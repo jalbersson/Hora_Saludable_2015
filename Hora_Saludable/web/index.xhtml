@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -12,14 +13,23 @@
             </ui:define>
 
             <ui:define name="CuadroDeBotonesSesion">
-                CuadroDeBotonesSesion
+                <p:commandButton  style="margin-bottom:5px; width:120px; border: none; 
+                                      border-radius: 5px;background: #092169;font-size: 13px;color: #FFFFFF"
+                                      value="BotonEjemplo">                        
+                </p:commandButton>
             </ui:define>
 
             <ui:define name="OpcionesMenu">
-                opciones de menus
+                <div class="OpcionesMenu">
+                    <p:link  value="EjemploOpcion1"/>                      
+                </div> 
+                <div class="OpcionesMenu">
+                    <p:link  value="EjemploOpcion2"/>                      
+                </div> 
             </ui:define>
 
             <ui:define name="contenido">
+                aqui se agrega el <br/>
                 contenido
             </ui:define>
 
