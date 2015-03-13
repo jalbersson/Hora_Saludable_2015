@@ -1,14 +1,37 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hola desde Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-    </h:body>
-</html>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
+    <body>
+
+        <ui:composition template="./WEB-INF/plantillas/frontend.xhtml">
+
+            <ui:define name="tituloPestaña">
+                tituloPestaña
+            </ui:define>
+
+            <ui:define name="CuadroDeBotonesSesion">
+                CuadroDeBotonesSesion
+            </ui:define>
+
+            <ui:define name="OpcionesMenu">
+                <div class="OpcionesMenu">
+                        <a href="">Cdu </a>                      
+                    </div>                
+                    <div class="OpcionesMenu">
+                        <a href="">otro </a>                      
+                    </div>
+                    <div class="OpcionesMenu">
+                        <a href="">contacto </a>                      
+                    </div>
+            </ui:define>
+
+            <ui:define name="contenido">
+                contenido
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

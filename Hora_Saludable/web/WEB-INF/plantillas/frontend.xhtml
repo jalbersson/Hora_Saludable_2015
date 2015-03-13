@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+        <h:outputStylesheet name="./css/frontend.css"/>  
+        <h:outputStylesheet name="./css/contenidos.css"/>
+        
+        <title><ui:insert name="tituloPestaña"> faceslest</ui:insert></title>
+    </h:head>
+
+    <h:body>
+        <div id="espacioDeTrabajo">
+            <div id="encabezado">
+                <div class="arriba">                    
+                    <div class="logoUnicauca">                        
+                        <a href="http://www.unicauca.edu.co/versionP/"></a>
+                    </div>
+                    <div class="bordeRedondo"></div>
+                    <div class="tituloPrincipal">
+                        sistema gestor de Recursos deportivos
+                    </div>
+                    <div class="CuadroDeBotonesSesion">                        
+                        <ui:insert name="CuadroDeBotonesSesion">cuadro de sision</ui:insert>                       
+                    </div>
+                </div>
+                <div class="medio"></div>
+                <div class="abajo">
+                    <ui:insert name="OpcionesMenu">agregar Opciones del menu</ui:insert>                    
+                </div>              
+
+            </div>
+
+            <div id="contenido" >
+                <ui:insert name="contenido">Content</ui:insert>
+                
+            </div>
+
+            <div id="piePagina">
+                <div class="separador"></div>
+                <div class="pie">
+                    <div class="decoracion izq"></div>
+                    <div class="decoracion der"></div>
+                </div>               
+            </div>
+        </div>
+
+
+
+    </h:body>
+
+</html>
