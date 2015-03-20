@@ -1,0 +1,3 @@
+
+
+en esta carpeta es para las vista de un administrador que estan relacionadas con el modulo medidas.
