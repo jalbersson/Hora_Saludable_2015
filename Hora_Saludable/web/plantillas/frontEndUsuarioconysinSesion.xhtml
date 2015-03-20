@@ -38,7 +38,15 @@
                                                   border-radius: 5px;background: #092169;font-size: 13px;color: #FFFFFF"
                                                   value="Iniciar Sesión" action="#{auxiliar.iniciarSesion}" ajax="true" update="form" >                        
                                 </p:commandButton>
-                                <p:outputLabel rendered="#{auxiliar.estadoNombresUsuario}" value="root"/>
+                                
+                                <h:link rendered="#{auxiliar.estadoNombresUsuario}" id="opcionesusuario" style="text-decoration: none;color:#FFFFFF; ">
+                                    root
+                                    <p:graphicImage style="width:20px; margin:0;margin-left: 5px;" library="img" name="usuario.png"/>
+                                </h:link>
+                                <p:menu rendered="#{auxiliar.estadoNombresUsuario}" overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">        
+                                    <p:menuitem value="Mi Perfil" />
+                                    <p:menuitem value="Cerrar Sesión" outcome="index"/>
+                                </p:menu>                           
                             </h:form>
                         </ui:insert>                       
                     </div>

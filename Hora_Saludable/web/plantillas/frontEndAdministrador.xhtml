@@ -31,9 +31,16 @@
                     <div class="borde-redondo"></div>
                     <a href="#" class="titulo">Hora Saludable<!--#{bundle.AppName}--></a>
                     <div class="CuadroDeBotonesSesion">                        
-                        <ui:insert name="CuadroDeBotonesSesion">
-                            <h:form id="form">                                
-                                <p:outputLabel value="root"/>
+                        <ui:insert name="CuadroDeBotonesSesion"> 
+                            <h:form>
+                                <h:link id="opcionesusuario" style="text-decoration: none;color:#FFFFFF; ">
+                                    root
+                                    <p:graphicImage style="width:20px; margin:0;margin-left: 5px;" library="img" name="usuario.png"/>
+                                </h:link>
+                                <p:menu overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">        
+                                    <p:menuitem value="Mi Perfil" />
+                                    <p:menuitem value="Cerrar Sesión" outcome="index"/>
+                                </p:menu>
                             </h:form>
                         </ui:insert>                       
                     </div>
