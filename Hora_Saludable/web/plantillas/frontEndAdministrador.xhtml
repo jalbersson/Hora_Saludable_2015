@@ -32,11 +32,8 @@
                     <a href="#" class="titulo">Hora Saludable<!--#{bundle.AppName}--></a>
                     <div class="CuadroDeBotonesSesion">                        
                         <ui:insert name="CuadroDeBotonesSesion">
-                            <h:form>            
-                                <p:commandButton  style="border: none; font-family: inherit; width: 120px;
-                                                  border-radius: 5px;background: #092169;font-size: 13px;color: #FFFFFF"
-                                                  value="Iniciar Sesión" >                        
-                                </p:commandButton>
+                            <h:form id="form">                                
+                                <p:outputLabel value="root"/>
                             </h:form>
                         </ui:insert>                       
                     </div>
@@ -48,11 +45,10 @@
                 <nav id="mainNav">                       
                     <ui:insert name="menuprincipal">
                         <ul>
-                            <li><span class="punta"></span><p:link outcome="index" value="Inicio"/></li>
-                            <li><span class="punta"></span><p:link  value="Item 1"/></li>
-                            <li><span class="punta"></span><p:link  value="Item 2"/></li>
-                            <li><span class="punta"></span><p:link  value="Item 3"/></li>
-                            <li><span class="punta"></span><p:link  value="Item 4"/></li>                    
+                            <li><span class="punta"></span><p:link  value="Gestión Usuarios"/></li>
+                            <li><span class="punta"></span><p:link  value="Gestión de Medidas"/></li>
+                            <li><span class="punta"></span><p:link  value="Control Asistencia"/></li>
+                            <li><span class="punta"></span><p:link  value="Gestión Contenidos"/></li>                                               
                         </ul>
                     </ui:insert>           
                 </nav>                
@@ -79,4 +75,3 @@
         </footer>
     </h:body>
 </html>
-
