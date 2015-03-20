@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">      
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">      
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />                     
@@ -30,21 +31,30 @@
                     <div class="borde-redondo"></div>
                     <a href="#" class="titulo">Hora Saludable<!--#{bundle.AppName}--></a>
                     <div class="CuadroDeBotonesSesion">                        
-                        <ui:insert name="CuadroDeBotonesSesion">Cuadro de Sesión</ui:insert>                       
+                        <ui:insert name="CuadroDeBotonesSesion">
+                            <h:form>            
+                                <p:commandButton  style="border: none; font-family: inherit; width: 120px;
+                                                  border-radius: 5px;background: #092169;font-size: 13px;color: #FFFFFF"
+                                                  value="Iniciar Sesión" >                        
+                                </p:commandButton>
+                            </h:form>
+                        </ui:insert>                       
                     </div>
                     <div class="clear"></div>
                 </div>
                 <div class="bottom">
 
                 </div>                
-                <nav id="mainNav">
-                    <ul>
-                        <li><span class="punta"></span><a href="#">Inicio</a></li>
-                        <li><span class="punta"></span><a href="#">Item 1</a></li>
-                        <li><span class="punta"></span><a href="#">Item 2</a></li>
-                        <li><span class="punta"></span><a href="#">Item 3</a></li>
-                        <li><span class="punta"></span><a href="#">Item 4</a></li>
-                    </ul>
+                <nav id="mainNav">                       
+                    <ui:insert name="menuprincipal">
+                        <ul>
+                            <li><span class="punta"></span><p:link href="#" value="Inicio"/></li>
+                            <li><span class="punta"></span><p:link href="#" value="Item 1"/></li>
+                            <li><span class="punta"></span><p:link href="#" value="Item 2"/></li>
+                            <li><span class="punta"></span><p:link href="#" value="Item 3"/></li>
+                            <li><span class="punta"></span><p:link href="#" value="Item 4"/></li>                    
+                        </ul>
+                    </ui:insert>           
                 </nav>                
             </div>
         </header>
