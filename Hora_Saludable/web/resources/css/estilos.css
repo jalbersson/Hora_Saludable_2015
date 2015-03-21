@@ -240,3 +240,13 @@ body {
      border-radius: 5px;
      margin-bottom: 5px;
 }
+
+.tituloContenido
+{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color:#22419A;
+    font-weight: bold;
+}

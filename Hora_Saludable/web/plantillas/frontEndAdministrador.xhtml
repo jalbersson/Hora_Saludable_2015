@@ -39,7 +39,7 @@
                                 </h:link>
                                 <p:menu overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">        
                                     <p:menuitem value="Mi Perfil" />
-                                    <p:menuitem value="Cerrar Sesión" outcome="index"/>
+                                    <p:menuitem value="Cerrar Sesión" outcome="/index"/>
                                 </p:menu>
                             </h:form>
                         </ui:insert>                       
@@ -52,7 +52,8 @@
                 <nav id="mainNav">                       
                     <ui:insert name="menuprincipal">
                         <ul>
-                            <li><span class="punta"></span><p:link  value="Gestión Usuarios"/></li>
+                            <li><span class="punta"></span><p:link outcome="/indexAdministrador" value="inicio"/></li>
+                            <li><span class="punta"></span><p:link outcome="/administrador/usuarios/gestionUsuarios" value="Gestión Usuarios"/></li>
                             <li><span class="punta"></span><p:link  value="Gestión de Medidas"/></li>
                             <li><span class="punta"></span><p:link  value="Control Asistencia"/></li>
                             <li><span class="punta"></span><p:link  value="Gestión Contenidos"/></li>                                               
