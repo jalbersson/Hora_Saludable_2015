@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">      
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">      
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />                     
@@ -22,6 +23,7 @@
     </h:head>
 
     <h:body>
+       
         <header id="mainHeader">
             <div class="contenedor">
                 <div class="top">
@@ -30,22 +32,52 @@
                     </div>
                     <div class="borde-redondo"></div>
                     <a href="#" class="titulo">Hora Saludable<!--#{bundle.AppName}--></a>
+                     
                     <div class="CuadroDeBotonesSesion">                        
                         <ui:insert name="CuadroDeBotonesSesion">
                             <h:form id="form">
                                 
-                                <p:commandButton rendered="#{auxiliar.estadoCerrarSesion}"  style="border: none; font-family: inherit; width: 120px;
-                                                  border-radius: 5px;background: #092169;font-size: 13px;color: #FFFFFF"
-                                                  value="Iniciar Sesión" action="#{auxiliar.iniciarSesion}" ajax="true" update="form" >                        
-                                </p:commandButton>
-                                
+                            <p:commandButton rendered="#{auxiliar.estadoCerrarSesion}"  style="border: none; font-family: inherit; width: 120px;
+                                              border-radius: 5px;background: #092169;font-size: 13px;color: #FFFFFF"
+                                              value="Iniciar Sesión" onclick="PF('IniciarSesion').show();" ajax="true" > 
+
+                            </p:commandButton>
+                                 <p:dialog   header="Hora Saludable" showEffect="scale" modal="true"  widgetVar="IniciarSesion" width="650">
+                                    <h:form>
+                                        <p:panel id="panel" header="Iniciar sesion">
+
+                                            <p:messages id="msgs" />
+
+                                            <h:panelGrid columns="3" cellpadding="5">
+                                                <p:outputLabel for="firstname" value="Usuario:" />
+                                                <p:inputText id="firstname" value="#{userView.firstname}" required="true" label="Firstname" requiredMessage="Ingrese nombre de Usuario">
+                                                    <f:validateLength minimum="2" />
+                                                </p:inputText>
+                                                <p:message for="firstname" display="icon" />
+                                                <p:outputLabel for="lastname" value="Contraseña:" />
+                                                <p:inputText id="lastname" value="#{userView.lastname}" label="Lastname" required="true" requiredMessage="Ingrese una contraseña">
+                                                    <f:validateLength minimum="2" />
+                                                    <p:ajax update="msgLastname" event="keyup" />
+                                                </p:inputText>
+                                                <p:message for="lastname" id="msgLastname" display="icon" />
+                                            </h:panelGrid>
+                                            <p:link outcome="/usuario/recuperarcontrasenia/recuperarContrasenia" value="¿Has olvidado tu contraseña?">
+                                                <f:param name="productId" value="10" />
+                                            </p:link>
+                                            <br/>
+                                            <br/>
+                                            <p:commandButton value="Iniciar Sesion" update="panel" actionListener="#{userView.save}" icon="ui-icon-check" />
+                                        </p:panel>
+                                    </h:form>
+                                     
+                                 </p:dialog>    
                                 <h:link rendered="#{auxiliar.estadoNombresUsuario}" id="opcionesusuario" style="text-decoration: none;color:#FFFFFF; ">
                                     user
                                     <p:graphicImage style="width:20px; margin:0;margin-left: 5px;" library="img" name="usuario.png"/>
                                 </h:link>
                                 <p:menu rendered="#{auxiliar.estadoNombresUsuario}" overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">        
                                     <p:menuitem value="Mi Perfil" />
-                                    <p:menuitem value="Cerrar Sesión" outcome="index"/>
+                                    <p:menuitem value="Cerrar Sesión" outcome="/index"/>
                                 </p:menu>                           
                             </h:form>
                         </ui:insert>                       
@@ -58,7 +90,7 @@
                 <nav id="mainNav">                       
                     <ui:insert name="menuprincipal">
                         <ul>
-                            <li><span class="punta"></span><p:link outcome="index" value="Inicio"/></li>
+                            <li><span class="punta"></span><p:link outcome="/index" value="Inicio"/></li>
                             <li><span class="punta"></span><p:link  value="Item 1"/></li>
                             <li><span class="punta"></span><p:link  value="Item 2"/></li>
                             <li><span class="punta"></span><p:link  value="Item 3"/></li>
@@ -71,7 +103,7 @@
 
         <section id="contenido">
             <div class="contenedor">                
-                <ui:insert name="title">Default Title</ui:insert>    
+                <ui:insert name="title">Default Title</ui:insert>  
                 <ui:insert name="body">Default Body</ui:insert>
                 <div class="clear"></div>
             </div>
