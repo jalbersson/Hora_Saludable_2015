@@ -251,3 +251,30 @@ body {
     color:#22419A;
     font-weight: bold;
 }
+
+.CampoLabel
+{
+    font-style: italic;
+    font-size: 16px;
+    text-align: left;
+}
+.CampoLabelEspecificacion
+{
+    font-style: italic;
+    font-size: 11px;
+}
+.CampoLabelObligatorios
+{
+    font-style: italic;
+    font-size: 15px;
+}
+.CampoLabelEspecificacion
+{
+    font-style: italic;
+    font-size: 11px;
+}
+
+/*.panelgrid , .panelgrid tr , .panelgrid td
+{
+    border-style: none !important
+}*/
