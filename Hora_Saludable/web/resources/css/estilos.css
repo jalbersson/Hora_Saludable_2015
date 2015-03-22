@@ -274,7 +274,7 @@ body {
     font-size: 11px;
 }
 
-/*.panelgrid , .panelgrid tr , .panelgrid td
+.panelgrid , .panelgrid tr , .panelgrid td
 {
     border-style: none !important
-}*/
+}

@@ -58,18 +58,66 @@
                                         <h:outputLabel class="CampoLabel" for="tipo" value="Tipo: *" />
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="tipo"  style="width:125px" required="true" requiredMessage="Seleccione un Tipo Usuario.">
+                                        <p:selectOneMenu id="tipo"  style="width:125px" required="true"
+                                        requiredMessage="Seleccione un Tipo Usuario."
+                                        valueChangeListener="#{auxiliar.cambiarTipo}">
                                             <f:selectItem itemLabel="Seleccione.." itemValue="" />
                                             <f:selectItem itemLabel="Estudiante" itemValue="Estudiante" />
                                             <f:selectItem itemLabel="Familiar" itemValue="Familiar" />
-                                            <f:selectItem itemLabel="Profesor" itemValue="Profesor" />
+                                            <f:selectItem itemLabel="Empleado" itemValue="Empleado" />
+                                            <f:ajax  execute="tipo" render="form" />
                                         </p:selectOneMenu>                                                                             
                                     </p:column>
                                     <p:column>
                                         <p:message for="tipo"/>  
                                     </p:column>
+                                </p:row>                                    
+                                <p:row rendered="#{auxiliar.cargo}">
+                                    <p:column style="text-align:right">
+                                        <h:outputLabel  class="CampoLabel" for="cargo" value="Cargo: *" />
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="cargo"  style="width:125px" required="true" requiredMessage="Seleccione un Cargo.">
+                                            <f:selectItem itemLabel="Seleccione.." itemValue="" />
+                                            <f:selectItem itemLabel="Profesor" itemValue="Profesor" />
+                                            <f:selectItem itemLabel="Administrativo" itemValue="Administrativo" />                                            
+                                        </p:selectOneMenu>                                                                             
+                                    </p:column>
+                                    <p:column>
+                                        <p:message for="cargo"/>  
+                                    </p:column>
                                 </p:row>
-                                <p:row>
+                                <p:row rendered="#{auxiliar.dependencia}">
+                                    <p:column style="text-align:right">
+                                        <h:outputLabel class="CampoLabel" for="dependencia" value="Dependencia: *" />
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="dependencia"  style="width:125px" required="true" requiredMessage="Seleccione una Dependencia.">
+                                            <f:selectItem itemLabel="Seleccione.." itemValue="" />
+                                            <f:selectItem itemLabel="Fac. Ingenieria Electronica y telecomunicaciones" itemValue="r" />
+                                            <f:selectItem itemLabel="Fac. Ingenieria Civil" itemValue="r" />                                            
+                                        </p:selectOneMenu>                                                                             
+                                    </p:column>
+                                    <p:column>
+                                        <p:message for="dependencia"/>  
+                                    </p:column>
+                                </p:row>
+                                <p:row id="filaFacultad" rendered="#{auxiliar.facultad}">
+                                    <p:column style="text-align:right">
+                                        <h:outputLabel class="CampoLabel" for="facultad" value="Facultad: *" />
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="facultad"  style="width:125px" required="true" requiredMessage="Seleccione una Facultad.">
+                                            <f:selectItem itemLabel="Seleccione.." itemValue="" />
+                                            <f:selectItem itemLabel="Fac. Ingenieria Electronica y telecomunicaciones" itemValue="r" />
+                                            <f:selectItem itemLabel="Fac. Ingenieria Civil" itemValue="r" />                                            
+                                        </p:selectOneMenu>                                                                             
+                                    </p:column>
+                                    <p:column>
+                                        <p:message for="facultad"/>  
+                                    </p:column>
+                                </p:row>
+                                <p:row rendered="#{auxiliar.empleado}">
                                     <p:column style="text-align:right">
                                         <h:outputLabel class="CampoLabel" for="empleado" value="Empleado: *" />
                                     </p:column>
@@ -81,7 +129,7 @@
                                         <p:message for="nombreEmpleado"/>
                                     </p:column>
                                 </p:row>
-                                <p:row>
+                                <p:row rendered="#{auxiliar.nombreEmpleado}">
                                     <p:column style="text-align:right">
                                         <h:outputLabel class="CampoLabel" for="nombreEmpleado" value="Nombre Empleado: *" />
                                     </p:column>
@@ -94,7 +142,7 @@
                                     <p:column>
                                     </p:column>
                                 </p:row>
-                                <p:row>
+                                <p:row rendered="#{auxiliar.dependenciaEmpleado}">
                                     <p:column style="text-align:right;">
                                         <h:outputLabel class="CampoLabel" for="dependenciaEmpleado" value="Dependencia Empleado: *" />
                                     </p:column>
