@@ -278,3 +278,14 @@ body {
 {
     border-style: none !important
 }
+.subtitulo{
+    text-align: center;
+}
+.usuarioParticularAsistenciaCalendario{
+    float:left;
+}
+.usuarioParticularAsistenciaGrafica{
+    margin-left: 20px;
+    float:left;
+    
+}
