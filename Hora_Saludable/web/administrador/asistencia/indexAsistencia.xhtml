@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Control asistencia
+            </ui:define>
+
+
+            <ui:define name="title">
+                <div class="tituloContenido">
+                    <br></br>
+                    Control Asistencia <br></br>
+                </div>
+            </ui:define>
+
+
+            <ui:define name="body">
+                <p:breadCrumb>
+                    <p:menuitem value="Inicio" url="../../indexAdministrador.xhtml" />                                                  
+                    <p:menuitem value="Control de asistencia" url="indexAsistencia.xhtml" />
+                </p:breadCrumb>
+                <p:spacer height="20"/>
+                <h:form id="form">
+                    <p:carousel value="#{carouselView.opciones}" headerText="Opciones Control Asistencia" var="opcion">
+                        <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
+                            <p:graphicImage value="../../resources/img/asistencia/#{opcion.urlImagen}.png"/>                             
+                            <h3></h3>
+
+                            <p:link outcome="#{opcion.facelet}" value="#{opcion.nombre}" />                    
+                        </h:panelGrid>                
+                    </p:carousel>            
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

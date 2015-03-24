@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+
+            <ui:define name="titulo">
+                Registro de Asistencia Personal
+            </ui:define>
+
+            <ui:define name="title">
+                <div class="tituloContenido">
+                    <br></br>
+                    Registro Asistencia Personal <br></br>
+                </div>
+            </ui:define>
+
+            <ui:define name="body">
+                <p:breadCrumb>
+                    <p:menuitem value="Inicio" url="../../index.xhtml" />                              
+                    <p:menuitem value="Asistencia de Usuario" outcome="asistencia-de-usuario" />                                        
+                </p:breadCrumb>
+                <p:spacer height="20"/>
+                <p:panel header="Información personal">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel id="lblNombre" value="Nombres y Apellidos:" />
+                        <p:outputLabel id="txtNombre" value="Daniel Felipe Cepeda" />
+
+                        <p:outputLabel id="lblSexo" value="Sexo:" />
+                        <p:outputLabel id="txtSexo" value="Masculino" />
+
+                        <p:outputLabel id="lblCodigo" value="Código:" />
+                        <p:outputLabel id="txtCodigo" value="46052009" />
+
+                        <p:outputLabel id="lblProgramaAcademico" value="Programa Académico:" />
+                        <p:outputLabel id="txtProgramaAcademico" value="Ingeniería de Sistemas" />
+
+                        <p:outputLabel id="lblPrograma" value="Programa:" />
+                        <p:outputLabel id="txtPrograma" value="Hora Saludable" />
+
+                        <p:outputLabel id="lblEstamento" value="Estamento:" />
+                        <p:outputLabel id="txtEstamento" value="Funcionario" />
+                    </h:panelGrid>
+                </p:panel>
+                <p:spacer height="30"/>
+                <p:panel header="Asistencia">
+                    <h:panelGrid columns="4" cellpadding="5">    
+                        <p:outputLabel for="anioReporte" value="Año:"/>
+                        <p:selectOneMenu id="anioReporte" value="#{param.anio}" onchange="document.location.href = 'asistencia-de-usuario.xhtml' + '?anio=' + this.options[this.selectedIndex].value;">
+                            <f:selectItem itemValue="ningunAnio" itemLabel="Seleccione uno" /> 
+                            <f:selectItem itemValue="2015" itemLabel="2015" />
+                            <f:selectItem itemValue="2014" itemLabel="2014" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="mesReporte" value="Mes:" />
+                        <p:selectOneMenu id="mesReporte" value="#{param.mes}" onchange="document.location.href = 'asistencia-de-usuario.xhtml' + '?anio=#{param.anio}&amp;mes=' + this.options[this.selectedIndex].value;">
+                            <f:selectItem itemValue="ningunMes" itemLabel="Seleccione uno" /> 
+                            <f:selectItem itemValue="enero" itemLabel="Enero" />
+                            <f:selectItem itemValue="febrero" itemLabel="Febrero" />
+                            <f:selectItem itemValue="marzo" itemLabel="Marzo" />
+                            <f:selectItem itemValue="abril" itemLabel="Abril" />
+                            <f:selectItem itemValue="mayo" itemLabel="Mayo" />
+                            <f:selectItem itemValue="junio" itemLabel="Junio" />
+                            <f:selectItem itemValue="julio" itemLabel="Julio" />
+                            <f:selectItem itemValue="agosto" itemLabel="Agosto" />
+                            <f:selectItem itemValue="septiembre" itemLabel="Septiembre" />
+                            <f:selectItem itemValue="octubre" itemLabel="Octubre" />
+                            <f:selectItem itemValue="noviembre" itemLabel="Noviembre" />
+                            <f:selectItem itemValue="diciembre" itemLabel="Diciembre" />
+                        </p:selectOneMenu >
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:calendar value="#{calendarView.date4}" mode="inline" navigator="true" pages="1"/>
+                        <p:barChart value="#{statistics.viviendas}" legendPosition="ne"
+                            title="Asistencia 2014" style="height:300px; width: 500px;"
+                            xaxisLabel="Meses" yaxisLabel="Total días" />
+                    </h:panelGrid>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

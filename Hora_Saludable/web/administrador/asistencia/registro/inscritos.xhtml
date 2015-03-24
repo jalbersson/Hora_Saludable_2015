@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Inscritos
+            </ui:define>
+
+            <ui:define name="title">
+                <div class="tituloContenido">
+                    <br></br>
+                    Lista de Inscritos <br></br>
+                </div>
+            </ui:define>
+
+            <ui:define name="body">
+                <p:breadCrumb>
+                    <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
+                    <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
+                    <p:menuitem value="Inscritos" outcome="inscritos" />                    
+                </p:breadCrumb>
+                <p:spacer height="20"/>
+                <h:form id="form">
+                    <p:dataTable id="inscritosDT" var="inscrito" value="#{inscritoBean.inscritos}" selectionMode="single" selection="#{inscritoBean.selectedInscrito}" rowKey="#{inscrito.documentoIdentidad}" style="width:70%">
+                        <f:facet name="header">
+                            INSCRITOS                                        
+                        </f:facet>
+
+                        <p:column headerText="NOMBRES Y APELLIDOS">
+                            <h:outputText value="#{inscrito.primerApellido} #{inscrito.segundoApellido} #{inscrito.primerNombre} #{inscrito.segundoNombre}" />
+                        </p:column>
+
+                        <p:column style="width:10%;text-align: center">
+                            <p:commandButton update=":form:inscritoDetail" oncomplete="PF('inscritoDialog').show()" icon="ui-icon-search" title="Ver">
+                                <f:setPropertyActionListener value="#{inscrito}" target="#{inscritoBean.selectedInscrito}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>            
+
+                    <p:dialog header="Información Inscrito" widgetVar="inscritoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                        <p:outputPanel id="inscritoDetail" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty inscritoBean.selectedInscrito}" columnClasses="label,value">
+
+                                <h:outputText value="Nombres y Apellidos:" />
+                                <h:outputText value="#{inscritoBean.selectedInscrito.primerApellido} 
+                                              #{inscritoBean.selectedInscrito.segundoApellido} 
+                                              #{inscritoBean.selectedInscrito.primerNombre} 
+                                              #{inscritoBean.selectedInscrito.segundoNombre}" />
+
+                                <h:outputText value="Documento de Identidad No.:" />
+                                <h:outputText value="#{inscritoBean.selectedInscrito.documentoIdentidad}" />
+
+                                <h:outputText value="Dependencia Universitaria:" />
+                                <h:outputText value="#{inscritoBean.selectedInscrito.dependenciaUniversitaria}" />                        
+                            </p:panelGrid>
+                        </p:outputPanel>
+                    </p:dialog>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
