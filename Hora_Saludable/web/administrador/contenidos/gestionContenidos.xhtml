@@ -28,40 +28,28 @@
                 <h:form>
                     <p:growl autoUpdate="true"/>
 
-                    <p:panelMenu style="width:300px">
-                        <p:submenu label="Gestión de Contenidos">
-                            <p:menuitem value="Eventos" ajax="false"/> 
-                            <p:menuitem value="Noticias" outcome="listarNoticias" ajax="false"/> 
-                            <p:menuitem value="Reglamento" ajax="false"/> 
-                            <p:menuitem value="Quienes somos" ajax="false"/> 
+                    <p:panelMenu style="width:300px; float: right">
+                        <p:submenu label="Gestión de Eventos">
+                            <p:menuitem value="Agregar evento" ajax="false"/> 
+                            <p:menuitem value="Editar evento" outcome="listarNoticias" ajax="false"/> 
+                            <p:menuitem value="Eliminar evento" ajax="false"/> 
+                            
                         </p:submenu>
 
-                        <p:submenu label="Otros">
+                        <p:submenu label="Gestion de noticias">
+                            <p:menuitem value="EjemploOtrasCosas" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
+                        </p:submenu>
+                        
+                        <p:submenu label="Reglamento">
+                            <p:menuitem value="EjemploOtrasCosas" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
+                        </p:submenu>
+                        
+                        <p:submenu label="Quienes somos">
                             <p:menuitem value="EjemploOtrasCosas" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
                         </p:submenu>
 
                     </p:panelMenu>
-
-
-                    <p:panelGrid columns="2" >
-                        <f:facet name="header">
-                            
-                        </f:facet>
-
-                        <h:outputText value="Name:" />
-                        <h:outputText value="Kobe Bryant" />
-
-                        <h:outputText value="Team:" />
-                        <h:outputText value="Los Angeles Lakers" />
-
-                        <h:outputText value="Position:" />
-                        <h:outputText value="Shooting Guard" />
-
-                        <h:outputText value="Number:" />
-                        <h:outputText value="24" />
-                    </p:panelGrid>
-
-
+                  
                 </h:form>                
             </ui:define>
 
