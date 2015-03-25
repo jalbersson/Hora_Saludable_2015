@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicauca.asistencia.jsf.managedbeans;
+package com.unicauca.horasaludable.asistenciaManagedbeans;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicauca.asistencia.jsf.managedbeans;
+package com.unicauca.horasaludable.asistenciaManagedbeans;
 
-import com.unicauca.asistencia.domain.Inscrito;
-import com.unicauca.asistencia.service.InscritoService;
+import com.unicauca.horasaludable.asistenciaDomain.Inscrito;
+import com.unicauca.horasaludable.asistenciaService.InscritoService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;

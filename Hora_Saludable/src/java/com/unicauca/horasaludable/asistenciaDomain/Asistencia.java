@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicauca.asistencia.domain;
+package com.unicauca.horasaludable.asistenciaDomain;
 
 import java.util.Date;
 

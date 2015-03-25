@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicauca.asistencia.jsf.managedbeans;
+package com.unicauca.horasaludable.asistenciaManagedbeans;
 
-import com.unicauca.asistencia.domain.Opcion;
+import com.unicauca.horasaludable.asistenciaDomain.Opcion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -28,11 +28,11 @@ public class CarouselView {
     @PostConstruct
     public void init() {
         opciones = new ArrayList<Opcion>();
-        opciones.add(new Opcion("Lista de Inscritos", "AGF_Sunset", "registro/inscritos"));
-        opciones.add(new Opcion("Registro Asistencia", "AGF_black", "registro/registro-asistencia"));
-        opciones.add(new Opcion("Reporte: Asistencia General", "AGF_blacknblue", "reporte/reporte-asistencia-inscritos"));
-        opciones.add(new Opcion("Reporte Asistencia por Dependencia", "AGF_blackngold", "reporte/reporte-asistencia-dependencias-universirarias"));
-        opciones.add(new Opcion("Reporte: Asistencia de Usuarios", "AGF_epicblue", "reporte/reporte-asistencia-usuarios"));
+        opciones.add(new Opcion("Lista de Inscritos", "lista-inscritos", "registro/inscritos"));
+        opciones.add(new Opcion("Registro Asistencia", "registro-asistencia", "registro/registro-asistencia"));
+        opciones.add(new Opcion("Reporte: Asistencia General", "reportes", "reporte/reporte-asistencia-inscritos"));
+        opciones.add(new Opcion("Reporte Asistencia por Dependencia", "reportes", "reporte/reporte-asistencia-dependencias-universirarias"));
+        opciones.add(new Opcion("Reporte: Asistencia de Usuarios", "reporte-usuarios", "reporte/reporte-asistencia-usuarios"));
 //        opciones.add(new Opcion("Reporte: Asistencia de Usuario", "AGF_greene", "control-asistencia"));
     }
 

@@ -28,14 +28,15 @@
                 </p:breadCrumb>
                 <p:spacer height="20"/>
                 <h:form id="form">
-                    <p:carousel value="#{carouselView.opciones}" headerText="Opciones Control Asistencia" var="opcion">
-                        <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
-                            <p:graphicImage value="../../resources/img/asistencia/#{opcion.urlImagen}.png"/>                             
-                            <h3></h3>
-
-                            <p:link outcome="#{opcion.facelet}" value="#{opcion.nombre}" />                    
-                        </h:panelGrid>                
-                    </p:carousel>            
+                    
+                        <p:carousel value="#{carouselView.opciones}" headerText="Opciones Control Asistencia" var="opcion">
+                            <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
+                                <p:graphicImage value="../../resources/img/asistencia/#{opcion.urlImagen}.png"/>                             
+                                <h3></h3>
+                                <p:link outcome="#{opcion.facelet}" value="#{opcion.nombre}" />                    
+                            </h:panelGrid>                
+                        </p:carousel>     
+                    
                 </h:form>
             </ui:define>
 
