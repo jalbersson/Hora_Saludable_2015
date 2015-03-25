@@ -40,11 +40,13 @@
                             <p:menuitem value="EjemploOtrasCosas" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
                         </p:submenu>
 
-                        <p:submenu label="Reglamento">
+                        <p:submenu label="Reglamento"  >
+                            <p:menuitem value="Ver Reglamento" outcome="reglamentoPrincipal" ajax="false"/>
                             <p:menuitem value="Editar Reglamento" outcome="reglamento" ajax="false"/>
                         </p:submenu>
 
                         <p:submenu label="Quienes somos">
+                            <p:menuitem value="Ver Quienes Somos" outcome="quienesSomosPrincipal" ajax="false" />
                             <p:menuitem value="Editar Quienes Somos" outcome="quienesSomos" ajax="false" />
                         </p:submenu>
 
