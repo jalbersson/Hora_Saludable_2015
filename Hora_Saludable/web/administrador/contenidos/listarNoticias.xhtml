@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -15,16 +18,76 @@
                 CuadroDeBotonesSesion
             </ui:define>
 
-            <ui:define name="menuprincipal">
-                menuprincipal
-            </ui:define>
 
             <ui:define name="title">
-                title
+                
             </ui:define>
 
+
             <ui:define name="body">
-                body
+                <h:form id="form">
+                    <p:panelMenu style="width:200px; float: right">
+                        <p:submenu label="Gestión de Noticias">
+                            <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false"/>
+                            <p:menuitem value="Nueva  Noticia" outcome="nuevaNoticia" ajax="false"/>
+
+                        </p:submenu>
+                    </p:panelMenu>
+
+
+                    <p:panelGrid  style="width: 78%;" columns="1" >
+
+                        <p:dataList      value="#{DataListView.listaNoticias}" var="noticia" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated" >
+                            <f:facet name="header">
+                                <H1>Lista de Noticias</H1>
+                            </f:facet>
+                            <p:commandLink update=":form:noticiasDetail" oncomplete="PF('noticiasDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+                                <f:setPropertyActionListener value="#{noticia}" target="#{DataListView.selectedNoticia}" />
+                                <h:outputText value="#{noticia.titulo}, #{noticia.contenido}" />
+                            </p:commandLink>
+                            <h:outputText value="#{noticia.titulo}, #{noticia.contenido}" style="display:inline-block"/>
+                            <p:button outcome="listarNoticias/eliminar" value="Eliminar" icon="ui-icon-close">
+                                <f:param name="noticiaID" value="20" />
+                            </p:button>
+                            <p:button outcome="listarNoticias/modificar" value="Modificar" >
+                                <f:param name="noticiaID" value="20" />
+                            </p:button>
+
+
+
+                        </p:dataList>
+
+
+                        <p:button outcome="gestionContenidos" value="Volver" style="float:right" >
+                        </p:button>
+                    </p:panelGrid>
+
+
+
+
+
+
+
+
+                    <p:dialog header="Informacion de Noticias" widgetVar="noticias" modal="true" showEffect="blind" hideEffect="explode" resizable="true">
+                        <p:outputPanel id="carDetail" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{DataListView.selectedNoticia}" columnClasses="label,value">
+
+
+                                <h:outputText value="Titulo:" />
+                                <h:outputText value="#{DataListView.selectedNoticia.titulo}" />
+
+                                <h:outputText value="Contenido" />
+                                <h:outputText value="#{DataListView.selectedNoticia.contenido}" />
+
+
+                            </p:panelGrid>
+                        </p:outputPanel>
+                    </p:dialog>
+
+
+                </h:form>
+
             </ui:define>
 
         </ui:composition>

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Nueva Noticia
+            </ui:define>
+
+            <ui:define name="title">
+
+            </ui:define>
+
+            <ui:define name="body">
+
+
+
+
+                <h:form id="form">
+                    <p:panelMenu style="width:200px; float: right">
+                        <p:submenu label="Gestión de Noticias">
+                            <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false"/>
+                            <p:menuitem value="Nueva  Noticia" outcome="nuevaNoticia" ajax="false"/>
+
+                        </p:submenu>
+                    </p:panelMenu>
+
+                    <p:panelGrid  style="width: 60%;" columns="1" >
+
+
+
+
+
+                        <f:facet name="header">
+                            <H1>Nueva noticia</H1>
+                        </f:facet>
+
+
+                        <p:messages id="messages" />
+                        <h:panelGrid columns="2" >
+                            <h:outputLabel value="*Titulo:"  />
+                            <p:inputText id="titulo" required="true" size="71" />
+
+                            <p:outputLabel value="Resumen: " />
+                            <p:inputText id="resumen" required="false" size="71" />
+
+                            <p:outputLabel  value="Resumen: " />
+                            <p:inputText id="palabrasclave" required="fale" size="71"/>
+
+                            <p:outputLabel  value="Fecha de publicaciòn:" />
+                            <p:calendar id="calendario"  pattern="dd-MM-yyyy" mask="true" size ="71"/>
+
+
+                        </h:panelGrid>
+
+
+                        <p:editor id="editor" widgetVar="editorWidget" value="Escribir nueva noticia!" width="600" />
+                        <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+                            <h:outputText id="display" value="Nueva noticia!" escape="false" />
+                        </p:dialog>
+                    </p:panelGrid>
+                    <p:button outcome="gestionContenidos" value="Visualizar" style="float:left" >
+                    </p:button>
+                    <h:form>
+                        <p:growl id="growl" life="2000" />
+                        <p:commandButton value="Guardar" id="nonAjax" actionListener="#{buttonView.buttonAction}" ajax="false" />
+                    </h:form>
+                    <p:button outcome="gestionContenidos" value="Volver" style="float:right; right: 33%" >
+                    </p:button>
+
+
+                    <p:dialog header="Informacion de Noticias" widgetVar="noticias" modal="true" showEffect="blind" hideEffect="explode" resizable="true">
+                        <p:outputPanel id="carDetail" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{DataListView.selectedNoticia}" columnClasses="label,value">
+
+
+                                <h:outputText value="Titulo:" />
+                                <h:outputText value="#{DataListView.selectedNoticia.titulo}" />
+
+                                <h:outputText value="Contenido" />
+                                <h:outputText value="#{DataListView.selectedNoticia.contenido}" />
+
+
+                            </p:panelGrid>
+                        </p:outputPanel>
+                    </p:dialog>
+
+
+                </h:form>
+
+
+
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
