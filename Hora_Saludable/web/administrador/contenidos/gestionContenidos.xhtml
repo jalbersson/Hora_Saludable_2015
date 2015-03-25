@@ -17,14 +17,52 @@
                 Administrador
             </ui:define>
 
-           
+
 
             <ui:define name="title">
                 Gestión de Contenidos
             </ui:define>
 
             <ui:define name="body">
-                <br></br>Aqui va el contenido
+                <br></br><h1> Aqui va el contenido  </h1>
+                <h:form>
+                    <p:growl autoUpdate="true"/>
+
+                    <p:panelMenu style="width:300px">
+                        <p:submenu label="Gestión de Contenidos">
+                            <p:menuitem value="Eventos" ajax="false"/> 
+                            <p:menuitem value="Noticias" ajax="false"/> 
+                            <p:menuitem value="Reglamento" ajax="false"/> 
+                            <p:menuitem value="Quienes somos" ajax="false"/> 
+                        </p:submenu>
+
+                        <p:submenu label="Otros">
+                            <p:menuitem value="EjemploOtrasCosas" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
+                        </p:submenu>
+
+                    </p:panelMenu>
+
+
+                    <p:panelGrid columns="2" >
+                        <f:facet name="header">
+                            
+                        </f:facet>
+
+                        <h:outputText value="Name:" />
+                        <h:outputText value="Kobe Bryant" />
+
+                        <h:outputText value="Team:" />
+                        <h:outputText value="Los Angeles Lakers" />
+
+                        <h:outputText value="Position:" />
+                        <h:outputText value="Shooting Guard" />
+
+                        <h:outputText value="Number:" />
+                        <h:outputText value="24" />
+                    </p:panelGrid>
+
+
+                </h:form>                
             </ui:define>
 
         </ui:composition>
