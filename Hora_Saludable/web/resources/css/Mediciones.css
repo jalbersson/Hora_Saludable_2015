@@ -1,0 +1,98 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20-mar-2015, 18:32:17
+    Author     : pcblanco
+*/
+
+
+.fichapersonal
+{
+ width: auto;
+ margin-top: 30px;
+ float: left;
+ 
+}
+.fichapersonal tr,.fichapersonal td
+{
+  border-style: groove !important; 
+  border-color: #092169 !important;
+  background-color: #eaeacd;
+  
+}
+.subtitulotabla
+{
+    color: #CC1414;
+    font-size: 25px !important;
+}
+.fuentefichatabla
+{
+    font-size: 18px !important;
+}
+
+.titulomediciones
+{
+    margin-top: 50px;
+    font-size: 35px;
+    color: wheat;
+    background-color: #CC1414;
+    border-radius: 5px;
+    position: relative;
+}
+
+.acciones
+{
+    margin-top: 25px !important;
+    float: left;
+}
+
+.panelmedidas
+{
+    margin-top: 25px;
+    display: inline;
+    float: left;
+}
+.btncalcularmedidas
+{
+    margin-top: 350px;
+    display: inline;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.imagenmedidas
+{
+    margin-left: 340px;
+}
+
+.imagenmedidas2
+{
+    float: right;
+    margin-top: 105px;
+    margin-right: 25px;
+}
+.btnesaccionesmediciones
+{
+    float: right;
+    margin-right: 50px;
+    margin-top: 50px;
+}
+
+.tablas
+{
+    font-size: 18px !important;
+    margin-top: 38px;
+    width: 680px;
+    float: left;
+}
+
+.Menuagregartest
+{
+    width:630px;
+    margin-top: 30px; 
+    font-size: 19px;
+    float: left;
+}
