@@ -36,7 +36,7 @@
 
                         <p:dataList      value="#{DataListView.listaNoticias}" var="noticia" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated" >
                             <f:facet name="header">
-                                <H1>Lista de Noticias</H1>
+                                <H1>Noticias</H1>
                             </f:facet>
                             <p:commandLink update=":form:noticiasDetail" oncomplete="PF('noticiasDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
                                 <f:setPropertyActionListener value="#{noticia}" target="#{DataListView.selectedNoticia}" />
