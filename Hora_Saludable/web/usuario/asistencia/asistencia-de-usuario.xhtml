@@ -78,7 +78,10 @@
                         </p:selectOneMenu >
                     </h:panelGrid>
                     <h:panelGrid columns="2" cellpadding="5">
-                        <p:calendar value="#{calendarView.date4}" mode="inline" navigator="true" pages="1"/>
+                        <p:calendar value="#{calendarView.date4}" mode="inline" navigator="true" pages="1"/> 
+                        <h3>Selecciona el año y mes para ver tu registro de asistencia
+                        </h3>
+                        <h3>En el calendario a su izquierda las fechas resaltadas en azul son los dias que asististe a las Atividades del Programa Hora Saludable</h3>
                         <p:barChart value="#{statistics.viviendas}" legendPosition="ne"
                             title="Asistencia 2014" style="height:300px; width: 500px;"
                             xaxisLabel="Meses" yaxisLabel="Total días" />
