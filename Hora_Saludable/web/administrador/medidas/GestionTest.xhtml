@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Historial de tests
+            </ui:define>
+
+            <ui:define name="CuadroDeBotonesSesion">
+                CuadroDeBotonesSesion
+            </ui:define>
+
+            <ui:define name="title">
+                <p:outputLabel styleClass="titulomediciones" value="Gestion de Test" />
+                <p:separator />
+                
+            </ui:define>
+
+            <ui:define name="body">
+                
+               
+                <p:dialog showEffect="fade" hideEffect="explode" position="center" widgetVar="agregartest" header="Agregar Nuevo Test" modal="true">
+                   
+                    <h:form>
+                    <h:panelGrid columns="2" cellpadding="10">
+                    <p:outputLabel value="Nombre del Test:" />
+                    <p:inputText id="firstname" value="" label="Firstname" />
+                    <p:outputLabel  value="Fecha" />
+                    <p:calendar  pattern="dd.MM.yyyy" navigator="true" showButtonPanel="true"/>
+                    <f:facet name="footer">
+                        <p:commandButton  value="Agregar Nuevo Test" type="button" onclick="PF('agregartest').hide();" icon="ui-icon-disk" />              
+                    </f:facet>                   
+                    </h:panelGrid>
+                        </h:form>
+                </p:dialog>
+                
+                <p:panelGrid styleClass="fichapersonal" >
+                    <p:row>
+                        <p:column rowspan="8"><p:graphicImage library="img" name="mario.jpg"/></p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Nombre:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="Mario Alberto Posada Rincon" />
+                        </p:column>                      
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="1061487921" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Perfil:" />
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel styleClass="fuentefichatabla" value="Docente" />
+                        </p:column>
+
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="M" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Peso:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="65 kg" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Talla:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="170 cm" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Deporte:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="Atletismo" />
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <div>
+                <p:panelGrid columns="2" styleClass="Menuagregartest">
+                    <f:facet name="header">
+                        <h:outputLabel  value="Lista de Test registrados al usuario" />                      
+                    </f:facet>
+                </p:panelGrid> 
+                
+                
+                <p:panelGrid columns="2" style="float: right; margin-top: 30px; ">
+                    <f:facet name="header">
+                        <p:commandButton  value="Agregar Nuevo Test" type="button" onclick="PF('agregartest').show();" icon="ui-icon-disk" />
+                        <p:commandButton  value="Ver Historial" type="button" icon="ui-icon-refresh" /> 
+                    </f:facet>
+                </p:panelGrid> 
+                </div>
+                <p:panelGrid styleClass="tablas">
+
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel for="surname" value="No" />
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel for="surname" value="Nombre" />
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel for="surname" value="Fecha" />
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel for="surname" value="Accion" />
+                            </p:column>
+
+                        </p:row>                      
+                    </f:facet>
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel for="firstname" value="1" />   
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel for="surname" value="Test 1" />
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel for="surname" value="10 de Mayo,2014" />
+                        </p:column>
+                        <p:column>                         
+                            <p:link value="Editar" outcome="Test">
+                            </p:link>
+                            <p:link value="Eliminar" outcome="Test">
+                            </p:link>                      
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel for="firstname" value="2" />   
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel for="surname" value="Test 2" />
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel for="surname" value="30 de Mayo,2014" />
+                        </p:column>
+                        <p:column>
+                            <p:link value="Editar">
+                            </p:link>
+                            <p:link value="Eliminar">
+                            </p:link>
+                        </p:column>
+                    </p:row>
+
+                </p:panelGrid>
+
+                
+                
+               
+           
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
