@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                titulo
+            </ui:define>
+
+            <ui:define name="CuadroDeBotonesSesion">
+                CuadroDeBotonesSesion
+            </ui:define>
+
+            <ui:define name="menuprincipal">
+                menuprincipal
+            </ui:define>
+
+            <ui:define name="title">
+                Gestion de eventos
+            </ui:define>
+
+            <ui:define name="body">                
+                <h:form>
+                        <p:panelMenu style="width:200px; float: right">
+                        <p:submenu label="Gestión de eventos">
+                            <p:menuitem value="Editar Evento" outcome="editarEvento" ajax="false"/>
+                            <p:menuitem value="Eliminar Evento" outcome="eliminarEvento" ajax="false"/>
+
+                        </p:submenu>
+                    </p:panelMenu>
+                    
+                </h:form>
+                <div style="position: relative; width: 200px; float: left; background-color: #F5A9A9; left: 40px; border:2px solid #F5A9A9;" >  
+                    <h1>Marzo 24</h1> 
+                    <h2>Partido de baloncesto Civil vs Electronica</h2>
+                    <p:button outcome="eliminarEventoEspecifico" value="Eliminar" style="float:right" >
+                    </p:button>
+                </div>
+                
+                <div style="position: relative; border:2px solid #F5A9A9; width: 200px; float: left; left: 60px; right: 20px; background-color:#F5A9A9;  " >  
+                    <h1>Marzo 24</h1> 
+                    <h2>Partido de baloncesto Civil vs Electronica</h2>
+                    <p:button outcome="eliminarEventoEspecifico" value="Eliminar" style="float:right" >
+                    </p:button>
+                </div>
+                
+                <div style="position: relative; border:2px solid #F5A9A9; width: 200px; float: left; left: 80px; background-color:#F5A9A9;" >  
+                    <h1>Marzo 24</h1> 
+                    <h2>Partido de baloncesto Civil vs Electronica</h2>
+                    <p:button outcome="eliminarEventoEspecifico" value="Eliminar" style="float:right" >
+                    </p:button>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

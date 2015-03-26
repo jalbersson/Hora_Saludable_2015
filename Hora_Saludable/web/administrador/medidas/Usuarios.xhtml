@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Gestion test usuarios
+            </ui:define>
+
+            <ui:define name="CuadroDeBotonesSesion">
+                CuadroDeBotonesSesion
+            </ui:define>
+
+            <ui:define name="title">
+                <p:outputLabel styleClass="titulomediciones" value="Usuarios" />
+                <p:separator />
+            </ui:define>
+
+            <ui:define name="body">
+
+                <p:panelGrid styleClass="fuentefichatabla" style="margin: 0 auto">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel for="surname" value="Nombre" />
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel for="surname" value="Perfil" />
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel for="surname" value="Deporte" />
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel for="surname" value="Accion" />
+                            </p:column>
+                        </p:row>                      
+                    </f:facet>
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel for="firstname" value="Mario Alberto Posada Rincon" />   
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel for="surname" value="Docente" />
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel for="surname" value="Atletismo" />
+                        </p:column>
+                        <p:column>
+                            <p:link outcome="GestionTest" value="Gestionar Test">
+                                <f:param name="productId" value="10" />
+                            </p:link>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel for="firstname" value="MArta Mercedes Perez Gonzales" />   
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel for="surname" value="Docente" />
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel for="surname" value="Atletismo" />
+                        </p:column>
+                        <p:column>
+                            <p:link outcome="GestionTest" value="Gestionar Test">
+                                <f:param name="productId" value="10" />
+                            </p:link>
+                        </p:column>
+                    </p:row>
+
+                </p:panelGrid>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
