@@ -190,9 +190,31 @@
                         </p:panelGrid>  
                     </p:tab>
                     <p:tab title="Test Deportivos">
-                        <p:commandLink styleClass="imagenmedidas">
-                            <h:graphicImage name="img/testDeportivos.PNG" />
-                        </p:commandLink>
+                        
+                            <p:panelGrid columns="1" style="margin: 0 auto">
+                                <h:graphicImage name="img/testDeportivos.PNG"/>
+                                <h2 align="center">Test de Sargent</h2>
+                            </p:panelGrid>
+                            <p:panelGrid columns="3" styleClass="btnesaccionesmediciones" style="margin: 0 auto">
+                            <h:panelGrid columns="1" style="margin-bottom: 10px">
+                                <h:outputText id="slider1" value="Embergadura#{sliderView.number2}" />
+                                <h:inputHidden id="sliderEmbergadura" value="#{sliderView.number2}" />
+                                <p:slider for="sliderEmbergadura" display="slider1" minValue="0" maxValue="70" style="width: 200px" displayTemplate="Embergadura: {value}cms" />
+                            </h:panelGrid>
+                            <h:panelGrid columns="1" style="margin-bottom: 10px">
+                                <h:outputText id="slider2" value="Salto Máximo#{sliderView.number3}" />
+                                <h:inputHidden id="sliderSaltoMaximo" value="#{sliderView.number3}" />
+                                <p:slider for="sliderEmbergadura" display="slider2" minValue="0" maxValue="300" style="width: 200px" displayTemplate="Salto Maximo: {value}cms" />
+                            </h:panelGrid>
+                            <p:panelGrid columns="2" styleClass="btnesaccionesmediciones" style="margin: 0 auto">
+                                <f:facet name="header">
+                                    <p:outputLabel for="firstname" value="Salto Real: " />
+                                    <p:inputText id="firstname" value="52cms" disabled="true" label="Firstname" />
+                                </f:facet>
+                            </p:panelGrid>  
+                            </p:panelGrid>
+                            <h2 align="center">Resultado: Bueno</h2>
+                        
                     </p:tab>
                     <p:tab title="Observaciones">
                         <p:commandLink styleClass="imagenmedidas">
