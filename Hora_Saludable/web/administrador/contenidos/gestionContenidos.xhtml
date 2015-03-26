@@ -21,7 +21,13 @@
                 <!--<br></br><h1> Aqui va el contenido </h1>-->
                 <p:contentFlow value="#{imagesView.images}" var="image">
                 <p:graphicImage name="resource/img/imagenSalud/salud/#{image}" styleClass="content" />
-                    <div class="caption" style="high:400px">#{image}</div>
+                    <div class="caption" style="high:400px">#{image}
+                        <div>
+                             <p:button value="Editar albúm" icon="ui-icon-star" disabled="false">
+                                <f:param name="editaAlbum" />
+                            </p:button>
+                        </div>
+                    </div>
                 </p:contentFlow>
                 <br/><br/>
                 <h:form>
@@ -82,6 +88,10 @@
                             <h:outputText value="#{car.color}" />
                         </p:column>
                     </p:dataTable>
+                    
+                    <p:button style="margin-top: 20px; " value="Editar Horario" icon="ui-icon-star" disabled="false">
+                        <f:param name="editaHorario" />
+                    </p:button>
                   
                 </h:form>                
             </ui:define>
