@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+           <h:form>
+ <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+       <ui:define name="titulo">
+                    Consutas Test
+                </ui:define>
+
+                <ui:define name="CuadroDeBotonesSesion">
+                    CuadroDeBotonesSesion
+                </ui:define>
+
+            
+
+                <ui:define name="title">
+                   
+                    
+                     <div class="tituloContenido">
+                         <br></br>
+                    Consultar Test <br></br>
+                </div>
+                </ui:define>
+
+                <ui:define name="body"> 
+                    
+                    <p:panel id="panel" header="Consultas">
+                        <p:messages id="msgs" />
+                        <h:panelGrid columns="4" cellpadding="7">
+
+
+                            <p:outputLabel value="Consultar Por Identificacion" />
+                            <p:autoComplete value="#{consultaEstudianteLibrosAjaxController.estudiante}" completeMethod="#{consultaEstudianteLibrosAjaxController.getEstudiantes()}"
+                                            var="estudiante" itemLabel="#{estudiante.nombre}" itemValue="#{estudiante}" >
+                            </p:autoComplete>                         
+                            <p:commandButton action="#{consultaEstudianteLibrosAjaxController.buscarLibros}" value="Ejecutar Consulta" type="button" onclick="PF('dlg2').show();" />
+                            <h:message for="identificacion" />
+
+                           
+
+                            <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Resultado" showEffect="fade"> 
+                                <p:panelGrid id="display" columns="5" columnClasses="label,value">
+                                    <h:outputText value="Identificacion " />    
+                                    <h:outputText value="Primer Apellido " />
+                                    <h:outputText value="Segundo  Apellido " />
+                                    <h:outputText value="Nombre" />
+
+
+                                    <h:outputText id="IdentificacionValue" value="#{maskView.date}" />
+                                    <h:outputText id="pApellidoValue" value="#{maskView.phone}" />
+                                    <h:outputText id="sApellidoValue" value="#{maskView.phoneExt}"/>
+                                    <h:outputText id="nombresValue" value="#{maskView.phoneExt}"/>
+
+
+                                </p:panelGrid>
+                            </p:dialog>
+                        </h:panelGrid>
+  </p:panel>
+                    <br></br>
+              <p:dataTable var="car" value="#{dtBasicView.cars}">
+        <f:facet name="header">
+           
+            Expandir las Filas para ver los Detalles 
+        </f:facet>
+        <p:column style="width:16px">
+            <p:rowToggler />
+        </p:column>
+    <p:column headerText="Identificacion">
+            <h:outputText value="#{car.id}" />
+        </p:column>
+        <p:column headerText="Nombre">
+            <h:outputText value="#{car.year}" />
+        </p:column>
+        <p:column headerText="Primer Apellido">
+            <h:outputText value="#{car.brand}" />
+        </p:column>
+        <p:column headerText="Segundo Apellido">
+            <h:outputText value="#{car.color}" />
+        </p:column>
+ 
+        <p:rowExpansion>
+            <p:panelGrid  columns="2" columnClasses="label,value" style="width:300px">
+              
+                  <p:growl id="msgs" showDetail="true" />
+ 
+    <p:dataTable id="basicDT" var="car" value="#{dtSelectionView.cars1}">
+        <f:facet name="header">
+            Basic
+        </f:facet>
+        <p:column headerText="Identificacion">
+            <h:outputText value="#{car.id}" />
+        </p:column>
+        <p:column headerText="Nombre">
+            <h:outputText value="#{car.year}" />
+        </p:column>
+        <p:column headerText="Primer Apellido">
+            <h:outputText value="#{car.brand}" />
+        </p:column>
+        <p:column headerText="Segundo Apellido">
+            <h:outputText value="#{car.color}" />
+        </p:column>
+        <p:column style="width:32px;text-align: center">
+             <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+                <f:setPropertyActionListener value="#{car}" target="#{dtSelectionView.selectedCar}" />
+            </p:commandButton>
+        </p:column>
+    </p:dataTable>
+                  
+                  <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="carDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty dtSelectionView.selectedCar}" columnClasses="label,value">
+                <f:facet name="header">
+                    <p:graphicImage name="demo/images/car/#{dtSelectionView.selectedCar.brand}-big.gif"/> 
+                </f:facet>
+ 
+                <h:outputText value="Identificacion :" />
+                <h:outputText value="#{dtSelectionView.selectedCar.id}" />
+ 
+                <h:outputText value="Nombre" />
+                <h:outputText value="#{dtSelectionView.selectedCar.year}" />
+ 
+                <h:outputText value="Primer Apellido" />
+                <h:outputText value="#{dtSelectionView.selectedCar.color}" style="color:#{dtSelectionView.selectedCar.color}"/>
+ 
+                <h:outputText value="Segundo Apellido" />
+                <h:outputText value="$#{dtSelectionView.selectedCar.price}" />
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+                
+            </p:panelGrid>
+        </p:rowExpansion>
+    </p:dataTable>
+                    
+                </ui:define>
+    
+            </ui:composition>
+        </h:form>
+       
+    </body>
+</html>
