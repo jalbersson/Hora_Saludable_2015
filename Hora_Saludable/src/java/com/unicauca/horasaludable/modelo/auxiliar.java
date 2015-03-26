@@ -139,7 +139,16 @@ public class auxiliar
             this.dependenciaEmpleado=true;
             this.facultad=false;
             this.cargo=false;
-        }              
+        }
+        if(tipo.equals("Seleccione"))
+        {
+            this.dependencia=false;
+            this.empleado=false;
+            this.nombreEmpleado=false;
+            this.dependenciaEmpleado=false;
+            this.facultad=false;
+            this.cargo=false;
+        }
         
     }   
 }
