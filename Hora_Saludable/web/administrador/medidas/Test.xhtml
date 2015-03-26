@@ -25,7 +25,7 @@
 
             <ui:define name="body">
 
-                <p:panelGrid styleClass="fichapersonal" >
+                <p:panelGrid styleClass="fichapersonal" style="margin: 0 auto">
                     <p:row>
                         <p:column rowspan="8"><p:graphicImage library="img" name="mario.jpg"/></p:column>
                     </p:row>
@@ -90,10 +90,12 @@
                 </p:panelGrid>
                 
                 <p:commandLink styleClass="imagenmedidas2">
+                    <p:panelGrid columns="1" style="margin: 0 auto">
                             <h:graphicImage name="img/Imprimir.PNG" />
+                    </p:panelGrid>
                 </p:commandLink>
                 
-                <p:accordionPanel styleClass="acciones" >
+                <p:accordionPanel styleClass="acciones" style="margin: 0 auto">
                     <p:tab title="Mediciones" >
 
                         <p:commandLink styleClass="imagenmedidas">
@@ -193,8 +195,8 @@
                         
                             <p:panelGrid columns="1" style="margin: 0 auto">
                                 <h:graphicImage name="img/testDeportivos.PNG"/>
-                                <h2 align="center">Test de Sargent</h2>
                             </p:panelGrid>
+                            <h2 align="center">Test de Sargent</h2>
                             <p:panelGrid columns="3" styleClass="btnesaccionesmediciones" style="margin: 0 auto">
                             <h:panelGrid columns="1" style="margin-bottom: 10px">
                                 <h:outputText id="slider1" value="Embergadura#{sliderView.number2}" />
@@ -213,8 +215,40 @@
                                 </f:facet>
                             </p:panelGrid>  
                             </p:panelGrid>
-                            <h2 align="center">Resultado: Bueno</h2>
-                        
+                        <h2 align="center">Resultado: Bueno</h2><br></br>
+                        <h2 align="center">Test de Rufier</h2>
+                        <p:panelGrid columns="3" styleClass="btnesaccionesmediciones" style="margin: 0 auto">
+                            <h:panelGrid columns="1" style="margin-bottom: 10px">
+                                <h:outputText id="slider3" value="Primer pulso#{sliderView.number3}" />
+                                <h:inputHidden id="sliderPrimerPulso" value="#{sliderView.number3}" />
+                                <p:slider for="sliderPrimerPulso" display="slider3" minValue="0" maxValue="200" style="width: 200px" displayTemplate="Primer Pulso: {value}bpm" />
+                            </h:panelGrid>
+                            <h:panelGrid columns="1" style="margin-bottom: 10px">
+                                <h:outputText id="slider4" value="Segundo pulso#{sliderView.number2}" />
+                                <h:inputHidden id="sliderSegundoPulso" value="#{sliderView.number2}" />
+                                <p:slider for="sliderSegundoPulso" display="slider4" minValue="0" maxValue="200" style="width: 200px" displayTemplate="Segundo pulso: {value}bpm" />
+                            </h:panelGrid>  
+                            <h:panelGrid columns="1" style="margin-bottom: 10px">
+                                <h:outputText id="slider5" value="Tercer pulso#{sliderView.number3}" />
+                                <h:inputHidden id="sliderTercerPulso" value="#{sliderView.number3}" />
+                                <p:slider for="sliderTercerPulso" display="slider5" minValue="0" maxValue="200" style="width: 200px" displayTemplate="Tercer Pulso: {value}bpm" />
+                            </h:panelGrid>  
+                            </p:panelGrid>
+                        <h2 align="center">Resultado: Bueno</h2><br></br>
+                        <h2 align="center">Test de Leger</h2>
+                        <p:panelGrid columns="2" styleClass="btnesaccionesmediciones" style="margin: 0 auto">
+                            <f:facet name="header">
+                                <p:outputLabel for="firstname" value="Consumo máximo de oxígeno: " />
+                                <p:outputLabel for="firstname" value="134" />
+                            </f:facet>
+                        </p:panelGrid>
+                        <br></br>
+                        <p:panelGrid columns="2" styleClass="btnesaccionesmediciones" style="margin: 0 auto">
+                            <f:facet name="header">
+                                <p:commandButton type="button" style="margin-right: 10px" value="Cancelar" />
+                                <p:commandButton type="button" style="margin-left: 10px" value="Guardar" icon="ui-icon-check" />
+                            </f:facet>
+                        </p:panelGrid>
                     </p:tab>
                     <p:tab title="Observaciones">
                         <p:commandLink styleClass="imagenmedidas">
