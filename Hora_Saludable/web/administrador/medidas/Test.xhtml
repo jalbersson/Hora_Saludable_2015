@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Toma de medidas
+            </ui:define>
+
+            <ui:define name="CuadroDeBotonesSesion">
+                CuadroDeBotonesSesion
+            </ui:define>
+
+            <ui:define name="title">
+                <p:outputLabel styleClass="titulomediciones" value="Gestion de Test #1" />
+                <p:separator />
+            </ui:define>
+
+            <ui:define name="body">
+
+                <p:panelGrid styleClass="fichapersonal" >
+                    <p:row>
+                        <p:column rowspan="8"><p:graphicImage library="img" name="mario.jpg"/></p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Nombre:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="Mario Alberto Posada Rincon" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="1061487921" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Perfil:" />
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel styleClass="fuentefichatabla" value="Docente" />
+                        </p:column>
+          
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="M" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Peso:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="65 kg" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Talla:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="170 cm" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Deporte:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="Atletismo" />
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                
+                <p:commandLink styleClass="imagenmedidas2">
+                            <h:graphicImage name="img/Imprimir.PNG" />
+                </p:commandLink>
+                
+                <p:accordionPanel styleClass="acciones" >
+                    <p:tab title="Mediciones" >
+
+                        <p:commandLink styleClass="imagenmedidas">
+                            <h:graphicImage name="img/Mediciones.PNG" />
+                        </p:commandLink>
+                        <p:panelGrid columns="2" styleClass="panelmedidas">
+                            <f:facet name="header">
+                                Variables
+                            </f:facet>
+
+                            <p:outputLabel for="firstname" value="Triceps(cm): *" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="surname" value="Sub Escapular(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Suprailiaco(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Abdominal(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Muslo(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Pantorrilla(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Perimetro Muñeca(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Perimetro Cabeza(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Diametro Biacromial(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Diametro Biltiocristal(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Diametro Humero(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Diametro Femur(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Perimetro Brazo(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Diametro Antebrazo(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Perimetro Pantorrilla(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Perimetro Caja Toraxica(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                            <p:outputLabel for="surname" value="Perimetro Muslo(cm): *" />
+                            <p:inputText id="surname" value="" label="Surname"/>
+                        </p:panelGrid>
+                        <p:commandButton type="button" value="Calcular Resultado" icon="ui-icon-arrowthick-1-e" styleClass="btncalcularmedidas"/>
+
+                        <p:panelGrid columns="2" styleClass="panelmedidas">
+                            <f:facet name="header">
+                                Resultado
+                            </f:facet>
+
+                            <p:outputLabel for="firstname" value="Sumatoria Pliegues(cm):" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Porcentaje Grasa(cm):" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Peso Graso(kg):" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Peso Libre grasa(kg):" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Masa Muscular(kg):" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Indice de Masa Corpolar" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Complexion:" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Tasa Metabolica Basal:" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Exceso de Peso(kg):" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Peso Optimo(kg):" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Masa Esq. Cuerpo(kg):" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Masa Total Osea(kg):" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel for="firstname" value="% Grasa Ideal" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:separator />
+                            <p:separator />
+                            <p:outputLabel for="firstname" value="% Grasa" />
+                            <p:inputText id="firstname" value="----" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Complexion" />
+                            <p:inputText id="firstname" value="----" label="Firstname" />
+                            <p:outputLabel for="firstname" value="Indice de Masa Corporal" />
+                            <p:inputText id="firstname" value="----" label="Firstname" />
+
+                        </p:panelGrid>
+                        <p:panelGrid columns="2" styleClass="btnesaccionesmediciones">
+                            <f:facet name="header">
+                                <p:commandButton type="button" value="Guardar" icon="ui-icon-check" />
+                                <p:commandButton type="button" value="Ver Historial" icon="ui-icon-check" />
+                            </f:facet>
+                        </p:panelGrid>  
+                    </p:tab>
+                    <p:tab title="Test Deportivos">
+                        <p:commandLink styleClass="imagenmedidas">
+                            <h:graphicImage name="img/testDeportivos.PNG" />
+                        </p:commandLink>
+                    </p:tab>
+                    <p:tab title="Observaciones">
+                        <p:commandLink styleClass="imagenmedidas">
+                            <h:graphicImage name="img/Comentarios.PNG" />
+                        </p:commandLink>
+
+
+
+                    </p:tab>
+
+                </p:accordionPanel>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
