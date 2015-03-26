@@ -27,7 +27,7 @@
                             <p:growl id="message" showDetail="true" />
 
                             <p:commandButton value="Guardar" actionListener="#{dialogView.destroyWorld}" update="message">
-                                <p:confirm header="Confirmacion" message="esta seguro?" icon="ui-icon-alert" />
+                                <p:confirm header="Confirmacion" message="Esta seguro?" icon="ui-icon-alert" />
                             </p:commandButton>
 
                             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
@@ -35,8 +35,8 @@
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
                         </h:form>
-                        <p:button outcome="gestionContenidos" value="Volver" style="float:right; right: 33%" />
-                   
+                        <p:button outcome="gestionContenidos" value="Volver" style="float:right" />
+
                     </h:panelGrid>
 
                     <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
