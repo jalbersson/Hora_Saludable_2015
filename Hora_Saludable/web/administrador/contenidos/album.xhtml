@@ -21,18 +21,35 @@
                 <br></br><h1> Editar Albúm... </h1>
 
                 <h:form>
-                    
-                    <h:form>
-                    <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true" update="messages" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                    <p:growl id="messages" showDetail="true" />
+                    <h2 style="margin-top: 0">Imagenes cargadas previamente:</h2>
+                    <p:lightBox styleClass="imagebox" id="lighbox1">  
+                        <h:outputLink value="../../resources/img/imagenSalud/salud1.jpg" title="Salud 1">  
+                            <h:graphicImage name="/img/imagenSalud/salud1.jpg" id="nature1" style="height: 77px; width: 100px" />  
+                        </h:outputLink>
+
+                        <h:outputLink value="../../resources/img/imagenSalud/salud2.jpg" title="Salud 2">  
+                            <h:graphicImage name="/img/imagenSalud/salud2.jpg" id="nature2" style="height: 77px; width: 100px" />  
+                        </h:outputLink>
+
+                        <h:outputLink value="../../resources/img/imagenSalud/salud3.jpg" title="Salud 3">  
+                            <h:graphicImage name="/img/imagenSalud/salud3.jpg" id="nature3" style="height: 77px; width: 100px" />  
+                        </h:outputLink>
+
+                        <h:outputLink value="../../resources/img/imagenSalud/salud4.jpg" title="Salud 4">  
+                            <h:graphicImage name="/img/imagenSalud/salud4.jpg" id="nature4" style="height: 77px; width: 100px" />  
+                        </h:outputLink>
+                    </p:lightBox>
                     
                     <br/><br/>
                     
-                    <p:button style="margin-top: 20px; " value="Salir" icon="ui-icon-star" disabled="false">
+                    <h2 style="margin-top: 0">Cargar nuevas imagenes en esta área: </h2>
+                    <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true" update="messages" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <p:growl id="messages" showDetail="true" />
+
+                    <p:button style="margin-top: 15px; " value="Salir" icon="ui-icon-star" disabled="false">
                         <f:param name="editaHorario" />
                     </p:button>
-                    
-                </h:form>
+
                     
                     <p:growl autoUpdate="true"/>
                   
