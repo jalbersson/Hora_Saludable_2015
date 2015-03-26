@@ -28,6 +28,8 @@
                     <p:menuitem value="Asistencia Inscritos" outcome="reporte-asistencia-inscritos" />
                 </p:breadCrumb>
                 <p:spacer height="20"/>                
+                
+                
                 <h:form>
                     <p:panel>
                         <h:panelGrid columns="2" cellpadding="5">
@@ -44,9 +46,15 @@
                                 <f:selectItem itemLabel="2014" itemValue="1" />
                                 <f:selectItem itemLabel="2015" itemValue="2" />
                             </p:selectOneMenu>                    
+                            
+                            <p:button value="Generar Reporte">
+                                
+                            </p:button>
                         </h:panelGrid>
                     </p:panel>
                 </h:form>
+                <p:spacer height="20"/>     
+                <h3>Este reporte muestra el número de participantes por mes en las atividades del Programa Hora Saludable</h3>
 
                 <p:chart type="bar" model="#{chartViewInscritos.barModel}" style="height:300px" widgetVar="chart"/>
 

@@ -21,27 +21,27 @@
             <ui:define name="title">
                 <p:outputLabel styleClass="titulomediciones" value="Gestion de Test" />
                 <p:separator />
-                
+
             </ui:define>
 
             <ui:define name="body">
-                
-               
+
+
                 <p:dialog showEffect="fade" hideEffect="explode" position="center" widgetVar="agregartest" header="Agregar Nuevo Test" modal="true">
-                   
+
                     <h:form>
-                    <h:panelGrid columns="2" cellpadding="10">
-                    <p:outputLabel value="Nombre del Test:" />
-                    <p:inputText id="firstname" value="" label="Firstname" />
-                    <p:outputLabel  value="Fecha" />
-                    <p:calendar  pattern="dd.MM.yyyy" navigator="true" showButtonPanel="true"/>
-                    <f:facet name="footer">
-                        <p:commandButton  value="Agregar Nuevo Test" type="button" onclick="PF('agregartest').hide();" icon="ui-icon-disk" />              
-                    </f:facet>                   
-                    </h:panelGrid>
-                        </h:form>
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:outputLabel value="Nombre del Test:" />
+                            <p:inputText id="firstname" value="" label="Firstname" />
+                            <p:outputLabel  value="Fecha" />
+                            <p:calendar  pattern="dd.MM.yyyy" navigator="true" showButtonPanel="true"/>
+                            <f:facet name="footer">
+                                <p:commandButton  value="Agregar Nuevo Test" type="button" onclick="PF('agregartest').hide();" icon="ui-icon-disk" />              
+                            </f:facet>                   
+                        </h:panelGrid>
+                    </h:form>
                 </p:dialog>
-                
+
                 <p:panelGrid styleClass="fichapersonal" >
                     <p:row>
                         <p:column rowspan="8"><p:graphicImage library="img" name="mario.jpg"/></p:column>
@@ -106,19 +106,19 @@
                     </p:row>
                 </p:panelGrid>
                 <div>
-                <p:panelGrid columns="2" styleClass="Menuagregartest">
-                    <f:facet name="header">
-                        <h:outputLabel  value="Lista de Test registrados al usuario" />                      
-                    </f:facet>
-                </p:panelGrid> 
-                
-                
-                <p:panelGrid columns="2" style="float: right; margin-top: 30px; ">
-                    <f:facet name="header">
-                        <p:commandButton  value="Agregar Nuevo Test" type="button" onclick="PF('agregartest').show();" icon="ui-icon-disk" />
-                        <p:commandButton  value="Ver Historial" type="button" icon="ui-icon-refresh" /> 
-                    </f:facet>
-                </p:panelGrid> 
+                    <p:panelGrid columns="2" styleClass="Menuagregartest">
+                        <f:facet name="header">
+                            <h:outputLabel  value="Lista de Test registrados al usuario" />                      
+                        </f:facet>
+                    </p:panelGrid> 
+
+
+                    <p:panelGrid columns="2" style="float: right; margin-top: 30px; ">
+                        <f:facet name="header">
+                            <p:commandButton  value="Agregar Nuevo Test" type="button" onclick="PF('agregartest').show();" icon="ui-icon-disk" />
+                            <p:commandButton  value="Ver Historial" type="button" icon="ui-icon-refresh" /> 
+                        </f:facet>
+                    </p:panelGrid> 
                 </div>
                 <p:panelGrid styleClass="tablas">
 
@@ -150,9 +150,23 @@
                             <h:outputLabel for="surname" value="10 de Mayo,2014" />
                         </p:column>
                         <p:column>                         
-                            <p:link value="Editar" outcome="Test">
+                            <p:link value=" Editar " outcome="Test">
                             </p:link>
-                            <p:link value="Eliminar" outcome="Test">
+
+
+
+                        <p:link value=" Imprimir " onclick="PF('dlg2').show();"> </p:link>
+
+
+
+                                <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="400" width="80%">
+                                    <h3>PDF</h3><object type="application/pdf" data="http://ccia.ei.uvigo.es/docencia/SCS/1112/jee/ejemploJSF.pdf" height="500px" width="100%">
+                                        Your browser can't display pdf, <a href="http://ccia.ei.uvigo.es/docencia/SCS/1112/jee/ejemploJSF.pdf">click</a> to download pdf instead.
+                                    </object>
+                                </p:dialog>   
+                   
+
+                            <p:link value=" Eliminar " outcome="Test">
                             </p:link>                      
                         </p:column>
                     </p:row>
@@ -167,19 +181,34 @@
                             <h:outputLabel for="surname" value="30 de Mayo,2014" />
                         </p:column>
                         <p:column>
-                            <p:link value="Editar">
+                            <p:link value=" Editar ">
                             </p:link>
-                            <p:link value="Eliminar">
+
+                       <p:link value=" Imprimir " onclick="PF('dlg2').show();"> </p:link>
+
+
+
+                                <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="400" width="80%">
+                                    <h3>PDF</h3><object type="application/pdf" data="http://ccia.ei.uvigo.es/docencia/SCS/1112/jee/ejemploJSF.pdf" height="500px" width="100%">
+                                        Your browser can't display pdf, <a href="http://ccia.ei.uvigo.es/docencia/SCS/1112/jee/ejemploJSF.pdf">click</a> to download pdf instead.
+                                    </object>
+                                </p:dialog>   
+                         
+
+
+
+
+                            <p:link value=" Eliminar ">
                             </p:link>
                         </p:column>
                     </p:row>
 
                 </p:panelGrid>
 
-                
-                
-               
-           
+
+
+
+
 
             </ui:define>
 

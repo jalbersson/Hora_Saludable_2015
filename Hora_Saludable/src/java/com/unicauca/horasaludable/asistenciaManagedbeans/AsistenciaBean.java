@@ -24,7 +24,7 @@ public class AsistenciaBean {
     }
 
     public Date getFecha() {
-        return fecha;
+        return new Date();
     }
 
     public void setFecha(Date fecha) {

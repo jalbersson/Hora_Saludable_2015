@@ -44,10 +44,22 @@
                                 <f:selectItem itemLabel="2014" itemValue="1" />
                                 <f:selectItem itemLabel="2015" itemValue="2" />
                             </p:selectOneMenu>                    
+                            
+                            <h:outputLabel for="txtMes" value="Mes:" />
+                            <p:selectOneMenu id="txtMes" label="Text 3">
+                                <f:selectItem itemLabel="Selecione Uno" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Enero" itemValue="1" />
+                                <f:selectItem itemLabel="Febrero" itemValue="2" />
+                            </p:selectOneMenu>                    
+
+                            <p:button value="Generar Reporte">
+                                
+                            </p:button>
                         </h:panelGrid>
                     </p:panel>
                 </h:form>
-                
+                <p:spacer height="20"/>     
+                <h3>Este reporte muestra la asistencia de participantes por areas en el mes de enero de 2014</h3>
                 <p:chart type="bar" model="#{chartView.barModel}" style="height:300px" widgetVar="chart"/>
 
                 <p:commandButton type="button" value="Exportar" icon="ui-icon-extlink" onclick="exportChart()"/>
