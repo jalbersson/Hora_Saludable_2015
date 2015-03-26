@@ -27,6 +27,8 @@ public class ButtonView {
         public void buttonAction(ActionEvent actionEvent) {
         addMessage("Noticia Nueva ha sido Guardada!!");
     }
+   
+
      
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
