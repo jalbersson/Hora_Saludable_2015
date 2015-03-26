@@ -38,7 +38,7 @@ public class ChartViewInscritos {
         xAxis.setTickAngle(-50);
 
         Axis yAxis = barModel.getAxis(AxisType.Y);
-        yAxis.setLabel("Inscritos");
+        yAxis.setLabel("Participantes");
         yAxis.setMin(0);
         yAxis.setMax(75);        
     }
