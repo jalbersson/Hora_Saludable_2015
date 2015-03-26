@@ -9,6 +9,12 @@
 
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
+            
+             <p:contentFlow value="#{imagesView.images}" var="image">
+            <p:graphicImage name="resource/imag/salud/salud/#{image}" styleClass="content" />
+                <div class="caption">#{image}</div>
+            </p:contentFlow>
+            
             <ui:define name="titulo">
                 Gestión de contenidos
             </ui:define>
