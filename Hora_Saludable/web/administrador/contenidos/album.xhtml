@@ -25,18 +25,35 @@
                     <p:lightBox styleClass="imagebox" id="lighbox1">  
                         <h:outputLink value="../../resources/img/imagenSalud/salud1.jpg" title="Salud 1">  
                             <h:graphicImage name="/img/imagenSalud/salud1.jpg" id="nature1" style="height: 77px; width: 100px" />  
+                            
+                            <p:button outcome="album" value="-" icon="ui-icon-star" disabled="false">
+                                <f:param name="eliminarHorario" />
+                            </p:button>
+                            
                         </h:outputLink>
 
                         <h:outputLink value="../../resources/img/imagenSalud/salud2.jpg" title="Salud 2">  
                             <h:graphicImage name="/img/imagenSalud/salud2.jpg" id="nature2" style="height: 77px; width: 100px" />  
+                            
+                            <p:button outcome="album" value="-" icon="ui-icon-star" disabled="false">
+                                <f:param name="eliminarHorario" />
+                            </p:button>
                         </h:outputLink>
 
                         <h:outputLink value="../../resources/img/imagenSalud/salud3.jpg" title="Salud 3">  
                             <h:graphicImage name="/img/imagenSalud/salud3.jpg" id="nature3" style="height: 77px; width: 100px" />  
+                            
+                            <p:button outcome="album" value="-" icon="ui-icon-star" disabled="false">
+                                <f:param name="eliminarHorario" />
+                            </p:button>
                         </h:outputLink>
 
                         <h:outputLink value="../../resources/img/imagenSalud/salud4.jpg" title="Salud 4">  
                             <h:graphicImage name="/img/imagenSalud/salud4.jpg" id="nature4" style="height: 77px; width: 100px" />  
+                            
+                            <p:button outcome="album" value="-" icon="ui-icon-star" disabled="false">
+                                <f:param name="eliminarHorario" />
+                            </p:button>
                         </h:outputLink>
                     </p:lightBox>
                     
@@ -46,7 +63,7 @@
                     <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true" update="messages" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                     <p:growl id="messages" showDetail="true" />
 
-                    <p:button style="margin-top: 15px; " value="Salir" icon="ui-icon-star" disabled="false">
+                    <p:button style="margin-top: 15px; " outcome="gestionContenidos" value="Salir" icon="ui-icon-star" disabled="false">
                         <f:param name="editaHorario" />
                     </p:button>
 

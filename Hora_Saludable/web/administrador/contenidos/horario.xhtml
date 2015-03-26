@@ -20,7 +20,100 @@
             <ui:define name="body">
                 <br></br><h1> Editar Horarios... </h1>
 
-                <h:form>
+                <h:form id="form">
+                    <p:growl id="msgs" showDetail="true"/>
+
+                    <p:dataTable id="cars1" var="car" value="#{dtEditView.cars1}" editable="true" style="margin-bottom:20px">
+                        <f:facet name="header">
+                            Editar horarios
+                        </f:facet>
+
+                        <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" update=":form:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
+
+                        <p:column headerText="Hora">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.id}" /></f:facet>
+                                <f:facet name="input"><p:inputText id="modelInput" value="#{car.id}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Lunes">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{car.year}" style="width:100%" label="Year"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Martes">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.brand}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{car.brand}" style="width:100%">
+                                        <f:selectItems value="#{dtEditView.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Miercoles">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{car.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Jueves">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{car.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Viernes">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{car.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Sabado">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{car.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Editar" style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+                        
+                        <p:column headerText="Eliminar" style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+                        
+                    </p:dataTable>
+                    
+                    <p:button style="margin-top: 15px; " outcome="gestionContenidos" value="Salir" icon="ui-icon-star" disabled="false">
+                        <f:param name="editaHorario" />
+                    </p:button>
+                    
                     <p:growl autoUpdate="true"/>
                   
                 </h:form>                
