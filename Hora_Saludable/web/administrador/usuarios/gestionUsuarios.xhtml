@@ -25,8 +25,19 @@
                 
                 
                     <h:form>
-                        <p:commandButton value="Registrar Nuevo Usuario" style="background:#22419A; 
-                                         color: #FFFFFF;" onclick="PF('RegistrarUsuario').show();"/>                        
+                        <p:commandButton  value="Registrar Nuevo Usuario" style="background:#22419A; 
+                                         color: #FFFFFF; margin-left: 740px;" 
+                                         onclick="PF('RegistrarUsuario').show();"/>  
+                        <h:panelGrid columns="3">
+                            <p:outputLabel value="Nombre del Estudiante" />
+                            <p:autoComplete >
+                            </p:autoComplete> 
+
+                            <h:commandButton style="background:#22419A; 
+                                         color: #FFFFFF;"  value="Buscar" />
+
+                        </h:panelGrid>
+                        <br/>                                              
                         <p:dataTable var="usuario" value=""
                                      paginator="true" rows="10"  
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
@@ -41,11 +52,17 @@
                             <p:column headerText="Apellidos">
                                 
                             </p:column> 
+                            <p:column headerText="Tipo">
+                                
+                            </p:column> 
+                            <p:column headerText="Acciones">
+                                
+                            </p:column> 
 
                         </p:dataTable>
                     </h:form>
                 
-                        <p:dialog   header="Registrar Usuario" showEffect="scale" modal="true"  widgetVar="RegistrarUsuario">
+                <p:dialog position="top"   header="Registrar Usuario" showEffect="scale" modal="true"  widgetVar="RegistrarUsuario">
                             <h:form id="form">
                                 <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
                                 <p:row>
@@ -122,8 +139,8 @@
                                         <h:outputLabel class="CampoLabel" for="empleado" value="Empleado: *" />
                                     </p:column>
                                     <p:column>                                
-                                        <p:commandButton value="seleccionar"
-                                        style="background: #22419A;color:#FFFFFF;font-style: italic"/>
+                                        <p:commandButton value="seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic" 
+                                         onclick="PF('seleccionarFamiliar').show();"/>
                                     </p:column>
                                     <p:column>
                                         <p:message for="nombreEmpleado"/>
@@ -293,7 +310,7 @@
                                 </p:row>
                                 <p:row>
                                     <p:column style="text-align:right">
-                                        <h:outputLabel class="CampoLabel" for="sexo" value="Sexo: " />
+                                        <h:outputLabel class="CampoLabel" for="sexo" value="Sexo: * " />
                                     </p:column>
                                     <p:column>
                                         <p:selectOneRadio id="sexo" value="" required="true" requiredMessage="Seleccione Sexo.">
@@ -329,6 +346,13 @@
                     </h:form>    
                             
                         
+                
+                </p:dialog>
+                  
+                <p:dialog header="Seleccionar Familiar"  modal="true"  widgetVar="seleccionarFamiliar">
+                    <h:form>
+                        
+                    </h:form>
                 </p:dialog>
                         
                         

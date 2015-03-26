@@ -7,30 +7,23 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-        <h:form>
+        
              <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
                 <ui:define name="titulo">
                     Consutas Test
-                </ui:define>
+                </ui:define>        
 
-                <ui:define name="CuadroDeBotonesSesion">
-                    CuadroDeBotonesSesion
-                </ui:define>
-
-            
-
-                <ui:define name="title">
-                   
+                <ui:define name="title">                  
                     
-                     <div class="tituloContenido">
-                         <br></br>
-                    Consultar Datos Personales (Un solo Campo) <br></br>
-                </div>
+                    <div class="tituloContenido">
+                             <br></br>
+                        Consultar Datos Personales (Un solo Campo) <br></br>
+                    </div>
                 </ui:define>
 
                 <ui:define name="body"> 
-                    
+                    <h:form>
                     <p:panel id="panel" header="Consultas">
                         <p:messages id="msgs" />
                         <h:panelGrid columns="4" cellpadding="7">
@@ -150,9 +143,9 @@
             </p:panelGrid>
         </p:rowExpansion>
     </p:dataTable>
-                    
+                    </h:form>
                 </ui:define>
             </ui:composition>
-        </h:form>
+        
     </body>
 </html>
