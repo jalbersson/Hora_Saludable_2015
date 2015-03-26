@@ -31,7 +31,9 @@
                         </p:submenu>
 
                         <p:submenu label="Gestion de noticias">
-                            <p:menuitem value="EjemploOtrasCosas" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
+                            <p:menuitem value="Nueva Noticia"  ajax="false" outcome="listarNoticias" icon="ui-icon-close"/>
+                            <p:menuitem value="Listar Noticias" outcome="nuevaNoticia" ajax="false" icon="ui-icon-close"/>
+                       
                         </p:submenu>
 
                         <p:submenu label="Reglamento"  >
