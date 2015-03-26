@@ -16,14 +16,14 @@
             <ui:define name="title">
                 Gestión de Contenidos
             </ui:define>
-
-            <p:contentFlow value="#{imagesView.images}" var="image">
-            <p:graphicImage name="resource/imag/salud/salud/#{image}" styleClass="content" />
-                <div class="caption">#{image}</div>
-            </p:contentFlow>
             
             <ui:define name="body">
-                <br></br><h1> Aqui va el contenido  </h1>
+                <!--<br></br><h1> Aqui va el contenido </h1>-->
+                <p:contentFlow value="#{imagesView.images}" var="image">
+                <p:graphicImage name="resource/img/imagenSalud/salud/#{image}" styleClass="content" />
+                    <div class="caption" style="high:400px">#{image}</div>
+                </p:contentFlow>
+                <br/><br/>
                 <h:form>
                     <p:growl autoUpdate="true"/>
 
@@ -52,6 +52,36 @@
                         </p:submenu>
 
                     </p:panelMenu>
+                    
+                    <p:dataTable style="width:700px; float: left" var="car" value="#{dtBasicView.cars}" rowStyleClass="#{car.year le 1990 ? 'old' : null}">
+                        <p:column headerText="Hora">
+                            <h:outputText value="#{car.id}" />
+                        </p:column>
+
+                        <p:column headerText="Lunes">
+                            <h:outputText value="#{car.year}" />
+                        </p:column>
+
+                        <p:column headerText="Martes">
+                            <h:outputText value="#{car.brand}" />
+                        </p:column>
+
+                        <p:column headerText="Miercoles">
+                            <h:outputText value="#{car.color}" />
+                        </p:column>
+                        
+                        <p:column headerText="Jueves">
+                            <h:outputText value="#{car.color}" />
+                        </p:column>
+                        
+                        <p:column headerText="Viernes">
+                            <h:outputText value="#{car.color}" />
+                        </p:column>
+                        
+                        <p:column headerText="Sabado">
+                            <h:outputText value="#{car.color}" />
+                        </p:column>
+                    </p:dataTable>
                   
                 </h:form>                
             </ui:define>
