@@ -26,10 +26,11 @@ public class auxiliar
     private boolean facultad;
     private ArrayList<Usuario> listaUsuarios;
     private Usuario usuarioSeleccionado;
+    private boolean tablaEstudiantes;    
+    private boolean tablaFamiliar;
+    private boolean tablaEmpleado;
 
-   
-   
-    
+
     public auxiliar()
     {
         estadoCerrarSesion=true;
@@ -41,7 +42,33 @@ public class auxiliar
         this.dependenciaEmpleado=false;
         this.facultad=false;
         this.cargo=false;
+        this.tablaEmpleado=false;
+        this.tablaEstudiantes=false;
+        this.tablaFamiliar=false;
         this.cargarUsuarios();
+    }
+    public boolean isTablaEstudiantes() {
+        return tablaEstudiantes;
+    }
+
+    public void setTablaEstudiantes(boolean tablaEstudiantes) {
+        this.tablaEstudiantes = tablaEstudiantes;
+    }
+
+    public boolean isTablaFamiliar() {
+        return tablaFamiliar;
+    }
+
+    public void setTablaFamiliar(boolean tablaFamiliar) {
+        this.tablaFamiliar = tablaFamiliar;
+    }
+
+    public boolean isTablaEmpleado() {
+        return tablaEmpleado;
+    }
+
+    public void setTablaEmpleado(boolean tablaEmpleado) {
+        this.tablaEmpleado = tablaEmpleado;
     }
      public Usuario getUsuarioSeleccionado() {
         return usuarioSeleccionado;
@@ -95,7 +122,8 @@ public class auxiliar
        RequestContext requestContext = RequestContext.getCurrentInstance();              
        requestContext.execute("PF('seleccionarFamiliar').hide()");
        this.usuarioSeleccionado=usuario;
-       requestContext.update("form"); 
+       requestContext.update("form:nombreEmpleado"); 
+       requestContext.update("form:dependenciaEmpleado");
        
     }
      public ArrayList<Usuario> getListaUsuarios() {
@@ -113,8 +141,7 @@ public class auxiliar
     public void setEstadoCerrarSesion(boolean estadoCerrarSesion) 
     {
         this.estadoCerrarSesion = estadoCerrarSesion;
-    }
-
+    }    
     public boolean isEstadoNombresUsuario() 
     {
         return estadoNombresUsuario;
@@ -219,7 +246,23 @@ public class auxiliar
             this.cargo=false;
         }
         
-    }   
+    }
+    public void cambiarTipoUsuario(ValueChangeEvent e)
+    {
+        String tipo=e.getNewValue().toString();
+        if(tipo.equals("Seleccione"))
+        {
+            this.tablaEmpleado=false;
+            this.tablaEstudiantes=false;
+            this.tablaFamiliar=false;
+        }
+        if(tipo.equals("Empleado"))
+        {
+            this.tablaEmpleado=true;
+            this.tablaEstudiantes=false;
+            this.tablaFamiliar=false;
+        }
+    }
 }
 
 

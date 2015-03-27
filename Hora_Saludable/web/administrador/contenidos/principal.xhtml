@@ -29,24 +29,29 @@
                     <p:growl id="msgs" showDetail="true" />
 
                     <h3 style="margin-top:0">Noticias</h3>
-                    <p:accordionPanel>
-                        <p:tab title="Noticia I">
+                     <p:accordionPanel>
+                        <p:tab title="Noticia I - 27 Marzo 2015">
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
-                                <h:outputText
-                                    value="The story begins as Don Vito Corleone..." />
+                                <p:graphicImage library="img/imagenSalud" name="salud1.jpg" width="80px" height="80px" style=""/>
+                                <h:outputText  value="Se condecoró estudiante de Octavo semestre de Ingenieria de Sistemas" />
+                                <h:outputText></h:outputText>
+                                <h:link outcome="visualizarNoticia" style="float: right">Ver mas</h:link>
                             </h:panelGrid>
                         </p:tab>
-                        <p:tab title="Noticia II">
+                        <p:tab title="Noticia II - 26 Marzo 2015">
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage name="demo/images/godfather/godfather2.jpg" />
-                                <h:outputText value="Francis Ford Coppola's legendary..." />
+                                <p:graphicImage library="img/imagenSalud" name="salud2.jpg" width="80px" height="80px" style=""/>
+                                <h:outputText  value="En semana santa no habrá servicio" />
+                                <h:outputText></h:outputText>
+                                <h:link outcome="visualizarNoticia"  style="float: right">Ver mas</h:link>
                             </h:panelGrid>
                         </p:tab>
-                        <p:tab title="Noticia III">
+                        <p:tab title="Noticia III - 26 Marzo 2015">
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
-                                <h:outputText value="After a break of more than 15 years..." />
+                                <p:graphicImage library="img/imagenSalud" name="salud3.jpg" width="80px" height="80px" style=""/>
+                                <h:outputText  value="Próximo fin de semana inician juegos de verano InterUniversitario" />
+                                <h:outputText></h:outputText>
+                                <h:link outcome="visualizarNoticia" style="float: right">Ver mas</h:link>
                             </h:panelGrid>
                         </p:tab>
                     </p:accordionPanel>
