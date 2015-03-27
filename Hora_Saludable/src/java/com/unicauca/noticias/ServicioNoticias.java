@@ -5,6 +5,11 @@
  */
 package com.unicauca.noticias;
 
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ApplicationScoped;
+import java.util.Random;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,9 +24,18 @@ import java.util.Random;
  */
 @ManagedBean(name = "servicioNoticias")
 @ApplicationScoped
+
 public class ServicioNoticias {
+
+    /**
+     * Creates a new instance of ServicioNoticias
+     */
+    public ServicioNoticias() {
+    }
+
     List<Noticias> lst;
-    public  List<Noticias> createNoticias(int tamaño) {
+
+    public List<Noticias> createNoticias(int tamaño) {
 
         lst = new ArrayList<Noticias>();
         for (int i = 0; i < tamaño; i++) {
@@ -34,7 +48,7 @@ public class ServicioNoticias {
 
     }
 
-    public  String getCadenaAleatoria(int longitud) {
+    public String getCadenaAleatoria(int longitud) {
         String cadenaAleatoria = "";
         long ms = new java.util.GregorianCalendar().getTimeInMillis();
         Random r = new Random(ms);
@@ -46,7 +60,8 @@ public class ServicioNoticias {
                 i++;
             }
         }
-        cadenaAleatoria="asd0";
+        cadenaAleatoria = "asd0";
         return cadenaAleatoria;
     }
+
 }
