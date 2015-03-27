@@ -11,12 +11,12 @@
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-                
+
             </ui:define>
 
 
             <ui:define name="title">
-                Reglamento
+                Noticias: 
             </ui:define>
 
             <ui:define name="body">
@@ -24,39 +24,38 @@
                     <p:growl autoUpdate="true"/>
 
                     <p:panelMenu style="width:200px; float: right">
-                          <p:submenu label="Contenidos">
+                        <p:submenu label="Contenidos">
                             <p:menuitem value="Eventos" outcome="eventos" ajax="false"/> 
-                            <p:menuitem value="Noticias" outcome="noticias" ajax="false"/> 
-                            <p:menuitem value="Ofertas" ajax="false"/>
+                            <p:menuitem value="Noticias" outcome="noticias" ajax="false"/>
                             <p:menuitem value="Reglamento" outcome="reglamento" ajax="false"/>
-                            <p:menuitem value="Quienes somos?" outcome="quienesSomos" ajax="false"/>
+                            <p:menuitem value="Quienes somos" outcome="reglamento" ajax="false"/>
                         </p:submenu>
                     </p:panelMenu>
                     <p:panelGrid  style="width: 78%;" columns="1" >
 
-                        <p:dataList      value="#{DataListView.listaNoticias}" var="noticia" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated" >
-                            <f:facet name="header">
-                                <H1>Noticias</H1>
-                            </f:facet>
-                            <p:commandLink update=":form:noticiasDetail" oncomplete="PF('noticiasDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
-                                <f:setPropertyActionListener value="#{noticia}" target="#{DataListView.selectedNoticia}" />
-                                <h:outputText value="#{noticia.titulo}, #{noticia.contenido}" />
-                            </p:commandLink>
-                            <h:outputText value="#{noticia.titulo}, #{noticia.contenido}" style="display:inline-block"/>
-                            <p:button outcome="listarNoticias/eliminar" value="Eliminar" icon="ui-icon-close">
-                                <f:param name="noticiaID" value="20" />
-                            </p:button>
-                            <p:button outcome="listarNoticias/modificar" value="Modificar" >
-                                <f:param name="noticiaID" value="20" />
-                            </p:button>
+
+                        <p:fieldset legend="Noticia II - 27 Marzo 2015" style="margin-bottom:20px">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:graphicImage library="img/imagenSalud" name="salud1.jpg" width="200px"/>
+                                <h:outputText
+                                    value="Unicauca y Secretaría Municipal de Deporte y Cultura presentan la campaña Popayán es mi Hogar" />
+                                <h:outputText></h:outputText>
+                                <h:link style="float: right" outcome="principal">Ver noticia</h:link>
+
+                            </h:panelGrid>
+                        </p:fieldset>
 
 
+                        <p:fieldset legend="Noticia I - 26 Marzo 2015" style="margin-bottom:20px">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:graphicImage library="img/imagenSalud" name="salud2.jpg" width="200px"/>
+                                <h:outputText
+                                    value=" Orquesta Sinfónica Bicentenario se vincula a la programación de la Semana Santa 2015" />
+                                <h:outputText></h:outputText>
+                                <h:link style="float: right">Ver noticia</h:link>
+                            </h:panelGrid>
+                        </p:fieldset>
 
-                        </p:dataList>
-
-
-                        <p:button outcome="quienesSomos" value="Volver" style="float:right" >
-                        </p:button>
                     </p:panelGrid>
 
 
