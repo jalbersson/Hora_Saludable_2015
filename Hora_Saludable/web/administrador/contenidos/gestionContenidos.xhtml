@@ -24,7 +24,7 @@
                     <div class="caption" style="high:400px">#{image}
                         <div>
                              <p:button outcome="album" value="Editar albúm" icon="ui-icon-star" disabled="false">
-                                <f:param name="editaAlbum" />
+                                <f:param name="album" />
                             </p:button>
                         </div>
                     </div>
@@ -83,13 +83,10 @@
                         <p:column headerText="Viernes">
                             <h:outputText value="#{car.color}" />
                         </p:column>
-                        
-                        <p:column headerText="Sabado">
-                            <h:outputText value="#{car.color}" />
-                        </p:column>
+                       
                     </p:dataTable>
                     
-                    <p:button style="margin-top: 20px;" outcome="horario" value="Editar Horario" icon="ui-icon-star" disabled="false">
+                    <p:button style="margin-top: 20px;" outcome="editarHorario" value="Editar Horario" icon="ui-icon-star" disabled="false">
                         <f:param name="editaHorario" />
                     </p:button>
                   
