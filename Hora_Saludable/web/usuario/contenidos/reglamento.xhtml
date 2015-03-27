@@ -21,9 +21,16 @@
             <ui:define name="body">
                 <h:form>
                     <p:growl autoUpdate="true"/>
-
                     <p:panelMenu style="width:200px; float: right">
-                          <p:submenu label="Contenidos">
+                        <p:submenu label="Contenidos">
+                            <p:menuitem value="Eventos" outcome="eventos" ajax="false"/> 
+                            <p:menuitem value="Noticias" outcome="noticias" ajax="false"/>
+                            <p:menuitem value="Reglamento" outcome="reglamento" ajax="false"/>
+                            <p:menuitem value="Quienes somos" outcome="quienesSomos" ajax="false"/>
+                        </p:submenu>
+                    </p:panelMenu>
+                    <p:panelMenu style="width:200px; float: right">
+                        <p:submenu label="Contenidos">
                             <p:menuitem value="Eventos" ajax="false"/> 
                             <p:menuitem value="Noticias" outcome="noticias" ajax="false"/> 
                             <p:menuitem value="Ofertas" ajax="false"/>
@@ -44,7 +51,7 @@
                         <p>
                             Ut vel nulla sit amet erat laoreet eleifend nec sed lacus. Quisque placerat diam vitae justo eleifend, rutrum mollis mauris fringilla. Curabitur turpis odio, euismod id lorem a, ultricies suscipit ligula. Pellentesque ut erat a leo rhoncus porta ac sed velit. Nunc at erat ligula. Fusce vehicula posuere interdum. Curabitur tempus, tortor at sollicitudin dapibus, erat ante varius nisl, id dictum erat ipsum porttitor ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla id varius enim, sed rutrum orci.
                         </p>
-                       
+
                     </p:scrollPanel>
                 </h:form> 
                 <h:panelGrid columns="2" style="margin-top: 10px">
