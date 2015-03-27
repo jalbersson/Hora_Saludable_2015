@@ -46,20 +46,22 @@
                         <p:messages id="messages" />
                         <h:panelGrid columns="2" >
                             <h:outputLabel value="*Titulo:"  />
-                            <p:inputText id="titulo" required="true" size="71" />
+                            <p:inputText id="titulo" required="true" size="65" />
 
-                            <p:outputLabel value="Resumen: " />
-                            <p:inputText id="resumen" required="false" size="71" />
+                            <p:outputLabel value="Resumen:" />
+                            <p:inputText id="resumen" required="false" size="65" />
 
-                            <p:outputLabel  value="Resumen: " />
-                            <p:inputText id="palabrasclave" required="fale" size="71"/>
 
-                            <p:outputLabel  value="Fecha de publicaciòn:" />
-                            <p:calendar id="calendario"  pattern="dd-MM-yyyy" mask="true" size ="71"/>
+                            <p:outputLabel  value="Mostrar noticia:" />
+                            <p:selectOneRadio id="mostrarNoticia" value="Mostrar noticia" >
+                                <f:selectItem itemLabel="Si" itemValue="Si" />   
+                                <f:selectItem itemLabel="No" itemValue="No" />
+                            </p:selectOneRadio>
 
 
                         </h:panelGrid>
 
+                        <p:outputLabel value="* A continuacòn edite su noticia: " />
 
                         <p:editor id="editor" widgetVar="editorWidget" value="Escribir nueva noticia!" width="600" />
                         <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
@@ -92,13 +94,7 @@
                         </p:outputPanel>
                     </p:dialog>
 
-
                 </h:form>
-
-
-
-
-
 
             </ui:define>
 
