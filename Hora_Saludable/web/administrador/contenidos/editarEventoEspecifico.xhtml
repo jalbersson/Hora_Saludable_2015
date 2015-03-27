@@ -11,7 +11,7 @@
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                titulo
+                Evento a editar
             </ui:define>
 
             <ui:define name="CuadroDeBotonesSesion">
@@ -19,28 +19,23 @@
             </ui:define>
 
             <ui:define name="menuprincipal">
-                menuprincipal
+
             </ui:define>
 
             <ui:define name="title">
-                title
             </ui:define>
 
             <ui:define name="body">
                 <h:form id="form">
                     <p:panelMenu style="width:200px; float: right">
                         <p:submenu label="Gestión de eventos">
-                            <p:menuitem value="Editar Evento" outcome="editarEvento" ajax="false"/>
+                            <p:menuitem value="Agregar Evento" outcome="agregarEvento" ajax="false"/>
                             <p:menuitem value="Eliminar Evento" outcome="eliminarEvento" ajax="false"/>
 
                         </p:submenu>
                     </p:panelMenu>
 
                     <p:panelGrid  style="width: 60%;" columns="1" >
-
-
-
-
 
                         <f:facet name="header">
                             <H1>Editar Evento</H1>
@@ -49,35 +44,30 @@
 
                         <p:messages id="messages" />
                         <h:panelGrid columns="2" >
-                            <h:outputLabel value="*Nombre:"  />
-                            <p:inputText id="nombreEvento" required="true" size="71" value="Partido de baloncesto Civil vs Electronica"/>
+                            <h:outputLabel value="*Nombre: "  />
+                            <p:inputText id="nombreEvento" required="true" size="80" value="Competencia de Atletismo"/>
 
                             <p:outputLabel value="*Lugar: " />
-                            <p:inputText id="lugarEvento" required="false" size="71" value="CDU Tulcan" />
+                            <p:inputText id="lugarEvento" required="false" size="80" value="CDU Tulcan"/>
                             
-                            <p:outputLabel  value="*Fecha:" />
-                            <p:calendar id="fechaEvento"  pattern="dd-MM-yyyy" mask="true" size ="71" />
+                            <p:outputLabel  value="*Fecha: " />
+                            <p:calendar id="fechaEvento"  pattern="dd-MM-yyyy" mask="true" size ="80"/>
 
-                            <p:outputLabel  value="Descripcion: " />
-                            <p:inputTextarea id="descripcionEvento" required="false" rows="4" cols="72"/>
+                            <p:outputLabel  value="Descripcion: " />         
+                            <p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" width="600" />
 
-
-
-
+                            <h:form>           
+                                <p:growl id="message" showDetail="true" />
+                                <p:commandButton value="Guardar" actionListener="#{dialogView.destroyWorld}" update="message">
+                                    <p:confirm header="Confirmacion" message="Evento editado con exito!!!" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                    <p:button value="Aceptar" outcome="gestionContenidos" style="float:right; right: 25%"/>                                  
+                                </p:confirmDialog>
+                            </h:form>
+                            <p:button outcome="gestionContenidos" value="Volver" style="float:right; right: 88%" ></p:button>
                         </h:panelGrid>
-
-
-                        
-                        <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
-                            <h:outputText id="display" value="Nueva noticia!" escape="false" />
-                        </p:dialog>
                     </p:panelGrid>
-                    <p:button outcome="editarEvento" value="Guardar" style="float:left" >
-                    </p:button>
-
-                    <p:button outcome="gestionContenidos" value="Volver" style="float:right; right: 33%" >
-                    </p:button>
-
                 </h:form>
             </ui:define>
 

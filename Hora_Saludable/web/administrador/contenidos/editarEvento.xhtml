@@ -10,7 +10,7 @@
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                titulo
+                Editar Evento
             </ui:define>
 
             <ui:define name="CuadroDeBotonesSesion">
@@ -18,45 +18,53 @@
             </ui:define>
 
             <ui:define name="menuprincipal">
-                menuprincipal
+
             </ui:define>
 
             <ui:define name="title">
-                title
-            </ui:define>
 
+            </ui:define>
+                
             <ui:define name="body">
+                <p:panelGrid columns="2">
+                    
+                <h:form>
+                    <p:dataTable var="evento" value="#{dtPaginatorView.eventos}" rows="10"
+                                         paginator="true"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{evento.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="Lugar">
+                            <h:outputText value="#{evento.lugar}" />
+                        </p:column>
+
+                        <p:column headerText="Fecha">
+                            <h:outputText value="#{evento.fecha}" />
+                        </p:column>
+
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="#{evento.descripcion}" />
+                        </p:column>
+                        
+                        <p:column headerText="Edicion">
+                            <p:button outcome="editarEventoEspecifico" value="Editar" style="float:right; right: 25%"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>  
                 
                 <h:form>
                         <p:panelMenu style="width:200px; float: right">
                         <p:submenu label="Gestión de eventos">
-                            <p:menuitem value="Editar Evento" outcome="editarEvento" ajax="false"/>
+                            <p:menuitem value="Agregar Evento" outcome="agregarEvento" ajax="false"/>
                             <p:menuitem value="Eliminar Evento" outcome="eliminarEvento" ajax="false"/>
-
                         </p:submenu>
                     </p:panelMenu>
                     
-                </h:form>
-                <div style="position: relative; width: 200px; float: left; background-color: #F5A9A9; left: 40px; border:2px solid #F5A9A9;" >  
-                    <h1>Marzo 24</h1> 
-                    <h2>Partido de baloncesto Civil vs Electronica</h2>
-                    <p:button outcome="editarEventoEspecifico" value="Editar" style="float:right" >
-                    </p:button>
-                </div>
-                
-                <div style="position: relative; border:2px solid #F5A9A9; width: 200px; float: left; left: 60px; right: 20px; background-color:#F5A9A9;  " >  
-                    <h1>Marzo 24</h1> 
-                    <h2>Partido de baloncesto Civil vs Electronica</h2>
-                    <p:button outcome="editarEventoEspecifico" value="Editar" style="float:right" >
-                    </p:button>
-                </div>
-                
-                <div style="position: relative; border:2px solid #F5A9A9; width: 200px; float: left; left: 80px; background-color:#F5A9A9;" >  
-                    <h1>Marzo 24</h1> 
-                    <h2>Partido de baloncesto Civil vs Electronica</h2>
-                    <p:button outcome="editarEventoEspecifico" value="Editar" style="float:right" >
-                    </p:button>
-                </div>    
+                </h:form>    
+                </p:panelGrid>
             </ui:define>
 
         </ui:composition>
