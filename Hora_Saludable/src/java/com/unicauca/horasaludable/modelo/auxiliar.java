@@ -95,7 +95,8 @@ public class auxiliar
        RequestContext requestContext = RequestContext.getCurrentInstance();              
        requestContext.execute("PF('seleccionarFamiliar').hide()");
        this.usuarioSeleccionado=usuario;
-       requestContext.update("form"); 
+       requestContext.update("form:nombreEmpleado"); 
+       requestContext.update("form:dependenciaEmpleado");
        
     }
      public ArrayList<Usuario> getListaUsuarios() {
