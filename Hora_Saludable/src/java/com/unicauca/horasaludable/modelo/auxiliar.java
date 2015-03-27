@@ -250,17 +250,20 @@ public class auxiliar
     public void cambiarTipoUsuario(ValueChangeEvent e)
     {
         String tipo=e.getNewValue().toString();
-        if(tipo.equals("Seleccione"))
-        {
-            this.tablaEmpleado=false;
-            this.tablaEstudiantes=false;
-            this.tablaFamiliar=false;
-        }
+        this.tablaEmpleado=false;
+        this.tablaEstudiantes=false;
+        this.tablaFamiliar=false;        
         if(tipo.equals("Empleado"))
         {
             this.tablaEmpleado=true;
-            this.tablaEstudiantes=false;
-            this.tablaFamiliar=false;
+        }
+        if(tipo.equals("Familiar"))
+        {
+            this.tablaFamiliar=true;
+        }
+        if(tipo.equals("Estudiante"))
+        {
+            this.tablaEstudiantes=true;
         }
     }
 }

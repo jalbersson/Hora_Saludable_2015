@@ -48,7 +48,7 @@
                         <p:separator/>
                         <br/>
                     <h:form id="tablasUsuarios">
-                        <h:panelGrid rendered="#{auxiliar.tablaEmpleado}" columns="3">                      
+                        <h:panelGrid style="margin-bottom: 10px;" rendered="#{auxiliar.tablaEmpleado}" columns="3">                      
                                     <h:outputLabel class="CampoLabel" value="Nombre ó Apellido del Estudiante:" />
                                     <p:autoComplete size="30">
                                     </p:autoComplete>
@@ -56,7 +56,7 @@
                                              color: #FFFFFF;"  value="Buscar" 
                                     />                  
                         </h:panelGrid>
-                        <br/>                                              
+                                                                    
                         <p:dataTable rendered="#{auxiliar.tablaEmpleado}" var="usuario" value="#{auxiliar.listaUsuarios}"
                                      paginator="true" rows="10"  
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
@@ -73,6 +73,85 @@
                             </p:column> 
                             <p:column headerText="Tipo">
                                 #{usuario.tipo}
+                            </p:column> 
+                            <p:column headerText="Acciones" width="90">
+                                <h:link id="ver" style="text-decoration: none; ">                                    
+                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                </h:link>
+                                <h:link id="editar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px;" library="img/usuarios" name="editar.png"/>
+                                </h:link>
+                                <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                </h:link>
+                            </p:column> 
+
+                        </p:dataTable>
+                        
+                        
+                        <h:panelGrid style="margin-bottom: 10px;" rendered="#{auxiliar.tablaEstudiantes}" columns="3">                      
+                                    <h:outputLabel class="CampoLabel" value="Nombre ó Apellido del Estudiante:" />
+                                    <p:autoComplete size="30">
+                                    </p:autoComplete>
+                                    <p:commandButton style="background:#22419A; 
+                                             color: #FFFFFF;"  value="Buscar" 
+                                    />                  
+                        </h:panelGrid>                                                                     
+                        <p:dataTable rendered="#{auxiliar.tablaEstudiantes}" var="usuario" value="#{auxiliar.listaUsuarios}"
+                                     paginator="true" rows="10"  
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                     rowsPerPageTemplate="5,10,15">
+                            
+                            <p:column headerText="No. Identificacion" width="100">                               
+                                    #{usuario.numeroIdentificacion}
+                            </p:column> 
+                            <p:column headerText="Nombres">
+                                #{usuario.nombres}
+                            </p:column>
+                            <p:column headerText="Apellidos">
+                                #{usuario.apellidos}
+                            </p:column> 
+                            <p:column headerText="Tipo">
+                                Estudiante
+                            </p:column> 
+                            <p:column headerText="Acciones" width="90">
+                                <h:link id="ver" style="text-decoration: none; ">                                    
+                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                </h:link>
+                                <h:link id="editar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px;" library="img/usuarios" name="editar.png"/>
+                                </h:link>
+                                <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                </h:link>
+                            </p:column> 
+
+                        </p:dataTable>
+                        
+                        <h:panelGrid style="margin-bottom: 10px;" rendered="#{auxiliar.tablaFamiliar}" columns="3">                      
+                                    <h:outputLabel class="CampoLabel" value="Nombre ó Apellido del Estudiante:" />
+                                    <p:autoComplete size="30">
+                                    </p:autoComplete>
+                                    <p:commandButton style="background:#22419A; 
+                                             color: #FFFFFF;"  value="Buscar" 
+                                    />                  
+                        </h:panelGrid>                                                                     
+                        <p:dataTable rendered="#{auxiliar.tablaFamiliar}" var="usuario" value="#{auxiliar.listaUsuarios}"
+                                     paginator="true" rows="10"  
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                     rowsPerPageTemplate="5,10,15">
+                            
+                            <p:column headerText="No. Identificacion" width="100">                               
+                                    #{usuario.numeroIdentificacion}
+                            </p:column> 
+                            <p:column headerText="Nombres">
+                                #{usuario.nombres}
+                            </p:column>
+                            <p:column headerText="Apellidos">
+                                #{usuario.apellidos}
+                            </p:column> 
+                            <p:column headerText="Tipo">
+                                Familiar
                             </p:column> 
                             <p:column headerText="Acciones" width="90">
                                 <h:link id="ver" style="text-decoration: none; ">                                    
