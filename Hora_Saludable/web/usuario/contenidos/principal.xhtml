@@ -9,7 +9,9 @@
     <body>
 
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
-
+            <ui:define name="titulo">
+                Quienes Somos
+            </ui:define>
 
 
             <ui:define name="title">
@@ -23,7 +25,7 @@
 
                 </p:contentFlow>
                 <br/> <br/>
-                <h:form >           
+                <h:form style="width: 350px">           
                     <p:growl id="msgs" showDetail="true" />
 
                     <h3 style="margin-top:0">Noticias</h3>
@@ -72,9 +74,19 @@
                             </h:panelGrid>
                         </p:tab>
                     </p:accordionPanel>
+
+
                 </h:form>
+                <br/> <br/>
+                <p:button outcome="quienesSomos" value="Quienes somos" icon="ui-icon-star">
+                    <f:param name="productId" value="10" />
+                </p:button>
 
+                <p:button outcome="reglamento" value="Reglamento" icon="ui-icon-star">
+                    <f:param name="productId" value="20" />
+                </p:button>
 
+               
             </ui:define>
 
         </ui:composition>
