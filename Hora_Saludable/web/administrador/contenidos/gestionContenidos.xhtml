@@ -20,7 +20,7 @@
             <ui:define name="body">
                 <!--<br></br><h1> Aqui va el contenido </h1>-->
                 <p:contentFlow value="#{imagesView.images}" var="image">
-                <p:graphicImage name="../../resources/img/imagenSalud/salud#{image}" styleClass="content" />
+                <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />
                     <div class="caption" style="high:400px">#{image}
                         <div>
                              <p:button outcome="album" value="Editar albúm" icon="ui-icon-star" disabled="false">
@@ -29,6 +29,7 @@
                         </div>
                     </div>
                 </p:contentFlow>
+                
                 <br/><br/>
                 <h:form>
                     <p:growl autoUpdate="true"/>

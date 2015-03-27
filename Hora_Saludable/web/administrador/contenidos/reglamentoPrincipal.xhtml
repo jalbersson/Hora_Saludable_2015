@@ -2,50 +2,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                reglamentoPrincipal
+                QuienesSomosPrincipal
             </ui:define>
 
             <ui:define name="title">
-                Reglamento
+                
             </ui:define>
 
             <ui:define name="body">
                 <h:form>
                     <p:growl autoUpdate="true"/>
 
-                    <p:panelMenu style="width:200px; float: right">
-                        <p:submenu label="Gestión de Eventos">
-                            <p:menuitem value="Agregar evento" ajax="false"/> 
-                            <p:menuitem value="Editar evento" outcome="listarNoticias" ajax="false"/> 
-                            <p:menuitem value="Eliminar evento" ajax="false"/> 
 
-                        </p:submenu>
-
-                        <p:submenu label="Gestion de noticias">
-                            <p:menuitem value="EjemploOtrasCosas" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
-                        </p:submenu>
-
-                         <p:submenu label="Reglamento"  >
-                            <p:menuitem value="Ver Reglamento" outcome="reglamentoPrincipal" ajax="false"/>
-                            <p:menuitem value="Editar Reglamento" outcome="reglamento" ajax="false"/>
-                        </p:submenu>
-
-                        <p:submenu label="Quienes somos">
-                            <p:menuitem value="Ver Quienes Somos" outcome="quienesSomosPrincipal" ajax="false" />
-                            <p:menuitem value="Editar Quienes Somos" outcome="quienesSomos" ajax="false" />
-                        </p:submenu>
-
-                    </p:panelMenu>
-
-                    <h3 style="margin-top:0">Editar Reglamento</h3>
+                    <h3 style="margin-top:0"> Reglamento</h3>
                     <p:scrollPanel style="width:550px;height:300px">
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit tortor a ipsum vehicula, in semper sapien auctor. Nulla tempor eget est non consequat. Nulla sit amet lorem justo. Cras non tellus eros. Sed ultricies orci ut quam interdum fringilla. Nam vitae massa ac mi elementum mattis vel vitae sem. Ut eros ipsum, scelerisque a erat a, eleifend luctus nibh. Interdum et malesuada fames ac ante ipsum primis in faucibus.
@@ -59,12 +36,13 @@
                         <p>
                             Sed tincidunt urna quis metus lacinia commodo. Praesent convallis eros vel quam scelerisque bibendum. Mauris eget dignissim libero. Pellentesque sagittis sem quis ipsum viverra, sed consequat mi consectetur. Donec facilisis dapibus ultrices. Donec luctus auctor lacus, at congue nisi aliquet eu. Praesent in justo at risus faucibus ultricies. Fusce et libero lectus. Donec elementum pharetra sapien, at placerat purus sodales et. Vivamus iaculis lacus sed placerat rhoncus. Mauris iaculis sit amet nunc at placerat. Donec consequat euismod lacinia. Etiam nec quam vehicula, cursus massa in, ullamcorper erat.
                         </p>
-                        <p>
-                            Praesent volutpat scelerisque vestibulum. In eu massa non neque rutrum commodo. Nunc vel enim nisi. Aenean leo ipsum, molestie vel justo nec, pharetra luctus dui. Nunc rhoncus turpis id lorem luctus consequat. Nulla condimentum adipiscing turpis consequat semper. Etiam ullamcorper velit nec hendrerit malesuada. Praesent venenatis leo sit amet arcu commodo, sit amet porta tellus suscipit. Quisque mi tortor, vestibulum in arcu non, pretium auctor libero. In commodo luctus placerat.
-                        </p>
+                     
                     </p:scrollPanel>
                 </h:form> 
-                
+                <h:panelGrid columns="2" style="margin-top: 10px">
+
+                    <p:button outcome="principal" value="Volver" style="float:right" />
+                </h:panelGrid>
             </ui:define>
 
         </ui:composition>
