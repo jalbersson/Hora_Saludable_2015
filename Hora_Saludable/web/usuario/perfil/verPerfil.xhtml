@@ -18,6 +18,19 @@
             <ui:define name="title">
             
             </ui:define>
+            
+            <ui:define name="CuadroDeBotonesSesion">
+                    <h:form>
+                        <h:link id="opcionesusuario" style="text-decoration: none;color:#FFFFFF; ">
+                            User
+                            <p:graphicImage style="width:20px; margin:0;margin-left: 5px;" library="img" name="usuario.png"/>
+                        </h:link>
+                        <p:menu overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">        
+                            <p:menuitem value="Mi Perfil" outcome="/usuario/perfil/verPerfil.xhtml" />
+                            <p:menuitem value="Cerrar Sesión" outcome="/index"/>
+                        </p:menu>
+                    </h:form>
+            </ui:define>
 
             <ui:define name="body">
                 <h:form>
