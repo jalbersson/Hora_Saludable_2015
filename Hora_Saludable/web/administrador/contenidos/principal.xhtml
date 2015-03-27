@@ -8,7 +8,7 @@
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
             <ui:define name="titulo">
                 Quienes Somos
             </ui:define>
@@ -22,19 +22,19 @@
                 <p:contentFlow value="#{imagesView.images}" var="image">
                     <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />
                     <div class="caption">#{image}
-                         <div>
-                             <p:button outcome="album" value="Editar albúm" icon="ui-icon-star" disabled="false">
+                        <div>
+                            <p:button outcome="album" value="Editar albúm" icon="ui-icon-star" disabled="false">
                                 <f:param name="album" />
                             </p:button>
                         </div>
                     </div>
-                    
+
 
                 </p:contentFlow>
                 <br/> <br/>
                 <h:form style="width: 350px">           
                     <p:growl id="msgs" showDetail="true" />
-                    
+
                     <p:dataTable style="width:700px" var="car" value="#{dtBasicView.cars}" rowStyleClass="#{car.year le 1990 ? 'old' : null}">
                         <p:column headerText="Hora">
                             <h:outputText value="#{car.id}" />
@@ -51,26 +51,25 @@
                         <p:column headerText="Miercoles">
                             <h:outputText value="#{car.color}" />
                         </p:column>
-                        
+
                         <p:column headerText="Jueves">
                             <h:outputText value="#{car.color}" />
                         </p:column>
-                        
+
                         <p:column headerText="Viernes">
                             <h:outputText value="#{car.color}" />
                         </p:column>
-                       
+
                     </p:dataTable>
-                    
+
                     <p:button style="margin-top: 20px;" outcome="editarHorario" value="Editar Horario" icon="ui-icon-star" disabled="false">
                         <f:param name="editaHorario" />
                     </p:button>
-                    
+
                     <br/> <br/>
-                    <p:panelGrid columns="2">
-                    <h:form>   
+
                     <h3 style="margin-top:0">Noticias</h3>
-                     <p:accordionPanel>
+                    <p:accordionPanel>
                         <p:tab title="Noticia I - 27 Marzo 2015">
                             <h:panelGrid columns="2" cellpadding="10">
                                 <p:graphicImage library="img/imagenSalud" name="salud1.jpg" width="80px" height="80px" style=""/>
@@ -96,36 +95,33 @@
                             </h:panelGrid>
                         </p:tab>
                     </p:accordionPanel>
-                    
 
-                     
-                    </h:form>
-                    <h:form>    
-                    
+                    <br/><br/>
+
+
                     <h3 style="margin-top:0">Eventos</h3>
                     <p:accordionPanel>
                         <p:tab title="Evento I">
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                                <p:graphicImage library="img" name="antorcha.png" width="80px" height="80px" />
                                 <h:outputText
-                                    value="The story begins as Don Vito Corleone..." />
+                                    value="Inauguración de Torneo Infantil" />
                             </h:panelGrid>
                         </p:tab>
                         <p:tab title="Evento II">
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage name="demo/images/godfather/godfather2.jpg" />
-                                <h:outputText value="Francis Ford Coppola's legendary..." />
+                                <p:graphicImage library="img" name="Mediciones.PNG" width="80px" height="80px"  />
+                                <h:outputText value="Dia del corre corre" />
                             </h:panelGrid>
                         </p:tab>
                         <p:tab title="Evento III">
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
-                                <h:outputText value="After a break of more than 15 years..." />
+                                <p:graphicImage library="img" name="mario.jpg" width="80px" height="80px"  />
+                                <h:outputText value="Visita del rector en la sede Tulcán para mejora de procesos" />
                             </h:panelGrid>
                         </p:tab>
                     </p:accordionPanel>
-                    </h:form>
-                    </p:panelGrid>
+
 
                 </h:form>
                 <br/> <br/>

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -17,45 +18,62 @@
                 CuadroDeBotonesSesion
             </ui:define>
 
-            <ui:define name="menuprincipal">
-                menuprincipal
-            </ui:define>
 
             <ui:define name="title">
                 Gestion de eventos
             </ui:define>
 
-            <ui:define name="body">                
+            <ui:define name="body">
                 <h:form>
-                        <p:panelMenu style="width:200px; float: right">
+                        <p:panelMenu style="width:20%; float: right;">
                         <p:submenu label="Gestión de eventos">
+                            <p:menuitem value="Agregar Evento" outcome="agregarEvento" ajax="false"/>
                             <p:menuitem value="Editar Evento" outcome="editarEvento" ajax="false"/>
-                            <p:menuitem value="Eliminar Evento" outcome="eliminarEvento" ajax="false"/>
-
                         </p:submenu>
                     </p:panelMenu>
                     
                 </h:form>
-                <div style="position: relative; width: 200px; float: left; background-color: #F5A9A9; left: 40px; border:2px solid #F5A9A9;" >  
-                    <h1>Marzo 24</h1> 
-                    <h2>Partido de baloncesto Civil vs Electronica</h2>
-                    <p:button outcome="eliminarEventoEspecifico" value="Eliminar" style="float:right" >
-                    </p:button>
-                </div>
                 
-                <div style="position: relative; border:2px solid #F5A9A9; width: 200px; float: left; left: 60px; right: 20px; background-color:#F5A9A9;  " >  
-                    <h1>Marzo 24</h1> 
-                    <h2>Partido de baloncesto Civil vs Electronica</h2>
-                    <p:button outcome="eliminarEventoEspecifico" value="Eliminar" style="float:right" >
-                    </p:button>
-                </div>
-                
-                <div style="position: relative; border:2px solid #F5A9A9; width: 200px; float: left; left: 80px; background-color:#F5A9A9;" >  
-                    <h1>Marzo 24</h1> 
-                    <h2>Partido de baloncesto Civil vs Electronica</h2>
-                    <p:button outcome="eliminarEventoEspecifico" value="Eliminar" style="float:right" >
-                    </p:button>
-                </div>
+                <p:panelGrid columns="1" style="width: 75%; float:left;">
+                    
+                <f:facet name="header">
+                    <H1>Eliminar Evento</H1>
+                </f:facet>
+                <h:form>
+                    <p:dataTable var="evento" value="#{dtPaginatorView.eventos}" rows="10"
+                                         paginator="true"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{evento.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="Lugar">
+                            <h:outputText value="#{evento.lugar}" />
+                        </p:column>
+
+                        <p:column headerText="Fecha">
+                            <h:outputText value="#{evento.fecha}" />
+                        </p:column>
+
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="#{evento.descripcion}" />
+                        </p:column>
+                        
+                        <p:column headerText="Accion">
+                           <p:growl id="message" showDetail="true" />
+                                <p:commandButton value="Eliminar" actionListener="#{dialogView.destroyWorld}" update="message">
+                                    <p:confirm header="Confirmacion" message="¿Esta seguro que desea eliminar este evento?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                    <p:button outcome="gestionContenidos" value="Si" style="float:left; " />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>                                 
+                                </p:confirmDialog>
+                        </p:column>
+                    </p:dataTable>
+                </h:form> 
+
+                </p:panelGrid>
             </ui:define>
 
         </ui:composition>
