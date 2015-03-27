@@ -21,12 +21,52 @@
             <ui:define name="body">
                 <p:contentFlow value="#{imagesView.images}" var="image">
                     <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />
-                    <div class="caption">#{image}</div>
+                    <div class="caption">#{image}
+                         <div>
+                             <p:button outcome="album" value="Editar albúm" icon="ui-icon-star" disabled="false">
+                                <f:param name="album" />
+                            </p:button>
+                        </div>
+                    </div>
+                    
 
                 </p:contentFlow>
                 <br/> <br/>
                 <h:form style="width: 350px">           
                     <p:growl id="msgs" showDetail="true" />
+                    
+                    <p:dataTable style="width:700px" var="car" value="#{dtBasicView.cars}" rowStyleClass="#{car.year le 1990 ? 'old' : null}">
+                        <p:column headerText="Hora">
+                            <h:outputText value="#{car.id}" />
+                        </p:column>
+
+                        <p:column headerText="Lunes">
+                            <h:outputText value="#{car.year}" />
+                        </p:column>
+
+                        <p:column headerText="Martes">
+                            <h:outputText value="#{car.brand}" />
+                        </p:column>
+
+                        <p:column headerText="Miercoles">
+                            <h:outputText value="#{car.color}" />
+                        </p:column>
+                        
+                        <p:column headerText="Jueves">
+                            <h:outputText value="#{car.color}" />
+                        </p:column>
+                        
+                        <p:column headerText="Viernes">
+                            <h:outputText value="#{car.color}" />
+                        </p:column>
+                       
+                    </p:dataTable>
+                    
+                    <p:button style="margin-top: 20px;" outcome="editarHorario" value="Editar Horario" icon="ui-icon-star" disabled="false">
+                        <f:param name="editaHorario" />
+                    </p:button>
+                    
+                    <br/> <br/>
 
                     <h3 style="margin-top:0">Noticias</h3>
                      <p:accordionPanel>
@@ -55,7 +95,9 @@
                             </h:panelGrid>
                         </p:tab>
                     </p:accordionPanel>
-                    <br/> <br/>
+                    
+                    <br/><br/>
+                     
 
                     <h3 style="margin-top:0">Eventos</h3>
                     <p:accordionPanel>
