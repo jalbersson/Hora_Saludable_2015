@@ -33,21 +33,24 @@
 
                         <p:column headerText="Hora">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{car.id}" /></f:facet>
+                                
+                                <f:facet name="output"><h:outputText value="7 am" /></f:facet>
                                 <f:facet name="input"><p:inputText id="modelInput" value="#{car.id}" style="width:100%"/></f:facet>
                             </p:cellEditor>
                         </p:column>
 
                         <p:column headerText="Lunes">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
+                                cerrado
+                                <f:facet name="output"><h:outputText value="uno" /></f:facet>
                                 <f:facet name="input"><p:inputText value="#{car.year}" style="width:100%" label="Year"/></f:facet>
                             </p:cellEditor>
                         </p:column>
 
                         <p:column headerText="Martes">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{car.brand}" /></f:facet>
+                                cerrado
+                                <f:facet name="output"><h:outputText value="dos" /></f:facet>
                                 <f:facet name="input">
                                     <h:selectOneMenu value="#{car.brand}" style="width:100%">
                                         <f:selectItems value="#{dtEditView.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
@@ -58,7 +61,8 @@
 
                         <p:column headerText="Miercoles">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                                abierto
+                                <f:facet name="output"><h:outputText value="tres" /></f:facet>
                                 <f:facet name="input">
                                     <h:selectOneMenu value="#{car.color}" style="width:100%">
                                         <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
@@ -69,7 +73,8 @@
                         
                         <p:column headerText="Jueves">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                                cerrado
+                                <f:facet name="output"><h:outputText value="cuatro" /></f:facet>
                                 <f:facet name="input">
                                     <h:selectOneMenu value="#{car.color}" style="width:100%">
                                         <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
@@ -80,18 +85,8 @@
                         
                         <p:column headerText="Viernes">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
-                                <f:facet name="input">
-                                    <h:selectOneMenu value="#{car.color}" style="width:100%">
-                                        <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
-                                    </h:selectOneMenu>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        
-                        <p:column headerText="Sabado">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                                aerobicos
+                                <f:facet name="output"><h:outputText value="5" /></f:facet>
                                 <f:facet name="input">
                                     <h:selectOneMenu value="#{car.color}" style="width:100%">
                                         <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
@@ -100,11 +95,7 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Editar" style="width:32px">
-                            <p:rowEditor />
-                        </p:column>
-                        
-                        <p:column headerText="Eliminar" style="width:32px">
+                        <p:column headerText="Acciones" style="width:32px">
                             <p:rowEditor />
                         </p:column>
                         
