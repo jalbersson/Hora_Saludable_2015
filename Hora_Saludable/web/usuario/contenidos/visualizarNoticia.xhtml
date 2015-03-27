@@ -7,7 +7,7 @@
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
                 Visualizando Noticia
@@ -20,19 +20,16 @@
 
             <ui:define name="body">
                 <h:form>
-                    
-                     <p:panelMenu style="width:200px; float: right">
-                        <p:submenu label="Gestión de Noticias">
-                            <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false"/>
-                            <p:menuitem value="Nueva  Noticia" outcome="nuevaNoticia" ajax="false"/>
-
-                        </p:submenu>
-                    </p:panelMenu>
-                    
-                    
                     <p:growl autoUpdate="true"/>
 
-
+                    <p:panelMenu style="width:200px; float: right">
+                        <p:submenu label="Contenidos">
+                            <p:menuitem value="Eventos" outcome="eventos" ajax="false"/> 
+                            <p:menuitem value="Noticias" outcome="noticias" ajax="false"/>
+                            <p:menuitem value="Reglamento" outcome="reglamento" ajax="false"/>
+                            <p:menuitem value="Quienes somos" outcome="quienesSomos" ajax="false"/>
+                        </p:submenu>
+                    </p:panelMenu>
 
                     <h1 style="margin-top:0;"> 
                         Visualización previa de Noticia
@@ -56,7 +53,7 @@
 
                         </p>
                     </p:scrollPanel>
-                    <p:button outcome="nuevaNoticia" value="Volver" style="float:right; right: 35%" >
+                    <p:button outcome="noticias" value="Volver" style="float:right; right: 35%" >
                     </p:button>
                 </h:form> 
             </ui:define>
