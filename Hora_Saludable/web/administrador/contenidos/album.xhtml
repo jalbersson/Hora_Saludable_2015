@@ -60,8 +60,8 @@
                     <br/><br/>
                     
                     <h2 style="margin-top: 0">Cargar nuevas imagenes en esta área: </h2>
-                    <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true" update="messages" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                    <p:growl id="messages" showDetail="true" />
+                    <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" label="Agregar a la lista" cancelLabel="Cancelar" uploadLabel="Guardar cambios" mode="advanced" dragDropSupport="true" update="messages" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <p:growl id="messages|" showDetail="true" />
 
                     <p:button style="margin-top: 15px; " outcome="gestionContenidos" value="Salir" icon="ui-icon-star" disabled="false">
                         <f:param name="editaHorario" />
