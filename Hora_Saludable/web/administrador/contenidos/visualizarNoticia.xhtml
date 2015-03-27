@@ -7,7 +7,7 @@
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
                 Visualizando Noticia
@@ -20,6 +20,16 @@
 
             <ui:define name="body">
                 <h:form>
+                    
+                     <p:panelMenu style="width:200px; float: right">
+                        <p:submenu label="Gestión de Noticias">
+                            <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false"/>
+                            <p:menuitem value="Nueva  Noticia" outcome="nuevaNoticia" ajax="false"/>
+
+                        </p:submenu>
+                    </p:panelMenu>
+                    
+                    
                     <p:growl autoUpdate="true"/>
 
 
