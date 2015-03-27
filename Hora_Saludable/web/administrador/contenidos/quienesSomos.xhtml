@@ -26,11 +26,11 @@
                         <h:form>           
                             <p:growl id="message" showDetail="true" />
 
-                            <p:commandButton value="Guardar" actionListener="#{dialogView.destroyWorld}" update="message">
+                            <p:commandButton  value="Guardar" actionListener="#{dialogView.destroyWorld}" update="message">
                                 <p:confirm header="Confirmacion" message="Esta seguro?" icon="ui-icon-alert" />
                             </p:commandButton>
                             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:button outcome="principal" value="Si" style="float:right; " />
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
                         </h:form>
