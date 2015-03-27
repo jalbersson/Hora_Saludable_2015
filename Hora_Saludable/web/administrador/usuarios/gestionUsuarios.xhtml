@@ -12,33 +12,52 @@
 
             <ui:define name="titulo">
                 Gestión Usuarios
+                
             </ui:define>           
 
             <ui:define name="title">
                 <div class="tituloContenido">
-                    GESTIÓN DE USUARIOS
+                    GESTIÓN DE USUARIOS                    
                 </div>
                 
             </ui:define>
 
             <ui:define name="body">
                 
-                
-                    <h:form>
-                        <p:commandButton  value="Registrar Nuevo Usuario" style="background:#22419A; 
-                                         color: #FFFFFF; margin-left: 740px;" 
-                                         onclick="PF('RegistrarUsuario').show();"/>  
-                        <h:panelGrid columns="3">
-                            <p:outputLabel value="Nombre del Estudiante" />
-                            <p:autoComplete  >
-                            </p:autoComplete> 
-
-                            <h:commandButton style="background:#22419A; 
-                                         color: #FFFFFF;"  value="Buscar" />
-
+                <br/>
+                    <h:form >
+                        <h:panelGrid columns="3">        
+                                
+                                    <h:outputLabel class="CampoLabel" value="Seleccione Tipo Usuario:" />                      
+                                    <p:selectOneMenu  id="tipoUsuario" style="width:150px;font-size: 15px;" required="true"
+                                    requiredMessage="Seleccione un Tipo Usuario."
+                                    valueChangeListener="#{auxiliar.cambiarTipoUsuario}"
+                                     >
+                                        <f:selectItem itemLabel="Seleccione.." itemValue="Seleccione" />
+                                        <f:selectItem itemLabel="Estudiante" itemValue="Estudiante" />
+                                        <f:selectItem itemLabel="Familiar" itemValue="Familiar" />
+                                        <f:selectItem itemLabel="Empleado" itemValue="Empleado" />
+                                        <f:ajax execute="tipoUsuario" render=":tablasUsuarios"/>
+                                    </p:selectOneMenu>                     
+                                    <p:commandButton  value="Registrar Nuevo Usuario" style="background:#22419A; 
+                                         color: #FFFFFF; margin-left: 395px;" 
+                                         onclick="PF('RegistrarUsuario').show();"
+                                    />                 
+                        </h:panelGrid>
+                    </h:form>                   
+                        <p:separator/>
+                        <br/>
+                    <h:form id="tablasUsuarios">
+                        <h:panelGrid rendered="#{auxiliar.tablaEmpleado}" columns="3">                      
+                                    <h:outputLabel class="CampoLabel" value="Nombre ó Apellido del Estudiante:" />
+                                    <p:autoComplete size="30">
+                                    </p:autoComplete>
+                                    <p:commandButton style="background:#22419A; 
+                                             color: #FFFFFF;"  value="Buscar" 
+                                    />                  
                         </h:panelGrid>
                         <br/>                                              
-                        <p:dataTable var="usuario" value="#{auxiliar.listaUsuarios}"
+                        <p:dataTable rendered="#{auxiliar.tablaEmpleado}" var="usuario" value="#{auxiliar.listaUsuarios}"
                                      paginator="true" rows="10"  
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                      rowsPerPageTemplate="5,10,15">
@@ -69,6 +88,8 @@
 
                         </p:dataTable>
                     </h:form>
+                <br/>
+                <p:separator/>
                 
                 <p:dialog position="top"   header="Registrar Usuario" showEffect="scale" modal="true"  widgetVar="RegistrarUsuario">
                             <h:form id="form">
@@ -187,7 +208,7 @@
                                         <h:outputLabel class="CampoLabel" for="fechaNacimiento" value="Fecha de Nacimiento: *" />
                                     </p:column>
                                     <p:column>
-                                        <p:calendar id="fechaNacimiento"  required="true" 
+                                        <p:calendar size="10" id="fechaNacimiento"  required="true" 
                                                     requiredMessage="Seleccione una Fecha de Nacimiento."
                                                     showOn="button" navigator="true" pattern="yyyy-MM-dd" 
                                                     />
