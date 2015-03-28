@@ -36,7 +36,7 @@
                                         <f:selectItem itemLabel="Seleccione.." itemValue="Seleccione" />
                                         <f:selectItem itemLabel="Estudiante" itemValue="Estudiante" />
                                         <f:selectItem itemLabel="Familiar" itemValue="Familiar" />
-                                        <f:selectItem itemLabel="Empleado" itemValue="Empleado" />
+                                        <f:selectItem itemLabel="Funcionario" itemValue="Funcionario" />
                                         <f:ajax execute="tipoUsuario" render=":tablasUsuarios"/>
                                     </p:selectOneMenu>                     
                                     <p:commandButton  value="Registrar Nuevo Usuario" style="background:#22419A; 
@@ -48,7 +48,7 @@
                         <p:separator/>
                         <br/>
                     <h:form id="tablasUsuarios">
-                        <h:panelGrid style="margin-bottom: 10px;" rendered="#{auxiliar.tablaEmpleado}" columns="3">                      
+                        <h:panelGrid style="margin-bottom: 10px;" rendered="#{auxiliar.tablaFuncionario}" columns="3">                      
                                     <h:outputLabel class="CampoLabel" value="Nombre ó Apellido del Estudiante:" />
                                     <p:autoComplete size="30">
                                     </p:autoComplete>
@@ -57,7 +57,7 @@
                                     />                  
                         </h:panelGrid>
                                                                     
-                        <p:dataTable rendered="#{auxiliar.tablaEmpleado}" var="usuario" value="#{auxiliar.listaUsuarios}"
+                        <p:dataTable rendered="#{auxiliar.tablaFuncionario}" var="usuario" value="#{auxiliar.listaUsuarios}"
                                      paginator="true" rows="10"  
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                      rowsPerPageTemplate="5,10,15">
@@ -195,7 +195,7 @@
                                             <f:selectItem itemLabel="Seleccione.." itemValue="Seleccione" />
                                             <f:selectItem itemLabel="Estudiante" itemValue="Estudiante" />
                                             <f:selectItem itemLabel="Familiar" itemValue="Familiar" />
-                                            <f:selectItem itemLabel="Empleado" itemValue="Empleado" />
+                                            <f:selectItem itemLabel="Funcionario" itemValue="Funcionario" />
                                             <f:ajax  execute="tipo" render="form" />
                                         </p:selectOneMenu>                                                                             
                                     </p:column>
@@ -226,7 +226,7 @@
                                         <p:selectOneMenu id="dependencia"  style="width:125px" required="true" requiredMessage="Seleccione una Dependencia.">
                                             <f:selectItem itemLabel="Seleccione.." itemValue="" />
                                             <f:selectItem itemLabel="Fac. Ingenieria Electronica y telecomunicaciones" itemValue="r" />
-                                            <f:selectItem itemLabel="Fac. Ingenieria Civil" itemValue="r" />                                            
+                                            <f:selectItem itemLabel="Fac. Ingenieria Civil" itemValue="m" />                                            
                                         </p:selectOneMenu>                                                                             
                                     </p:column>
                                     <p:column>
@@ -241,14 +241,14 @@
                                         <p:selectOneMenu id="facultad"  style="width:125px" required="true" requiredMessage="Seleccione una Facultad.">
                                             <f:selectItem itemLabel="Seleccione.." itemValue="" />
                                             <f:selectItem itemLabel="Fac. Ingenieria Electronica y telecomunicaciones" itemValue="r" />
-                                            <f:selectItem itemLabel="Fac. Ingenieria Civil" itemValue="r" />                                            
+                                            <f:selectItem itemLabel="Fac. Ingenieria Civil" itemValue="m" />                                            
                                         </p:selectOneMenu>                                                                             
                                     </p:column>
                                     <p:column>
                                         <p:message for="facultad"/>  
                                     </p:column>
                                 </p:row>
-                                <p:row rendered="#{auxiliar.empleado}">
+                                <p:row rendered="#{auxiliar.funcionario}">
                                     <p:column style="text-align:right">
                                         <h:outputLabel class="CampoLabel" for="empleado" value="Empleado: *" />
                                     </p:column>
@@ -260,7 +260,7 @@
                                         <p:message for="nombreEmpleado"/>
                                     </p:column>
                                 </p:row>
-                                    <p:row rendered="#{auxiliar.nombreEmpleado}">
+                                    <p:row rendered="#{auxiliar.nombreFuncionario}">
                                     <p:column style="text-align:right;height: 30px;">
                                         <h:outputLabel class="CampoLabel" for="nombreEmpleado" value="Nombre Empleado: *" />
                                     </p:column>
@@ -274,7 +274,7 @@
                                     <p:column>
                                     </p:column>
                                 </p:row>
-                                <p:row rendered="#{auxiliar.dependenciaEmpleado}">
+                                <p:row rendered="#{auxiliar.dependenciaFuncionario}">
                                     <p:column style="text-align:right;height:30px; ">
                                         <h:outputLabel class="CampoLabel" for="dependenciaEmpleado" value="Dependencia Empleado: *" />
                                     </p:column>

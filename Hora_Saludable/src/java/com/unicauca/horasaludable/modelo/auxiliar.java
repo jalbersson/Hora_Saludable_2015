@@ -20,15 +20,15 @@ public class auxiliar
     
     private boolean cargo;
     private boolean dependencia;
-    private boolean empleado;
-    private boolean nombreEmpleado;
-    private boolean dependenciaEmpleado;
+    private boolean funcionario;
+    private boolean nombreFuncionario;
+    private boolean dependenciaFuncionario;
     private boolean facultad;
     private ArrayList<Usuario> listaUsuarios;
     private Usuario usuarioSeleccionado;
     private boolean tablaEstudiantes;    
     private boolean tablaFamiliar;
-    private boolean tablaEmpleado;
+    private boolean tablaFuncionario;
 
 
     public auxiliar()
@@ -37,12 +37,12 @@ public class auxiliar
         estadoNombresUsuario=false;
         
         this.dependencia=false;
-        this.empleado=false;
-        this.nombreEmpleado=false;
-        this.dependenciaEmpleado=false;
+        this.funcionario=false;
+        this.nombreFuncionario=false;
+        this.dependenciaFuncionario=false;
         this.facultad=false;
         this.cargo=false;
-        this.tablaEmpleado=false;
+        this.tablaFuncionario=false;
         this.tablaEstudiantes=false;
         this.tablaFamiliar=false;
         this.cargarUsuarios();
@@ -63,12 +63,12 @@ public class auxiliar
         this.tablaFamiliar = tablaFamiliar;
     }
 
-    public boolean isTablaEmpleado() {
-        return tablaEmpleado;
+    public boolean isTablaFuncionario() {
+        return tablaFuncionario;
     }
 
-    public void setTablaEmpleado(boolean tablaEmpleado) {
-        this.tablaEmpleado = tablaEmpleado;
+    public void setTablaFuncionario(boolean tablaEmpleado) {
+        this.tablaFuncionario = tablaEmpleado;
     }
      public Usuario getUsuarioSeleccionado() {
         return usuarioSeleccionado;
@@ -86,7 +86,7 @@ public class auxiliar
         usuario.setApellidos("Narvaez");
         usuario.setNumeroIdentificacion(11110110);
         usuario.setCorreo("pedro@gmail.com");
-        usuario.setTipo("Empleado");
+        usuario.setTipo("Funcionario");
         usuario.setDependencia("Fac. Ingenieria Electronica");
         listaUsuarios.add(usuario);
         /*-----------------*/
@@ -95,7 +95,7 @@ public class auxiliar
         usuario.setApellidos("Romero");
         usuario.setNumeroIdentificacion(11222110);
         usuario.setCorreo("Benito@gmail.com");
-        usuario.setTipo("Empleado");
+        usuario.setTipo("Funcionario");
         usuario.setDependencia("Fac. Ingenieria Civil");
         listaUsuarios.add(usuario);
         /*-----------------*/
@@ -104,7 +104,7 @@ public class auxiliar
         usuario.setApellidos("Andrade");
         usuario.setNumeroIdentificacion(122203310);
         usuario.setCorreo("Kyra@gmail.com");
-        usuario.setTipo("Empleado");
+        usuario.setTipo("Funcionario");
         usuario.setDependencia("Fac. Contables");
         listaUsuarios.add(usuario);
         /*-----------------*/
@@ -113,7 +113,7 @@ public class auxiliar
         usuario.setApellidos("Molina");
         usuario.setNumeroIdentificacion(122205510);
         usuario.setCorreo("pepito@gmail.com");
-        usuario.setTipo("Empleado");
+        usuario.setTipo("Funcionario");
         usuario.setDependencia("Division Financiera");
         listaUsuarios.add(usuario);
     }
@@ -169,28 +169,28 @@ public class auxiliar
         this.dependencia = dependencia;
     }
 
-    public boolean isEmpleado() {
-        return empleado;
+    public boolean isFuncionario() {
+        return funcionario;
     }
 
-    public void setEmpleado(boolean empleado) {
-        this.empleado = empleado;
+    public void setFuncionario(boolean funcionario) {
+        this.funcionario = funcionario;
     }
 
-    public boolean isNombreEmpleado() {
-        return nombreEmpleado;
+    public boolean isNombreFuncionario() {
+        return nombreFuncionario;
     }
 
-    public void setNombreEmpleado(boolean nombreEmpleado) {
-        this.nombreEmpleado = nombreEmpleado;
+    public void setNombreFuncionario(boolean nombreFuncionario) {
+        this.nombreFuncionario = nombreFuncionario;
     }
 
-    public boolean isDependenciaEmpleado() {
-        return dependenciaEmpleado;
+    public boolean isDependenciaFuncionario() {
+        return dependenciaFuncionario;
     }
 
-    public void setDependenciaEmpleado(boolean dependenciaEmpleado) {
-        this.dependenciaEmpleado = dependenciaEmpleado;
+    public void setDependenciaFuncionario(boolean dependenciaFuncionario) {
+        this.dependenciaFuncionario = dependenciaFuncionario;
     }
 
     public boolean isFacultad() {
@@ -212,36 +212,36 @@ public class auxiliar
         if(tipo.equals("Estudiante"))
         {
             this.dependencia=false;
-            this.empleado=false;
-            this.nombreEmpleado=false;
-            this.dependenciaEmpleado=false;
+            this.funcionario=false;
+            this.nombreFuncionario=false;
+            this.dependenciaFuncionario=false;
             this.facultad=true;
             this.cargo=false;
         }
-        if(tipo.equals("Empleado"))
+        if(tipo.equals("Funcionario"))
         {
             this.dependencia=true;
-            this.empleado=false;
-            this.nombreEmpleado=false;
-            this.dependenciaEmpleado=false;
+            this.funcionario=false;
+            this.nombreFuncionario=false;
+            this.dependenciaFuncionario=false;
             this.facultad=false;
             this.cargo=true;
         }        
         if(tipo.equals("Familiar"))
         {
             this.dependencia=false;
-            this.empleado=true;
-            this.nombreEmpleado=true;
-            this.dependenciaEmpleado=true;
+            this.funcionario=true;
+            this.nombreFuncionario=true;
+            this.dependenciaFuncionario=true;
             this.facultad=false;
             this.cargo=false;
         }
         if(tipo.equals("Seleccione"))
         {
             this.dependencia=false;
-            this.empleado=false;
-            this.nombreEmpleado=false;
-            this.dependenciaEmpleado=false;
+            this.funcionario=false;
+            this.nombreFuncionario=false;
+            this.dependenciaFuncionario=false;
             this.facultad=false;
             this.cargo=false;
         }
@@ -250,12 +250,12 @@ public class auxiliar
     public void cambiarTipoUsuario(ValueChangeEvent e)
     {
         String tipo=e.getNewValue().toString();
-        this.tablaEmpleado=false;
+        this.tablaFuncionario=false;
         this.tablaEstudiantes=false;
         this.tablaFamiliar=false;        
-        if(tipo.equals("Empleado"))
+        if(tipo.equals("Funcionario"))
         {
-            this.tablaEmpleado=true;
+            this.tablaFuncionario=true;
         }
         if(tipo.equals("Familiar"))
         {
