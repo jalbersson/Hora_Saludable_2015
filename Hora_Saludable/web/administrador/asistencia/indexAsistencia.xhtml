@@ -9,7 +9,7 @@
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Control asistencia
+                Control de asistencia
             </ui:define>
 
 
@@ -28,15 +28,47 @@
                 </p:breadCrumb>
                 <p:spacer height="20"/>
                 <h:form id="form">
-                    
-                        <p:carousel value="#{carouselView.opciones}" headerText="Opciones Control Asistencia" var="opcion">
-                            <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
-                                <p:graphicImage value="../../resources/img/asistencia/#{opcion.urlImagen}.png"/>                             
-                                <h3></h3>
-                                <p:link outcome="#{opcion.facelet}" value="#{opcion.nombre}" />                    
-                            </h:panelGrid>                
-                        </p:carousel>     
-                    
+                    <p:panel header="Menu">
+                        <p:spacer height="20"/>
+                        <h:panelGrid columns="5" styleClass="panelGrid" style="margin: 0 auto;">
+                            <h:link outcome="registro/lista-inscritos" >
+                                    <h:graphicImage value="../../resources/img/asistencia/lista-inscritos.png" width="130" height="130"/>
+                            </h:link>
+                            <h:link outcome="registro/registro-asistencia" >
+                                    <h:graphicImage style="margin-left: 30px" value="../../resources/img/asistencia/registro-asistencia.png" width="130" height="130"/>
+                            </h:link>
+                            <h:link outcome="reporte/reporte-asistencia-general" >
+                                    <h:graphicImage style="margin-left: 30px" value="../../resources/img/asistencia/reporte-asistencia-general.png" width="130" height="130"/>
+                            </h:link>
+                            <h:link outcome="reporte/reporte-asistencia-dependencias" >
+                                    <h:graphicImage style="margin-left: 30px" value="../../resources/img/asistencia/reporte-asistencia-dependencias.png" width="130" height="130"/>
+                            </h:link>
+                            <h:link outcome="reporte/reporte-asistencia-usuarios" >
+                                    <h:graphicImage style="margin-left: 30px" value="../../resources/img/asistencia/reporte-asistencia-usuarios.png" width="130" height="130"/>
+                            </h:link>
+                            <p:link style="margin-left: 15px" outcome="registro/lista-inscritos" value="Lista de inscritos" />
+                            <p:link style="margin-left: 30px" outcome="registro/registro-asistencia" value="Registro de asistencia" />
+                            <p:link style="margin-left: 30px" outcome="reporte/reporte-asistencia-general" value="Reporte: Asistencia"/>
+                            <p:link style="margin-left: 30px" outcome="reporte/reporte-asistencia-dependencias" value="Reporte: Asistencia" />
+                            <p:link style="margin-left: 30px" outcome="reporte/reporte-asistencia-usuarios" value="Reporte: Asistencia" />
+                            <h:outputLabel />
+                            <h:outputLabel />
+                            <p:link style="margin-left: 30px" outcome="reporte/reporte-asistencia-general" value="general" />
+                            <p:link style="margin-left: 30px" outcome="reporte/reporte-asistencia-dependencias" value="por dependencias" />
+                            <p:link style="margin-left: 30px" outcome="reporte/reporte-asistencia-usuarios" value="de usuarios" />
+                        </h:panelGrid>
+                        <p:spacer height="20"/>
+                    </p:panel>
+                    <p:spacer height="20"/>
+                    <!--
+                    <p:carousel value="#{carouselView.opciones}" headerText="Menu" var="opcion">
+                        <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
+                            <p:graphicImage value="../../resources/img/asistencia/#{opcion.urlImagen}.png" width="80" height="80"/>                             
+                            <h3></h3>
+                            <p:link outcome="#{opcion.facelet}" value="#{opcion.nombre}" />                    
+                        </h:panelGrid>                
+                    </p:carousel>
+                    -->
                 </h:form>
             </ui:define>
 

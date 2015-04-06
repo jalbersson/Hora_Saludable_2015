@@ -11,13 +11,13 @@
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-                Registro de Asistencia Personal
+                Asistencia personal
             </ui:define>
 
             <ui:define name="title">
                 <div class="tituloContenido">
                     <br></br>
-                    Registro Asistencia Personal <br></br>
+                    Asistencia personal <br></br>
                 </div>
             </ui:define>
 
@@ -27,7 +27,7 @@
                 
                 <p:breadCrumb>
                     <p:menuitem value="Inicio" url="../../index.xhtml" />                              
-                    <p:menuitem value="Asistencia de Usuario" outcome="asistencia-de-usuario" />                                        
+                    <p:menuitem value="Asistencia personal" outcome="asistencia-personal" />                                        
                 </p:breadCrumb>
                 <p:spacer height="20"/>
                 <p:panel header="Información personal">
@@ -53,35 +53,38 @@
                 </p:panel>
                 <p:spacer height="30"/>
                 <p:panel header="Asistencia">
-                    <h:panelGrid columns="4" cellpadding="5">    
+                    <br />
+                    <p:outputLabel value="Seleccione el año y mes para ver su registro de asistencia" />
+                    <h:panelGrid columns="2" cellpadding="7">
                         <p:outputLabel for="anioReporte" value="Año:"/>
-                        <p:selectOneMenu id="anioReporte" value="#{param.anio}" onchange="document.location.href = 'asistencia-de-usuario.xhtml' + '?anio=' + this.options[this.selectedIndex].value;">
-                            <f:selectItem itemValue="ningunAnio" itemLabel="Seleccione uno" /> 
+                        <p:selectOneMenu id="anioReporte" value="#{param.anio}">
+                            <f:selectItem itemValue="NingunAño" itemLabel="Seleccione uno" /> 
                             <f:selectItem itemValue="2015" itemLabel="2015" />
                             <f:selectItem itemValue="2014" itemLabel="2014" />
                         </p:selectOneMenu>
                         <p:outputLabel for="mesReporte" value="Mes:" />
-                        <p:selectOneMenu id="mesReporte" value="#{param.mes}" onchange="document.location.href = 'asistencia-de-usuario.xhtml' + '?anio=#{param.anio}&amp;mes=' + this.options[this.selectedIndex].value;">
-                            <f:selectItem itemValue="ningunMes" itemLabel="Seleccione uno" /> 
-                            <f:selectItem itemValue="enero" itemLabel="Enero" />
-                            <f:selectItem itemValue="febrero" itemLabel="Febrero" />
-                            <f:selectItem itemValue="marzo" itemLabel="Marzo" />
-                            <f:selectItem itemValue="abril" itemLabel="Abril" />
-                            <f:selectItem itemValue="mayo" itemLabel="Mayo" />
-                            <f:selectItem itemValue="junio" itemLabel="Junio" />
-                            <f:selectItem itemValue="julio" itemLabel="Julio" />
-                            <f:selectItem itemValue="agosto" itemLabel="Agosto" />
-                            <f:selectItem itemValue="septiembre" itemLabel="Septiembre" />
-                            <f:selectItem itemValue="octubre" itemLabel="Octubre" />
-                            <f:selectItem itemValue="noviembre" itemLabel="Noviembre" />
-                            <f:selectItem itemValue="diciembre" itemLabel="Diciembre" />
+                        <p:selectOneMenu id="mesReporte" value="#{param.mes}">
+                            <f:selectItem itemValue="NingunMes" itemLabel="Seleccione uno" /> 
+                            <f:selectItem itemValue="Enero" itemLabel="Enero" />
+                            <f:selectItem itemValue="Febrero" itemLabel="Febrero" />
+                            <f:selectItem itemValue="Marzo" itemLabel="Marzo" />
+                            <f:selectItem itemValue="Abril" itemLabel="Abril" />
+                            <f:selectItem itemValue="Mayo" itemLabel="Mayo" />
+                            <f:selectItem itemValue="Junio" itemLabel="Junio" />
+                            <f:selectItem itemValue="Julio" itemLabel="Julio" />
+                            <f:selectItem itemValue="Agosto" itemLabel="Agosto" />
+                            <f:selectItem itemValue="Septiembre" itemLabel="Septiembre" />
+                            <f:selectItem itemValue="Octubre" itemLabel="Octubre" />
+                            <f:selectItem itemValue="Noviembre" itemLabel="Noviembre" />
+                            <f:selectItem itemValue="Diciembre" itemLabel="Diciembre" />
                         </p:selectOneMenu >
                     </h:panelGrid>
-                    <h:panelGrid columns="2" cellpadding="5">
+                    <p:spacer height="25"/>
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <p:outputLabel value="En el siguiente calendario, las fechas resaltadas en azul representa los dias en que asistió al programa Hora Saludable" />
                         <p:calendar value="#{calendarView.date4}" mode="inline" navigator="true" pages="1"/> 
-                        <h3>Selecciona el año y mes para ver tu registro de asistencia
-                        </h3>
-                        <h3>En el calendario a su izquierda las fechas resaltadas en azul son los dias que asististe a las Atividades del Programa Hora Saludable</h3>
+                        <br />
+                        <p:outputLabel value="A continuación se muestra una gráfica donde se refleja su asistencia al programa Hora Saludable" />
                         <p:barChart value="#{statistics.viviendas}" legendPosition="ne"
                             title="Asistencia 2014" style="height:300px; width: 500px;"
                             xaxisLabel="Meses" yaxisLabel="Total días" />

@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Reporte | Asistencia por dependencias
+            </ui:define>
+
+            <ui:define name="title">
+                <div class="tituloContenido">
+                    <br></br>
+                    Reporte: Asistencia por dependencias <br></br>
+                </div>                
+            </ui:define>
+
+            <ui:define name="body">
+                <p:breadCrumb>
+                    <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
+                    <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
+                    <p:menuitem value="Reporte: Asistencia por dependencias" outcome="reporte-asistencia-dependencias" />                    
+                </p:breadCrumb>
+
+                <p:spacer height="20"/>
+
+                <h:form id="form">
+                    <p:panel>
+                        <p:panelGrid styleClass="panelgrid"  id="panelGrid1">
+                            <p:row>
+                                <p:column style="text-align:right">
+                                    <h:outputLabel for="tipoReporte" value="Tipo de reporte:" />
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="tipoReporte" required="true"
+                                                     requiredMessage="Seleccione el tipo de reporte."
+                                                     valueChangeListener="#{auxiliarAsistencia.cambiarTipo}">
+                                        <f:selectItem itemValue="NingunReporte" itemLabel="Seleccione uno" /> 
+                                        <f:selectItem itemValue="Anual" itemLabel="Anual" />
+                                        <f:selectItem itemValue="Mensual" itemLabel="Mensual" />
+                                        <f:ajax  execute="tipoReporte" render="form" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column>
+                                    <p:message for="tipoReporte"/>  
+                                </p:column>
+                            </p:row>
+
+                            <p:row rendered="#{auxiliarAsistencia.reporteAnual}">
+                                <p:column style="text-align:right">
+                                    <h:outputLabel for="anioReporte" value="Año:" />
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="anioReporte" required="true" requiredMessage="Seleccione el año."
+                                                     valueChangeListener="#{auxiliarAsistencia.cambiarAño}">
+                                        <f:selectItem itemValue="NingunAño" itemLabel="Seleccione uno" /> 
+                                        <f:selectItem itemValue="2014" itemLabel="2014" />
+                                        <f:selectItem itemValue="2015" itemLabel="2015" />
+                                        <f:ajax  execute="tipoReporte" render="form" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column>
+                                    <p:message for="anioReporte"/>  
+                                </p:column>
+                            </p:row>
+
+                            <p:row rendered="#{auxiliarAsistencia.reporteMensual}">
+                                <p:column style="text-align:right">
+                                    <h:outputLabel for="mesReporte" value="Mes:" />
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="mesReporte" required="true" requiredMessage="Seleccione el mes."
+                                                     valueChangeListener="#{auxiliarAsistencia.cambiarMes}">
+                                        <f:selectItem itemValue="NingunMes" itemLabel="Seleccione uno" /> 
+                                        <f:selectItem itemValue="Enero" itemLabel="Enero" />
+                                        <f:selectItem itemValue="Febrero" itemLabel="Febrero" />
+                                        <f:selectItem itemValue="Marzo" itemLabel="Marzo" />
+                                        <f:selectItem itemValue="Abril" itemLabel="Abril" />
+                                        <f:selectItem itemValue="Mayo" itemLabel="Mayo" />
+                                        <f:selectItem itemValue="Junio" itemLabel="Junio" />
+                                        <f:selectItem itemValue="Julio" itemLabel="Julio" />
+                                        <f:selectItem itemValue="Agosto" itemLabel="Agosto" />
+                                        <f:selectItem itemValue="Septiembre" itemLabel="Septiembre" />
+                                        <f:selectItem itemValue="Octubre" itemLabel="Octubre" />
+                                        <f:selectItem itemValue="Noviembre" itemLabel="Noviembre" />
+                                        <f:selectItem itemValue="Diciembre" itemLabel="Diciembre" />
+                                        <f:ajax  execute="tipoReporte" render="form" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column>
+                                    <p:message for="mesReporte"/>  
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </p:panel>
+
+                    <p:spacer height="20"/>
+                    
+                    <h:panelGrid id="panelGrid2" style="margin: 0 auto;" columns="1" cellpadding="7" rendered="#{auxiliarAsistencia.verReporte}"> 
+                        <h3>Este reporte muestra la asistencia de participantes por dependencias en el mes de enero de 2014</h3>
+                        <p:chart type="bar" model="#{chartView.barModel}" style="height:300px; width: 850px" widgetVar="chart"/>
+                        <p:commandButton type="button" value="Exportar" icon="ui-icon-extlink" onclick="exportChart()"/>
+                    </h:panelGrid>
+                </h:form>
+                
+                <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Gráfica" resizable="false">
+                    <p:outputPanel id="output" layout="block" style="width:610px; height:320px"/>
+                </p:dialog>
+
+                <script type="text/javascript">
+                    function exportChart() {
+                        //export image
+                        $('#output').empty().append(PF('chart').exportAsImage());
+
+                        //show the dialog
+                        PF('dlg').show();
+                    }
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

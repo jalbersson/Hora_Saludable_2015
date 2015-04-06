@@ -11,13 +11,13 @@
         <ui:composition template="./../../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Inscritos
+                Lista de inscritos
             </ui:define>
 
             <ui:define name="title">
                 <div class="tituloContenido">
                     <br></br>
-                    Lista de Inscritos <br></br>
+                    Lista de inscritos <br></br>
                 </div>
             </ui:define>
 
@@ -25,15 +25,15 @@
                 <p:breadCrumb>
                     <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
                     <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
-                    <p:menuitem value="Inscritos" outcome="inscritos" />                    
+                    <p:menuitem value="Lista de inscritos" outcome="lista-inscritos" />                    
                 </p:breadCrumb>
                 <p:spacer height="20"/>
                 <h:form id="form">
-                    <p:dataTable id="inscritosDT" var="inscrito" value="#{inscritoBean.inscritos}" selectionMode="single" selection="#{inscritoBean.selectedInscrito}" rowKey="#{inscrito.documentoIdentidad}" style="width:70%">
+
+                    <p:dataTable id="inscritosDT" var="inscrito" value="#{inscritoBean.inscritos}" selectionMode="single" selection="#{inscritoBean.selectedInscrito}" rowKey="#{inscrito.documentoIdentidad}" style="width:70%;margin: 0 auto;">
                         <f:facet name="header">
                             INSCRITOS                                        
                         </f:facet>
-
                         <p:column headerText="NOMBRES Y APELLIDOS">
                             <h:outputText value="#{inscrito.primerApellido} #{inscrito.segundoApellido} #{inscrito.primerNombre} #{inscrito.segundoNombre}" />
                         </p:column>
@@ -63,11 +63,9 @@
                             </p:panelGrid>
                         </p:outputPanel>
                     </p:dialog>
-
+                    <p:spacer height="15"/>
                 </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

@@ -11,34 +11,39 @@
         <ui:composition template="./../../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Registro Asistencia
+                Registro de asistencia
             </ui:define>
 
             <ui:define name="title">
                 <div class="tituloContenido">
                     <br></br>
-                    Registro asistencia <br></br>
+                    Registro de asistencia <br></br>
                 </div>
             </ui:define>
 
             <ui:define name="body">
+                
                 <p:breadCrumb>
                     <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
                     <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
-                    <p:menuitem value="Registro asistencia" outcome="registro-asistencia" />
+                    <p:menuitem value="Registro de asistencia" outcome="registro-asistencia" />
                 </p:breadCrumb>
-                <h3></h3>
-                <h:form id="buscarFechaForm">            
+                
+                <p:spacer height="25"/>
+                
+                <h:panelGrid columns="3" cellpadding="7" style="margin: 0 auto;">            
                     <p:outputLabel for="fecha" value="Fecha:" />
-                    <p:calendar id="fecha" value="#{asistenciaBean.fecha}" pattern="dd-MM-yyyy" mask="true" />
+                    <p:calendar id="fecha" value="#{asistenciaBean.fecha}" pattern="dd-MM-yyyy" mask="true" size="7"/>
                     <p:commandButton icon="ui-icon-search" value="Buscar" />
-                </h:form>
-                <h3></h3>
+                </h:panelGrid>
+                
+                <p:spacer height="10"/>
+                
                 <h:form id="form">
-
-                    <p:dataTable id="checkboxInscritos" var="inscrito" value="#{inscritoBean.inscritos}" selection="#{inscritoBean.selectedIncritos}" rowKey="#{inscrito.documentoIdentidad}" style="width:70%">
+                    
+                    <p:dataTable id="checkboxInscritos" var="inscrito" value="#{inscritoBean.inscritos}" selection="#{inscritoBean.selectedIncritos}" rowKey="#{inscrito.documentoIdentidad}" style="width:70%; margin: 0 auto;">
                         <f:facet name="header">
-                            Registro Asistencia                                        
+                            Registro de asistencia                                     
                         </f:facet>
 
                         <p:column headerText="NOMBRES Y APELLIDOS">
@@ -48,7 +53,7 @@
                         <p:column selectionMode="multiple" style="width:10%;text-align:center"/>                     
 
                         <f:facet name="footer">
-                            <h3>OBSERVACIONES</h3>
+                            <h4>OBSERVACIONES</h4>
                             <p:inputTextarea id="observaciones" rows="2" cols="80" />
                             <p:watermark for="observaciones" value="(Imprevistos u observaciones)" id="watermark" />
                             <h3></h3>
@@ -56,14 +61,15 @@
                         </f:facet>
                     </p:dataTable>
 
-                    <p:dialog header="Registro Asistencia" widgetVar="multiInscritoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" style="width:50%">
+                    <p:dialog header="Mensaje" widgetVar="multiInscritoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" style="width:50%">
                         <p:outputPanel id="multiInscritoDetail" style="text-align:center;">
-                            <ui:repeat value="#{inscritoBean.selectedIncritos}" var="inscrito">
-                                <h:outputText value="#{inscrito.primerNombre} #{inscrito.primerApellido}" style="display:block"/>
-                            </ui:repeat>
+                            <h:outputLabel class="CampoLabel" value="Registro guardado con éxito" />
                         </p:outputPanel>
                     </p:dialog>
+                    <p:spacer height="15"/>
+                    
                 </h:form>
+                
             </ui:define>
 
         </ui:composition>
