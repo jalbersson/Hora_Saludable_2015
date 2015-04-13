@@ -29,90 +29,63 @@
                 </p:breadCrumb>
                 <p:spacer height="20"/>                
 
-                <h:form id="form">
-                    <p:panel>
-                        <p:panelGrid styleClass="panelgrid"  id="panelGrid1">
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel for="tipoReporte" value="Tipo de reporte:" />
-                                </p:column>
-                                <p:column>
-                                    <p:selectOneMenu id="tipoReporte" required="true"
-                                                     requiredMessage="Seleccione el tipo de reporte."
-                                                     valueChangeListener="#{auxiliarAsistencia.cambiarTipo}">
-                                        <f:selectItem itemValue="NingunReporte" itemLabel="Seleccione uno" /> 
-                                        <f:selectItem itemValue="Anual" itemLabel="Anual" />
-                                        <f:selectItem itemValue="Mensual" itemLabel="Mensual" />
-                                        <f:ajax  execute="tipoReporte" render="form" />
-                                    </p:selectOneMenu>
-                                </p:column>
-                                <p:column>
-                                    <p:message for="tipoReporte"/>  
-                                </p:column>
-                            </p:row>
+                <h:form id="reporteViewForm">
+                    <h3>Descripción</h3>
+                    <h:panelGroup>
+                        <p:panel>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Tipo de reporte:" />
+                                <p:selectOneMenu valueChangeListener="#{reporteView.seleccionarTipo}">
+                                    <f:selectItem itemLabel="seleccione el tipo de reporte" itemValue="seleccione" />
+                                    <f:selectItems value="#{reporteView.tipos}"/>
+                                    <f:ajax  execute="tipo" render="reporteViewForm" />
+                                </p:selectOneMenu>
 
-                            <p:row rendered="#{auxiliarAsistencia.reporteAnual}">
-                                <p:column style="text-align:right">
-                                    <h:outputLabel for="anioReporte" value="Año:" />
-                                </p:column>
-                                <p:column>
-                                    <p:selectOneMenu id="anioReporte" required="true" requiredMessage="Seleccione el año."
-                                                     valueChangeListener="#{auxiliarAsistencia.cambiarAño}">
-                                        <f:selectItem itemValue="NingunAño" itemLabel="Seleccione uno" /> 
-                                        <f:selectItem itemValue="2014" itemLabel="2014" />
-                                        <f:selectItem itemValue="2015" itemLabel="2015" />
-                                        <f:ajax  execute="tipoReporte" render="form" />
-                                    </p:selectOneMenu>
-                                </p:column>
-                                <p:column>
-                                    <p:message for="anioReporte"/>  
-                                </p:column>
-                            </p:row>
+                                <h:outputText value="AÃ±o:" rendered="#{reporteView.anioRow}" />
+                                <p:spinner value="#{reporteView.anio}" rendered="#{reporteView.anioRow}" max="#{reporteView.anio}"/>
 
-                            <p:row rendered="#{auxiliarAsistencia.reporteMensual}">
-                                <p:column style="text-align:right">
-                                    <h:outputLabel for="mesReporte" value="Mes:" />
-                                </p:column>
-                                <p:column>
-                                    <p:selectOneMenu id="mesReporte" required="true" requiredMessage="Seleccione el mes."
-                                                     valueChangeListener="#{auxiliarAsistencia.cambiarMes}">
-                                        <f:selectItem itemValue="NingunMes" itemLabel="Seleccione uno" /> 
-                                        <f:selectItem itemValue="Enero" itemLabel="Enero" />
-                                        <f:selectItem itemValue="Febrero" itemLabel="Febrero" />
-                                        <f:selectItem itemValue="Marzo" itemLabel="Marzo" />
-                                        <f:selectItem itemValue="Abril" itemLabel="Abril" />
-                                        <f:selectItem itemValue="Mayo" itemLabel="Mayo" />
-                                        <f:selectItem itemValue="Junio" itemLabel="Junio" />
-                                        <f:selectItem itemValue="Julio" itemLabel="Julio" />
-                                        <f:selectItem itemValue="Agosto" itemLabel="Agosto" />
-                                        <f:selectItem itemValue="Septiembre" itemLabel="Septiembre" />
-                                        <f:selectItem itemValue="Octubre" itemLabel="Octubre" />
-                                        <f:selectItem itemValue="Noviembre" itemLabel="Noviembre" />
-                                        <f:selectItem itemValue="Diciembre" itemLabel="Diciembre" />
-                                        <f:ajax  execute="tipoReporte" render="form" />
-                                    </p:selectOneMenu>
-                                </p:column>
-                                <p:column>
-                                    <p:message for="mesReporte"/>  
-                                </p:column>
-                            </p:row>
-                        </p:panelGrid>
-                    </p:panel>
+                                <h:outputText value="Periodo:" rendered="#{reporteView.periodoRow}" />
+                                <p:selectOneMenu value="#{reporteView.perido}" rendered="#{reporteView.periodoRow}" >
+                                    <f:selectItem itemLabel="seleccione el periodo" itemValue="" />
+                                    <f:selectItems value="#{reporteView.periodos}" />                                    
+                                </p:selectOneMenu>
 
-                    <p:spacer height="20"/>
-                    
-                    <h:panelGrid id="panelGrid2" style="margin: 0 auto;" columns="1" cellpadding="7" rendered="#{auxiliarAsistencia.verReporte}"> 
-                        <p:outputLabel value="Este reporte muestra el número de participantes por mes que asistieron al Programa Hora Saludable" />
-                        <p:chart type="bar" model="#{chartViewInscritos.barModel}" style="height:300px" widgetVar="chart"/>
-                        <p:commandButton type="button" value="Exportar" icon="ui-icon-extlink" onclick="exportChart()"/>
-                    </h:panelGrid>
-                    
+                                <h:outputText value="Mes:" rendered="#{reporteView.mesRow}" />
+                                <p:selectOneMenu value="#{reporteView.mes}" rendered="#{reporteView.mesRow}" >
+                                    <f:selectItem itemLabel="seleccione el mes" itemValue="" />
+                                    <f:selectItems value="#{reporteView.meses}" />                                    
+                                </p:selectOneMenu>
+
+                                <h:outputText value="Fecha inicial:" rendered="#{reporteView.rangoRow}" />
+                                <p:calendar id="fechaIncioCalendar" rendered="#{reporteView.rangoRow}" value="#{reporteView.fechaIncio}" pattern="dd-MM-yyyy" mask="true" mode="popup" showOn="button" locale="es" navigator="true" />
+
+                                <h:outputText value="Fecha Final:" rendered="#{reporteView.rangoRow}" />
+                                <p:calendar id="fechaFinCalendar" rendered="#{reporteView.rangoRow}" value="#{reporteView.fechaFin}" pattern="dd-MM-yyyy" mask="true" mode="popup" showOn="button" locale="es" navigator="true" />
+
+                                <br />
+                                <p:selectOneMenu  disabled="#{reporteView.disabledButton}" valueChangeListener="#{reporteView.generarReporte}">
+                                    <f:selectItem itemLabel="Generar reporte" itemValue="seleccione" />
+                                    <f:selectItem itemLabel="Si" itemValue="Si"/>
+                                    <f:selectItem itemLabel="No" itemValue="No"/>
+                                    <f:ajax  execute="tipo" render="reporteViewForm" />
+                                </p:selectOneMenu>
+                            </h:panelGrid>                            
+                        </p:panel>     
+                        <p:spacer height="20"/>                
+                        <p:panel rendered="#{reporteView.mostrarReporte}">
+                            <h:panelGrid id="panelGrid2" style="margin: 0 auto;" columns="1" cellpadding="7" > 
+                                <p:outputLabel value="Este reporte muestra el número de participantes por mes que asistieron al Programa Hora Saludable" />
+                                <p:chart type="bar" model="#{chartViewInscritos.barModel}" style="height:300px" widgetVar="chart"/>
+                                <p:commandButton type="button" value="Exportar como imagen" icon="ui-icon-extlink" onclick="exportChart()"/>
+                            </h:panelGrid>                   
+                        </p:panel>
+                    </h:panelGroup>                
                 </h:form>
-                
+
                 <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Gráfica" resizable="false">
                     <p:outputPanel id="output" layout="block" style="width:610px; height:320px"/>
                 </p:dialog>
-                
+
                 <script type="text/javascript">
                     function exportChart() {
                         //export image
@@ -122,7 +95,7 @@
                         PF('dlg').show();
                     }
                 </script>
-                
+
             </ui:define>
         </ui:composition>
     </body>
