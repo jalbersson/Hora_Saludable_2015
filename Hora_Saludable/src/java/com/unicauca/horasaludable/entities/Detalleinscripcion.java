@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author seven
  */
 @Entity
-@Table(name = "DETALLEINSCRIPCION")
+@Table(name = "DETALLEINSCRIPCION", catalog = "asae", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Detalleinscripcion.findAll", query = "SELECT d FROM Detalleinscripcion d"),
@@ -38,12 +38,12 @@ public class Detalleinscripcion implements Serializable {
     @NotNull
     @Column(name = "DETACTIVO")
     private boolean detactivo;
-    @JoinColumn(name = "INSID", referencedColumnName = "INSID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Inscripcion inscripcion;
     @JoinColumn(name = "USUID", referencedColumnName = "USUID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Usuario usuario;
+    @JoinColumn(name = "INSID", referencedColumnName = "INSID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Inscripcion inscripcion;
 
     public Detalleinscripcion() {
     }
@@ -77,20 +77,20 @@ public class Detalleinscripcion implements Serializable {
         this.detactivo = detactivo;
     }
 
-    public Inscripcion getInscripcion() {
-        return inscripcion;
-    }
-
-    public void setInscripcion(Inscripcion inscripcion) {
-        this.inscripcion = inscripcion;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Inscripcion getInscripcion() {
+        return inscripcion;
+    }
+
+    public void setInscripcion(Inscripcion inscripcion) {
+        this.inscripcion = inscripcion;
     }
 
     @Override

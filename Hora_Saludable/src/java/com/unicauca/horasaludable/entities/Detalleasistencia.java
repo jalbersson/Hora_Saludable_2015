@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author seven
  */
 @Entity
-@Table(name = "DETALLEASISTENCIA")
+@Table(name = "DETALLEASISTENCIA", catalog = "asae", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Detalleasistencia.findAll", query = "SELECT d FROM Detalleasistencia d"),
@@ -38,12 +38,12 @@ public class Detalleasistencia implements Serializable {
     @NotNull
     @Column(name = "DETASISTIO")
     private boolean detasistio;
-    @JoinColumn(name = "USUID", referencedColumnName = "USUID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Usuario usuario;
     @JoinColumn(name = "ASIID", referencedColumnName = "ASIID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Asistencia asistencia;
+    @JoinColumn(name = "USUID", referencedColumnName = "USUID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Usuario usuario;
 
     public Detalleasistencia() {
     }
@@ -77,20 +77,20 @@ public class Detalleasistencia implements Serializable {
         this.detasistio = detasistio;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public Asistencia getAsistencia() {
         return asistencia;
     }
 
     public void setAsistencia(Asistencia asistencia) {
         this.asistencia = asistencia;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author seven
  */
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "USUARIO", catalog = "asae", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
@@ -88,12 +88,12 @@ public class Usuario implements Serializable {
     private String usunombreusuario;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 90)
+    @Size(min = 1, max = 100)
     @Column(name = "USUCONTRASENA")
     private String usucontrasena;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 150)
     @Column(name = "USUEMAIL")
     private String usuemail;
     @Column(name = "USUTELEFONO")
@@ -108,9 +108,6 @@ public class Usuario implements Serializable {
     private List<Grupo> grupoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Detalleasistencia> detalleasistenciaList;
-    @JoinColumn(name = "UNIID", referencedColumnName = "UNIID")
-    @ManyToOne
-    private Unidadacademica uniid;
     @JoinColumn(name = "CARID", referencedColumnName = "CARID")
     @ManyToOne
     private Cargo carid;
@@ -119,6 +116,9 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "CONYUGEID", referencedColumnName = "USUID")
     @ManyToOne
     private Usuario conyugeid;
+    @JoinColumn(name = "UNIID", referencedColumnName = "UNIID")
+    @ManyToOne
+    private Unidadacademica uniid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Detalleinscripcion> detalleinscripcionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuid")
@@ -249,14 +249,6 @@ public class Usuario implements Serializable {
         this.detalleasistenciaList = detalleasistenciaList;
     }
 
-    public Unidadacademica getUniid() {
-        return uniid;
-    }
-
-    public void setUniid(Unidadacademica uniid) {
-        this.uniid = uniid;
-    }
-
     public Cargo getCarid() {
         return carid;
     }
@@ -280,6 +272,14 @@ public class Usuario implements Serializable {
 
     public void setConyugeid(Usuario conyugeid) {
         this.conyugeid = conyugeid;
+    }
+
+    public Unidadacademica getUniid() {
+        return uniid;
+    }
+
+    public void setUniid(Unidadacademica uniid) {
+        this.uniid = uniid;
     }
 
     @XmlTransient

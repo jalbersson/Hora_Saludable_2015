@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author seven
  */
 @Entity
-@Table(name = "MEDIDA")
+@Table(name = "MEDIDA", catalog = "asae", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Medida.findAll", query = "SELECT m FROM Medida m"),
@@ -53,7 +53,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Medida.findByMeddiametroantebrazo", query = "SELECT m FROM Medida m WHERE m.meddiametroantebrazo = :meddiametroantebrazo"),
     @NamedQuery(name = "Medida.findByMedperimetropantorrilla", query = "SELECT m FROM Medida m WHERE m.medperimetropantorrilla = :medperimetropantorrilla"),
     @NamedQuery(name = "Medida.findByMedperimetrocajatoraxica", query = "SELECT m FROM Medida m WHERE m.medperimetrocajatoraxica = :medperimetrocajatoraxica"),
-    @NamedQuery(name = "Medida.findByMedperimetromuslo", query = "SELECT m FROM Medida m WHERE m.medperimetromuslo = :medperimetromuslo")})
+    @NamedQuery(name = "Medida.findByMedperimetromuslo", query = "SELECT m FROM Medida m WHERE m.medperimetromuslo = :medperimetromuslo"),
+    @NamedQuery(name = "Medida.findByMedpulso0", query = "SELECT m FROM Medida m WHERE m.medpulso0 = :medpulso0"),
+    @NamedQuery(name = "Medida.findByMedpulso1", query = "SELECT m FROM Medida m WHERE m.medpulso1 = :medpulso1"),
+    @NamedQuery(name = "Medida.findByMedpulso2", query = "SELECT m FROM Medida m WHERE m.medpulso2 = :medpulso2"),
+    @NamedQuery(name = "Medida.findByMedflexibilidad", query = "SELECT m FROM Medida m WHERE m.medflexibilidad = :medflexibilidad"),
+    @NamedQuery(name = "Medida.findByMedembergadura", query = "SELECT m FROM Medida m WHERE m.medembergadura = :medembergadura"),
+    @NamedQuery(name = "Medida.findByMedsaltomaximo", query = "SELECT m FROM Medida m WHERE m.medsaltomaximo = :medsaltomaximo"),
+    @NamedQuery(name = "Medida.findByMedsaltoreal", query = "SELECT m FROM Medida m WHERE m.medsaltoreal = :medsaltoreal")})
 public class Medida implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -141,6 +148,34 @@ public class Medida implements Serializable {
     @NotNull
     @Column(name = "MEDPERIMETROMUSLO")
     private float medperimetromuslo;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "MEDPULSO0")
+    private float medpulso0;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "MEDPULSO1")
+    private float medpulso1;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "MEDPULSO2")
+    private float medpulso2;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "MEDFLEXIBILIDAD")
+    private float medflexibilidad;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "MEDEMBERGADURA")
+    private float medembergadura;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "MEDSALTOMAXIMO")
+    private float medsaltomaximo;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "MEDSALTOREAL")
+    private float medsaltoreal;
     @JoinColumn(name = "USUID", referencedColumnName = "USUID")
     @ManyToOne(optional = false)
     private Usuario usuid;
@@ -152,7 +187,7 @@ public class Medida implements Serializable {
         this.medid = medid;
     }
 
-    public Medida(Long medid, Date medfecha, float medpeso, float medtriceps, float medsubescapular, float medsuprailiaco, float medabdominal, float medmuslo, float medpantorilla, float medperimetromuneca, float medperimetrocabeza, float meddiametrobiacromial, float meddiametrobiltiocristal, float meddiametrohumero, float meddiametrofemur, float medperimetrobrazo, float meddiametroantebrazo, float medperimetropantorrilla, float medperimetrocajatoraxica, float medperimetromuslo) {
+    public Medida(Long medid, Date medfecha, float medpeso, float medtriceps, float medsubescapular, float medsuprailiaco, float medabdominal, float medmuslo, float medpantorilla, float medperimetromuneca, float medperimetrocabeza, float meddiametrobiacromial, float meddiametrobiltiocristal, float meddiametrohumero, float meddiametrofemur, float medperimetrobrazo, float meddiametroantebrazo, float medperimetropantorrilla, float medperimetrocajatoraxica, float medperimetromuslo, float medpulso0, float medpulso1, float medpulso2, float medflexibilidad, float medembergadura, float medsaltomaximo, float medsaltoreal) {
         this.medid = medid;
         this.medfecha = medfecha;
         this.medpeso = medpeso;
@@ -173,6 +208,13 @@ public class Medida implements Serializable {
         this.medperimetropantorrilla = medperimetropantorrilla;
         this.medperimetrocajatoraxica = medperimetrocajatoraxica;
         this.medperimetromuslo = medperimetromuslo;
+        this.medpulso0 = medpulso0;
+        this.medpulso1 = medpulso1;
+        this.medpulso2 = medpulso2;
+        this.medflexibilidad = medflexibilidad;
+        this.medembergadura = medembergadura;
+        this.medsaltomaximo = medsaltomaximo;
+        this.medsaltoreal = medsaltoreal;
     }
 
     public Long getMedid() {
@@ -341,6 +383,62 @@ public class Medida implements Serializable {
 
     public void setMedperimetromuslo(float medperimetromuslo) {
         this.medperimetromuslo = medperimetromuslo;
+    }
+
+    public float getMedpulso0() {
+        return medpulso0;
+    }
+
+    public void setMedpulso0(float medpulso0) {
+        this.medpulso0 = medpulso0;
+    }
+
+    public float getMedpulso1() {
+        return medpulso1;
+    }
+
+    public void setMedpulso1(float medpulso1) {
+        this.medpulso1 = medpulso1;
+    }
+
+    public float getMedpulso2() {
+        return medpulso2;
+    }
+
+    public void setMedpulso2(float medpulso2) {
+        this.medpulso2 = medpulso2;
+    }
+
+    public float getMedflexibilidad() {
+        return medflexibilidad;
+    }
+
+    public void setMedflexibilidad(float medflexibilidad) {
+        this.medflexibilidad = medflexibilidad;
+    }
+
+    public float getMedembergadura() {
+        return medembergadura;
+    }
+
+    public void setMedembergadura(float medembergadura) {
+        this.medembergadura = medembergadura;
+    }
+
+    public float getMedsaltomaximo() {
+        return medsaltomaximo;
+    }
+
+    public void setMedsaltomaximo(float medsaltomaximo) {
+        this.medsaltomaximo = medsaltomaximo;
+    }
+
+    public float getMedsaltoreal() {
+        return medsaltoreal;
+    }
+
+    public void setMedsaltoreal(float medsaltoreal) {
+        this.medsaltoreal = medsaltoreal;
     }
 
     public Usuario getUsuid() {
