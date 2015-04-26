@@ -5,7 +5,9 @@
  */
 package com.unicauca.horasaludable.modelo;
 
+
 import java.util.ArrayList;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
@@ -30,7 +32,7 @@ public class auxiliar
     private boolean tablaFamiliar;
     private boolean tablaFuncionario;
 
-
+    
     public auxiliar()
     {
         estadoCerrarSesion=true;
@@ -266,6 +268,7 @@ public class auxiliar
             this.tablaEstudiantes=true;
         }
     }
+    
 }
 
 

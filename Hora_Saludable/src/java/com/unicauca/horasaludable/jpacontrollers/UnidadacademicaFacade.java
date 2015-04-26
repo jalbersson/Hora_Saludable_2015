@@ -6,9 +6,11 @@
 package com.unicauca.horasaludable.jpacontrollers;
 
 import com.unicauca.horasaludable.entities.Unidadacademica;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,4 +30,20 @@ public class UnidadacademicaFacade extends AbstractFacade<Unidadacademica> {
         super(Unidadacademica.class);
     }
     
+    public List<Unidadacademica> findBYFacultades()
+    {
+        Query query = getEntityManager().createNamedQuery("Unidadacademica.findByTipo");
+        query.setParameter("tiponombre", "Facultad");
+        List<Unidadacademica> resultList = query.getResultList();
+        
+        return resultList;
+    }
+    public List<Unidadacademica> findBYDivisiones()
+    {
+        Query query = getEntityManager().createNamedQuery("Unidadacademica.findByTipo");
+        query.setParameter("tiponombre", "Division");
+        List<Unidadacademica> resultList = query.getResultList();
+        
+        return resultList;
+    }
 }

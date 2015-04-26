@@ -41,7 +41,7 @@
                                     </p:selectOneMenu>                     
                                     <p:commandButton  value="Registrar Nuevo Usuario" style="background:#22419A; 
                                          color: #FFFFFF; margin-left: 395px;" 
-                                         onclick="PF('RegistrarUsuario').show();"
+                                         action="#{registrarUsuarioController.abrirVentanaRegistrarUsuario()}"
                                     />                 
                         </h:panelGrid>
                     </h:form>                   
@@ -175,8 +175,11 @@
                     </h:form>
                 <br/>
                 <p:separator/>
-                
+                <p:dialog  modal="true" widgetVar="efectoCarga" showHeader="false">
+                    <h:graphicImage style="width:60px;height: 60px;" library="img/efectoCarga" name="carga.gif" />
+                </p:dialog>
                 <p:dialog position="top"   header="Registrar Usuario" showEffect="scale" modal="true"  widgetVar="RegistrarUsuario">
+                            <p:ajaxStatus onstart="PF('efectoCarga').show()" onsuccess="PF('efectoCarga').hide()"/>
                             <h:form id="form">
                                 <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
                                 <p:row>
@@ -191,64 +194,87 @@
                                     <p:column>
                                         <p:selectOneMenu id="tipo"  style="width:125px" required="true"
                                         requiredMessage="Seleccione un Tipo Usuario."
-                                        valueChangeListener="#{auxiliar.cambiarTipo}">
-                                            <f:selectItem itemLabel="Seleccione.." itemValue="Seleccione" />
-                                            <f:selectItem itemLabel="Estudiante" itemValue="Estudiante" />
-                                            <f:selectItem itemLabel="Familiar" itemValue="Familiar" />
-                                            <f:selectItem itemLabel="Funcionario" itemValue="Funcionario" />
-                                            <f:ajax  execute="tipo" render="form" />
+                                        valueChangeListener="#{registrarUsuarioController.cambiarTipoUsuario}">                                            
+                                            <f:selectItem itemLabel="Seleccionar.." itemValue="Seleccione"/>
+                                            <f:selectItems value="#{registrarUsuarioController.listaTipo}"/>
+                                            <f:ajax  execute="tipo" render="form" />                                            
                                         </p:selectOneMenu>                                                                             
                                     </p:column>
                                     <p:column>
                                         <p:message for="tipo"/>  
                                     </p:column>
                                 </p:row>                                    
-                                <p:row rendered="#{auxiliar.cargo}">
+                                <p:row rendered="#{registrarUsuarioController.camposRegistroFuncionario}">
                                     <p:column style="text-align:right">
                                         <h:outputLabel  class="CampoLabel" for="cargo" value="Cargo: *" />
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="cargo"  style="width:125px" required="true" requiredMessage="Seleccione un Cargo.">
-                                            <f:selectItem itemLabel="Seleccione.." itemValue="" />
-                                            <f:selectItem itemLabel="Profesor" itemValue="Profesor" />
-                                            <f:selectItem itemLabel="Administrativo" itemValue="Administrativo" />                                            
+                                        <p:selectOneMenu id="cargo"  style="width:125px" required="true" 
+                                                         valueChangeListener="#{registrarUsuarioController.cambiarCargoFuncionario}"
+                                                         requiredMessage="Seleccione un Cargo." 
+                                                         value="#{registrarUsuarioController.cargo.carid}">
+                                            <f:selectItem itemLabel="Seleccionar.." itemValue="Seleccionar" />
+                                            <f:selectItems value="#{registrarUsuarioController.listaCargos}" var="cargo" 
+                                                           itemLabel="#{cargo.carnombre}" itemValue="#{cargo.carid}"/>
+                                            <f:ajax  execute="cargo" render="form" />
                                         </p:selectOneMenu>                                                                             
                                     </p:column>
                                     <p:column>
                                         <p:message for="cargo"/>  
                                     </p:column>
                                 </p:row>
-                                <p:row rendered="#{auxiliar.dependencia}">
+                                <p:row rendered="#{registrarUsuarioController.camposRegistroFuncionarioDocente}">
                                     <p:column style="text-align:right">
-                                        <h:outputLabel class="CampoLabel" for="dependencia" value="Dependencia: *" />
+                                        <h:outputLabel class="CampoLabel" for="dependenciaDocente" value="Dependencia: *" />
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="dependencia"  style="width:125px" required="true" requiredMessage="Seleccione una Dependencia.">
-                                            <f:selectItem itemLabel="Seleccione.." itemValue="" />
-                                            <f:selectItem itemLabel="Fac. Ingenieria Electronica y telecomunicaciones" itemValue="r" />
-                                            <f:selectItem itemLabel="Fac. Ingenieria Civil" itemValue="m" />                                            
+                                        <p:selectOneMenu id="dependenciaDocente"  style="width:125px" required="true" 
+                                                         requiredMessage="Seleccione una Dependencia."
+                                                         value="#{registrarUsuarioController.facultad.uniid}">
+                                            <f:selectItem itemLabel="Seleccionar.." itemValue="selecionar" />
+                                            <f:selectItems value="#{registrarUsuarioController.listaFacultades}" var="facultadDocente"
+                                                           itemLabel="#{facultadDocente.uninombre}" itemValue="#{facultadDocente.uniid}"/>                                            
                                         </p:selectOneMenu>                                                                             
                                     </p:column>
                                     <p:column>
-                                        <p:message for="dependencia"/>  
+                                        <p:message for="dependenciaDocente"/>  
                                     </p:column>
                                 </p:row>
-                                <p:row id="filaFacultad" rendered="#{auxiliar.facultad}">
+                                <p:row rendered="#{registrarUsuarioController.camposRegistroFuncionarioAdministrativo}">
+                                    <p:column style="text-align:right">
+                                        <h:outputLabel class="CampoLabel" for="dependenciaAdministrativo" value="Dependencia: *" />
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="dependenciaAdministrativo"  style="width:125px" 
+                                                         required="true" requiredMessage="Seleccione una Dependencia."
+                                                         value="#{registrarUsuarioController.unidadAcademica.uniid}">
+                                            <f:selectItem itemLabel="Seleccionar.." itemValue="Seleccionar" />
+                                            <f:selectItems value="#{registrarUsuarioController.listaUnidadAcademica}"
+                                                           var="unidad" itemLabel="#{unidad.uninombre}" itemValue="#{unidad.uniid}"/>                                            
+                                        </p:selectOneMenu>                                                                             
+                                    </p:column>
+                                    <p:column>
+                                        <p:message for="dependenciaAdministrativo"/>  
+                                    </p:column>
+                                </p:row>
+                                <p:row id="filaFacultad" rendered="#{registrarUsuarioController.camposRegistroEstudiante}">
                                     <p:column style="text-align:right">
                                         <h:outputLabel class="CampoLabel" for="facultad" value="Facultad: *" />
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="facultad"  style="width:125px" required="true" requiredMessage="Seleccione una Facultad.">
+                                        <p:selectOneMenu id="facultad"  style="width:125px" required="true" 
+                                                         value="#{registrarUsuarioController.facultad.uniid}" requiredMessage="Seleccione una Facultad.">
                                             <f:selectItem itemLabel="Seleccione.." itemValue="" />
-                                            <f:selectItem itemLabel="Fac. Ingenieria Electronica y telecomunicaciones" itemValue="r" />
-                                            <f:selectItem itemLabel="Fac. Ingenieria Civil" itemValue="m" />                                            
+                                            <f:selectItems value="#{registrarUsuarioController.listaFacultades}" 
+                                                           var="facultad" itemLabel="#{facultad.uninombre}" 
+                                                           itemValue="#{facultad.uniid}"/>                                            
                                         </p:selectOneMenu>                                                                             
                                     </p:column>
                                     <p:column>
                                         <p:message for="facultad"/>  
                                     </p:column>
                                 </p:row>
-                                <p:row rendered="#{auxiliar.funcionario}">
+                                <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
                                     <p:column style="text-align:right">
                                         <h:outputLabel class="CampoLabel" for="empleado" value="Empleado: *" />
                                     </p:column>
@@ -260,7 +286,7 @@
                                         <p:message for="nombreEmpleado"/>
                                     </p:column>
                                 </p:row>
-                                    <p:row rendered="#{auxiliar.nombreFuncionario}">
+                                    <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
                                     <p:column style="text-align:right;height: 30px;">
                                         <h:outputLabel class="CampoLabel" for="nombreEmpleado" value="Nombre Empleado: *" />
                                     </p:column>
@@ -274,7 +300,7 @@
                                     <p:column>
                                     </p:column>
                                 </p:row>
-                                <p:row rendered="#{auxiliar.dependenciaFuncionario}">
+                                <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
                                     <p:column style="text-align:right;height:30px; ">
                                         <h:outputLabel class="CampoLabel" for="dependenciaEmpleado" value="Dependencia Empleado: *" />
                                     </p:column>
@@ -293,7 +319,7 @@
                                         <h:outputLabel class="CampoLabel" for="fechaNacimiento" value="Fecha de Nacimiento: *" />
                                     </p:column>
                                     <p:column>
-                                        <p:calendar size="10" id="fechaNacimiento"  required="true" 
+                                        <p:calendar value="#{registrarUsuarioController.usuario.usufechanacimiento}" size="10" id="fechaNacimiento"  required="true" 
                                                     requiredMessage="Seleccione una Fecha de Nacimiento."
                                                     showOn="button" navigator="true" pattern="yyyy-MM-dd" 
                                                     />
@@ -309,7 +335,7 @@
                                     </p:column>
                                     <p:column>
                                         <p:inputText style="width: 110px;font-size:15px" 
-                                                     id="numeroIdentificacion" value=""
+                                                     id="numeroIdentificacion" value="#{registrarUsuarioController.usuario.usuidentificacion}"
                                                    required="true" requiredMessage="Campo Obligatorio.">                              
                                         </p:inputText>                                
                                     </p:column>
@@ -323,7 +349,7 @@
                                     </p:column>
                                     <p:column>
                                         <p:inputText style="width: 140px;font-size:15px" 
-                                                     id="nombres" value=""
+                                                     id="nombres" value="#{registrarUsuarioController.usuario.usunombres}"
                                                    required="true" requiredMessage="Campo Obligatorio.">                              
                                         </p:inputText>                                
                                     </p:column>
@@ -337,7 +363,7 @@
                                     </p:column>
                                     <p:column>
                                         <p:inputText style="width: 140px;font-size:15px" 
-                                                     id="apellidos" value=""
+                                                     id="apellidos" value="#{registrarUsuarioController.usuario.usuapellidos}"
                                                    required="true" requiredMessage="Campo Obligatorio.">                              
                                         </p:inputText>                                
                                     </p:column>
@@ -351,7 +377,7 @@
                                     </p:column>
                                     <p:column>
                                         <p:inputText style="width: 120px;font-size:15px" 
-                                                     id="nombreUsuario" value=""
+                                                     id="nombreUsuario" value="#{registrarUsuarioController.usuario.usunombreusuario}"
                                                    required="true" requiredMessage="Campo Obligatorio.">                              
                                         </p:inputText>                                
                                     </p:column>
@@ -365,8 +391,8 @@
                                     </p:column>
                                     <p:column>
                                         <p:password style="width: 120px;font-size:15px" 
-                                                     id="contrasena" value=""
-                                                   required="true" requiredMessage="Campo Obligatorio.">                              
+                                                    id="contrasena" value="#{registrarUsuarioController.usuario.usucontrasena}"
+                                                    required="true" requiredMessage="Campo Obligatorio.">                              
                                         </p:password>                                
                                     </p:column>
                                     <p:column>
@@ -377,7 +403,7 @@
                                     <p:column>                                        
                                     </p:column>
                                     <p:column>
-                                        <h:outputLabel class="CampoLabelEspecificacion"  value="Entre 6 y 20 caracteres AlfaNumericos." />
+                                        <h:outputLabel class="CampoLabelEspecificacion"   value="Entre 6 y 20 caracteres AlfaNumericos." />
                                     </p:column>
                                     <p:column>                                        
                                     </p:column>                                        
@@ -387,9 +413,9 @@
                                         <h:outputLabel class="CampoLabel" for="confirmarContrasena" value="Confirmar Contraseña: *" />
                                     </p:column>
                                     <p:column>
-                                        <p:password style="width: 120px;font-size:15px" 
-                                                     id="confirmarContrasena" value=""
-                                                   required="true" requiredMessage="Campo Obligatorio.">                              
+                                        <p:password  style="width: 120px;font-size:15px" 
+                                                     id="confirmarContrasena" value="#{registrarUsuarioController.usuario.usucontrasena}"
+                                                   required="true" requiredMessage="Campo Obligatorio.">                                            
                                         </p:password>                                
                                     </p:column>
                                     <p:column>
@@ -402,7 +428,7 @@
                                     </p:column>
                                     <p:column>
                                         <p:inputText style="width: 180px;font-size:15px" 
-                                                     id="correoElectronico" value=""
+                                                     id="correoElectronico" value="#{registrarUsuarioController.usuario.usuemail}"
                                                    required="true" requiredMessage="Campo Obligatorio.">                              
                                         </p:inputText>
                                     </p:column>
@@ -417,7 +443,7 @@
                                     </p:column>
                                     <p:column>
                                         <p:inputText style="width: 100px;font-size:15px" 
-                                                     id="telefono" value=""
+                                                     id="telefono" value="#{registrarUsuarioController.usuario.usutelefono}"
                                                    required="true" requiredMessage="Campo Obligatorio.">                              
                                         </p:inputText>
                                     </p:column>
@@ -431,7 +457,7 @@
                                         <h:outputLabel class="CampoLabel" for="sexo" value="Sexo: * " />
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneRadio    id="sexo" value="" required="true" requiredMessage="Seleccione Sexo.">
+                                        <p:selectOneRadio    id="sexo" value="#{registrarUsuarioController.usuario.usugenero}" required="true" requiredMessage="Seleccione Sexo.">
                                             <f:selectItem itemLabel="M" itemValue="M" />
                                             <f:selectItem itemLabel="F" itemValue="F" />                                            
                                         </p:selectOneRadio>
@@ -457,7 +483,8 @@
                                     </p:column>
                                     <p:column>
                                         <p:commandButton   style="background: #22419A;color:#FFFFFF;font-style: italic" 
-                                                           value="Registrar" ajax="true" update="panel" id="registrar"/>
+                                                           action="#{registrarUsuarioController.registrarUsuario()}" value="Registrar" ajax="true" 
+                                                           update="panel" id="registrar"/>
                                     </p:column>
                                 </p:row>                               
                             </p:panelGrid>                            
@@ -505,9 +532,7 @@
 
                         </p:dataTable>
                     </h:form>
-                </p:dialog>
-                        
-                        
+                </p:dialog>     
                                     
                              
             </ui:define>
