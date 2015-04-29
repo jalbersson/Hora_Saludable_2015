@@ -122,10 +122,10 @@ public class auxiliar
     public void seleccionarEmpleado(Usuario usuario)
     {
        RequestContext requestContext = RequestContext.getCurrentInstance();              
-       requestContext.execute("PF('seleccionarFamiliar').hide()");
+       requestContext.execute("PF('seleccionarFuncionario').hide()");
        this.usuarioSeleccionado=usuario;
-       requestContext.update("form:nombreEmpleado"); 
-       requestContext.update("form:dependenciaEmpleado");
+       requestContext.update("form:nombreFuncionario"); 
+       requestContext.update("form:dependenciaFuncionario");
        
     }
      public ArrayList<Usuario> getListaUsuarios() {
