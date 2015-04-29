@@ -30,27 +30,22 @@
 
 
                             <p:outputLabel value="Consultar Por Identificacion" />
-                            <p:autoComplete value="#{consultaEstudianteLibrosAjaxController.estudiante}" completeMethod="#{consultaEstudianteLibrosAjaxController.getEstudiantes()}"
-                                            var="estudiante" itemLabel="#{estudiante.nombre}" itemValue="#{estudiante}" >
+                            <p:autoComplete value="#{consultaUsuarioMedidadController.usuario}" completeMethod="#{consultaUsuarioMedidadController.getUsuario()}"
+                                            var="usuario" itemLabel="#{usuario.numeroIdentificacion}" itemValue="#{usuario}" >
                             </p:autoComplete>                         
-                            <p:commandButton action="#{consultaEstudianteLibrosAjaxController.buscarLibros}" value="Ejecutar Consulta" type="button" onclick="PF('dlg2').show();" />
+                            <p:commandButton action="#{consultaUsuarioMedidadController.buscarMedias}" value="Ejecutar Consulta" type="button" onclick="PF('dlg2').show();" />
                             <h:message for="identificacion" />
-
-                           
 
                             <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Resultado" showEffect="fade"> 
                                 <p:panelGrid id="display" columns="5" columnClasses="label,value">
                                     <h:outputText value="Identificacion " />    
-                                    <h:outputText value="Primer Apellido " />
-                                    <h:outputText value="Segundo  Apellido " />
-                                    <h:outputText value="Nombre" />
+                                    <h:outputText value="Apellidos " />
+                                    <h:outputText value="Nombres" />
 
 
-                                    <h:outputText id="IdentificacionValue" value="#{maskView.date}" />
-                                    <h:outputText id="pApellidoValue" value="#{maskView.phone}" />
-                                    <h:outputText id="sApellidoValue" value="#{maskView.phoneExt}"/>
-                                    <h:outputText id="nombresValue" value="#{maskView.phoneExt}"/>
-
+                                    <h:outputText id="IdentificacionValue" value="#{usuario.numeroIdentificacion}" />
+                                    <h:outputText id="ApellidosValue" value="#{usuario.apellidos}" />
+                                    <h:outputText id="NombresValue" value="#{usuario.nombres}"/>
 
                                 </p:panelGrid>
                             </p:dialog>

@@ -6,9 +6,13 @@
 package com.unicauca.horasaludable.jpacontrollers;
 
 import com.unicauca.horasaludable.entities.Medida;
+import com.unicauca.horasaludable.entities.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -24,8 +28,23 @@ public class MedidaFacade extends AbstractFacade<Medida> {
         return em;
     }
 
-    public MedidaFacade() {
+    
+    public MedidaFacade() 
+    {
         super(Medida.class);
+    }
+    
+      public List<Medida> findUsuario(Long codigo)
+    {
+        Query query = getEntityManager().createNamedQuery("Usuario.findByUsuidentificacion");
+        query.setParameter("codigo", codigo);
+        List<Usuario> resultList = query.getResultList();
+        List<Medida> listado = new ArrayList();
+        for(Usuario el: resultList)
+        {
+            listado.add((Medida) el.getMedidaList());
+        }
+        return listado;
     }
     
 }
