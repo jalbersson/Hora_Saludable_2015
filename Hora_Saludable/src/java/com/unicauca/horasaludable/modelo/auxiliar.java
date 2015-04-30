@@ -211,7 +211,7 @@ public class auxiliar
     public void cambiarTipo(ValueChangeEvent e)
     {         
         String tipo=e.getNewValue().toString();        
-        if(tipo.equals("Estudiante"))
+        if(tipo.equals("Estudiantes"))
         {
             this.dependencia=false;
             this.funcionario=false;
@@ -220,7 +220,7 @@ public class auxiliar
             this.facultad=true;
             this.cargo=false;
         }
-        if(tipo.equals("Funcionario"))
+        if(tipo.equals("Funcionarios"))
         {
             this.dependencia=true;
             this.funcionario=false;
@@ -229,7 +229,7 @@ public class auxiliar
             this.facultad=false;
             this.cargo=true;
         }        
-        if(tipo.equals("Familiar"))
+        if(tipo.equals("Familiares"))
         {
             this.dependencia=false;
             this.funcionario=true;
@@ -255,15 +255,15 @@ public class auxiliar
         this.tablaFuncionario=false;
         this.tablaEstudiantes=false;
         this.tablaFamiliar=false;        
-        if(tipo.equals("Funcionario"))
+        if(tipo.equals("Funcionarios"))
         {
             this.tablaFuncionario=true;
         }
-        if(tipo.equals("Familiar"))
+        if(tipo.equals("Familiares"))
         {
             this.tablaFamiliar=true;
         }
-        if(tipo.equals("Estudiante"))
+        if(tipo.equals("Estudiantes"))
         {
             this.tablaEstudiantes=true;
         }

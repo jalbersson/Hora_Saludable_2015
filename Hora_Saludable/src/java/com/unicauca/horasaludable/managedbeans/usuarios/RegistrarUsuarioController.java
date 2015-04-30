@@ -395,10 +395,10 @@ public class RegistrarUsuarioController implements Serializable {
     {
         return unidadAcademicaEJB.findBYFacultades();
     }
-    public void  buscarPorNombreOApellidos()
+    public void  buscarPorNombreFuncionario()
     {
         
-        this.listaFuncionarios=usuarioEJB.busacarPorNombreOApellidos(this.nombreOApellidos.toLowerCase());
+        this.listaFuncionarios=usuarioEJB.busacarPorNombreFuncionario(this.nombreOApellidos.toLowerCase());
         
     }
     

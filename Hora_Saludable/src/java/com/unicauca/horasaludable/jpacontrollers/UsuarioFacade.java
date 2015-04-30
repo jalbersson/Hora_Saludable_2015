@@ -62,10 +62,41 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         return !resultList.isEmpty();
         
     }
-    public List<Usuario> busacarPorNombreOApellidos(String nombre)
+    
+    public List<Usuario> busacarPorNombreFuncionario(String nombre)
     {
-        Query query = getEntityManager().createNamedQuery("Usuario.findByName");
+        Query query = getEntityManager().createNamedQuery("Usuario.findByNameFuncionarios");
         query.setParameter("nombre", "%"+nombre+"%");
+        List<Usuario> resultList = query.getResultList();
+        return resultList;
+    }
+    
+    public List<Usuario> busacarPorNombreEstudiante(String nombre)
+    {
+        Query query = getEntityManager().createNamedQuery("Usuario.findByNameEstudiante");
+        query.setParameter("nombre", "%"+nombre+"%");
+        List<Usuario> resultList = query.getResultList();
+        return resultList;
+    }
+    
+    public List<Usuario> busacarPorNombreFamiliar(String nombre)
+    {
+        Query query = getEntityManager().createNamedQuery("Usuario.findByNameFamiliar");
+        query.setParameter("nombre", "%"+nombre+"%");
+        List<Usuario> resultList = query.getResultList();
+        return resultList;
+    }
+    
+    public List<Usuario> buscarPorEstudiantes()
+    {
+        Query query = getEntityManager().createNamedQuery("Usuario.findByEstudents");        
+        List<Usuario> resultList = query.getResultList();
+        return resultList;
+        
+    }
+    public List<Usuario> buscarPorFamiliares()
+    {
+        Query query = getEntityManager().createNamedQuery("Usuario.findByFamiliars");        
         List<Usuario> resultList = query.getResultList();
         return resultList;
     }
