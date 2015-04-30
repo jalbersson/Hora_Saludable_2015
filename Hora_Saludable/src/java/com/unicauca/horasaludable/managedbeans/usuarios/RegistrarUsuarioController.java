@@ -328,7 +328,9 @@ public class RegistrarUsuarioController implements Serializable {
        UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());
        context.setViewRoot(viewRoot);       
        context.renderResponse();          
-       requestContext.update("form:panel");       
+       requestContext.update("form:panel");
+       requestContext.update("seleccionarUsuarios");
+       requestContext.update("tablasUsuarios");
        requestContext.execute("PF('RegistrarUsuario').show()");
     }
     public void cambiarTipoUsuario(ValueChangeEvent e)
