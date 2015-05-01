@@ -31,119 +31,85 @@
             
             <ui:define name="body"> 
                 <h:form>
+                    
                     <p:panel id="panel" header="Consultas">
                         <p:messages id="msgs" />
                         <h:panelGrid columns="4" cellpadding="7">
 
 
                             <p:outputLabel value="Consultar Por Identificacion" />
-                            <p:autoComplete value="#{consultaEstudianteLibrosAjaxController.estudiante}" completeMethod="#{consultaEstudianteLibrosAjaxController.getEstudiantes()}"
-                                            var="estudiante" itemLabel="#{estudiante.nombre}" itemValue="#{estudiante}" >
-                            </p:autoComplete>                         
-                            <p:commandButton action="#{consultaEstudianteLibrosAjaxController.buscarLibros}" value="Ejecutar Consulta" type="button" onclick="PF('dlg2').show();" />
+                              <p:inputText value="#{consultaUsuarioMedidadController.identificacionUsuario}" >
+                            </p:inputText>    
+                               <p:commandButton  value="Ejecutar Consulta" 
+                                              action="#{consultaUsuarioMedidadController.buscarMedidasUsuario()}"
+                                              update="panelMedidas">
+                                
+                            </p:commandButton>   
+                            
+                            
                             <h:message for="identificacion" />
-
-                            <p:outputLabel value="Primer Apellido" />
-                            <p:autoComplete value="#{consultaEstudianteLibrosAjaxController.estudiante}" completeMethod="#{consultaEstudianteLibrosAjaxController.getEstudiantes()}"
-                                            var="estudiante" itemLabel="#{estudiante.nombre}" itemValue="#{estudiante}" >
-                            </p:autoComplete>                         
-                            <p:commandButton action="#{consultaEstudianteLibrosAjaxController.buscarLibros}" value="Ejecutar Consulta" type="button" onclick="PF('dlg2').show();" />
-                            <h:message for="pApellido" />
-
-                            <p:outputLabel value="Primer Apelldio y Nombre" />
-                            <p:autoComplete value="#{consultaEstudianteLibrosAjaxController.estudiante}" completeMethod="#{consultaEstudianteLibrosAjaxController.getEstudiantes()}"
-                                            var="estudiante" itemLabel="#{estudiante.nombre}" itemValue="#{estudiante}" >
-                            </p:autoComplete>                         
-                            <p:commandButton action="#{consultaEstudianteLibrosAjaxController.buscarLibros}" value="Ejecutar Consulta" type="button" onclick="PF('dlg2').show();" />
-                            <h:message for="pApellNombre" />
-
-                            <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Resultado" showEffect="fade"> 
-                                <p:panelGrid id="display" columns="5" columnClasses="label,value">
-                                    <h:outputText value="Identificacion " />    
-                                    <h:outputText value="Primer Apellido " />
-                                    <h:outputText value="Segundo  Apellido " />
-                                    <h:outputText value="Nombre" />
-
-
-                                    <h:outputText id="IdentificacionValue" value="#{maskView.date}" />
-                                    <h:outputText id="pApellidoValue" value="#{maskView.phone}" />
-                                    <h:outputText id="sApellidoValue" value="#{maskView.phoneExt}"/>
-                                    <h:outputText id="nombresValue" value="#{maskView.phoneExt}"/>
-
-
-                                </p:panelGrid>
-                            </p:dialog>
+                            
+                            
+                             <p:outputLabel value="Primer Apellido" />
+                              <p:inputText value="#{consultaUsuarioMedidadController.identificacionUsuario}" >
+                            </p:inputText>    
+                               <p:commandButton  value="Ejecutar Consulta" 
+                                              action="#{consultaUsuarioMedidadController.buscarMedidasUsuario()}"
+                                              update="panelMedidas">
+                                
+                            </p:commandButton>  
+                                    <h:message for="identificacion" />
+                             <p:outputLabel value="Primer Apellido y Nombre" />
+                              <p:inputText value="#{consultaUsuarioMedidadController.identificacionUsuario}" >
+                            </p:inputText>    
+                               <p:commandButton  value="Ejecutar Consulta" 
+                                              action="#{consultaUsuarioMedidadController.buscarMedidasUsuario()}"
+                                              update="panelMedidas">
+                                
+                            </p:commandButton>  
+                            
+                            
                         </h:panelGrid>
                     </p:panel>
                     <br></br>
-                  <p:panelGrid styleClass="fuentefichatabla" style="margin: 0 auto">
-                    <f:facet name="header">
-                        <p:row>
-                            <p:column>
-                                <h:outputLabel for="surname" value="Nombre" />
-                            </p:column>
-                            <p:column>
-                                <h:outputLabel for="surname" value="Perfil" />
-                            </p:column>
-                            <p:column>
-                                <h:outputLabel for="surname" value="Deporte" />
-                            </p:column>
-                            <p:column>
-                                <h:outputLabel for="surname" value="Accion" />
-                            </p:column>
-                        </p:row>                      
-                    </f:facet>
-                    <p:row>
-                        <p:column>
-                            <h:outputLabel for="firstname" value="Mario Alberto Posada Rincon" />   
-                        </p:column>
-                        <p:column>
-                            <h:outputLabel for="surname" value="Docente" />
-                        </p:column>
-                        <p:column>
-                            <h:outputLabel for="surname" value="Atletismo" />
-                        </p:column>
-                        <p:column>
-                            <p:link outcome="GestionTest" value="Gestionar Test">
-                                <f:param name="productId" value="10" />
-                            </p:link>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <h:outputLabel for="firstname" value="MArta Mercedes Perez Gonzales" />   
-                        </p:column>
-                        <p:column>
-                            <h:outputLabel for="surname" value="Docente" />
-                        </p:column>
-                        <p:column>
-                            <h:outputLabel for="surname" value="Atletismo" />
-                        </p:column>
-                        <p:column>
+                    
+                    
+                  <p:panel id="panelMedidas">
+                        <p:dataTable var="medida" value="#{consultaUsuarioMedidadController.listaMedidas}">
                             
+                                <p:column headerText="Identificacion">
+                                   #{medida.usuid.usuidentificacion}
+                                </p:column>
+                                <p:column headerText="Apellidos">
+                                     
+                                    #{medida.usuid.usuapellidos}
+                                </p:column>
+                                <p:column headerText="Nombres">
+                                     #{medida.usuid.usunombres}
+                                </p:column>
+                               
                             
+                            <p:column headerText="Cargo">
+                                #{medida.usuid.carid.carnombre}
+                                </p:column>
+                                <p:column headerText="Facultad">
+                                #{medida.usuid.uniid.uninombre}
+                                </p:column>
+                               <p:column headerText="Acciones" width="90">
+                                    <h:link id="ver" style="text-decoration: none; ">                                    
+                                        <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                    </h:link>
+                                    <h:link id="editar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                        <p:graphicImage style="width:20px;" library="img/usuarios" name="editar.png"/>
+                                    </h:link>
+                                    <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                        <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                    </h:link>
+                                </p:column> 
                             
-                       
-
-
-                      <h:form>    <p:commandButton value="Modal" type="button" onclick="PF('dlg2').show();" />
-
-                  
-
-            <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="400" width="80%">
-                <h3>PDF</h3><object type="application/pdf" data="http://ccia.ei.uvigo.es/docencia/SCS/1112/jee/ejemploJSF.pdf" height="500px" width="100%">
-                    Your browser can't display pdf, <a href="http://ccia.ei.uvigo.es/docencia/SCS/1112/jee/ejemploJSF.pdf">click</a> to download pdf instead.
-                </object>
-            </p:dialog>   
-                 </h:form> 
-           
-                            <p:link outcome="GestionTest" value="Gestionar Test">
-                                <f:param name="productId" value="10" />
-                            </p:link>
-                        </p:column>
-                    </p:row>
-
-                </p:panelGrid>
+                        </p:dataTable>
+                        
+                    </p:panel>
                 </h:form>
             </ui:define>
         </ui:composition>
