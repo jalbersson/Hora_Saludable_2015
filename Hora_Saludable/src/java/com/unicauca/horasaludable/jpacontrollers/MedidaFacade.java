@@ -34,17 +34,12 @@ public class MedidaFacade extends AbstractFacade<Medida> {
         super(Medida.class);
     }
     
-      public List<Medida> findUsuario(Long codigo)
+    public List<Medida> buscarMedidaUsuario(Long usuidentificacion)
     {
-        Query query = getEntityManager().createNamedQuery("Usuario.findByUsuidentificacion");
-        query.setParameter("codigo", codigo);
-        List<Usuario> resultList = query.getResultList();
-        List<Medida> listado = new ArrayList();
-        for(Usuario el: resultList)
-        {
-            listado.add((Medida) el.getMedidaList());
-        }
-        return listado;
+        Query query = getEntityManager().createNamedQuery("Medida.findByMedidasPorUsuario");
+        query.setParameter("usuidentificacion", usuidentificacion);
+        List<Medida> resultList = query.getResultList();
+        return resultList;
     }
     
 }

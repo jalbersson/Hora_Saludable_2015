@@ -5,59 +5,56 @@
  */
 package com.unicauca.horasaludable.managedbeans.medidas;
 
+
 import com.unicauca.horasaludable.entities.Medida;
-import com.unicauca.horasaludable.entities.Usuario;
+import com.unicauca.horasaludable.jpacontrollers.MedidaFacade;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author Jhonny Taborda
  */
 @ManagedBean(name = "consultaUsuarioMedidadController")
-@RequestScoped
-public class ConsultarUsuarioMedidaController {
+@ViewScoped
+public class ConsultarUsuarioMedidaController implements Serializable {
 
     @EJB
-    private com.unicauca.horasaludable.jpacontrollers.MedidaFacade ejbMedida;
-    @EJB
-    private com.unicauca.horasaludable.jpacontrollers.UsuarioFacade ejbUsuario;
+    private MedidaFacade ejbMedida;
+    private List<Medida> listaMedidas;
+    private Long identificacionUsuario;   
 
-    /**
-     * Creates a new instance of ConsultarUsuarioMedidaController
-     */
-    private Usuario usuario;
-
-    public Usuario getUsuario() {
-        return usuario;
+    
+    public ConsultarUsuarioMedidaController() 
+    {
+    }
+    
+    public List<Medida> getListaMedidas() 
+    {
+        return listaMedidas;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setListaMedidas(List<Medida> listaMedidas) 
+    {
+        this.listaMedidas = listaMedidas;
+    }
+    
+    public Long getIdentificacionUsuario() 
+    {
+        return identificacionUsuario;
     }
 
-    private List<Medida> listadoMedidas = null;
-
-    public List<Medida> getListadoMedidas() {
-        return ejbMedida.findAll();
+    public void setIdentificacionUsuario(Long identificacionUsuario) 
+    {
+        this.identificacionUsuario = identificacionUsuario;
     }
-
-    public void setListadoMedidas(List<Medida> listadoMedidas) {
-        this.listadoMedidas = listadoMedidas;
+    
+    public void buscarMedidasUsuario()
+    {
+        this.listaMedidas= this.ejbMedida.buscarMedidaUsuario(this.identificacionUsuario);
     }
-
-    public String buscarMedias() {
-        if (usuario == null) {
-            listadoMedidas = null;
-        } else {
-            listadoMedidas = ejbMedida.findUsuario(usuario.getUsuidentificacion());
-        }
-        return "/meidas/BuscarEstudianteLibrosAjax";
-    }
-
-    public ConsultarUsuarioMedidaController() {
-    }
-
+    
 }
