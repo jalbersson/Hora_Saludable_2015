@@ -6,9 +6,11 @@
 package com.unicauca.horasaludable.jpacontrollers;
 
 import com.unicauca.horasaludable.entities.Detalleasistencia;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,4 +30,18 @@ public class DetalleasistenciaFacade extends AbstractFacade<Detalleasistencia> {
         super(Detalleasistencia.class);
     }
     
+    public List<Detalleasistencia> obtenerAsisUsuid(int usuid){
+        try
+        {
+            String queryString = "SELECT t FROM Detalleasistencia t "+
+            "where t.usuario.usuid="+usuid;
+            Query query = getEntityManager().createQuery(queryString);  
+            //System.out.println("ERR"+Long.valueOf(usuid.intValue()+""));
+            //query.set("usuid", Long.valueOf(usuid.intValue()+""));
+            return query.getResultList();       
+        }finally 
+        {
+           // em.close();
+        }
+    }
 }

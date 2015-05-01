@@ -28,7 +28,7 @@
                     <h:form id="seleccionarUsuarios">
                         <h:panelGrid columns="3">        
                                 
-                                    <h:outputLabel class="CampoLabel" value="Seleccione Tipo Usuario:" />                      
+                            <p:outputLabel styleClass="CampoLabel" value="Seleccione Tipo Usuario:" />                      
                                     <p:selectOneMenu  id="tipoUsuario" style="width:150px;font-size: 15px;" required="true"
                                     requiredMessage="Seleccione un Tipo Usuario."
                                     valueChangeListener="#{mostrarUsuariosController.cambiarTipoUsuario}"
@@ -51,7 +51,7 @@
                         <br/>
                     <h:form id="tablasUsuarios">
                         <h:panelGrid style="margin-bottom: 10px;" rendered="#{mostrarUsuariosController.habilitarFuncionarios}" columns="3">                      
-                            <p:outputLabel class="CampoLabel" value="Nombre del Funcionario:" />
+                            <h:outputLabel class="CampoLabel" value="Nombre del Funcionario:" />
                             <p:inputText style="width: 240px;" value="#{mostrarUsuariosController.nombreFuncionario}"  >
                                 <p:ajax event="keyup" update="tablaFuncionario" listener="#{mostrarUsuariosController.buscarPorNombreFuncionario}" />                                
                             </p:inputText>                                                   
@@ -94,7 +94,7 @@
                         
                         
                         <h:panelGrid style="margin-bottom: 10px;" rendered="#{mostrarUsuariosController.habilitarEstudiantes}" columns="3">                      
-                            <p:outputLabel class="CampoLabel" value="Nombre del Estudiante:" />
+                            <h:outputLabel class="CampoLabel" value="Nombre del Estudiante:" />
                             <p:inputText style="width: 240px;" value="#{mostrarUsuariosController.nombreEstudiante}"  >
                                 <p:ajax event="keyup" update="tablaEstudiante" listener="#{mostrarUsuariosController.buscarPorNombreEstudiante}" />                                
                             </p:inputText>                       
@@ -133,7 +133,7 @@
                         </p:panel>
                         
                         <h:panelGrid style="margin-bottom: 10px;" rendered="#{mostrarUsuariosController.habilitarFamiliares}" columns="3">                      
-                            <p:outputLabel class="CampoLabel" value="Nombre del Familiar:" />
+                            <h:outputLabel class="CampoLabel" value="Nombre del Familiar:" />
                             <p:inputText style="width: 240px;" value="#{mostrarUsuariosController.nombreFamiliar}"  >
                                 <p:ajax event="keyup" update="tablaFamiliar" listener="#{mostrarUsuariosController.buscarPorNombreFamiliar}" />                                
                             </p:inputText>                        
@@ -262,7 +262,7 @@
                                 </p:row>                           
                                 <p:row id="filaFacultad" rendered="#{registrarUsuarioController.camposRegistroEstudiante}">
                                     <p:column style="text-align:right">
-                                        <h:outputLabel class="CampoLabel" for="facultad" value="Facultad: *" />
+                                        <p:outputLabel styleClass="CampoLabel" for="facultad" value="Facultad: *" />
                                     </p:column>
                                     <p:column>
                                         <p:selectOneMenu id="facultad"  style="width:160px"  
@@ -281,7 +281,7 @@
                                 
                                 <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
                                     <p:column style="text-align:right">
-                                        <h:outputLabel class="CampoLabel" for="empleado" value="Empleado: *" />
+                                        <p:outputLabel styleClass="CampoLabel"  value="Empleado: *" />
                                     </p:column>
                                     <p:column>                                
                                         <p:commandButton value="seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic" 
@@ -293,7 +293,7 @@
                                 </p:row>
                                     <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
                                     <p:column style="text-align:right;height: 30px;">
-                                        <h:outputLabel class="CampoLabel" for="nombreFuncionario" value="Nombre Funcionario: *" />
+                                        <p:outputLabel styleClass="CampoLabel" for="nombreFuncionario" value="Nombre Funcionario: *" />
                                     </p:column>
                                     <p:column>
                                         <p:outputLabel style="font-size:15px;" 
