@@ -43,20 +43,35 @@
                     <p:panel id="panelMedidas">
                         <p:dataTable var="medida" value="#{consultaUsuarioMedidadController.listaMedidas}">
                             
-                                <p:column headerText="Nombre">
-                                    #{medida.usuid.usunombres}
+                                <p:column headerText="Identificacion">
+                                   #{medida.usuid.usuidentificacion}
+                                </p:column>
+                                <p:column headerText="Apellidos">
+                                     
                                     #{medida.usuid.usuapellidos}
                                 </p:column>
-                                <p:column headerText="Perfil">
-                                    
+                                <p:column headerText="Nombres">
+                                     #{medida.usuid.usunombres}
                                 </p:column>
-                                <p:column headerText="Deporte">
-                                    
-                                </p:column>
-                                <p:column headerText="Acciones">
-                                    
-                                </p:column>
+                               
                             
+                            <p:column headerText="Cargo">
+                                #{medida.usuid.carid.carnombre}
+                                </p:column>
+                                <p:column headerText="Facultad">
+                                #{medida.usuid.uniid.uninombre}
+                                </p:column>
+                               <p:column headerText="Acciones" width="90">
+                                    <h:link id="ver" style="text-decoration: none; ">                                    
+                                        <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                    </h:link>
+                                    <h:link id="editar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                        <p:graphicImage style="width:20px;" library="img/usuarios" name="editar.png"/>
+                                    </h:link>
+                                    <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                        <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                    </h:link>
+                                </p:column> 
                             
                         </p:dataTable>
                         
