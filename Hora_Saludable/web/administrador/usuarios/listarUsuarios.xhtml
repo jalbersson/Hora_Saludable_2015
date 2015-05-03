@@ -68,14 +68,11 @@
                                 #{estudiantes.uniid.uninombre}
                             </p:column> 
                             <p:column headerText="Acciones" width="90">
-                                <h:link id="ver" style="text-decoration: none; ">                                    
+                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{verEditarUsuarioController.estudianteSeleccionado(estudiantes)}" >                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
-                                </h:link>
-                                <h:link id="editar" style="text-decoration: none;margin-left: 5px; ">                                    
-                                    <p:graphicImage style="width:20px;" library="img/usuarios" name="editar.png"/>
-                                </h:link>
+                                </p:commandLink>                                
                                 <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
-                                    <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                    <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>                                    
                                 </h:link>
                             </p:column>
                         </p:dataTable>
@@ -108,12 +105,9 @@
                                 #{familiar.conyugeid.carid.carnombre}
                             </p:column>
                             <p:column headerText="Acciones" width="90">
-                                <p:commandLink id="ver" style="text-decoration: none; "  >                                    
+                                <p:commandLink id="ver" style="text-decoration: none; " action="#{verEditarUsuarioController.familiarSeleccionado(familiar)}" >                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
-                                </p:commandLink>
-                                <h:link id="editar" style="text-decoration: none;margin-left: 5px; ">                                    
-                                    <p:graphicImage style="width:20px;" library="img/usuarios" name="editar.png"/>
-                                </h:link>
+                                </p:commandLink>                                
                                 <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
                                     <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
                                 </h:link>

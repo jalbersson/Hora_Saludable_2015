@@ -131,4 +131,112 @@ public class ValidarEdicionUsuarios implements Serializable
         }        
     }
     
+    public boolean validarTelefono(String telefono)
+    {  
+        if(!telefono.isEmpty())
+        {
+            
+            try
+            {
+                long campo= Long.parseLong(telefono);
+
+            }catch(Exception e)
+            {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo teléfono solo puede contener numeros.", "Campo teléfono solo puede contener números."));
+                return false;
+            }  
+            
+        }
+        return true;             
+    }
+    
+    public boolean validarNombreUsuario(String nombreUsuario,UsuarioFacade usuariosEJB)
+    {  
+        if(nombreUsuario.isEmpty())
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo nombre de usuario obligatorio.", "Campo nombre de usuario obligatorio."));
+            return false;
+        }
+        else
+        {                    
+            String caracter=nombreUsuario.charAt(0)+"";
+            int validacion=0;
+            try
+            {
+               int numero= Integer.parseInt(caracter);
+
+
+            }catch(Exception e)
+            {
+               validacion=1;
+            }
+
+            if(validacion==0)
+            {
+                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Campo nombre usuario no puede comenzar con un número.","Campo nombre usuario no puede comenzar con un número.")); 
+                return false;
+            }
+            else
+            {
+                if(nombreUsuario.length()>20)
+                {
+                    FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nombre de usuario no mas de 20 caracteres.","Nombre de usuario no mas de 20 caracteres.")); 
+                    return false;
+                }
+                else
+                {
+                    if(nombreUsuario.length()<3)
+                    {
+                        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nombre de usuario no menos de 3 caracteres.","Nombre de usuario no menos de 3 caracteres.")); 
+                        return false;
+                    }
+                    else
+                    {
+                        Pattern patron = Pattern.compile("[^A-Za-z_.ñÑ]");
+                        Matcher encaja = patron.matcher(nombreUsuario);        
+                        if(encaja.find())
+                        {
+                            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Solo se permiten caracteres alfanumericos, guiones bajos y puntos.","Solo se permiten caracteres alfanumericos, guiones bajos y puntos."));
+                            return false;
+                        }
+                        else
+                        {
+                            if(usuariosEJB.buscarPorNombreUsuario(nombreUsuario))
+                            {
+                                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nombre de usuario ya esta uso.","Nombre de usuario ya esta uso."));
+                                return false;  
+                            } 
+                            return true;
+                        }
+                    }
+                }
+            }
+        }        
+    }
+    public boolean validarContrasena(String contrasena)
+    {  
+        if(contrasena.isEmpty())
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo contraseña obligatorio.", "Campo contraseña obligatorio."));
+            return false;
+        }
+        else
+        {
+            if(contrasena.length()<6)
+            {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo contraseña minimo 6 caracteres.", "Campo contraseña minimo 6 caracteres."));
+                return false;
+            }
+            else
+            {
+                if(contrasena.length()>20)
+                {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo contraseña maximo 20 caracteres.", "Campo contraseña maximo 20 caracteres."));
+                    return false;
+                }                
+                return true;
+            }
+        }                    
+    }
+    
 }
