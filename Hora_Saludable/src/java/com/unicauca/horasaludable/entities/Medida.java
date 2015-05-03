@@ -6,6 +6,7 @@
 package com.unicauca.horasaludable.entities;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -62,6 +63,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Medida.findByMedsaltomaximo", query = "SELECT m FROM Medida m WHERE m.medsaltomaximo = :medsaltomaximo"),
     @NamedQuery(name = "Medida.findByMedsaltoreal", query = "SELECT m FROM Medida m WHERE m.medsaltoreal = :medsaltoreal")})
 public class Medida implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -473,5 +475,116 @@ public class Medida implements Serializable {
     public String toString() {
         return "com.unicauca.horasaludable.entities.Medida[ medid=" + medid + " ]";
     }
+
+    public double sumatoriadepliegues() {
+        return Redondear(medtriceps + medsubescapular + medsuprailiaco + medmuslo + medpantorilla + medabdominal);
+    }
+
+    public double porcentajeGrasa() {
+        double r;
+        if (usuid.getUsugenero().equals('M')) {
+            r = sumatoriadepliegues() * 0.097 + 3.64;
+        } else {
+            r = sumatoriadepliegues() * 0.1429 + 4.56;
+        }
+        return Redondear(r);
+    }
+
+    public double pesoGraso() {
+        return Redondear((medpeso * porcentajeGrasa()) / 100);
+    }
+
+    public double pesolibregrasa() {
+        return Redondear(medpeso - pesoGraso());
+    }
+
+    public double masamuscular() {
+        return Redondear(0);
+    }
+
+    public double pesoideal() {
+        return (0.75 * (155 - 150) + 50);   ///cambiar 155 por est
+    }
+
+    public double indicemasacorporal() {
+        return Redondear(medpeso / 2.89);
+    }
+
+    public double complexion() {
+        return Redondear(155 / medperimetromuneca);  ///cambiar 155 por est
+    }
+
+    public double tasametabolicabasal() {
+        double r;
+        if (usuid.getUsugenero().equals('M')) {
+            r = 66 + (13.8 * medpeso) + (5 * 155) - (6.8 * 55);   ///cambiar 55 por edad,155 por est
+        } else {
+            r = 655 + (9.6 * medpeso) + (1.7 * 155) - (4.7 * 55);   //cambiar 55 por edad,155 por est
+        }
+        return Redondear(r);
+    }
+
+    public double excesodepeso() {
+        return Redondear(medpeso - pesooptimo());
+    }
+
+    public double pesooptimo() {
+        return Redondear(pesolibregrasa() / 0.9);
+    }
+
+    public double masaesqcuerpo() {
+        return 0;
+    }
+
+    public double masatotalosea() {
+        return 0;
+    }
+
+    public double porcentajegrasaideal() {
+        return 0;
+    }
     
+    public double frecuenciaMaxima()
+            {
+           if(medpulso0>medpulso1)
+                 if(medpulso0>medpulso2)return medpulso0;
+                 else return medpulso2;
+           else if(medpulso1>medpulso2)return medpulso1;
+           else return medpulso2;
+    }
+    
+    public double rehabilitacion()
+          {
+            return  Redondear((frecuenciaMaxima() - medpulso0)*0.5 + medpulso0);              
+          }   
+    
+    public double quemadegrasa()           
+            {          
+                return  Redondear((frecuenciaMaxima() - medpulso0)*0.6 + medpulso0);              
+          }   
+    
+    public double desarrolloresistencia()           
+            {          
+                return  Redondear((frecuenciaMaxima() - medpulso0)*0.7 + medpulso0);              
+          }   
+    
+    public double desarrollopotenciaaerobica()           
+            {          
+                return  Redondear((frecuenciaMaxima() - medpulso0)*0.8 + medpulso0);              
+          } 
+    
+    public double aumentometanaerobico()           
+            {          
+                return  Redondear((frecuenciaMaxima() - medpulso0)*0.9 + medpulso0);              
+          } 
+    
+    public double Redondear(double numero) {
+        return Math.rint(numero * 100) / 100;
+    }
+    
+    public String obtenerFecha()
+          {
+              DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
+              return df.format(medfecha);                  
+          }  
 }

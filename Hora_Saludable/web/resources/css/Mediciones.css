@@ -13,15 +13,14 @@ and open the template in the editor.
 {
  width: auto;
  margin-top: 30px;
+ margin-left: 20px;
  float: left;
  
 }
 .fichapersonal tr,.fichapersonal td
 {
-  border-style: groove !important; 
-  border-color: #092169 !important;
+  border-color: white !important;
   background-color: #eaeacd;
-  
 }
 .subtitulotabla
 {
@@ -35,12 +34,13 @@ and open the template in the editor.
 
 .titulomediciones
 {
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     font-size: 35px;
     color: wheat;
     background-color: #CC1414;
     border-radius: 5px;
-    position: relative;
+    float: left;
 }
 
 .acciones
@@ -52,16 +52,17 @@ and open the template in the editor.
 .panelmedidas
 {
     margin-top: 25px;
+    margin-left: 25px;
     display: inline;
     float: left;
+    font-weight: bold;
 }
 .btncalcularmedidas
 {
     margin-top: 350px;
     display: inline;
     float: left;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 25px;
 }
 .imagenmedidas
 {
@@ -77,8 +78,8 @@ and open the template in the editor.
 .btnesaccionesmediciones
 {
     float: right;
-    margin-right: 50px;
-    margin-top: 50px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
 .tablas
@@ -95,4 +96,53 @@ and open the template in the editor.
     margin-top: 30px; 
     font-size: 19px;
     float: left;
+}
+
+.txtboxmed
+{
+    width:80px;
+}
+
+.histmedpanel
+{
+    margin-top: 25px !important;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.histmedpanel .ui-widget-content {
+    background-color: #FDFDE7;
+    color: black;
+}
+
+.paneleshistmed
+{
+    
+}
+
+.subtitulotablahist
+{
+    color: #092169;
+    font-size: 20px !important;
+}
+
+.migadepan
+{
+    background: #eaeacd;
+    margin-top: 50px;
+}
+
+.selectonemenuhist
+{
+    margin-top: 10px !important; 
+    width: 80% !important;
+    font-size: 13px !important;
+}
+
+.panelselectonemenuhist
+{
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -1,0 +1,378 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                titulo
+            </ui:define>
+
+            <ui:define name="CuadroDeBotonesSesion">
+                CuadroDeBotonesSesion
+            </ui:define>
+
+            <ui:define name="title">
+                <p:panel style="border: none;">
+                <h:form>
+                     <p:breadCrumb id="migaDirector" styleClass="migadepan">
+                       <p:menuitem value="Usuarios" url="../../index.xhtml" />
+                        <p:menuitem value="Usuarios" outcome="consultaTest" />
+                        <p:menuitem value="Gestion de Mediciones" outcome="GestionTest" />
+                        <p:menuitem value="Historial de Medidas" url="#" />
+                    </p:breadCrumb>
+                </h:form>
+                </p:panel>
+                <p:outputLabel styleClass="titulomediciones" value="Historial de Mediciones" />
+                <p:separator style="width: 100%;"/>
+            </ui:define>
+
+            <ui:define name="body">
+
+                <h:form>
+                
+                <p:panelGrid styleClass="fichapersonal">
+
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Nombre:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="Mario Alberto Posada Rincon" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="1061487921" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Perfil:" />
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel styleClass="fuentefichatabla" value="Docente" />
+                        </p:column>
+
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="M" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Peso:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="65 kg" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Talla:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="170 cm" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Deporte:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="Atletismo" />
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+
+                <p:panelGrid styleClass="histmedpanel">
+
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="2">                  
+                                <h:outputText id="tittest1" styleClass="subtitulotablahist" value="TEST FECHA : #{historialMedController.medhist1.obtenerFecha()}"/>
+                            </p:column>
+                            <p:column colspan="2">                  
+                                <h:outputText id="tittest2" styleClass="subtitulotablahist" value="TEST FECHA : #{historialMedController.medhist2.obtenerFecha()}"/>
+                            </p:column>  
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column colspan="2" style="padding-top: 10px;">
+                            <p:panelGrid columns="2" styleClass="panelselectonemenuhist">
+                                <f:facet name="header">
+                                    <p:outputLabel  value="Seleccionar Fecha:" style="font-size: 14px;"/>
+                                    <p:selectOneMenu value="#{historialMedController.medhist1}" converter="medidaConv" var="m" styleClass="selectonemenuhist" >
+                                        <f:selectItem itemLabel="Cambiar ..." itemValue="" />
+                                        <f:selectItems value="#{historialMedController.medidas}" var="med"
+                                                       itemLabel="#{med.obtenerFecha()}" itemValue="#{med}"/>
+                                        <p:column>
+                                            #{m.obtenerFecha()}                         
+                                        </p:column>
+                                        <p:ajax update="tittest1,tabmed1,tabres1"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                            </p:panelGrid>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:panelGrid columns="2" styleClass="panelselectonemenuhist">
+                                <f:facet name="header">
+                                    <p:outputLabel  value="Seleccionar Fecha:" style="font-size: 14px;"/>
+                                    <p:selectOneMenu value="#{historialMedController.medhist2}" converter="medidaConv" var="m" styleClass="selectonemenuhist" >
+                                        <f:selectItem itemLabel="Cambiar ..." itemValue="" />
+                                        <f:selectItems value="#{historialMedController.medidas}" var="med"
+                                                       itemLabel="#{med.obtenerFecha()}" itemValue="#{med}"/>
+                                        <p:column>
+                                            #{m.obtenerFecha()}                         
+                                        </p:column>
+                                        <p:ajax update="tittest2,tabmed2,tabres2"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                            </p:panelGrid>
+                            </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:panelGrid id="tabmed1" columns="2" styleClass="paneleshistmed" style="margin-top: -60px;">
+                                <f:facet name="header">
+                                    Variables
+                                </f:facet>
+
+                                <p:outputLabel value="Peso(kg): " />
+                                <p:outputLabel value="#{historialMedController.medhist1.medpeso}"   styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Triceps(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.medtriceps}"   styleClass="txtboxmed"/>
+
+                                <p:outputLabel value="Sub Escapular(cm): " />
+                                <p:outputLabel value="#{historialMedController.medhist1.medsubescapular}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Suprailiaco(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.medsuprailiaco}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel value="Abdominal(cm): " />
+                                <p:outputLabel value="#{historialMedController.medhist1.medabdominal}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Muslo(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.medmuslo}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Pantorrilla(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.medpantorilla}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Perimetro Muñeca(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.medperimetromuneca}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Perimetro Cabeza(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.medperimetrocabeza}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Diametro Biacromial(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.meddiametrobiacromial}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Diametro Biltiocristal(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.meddiametrobiltiocristal}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Diametro Humero(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.meddiametrohumero}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Diametro Femur(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.meddiametrofemur}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel value="Perimetro Brazo(cm): " />
+                                <p:outputLabel value="#{historialMedController.medhist1.medperimetrobrazo}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel value="Diametro Antebrazo(cm): " />
+                                <p:outputLabel value="#{historialMedController.medhist1.meddiametroantebrazo}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Perimetro Pantorrilla(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.medperimetropantorrilla}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Perimetro Caja Toraxica(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.medperimetrocajatoraxica}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Perimetro Muslo(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist1.medperimetromuslo}"  styleClass="txtboxmed"/>
+
+                            </p:panelGrid>
+                            </p:column>
+                         <p:column>
+                            <p:panelGrid id="tabres1" columns="2" styleClass="paneleshistmed" >
+                                <f:facet name="header">
+                                    Resultado
+                                </f:facet>
+
+                                <p:outputLabel  value="Sumatoria Pliegues(cm):" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.sumatoriadepliegues()}" />
+                                <p:outputLabel  value="Porcentaje Grasa(cm):" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.porcentajeGrasa()}"/>
+                                <p:outputLabel  value="Peso Graso(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.pesoGraso()}" />
+                                <p:outputLabel  value="Peso Libre grasa(kg):" />
+                                <p:outputLabel   value="#{historialMedController.medhist1.pesolibregrasa()}" />
+                                <p:outputLabel  value="Masa Muscular(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.masamuscular()}"/>
+                                <p:outputLabel  value="Peso Ideal(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.pesoideal()}"/>
+                                <p:outputLabel  value="Indice de Masa Corporal" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.indicemasacorporal()}"/>
+                                <p:outputLabel  value="Complexion:" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.complexion()}"/>
+                                <p:outputLabel  value="Tasa Metabolica Basal:" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.tasametabolicabasal()}"/>
+                                <p:outputLabel  value="Exceso de Peso(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.excesodepeso()}"/>
+                                <p:outputLabel  value="Peso Optimo(kg):" />
+                                <p:outputLabel   value="#{historialMedController.medhist1.pesooptimo()}" />
+                                <p:outputLabel  value="Masa Esq. Cuerpo(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.masaesqcuerpo()}"/>
+                                <p:outputLabel  value="Masa Total Osea(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.masatotalosea()}"/>
+                                <p:outputLabel  value="% Grasa Ideal" />
+                                <p:outputLabel    value="#{historialMedController.medhist1.porcentajegrasaideal()}"/>
+                                <p:separator />
+                                <p:separator />
+                                <p:outputLabel  value="% Grasa" />
+                                <p:outputLabel   value="----"  />
+                                <p:outputLabel  value="Complexion" />
+                                <p:outputLabel   value="----"  />
+                                <p:outputLabel  value="Indice de Masa Corporal" />
+                                <p:outputLabel   value="----"  />
+
+                            </p:panelGrid>
+                                
+                        </p:column>
+
+                        <p:column>
+
+                            <p:panelGrid id="tabmed2" columns="2" styleClass="paneleshistmed" style="margin-top: -60px;">
+                                <f:facet name="header">
+                                    Variables
+                                </f:facet>
+
+                                <p:outputLabel value="Peso(kg): " />
+                                <p:outputLabel value="#{historialMedController.medhist2.medpeso}"   styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Triceps(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist2.medtriceps}"   styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Sub Escapular(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist2.medsubescapular}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Suprailiaco(cm): " />
+                                <p:outputLabel   value="#{historialMedController.medhist2.medsuprailiaco}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel value="Abdominal(cm): " />
+                                <p:outputLabel value="#{historialMedController.medhist2.medabdominal}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Muslo(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist2.medmuslo}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Pantorrilla(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist2.medpantorilla}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel value="Perimetro Muñeca(cm): " />
+                                <p:outputLabel value="#{historialMedController.medhist2.medperimetromuneca}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel value="Perimetro Cabeza(cm): " />
+                                <p:outputLabel value="#{historialMedController.medhist2.medperimetrocabeza}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Diametro Biacromial(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist2.meddiametrobiacromial}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel value="Diametro Biltiocristal(cm): " />
+                                <p:outputLabel value="#{historialMedController.medhist2.meddiametrobiltiocristal}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Diametro Humero(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist2.meddiametrohumero}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel value="Diametro Femur(cm): " />
+                                <p:outputLabel value="#{historialMedController.medhist2.meddiametrofemur}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Perimetro Brazo(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist2.medperimetrobrazo}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Diametro Antebrazo(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist2.meddiametroantebrazo}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Perimetro Pantorrilla(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist2.medperimetropantorrilla}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel value="Perimetro Caja Toraxica(cm): " />
+                                <p:outputLabel value="#{historialMedController.medhist2.medperimetrocajatoraxica}"  styleClass="txtboxmed"/>
+
+                                <p:outputLabel  value="Perimetro Muslo(cm): " />
+                                <p:outputLabel  value="#{historialMedController.medhist2.medperimetromuslo}"  styleClass="txtboxmed"/>
+
+                            </p:panelGrid>
+                        </p:column>
+                        <p:column>
+                            <p:panelGrid id="tabres2" columns="2" styleClass="paneleshistmed" style="margin-left: 5px;">
+                                <f:facet name="header">
+                                    Resultado
+                                </f:facet>
+
+                                <p:outputLabel  value="Sumatoria Pliegues(cm):" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.sumatoriadepliegues()}" />
+                                <p:outputLabel  value="Porcentaje Grasa(cm):" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.porcentajeGrasa()}"/>
+                                <p:outputLabel  value="Peso Graso(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.pesoGraso()}" />
+                                <p:outputLabel  value="Peso Libre grasa(kg):" />
+                                <p:outputLabel   value="#{historialMedController.medhist2.pesolibregrasa()}" />
+                                <p:outputLabel  value="Masa Muscular(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.masamuscular()}"/>
+                                <p:outputLabel  value="Peso Ideal(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.pesoideal()}"/>
+                                <p:outputLabel  value="Indice de Masa Corporal" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.indicemasacorporal()}"/>
+                                <p:outputLabel  value="Complexion:" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.complexion()}"/>
+                                <p:outputLabel  value="Tasa Metabolica Basal:" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.tasametabolicabasal()}"/>
+                                <p:outputLabel  value="Exceso de Peso(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.excesodepeso()}"/>
+                                <p:outputLabel  value="Peso Optimo(kg):" />
+                                <p:outputLabel   value="#{historialMedController.medhist2.pesooptimo()}" />
+                                <p:outputLabel  value="Masa Esq. Cuerpo(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.masaesqcuerpo()}"/>
+                                <p:outputLabel  value="Masa Total Osea(kg):" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.masatotalosea()}"/>
+                                <p:outputLabel  value="% Grasa Ideal" />
+                                <p:outputLabel    value="#{historialMedController.medhist2.porcentajegrasaideal()}"/>
+                                <p:separator />
+                                <p:separator />
+                                <p:outputLabel  value="% Grasa" />
+                                <p:outputLabel   value="----"  />
+                                <p:outputLabel  value="Complexion" />
+                                <p:outputLabel   value="----"  />
+                                <p:outputLabel  value="Indice de Masa Corporal" />
+                                <p:outputLabel   value="----"  />
+
+                            </p:panelGrid>
+                        </p:column>    
+
+                    </p:row>
+                     
+
+                </p:panelGrid>
+
+            </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

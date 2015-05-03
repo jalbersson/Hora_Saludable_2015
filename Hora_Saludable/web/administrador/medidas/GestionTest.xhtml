@@ -19,8 +19,18 @@
             </ui:define>
 
             <ui:define name="title">
-                <p:outputLabel styleClass="titulomediciones" value="Gestion de Test" />
-                <p:separator />
+                <p:panel style="border: none;">
+                <h:form>
+                    <p:breadCrumb id="migaDirector" styleClass="migadepan">
+                        <p:menuitem value="Usuarios" url="../../index.xhtml" />
+                        <p:menuitem value="Usuarios" outcome="consultaTest" />
+                        <p:menuitem value="Gestion de Mediciones" outcome="GestionTest" />
+                        <p:menuitem value="Test" url="#" />
+                    </p:breadCrumb>
+                </h:form>
+                </p:panel>
+                <p:outputLabel styleClass="titulomediciones" value="Gestion de Mediciones" />
+                <p:separator style="width: 100%;"/>
 
             </ui:define>
 
@@ -105,6 +115,7 @@
                         </p:column>
                     </p:row>
                 </p:panelGrid>
+                 <p:growl for="msggestion" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
                 <div>
                     <p:panelGrid columns="2" styleClass="Menuagregartest">
                         <f:facet name="header">

@@ -46,5 +46,31 @@ public class MedidaFacade extends AbstractFacade<Medida> {
         }
         return listado;
     }
+      
+     public List<Medida> buscarporMedId(int mediId) {
+        try {
+            String queryString = "SELECT t FROM Medida t "
+                    + "where t.medid=" + mediId;
+            Query query = getEntityManager().createQuery(queryString);
+            //System.out.println("ERR"+Long.valueOf(usuid.intValue()+""));
+            //query.set("usuid", Long.valueOf(usuid.intValue()+""));
+            return query.getResultList();
+        } finally {
+            // em.close();
+        }
+     }
+     
+     public List<Medida> buscarporUsuid(int usuid) {
+        try {
+            String queryString = "SELECT *, DATE_FORMAT(MEDFECHA,'%d/%m/%Y %H:%i:%s') AS fec FROM MEDIDA"
+                    + " WHERE usuid=" + usuid+"  ORDER BY fec DESC";
+            Query query = getEntityManager().createNativeQuery(queryString,Medida.class);
+            //System.out.println("ERR"+Long.valueOf(usuid.intValue()+""));
+            //query.set("usuid", Long.valueOf(usuid.intValue()+""));
+            return query.getResultList();
+        } finally {
+            // em.close();
+        }
+     }
     
 }
