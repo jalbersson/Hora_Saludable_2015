@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <p:dialog modal="true"  widgetVar="verEditarUsuario" closable="true">
+            <p:messages autoUpdate="true" closable="true" />
+            <div style="float:left">
+                <h:form id="formularioFoto">                    
+                    <p:panelGrid styleClass="panelgrid" id="panelgridusuario">
+                        <p:row>
+                            <p:column colspan="3" >
+                                <p:outputLabel style="font-size: 20px;" value="Foto de Perfil"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>                                
+                            </p:column>
+                            <p:column  rendered="#{verEditarUsuarioController.campoFoto}">                                
+                                <p:graphicImage  width="100" height="100" library="#{verEditarUsuarioController.rutaFoto}" name="#{verEditarUsuarioController.usuario.usufoto}"
+                                                 />
+                            </p:column>
+                            <p:column rendered="#{verEditarUsuarioController.campoFoto}">
+                                <p:commandLink style="color: blue;" action="#{verEditarUsuarioController.mostraSubirFoto()}" value="Cambiar"/>                                                                 
+                            </p:column>
+                            <p:column  rendered="#{verEditarUsuarioController.camposubidaFoto}">
+                                <p:fileUpload  fileUploadListener="#{verEditarUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                               label="Cargar" auto="true"  
+                                               sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                               onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
+                            </p:column>
+                            <p:column rendered="#{verEditarUsuarioController.camposubidaFoto}">
+                                <p:outputLabel value="#{verEditarUsuarioController.foto.fileName}"/>
+                            </p:column>
+
+                        </p:row>
+
+                    </p:panelGrid>            
+                </h:form> 
+            </div>
+            <div style="float:left;margin-top: 50px;">
+                <h:form id="formularioEditarFoto">
+                    <p:commandLink rendered="#{verEditarUsuarioController.camposubidaFoto}"
+                                   action="#{verEditarUsuarioController.actualizarFoto()}"
+                                   style="color:blue;"  value="Aceptar"
+                                   onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
+                    <p:commandLink rendered="#{verEditarUsuarioController.camposubidaFoto}" 
+                                   style="margin-left:10px; color:blue;"  value="Cancelar" action="#{verEditarUsuarioController.cancelarSubirFoto()}"
+                                   onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
+                </h:form>
+            </div>
+            <div style="clear: both">
+                
+            </div>
+            <h:form id="formularioDatosPersonales">
+                <p:panelGrid styleClass="panelgrid">
+                    <p:row>
+                        <p:column colspan="3" >
+                            <p:outputLabel style="font-size: 20px;" value="Datos Personales"/>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.campoFechaNacimiento}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Fecha de Nacimiento:(aaaa-mm-dd) "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{verEditarUsuarioController.sdf.format(verEditarUsuarioController.usuario.usufechanacimiento)}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandLink style="color:blue;" value="Modificar" action="#{verEditarUsuarioController.mostrarModificarFechaNacimiento()}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.campoModificarFechaNacimiento}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Fecha de Nacimiento:(aaaa-mm-dd) "/>
+                        </p:column>
+                        <p:column>
+                            <p:calendar value="#{verEditarUsuarioController.fechaNacimiento}" size="10"    
+                                                showOn="button" navigator="true" pattern="yyyy-MM-dd" 
+                                                />
+                        </p:column>
+                        <p:column>
+                            <p:commandLink style="color:blue;"  value="Aceptar" action="#{verEditarUsuarioController.actualizarFechaNacimiento()}"
+                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                            <p:commandLink style="margin-left: 10px;color:blue;"  value="Cancelar" action="#{verEditarUsuarioController.cancelarActualizarFechaNacimiento()}"
+                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.campoIdentificacion}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Número de Identificación: "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{verEditarUsuarioController.usuario.usuidentificacion}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandLink style="color:blue;" value="Modificar" action="#{verEditarUsuarioController.mostrarModificarIdentificacion()}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.campoModificarIdentificacion}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Número de Identificación: "/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{verEditarUsuarioController.identificacion}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandLink style="color:blue;"  value="Aceptar" action="#{verEditarUsuarioController.actualizarIdentificacion()}"
+                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                            <p:commandLink style="margin-left: 10px;color:blue;"  value="Cancelar" action="#{verEditarUsuarioController.cancelarActualizarIdentificacion()}"
+                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.campoNombre}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Nombre: "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{verEditarUsuarioController.usuario.usunombres}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandLink style="color: blue;" value="Modificar" action="#{verEditarUsuarioController.mostrarModifiarNombre()}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.campoModificarNombre}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Nombre: "/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{verEditarUsuarioController.nombres}"/>  
+                        </p:column>
+                        <p:column>
+                            <p:commandLink style="color: blue;" value="Aceptar" action="#{verEditarUsuarioController.actualizarNombre()}"
+                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                            <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                           action="#{verEditarUsuarioController.cancelarActualizarNombre()}"
+                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.campoApellidos}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Apellidos: "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{verEditarUsuarioController.usuario.usuapellidos}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandLink style="color: blue;" value="Modificar" action="#{verEditarUsuarioController.mostrarModificarApellidos()}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.campoModificarApellidos}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Apellidos: "/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{verEditarUsuarioController.apellidos}"/>  
+                        </p:column>
+                        <p:column>
+                            <p:commandLink style="color: blue;" value="Aceptar" action="#{verEditarUsuarioController.actualizarApellidos()}"
+                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                            <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                           action="#{verEditarUsuarioController.cancelarActualizarApellidos()}"
+                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                        </p:column>
+                    </p:row> 
+                    <p:row rendered="#{verEditarUsuarioController.campoCorreo}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Correo Electróncio: "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{verEditarUsuarioController.usuario.usuemail}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandLink style="color: blue;" value="Modificar" action="#{verEditarUsuarioController.mostrarModificarCorreo()}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.campoModificarCorreo}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Correo Electróncio: "/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{verEditarUsuarioController.correo}"/>  
+                        </p:column>
+                        <p:column>
+                            <p:commandLink style="color: blue;" value="Aceptar" action="#{verEditarUsuarioController.actualizarCorreo()}"
+                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                            <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                           action="#{verEditarUsuarioController.cancelarActualizarCorreo()}"
+                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                        </p:column>
+                    </p:row> 
+                </p:panelGrid>
+            </h:form>            
+        </p:dialog>
+    </ui:composition>   
+</html>

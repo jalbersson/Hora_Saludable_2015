@@ -452,6 +452,7 @@ public class RegistrarUsuarioController implements Serializable {
                this.usuario.setUsuidentificacion(Long.parseLong(this.numeroIdentificacion));
                this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));
                this.usuario.setConyugeid(this.funcionario);
+               this.usuario.setUsufoto("vacio.jpg");
                this.usuarioEJB.create(this.usuario);            
                
                RequestContext requestContext = RequestContext.getCurrentInstance();
@@ -486,7 +487,8 @@ public class RegistrarUsuarioController implements Serializable {
            }
            
            this.usuario.setUsuidentificacion(Long.parseLong(this.numeroIdentificacion));
-           this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));           
+           this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));
+           this.usuario.setUsufoto("vacio.jpg");
            this.usuarioEJB.create(this.usuario);            
            
            

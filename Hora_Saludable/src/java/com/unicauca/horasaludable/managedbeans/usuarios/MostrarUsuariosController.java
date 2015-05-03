@@ -15,7 +15,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ValueChangeEvent;
-
 /**
  *
  * @author geovanny
@@ -37,7 +36,7 @@ public class MostrarUsuariosController implements Serializable {
     private boolean habilitarFamiliares;
     private String nombreFuncionario;
     private String nombreEstudiante;
-    private String nombreFamiliar; 
+    private String nombreFamiliar;
     
     public MostrarUsuariosController() 
     {
@@ -192,8 +191,8 @@ public class MostrarUsuariosController implements Serializable {
             this.habilitarEstudiantes=true;
             this.listaestudiantes=this.usuarioEJB.buscarPorEstudiantes();
         }
-    }
-    
+    }    
+       
     public void buscarPorNombreFuncionario()
     {
         this.listaFuncionarios=usuarioEJB.busacarPorNombreFuncionario(this.nombreFuncionario);

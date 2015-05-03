@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <h:form id="tablasUsuarios">
+                    <h:panelGrid style="margin-bottom: 10px;" rendered="#{mostrarUsuariosController.habilitarFuncionarios}" columns="3">                      
+                        <h:outputLabel class="CampoLabel" value="Nombre del Funcionario:" />
+                        <p:inputText style="width: 240px;" value="#{mostrarUsuariosController.nombreFuncionario}"  >
+                            <p:ajax event="keyup" update="tablaFuncionario" listener="#{mostrarUsuariosController.buscarPorNombreFuncionario}" />                                
+                        </p:inputText>                                                   
+                    </h:panelGrid>
+                    <p:panel id="tablaFuncionario" rendered="#{mostrarUsuariosController.habilitarFuncionarios}">                                            
+                        <p:dataTable  var="funcionario" value="#{mostrarUsuariosController.listaFuncionarios}"
+                                      paginator="true" rows="10"  
+                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                      rowsPerPageTemplate="5,10,15">
+
+                            <p:column headerText="No. Identificacion" width="100">                               
+                                    #{funcionario.usuidentificacion}
+                            </p:column> 
+                            <p:column headerText="Nombres">
+                                #{funcionario.usunombres}
+                            </p:column>
+                            <p:column headerText="Apellidos">
+                                #{funcionario.usuapellidos}
+                            </p:column>                             
+                            <p:column headerText="Cargo">
+                                #{funcionario.carid.carnombre}
+                            </p:column>
+                            <p:column headerText="Facultad">
+                                #{funcionario.uniid.uninombre}
+                            </p:column>
+                            <p:column headerText="Acciones" width="90">
+                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{verEditarUsuarioController.funcionarioSeleccionado(funcionario)}">                                    
+                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                </p:commandLink>                                
+                                <p:commandLink id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                </p:commandLink>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                    <h:panelGrid style="margin-bottom: 10px;" rendered="#{mostrarUsuariosController.habilitarEstudiantes}" columns="3">                      
+                        <h:outputLabel class="CampoLabel" value="Nombre del Estudiante:" />
+                        <p:inputText style="width: 240px;" value="#{mostrarUsuariosController.nombreEstudiante}"  >
+                            <p:ajax event="keyup" update="tablaEstudiante" listener="#{mostrarUsuariosController.buscarPorNombreEstudiante}" />                                
+                        </p:inputText>                       
+                    </h:panelGrid>
+                    <p:panel id="tablaEstudiante" rendered="#{mostrarUsuariosController.habilitarEstudiantes}">
+                        <p:dataTable  var="estudiantes" value="#{mostrarUsuariosController.listaestudiantes}"
+                                      paginator="true" rows="10"  
+                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                      rowsPerPageTemplate="5,10,15">
+
+                            <p:column headerText="No. Identificacion" width="100">                               
+                                    #{estudiantes.usuidentificacion}
+                            </p:column> 
+                            <p:column headerText="Nombres">
+                                #{estudiantes.usunombres}
+                            </p:column>
+                            <p:column headerText="Apellidos">
+                                #{estudiantes.usuapellidos}
+                            </p:column>                            
+                            <p:column headerText="Facultad">
+                                #{estudiantes.uniid.uninombre}
+                            </p:column> 
+                            <p:column headerText="Acciones" width="90">
+                                <h:link id="ver" style="text-decoration: none; ">                                    
+                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                </h:link>
+                                <h:link id="editar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px;" library="img/usuarios" name="editar.png"/>
+                                </h:link>
+                                <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                </h:link>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                    <h:panelGrid style="margin-bottom: 10px;" rendered="#{mostrarUsuariosController.habilitarFamiliares}" columns="3">                      
+                        <h:outputLabel class="CampoLabel" value="Nombre del Familiar:" />
+                        <p:inputText style="width: 240px;" value="#{mostrarUsuariosController.nombreFamiliar}"  >
+                            <p:ajax event="keyup" update="tablaFamiliar" listener="#{mostrarUsuariosController.buscarPorNombreFamiliar}" />                                
+                        </p:inputText>                        
+                    </h:panelGrid>
+                    <p:panel id="tablaFamiliar" rendered="#{mostrarUsuariosController.habilitarFamiliares}">
+                        <p:dataTable  var="familiar" value="#{mostrarUsuariosController.listaFamiliares}"
+                                      paginator="true" rows="10"  
+                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                      rowsPerPageTemplate="5,10,15">
+
+                            <p:column headerText="No. Identificacion" width="100">                               
+                                    #{familiar.usuidentificacion}
+                            </p:column> 
+                            <p:column headerText="Nombres">
+                                #{familiar.usunombres}
+                            </p:column>
+                            <p:column headerText="Apellidos">
+                                #{familiar.usuapellidos}
+                            </p:column> 
+                            <p:column headerText="Nombre Funcionario">
+                                #{familiar.conyugeid.usunombres} #{familiar.conyugeid.usuapellidos}
+                            </p:column>
+                            <p:column headerText="Cargo Funcionario">
+                                #{familiar.conyugeid.carid.carnombre}
+                            </p:column>
+                            <p:column headerText="Acciones" width="90">
+                                <p:commandLink id="ver" style="text-decoration: none; "  >                                    
+                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                </p:commandLink>
+                                <h:link id="editar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px;" library="img/usuarios" name="editar.png"/>
+                                </h:link>
+                                <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                </h:link>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+        
+    </ui:composition>    
+</html>
+
