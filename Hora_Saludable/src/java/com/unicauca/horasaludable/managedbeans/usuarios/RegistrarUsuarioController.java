@@ -328,7 +328,9 @@ public class RegistrarUsuarioController implements Serializable {
        UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());
        context.setViewRoot(viewRoot);       
        context.renderResponse();          
-       requestContext.update("form:panel");       
+       requestContext.update("form:panel");
+       requestContext.update("seleccionarUsuarios");
+       requestContext.update("tablasUsuarios");
        requestContext.execute("PF('RegistrarUsuario').show()");
     }
     public void cambiarTipoUsuario(ValueChangeEvent e)
@@ -395,10 +397,10 @@ public class RegistrarUsuarioController implements Serializable {
     {
         return unidadAcademicaEJB.findBYFacultades();
     }
-    public void  buscarPorNombreOApellidos()
+    public void  buscarPorNombreFuncionario()
     {
         
-        this.listaFuncionarios=usuarioEJB.busacarPorNombreOApellidos(this.nombreOApellidos.toLowerCase());
+        this.listaFuncionarios=usuarioEJB.busacarPorNombreFuncionario(this.nombreOApellidos.toLowerCase());
         
     }
     
@@ -450,6 +452,7 @@ public class RegistrarUsuarioController implements Serializable {
                this.usuario.setUsuidentificacion(Long.parseLong(this.numeroIdentificacion));
                this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));
                this.usuario.setConyugeid(this.funcionario);
+               this.usuario.setUsufoto("vacio.jpg");
                this.usuarioEJB.create(this.usuario);            
                
                RequestContext requestContext = RequestContext.getCurrentInstance();
@@ -484,7 +487,8 @@ public class RegistrarUsuarioController implements Serializable {
            }
            
            this.usuario.setUsuidentificacion(Long.parseLong(this.numeroIdentificacion));
-           this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));           
+           this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));
+           this.usuario.setUsufoto("vacio.jpg");
            this.usuarioEJB.create(this.usuario);            
            
            

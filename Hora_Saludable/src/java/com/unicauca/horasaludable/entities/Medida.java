@@ -61,7 +61,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Medida.findByMedflexibilidad", query = "SELECT m FROM Medida m WHERE m.medflexibilidad = :medflexibilidad"),
     @NamedQuery(name = "Medida.findByMedembergadura", query = "SELECT m FROM Medida m WHERE m.medembergadura = :medembergadura"),
     @NamedQuery(name = "Medida.findByMedsaltomaximo", query = "SELECT m FROM Medida m WHERE m.medsaltomaximo = :medsaltomaximo"),
-    @NamedQuery(name = "Medida.findByMedsaltoreal", query = "SELECT m FROM Medida m WHERE m.medsaltoreal = :medsaltoreal")})
+    @NamedQuery(name = "Medida.findByMedsaltoreal", query = "SELECT m FROM Medida m WHERE m.medsaltoreal = :medsaltoreal"),
+    @NamedQuery(name = "Medida.findByMedidasPorUsuario", query = "SELECT m FROM Medida m WHERE m.usuid.usuidentificacion = :usuidentificacion"),
+    @NamedQuery(name = "Medida.findByporApellido", query = "SELECT m FROM Medida m WHERE m.usuid.usuapellidos = :usuapellidos")})
 public class Medida implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,8 +1,10 @@
 
 package com.unicauca.horasaludable.validadores;
 
+import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -13,7 +15,8 @@ import javax.faces.validator.ValidatorException;
 @FacesValidator(value="ValidarCampoCorreoElectronico")
 public class ValidarCampoCorreoElectronico implements Validator
 {
-
+    @EJB
+    private UsuarioFacade usuarioEJB;
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException 
     {
@@ -25,6 +28,14 @@ public class ValidarCampoCorreoElectronico implements Validator
         {
             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Formato de Correo Invalido.","Formato de Correo Invalido.");
             throw new ValidatorException(msg);
+        }
+        else
+        {
+            if(usuarioEJB.buscarPorEmail(texto))
+            {
+                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Correo electrónico ya se encuentra registrado.","Correo electrónico ya se encuentra registrado.");
+                throw new ValidatorException(msg);
+            }
         }
         
     }

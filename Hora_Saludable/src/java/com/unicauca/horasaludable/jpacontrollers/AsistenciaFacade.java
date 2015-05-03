@@ -6,9 +6,12 @@
 package com.unicauca.horasaludable.jpacontrollers;
 
 import com.unicauca.horasaludable.entities.Asistencia;
+import com.unicauca.horasaludable.entities.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +29,14 @@ public class AsistenciaFacade extends AbstractFacade<Asistencia> {
 
     public AsistenciaFacade() {
         super(Asistencia.class);
+    }
+    
+    public List<Usuario> buscarporUsuid(int usuid)
+    {      
+       Query query = getEntityManager().createNamedQuery("Usuario.findByUsuid");
+       query.setParameter("usuid", usuid);
+       List<Usuario> resultList=query.getResultList();
+       return resultList;
     }
     
 }
