@@ -26,6 +26,15 @@ public class ConsultarUsuarioMedidaController implements Serializable {
     private MedidaFacade ejbMedida;
     private List<Medida> listaMedidas;
     private Long identificacionUsuario;   
+    private String porApellido;
+
+    public String getPorApellido() {
+        return porApellido;
+    }
+
+    public void setPorApellido(String porApellido) {
+        this.porApellido = porApellido;
+    }
 
     
     public ConsultarUsuarioMedidaController() 
@@ -56,5 +65,9 @@ public class ConsultarUsuarioMedidaController implements Serializable {
     {
         this.listaMedidas= this.ejbMedida.buscarMedidaUsuario(this.identificacionUsuario);
     }
-    
+ public void buscarporApellido()
+    {
+        this.listaMedidas= this.ejbMedida.buscarporApellido(this.porApellido);
+    }
+ 
 }

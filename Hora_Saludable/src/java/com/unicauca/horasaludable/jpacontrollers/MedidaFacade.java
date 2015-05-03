@@ -41,5 +41,13 @@ public class MedidaFacade extends AbstractFacade<Medida> {
         List<Medida> resultList = query.getResultList();
         return resultList;
     }
-    
+
+    public List<Medida> buscarporApellido(String porApellido) 
+    {
+        Query query = getEntityManager().createNamedQuery("Medida.findByporApellido");
+        query.setParameter("usuapellidos", porApellido);
+        List<Medida> resultList2 = query.getResultList();
+        return resultList2;
+    }
+ 
 }

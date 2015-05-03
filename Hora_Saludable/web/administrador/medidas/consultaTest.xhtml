@@ -22,93 +22,82 @@
 
 
                 </div>
-
-               
-                   
             </ui:define>
 
-            
-            
+
+
             <ui:define name="body"> 
                 <h:form>
-                    
+
                     <p:panel id="panel" header="Consultas">
                         <p:messages id="msgs" />
-                        <h:panelGrid columns="4" cellpadding="7">
+                            <h:panelGrid columns="3" cellpadding="7">
 
 
                             <p:outputLabel value="Consultar Por Identificacion" />
-                              <p:inputText value="#{consultaUsuarioMedidadController.identificacionUsuario}" >
-                            </p:inputText>    
-                               <p:commandButton  value="Ejecutar Consulta" 
+                            <p:inputText value="#{consultaUsuarioMedidadController.identificacionUsuario}" >
+                            </p:inputText>                         
+                            <p:commandButton  value="Ejecutar Consulta" 
                                               action="#{consultaUsuarioMedidadController.buscarMedidasUsuario()}"
                                               update="panelMedidas">
                                 
-                            </p:commandButton>   
+                            </p:commandButton>     
                             
-                            
-                            <h:message for="identificacion" />
-                            
-                            
-                             <p:outputLabel value="Primer Apellido" />
-                              <p:inputText value="#{consultaUsuarioMedidadController.identificacionUsuario}" >
-                            </p:inputText>    
-                               <p:commandButton  value="Ejecutar Consulta" 
-                                              action="#{consultaUsuarioMedidadController.buscarMedidasUsuario()}"
+                           <p:outputLabel value="Consultar Por Apellidos" />
+                           <p:inputText value="#{consultaUsuarioMedidadController.porApellido}" >
+                            </p:inputText>                         
+                            <p:commandButton  value="Ejecutar Consulta" 
+                                              action="#{consultaUsuarioMedidadController.buscarporApellido()}"
                                               update="panelMedidas">
                                 
-                            </p:commandButton>  
-                                    <h:message for="identificacion" />
-                             <p:outputLabel value="Primer Apellido y Nombre" />
-                              <p:inputText value="#{consultaUsuarioMedidadController.identificacionUsuario}" >
-                            </p:inputText>    
-                               <p:commandButton  value="Ejecutar Consulta" 
-                                              action="#{consultaUsuarioMedidadController.buscarMedidasUsuario()}"
-                                              update="panelMedidas">
-                                
-                            </p:commandButton>  
-                            
-                            
+                            </p:commandButton>     
+
+
+     <h:message for="identificacion" />
+                           
                         </h:panelGrid>
+
                     </p:panel>
+                      
+  
                     <br></br>
-                    
-                    
-                  <p:panel id="panelMedidas">
+
+
+                    <p:panel id="panelMedidas">
                         <p:dataTable var="medida" value="#{consultaUsuarioMedidadController.listaMedidas}">
-                            
-                                <p:column headerText="Identificacion">
-                                   #{medida.usuid.usuidentificacion}
-                                </p:column>
-                                <p:column headerText="Apellidos">
-                                     
-                                    #{medida.usuid.usuapellidos}
-                                </p:column>
-                                <p:column headerText="Nombres">
-                                     #{medida.usuid.usunombres}
-                                </p:column>
-                               
-                            
+
+                            <p:column headerText="Identificacion">
+                                #{medida.usuid.usuidentificacion}
+                            </p:column>
+                            <p:column headerText="Apellidos">
+
+                                #{medida.usuid.usuapellidos}
+                            </p:column>
+                            <p:column headerText="Nombres">
+                                #{medida.usuid.usunombres}
+                            </p:column>
+
+
                             <p:column headerText="Cargo">
                                 #{medida.usuid.carid.carnombre}
-                                </p:column>
-                                <p:column headerText="Facultad">
+                            </p:column>
+                            <p:column headerText="Facultad">
                                 #{medida.usuid.uniid.uninombre}
-                                </p:column>
-                               <p:column headerText="Acciones" width="90">
-                                    <h:link id="ver" style="text-decoration: none; ">                                    
-                                        <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
-                                    </h:link>
-                                    <h:link id="editar" style="text-decoration: none;margin-left: 5px; ">                                    
-                                        <p:graphicImage style="width:20px;" library="img/usuarios" name="editar.png"/>
-                                    </h:link>
-                                    <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
-                                        <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
-                                    </h:link>
-                                </p:column> 
-                            
+                            </p:column>
+                            <p:column headerText="Acciones" width="90">
+                                <h:link id="ver" style="text-decoration: none; ">                                    
+                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                </h:link>
+                                <h:link id="editar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px;" library="img/usuarios" name="editar.png"/>
+                                </h:link>
+                                <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                </h:link>
+                            </p:column> 
+
                         </p:dataTable>
-                        
+
                     </p:panel>
                 </h:form>
             </ui:define>
