@@ -813,7 +813,11 @@ public class VerEditarUsuarioController implements Serializable
             {
                 BigInteger bi= new BigInteger(this.telefono);
                 this.usuario.setUsutelefono(bi);
-            }            
+            }
+            else
+            {
+                this.usuario.setUsutelefono(null);
+            }
             this.usuarioEJB.edit(this.usuario);            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo teléfono actualizado.", ""));
         }
