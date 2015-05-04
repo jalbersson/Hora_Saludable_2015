@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+
+    <body>
+
+        <ui:composition template="./../../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Registro de Asistencia
+            </ui:define>
+
+            <ui:define name="title">
+                <div class="tituloContenido">
+                    <br></br>
+                    Registro de asistencia <br></br>
+                </div>
+            </ui:define>
+
+            <ui:define name="body">                
+                <h:form id="crearInscripcionForm">
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
+                        <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
+                        <p:menuitem value="Registro de asistencia" outcome="registrar-asistencia" />
+                    </p:breadCrumb>
+
+                    <p:spacer height="25"/>
+
+                    <p:growl id="growl" sticky="true" showDetail="true" />
+
+                    <h:panelGroup id="crearInscripcionPanelGroup">
+                        <p:panelGrid columns="4" rendered="#{crearInscripcionBean.ins != null}">
+                            <h:outputText value="Fecha:" />
+                            <p:calendar id="fecha" value="#{asistenciaView.asi.asifecha}" pattern="dd-MM-yyyy" mask="true" size="7"/>                            
+                            <p:commandButton value="Buscar" actionListener="#{asistenciaView.buscarAsistencia()}" update="growl, usuariosDataTable, crearInscripcionForm" />
+                            <p:commandButton value="#{asistenciaView.accion}" actionListener="#{asistenciaView.crearAsistencia()}" update="growl" />
+                        </p:panelGrid>
+                    </h:panelGroup>
+                    
+                    <p:spacer height="25"/>
+
+                    <p:panel header="Usuarios" >
+                        <p:dataTable id="usuariosDataTable" value="#{asistenciaView.usuarios}" var="usu"
+                                     paginator="true"
+                                     rows="10"
+                                     selection="#{asistenciaView.selectedUsus}"
+                                     rowKey="#{usu.usuid}"                                     
+                                     >                            
+                            <p:column headerText="NOMBRES" filterBy="#{usu.usunombres}" >
+                                <h:outputText value="#{usu.usunombres}" />
+                            </p:column>
+                            <p:column headerText="APELLIDOS" filterBy="#{usu.usuapellidos}">
+                                <h:outputText value="#{usu.usuapellidos}" />
+                            </p:column>
+                            <p:column headerText="SEXO" >
+                                <h:outputText value="#{usu.usugenero}" />
+                            </p:column>
+                            <p:column headerText="CÓDIGO" filterBy="#{usu.usuidentificacion}">
+                                <h:outputText value="#{usu.usuidentificacion}" />
+                            </p:column>
+                            <p:column headerText="PROGRAMA ACADEMICO" ></p:column>
+                            <p:column headerText="PROGRAMA" ></p:column>
+                            <p:column headerText="ESTAMENTO" ></p:column>                    
+                            <p:column  selectionMode="multiple" style="width:10%;text-align:center" />
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

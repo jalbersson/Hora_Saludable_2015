@@ -9,6 +9,7 @@ import com.unicauca.horasaludable.entities.Inscripcion;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -16,6 +17,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class InscripcionFacade extends AbstractFacade<Inscripcion> {
+
     @PersistenceContext(unitName = "Hora_SaludablePU")
     private EntityManager em;
 
@@ -27,5 +29,26 @@ public class InscripcionFacade extends AbstractFacade<Inscripcion> {
     public InscripcionFacade() {
         super(Inscripcion.class);
     }
-    
+
+    public Inscripcion existeInscripcion(String mes, int anio) {
+        try {
+            String queryString = "SELECT i "
+                    + "FROM Inscripcion i "
+                    + "WHERE i.insmes = :mes AND i.insanio = :anio";
+
+            TypedQuery<Inscripcion> query = getEntityManager().createQuery(queryString, Inscripcion.class);
+            query.setParameter("mes", mes);
+            query.setParameter("anio", anio);
+
+            if (query.getSingleResult() != null) {
+                return query.getSingleResult();
+            }
+
+            return null;
+        } finally {
+            // em.close();
+//            return null;
+        }
+    }
+
 }
