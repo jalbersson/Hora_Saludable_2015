@@ -6,9 +6,12 @@
 package com.unicauca.horasaludable.jpacontrollers;
 
 import com.unicauca.horasaludable.entities.Cargo;
+import com.unicauca.horasaludable.entities.Unidadacademica;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +29,15 @@ public class CargoFacade extends AbstractFacade<Cargo> {
 
     public CargoFacade() {
         super(Cargo.class);
+    }
+    
+    public List<Cargo> buscarPorId(Long carid)
+    {
+        Query query = getEntityManager().createNamedQuery("Cargo.findByCarid");
+        query.setParameter("carid", carid);
+        List<Cargo> resultList = query.getResultList();
+        
+        return resultList;
     }
     
 }

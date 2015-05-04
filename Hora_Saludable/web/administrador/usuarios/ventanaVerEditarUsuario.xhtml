@@ -286,8 +286,17 @@
             <h:form id="formularioDatosAcademia" >
                 <p:panelGrid styleClass="panelgrid">
                     <p:row>
-                        <p:column colspan="3" >
+                        <p:column style="width: 345px;" >
                             <p:outputLabel style="font-size: 20px;" value="Datos Académicos"/>
+                        </p:column>                        
+                        <p:column rendered="#{verEditarUsuarioController.modificarDatosAcademicos}">
+                            <p:commandLink value="Modificar" style="color: blue;" action="#{verEditarUsuarioController.modificarDatosAcademicos()}"/>
+                        </p:column>
+                        <p:column rendered="#{verEditarUsuarioController.aceptarCancelarModificarDatosAcademicos}">
+                            <p:commandLink value="Aceptar" style="color: blue;" action="#{verEditarUsuarioController.aceptarModificarDatosAcademicos()}"
+                                           onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()" />
+                            <p:commandLink value="Cancelar" style="color: blue; margin-left: 5px;"
+                                           action="#{verEditarUsuarioController.cancelarModificarDatosAcademicos()}" />
                         </p:column>
                     </p:row>
                 </p:panelGrid>
@@ -345,7 +354,140 @@
                         </p:column>
                     </p:row>
                 </p:panelGrid>
+                <p:panelGrid styleClass="panelgrid" rendered="#{verEditarUsuarioController.aceptarCancelarModificarDatosAcademicos}">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Tipo:* "/>
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu value="#{verEditarUsuarioController.tipoUsuario}">
+                                <f:selectItem itemLabel="Funcionario" itemValue="Funcionario"/>
+                                <f:selectItem itemLabel="Estudiante" itemValue="Estudiante"/>
+                                <f:selectItem itemLabel="Familiar" itemValue="Familiar"/>
+                                <p:ajax listener="#{verEditarUsuarioController.cambiarTipo}"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.modificarDatosFuncionario}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Cargo:* "/>
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu value="#{verEditarUsuarioController.idCargo}">
+                                <f:selectItems value="#{verEditarUsuarioController.listaCargo}"
+                                               var="cargo" itemLabel="#{cargo.carnombre}" 
+                                               itemValue="#{cargo.carid}"/>
+                                <p:ajax listener="#{verEditarUsuarioController.cambiarCargo}"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.modificarDatosFuncionario}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Unidad Académica:* " />
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu value="#{verEditarUsuarioController.idUnidadAcademica}">
+                                <f:selectItems value="#{verEditarUsuarioController.listaUnidadAcademica}"
+                                               var="unidad" itemLabel="#{unidad.uninombre}" 
+                                               itemValue="#{unidad.uniid}"/>
+                            </p:selectOneMenu>                            
+                        </p:column>                        
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.modificarDatosFamiliar}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Funcionario:* "/>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic"
+                                             onclick="PF('seleccionarEditarFuncionario').show()" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.modificarDatosFamiliar}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Nombre Funcionario:* " />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{verEditarUsuarioController.funcionarioFamiliar.usunombres} #{verEditarUsuarioController.funcionarioFamiliar.usuapellidos}"/>                          
+                        </p:column>                        
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.modificarDatosFamiliar}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Dependencia Funcionario:* " />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{verEditarUsuarioController.funcionarioFamiliar.uniid.uninombre}"/>                           
+                        </p:column>                        
+                    </p:row>
+                    <p:row rendered="#{verEditarUsuarioController.modificarDatosEstudiante}">
+                        <p:column>
+                            <p:outputLabel style="font-size: 15px;" value="Facultad:* " />
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu value="#{verEditarUsuarioController.idUnidadAcademica}">
+                                <f:selectItems value="#{verEditarUsuarioController.listaUnidadAcademica}"
+                                               var="unidad" itemLabel="#{unidad.uninombre}" 
+                                               itemValue="#{unidad.uniid}"/>
+                            </p:selectOneMenu>                            
+                        </p:column>                        
+                    </p:row>                    
+                </p:panelGrid>
             </h:form>
         </p:dialog>
+        <p:dialog header="Seleccionar Funcionariosss" width="700"  modal="true"  widgetVar="seleccionarEditarFuncionario">
+                    <h:form id="ventanaSeleccionarFuncionario">
+                        <br/>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Nombre del Funcionario:" />
+                            <p:inputText style="width: 240px;" value="#{verEditarUsuarioController.nombreOApellidos}"  >
+                                <p:ajax event="keyup" update="tablasEditarFuncionarios" listener="#{verEditarUsuarioController.buscarPorNombreFuncionario}" />                                
+                            </p:inputText>                          
+
+                        </h:panelGrid>
+
+                        <br/>
+                        <p:panel id="tablasEditarFuncionarios">
+                            <p:dataTable  var="funcionarioEditar" value="#{verEditarUsuarioController.listaFuncionarios}" 
+                                          paginator="true" rows="8"  
+                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                          rowsPerPageTemplate="5,8">
+
+                                <p:column headerText="No. Identificacion" width="130" >                                
+                                #{funcionarioEditar.usuidentificacion} 
+                                </p:column> 
+                                <p:column headerText="Nombres" >
+                                #{funcionarioEditar.usunombres}
+                                </p:column>
+                                <p:column headerText="Apellidos" >
+                                #{funcionarioEditar.usuapellidos}
+                                </p:column>
+                                <p:column headerText="Cargo" >
+                                #{funcionarioEditar.carid.carnombre}
+                                </p:column>
+                                <p:column headerText="Apellidos" >
+                                #{funcionarioEditar.uniid.uninombre}
+                                </p:column>
+
+                                <p:column headerText="Acciones" width="70">
+                                    <p:commandLink actionListener="#{verEditarUsuarioController.seleccionarFuncionario(funcionarioEditar)}" 
+                                                   id="seleccionar" style="text-decoration: none;color: blue;" 
+                                                   >                                    
+                                        Seleccionar
+                                    </p:commandLink>
+                                </p:column> 
+
+                            </p:dataTable>
+                        </p:panel>
+
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog modal="true"  widgetVar="editarFuncionarioYaTieneFamiliarAsociado" closable="false">
+                    <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
+                    <h:form>
+                        <p:commandButton  value="Aceptar" style="background:#22419A; 
+                                             color: #FFFFFF;margin-left:150px;"
+                                          onclick="PF('editarFuncionarioYaTieneFamiliarAsociado').hide()"/>
+                    </h:form>
+                </p:dialog>
     </ui:composition>   
 </html>

@@ -1,7 +1,11 @@
 package com.unicauca.horasaludable.managedbeans.usuarios;
 
 import com.unicauca.horasaludable.cifrado.Cifrar;
+import com.unicauca.horasaludable.entities.Cargo;
+import com.unicauca.horasaludable.entities.Unidadacademica;
 import com.unicauca.horasaludable.entities.Usuario;
+import com.unicauca.horasaludable.jpacontrollers.CargoFacade;
+import com.unicauca.horasaludable.jpacontrollers.UnidadacademicaFacade;
 import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
 import com.unicauca.horasaludable.validadores.ValidarEdicionUsuarios;
 import java.io.File;
@@ -13,6 +17,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -32,6 +37,11 @@ public class VerEditarUsuarioController implements Serializable
 {
     @EJB
     private UsuarioFacade usuarioEJB;
+    @EJB
+    private CargoFacade cargoEJB;
+    @EJB
+    private UnidadacademicaFacade unidadAcademicaEJB;
+    private MostrarUsuariosController mostraUsuariosController;
     private Usuario usuario;
     private boolean camposFuncionario;
     private boolean camposEstudiante;
@@ -54,6 +64,12 @@ public class VerEditarUsuarioController implements Serializable
     private boolean campoModificarNombreUsuario;
     private boolean campoContrasena;
     private boolean campoModificarContrasena;
+    private boolean modificarDatosAcademicos;    
+    private boolean aceptarCancelarModificarDatosAcademicos;
+    private boolean modificarDatosFuncionario;
+    private boolean modificarDatosEstudiante;
+    private boolean modificarDatosFamiliar;    
+    private String usuarioSeleccionado;
     private String rutaFoto;
     private String rutaAbsolutaFotos;
     private UploadedFile foto;
@@ -65,7 +81,16 @@ public class VerEditarUsuarioController implements Serializable
     private String correo;
     private String telefono;
     private String nombreUsuario;
-    private String contrasena;    
+    private String contrasena;
+    private String tipoUsuario;
+    private List<Cargo> listaCargo;    
+    private List<Unidadacademica> listaUnidadAcademica;
+    private Long idCargo;
+    private Long idUnidadAcademica;
+    private Usuario funcionarioFamiliar;
+    private List<Usuario> listaFuncionarios;
+    private String nombreOApellidos;   
+    
     
     private ValidarEdicionUsuarios validarEdicionUsuario;
     
@@ -75,6 +100,136 @@ public class VerEditarUsuarioController implements Serializable
         this.rutaFoto="img/fotosUploads";
         this.rutaAbsolutaFotos="/home/geovanny/Documentos/Asae/Hora_Saludable_2015/Hora_Saludable/web/resources/img/fotosUploads/";
         this.sdf=new SimpleDateFormat("yyyy-MM-dd");
+    }
+    
+    public String getNombreOApellidos()
+    {
+        return nombreOApellidos;
+    }
+
+    public void setNombreOApellidos(String nombreOApellidos) 
+    {
+        this.nombreOApellidos = nombreOApellidos;
+    }
+    
+    public List<Usuario> getListaFuncionarios() 
+    {
+        return listaFuncionarios;
+    }
+
+    public void setListaFuncionarios(List<Usuario> listaFuncionarios) 
+    {
+        this.listaFuncionarios = listaFuncionarios;
+    }
+    
+    public Usuario getFuncionarioFamiliar() 
+    {
+        return funcionarioFamiliar;
+    }
+
+    public void setFuncionarioFamiliar(Usuario funcionarioFamiliar) 
+    {
+        this.funcionarioFamiliar = funcionarioFamiliar;
+    }
+    
+    public boolean isModificarDatosFuncionario()
+    {
+        return modificarDatosFuncionario;
+    }
+
+    public void setModificarDatosFuncionario(boolean modificarDatosFuncionario)
+    {
+        this.modificarDatosFuncionario = modificarDatosFuncionario;
+    }
+
+    public boolean isModificarDatosEstudiante()
+    {
+        return modificarDatosEstudiante;
+    }
+
+    public void setModificarDatosEstudiante(boolean modificarDatosEstudiante)
+    {
+        this.modificarDatosEstudiante = modificarDatosEstudiante;
+    }
+
+    public boolean isModificarDatosFamiliar()
+    {
+        return modificarDatosFamiliar;
+    }
+
+    public void setModificarDatosFamiliar(boolean modificarDatosFamiliar)
+    {
+        this.modificarDatosFamiliar = modificarDatosFamiliar;
+    }
+    
+    public Long getIdCargo() 
+    {
+        return idCargo;
+    }
+
+    public void setIdCargo(Long idCargo) 
+    {
+        this.idCargo = idCargo;
+    }
+
+    public Long getIdUnidadAcademica() 
+    {
+        return idUnidadAcademica;
+    }
+
+    public void setIdUnidadAcademica(Long idUnidadAcademica) 
+    {
+        this.idUnidadAcademica = idUnidadAcademica;
+    }
+    
+    public String getTipoUsuario()
+    {
+        return tipoUsuario;
+    }
+
+    public List<Cargo> getListaCargo()
+    {
+        return listaCargo;
+    }
+
+    public void setListaCargo(List<Cargo> listaCargo)
+    {
+        this.listaCargo = listaCargo;
+    }
+
+    public List<Unidadacademica> getListaUnidadAcademica()
+    {
+        return listaUnidadAcademica;
+    }
+
+    public void setUnidadAcademica(List<Unidadacademica> listaUnidadAcademica)
+    {
+        this.listaUnidadAcademica = listaUnidadAcademica;
+    }
+    
+    public void setTipoUsuario(String tipoUsuario) 
+    {
+        this.tipoUsuario = tipoUsuario;
+    }
+    
+    public boolean isModificarDatosAcademicos()
+    {
+        return modificarDatosAcademicos;
+    }
+
+    public void setModificarDatosAcademicos(boolean modificarDatosAcademicos) 
+    {
+        this.modificarDatosAcademicos = modificarDatosAcademicos;
+    }
+
+    public boolean isAceptarCancelarModificarDatosAcademicos() 
+    {
+        return aceptarCancelarModificarDatosAcademicos;
+    }
+
+    public void setAceptarCancelarModificarDatosAcademicos(boolean aceptarCancelarModificarDatosAcademicos) 
+    {
+        this.aceptarCancelarModificarDatosAcademicos = aceptarCancelarModificarDatosAcademicos;
     }
     
     public boolean isCampoContrasena() 
@@ -417,8 +572,9 @@ public class VerEditarUsuarioController implements Serializable
         this.usuario = usuario;
     }
     
-    public void funcionarioSeleccionado(Usuario funcionario)
+    public void funcionarioSeleccionado(Usuario funcionario,MostrarUsuariosController mgb)
     {
+        this.mostraUsuariosController=mgb;
         RequestContext requestContext = RequestContext.getCurrentInstance();
         this.usuario=funcionario; 
         this.camposFuncionario=true;
@@ -431,6 +587,7 @@ public class VerEditarUsuarioController implements Serializable
         this.campotelefono=true;
         this.campoNombreUsuario=true;
         this.campoContrasena=true;
+        this.modificarDatosAcademicos=true;
         
         this.camposEstudiante=false;
         this.camposFamiliar=false;        
@@ -443,6 +600,7 @@ public class VerEditarUsuarioController implements Serializable
         this.campoModificarTefelfono=false;
         this.campoModificarNombreUsuario=false;
         this.campoModificarContrasena=false;
+        this.aceptarCancelarModificarDatosAcademicos=false;
         requestContext.update("formularioFoto");
         requestContext.update("formularioEditarFoto");
         requestContext.update("formularioDatosPersonales");
@@ -451,8 +609,9 @@ public class VerEditarUsuarioController implements Serializable
         
     }
     
-    public void estudianteSeleccionado(Usuario estudiante)
+    public void estudianteSeleccionado(Usuario estudiante,MostrarUsuariosController mgb)
     {
+        this.mostraUsuariosController=mgb;
         RequestContext requestContext = RequestContext.getCurrentInstance();
         this.usuario=estudiante; 
         this.camposEstudiante=true;
@@ -465,6 +624,7 @@ public class VerEditarUsuarioController implements Serializable
         this.campotelefono=true;
         this.campoNombreUsuario=true;
         this.campoContrasena=true;
+        this.modificarDatosAcademicos=true;
         
         this.camposFuncionario=false;
         this.camposFamiliar=false;        
@@ -477,6 +637,7 @@ public class VerEditarUsuarioController implements Serializable
         this.campoModificarTefelfono=false;
         this.campoModificarNombreUsuario=false;
         this.campoModificarContrasena=false;
+        this.aceptarCancelarModificarDatosAcademicos=false;
         requestContext.update("formularioFoto");
         requestContext.update("formularioEditarFoto");
         requestContext.update("formularioDatosPersonales");
@@ -485,8 +646,9 @@ public class VerEditarUsuarioController implements Serializable
         
     }
     
-    public void familiarSeleccionado(Usuario familiar)
+    public void familiarSeleccionado(Usuario familiar,MostrarUsuariosController mgb)
     {
+        this.mostraUsuariosController=mgb;
         RequestContext requestContext = RequestContext.getCurrentInstance();
         this.usuario=familiar; 
         this.camposFamiliar=true;
@@ -499,6 +661,7 @@ public class VerEditarUsuarioController implements Serializable
         this.campotelefono=true;
         this.campoNombreUsuario=true;
         this.campoContrasena=true;
+        this.modificarDatosAcademicos=true;
         
         this.camposFuncionario=false;
         this.camposEstudiante=false;        
@@ -511,6 +674,7 @@ public class VerEditarUsuarioController implements Serializable
         this.campoModificarTefelfono=false;
         this.campoModificarNombreUsuario=false;
         this.campoModificarContrasena=false;
+        this.aceptarCancelarModificarDatosAcademicos=false;
         requestContext.update("formularioFoto");
         requestContext.update("formularioEditarFoto");
         requestContext.update("formularioDatosPersonales");
@@ -888,4 +1052,232 @@ public class VerEditarUsuarioController implements Serializable
         }
         requestContext.update("formularioDatosPersonales");        
     }
+    public void modificarDatosAcademicos()
+    {
+        this.modificarDatosFamiliar=false;
+        this.modificarDatosEstudiante=false;
+        this.modificarDatosFuncionario=false;
+        if(this.camposFuncionario==true)
+        {
+            this.modificarDatosFuncionario=true;
+            this.usuarioSeleccionado="Funcionario";
+            this.tipoUsuario="Funcionario";
+            this.camposFuncionario=false;
+            this.listaCargo=cargoEJB.findAll();
+            if(this.usuario.getCarid().getCarnombre().equals("Docente"))
+            {
+                this.listaUnidadAcademica=unidadAcademicaEJB.findBYFacultades();
+            }
+            else
+            {
+                this.listaUnidadAcademica=unidadAcademicaEJB.findAll();
+            }
+            this.idCargo=usuario.getCarid().getCarid();
+            this.idUnidadAcademica=usuario.getUniid().getUniid();
+        }
+        if(this.camposFamiliar==true)
+        {
+            this.modificarDatosFamiliar=true;
+            this.usuarioSeleccionado="Familiar";
+            this.tipoUsuario="Familiar";
+            this.camposFamiliar=false;
+            this.funcionarioFamiliar=this.usuario.getConyugeid();            
+            this.listaFuncionarios=this.usuarioEJB.buscarPorUsuariosConCargo();            
+        }
+        if(this.camposEstudiante==true)
+        {
+            this.modificarDatosEstudiante=true;
+            this.usuarioSeleccionado="Estudiante";
+            this.tipoUsuario="Estudiante";
+            this.camposEstudiante=false;
+            this.idUnidadAcademica=this.usuario.getUniid().getUniid();
+            this.listaUnidadAcademica=unidadAcademicaEJB.findBYFacultades();
+        }
+        this.aceptarCancelarModificarDatosAcademicos=true;
+        this.modificarDatosAcademicos=false;
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.update("formularioDatosAcademia"); 
+        requestContext.update("ventanaSeleccionarFuncionario");
+    }
+    public void cancelarModificarDatosAcademicos()
+    {
+        if(this.usuarioSeleccionado.equals("Funcionario"))
+        {            
+            this.camposFuncionario=true;            
+        }
+        if(this.usuarioSeleccionado.equals("Familiar"))        {
+            
+            this.camposFamiliar=true;
+        }
+        if(this.usuarioSeleccionado.equals("Estudiante"))
+        {
+            this.camposEstudiante=true;
+        }
+        this.aceptarCancelarModificarDatosAcademicos=false;
+        this.modificarDatosAcademicos=true;
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.update("formularioDatosAcademia"); 
+        requestContext.update("tablasUsuarios"); 
+        requestContext.update("formularioFoto");
+    }
+    
+    public void seleccionarFuncionario(Usuario funcionarioEditar)
+   {
+       RequestContext requestContext = RequestContext.getCurrentInstance();
+       if(this.usuarioEJB.buscarPorConyugeid(funcionarioEditar.getUsuid()))
+       {
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info", "El Funcionario ya tiene un Familiar Asociado."));
+           requestContext.execute("PF('editarFuncionarioYaTieneFamiliarAsociado').show()");
+       }
+       else
+       {
+                         
+           requestContext.execute("PF('seleccionarEditarFuncionario').hide()");
+           this.funcionarioFamiliar=funcionarioEditar;        
+           requestContext.update("formularioDatosAcademia"); 
+       }       
+
+   }
+    public void  buscarPorNombreFuncionario()
+    {
+        
+        this.listaFuncionarios=usuarioEJB.busacarPorNombreFuncionario(this.nombreOApellidos.toLowerCase());
+        
+    }
+    
+    public void cambiarCargo()
+    {        
+        if(this.idCargo.toString().equals("1"))
+        {
+            this.listaUnidadAcademica=this.unidadAcademicaEJB.findBYFacultades();
+        }
+        else
+        {
+            this.listaUnidadAcademica=this.unidadAcademicaEJB.findAll();
+        }        
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.update("formularioDatosAcademia");
+    }
+    
+    public void aceptarModificarDatosAcademicos()
+    {
+        int bandera=1;
+        if(this.tipoUsuario.equals("Funcionario"))
+        {
+            this.usuario.setConyugeid(null);
+            Cargo carid= cargoEJB.buscarPorId(this.idCargo).get(0);
+            Unidadacademica uniid= unidadAcademicaEJB.buscarPorId(this.idUnidadAcademica).get(0);
+            this.usuario.setCarid(carid);
+            this.usuario.setUniid(uniid);
+            this.usuarioEJB.edit(this.usuario);
+            this.camposFuncionario=true;
+            this.camposEstudiante=false;
+            this.camposFamiliar=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campos Datos Academicos actualizados.", ""));
+        }
+        if(this.tipoUsuario.equals("Familiar"))
+        {
+            if(this.funcionarioFamiliar!=null)
+            {
+                this.usuario.setCarid(null);
+                this.usuario.setUniid(null);
+                this.usuario.setConyugeid(this.funcionarioFamiliar);
+                this.usuarioEJB.edit(this.usuario);
+                this.camposFuncionario=false;
+                this.camposEstudiante=false;
+                this.camposFamiliar=true;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campos Datos Academicos actualizados.", "Info. Campos Datos Academicos actualizados."));
+
+            }
+            else
+            {
+                bandera=0;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe Selecccionar un Funcionario.", "Debe Selecccionar un Funcionario."));
+ 
+            }
+        }
+        if(this.tipoUsuario.equals("Estudiante"))
+        {
+            this.usuario.setCarid(null);
+            this.usuario.setConyugeid(null);
+            Unidadacademica uniid= unidadAcademicaEJB.buscarPorId(this.idUnidadAcademica).get(0);
+            this.usuario.setUniid(uniid);
+            this.usuarioEJB.edit(this.usuario);
+            this.camposFuncionario=false;
+            this.camposEstudiante=true;
+            this.camposFamiliar=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campos Datos Academicos actualizados.", ""));
+
+        }
+        if (bandera == 1) 
+        {
+            if (this.mostraUsuariosController.getListaFamiliares() != null) 
+            {
+                this.mostraUsuariosController.getListaFamiliares().remove(this.usuario);
+                if (this.tipoUsuario.equals("Familiar")) 
+                {
+                    this.mostraUsuariosController.getListaFamiliares().add(this.usuario);
+                }
+            }
+            if (this.mostraUsuariosController.getListaFuncionarios() != null) 
+            {
+                this.mostraUsuariosController.getListaFuncionarios().remove(this.usuario);
+                if (this.tipoUsuario.equals("Funcionario")) 
+                {
+                    this.mostraUsuariosController.getListaFuncionarios().add(this.usuario);
+                }
+            }
+            if (this.mostraUsuariosController.getListaestudiantes() != null) 
+            {
+                this.mostraUsuariosController.getListaestudiantes().remove(this.usuario);
+                if (this.tipoUsuario.equals("Estudiante")) 
+                {
+                    this.mostraUsuariosController.getListaestudiantes().add(this.usuario);
+                }
+            }
+            this.aceptarCancelarModificarDatosAcademicos = false;
+            this.modificarDatosAcademicos = true;
+        }      
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.update("formularioDatosAcademia"); 
+        requestContext.update("tablasUsuarios"); 
+        requestContext.update("formularioFoto");      
+    }
+    
+    public void cambiarTipo()
+    {        
+        if(this.tipoUsuario.equals("Funcionario"))
+        {
+            this.modificarDatosEstudiante=false;
+            this.modificarDatosFamiliar=false;
+            this.modificarDatosFuncionario=true;
+            this.listaCargo=cargoEJB.findAll();
+            this.listaUnidadAcademica=unidadAcademicaEJB.findBYFacultades();
+            this.idCargo=Long.parseLong("1");            
+        }
+        else
+        {
+            if(this.tipoUsuario.equals("Estudiante"))
+            {
+                this.modificarDatosEstudiante=true;
+                this.modificarDatosFamiliar=false;
+                this.modificarDatosFuncionario=false;
+                this.listaUnidadAcademica=unidadAcademicaEJB.findBYFacultades();                
+            }
+            else
+            {
+                this.modificarDatosEstudiante=false;
+                this.modificarDatosFamiliar=true;
+                this.modificarDatosFuncionario=false;
+                this.funcionarioFamiliar=null;
+                this.listaFuncionarios=usuarioEJB.buscarPorUsuariosConCargo();
+            }
+        }        
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.update("formularioDatosAcademia"); 
+        requestContext.update("tablasUsuarios"); 
+        requestContext.update("formularioFoto");
+        requestContext.update("ventanaSeleccionarFuncionario");
+    }
+    
 }

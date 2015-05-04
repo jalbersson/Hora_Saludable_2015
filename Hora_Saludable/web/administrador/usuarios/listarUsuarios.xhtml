@@ -34,7 +34,7 @@
                                 #{funcionario.uniid.uninombre}
                             </p:column>
                             <p:column headerText="Acciones" width="90">
-                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{verEditarUsuarioController.funcionarioSeleccionado(funcionario)}">                                    
+                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{verEditarUsuarioController.funcionarioSeleccionado(funcionario,mostrarUsuariosController)}">                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
                                 </p:commandLink>                                
                                 <p:commandLink id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
@@ -68,7 +68,7 @@
                                 #{estudiantes.uniid.uninombre}
                             </p:column> 
                             <p:column headerText="Acciones" width="90">
-                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{verEditarUsuarioController.estudianteSeleccionado(estudiantes)}" >                                    
+                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{verEditarUsuarioController.estudianteSeleccionado(estudiantes,mostrarUsuariosController)}" >                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
                                 </p:commandLink>                                
                                 <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
@@ -105,7 +105,7 @@
                                 #{familiar.conyugeid.carid.carnombre}
                             </p:column>
                             <p:column headerText="Acciones" width="90">
-                                <p:commandLink id="ver" style="text-decoration: none; " action="#{verEditarUsuarioController.familiarSeleccionado(familiar)}" >                                    
+                                <p:commandLink id="ver" style="text-decoration: none; " action="#{verEditarUsuarioController.familiarSeleccionado(familiar,mostrarUsuariosController)}" >                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
                                 </p:commandLink>                                
                                 <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    

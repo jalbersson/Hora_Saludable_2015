@@ -46,4 +46,12 @@ public class UnidadacademicaFacade extends AbstractFacade<Unidadacademica> {
         
         return resultList;
     }
+    public List<Unidadacademica> buscarPorId(Long uniid)
+    {
+        Query query = getEntityManager().createNamedQuery("Unidadacademica.findByUniid");
+        query.setParameter("uniid", uniid);
+        List<Unidadacademica> resultList = query.getResultList();
+        
+        return resultList;
+    }
 }
