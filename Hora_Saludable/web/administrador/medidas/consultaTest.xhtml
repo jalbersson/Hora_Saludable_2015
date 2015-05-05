@@ -44,13 +44,26 @@
                     </h:panelGrid>
                 </h:form>
                 <p:separator/>
+             
                 <h:form id="tablasUsuarios">
                     <h:panelGrid style="margin-bottom: 10px;" rendered="#{listasUsuariosMedidasController.habilitarTablaUsuarios}" columns="3">                      
+                       
+                        
+                        <h:outputLabel class="CampoLabel" value="Identificacion del Funcionario:" />
+                        <p:inputText style="width: 240px;" value="#{listasUsuariosMedidasController.identificacion}"  >
+                            <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarporIdentificacion}" />                                
+                        </p:inputText>  
+                        
+                        
+                         <h:outputLabel class="CampoLabel" value="" />                      
+                        
                         <h:outputLabel class="CampoLabel" value="Nombre del Funcionario:" />
                         <p:inputText style="width: 240px;" value="#{listasUsuariosMedidasController.nombreUsuario}"  >
                             <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarPorNombreUsuario}" />                                
                         </p:inputText>                                                   
                     </h:panelGrid>
+              
+                    
                     <p:panel id="tablaUsuariosM" rendered="#{listasUsuariosMedidasController.habilitarTablaUsuarios}">                                            
                         <p:dataTable  var="usuarios" value="#{listasUsuariosMedidasController.listaUsuarios}"
                                       paginator="true" rows="10"  
@@ -82,7 +95,12 @@
                                 #{usuarios.conyugeid.carid.carnombre}
                             </p:column>
                             <p:column headerText="Acciones" width="90">
-                                
+                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{listasUsuariosMedidasController.habilitarFamiliares}" >                                    
+                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                </p:commandLink>                                
+                                <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                    <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>                                    
+                                </h:link>
                             </p:column>
                         </p:dataTable>
                     </p:panel>                    

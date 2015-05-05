@@ -57,7 +57,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByconyugeid", query = "SELECT u FROM Usuario u WHERE u.conyugeid.usuid= :conyugeid"),
     @NamedQuery(name = "Usuario.findByNameFuncionarios", query = "SELECT u FROM Usuario u WHERE LOWER(CONCAT(CONCAT(u.usunombres,' '),u.usuapellidos)) LIKE :nombre AND u.carid IS NOT NULL"),
     @NamedQuery(name = "Usuario.findByNameEstudiante", query = "SELECT u FROM Usuario u WHERE LOWER(CONCAT(CONCAT(u.usunombres,' '),u.usuapellidos)) LIKE :nombre AND u.carid IS NULL AND u.conyugeid IS NULL AND u.uniid IS NOT NULL"),
-    @NamedQuery(name = "Usuario.findByNameFamiliar", query = "SELECT u FROM Usuario u WHERE LOWER(CONCAT(CONCAT(u.usunombres,' '),u.usuapellidos)) LIKE :nombre AND u.conyugeid IS NOT NULL")})
+    @NamedQuery(name = "Usuario.findByNameFamiliar", query = "SELECT u FROM Usuario u WHERE LOWER(CONCAT(CONCAT(u.usunombres,' '),u.usuapellidos)) LIKE :nombre AND u.conyugeid IS NOT NULL"),
+    
+    @NamedQuery(name = "Usuario.findByIdentiFuncionarios", query = "SELECT u FROM Usuario u WHERE u.usuidentificacion =:usuidentificacion AND u.carid IS NOT NULL"),
+    @NamedQuery(name = "Usuario.findByIdentiEstudiante", query = "SELECT u FROM Usuario u WHERE u.usuidentificacion =:usuidentificacion AND u.carid IS NULL AND u.conyugeid IS NULL AND u.uniid IS NOT NULL"),
+    @NamedQuery(name = "Usuario.findByIdentiFamiliar", query = "SELECT u FROM Usuario u WHERE u.usuidentificacion =:usuidentificacion AND u.conyugeid IS NOT NULL")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
