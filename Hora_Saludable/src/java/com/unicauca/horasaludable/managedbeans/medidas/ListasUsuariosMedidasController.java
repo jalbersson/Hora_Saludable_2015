@@ -14,6 +14,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ValueChangeEvent;
 
+/**
+ *
+ * @author Jhonny Taborda
+ */
 
 @ManagedBean
 @ViewScoped
@@ -22,6 +26,16 @@ public class ListasUsuariosMedidasController implements Serializable {
     @EJB
     private UsuarioFacade usuarioEJB;
     
+    
+    private Long identificacion;
+
+    public Long getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(Long identificacion) {
+        this.identificacion = identificacion;
+    }
     private String nombreUsuario;
     private boolean habilitarEstudiantes;    
     private boolean habilitarFuncionarios;
@@ -125,6 +139,26 @@ public class ListasUsuariosMedidasController implements Serializable {
             this.listaUsuarios=this.usuarioEJB.buscarPorEstudiantes();
         }
     }    
+    
+    public void buscarporIdentificacion()
+    {
+     if(this.habilitarEstudiantes==true)
+      {
+            this.listaUsuarios=usuarioEJB.buscarPorIdentificacionEstudiante(this.identificacion);
+        }
+        else
+        {
+            if(this.habilitarFamiliares==true)
+            {
+                this.listaUsuarios=usuarioEJB.buscarPorIdentificacionFamiliares(this.identificacion);
+ 
+            }
+            else
+            {
+                this.listaUsuarios=usuarioEJB.buscarPorIdentificacionFuncionario(this.identificacion);
+            }
+        }
+    }
     public void buscarPorNombreUsuario()
     {
         if(this.habilitarEstudiantes==true)
