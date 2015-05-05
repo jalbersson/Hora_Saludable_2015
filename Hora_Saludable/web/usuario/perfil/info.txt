@@ -1,4 +1,0 @@
-
-
-en esta carpeta es para las vista de un usuario con sesion o sin sesion
- que estan relacionadas con el modulo usuarios el perfil.

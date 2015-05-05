@@ -807,7 +807,8 @@ public class VerEditarUsuarioController implements Serializable
             this.usuarioEJB.edit(this.usuario);            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo Nombre Actualizado.", ""));
         }
-        requestContext.update("formularioDatosPersonales");        
+        requestContext.update("formularioDatosPersonales");
+        requestContext.update("tablasUsuarios");
     }
     
     public void mostrarModificarIdentificacion()
@@ -816,8 +817,7 @@ public class VerEditarUsuarioController implements Serializable
         this.campoIdentificacion=false;
         this.campoModificarIdentificacion=true;
         this.identificacion=this.usuario.getUsuidentificacion()+"";
-        requestContext.update("formularioDatosPersonales");
-        
+        requestContext.update("formularioDatosPersonales");        
     }  
     
     public void cancelarActualizarIdentificacion()
@@ -842,6 +842,7 @@ public class VerEditarUsuarioController implements Serializable
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo número de identificación Actualizado.", ""));
         }        
         requestContext.update("formularioDatosPersonales");
+        requestContext.update("tablasUsuarios");
     }
     
     public void mostrarModificarApellidos()
@@ -909,6 +910,7 @@ public class VerEditarUsuarioController implements Serializable
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo fecha nacimiento actualizado.", ""));
         }
         requestContext.update("formularioDatosPersonales");
+        requestContext.update("tablasUsuarios");
     }
     
     public void mostrarModificarCorreo()

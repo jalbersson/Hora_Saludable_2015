@@ -110,6 +110,14 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         
     }
     
+    public List<Usuario> buscarPorIdUsuario(Long usuid)
+    {
+        Query query = getEntityManager().createNamedQuery("Usuario.findByUsuid");
+        query.setParameter("usuid", usuid);
+        List<Usuario> resultList = query.getResultList();
+        return resultList;
+    }
+    
     
     
 }
