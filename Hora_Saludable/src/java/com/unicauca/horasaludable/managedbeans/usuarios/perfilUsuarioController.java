@@ -5,14 +5,27 @@
  */
 package com.unicauca.horasaludable.managedbeans.usuarios;
 
+import com.unicauca.horasaludable.cifrado.Cifrar;
 import com.unicauca.horasaludable.entities.Usuario;
 import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
+import com.unicauca.horasaludable.validadores.ValidarEdicionUsuarios;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -29,15 +42,31 @@ public class perfilUsuarioController implements Serializable
     private SimpleDateFormat sdf;
     private String sexo;
     private String tipo;
+    private String rutaAbsolutaFotos;
+    private UploadedFile foto;    
     private boolean estudiante;    
     private boolean funcionario;
     private boolean familiar;
+    private boolean mostrarFoto;
+    private boolean mostrarEditarFoto;
+    private boolean mostrarTelefono;
+    private boolean mostrarEditarTelefono;
+    private boolean mostrarContrasena;
+    private boolean mostrarEditarContrasena;    
+    private String telefono;
+    private String contrasena;
+    private String confirmarContrasena;   
     
+    
+    private ValidarEdicionUsuarios validarEdicionUsuario;
+      
     
     public perfilUsuarioController() 
     {
         rutaFoto="img/fotosUploads";
+        this.rutaAbsolutaFotos="/home/geovanny/Documentos/Asae/Hora_Saludable_2015/Hora_Saludable/web/resources/img/fotosUploads/";
         this.sdf=new SimpleDateFormat("yyyy-MM-dd");
+        
     }
     
     @PostConstruct
@@ -47,7 +76,108 @@ public class perfilUsuarioController implements Serializable
         this.usuario=this.usuarioEJB.buscarPorIdUsuario(idusuario).get(0);
         this.definirSexo();
         this.definirTipo();
+        this.inicializarCampos();
         
+    }
+    
+    public String getContrasena() 
+    {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) 
+    {
+        this.contrasena = contrasena;
+    }
+
+    public String getConfirmarContrasena() 
+    {
+        return confirmarContrasena;
+    }
+
+    public void setConfirmarContrasena(String confirmarContrasena) 
+    {
+        this.confirmarContrasena = confirmarContrasena;
+    }
+    
+    public boolean isMostrarContrasena()
+    {
+        return mostrarContrasena;
+    }
+
+    public void setMostrarContrasena(boolean mostrarContrasena)
+    {
+        this.mostrarContrasena = mostrarContrasena;
+    }
+
+    public boolean isMostrarEditarContrasena() 
+    {
+        return mostrarEditarContrasena;
+    }
+
+    public void setMostrarEditarContrasena(boolean mostrarEditarContrasena) 
+    {
+        this.mostrarEditarContrasena = mostrarEditarContrasena;
+    }
+    
+    public String getTelefono() 
+    {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) 
+    {
+        this.telefono = telefono;
+    }
+    
+    public boolean isMostrarTelefono()
+    {
+        return mostrarTelefono;
+    }
+
+    public void setMostrarTelefono(boolean mostrarTelefono) 
+    {
+        this.mostrarTelefono = mostrarTelefono;
+    }
+
+    public boolean isMostrarEditarTelefono()
+    {
+        return mostrarEditarTelefono;
+    }
+
+    public void setMostrarEditarTelefono(boolean mostrarEditarTelefono) 
+    {
+        this.mostrarEditarTelefono = mostrarEditarTelefono;
+    }
+    
+    public UploadedFile getFoto() 
+    {
+        return foto;
+    }
+
+    public void setFoto(UploadedFile foto)
+    {
+        this.foto = foto;
+    }
+    
+    public boolean isMostrarFoto() 
+    {
+        return mostrarFoto;
+    }
+
+    public void setMostrarFoto(boolean mostrarFoto) 
+    {
+        this.mostrarFoto = mostrarFoto;
+    }
+
+    public boolean isMostrarEditarFoto() 
+    {
+        return mostrarEditarFoto;
+    }
+
+    public void setMostrarEditarFoto(boolean mostrarEditarFoto)
+    {
+        this.mostrarEditarFoto = mostrarEditarFoto;
     }
     
     public boolean isEstudiante() 
@@ -168,6 +298,187 @@ public class perfilUsuarioController implements Serializable
                 this.familiar=true;
             }
         }
+    }
+    
+    private void inicializarCampos()
+    {
+        this.mostrarFoto=true;
+        this.mostrarEditarFoto=false;
+        this.mostrarTelefono=true;
+        this.mostrarEditarTelefono=false;
+        this.mostrarContrasena=true;
+        this.mostrarEditarContrasena=false;
+    }
+    
+    public void cargarFoto(FileUploadEvent event)
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance(); 
+        this.foto=event.getFile();
+        requestContext.update("formularioPerfilFotoUsuario");        
+        
+    }
+    public void mostraSubirFoto()
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        this.mostrarFoto=false;
+        this.mostrarEditarFoto=true;
+        requestContext.update("formularioPerfilFotoUsuario");
+        requestContext.update("formularioEditarFoto");
+    }
+    
+    public void actualizarFoto() throws InterruptedException
+    {       
+        RequestContext requestContext = RequestContext.getCurrentInstance();        
+        if(this.foto!=null)
+        {
+            this.mostrarFoto=true;
+            this.mostrarEditarFoto=false;            
+            int i = this.foto.getFileName().lastIndexOf('.');            
+            String extension = this.foto.getFileName().substring(i+1);
+            String nombre;
+            if(!this.usuario.getUsufoto().equals("vacio.jpg"))
+            {
+                int indiceImagenAnterior=this.usuario.getUsufoto().lastIndexOf(".");
+                String imagenAnerior=this.usuario.getUsufoto().substring(0, indiceImagenAnterior);
+                int indiceImagenFiltrada=imagenAnerior.lastIndexOf("_");
+                String numerostring=imagenAnerior.substring(indiceImagenFiltrada+1);
+                int numero=Integer.parseInt(numerostring);
+                numero=numero+1;
+                nombre=this.usuario.getUsuidentificacion()+"_"+numero+"."+extension;                
+            }
+            else
+            {
+                nombre=this.usuario.getUsuidentificacion()+"_1."+extension;
+            }
+            
+            
+            try 
+            {
+                this.usuario.setUsufoto(nombre);
+                this.usuarioEJB.edit(usuario);
+                this.GuardarFoto(nombre, this.foto.getInputstream());
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Foto Actualizada.", "Foto Actualizada."));
+            } catch (IOException e) 
+            {
+                e.printStackTrace();
+            }
+            Thread.sleep(2000);
+            this.foto=null;            
+            
+        }
+        else
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se ha cargado una foto.", "No se ha cargado una foto"));
+        }
+        requestContext.update("formularioPerfilFotoUsuario");
+        requestContext.update("formularioEditarFoto");
+    }    
+    public void cancelarSubirFoto()
+    {        
+        RequestContext requestContext = RequestContext.getCurrentInstance(); 
+        this.mostrarFoto=true;
+        this.mostrarEditarFoto=false;
+        this.foto=null;
+        requestContext.update("formularioPerfilFotoUsuario");
+        requestContext.update("formularioEditarFoto");
+        
+    }
+    private void GuardarFoto(String filename, InputStream in)
+    {
+       try 
+       { 
+            OutputStream out = new FileOutputStream(new File(this.rutaAbsolutaFotos + filename));              
+            int read = 0;
+            byte[] bytes = new byte[1024];              
+            while ((read = in.read(bytes)) != -1) 
+            {
+                out.write(bytes, 0, read);
+            }              
+            in.close();
+            out.flush();
+            out.close();
+       } catch (IOException e)
+       {
+            System.out.println(e.getMessage());
+       } 
+    }
+    
+    public void mostrarModificarTelefono()
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        this.mostrarTelefono=false;
+        this.mostrarEditarTelefono=true;
+        if(this.usuario.getUsutelefono()!=null)
+        {
+            this.telefono=this.usuario.getUsutelefono()+"";
+        }        
+        requestContext.update("formularioPerfilDatosPersonales");
+    }
+    
+    public void cancelarActualizarTelefono()
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        this.mostrarTelefono=true;
+        this.mostrarEditarTelefono=false;
+        this.telefono="";
+        requestContext.update("formularioPerfilDatosPersonales");
+    }
+    
+    public void actualizarTelefono()
+    {
+        this.validarEdicionUsuario= new ValidarEdicionUsuarios();
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        if(this.validarEdicionUsuario.validarTelefono(this.telefono))
+        {
+            this.mostrarTelefono=true;
+            this.mostrarEditarTelefono=false;
+            if(!this.telefono.isEmpty())
+            {
+                BigInteger bi= new BigInteger(this.telefono);
+                this.usuario.setUsutelefono(bi);
+            }
+            else
+            {
+                this.usuario.setUsutelefono(null);
+            }
+            this.usuarioEJB.edit(this.usuario);            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo teléfono actualizado.", ""));
+        }
+        requestContext.update("formularioPerfilDatosPersonales");        
+    }
+    
+    public void mostrarModificarContrasena()
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        this.mostrarContrasena=false;
+        this.mostrarEditarContrasena=true;
+              
+        requestContext.update("formularioPerfilDatosCuenta");
+    }
+    public void cancelarActualizarContrasena()
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        this.mostrarContrasena=true;
+        this.mostrarEditarContrasena=false;
+        this.contrasena="";
+        this.confirmarContrasena="";
+        requestContext.update("formularioPerfilDatosCuenta");
+    }
+    public void cambiarContrasena()
+    {
+        this.validarEdicionUsuario= new ValidarEdicionUsuarios();
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        if(this.validarEdicionUsuario.validarContrasenaConConfirmacion(this.contrasena,this.confirmarContrasena))
+        {
+            this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));
+            this.usuarioEJB.edit(this.usuario);
+            this.mostrarContrasena=true;
+            this.mostrarEditarContrasena=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Se cambio la contraseña correctamente.", ""));
+
+        }
+        requestContext.update("formularioPerfilDatosCuenta");
+        
     }
     
 }

@@ -239,4 +239,53 @@ public class ValidarEdicionUsuarios implements Serializable
         }                    
     }
     
+    public boolean validarContrasenaConConfirmacion(String contrasena,String confirmarContrasena)
+    {  
+        if(confirmarContrasena.isEmpty() && contrasena.isEmpty())
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo contraseña obligatorio.", "Campo contraseña obligatorio."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo confirmar contraseña obligatorio.", "Campo confirmar contraseña obligatorio."));
+            return false;
+        }
+        if(contrasena.isEmpty())
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo contraseña obligatorio.", "Campo contraseña obligatorio."));
+            return false;
+        }
+        else
+        {
+            if(confirmarContrasena.isEmpty())
+            {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo confirmar contraseña obligatorio.", "Campo confirmar contraseña obligatorio."));
+                return false;
+            }
+            else 
+            {
+                if (contrasena.length() < 6) 
+                {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo contraseña minimo 6 caracteres.", "Campo contraseña minimo 6 caracteres."));
+                    return false;
+                } else 
+                {
+                    if (contrasena.length() > 20) 
+                    {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo contraseña maximo 20 caracteres.", "Campo contraseña maximo 20 caracteres."));
+                        return false;
+                    }
+                    else
+                    {
+                        if(!contrasena.equals(confirmarContrasena))
+                        {
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden.", "Las contraseñas no coinciden."));
+                            return false;
+                        }
+                        return true;
+                    }
+                    
+                }
+            }
+            
+        }                    
+    }
+    
 }
