@@ -72,7 +72,7 @@ public class perfilUsuarioController implements Serializable
     @PostConstruct
     private void init()
     {
-        Long idusuario=Long.parseLong("20141227");
+        Long idusuario=Long.parseLong("20141223");
         this.usuario=this.usuarioEJB.buscarPorIdUsuario(idusuario).get(0);
         this.definirSexo();
         this.definirTipo();

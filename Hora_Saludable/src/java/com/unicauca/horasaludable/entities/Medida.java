@@ -86,6 +86,10 @@ public class Medida implements Serializable {
     private float medpeso;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "MEDTALLA")
+    private float medtalla;   
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "MEDTRICEPS")
     private float medtriceps;
     @Basic(optional = false)
@@ -191,10 +195,11 @@ public class Medida implements Serializable {
         this.medid = medid;
     }
 
-    public Medida(Long medid, Date medfecha, float medpeso, float medtriceps, float medsubescapular, float medsuprailiaco, float medabdominal, float medmuslo, float medpantorilla, float medperimetromuneca, float medperimetrocabeza, float meddiametrobiacromial, float meddiametrobiltiocristal, float meddiametrohumero, float meddiametrofemur, float medperimetrobrazo, float meddiametroantebrazo, float medperimetropantorrilla, float medperimetrocajatoraxica, float medperimetromuslo, float medpulso0, float medpulso1, float medpulso2, float medflexibilidad, float medembergadura, float medsaltomaximo, float medsaltoreal) {
+    public Medida(Long medid, Date medfecha, float medpeso,float medtalla,float medtriceps, float medsubescapular, float medsuprailiaco, float medabdominal, float medmuslo, float medpantorilla, float medperimetromuneca, float medperimetrocabeza, float meddiametrobiacromial, float meddiametrobiltiocristal, float meddiametrohumero, float meddiametrofemur, float medperimetrobrazo, float meddiametroantebrazo, float medperimetropantorrilla, float medperimetrocajatoraxica, float medperimetromuslo, float medpulso0, float medpulso1, float medpulso2, float medflexibilidad, float medembergadura, float medsaltomaximo, float medsaltoreal) {
         this.medid = medid;
         this.medfecha = medfecha;
         this.medpeso = medpeso;
+        this.medtalla=medtalla;
         this.medtriceps = medtriceps;
         this.medsubescapular = medsubescapular;
         this.medsuprailiaco = medsuprailiaco;
@@ -219,6 +224,7 @@ public class Medida implements Serializable {
         this.medembergadura = medembergadura;
         this.medsaltomaximo = medsaltomaximo;
         this.medsaltoreal = medsaltoreal;
+        
     }
 
     public Long getMedid() {
@@ -251,6 +257,16 @@ public class Medida implements Serializable {
 
     public void setMedpeso(float medpeso) {
         this.medpeso = medpeso;
+    }
+    
+     public float getMedtalla() 
+    {
+        return medtalla;
+    }
+
+    public void setMedtalla(float medtalla) 
+    {
+        this.medtalla = medtalla;
     }
 
     public float getMedtriceps() {
