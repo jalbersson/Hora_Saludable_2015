@@ -7,11 +7,15 @@ package com.unicauca.horasaludable.managedbeans.usuarios;
 
 import com.unicauca.horasaludable.cifrado.Cifrar;
 import com.unicauca.horasaludable.entities.Cargo;
+import com.unicauca.horasaludable.entities.Grupo;
 import com.unicauca.horasaludable.entities.Unidadacademica;
 import com.unicauca.horasaludable.entities.Usuario;
+import com.unicauca.horasaludable.entities.Usuariogrupo;
+import com.unicauca.horasaludable.entities.UsuariogrupoPK;
 import com.unicauca.horasaludable.jpacontrollers.CargoFacade;
 import com.unicauca.horasaludable.jpacontrollers.UnidadacademicaFacade;
 import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
+import com.unicauca.horasaludable.jpacontrollers.UsuariogrupoFacade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +47,8 @@ public class RegistrarUsuarioController implements Serializable {
     private UsuarioFacade usuarioEJB;
    @EJB
     private CargoFacade cargoEJB;
+   @EJB
+    private UsuariogrupoFacade usuarioGrupoEJB;
     private List<String> listaTipo;
     private boolean camposRegistroEstudiante;
     private boolean camposRegistroFuncionario;    
@@ -449,11 +455,20 @@ public class RegistrarUsuarioController implements Serializable {
            }
            else
            {
+              
+               
                this.usuario.setUsuidentificacion(Long.parseLong(this.numeroIdentificacion));
-               this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));
+               this.usuario.setUsucontrasena(Cifrar.sha256(this.contrasena));
                this.usuario.setConyugeid(this.funcionario);
                this.usuario.setUsufoto("vacio.jpg");
                this.usuarioEJB.create(this.usuario);            
+               Usuariogrupo usuarioGrupo= new Usuariogrupo();
+               UsuariogrupoPK usuarioGrupoPK= new UsuariogrupoPK();
+               usuarioGrupoPK.setGruid("user");
+               usuarioGrupoPK.setUsuid(this.usuario.getUsuid());
+               usuarioGrupo.setUsuariogrupoPK(usuarioGrupoPK);
+               usuarioGrupo.setUsunombreusuario(this.usuario.getUsunombreusuario());
+               this.usuarioGrupoEJB.create(usuarioGrupo);
                
                RequestContext requestContext = RequestContext.getCurrentInstance();
                FacesContext context = FacesContext.getCurrentInstance();
@@ -486,10 +501,18 @@ public class RegistrarUsuarioController implements Serializable {
                this.usuario.setUniid(this.unidadAcademica);
            }
            
+           
            this.usuario.setUsuidentificacion(Long.parseLong(this.numeroIdentificacion));
-           this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));
+           this.usuario.setUsucontrasena(Cifrar.sha256(this.contrasena));
            this.usuario.setUsufoto("vacio.jpg");
-           this.usuarioEJB.create(this.usuario);            
+           this.usuarioEJB.create(this.usuario);  
+           Usuariogrupo usuarioGrupo= new Usuariogrupo();
+           UsuariogrupoPK usuarioGrupoPK= new UsuariogrupoPK();
+           usuarioGrupoPK.setGruid("user");
+           usuarioGrupoPK.setUsuid(this.usuario.getUsuid());
+           usuarioGrupo.setUsuariogrupoPK(usuarioGrupoPK);
+           usuarioGrupo.setUsunombreusuario(this.usuario.getUsunombreusuario());
+           this.usuarioGrupoEJB.create(usuarioGrupo);
            
            
            RequestContext requestContext = RequestContext.getCurrentInstance(); 

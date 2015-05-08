@@ -21,4 +21,29 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <security-constraint>
+        <display-name>user pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>perfil usuario</web-resource-name>
+            <description/>
+            <url-pattern>/usuario/usuarios/*</url-pattern>
+            <url-pattern>/faces/usuario/usuarios/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>user</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>asaeJDBCRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/error.xhtml</form-login-page>
+            <form-error-page>/error.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>usuarios normales</description>
+        <role-name>user</role-name>
+    </security-role>
 </web-app>

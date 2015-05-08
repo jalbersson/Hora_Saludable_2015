@@ -23,6 +23,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -71,13 +72,22 @@ public class perfilUsuarioController implements Serializable
     
     @PostConstruct
     private void init()
-    {
-        Long idusuario=Long.parseLong("20141223");
-        this.usuario=this.usuarioEJB.buscarPorIdUsuario(idusuario).get(0);
+    {        
+        this.buscarUsuario();
         this.definirSexo();
         this.definirTipo();
         this.inicializarCampos();
         
+    }
+    
+    private void buscarUsuario()
+    {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
+        if (req.getUserPrincipal() != null)
+        {
+            this.usuario=this.usuarioEJB.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0);
+        }
     }
     
     public String getContrasena() 
@@ -470,7 +480,7 @@ public class perfilUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.validarEdicionUsuario.validarContrasenaConConfirmacion(this.contrasena,this.confirmarContrasena))
         {
-            this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));
+            this.usuario.setUsucontrasena(Cifrar.sha256(this.contrasena));
             this.usuarioEJB.edit(this.usuario);
             this.mostrarContrasena=true;
             this.mostrarEditarContrasena=false;

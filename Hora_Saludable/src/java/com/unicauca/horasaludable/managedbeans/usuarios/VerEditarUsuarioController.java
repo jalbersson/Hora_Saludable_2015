@@ -4,9 +4,11 @@ import com.unicauca.horasaludable.cifrado.Cifrar;
 import com.unicauca.horasaludable.entities.Cargo;
 import com.unicauca.horasaludable.entities.Unidadacademica;
 import com.unicauca.horasaludable.entities.Usuario;
+import com.unicauca.horasaludable.entities.Usuariogrupo;
 import com.unicauca.horasaludable.jpacontrollers.CargoFacade;
 import com.unicauca.horasaludable.jpacontrollers.UnidadacademicaFacade;
 import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
+import com.unicauca.horasaludable.jpacontrollers.UsuariogrupoFacade;
 import com.unicauca.horasaludable.validadores.ValidarEdicionUsuarios;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,6 +43,8 @@ public class VerEditarUsuarioController implements Serializable
     private CargoFacade cargoEJB;
     @EJB
     private UnidadacademicaFacade unidadAcademicaEJB;
+    @EJB
+    private UsuariogrupoFacade usuarioGrupoEJB;
     private MostrarUsuariosController mostraUsuariosController;
     private Usuario usuario;
     private boolean camposFuncionario;
@@ -1017,7 +1021,8 @@ public class VerEditarUsuarioController implements Serializable
             this.campoNombreUsuario=true;
             this.campoModificarNombreUsuario=false;
             this.usuario.setUsunombreusuario(this.nombreUsuario);
-            this.usuarioEJB.edit(this.usuario);            
+            this.usuarioEJB.edit(this.usuario);
+            this.usuarioGrupoEJB.actualizarNombreUsuario("user",this.usuario.getUsuid(), this.usuario.getUsunombreusuario());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo nombre de usuario actualizado.", ""));
         }
         requestContext.update("formularioDatosPersonales");        
@@ -1048,7 +1053,7 @@ public class VerEditarUsuarioController implements Serializable
         {
             this.campoContrasena=true;
             this.campoModificarContrasena=false;
-            this.usuario.setUsucontrasena(Cifrar.sha512(this.contrasena));
+            this.usuario.setUsucontrasena(Cifrar.sha256(this.contrasena));
             this.usuarioEJB.edit(this.usuario);            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo contraseña actualizado.", ""));
         }

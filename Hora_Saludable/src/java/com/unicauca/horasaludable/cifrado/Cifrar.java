@@ -30,4 +30,24 @@ public class Cifrar
         }
         return sb.toString();
     }
+    public static String sha256(String cadena)
+    {
+        StringBuilder sb= new StringBuilder();
+        try
+        {
+            MessageDigest md= MessageDigest.getInstance("SHA-256");
+            md.update(cadena.getBytes());
+            
+            byte[] mb=md.digest();
+            for(int i=0; i< mb.length;i++)
+            {
+                sb.append(Integer.toString((mb[i] & 0xff)+ 0x100,16).substring(1));
+            }
+            
+        }catch(NoSuchAlgorithmException ex)
+        {
+            
+        }
+        return sb.toString();
+    }
 }

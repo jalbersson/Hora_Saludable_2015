@@ -38,6 +38,14 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         return !resultList.isEmpty();        
     }
     
+    public List<Usuario> retornarBuscarPorNombreUsuario(String nombreUsuario)
+    {
+        Query query = getEntityManager().createNamedQuery("Usuario.findByUsunombreusuario");
+        query.setParameter("usunombreusuario", nombreUsuario);
+        List<Usuario> resultList = query.getResultList();
+        return resultList;
+    }
+    
     public boolean buscarPorNumeroIdentificacion(Long numeroIdentificacion)
     {
         Query query = getEntityManager().createNamedQuery("Usuario.findByUsuidentificacion");

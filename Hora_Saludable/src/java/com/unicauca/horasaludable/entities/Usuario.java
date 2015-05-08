@@ -99,7 +99,7 @@ public class Usuario implements Serializable {
     private String usunombreusuario;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 256)
+    @Size(min = 1, max = 250)
     @Column(name = "USUCONTRASENA")
     private String usucontrasena;
     @Basic(optional = false)
@@ -112,28 +112,25 @@ public class Usuario implements Serializable {
     @Size(max = 150)
     @Column(name = "USUFOTO")
     private String usufoto;
-    @JoinTable(name = "USUARIOGRUPO", joinColumns = {
-        @JoinColumn(name = "USUID", referencedColumnName = "USUID")}, inverseJoinColumns = {
-        @JoinColumn(name = "GRUID", referencedColumnName = "GRUID")})
-    @ManyToMany
-    private List<Grupo> grupoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Detalleasistencia> detalleasistenciaList;
-    @JoinColumn(name = "CARID", referencedColumnName = "CARID")
-    @ManyToOne
-    private Cargo carid;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuid")
+    private List<Medida> medidaList;
     @OneToMany(mappedBy = "conyugeid")
     private List<Usuario> usuarioList;
     @JoinColumn(name = "CONYUGEID", referencedColumnName = "USUID")
     @ManyToOne
     private Usuario conyugeid;
+    @JoinColumn(name = "CARID", referencedColumnName = "CARID")
+    @ManyToOne
+    private Cargo carid;
     @JoinColumn(name = "UNIID", referencedColumnName = "UNIID")
     @ManyToOne
     private Unidadacademica uniid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Detalleasistencia> detalleasistenciaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Usuariogrupo> usuariogrupoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Detalleinscripcion> detalleinscripcionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuid")
-    private List<Medida> medidaList;
 
     public Usuario() {
     }
@@ -243,29 +240,12 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<Grupo> getGrupoList() {
-        return grupoList;
+    public List<Medida> getMedidaList() {
+        return medidaList;
     }
 
-    public void setGrupoList(List<Grupo> grupoList) {
-        this.grupoList = grupoList;
-    }
-
-    @XmlTransient
-    public List<Detalleasistencia> getDetalleasistenciaList() {
-        return detalleasistenciaList;
-    }
-
-    public void setDetalleasistenciaList(List<Detalleasistencia> detalleasistenciaList) {
-        this.detalleasistenciaList = detalleasistenciaList;
-    }
-
-    public Cargo getCarid() {
-        return carid;
-    }
-
-    public void setCarid(Cargo carid) {
-        this.carid = carid;
+    public void setMedidaList(List<Medida> medidaList) {
+        this.medidaList = medidaList;
     }
 
     @XmlTransient
@@ -285,6 +265,14 @@ public class Usuario implements Serializable {
         this.conyugeid = conyugeid;
     }
 
+    public Cargo getCarid() {
+        return carid;
+    }
+
+    public void setCarid(Cargo carid) {
+        this.carid = carid;
+    }
+
     public Unidadacademica getUniid() {
         return uniid;
     }
@@ -294,21 +282,30 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    public List<Detalleasistencia> getDetalleasistenciaList() {
+        return detalleasistenciaList;
+    }
+
+    public void setDetalleasistenciaList(List<Detalleasistencia> detalleasistenciaList) {
+        this.detalleasistenciaList = detalleasistenciaList;
+    }
+
+    @XmlTransient
+    public List<Usuariogrupo> getUsuariogrupoList() {
+        return usuariogrupoList;
+    }
+
+    public void setUsuariogrupoList(List<Usuariogrupo> usuariogrupoList) {
+        this.usuariogrupoList = usuariogrupoList;
+    }
+
+    @XmlTransient
     public List<Detalleinscripcion> getDetalleinscripcionList() {
         return detalleinscripcionList;
     }
 
     public void setDetalleinscripcionList(List<Detalleinscripcion> detalleinscripcionList) {
         this.detalleinscripcionList = detalleinscripcionList;
-    }
-
-    @XmlTransient
-    public List<Medida> getMedidaList() {
-        return medidaList;
-    }
-
-    public void setMedidaList(List<Medida> medidaList) {
-        this.medidaList = medidaList;
     }
 
     @Override
@@ -330,7 +327,6 @@ public class Usuario implements Serializable {
         }
         return true;
     }
-
     @Override
     public String toString() {
         return "com.unicauca.horasaludable.entities.Usuario[ usuid=" + usuid + " ]";
