@@ -15,6 +15,7 @@ import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
 import com.unicauca.horasaludable.jpacontrollers.UsuariogrupoFacade;
 import com.unicauca.horasaludable.managedbeans.usuarios.MostrarUsuariosController;
 import com.unicauca.horasaludable.validadores.ValidarEdicionUsuarios;
+import java.io.IOException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -306,7 +307,7 @@ public class MostrarUsuarioTestController {
     }
     
     
-    public void estudianteSeleccionado(Usuario estudiante)
+    public void estudianteSeleccionado(Usuario estudiante) throws IOException
     {
        
         RequestContext requestContext = RequestContext.getCurrentInstance();
@@ -314,7 +315,8 @@ public class MostrarUsuarioTestController {
        
         this.campoFoto=true;
      
-                         
+               
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/administrador/medidas/GestionTest.xhtml");
         
     }
    
