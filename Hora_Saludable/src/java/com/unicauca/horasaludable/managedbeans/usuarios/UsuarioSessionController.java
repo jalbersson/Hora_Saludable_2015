@@ -1,6 +1,9 @@
 package com.unicauca.horasaludable.managedbeans.usuarios;
 
+import com.unicauca.horasaludable.jpacontrollers.UsuariogrupoFacade;
+import java.io.IOException;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.ViewHandler;
@@ -10,6 +13,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -20,8 +24,11 @@ import org.primefaces.context.RequestContext;
 @SessionScoped
 public class UsuarioSessionController implements Serializable
 {
+    @EJB
+    private UsuariogrupoFacade usuarioGrupoEJB;
     String nombreDeUsuario;    
-    String contrasena;    
+    String contrasena;
+    
     
     public UsuarioSessionController()
     {
@@ -46,28 +53,53 @@ public class UsuarioSessionController implements Serializable
     {
         this.contrasena = contrasena;
     }
-    
-    public String login() {
-
+       
+    public void login()throws IOException, ServletException 
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
         FacesContext fc = FacesContext.getCurrentInstance();
-        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
-        //only login if not already logged in...
-        
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();        
         if (req.getUserPrincipal() == null) {
-            try {
+            try 
+            {
                 req.login(this.nombreDeUsuario, this.contrasena);
                 req.getServletContext().log("Autenticacion exitosa");
-            } catch (ServletException e) 
+                if(this.usuarioGrupoEJB.buscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0).getUsuariogrupoPK().getGruid().equals("user"))
+                {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("");
+                }
+                else
+                {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/administrador/contenidos/principal.xhtml");
+                }
+            } 
+            catch (ServletException e) 
             {
                 fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "FAILED", "Authentication failed"));
-                return "";
+                requestContext.update("formularioInicioSession");                
             }
-        } else {
+        } 
+        else 
+        {
             req.getServletContext().log("El usuario ya estaba logueado:  ");
+            requestContext.update("formularioInicioSession");
         }
-        //read the user data from db and return to caller
-        fc.addMessage(null, new FacesMessage("SUCCESS"));
-        return "/index";
+    }
+    
+    public void logout() throws IOException, ServletException 
+    {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+        try {
+            req.logout();            
+            req.getSession().invalidate();
+            fc.getExternalContext().invalidateSession();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/");
+
+        } catch (ServletException e) {            
+            fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "FAILED", "Logout failed on backend"));            
+        }
+        
     }
     
     public void ventanaInicioSession()
@@ -100,8 +132,36 @@ public class UsuarioSessionController implements Serializable
         if (req.getUserPrincipal() == null) 
         {
             return false;
+            
         }
-        return true;
+        else
+        {
+            if(this.usuarioGrupoEJB.buscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0).getUsuariogrupoPK().getGruid().equals("user"))
+            {
+                return true;
+            }
+            return false;
+        }
+        
+    }
+    public boolean esAdministrador()
+    {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
+        if (req.getUserPrincipal() == null) 
+        {
+            return false;
+            
+        }
+        else
+        {
+            if(this.usuarioGrupoEJB.buscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0).getUsuariogrupoPK().getGruid().equals("admin"))
+            {
+                return true;
+            }
+            return false;
+        }
+        
     }
     public String nombreUsuario()
     {
