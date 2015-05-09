@@ -49,8 +49,17 @@
                                 </h:link>
                                 <p:menu rendered="#{usuarioSessionController.esusuarioConSession()}" overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">        
                                     <p:menuitem value="Mi Perfil" outcome="/faces/usuario/usuarios/perfilUsuario"  />
-                                    <p:menuitem value="Cerrar Sesión" />
-                                </p:menu>                           
+                                    <p:menuitem value="Cerrar Sesión" action="#{usuarioSessionController.logout()}" />
+                                </p:menu> 
+                                
+                                <h:link rendered="#{usuarioSessionController.esAdministrador()}" id="opcionesadministrador" style="text-decoration: none;color:#FFFFFF; ">
+                                    #{usuarioSessionController.nombreUsuario()}
+                                    <p:graphicImage style="width:20px; margin:0;margin-left: 5px;" library="img" name="usuario.png"/>
+                                </h:link>
+                                <p:menu rendered="#{usuarioSessionController.esAdministrador()}" overlay="true" trigger="opcionesadministrador"  my="left top" at="left bottom">        
+                                    <p:menuitem value="Mi Perfil"   />
+                                    <p:menuitem value="Cerrar Sesión" action="#{usuarioSessionController.logout()}" />
+                                </p:menu> 
                             </h:form>
                         </ui:insert>                       
                     </div>
