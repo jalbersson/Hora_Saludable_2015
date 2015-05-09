@@ -93,20 +93,24 @@
                             </p:column>
                             <p:column headerText="Cargo Funcionario" rendered="#{listasUsuariosMedidasController.habilitarFamiliares}">
                                 #{usuarios.conyugeid.carid.carnombre}
+                                
                             </p:column>
-                            <p:column headerText="Acciones" width="90">
-                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{listasUsuariosMedidasController.habilitarFamiliares}" >                                    
+                            <p:column headerText="Gestionionar Test" width="90">
+                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{mostrarUsuarioTestController.estudianteSeleccionado(usuarios)}" >                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
                                 </p:commandLink>                                
-                                <h:link id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
-                                    <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>                                    
-                                </h:link>
+                            
                             </p:column>
+                            
+                            
                         </p:dataTable>
                     </p:panel>                    
                 </h:form>
                 <p:separator/>
+                  <ui:include src="ventanaEfectodeCarga.xhtml"/>          
+                <ui:include src="ventanaVerEditarUsuario.xhtml"/>  
             </ui:define>
+            
         </ui:composition>
 
     </body>
