@@ -70,7 +70,7 @@ public class UsuarioSessionController implements Serializable
                 }
                 else
                 {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("faces/administrador/contenidos/principal.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/administrador/contenidos/principal.xhtml");
                 }
             } 
             catch (ServletException e) 
