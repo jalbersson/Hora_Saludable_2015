@@ -15,71 +15,93 @@
             </ui:define>
 
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Asistencia personal <br></br>
-                </div>
+                
             </ui:define>
 
-            <ui:define name="body">
-                <h:form>
-
-
-                    <p:breadCrumb>
-                        <p:menuitem value="Inicio" url="../../index.xhtml" />                              
-                        <p:menuitem value="Asistencia personal" outcome="asistencia-personal" />                                        
-                    </p:breadCrumb>
-                    <p:spacer height="20"/>
-                    <p:panel header="Información personal">
-                        <p:dataGrid var="usu" value="#{asistencia_usuarios_con_session.obtener_usuario_usuid()}">
-                            <h:panelGrid columns="2" cellpadding="5" >
-                                <p:outputLabel id="lblNombre" value="Nombres y Apellidos:" />
+            <ui:define name="body">               
+                
+                <div class="submenu">
+                    <h5>MENU USUARIO</h5>
+                    <h:form>
+                        <h:link style="text-decoration: none;" outcome="/faces/usuario/usuarios/perfilUsuario" >
+                            <div class="botonSubmenu">
+                                Mi Perfil
+                            </div>
+                        </h:link>                  
+                        <h:link style="text-decoration: none;" > 
+                            <div class="botonSubmenu">
+                                Medidas
+                            </div>
+                        </h:link>
+                        <h:link style="text-decoration: none;" outcome="/faces/usuario/asistencia/asistencia-personal"> 
+                            <div class="botonSubmenu">
+                                Asistencia
+                            </div>
+                        </h:link> 
+                    </h:form>                    
+                </div>
+                <div style="margin-left: 200px; margin-top: 10px;">                    
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" url="../../index.xhtml" />                              
+                            <p:menuitem value="Asistencia personal" outcome="asistencia-personal" />                                        
+                        </p:breadCrumb>
+                        <div class="tituloContenido">                           
+                            Asistencia personal 
+                        </div>                        
+                        <p:spacer height="20"/>
+                        <p:panel header="Información personal">
+                            <p:dataGrid var="usu" value="#{asistencia_usuarios_con_session.obtener_usuario_usuid()}">
+                                <h:panelGrid columns="2" cellpadding="5" >
+                                    <p:outputLabel id="lblNombre" value="Nombres y Apellidos:" />
                                 #{usu.usunombres}  #{usu.usuapellidos}
 
 
-                                <p:outputLabel id="lblSexo" value="Sexo:" />
+                                    <p:outputLabel id="lblSexo" value="Sexo:" />
                                 #{usu.usugenero}
 
-                                <p:outputLabel id="lblCodigo" value="Código:" />
+                                    <p:outputLabel id="lblCodigo" value="Código:" />
                                 #{usu.usuidentificacion}
 
-                                <p:outputLabel id="lblProgramaAcademico" value="Facultad:" />
+                                    <p:outputLabel id="lblProgramaAcademico" value="Facultad:" />
                                 #{usu.uniid.uninombre}
 
-                                <p:outputLabel id="lblEstamento" value="Estamento:" />
+                                    <p:outputLabel id="lblEstamento" value="Estamento:" />
                                 #{usu.carid.carnombre}
-                            </h:panelGrid>
-                        </p:dataGrid>
-                    </p:panel>
-                    <p:spacer height="30"/>
-                    <p:panel header="Asistencia">
-                        <br />
-                        <p:spacer height="25"/>
-
-
-                        <h:panelGrid columns="1" cellpadding="5">
-                            <p:outputLabel value="En el siguiente calendario, las fechas resaltadas en azul representa los dias en que asistió al programa Hora Saludable" />
-                            <p:schedule value="#{asistencia_usuarios_con_session.eventModel}" >
-                            </p:schedule>
+                                </h:panelGrid>
+                            </p:dataGrid>
+                        </p:panel>
+                        <p:spacer height="30"/>
+                        <p:panel header="Asistencia">
                             <br />
-                            <p:outputLabel value="A continuación se muestra una gráfica donde se refleja su asistencia al programa Hora Saludable" />
-                            <p:selectOneMenu value="#{asistencia_usuarios_con_session.anioElegido}">
-                                
-                                <f:selectItem itemLabel="2015" itemValue="2015" />
-                                <f:selectItem itemLabel="2014" itemValue="2014" />
-                                <f:selectItem itemLabel="2013" itemValue="2013" />
-                                <f:selectItem itemLabel="2012" itemValue="2012" />
-                                <p:ajax update="Barra"  />
-                            </p:selectOneMenu>
-                            <p:barChart id="Barra" value="#{asistencia_usuarios_con_session.estadisticas()}" legendPosition="ne"
-                                         title="Asistencia 2014" style="height:300px; width: 500px;"
-                                         xaxisLabel="Meses" yaxisLabel="Total días" />
-                        </h:panelGrid>
+                            <p:spacer height="25"/>
+
+
+                            <h:panelGrid columns="1" cellpadding="5">
+                                <p:outputLabel value="En el siguiente calendario, las fechas resaltadas en azul representa los dias en que asistió al programa Hora Saludable" />
+                                <p:schedule value="#{asistencia_usuarios_con_session.eventModel}" >
+                                </p:schedule>
+                                <br />
+                                <p:outputLabel value="A continuación se muestra una gráfica donde se refleja su asistencia al programa Hora Saludable" />
+                                <p:selectOneMenu value="#{asistencia_usuarios_con_session.anioElegido}">
+
+                                    <f:selectItem itemLabel="2015" itemValue="2015" />
+                                    <f:selectItem itemLabel="2014" itemValue="2014" />
+                                    <f:selectItem itemLabel="2013" itemValue="2013" />
+                                    <f:selectItem itemLabel="2012" itemValue="2012" />
+                                    <p:ajax update="Barra"  />
+                                </p:selectOneMenu>
+                                <p:barChart id="Barra" value="#{asistencia_usuarios_con_session.estadisticas()}" legendPosition="ne"
+                                            title="Asistencia 2014" style="height:300px; width: 500px;"
+                                            xaxisLabel="Meses" yaxisLabel="Total días" />
+                            </h:panelGrid>
 
 
 
-                    </p:panel>
-                </h:form>
+                        </p:panel>
+                    </h:form>
+                </div>
+                <div style="clear: both;"></div>
             </ui:define>
         </ui:composition>
     </body>

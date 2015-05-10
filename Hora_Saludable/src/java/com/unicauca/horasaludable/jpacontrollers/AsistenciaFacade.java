@@ -39,4 +39,12 @@ public class AsistenciaFacade extends AbstractFacade<Asistencia> {
        return resultList;
     }
     
+    public List<Usuario> retornarBuscarPorNombreUsuario(String nombreUsuario)
+    {
+        Query query = getEntityManager().createNamedQuery("Usuario.findByUsunombreusuario");
+        query.setParameter("usunombreusuario", nombreUsuario);
+        List<Usuario> resultList = query.getResultList();
+        return resultList;
+    }
+    
 }
