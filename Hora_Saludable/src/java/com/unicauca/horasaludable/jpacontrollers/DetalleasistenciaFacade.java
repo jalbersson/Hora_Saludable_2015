@@ -30,7 +30,7 @@ public class DetalleasistenciaFacade extends AbstractFacade<Detalleasistencia> {
         super(Detalleasistencia.class);
     }
     
-    public List<Detalleasistencia> obtenerAsisUsuid(int usuid){
+    public List<Detalleasistencia> obtenerAsisUsuid(Long usuid){
         try
         {
             String queryString = "SELECT t FROM Detalleasistencia t "+
@@ -44,4 +44,6 @@ public class DetalleasistenciaFacade extends AbstractFacade<Detalleasistencia> {
            // em.close();
         }
     }
+    
+    
 }

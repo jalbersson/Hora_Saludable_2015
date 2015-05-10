@@ -11,7 +11,7 @@
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Historial de tests
+                Gestion Test
             </ui:define>
 
             <ui:define name="CuadroDeBotonesSesion">
@@ -29,12 +29,14 @@
                     </p:breadCrumb>
                 </h:form>
                 </p:panel>
+                    <p:separator style="width: 100%;"/>
                 <p:outputLabel styleClass="titulomediciones" value="Gestion de Mediciones" />
-                <p:separator style="width: 100%;"/>
+                <br></br>     <br></br>     <br></br><br></br>     <br></br>     <br></br>
+            
 
             </ui:define>
-
-            <ui:define name="body">
+          
+            <ui:define name="body" >
 
 
                 <p:dialog showEffect="fade" hideEffect="explode" position="center" widgetVar="agregartest" header="Agregar Nuevo Test" modal="true">
@@ -139,12 +141,11 @@
                     </p:panelGrid> 
 
 
-                    <p:panelGrid columns="2" style="float: right; margin-top: 30px; ">
-                        <f:facet name="header">
-                            <p:commandButton  value="Agregar Nuevo Test" type="button" onclick="PF('agregartest').show();" icon="ui-icon-disk" />
-                            <p:commandButton  value="Ver Historial" type="button" icon="ui-icon-refresh" /> 
-                        </f:facet>
-                    </p:panelGrid> 
+                     <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="400" width="80%">
+                                    <h3>Test 1</h3><object type="application/pdf" data="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/consultaTest.xhtml" height="500px" width="100%">
+                                        Your browser can't display pdf, <a href="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/consultaTest.xhtml">click</a> to download pdf instead.
+                                    </object>
+                                </p:dialog>   
                 </div>
                 <p:panelGrid styleClass="tablas">
 
@@ -179,18 +180,13 @@
                             <p:link value=" Editar " outcome="Test">
                             </p:link>
 
-
-
-                        <p:link value=" Imprimir " onclick="PF('dlg2').show();"> </p:link>
-
-
+                               <p:commandButton value="Imprimir" type="button" onclick="PF('dlg2').show();" />
 
                                 <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="400" width="80%">
-                                    <h3>PDF</h3><object type="application/pdf" data="http://ccia.ei.uvigo.es/docencia/SCS/1112/jee/ejemploJSF.pdf" height="500px" width="100%">
-                                        Your browser can't display pdf, <a href="http://ccia.ei.uvigo.es/docencia/SCS/1112/jee/ejemploJSF.pdf">click</a> to download pdf instead.
+                                    <h3>Test 1</h3><object type="application/pdf" data="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/consultaTest.xhtml" height="500px" width="100%">
+                                        Your browser can't display pdf, <a href="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/consultaTest.xhtml">click</a> to download pdf instead.
                                     </object>
                                 </p:dialog>   
-                   
 
                             <p:link value=" Eliminar " outcome="Test">
                             </p:link>                      
@@ -210,18 +206,13 @@
                             <p:link value=" Editar ">
                             </p:link>
 
-                       <p:link value=" Imprimir " onclick="PF('dlg2').show();"> </p:link>
-
-
-
-                                <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="400" width="80%">
-                                    <h3>PDF</h3><object type="application/pdf" data="http://ccia.ei.uvigo.es/docencia/SCS/1112/jee/ejemploJSF.pdf" height="500px" width="100%">
-                                        Your browser can't display pdf, <a href="http://ccia.ei.uvigo.es/docencia/SCS/1112/jee/ejemploJSF.pdf">click</a> to download pdf instead.
+                       <p:commandButton value="Imprimir" type="button" onclick="PF('dlg2').show();" />
+                                <p:dialog header="Imprimir Resultado Test" widgetVar="dlg2" modal="true" height="400" width="80%">
+                                    <h3>Test numero1</h3><object type="" data="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/consultaTest.xhtml" height="500px" width="100%">
+                                        Your browser can't display pdf, <a href="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/consultaTest.xhtml">click</a> to download pdf instead.
                                     </object>
                                 </p:dialog>   
                          
-
-
 
 
                             <p:link value=" Eliminar ">
