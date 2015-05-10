@@ -49,7 +49,7 @@
                     <h:panelGrid style="margin-bottom: 10px;" rendered="#{listasUsuariosMedidasController.habilitarTablaUsuarios}" columns="3">                      
                        
                         
-                        <h:outputLabel class="CampoLabel" value="Identificacion del Funcionario:" />
+                        <h:outputLabel class="CampoLabel" value="Identificacion:" />
                         <p:inputText style="width: 240px;" value="#{listasUsuariosMedidasController.identificacion}"  >
                             <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarporIdentificacion}" />                                
                         </p:inputText>  
@@ -57,7 +57,7 @@
                         
                          <h:outputLabel class="CampoLabel" value="" />                      
                         
-                        <h:outputLabel class="CampoLabel" value="Nombre del Funcionario:" />
+                        <h:outputLabel class="CampoLabel" value="Nombre: " />
                         <p:inputText style="width: 240px;" value="#{listasUsuariosMedidasController.nombreUsuario}"  >
                             <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarPorNombreUsuario}" />                                
                         </p:inputText>                                                   
@@ -107,8 +107,7 @@
                     </p:panel>                    
                 </h:form>
                 <p:separator/>
-                          
-                <!--<ui:include src="GestionTest.xhtml"/>  -->
+              
             </ui:define>
             
         </ui:composition>

@@ -21,12 +21,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -48,7 +46,7 @@ public class MostrarUsuarioTestController {
     private MostrarUsuariosController mostraUsuariosController;
     private Usuario usuario;
    
-    private String usuarioSeleccionado;
+
     private String rutaFoto;
     private String rutaAbsolutaFotos;
     private UploadedFile foto;
@@ -57,10 +55,19 @@ public class MostrarUsuarioTestController {
     private String apellidos;
     private Date fechaNacimiento;
     private SimpleDateFormat sdf;
-    private String correo;
-    private String telefono;
-    private String nombreUsuario;
-    private String contrasena;
+    private float peso;
+
+    public float getPeso() {
+        return peso;
+    }
+
+    public void setPeso(float peso) {
+        this.peso = peso;
+    }
+
+
+
+
     private String tipoUsuario;
     private List<Cargo> listaCargo;    
     private List<Unidadacademica> listaUnidadAcademica;
@@ -79,7 +86,7 @@ public class MostrarUsuarioTestController {
         this.campoFoto = campoFoto;
     }
     
-    private ValidarEdicionUsuarios validarEdicionUsuario;
+   
     
        
     public MostrarUsuarioTestController() 
@@ -170,50 +177,9 @@ public class MostrarUsuarioTestController {
         this.tipoUsuario = tipoUsuario;
     }
     
-  
-
-    public String getContrasena()
-    {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) 
-    {
-        this.contrasena = contrasena;
-    }
-    
     
 
-    public String getNombreUsuario() 
-    {
-        return nombreUsuario;
-    }
 
-    public void setNombreUsuario(String nombreUsuario) 
-    {
-        this.nombreUsuario = nombreUsuario;
-    }
-    
-
-    public String getTelefono()
-    {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) 
-    {
-        this.telefono = telefono;
-    }
-   
-    public String getCorreo() 
-    {
-        return correo;
-    }
-
-    public void setCorreo(String correo)
-    {
-        this.correo = correo;
-    }
     
     public SimpleDateFormat getSdf()
     {
@@ -310,9 +276,7 @@ public class MostrarUsuarioTestController {
     public void estudianteSeleccionado(Usuario estudiante) throws IOException
     {
        
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.usuario=estudiante; 
-       
+        this.usuario=estudiante;
         this.campoFoto=true;
      
                

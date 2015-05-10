@@ -28,11 +28,14 @@
                         <p:menuitem value="Test" url="#" />
                     </p:breadCrumb>
                 </h:form>
+                   
                 </p:panel>
-                <p:outputLabel styleClass="titulomediciones" value="Gestion de Test" />
-                <p:separator style="width: 100%;"/>
+                    <p:separator style="width: 100%;"/>   
+                    <p:outputLabel styleClass="titulomediciones" value="Gestion de Test" /><br></br><br></br>
+             
+           
             </ui:define>
-
+ 
             <ui:define name="body">
 
                 <p:panelGrid styleClass="fichapersonal">
@@ -42,32 +45,32 @@
                             <p:outputLabel styleClass="subtitulotabla" value="Nombre:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="Mario Alberto Posada Rincon" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usunombres}" />
                         </p:column>
+                    </p:row>
+                       <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Apellidos:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuapellidos}" />
+                        </p:column>                      
                     </p:row>
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="1061487921" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
                         </p:column>
                     </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Perfil:" />
-                        </p:column>
-                        <p:column >
-                            <p:outputLabel styleClass="fuentefichatabla" value="Docente" />
-                        </p:column>
-
-                    </p:row>
+                   
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="M" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usugenero}" />
                         </p:column>
                     </p:row>
                     <p:row>
@@ -75,7 +78,7 @@
                             <p:outputLabel styleClass="subtitulotabla" value="Peso:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="65 kg" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{medidasController.medicionactual.medpeso} Kg" />
                         </p:column>
                     </p:row>
                     <p:row>
@@ -83,27 +86,23 @@
                             <p:outputLabel styleClass="subtitulotabla" value="Talla:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="170 cm" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{medidasController.medicionactual.medtalla} Cm" />
                         </p:column>
                     </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Deporte:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="Atletismo" />
-                        </p:column>
-                    </p:row>
+                 
                 </p:panelGrid>
 
                 <h:form>
                     <p:growl for="msg" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
-                    <p:commandLink styleClass="imagenmedidas2">
+                    
+                         <p:commandLink id="imagenmedidas2" actionListener="#{medidasController.redireccionar(medicionactual)}">
+                             
                         <p:panelGrid columns="1" style="margin: 0 auto">
                             <h:graphicImage name="img/Imprimir.PNG" />
                         </p:panelGrid>
                     </p:commandLink>
-
+             
+                    
 
                     <p:accordionPanel id="acord" styleClass="acciones" style="margin: 0 auto">
                         <p:tab title="Mediciones" >
@@ -316,8 +315,6 @@
                                 <h:graphicImage name="img/Comentarios.PNG" />
                             </p:commandLink>
 
-
-
                         </p:tab>
 
                     </p:accordionPanel>
@@ -329,7 +326,10 @@
                     </h:panelGrid> 
 
                 </h:form>
-
+             
+                <ui:include src="ventanaEfectodeCarga.xhtml"/>  
+                <ui:include src="VistaImprimirMedida.xhtml"/>  
+                
             </ui:define>
 
         </ui:composition>

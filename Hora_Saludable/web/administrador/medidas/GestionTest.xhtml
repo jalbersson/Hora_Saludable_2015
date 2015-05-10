@@ -90,15 +90,7 @@
                             <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
                         </p:column>
                     </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Perfil:" />
-                        </p:column>
-                        <p:column >
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usugenero}" />
-                        </p:column>
-
-                    </p:row>
+                  
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
@@ -112,7 +104,7 @@
                             <p:outputLabel styleClass="subtitulotabla" value="Peso:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="65 kg" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{medidasController.medicionactual.medpeso} Kg" />
                         </p:column>
                     </p:row>
                     <p:row>
@@ -120,17 +112,10 @@
                             <p:outputLabel styleClass="subtitulotabla" value="Talla:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="170 cm" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{medidasController.medicionactual.medtalla} cm" />
                         </p:column>
                     </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Deporte:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="Atletismo" />
-                        </p:column>
-                    </p:row>
+                  
                 </p:panelGrid>
                  <p:growl for="msggestion" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
                 <div>
@@ -142,8 +127,8 @@
 
 
                      <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="400" width="80%">
-                                    <h3>Test 1</h3><object type="application/pdf" data="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/consultaTest.xhtml" height="500px" width="100%">
-                                        Your browser can't display pdf, <a href="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/consultaTest.xhtml">click</a> to download pdf instead.
+                                    <h3>Test 1</h3><object type="application/pdf" data="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/Test.xhtml" height="500px" width="100%">
+                                        Your browser can't display pdf, <a href="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/Test.xhtml">click</a> to download pdf instead.
                                     </object>
                                 </p:dialog>   
                 </div>
@@ -183,8 +168,8 @@
                                <p:commandButton value="Imprimir" type="button" onclick="PF('dlg2').show();" />
 
                                 <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="400" width="80%">
-                                    <h3>Test 1</h3><object type="application/pdf" data="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/consultaTest.xhtml" height="500px" width="100%">
-                                        Your browser can't display pdf, <a href="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/consultaTest.xhtml">click</a> to download pdf instead.
+                                    <h3>Test 1</h3><object type="application/pdf" data="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/Test.xhtml" height="500px" width="100%">
+                                        Your browser can't display pdf, <a href="http://localhost:8080/Hora_Saludable/faces/administrador/medidas/Test.xhtml">click</a> to download pdf instead.
                                     </object>
                                 </p:dialog>   
 
