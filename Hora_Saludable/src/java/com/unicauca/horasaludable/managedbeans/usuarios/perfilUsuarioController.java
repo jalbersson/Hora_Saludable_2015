@@ -48,12 +48,9 @@ public class perfilUsuarioController implements Serializable
     private boolean estudiante;    
     private boolean funcionario;
     private boolean familiar;
-    private boolean mostrarFoto;
-    private boolean mostrarEditarFoto;
-    private boolean mostrarTelefono;
-    private boolean mostrarEditarTelefono;
-    private boolean mostrarContrasena;
-    private boolean mostrarEditarContrasena;    
+    private boolean mostrarFoto;    
+    private boolean mostrarTelefono;    
+    private boolean mostrarContrasena;      
     private String telefono;
     private String contrasena;
     private String confirmarContrasena;   
@@ -118,17 +115,7 @@ public class perfilUsuarioController implements Serializable
     public void setMostrarContrasena(boolean mostrarContrasena)
     {
         this.mostrarContrasena = mostrarContrasena;
-    }
-
-    public boolean isMostrarEditarContrasena() 
-    {
-        return mostrarEditarContrasena;
-    }
-
-    public void setMostrarEditarContrasena(boolean mostrarEditarContrasena) 
-    {
-        this.mostrarEditarContrasena = mostrarEditarContrasena;
-    }
+    }    
     
     public String getTelefono() 
     {
@@ -148,17 +135,7 @@ public class perfilUsuarioController implements Serializable
     public void setMostrarTelefono(boolean mostrarTelefono) 
     {
         this.mostrarTelefono = mostrarTelefono;
-    }
-
-    public boolean isMostrarEditarTelefono()
-    {
-        return mostrarEditarTelefono;
-    }
-
-    public void setMostrarEditarTelefono(boolean mostrarEditarTelefono) 
-    {
-        this.mostrarEditarTelefono = mostrarEditarTelefono;
-    }
+    }    
     
     public UploadedFile getFoto() 
     {
@@ -178,17 +155,7 @@ public class perfilUsuarioController implements Serializable
     public void setMostrarFoto(boolean mostrarFoto) 
     {
         this.mostrarFoto = mostrarFoto;
-    }
-
-    public boolean isMostrarEditarFoto() 
-    {
-        return mostrarEditarFoto;
-    }
-
-    public void setMostrarEditarFoto(boolean mostrarEditarFoto)
-    {
-        this.mostrarEditarFoto = mostrarEditarFoto;
-    }
+    }    
     
     public boolean isEstudiante() 
     {
@@ -312,12 +279,9 @@ public class perfilUsuarioController implements Serializable
     
     private void inicializarCampos()
     {
-        this.mostrarFoto=true;
-        this.mostrarEditarFoto=false;
-        this.mostrarTelefono=true;
-        this.mostrarEditarTelefono=false;
-        this.mostrarContrasena=true;
-        this.mostrarEditarContrasena=false;
+        this.mostrarFoto=true;        
+        this.mostrarTelefono=true;        
+        this.mostrarContrasena=true;        
     }
     
     public void cargarFoto(FileUploadEvent event)
@@ -330,8 +294,7 @@ public class perfilUsuarioController implements Serializable
     public void mostraSubirFoto()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.mostrarFoto=false;
-        this.mostrarEditarFoto=true;
+        this.mostrarFoto=false;        
         requestContext.update("formularioPerfilFotoUsuario");
         requestContext.update("formularioEditarFoto");
     }
@@ -341,8 +304,7 @@ public class perfilUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();        
         if(this.foto!=null)
         {
-            this.mostrarFoto=true;
-            this.mostrarEditarFoto=false;            
+            this.mostrarFoto=true;                        
             int i = this.foto.getFileName().lastIndexOf('.');            
             String extension = this.foto.getFileName().substring(i+1);
             String nombre;
@@ -386,8 +348,7 @@ public class perfilUsuarioController implements Serializable
     public void cancelarSubirFoto()
     {        
         RequestContext requestContext = RequestContext.getCurrentInstance(); 
-        this.mostrarFoto=true;
-        this.mostrarEditarFoto=false;
+        this.mostrarFoto=true;        
         this.foto=null;
         requestContext.update("formularioPerfilFotoUsuario");
         requestContext.update("formularioEditarFoto");
@@ -416,8 +377,7 @@ public class perfilUsuarioController implements Serializable
     public void mostrarModificarTelefono()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.mostrarTelefono=false;
-        this.mostrarEditarTelefono=true;
+        this.mostrarTelefono=false;        
         if(this.usuario.getUsutelefono()!=null)
         {
             this.telefono=this.usuario.getUsutelefono()+"";
@@ -428,8 +388,7 @@ public class perfilUsuarioController implements Serializable
     public void cancelarActualizarTelefono()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.mostrarTelefono=true;
-        this.mostrarEditarTelefono=false;
+        this.mostrarTelefono=true;        
         this.telefono="";
         requestContext.update("formularioPerfilDatosPersonales");
     }
@@ -440,8 +399,7 @@ public class perfilUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.validarEdicionUsuario.validarTelefono(this.telefono))
         {
-            this.mostrarTelefono=true;
-            this.mostrarEditarTelefono=false;
+            this.mostrarTelefono=true;            
             if(!this.telefono.isEmpty())
             {
                 BigInteger bi= new BigInteger(this.telefono);
@@ -460,16 +418,13 @@ public class perfilUsuarioController implements Serializable
     public void mostrarModificarContrasena()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.mostrarContrasena=false;
-        this.mostrarEditarContrasena=true;
-              
+        this.mostrarContrasena=false;             
         requestContext.update("formularioPerfilDatosCuenta");
     }
     public void cancelarActualizarContrasena()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.mostrarContrasena=true;
-        this.mostrarEditarContrasena=false;
+        this.mostrarContrasena=true;        
         this.contrasena="";
         this.confirmarContrasena="";
         requestContext.update("formularioPerfilDatosCuenta");
@@ -482,8 +437,7 @@ public class perfilUsuarioController implements Serializable
         {
             this.usuario.setUsucontrasena(Cifrar.sha256(this.contrasena));
             this.usuarioEJB.edit(this.usuario);
-            this.mostrarContrasena=true;
-            this.mostrarEditarContrasena=false;
+            this.mostrarContrasena=true;            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Se cambio la contraseña correctamente.", ""));
 
         }

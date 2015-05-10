@@ -21,12 +21,16 @@
                         <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
                             <p:row>
                                 <p:column>
-                                    <h:outputLabel class="CampoLabelObligatorios" value="* Campos Obligatorios" />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
+                                    <h:outputLabel class="CampoLabelObligatorios" value=" Campos Obligatorios" />
                                 </p:column>                                
                             </p:row>                            
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="tipo" value="Tipo: *" />
+                                    <h:outputLabel class="CampoLabel" for="tipo" value="Tipo: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:selectOneMenu id="tipo"  style="width:125px" 
@@ -43,7 +47,9 @@
                             </p:row>
                             <p:row rendered="#{registrarUsuarioController.camposRegistroFuncionario}">
                                 <p:column style="text-align:right">
-                                    <h:outputLabel  class="CampoLabel" for="cargo" value="Cargo: *" />
+                                    <h:outputLabel  class="CampoLabel" for="cargo" value="Cargo: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:selectOneMenu id="cargo"  style="width:125px" required="true" 
@@ -62,7 +68,9 @@
                             </p:row>
                             <p:row rendered="#{registrarUsuarioController.camposRegistroFuncionarioDocente}">
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="dependenciaDocente" value="Dependencia: *" />
+                                    <h:outputLabel class="CampoLabel" for="dependenciaDocente" value="Dependencia: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:selectOneMenu id="dependenciaDocente"  style="width:160px"                                                          
@@ -80,7 +88,9 @@
                             </p:row>
                             <p:row rendered="#{registrarUsuarioController.camposRegistroFuncionarioAdministrativo}">
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="dependenciaAdministrativo" value="Dependencia: *" />
+                                    <h:outputLabel class="CampoLabel" for="dependenciaAdministrativo" value="Dependencia: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:selectOneMenu id="dependenciaAdministrativo"  style="width:160px"                                                          
@@ -97,7 +107,9 @@
                             </p:row>                           
                             <p:row id="filaFacultad" rendered="#{registrarUsuarioController.camposRegistroEstudiante}">
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="facultad" value="Facultad: *" />
+                                    <h:outputLabel class="CampoLabel" for="facultad" value="Facultad: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:selectOneMenu id="facultad"  style="width:160px"  
@@ -116,7 +128,9 @@
 
                             <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel"  value="Funcionario: *" />
+                                    <h:outputLabel class="CampoLabel"  value="Funcionario: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>                                
                                     <p:commandButton value="seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic" 
@@ -128,7 +142,9 @@
                             </p:row>
                             <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
                                 <p:column style="text-align:right;height: 30px;">
-                                    <h:outputLabel class="CampoLabel" for="nombreFuncionario" value="Nombre Funcionario: *" />
+                                    <h:outputLabel class="CampoLabel" for="nombreFuncionario" value="Nombre Funcionario: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:outputLabel style="font-size:15px;" 
@@ -143,21 +159,23 @@
                             </p:row>
                             <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
                                 <p:column style="text-align:right;height:30px; ">
-                                    <h:outputLabel class="CampoLabel" for="dependenciaFuncionario" value="Dependencia Funcionario: *" />
+                                    <h:outputLabel class="CampoLabel" for="dependenciaFuncionario" value="Dependencia Funcionario: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:outputLabel  style="font-size:15px; width: 160px;" 
                                                     id="dependenciaFuncionario" 
-                                                    value="#{registrarUsuarioController.funcionario.uniid.uninombre}"/>                             
-
-
+                                                    value="#{registrarUsuarioController.funcionario.uniid.uninombre}"/>
                                 </p:column>
                                 <p:column>                                        
                                 </p:column>
                             </p:row>                                                            
                             <p:row>
                                 <p:column style="text-align: right;">                                       
-                                    <h:outputLabel class="CampoLabel" for="fechaNacimiento" value="Fecha de Nacimiento: *" />
+                                    <h:outputLabel class="CampoLabel" for="fechaNacimiento" value="Fecha de Nacimiento: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:calendar value="#{registrarUsuarioController.usuario.usufechanacimiento}" size="10" id="fechaNacimiento"  required="true" 
@@ -172,7 +190,9 @@
                             </p:row>
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="numeroIdentificacion" value="No. Identificación: *" />
+                                    <h:outputLabel class="CampoLabel" for="numeroIdentificacion" value="No. Identificación: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:inputText style="width: 110px;font-size:15px" 
@@ -187,7 +207,9 @@
                             </p:row>
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="nombres" value="Nombres: *" />
+                                    <h:outputLabel class="CampoLabel" for="nombres" value="Nombres: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:inputText style="width: 140px;font-size:15px" 
@@ -202,7 +224,9 @@
                             </p:row>
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="apellidos" value="Apellidos: *" />
+                                    <h:outputLabel class="CampoLabel" for="apellidos" value="Apellidos: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:inputText style="width: 140px;font-size:15px" 
@@ -217,7 +241,9 @@
                             </p:row>
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="nombreUsuario" value="Nombre Usuario: *" />
+                                    <h:outputLabel class="CampoLabel" for="nombreUsuario" value="Nombre Usuario: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:inputText style="width: 120px;font-size:15px" 
@@ -232,7 +258,9 @@
                             </p:row>
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="contrasena" value="Contraseña: *" />
+                                    <h:outputLabel class="CampoLabel" for="contrasena" value="Contraseña: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:password style="width: 120px;font-size:15px" 
@@ -258,7 +286,9 @@
                             </p:row>
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="confirmarContrasena" value="Confirmar Contraseña: *" />
+                                    <h:outputLabel class="CampoLabel" for="confirmarContrasena" value="Confirmar Contraseña: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:password  style="width: 120px;font-size:15px" 
@@ -273,7 +303,9 @@
                             </p:row>
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="correoElectronico" value="Correo Electrónico: *" />
+                                    <h:outputLabel class="CampoLabel" for="correoElectronico" value="Correo Electrónico: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:inputText style="width: 180px;font-size:15px" 
@@ -304,7 +336,9 @@
                             </p:row>
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="sexo" value="Sexo: * " />
+                                    <h:outputLabel class="CampoLabel" for="sexo" value="Sexo: " />
+                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                                   value="*"/>
                                 </p:column>
                                 <p:column>
                                     <p:selectOneRadio    id="sexo" value="#{registrarUsuarioController.usuario.usugenero}" required="true" requiredMessage="Seleccione Sexo.">

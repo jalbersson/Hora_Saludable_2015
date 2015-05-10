@@ -27,16 +27,14 @@ public class MostrarUsuariosController implements Serializable {
     private UsuarioFacade usuarioEJB;
     
     private List<String> listaTiposdeUsuario;
-    private List<Usuario> listaestudiantes;    
-    private List<Usuario> listaFuncionarios;
-    private List<Usuario> listaFamiliares;
-    
+    private List<Usuario> listaUsuarios; 
     private boolean habilitarEstudiantes;    
     private boolean habilitarFuncionarios;
     private boolean habilitarFamiliares;
-    private String nombreFuncionario;
-    private String nombreEstudiante;
-    private String nombreFamiliar;
+    private boolean habilitarTablaUsuarios;
+    
+    private String nombreUsuario;
+    
     
     public MostrarUsuariosController() 
     {
@@ -47,36 +45,26 @@ public class MostrarUsuariosController implements Serializable {
     {
         this.cargarListaTiposUsuarios();
         this.InicializarValores();
-    }
+    }   
     
-    public String getNombreFamiliar() 
+    public boolean isHabilitarTablaUsuarios()
     {
-        return nombreFamiliar;
+        return habilitarTablaUsuarios;
     }
 
-    public void setNombreFamiliar(String nombreFamiliar) 
+    public void setHabilitarTablaUsuarios(boolean habilitarTablaUsuarios)
     {
-        this.nombreFamiliar = nombreFamiliar;
+        this.habilitarTablaUsuarios = habilitarTablaUsuarios;
     }
     
-    public String getNombreEstudiante() 
+    public String getNombreUsuario() 
     {
-        return nombreEstudiante;
+        return nombreUsuario;
     }
 
-    public void setNombreEstudiante(String nombreEstudiante) 
+    public void setNombreUsuario(String nombreUsuario) 
     {
-        this.nombreEstudiante = nombreEstudiante;
-    }
-    
-    public String getNombreFuncionario() 
-    {
-        return nombreFuncionario;
-    }
-
-    public void setNombreFuncionario(String nombreFuncionario) 
-    {
-        this.nombreFuncionario = nombreFuncionario;
+        this.nombreUsuario = nombreUsuario;
     }
     
     public List<String> getListaTiposdeUsuario() 
@@ -89,35 +77,10 @@ public class MostrarUsuariosController implements Serializable {
         this.listaTiposdeUsuario = listaTiposdeUsuario;
     }
     
-    public List<Usuario> getListaestudiantes() 
+    public List<Usuario> getListaUsuarios() 
     {
-        return listaestudiantes;
-    }
-
-    public void setListaestudiantes(List<Usuario> listaestudiantes)
-    {
-        this.listaestudiantes = listaestudiantes;
-    }
-
-    public List<Usuario> getListaFuncionarios()
-    {
-        return listaFuncionarios;
-    }
-
-    public void setListaFuncionarios(List<Usuario> listaFuncionarios)
-    {
-        this.listaFuncionarios = listaFuncionarios;
-    }
-
-    public List<Usuario> getListaFamiliares() 
-    {
-        return listaFamiliares;
-    }
-
-    public void setListaFamiliares(List<Usuario> listaFamiliares) 
-    {
-        this.listaFamiliares = listaFamiliares;
-    }
+        return listaUsuarios;
+    }   
     
     public boolean isHabilitarEstudiantes()
     {
@@ -162,6 +125,7 @@ public class MostrarUsuariosController implements Serializable {
         this.habilitarEstudiantes=false;
         this.habilitarFamiliares=false;
         this.habilitarFuncionarios=false;
+        this.habilitarTablaUsuarios=false;
     }
     
     public void cambiarTipoUsuario(ValueChangeEvent e)
@@ -170,42 +134,47 @@ public class MostrarUsuariosController implements Serializable {
         this.habilitarEstudiantes=false;
         this.habilitarFuncionarios=false;
         this.habilitarFamiliares=false;
-        this.listaFamiliares=null;
-        this.listaFuncionarios=null;
-        this.listaestudiantes=null;
-        this.nombreEstudiante=null;
-        this.nombreFuncionario=null;
-        this.nombreFamiliar=null;
+        this.habilitarTablaUsuarios=false;
+        this.nombreUsuario=null;
         if(tipo.equals("Funcionarios"))
         {
             this.habilitarFuncionarios=true;
-            this.listaFuncionarios=this.usuarioEJB.buscarPorUsuariosConCargo();
+            this.habilitarTablaUsuarios=true;
+            this.listaUsuarios=this.usuarioEJB.buscarPorUsuariosConCargo();
         }
         if(tipo.equals("Familiares"))
         {
             this.habilitarFamiliares=true;
-            this.listaFamiliares=this.usuarioEJB.buscarPorFamiliares();
+            this.habilitarTablaUsuarios=true;
+            this.listaUsuarios=this.usuarioEJB.buscarPorFamiliares();
         }
         if(tipo.equals("Estudiantes"))
         {
             this.habilitarEstudiantes=true;
-            this.listaestudiantes=this.usuarioEJB.buscarPorEstudiantes();
+            this.habilitarTablaUsuarios=true;
+            this.listaUsuarios=this.usuarioEJB.buscarPorEstudiantes();
         }
     }    
        
-    public void buscarPorNombreFuncionario()
+    public void buscarPorNombreUsuario()
     {
-        this.listaFuncionarios=usuarioEJB.busacarPorNombreFuncionario(this.nombreFuncionario);
-    }
+        if(this.habilitarEstudiantes==true)
+        {
+            this.listaUsuarios=usuarioEJB.busacarPorNombreEstudiante(this.nombreUsuario);
+        }
+        else
+        {
+            if(this.habilitarFamiliares==true)
+            {
+                this.listaUsuarios=usuarioEJB.busacarPorNombreFamiliar(this.nombreUsuario);
+ 
+            }
+            else
+            {
+                this.listaUsuarios=usuarioEJB.busacarPorNombreFuncionario(this.nombreUsuario);
+            }
+        }
+    }  
     
-    public void buscarPorNombreEstudiante()
-    {
-        this.listaestudiantes=usuarioEJB.busacarPorNombreEstudiante(this.nombreEstudiante);
-    }
-    
-    public void buscarPorNombreFamiliar()
-    {
-        this.listaFamiliares=usuarioEJB.busacarPorNombreFamiliar(this.nombreFamiliar);
-    }
     
 }

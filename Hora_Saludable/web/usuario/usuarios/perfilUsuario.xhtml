@@ -63,14 +63,14 @@
                                         <p:column rendered="#{perfilUsuarioController.mostrarFoto}">
                                             <p:commandLink style="color: blue;" action="#{perfilUsuarioController.mostraSubirFoto()}" value="Cambiar"/>
                                         </p:column>
-                                        <p:column  rendered="#{perfilUsuarioController.mostrarEditarFoto}">
+                                        <p:column  rendered="#{!perfilUsuarioController.mostrarFoto}">
                                             <p:fileUpload  fileUploadListener="#{perfilUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
                                                            label="Cargar" auto="true"  
                                                            sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                                                            onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"
                                                            />                              
                                         </p:column>
-                                        <p:column rendered="#{perfilUsuarioController.mostrarEditarFoto}">
+                                        <p:column rendered="#{!perfilUsuarioController.mostrarFoto}">
                                             <p:outputLabel value="#{perfilUsuarioController.foto.fileName}"/>
                                         </p:column>
                                     </p:row>                           
@@ -80,11 +80,11 @@
                         </div>
                         <div style="float:left;margin-top: 50px;">
                             <h:form id="formularioEditarFoto">
-                                <p:commandLink rendered="#{perfilUsuarioController.mostrarEditarFoto}"
+                                <p:commandLink rendered="#{!perfilUsuarioController.mostrarFoto}"
                                                action="#{perfilUsuarioController.actualizarFoto()}"
                                                style="color:blue;"  value="Aceptar"
                                                onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
-                                <p:commandLink rendered="#{perfilUsuarioController.mostrarEditarFoto}" 
+                                <p:commandLink rendered="#{!perfilUsuarioController.mostrarFoto}" 
                                                style="margin-left:10px; color:blue;"  value="Cancelar" action="#{perfilUsuarioController.cancelarSubirFoto()}"
                                                onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
                             </h:form>
@@ -147,10 +147,10 @@
                                     <p:column rendered="#{perfilUsuarioController.mostrarTelefono}">
                                         <p:commandLink style="color: blue;" value="Modificar" action="#{perfilUsuarioController.mostrarModificarTelefono()}"/>
                                     </p:column>
-                                    <p:column rendered="#{perfilUsuarioController.mostrarEditarTelefono}">
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarTelefono}">
                                         <p:inputText value="#{perfilUsuarioController.telefono}"/>  
                                     </p:column>
-                                    <p:column rendered="#{perfilUsuarioController.mostrarEditarTelefono}">
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarTelefono}">
                                         <p:commandLink style="color: blue;" value="Aceptar" action="#{perfilUsuarioController.actualizarTelefono()}"
                                                        onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                         <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
@@ -185,7 +185,7 @@
                                     <p:column rendered="#{perfilUsuarioController.mostrarContrasena}">
                                         <p:outputLabel style="font-size: 15px; font-style: italic" value="Contraseña: "/>
                                     </p:column>
-                                    <p:column rendered="#{perfilUsuarioController.mostrarEditarContrasena}">
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarContrasena}">
                                         <p:outputLabel style="font-size: 15px; font-style: italic" value="Contraseña:"/>
                                         <p:outputLabel style="font-size: 15px; font-style: italic;color:red;" value="* "/>
                                     </p:column>
@@ -195,10 +195,10 @@
                                     <p:column rendered="#{perfilUsuarioController.mostrarContrasena}">
                                         <p:commandLink style="color: blue;" value="Cambiar" action="#{perfilUsuarioController.mostrarModificarContrasena()}"/>
                                     </p:column>
-                                    <p:column rendered="#{perfilUsuarioController.mostrarEditarContrasena}">
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarContrasena}">
                                         <p:password style="width: 120px;" value="#{perfilUsuarioController.contrasena}"/>  
                                     </p:column>
-                                    <p:column rendered="#{perfilUsuarioController.mostrarEditarContrasena}">
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarContrasena}">
                                         <p:commandLink style="color: blue;" value="Aceptar" action="#{perfilUsuarioController.cambiarContrasena()}" 
                                                        onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                         <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
@@ -206,14 +206,14 @@
                                                        onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                     </p:column>
                                 </p:row>
-                                <p:row rendered="#{perfilUsuarioController.mostrarEditarContrasena}">
+                                <p:row rendered="#{!perfilUsuarioController.mostrarContrasena}">
                                     <p:column>                                        
                                     </p:column>
                                     <p:column>
                                         <h:outputLabel class="CampoLabelEspecificacion"   value="Entre 6 y 20 caracteres AlfaNumericos." />
                                     </p:column>
                                 </p:row>
-                                <p:row rendered="#{perfilUsuarioController.mostrarEditarContrasena}">
+                                <p:row rendered="#{!perfilUsuarioController.mostrarContrasena}">
                                     <p:column>
                                         <p:outputLabel style="font-size: 15px; font-style: italic" value="Confirmar Contraseña:"/>
                                         <p:outputLabel style="font-size: 15px; font-style: italic;color:red;" value="* "/>

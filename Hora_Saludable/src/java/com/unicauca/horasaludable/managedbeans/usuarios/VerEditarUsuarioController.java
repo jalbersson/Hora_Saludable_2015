@@ -4,7 +4,6 @@ import com.unicauca.horasaludable.cifrado.Cifrar;
 import com.unicauca.horasaludable.entities.Cargo;
 import com.unicauca.horasaludable.entities.Unidadacademica;
 import com.unicauca.horasaludable.entities.Usuario;
-import com.unicauca.horasaludable.entities.Usuariogrupo;
 import com.unicauca.horasaludable.jpacontrollers.CargoFacade;
 import com.unicauca.horasaludable.jpacontrollers.UnidadacademicaFacade;
 import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
@@ -49,25 +48,16 @@ public class VerEditarUsuarioController implements Serializable
     private Usuario usuario;
     private boolean camposFuncionario;
     private boolean camposEstudiante;
-    private boolean camposFamiliar;
-    private boolean camposubidaFoto;
+    private boolean camposFamiliar;    
     private boolean campoFoto;
-    private boolean campoNombre;    
-    private boolean campoModificarNombre;
+    private boolean campoFechaNacimiento;
     private boolean campoIdentificacion;
-    private boolean campoApellidos;    
-    private boolean campoModificarApellidos;
-    private boolean campoModificarIdentificacion;
-    private boolean campoFechaNacimiento;   
-    private boolean campoModificarFechaNacimiento;
-    private boolean campoCorreo;    
-    private boolean campoModificarCorreo;
-    private boolean campotelefono;   
-    private boolean campoModificarTefelfono;
-    private boolean campoNombreUsuario;    
-    private boolean campoModificarNombreUsuario;
-    private boolean campoContrasena;
-    private boolean campoModificarContrasena;
+    private boolean campoNombre;
+    private boolean campoApellidos;
+    private boolean campoCorreo;
+    private boolean campotelefono;
+    private boolean campoNombreUsuario;
+    private boolean campoContrasena;    
     private boolean modificarDatosAcademicos;    
     private boolean aceptarCancelarModificarDatosAcademicos;
     private boolean modificarDatosFuncionario;
@@ -245,17 +235,7 @@ public class VerEditarUsuarioController implements Serializable
     {
         this.campoContrasena = campoContrasena;
     }
-
-    public boolean isCampoModificarContrasena() 
-    {
-        return campoModificarContrasena;
-    }
-
-    public void setCampoModificarContrasena(boolean campoModificarContrasena)
-    {
-        this.campoModificarContrasena = campoModificarContrasena;
-    }
-
+    
     public String getContrasena()
     {
         return contrasena;
@@ -274,17 +254,7 @@ public class VerEditarUsuarioController implements Serializable
     public void setCampoNombreUsuario(boolean campoNombreUsuario)
     {
         this.campoNombreUsuario = campoNombreUsuario;
-    }
-
-    public boolean isCampoModificarNombreUsuario() 
-    {
-        return campoModificarNombreUsuario;
-    }
-
-    public void setCampoModificarNombreUsuario(boolean campoModificarNombreUsuario) 
-    {
-        this.campoModificarNombreUsuario = campoModificarNombreUsuario;
-    }
+    }   
 
     public String getNombreUsuario() 
     {
@@ -304,17 +274,7 @@ public class VerEditarUsuarioController implements Serializable
     public void setCampotelefono(boolean campotelefono) 
     {
         this.campotelefono = campotelefono;
-    }
-
-    public boolean isCampoModificarTefelfono() 
-    {
-        return campoModificarTefelfono;
-    }
-
-    public void setCampoModificarTefelfono(boolean campoModificarTefelfono) 
-    {
-        this.campoModificarTefelfono = campoModificarTefelfono;
-    }
+    }    
 
     public String getTelefono()
     {
@@ -334,17 +294,7 @@ public class VerEditarUsuarioController implements Serializable
     public void setCampoCorreo(boolean campoCorreo) 
     {
         this.campoCorreo = campoCorreo;
-    }
-
-    public boolean isCampoModificarCorreo() 
-    {
-        return campoModificarCorreo;
-    }
-
-    public void setCampoModificarCorreo(boolean campoModificarCorreo)
-    {
-        this.campoModificarCorreo = campoModificarCorreo;
-    }
+    }    
 
     public String getCorreo() 
     {
@@ -384,17 +334,7 @@ public class VerEditarUsuarioController implements Serializable
     public void setCampoFechaNacimiento(boolean campoFechaNacimiento)
     {
         this.campoFechaNacimiento = campoFechaNacimiento;
-    }
-
-    public boolean isCampoModificarFechaNacimiento() 
-    {
-        return campoModificarFechaNacimiento;
-    }
-
-    public void setCampoModificarFechaNacimiento(boolean campoModificarFechaNacimiento) 
-    {
-        this.campoModificarFechaNacimiento = campoModificarFechaNacimiento;
-    }
+    }    
     
     public String getApellidos() 
     {
@@ -414,17 +354,7 @@ public class VerEditarUsuarioController implements Serializable
     public void setCampoApellidos(boolean campoApellidos) 
     {
         this.campoApellidos = campoApellidos;
-    }
-
-    public boolean isCampoModificarApellidos() 
-    {
-        return campoModificarApellidos;
-    }
-
-    public void setCampoModificarApellidos(boolean campoModificarApellidos) 
-    {
-        this.campoModificarApellidos = campoModificarApellidos;
-    }
+    }    
     
     public String getNombres()
     {
@@ -455,16 +385,6 @@ public class VerEditarUsuarioController implements Serializable
     {
         this.campoIdentificacion = campoIdentificacion;
     }
-
-    public boolean isCampoModificarIdentificacion() 
-    {
-        return campoModificarIdentificacion;
-    }
-
-    public void setCampoModificarIdentificacion(boolean campoModificarIdentificacion)
-    {
-        this.campoModificarIdentificacion = campoModificarIdentificacion;
-    }
     
     public boolean isCampoNombre() 
     {
@@ -475,21 +395,6 @@ public class VerEditarUsuarioController implements Serializable
     {
         this.campoNombre = campoNombre;
     }
-
-    public boolean isCampoModificarNombre()
-    {
-        return campoModificarNombre;
-    }
-
-    public void setCampoModificarNombre(boolean campoModificarNombre) 
-    {
-        this.campoModificarNombre = campoModificarNombre;
-    }
-    
-    public boolean isCamposubidaFoto()
-    {
-        return camposubidaFoto;
-    }
     
     public boolean isCampoFoto() 
     {
@@ -499,12 +404,8 @@ public class VerEditarUsuarioController implements Serializable
     public void setCampoFoto(boolean campoFoto) 
     {
         this.campoFoto = campoFoto;
-    }
+    }   
     
-    public void setCamposubidaFoto(boolean camposubidaFoto)
-    {
-        this.camposubidaFoto = camposubidaFoto;
-    }
     
     public UploadedFile getFoto()
     {
@@ -576,12 +477,16 @@ public class VerEditarUsuarioController implements Serializable
         this.usuario = usuario;
     }
     
-    public void funcionarioSeleccionado(Usuario funcionario,MostrarUsuariosController mgb)
+    public void usuarioSeleccionado(Usuario usuario,MostrarUsuariosController mgb)
     {
         this.mostraUsuariosController=mgb;
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.usuario=funcionario; 
-        this.camposFuncionario=true;
+        
+        this.camposEstudiante=this.mostraUsuariosController.isHabilitarEstudiantes();
+        this.camposFamiliar=this.mostraUsuariosController.isHabilitarFamiliares();
+        this.camposFuncionario=this.mostraUsuariosController.isHabilitarFuncionarios();
+        
+        this.usuario=usuario;       
         this.campoFoto=true;
         this.campoNombre=true;
         this.campoIdentificacion=true;
@@ -591,102 +496,18 @@ public class VerEditarUsuarioController implements Serializable
         this.campotelefono=true;
         this.campoNombreUsuario=true;
         this.campoContrasena=true;
-        this.modificarDatosAcademicos=true;
+        this.modificarDatosAcademicos=true;  
         
-        this.camposEstudiante=false;
-        this.camposFamiliar=false;        
-        this.camposubidaFoto=false;
-        this.campoModificarNombre=false;
-        this.campoModificarIdentificacion=false;
-        this.campoModificarApellidos=false;
-        this.campoModificarFechaNacimiento=false;
-        this.campoModificarCorreo=false;
-        this.campoModificarTefelfono=false;
-        this.campoModificarNombreUsuario=false;
-        this.campoModificarContrasena=false;
         this.aceptarCancelarModificarDatosAcademicos=false;
         requestContext.update("formularioFoto");
+        requestContext.update("formularioTituloVerEditar");
         requestContext.update("formularioEditarFoto");
         requestContext.update("formularioDatosPersonales");
-        requestContext.update("formularioDatosAcademia");
+        requestContext.update("formularioDatosCuenta");
+        requestContext.update("formularioOtrosDatos");
         requestContext.execute("PF('verEditarUsuario').show()");               
         
-    }
-    
-    public void estudianteSeleccionado(Usuario estudiante,MostrarUsuariosController mgb)
-    {
-        this.mostraUsuariosController=mgb;
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.usuario=estudiante; 
-        this.camposEstudiante=true;
-        this.campoFoto=true;
-        this.campoNombre=true;
-        this.campoIdentificacion=true;
-        this.campoApellidos=true;
-        this.campoFechaNacimiento=true;
-        this.campoCorreo=true;
-        this.campotelefono=true;
-        this.campoNombreUsuario=true;
-        this.campoContrasena=true;
-        this.modificarDatosAcademicos=true;
-        
-        this.camposFuncionario=false;
-        this.camposFamiliar=false;        
-        this.camposubidaFoto=false;
-        this.campoModificarNombre=false;
-        this.campoModificarIdentificacion=false;
-        this.campoModificarApellidos=false;
-        this.campoModificarFechaNacimiento=false;
-        this.campoModificarCorreo=false;
-        this.campoModificarTefelfono=false;
-        this.campoModificarNombreUsuario=false;
-        this.campoModificarContrasena=false;
-        this.aceptarCancelarModificarDatosAcademicos=false;
-        requestContext.update("formularioFoto");
-        requestContext.update("formularioEditarFoto");
-        requestContext.update("formularioDatosPersonales");
-        requestContext.update("formularioDatosAcademia");
-        requestContext.execute("PF('verEditarUsuario').show()");               
-        
-    }
-    
-    public void familiarSeleccionado(Usuario familiar,MostrarUsuariosController mgb)
-    {
-        this.mostraUsuariosController=mgb;
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.usuario=familiar; 
-        this.camposFamiliar=true;
-        this.campoFoto=true;
-        this.campoNombre=true;
-        this.campoIdentificacion=true;
-        this.campoApellidos=true;
-        this.campoFechaNacimiento=true;
-        this.campoCorreo=true;
-        this.campotelefono=true;
-        this.campoNombreUsuario=true;
-        this.campoContrasena=true;
-        this.modificarDatosAcademicos=true;
-        
-        this.camposFuncionario=false;
-        this.camposEstudiante=false;        
-        this.camposubidaFoto=false;
-        this.campoModificarNombre=false;
-        this.campoModificarIdentificacion=false;
-        this.campoModificarApellidos=false;
-        this.campoModificarFechaNacimiento=false;
-        this.campoModificarCorreo=false;
-        this.campoModificarTefelfono=false;
-        this.campoModificarNombreUsuario=false;
-        this.campoModificarContrasena=false;
-        this.aceptarCancelarModificarDatosAcademicos=false;
-        requestContext.update("formularioFoto");
-        requestContext.update("formularioEditarFoto");
-        requestContext.update("formularioDatosPersonales");
-        requestContext.update("formularioDatosAcademia");
-        requestContext.execute("PF('verEditarUsuario').show()");               
-        
-    }
-    
+    } 
     public void cargarFoto(FileUploadEvent event)
     {
         RequestContext requestContext = RequestContext.getCurrentInstance(); 
@@ -700,8 +521,7 @@ public class VerEditarUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();        
         if(this.foto!=null)
         {
-            this.campoFoto=true;
-            this.camposubidaFoto=false;            
+            this.campoFoto=true;                       
             int i = this.foto.getFileName().lastIndexOf('.');            
             String extension = this.foto.getFileName().substring(i+1);
             String nombre;
@@ -745,8 +565,7 @@ public class VerEditarUsuarioController implements Serializable
     public void cancelarSubirFoto()
     {        
         RequestContext requestContext = RequestContext.getCurrentInstance(); 
-        this.campoFoto=true;
-        this.camposubidaFoto=false;
+        this.campoFoto=true;        
         this.foto=null;
         requestContext.update("formularioFoto");
         requestContext.update("formularioEditarFoto"); 
@@ -775,8 +594,7 @@ public class VerEditarUsuarioController implements Serializable
     public void mostraSubirFoto()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoFoto=false;
-        this.camposubidaFoto=true;
+        this.campoFoto=false;        
         requestContext.update("formularioFoto");
         requestContext.update("formularioEditarFoto"); 
     }
@@ -784,8 +602,7 @@ public class VerEditarUsuarioController implements Serializable
     public void mostrarModifiarNombre()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoNombre=false;
-        this.campoModificarNombre=true;
+        this.campoNombre=false;        
         this.nombres=this.usuario.getUsunombres();
         requestContext.update("formularioDatosPersonales");
     }
@@ -793,8 +610,7 @@ public class VerEditarUsuarioController implements Serializable
     public void cancelarActualizarNombre()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoNombre=true;
-        this.campoModificarNombre=false;
+        this.campoNombre=true;        
         this.nombres="";
         requestContext.update("formularioDatosPersonales");
     }
@@ -805,8 +621,7 @@ public class VerEditarUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.validarEdicionUsuario.validarNombres(this.nombres))
         {
-            this.campoNombre=true;
-            this.campoModificarNombre=false;
+            this.campoNombre=true;            
             this.usuario.setUsunombres(nombres);
             this.usuarioEJB.edit(this.usuario);            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo Nombre Actualizado.", ""));
@@ -818,8 +633,7 @@ public class VerEditarUsuarioController implements Serializable
     public void mostrarModificarIdentificacion()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoIdentificacion=false;
-        this.campoModificarIdentificacion=true;
+        this.campoIdentificacion=false;        
         this.identificacion=this.usuario.getUsuidentificacion()+"";
         requestContext.update("formularioDatosPersonales");        
     }  
@@ -827,8 +641,7 @@ public class VerEditarUsuarioController implements Serializable
     public void cancelarActualizarIdentificacion()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoIdentificacion=true;
-        this.campoModificarIdentificacion=false;
+        this.campoIdentificacion=true;        
         this.identificacion="";
         requestContext.update("formularioDatosPersonales");        
     }    
@@ -838,8 +651,7 @@ public class VerEditarUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.validarEdicionUsuario.validarNumeroIdentificacion(this.identificacion,this.usuarioEJB))
         {            
-            this.campoIdentificacion=true;
-            this.campoModificarIdentificacion=false;
+            this.campoIdentificacion=true;            
             this.usuario.setUsuidentificacion(Long.parseLong(this.identificacion));
             this.usuarioEJB.edit(this.usuario);
             this.identificacion="";
@@ -852,8 +664,7 @@ public class VerEditarUsuarioController implements Serializable
     public void mostrarModificarApellidos()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoApellidos=false;
-        this.campoModificarApellidos=true;
+        this.campoApellidos=false;        
         this.apellidos=this.usuario.getUsuapellidos();
         requestContext.update("formularioDatosPersonales");
     }
@@ -861,8 +672,7 @@ public class VerEditarUsuarioController implements Serializable
     public void cancelarActualizarApellidos()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoApellidos=true;
-        this.campoModificarApellidos=false;
+        this.campoApellidos=true;        
         this.apellidos="";
         requestContext.update("formularioDatosPersonales");
     }
@@ -873,8 +683,7 @@ public class VerEditarUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.validarEdicionUsuario.validarApellidos(this.apellidos))
         {
-            this.campoApellidos=true;
-            this.campoModificarApellidos=false;
+            this.campoApellidos=true;            
             this.usuario.setUsuapellidos(this.apellidos);
             this.usuarioEJB.edit(this.usuario);            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo apellidos actualizado.", ""));
@@ -886,8 +695,7 @@ public class VerEditarUsuarioController implements Serializable
     public void mostrarModificarFechaNacimiento()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoFechaNacimiento=false;
-        this.campoModificarFechaNacimiento=true;
+        this.campoFechaNacimiento=false;        
         this.fechaNacimiento= new Date(this.usuario.getUsufechanacimiento().getYear(),this.usuario.getUsufechanacimiento().getMonth(),this.usuario.getUsufechanacimiento().getDate());
         requestContext.update("formularioDatosPersonales");        
     }
@@ -895,8 +703,7 @@ public class VerEditarUsuarioController implements Serializable
     public void cancelarActualizarFechaNacimiento()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoFechaNacimiento=true;
-        this.campoModificarFechaNacimiento=false;
+        this.campoFechaNacimiento=true;        
         this.fechaNacimiento= new Date();
         requestContext.update("formularioDatosPersonales");
     }
@@ -907,8 +714,7 @@ public class VerEditarUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.validarEdicionUsuario.validarFechaNacimiento(this.fechaNacimiento))
         {
-            this.campoFechaNacimiento=true;
-            this.campoModificarFechaNacimiento=false;
+            this.campoFechaNacimiento=true;            
             this.usuario.setUsufechanacimiento(this.fechaNacimiento);
             this.usuarioEJB.edit(this.usuario);            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo fecha nacimiento actualizado.", ""));
@@ -920,8 +726,7 @@ public class VerEditarUsuarioController implements Serializable
     public void mostrarModificarCorreo()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoCorreo=false;
-        this.campoModificarCorreo=true;
+        this.campoCorreo=false;        
         this.correo=this.usuario.getUsuemail();
         requestContext.update("formularioDatosPersonales");
     }
@@ -929,8 +734,7 @@ public class VerEditarUsuarioController implements Serializable
     public void cancelarActualizarCorreo()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoCorreo=true;
-        this.campoModificarCorreo=false;
+        this.campoCorreo=true;        
         this.correo="";
         requestContext.update("formularioDatosPersonales");
     }
@@ -941,8 +745,7 @@ public class VerEditarUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.validarEdicionUsuario.validarCorreo(this.correo,this.usuarioEJB))
         {
-            this.campoCorreo=true;
-            this.campoModificarCorreo=false;
+            this.campoCorreo=true;            
             this.usuario.setUsuemail(this.correo);
             this.usuarioEJB.edit(this.usuario);            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo correo electrónico actualizado.", ""));
@@ -953,8 +756,7 @@ public class VerEditarUsuarioController implements Serializable
     public void mostrarModificarTelefono()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campotelefono=false;
-        this.campoModificarTefelfono=true;
+        this.campotelefono=false;        
         if(this.usuario.getUsutelefono()!=null)
         {
             this.telefono=this.usuario.getUsutelefono()+"";
@@ -965,8 +767,7 @@ public class VerEditarUsuarioController implements Serializable
     public void cancelarActualizarTelefono()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campotelefono=true;
-        this.campoModificarTefelfono=false;
+        this.campotelefono=true;        
         this.telefono="";
         requestContext.update("formularioDatosPersonales");
     }
@@ -977,8 +778,7 @@ public class VerEditarUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.validarEdicionUsuario.validarTelefono(this.telefono))
         {
-            this.campotelefono=true;
-            this.campoModificarTefelfono=false;
+            this.campotelefono=true;            
             if(!this.telefono.isEmpty())
             {
                 BigInteger bi= new BigInteger(this.telefono);
@@ -997,19 +797,17 @@ public class VerEditarUsuarioController implements Serializable
     public void mostrarModificarNombreUsuario()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoNombreUsuario=false;
-        this.campoModificarNombreUsuario=true;
+        this.campoNombreUsuario=false;        
         this.nombreUsuario=this.usuario.getUsunombreusuario();
-        requestContext.update("formularioDatosPersonales");
+        requestContext.update("formularioDatosCuenta");
     }
     
     public void cancelarActualizarNombreUsuario()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoNombreUsuario=true;
-        this.campoModificarNombreUsuario=false;
+        this.campoNombreUsuario=true;        
         this.nombreUsuario="";
-        requestContext.update("formularioDatosPersonales");
+        requestContext.update("formularioDatosCuenta");
     }
     
     public void actualizarNombreUsuario()
@@ -1018,31 +816,28 @@ public class VerEditarUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.validarEdicionUsuario.validarNombreUsuario(this.nombreUsuario,this.usuarioEJB))
         {
-            this.campoNombreUsuario=true;
-            this.campoModificarNombreUsuario=false;
+            this.campoNombreUsuario=true;            
             this.usuario.setUsunombreusuario(this.nombreUsuario);
             this.usuarioEJB.edit(this.usuario);
             this.usuarioGrupoEJB.actualizarNombreUsuario("user",this.usuario.getUsuid(), this.usuario.getUsunombreusuario());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo nombre de usuario actualizado.", ""));
         }
-        requestContext.update("formularioDatosPersonales");        
+        requestContext.update("formularioDatosCuenta");        
     }
     
     public void mostrarModificarContrasena()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoContrasena=false;
-        this.campoModificarContrasena=true;        
-        requestContext.update("formularioDatosPersonales");
+        this.campoContrasena=false;                
+        requestContext.update("formularioDatosCuenta");
     }
     
     public void cancelarActualizarContrasena()
     {
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        this.campoContrasena=true;
-        this.campoModificarContrasena=false;
+        this.campoContrasena=true;        
         this.contrasena="";
-        requestContext.update("formularioDatosPersonales");
+        requestContext.update("formularioDatosCuenta");
     }
     
     public void actualizarContrasena()
@@ -1051,13 +846,12 @@ public class VerEditarUsuarioController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.validarEdicionUsuario.validarContrasena(this.contrasena))
         {
-            this.campoContrasena=true;
-            this.campoModificarContrasena=false;
+            this.campoContrasena=true;            
             this.usuario.setUsucontrasena(Cifrar.sha256(this.contrasena));
             this.usuarioEJB.edit(this.usuario);            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campo contraseña actualizado.", ""));
         }
-        requestContext.update("formularioDatosPersonales");        
+        requestContext.update("formularioDatosCuenta");        
     }
     public void modificarDatosAcademicos()
     {
@@ -1103,8 +897,8 @@ public class VerEditarUsuarioController implements Serializable
         this.aceptarCancelarModificarDatosAcademicos=true;
         this.modificarDatosAcademicos=false;
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        requestContext.update("formularioDatosAcademia"); 
-        requestContext.update("ventanaSeleccionarFuncionario");
+        requestContext.update("formularioOtrosDatos");
+        requestContext.update("ventanaSeleccionarFuncionario"); 
     }
     public void cancelarModificarDatosAcademicos()
     {
@@ -1123,9 +917,9 @@ public class VerEditarUsuarioController implements Serializable
         this.aceptarCancelarModificarDatosAcademicos=false;
         this.modificarDatosAcademicos=true;
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        requestContext.update("formularioDatosAcademia"); 
-        requestContext.update("tablasUsuarios"); 
-        requestContext.update("formularioFoto");
+        requestContext.update("formularioOtrosDatos"); 
+        requestContext.update("tablasUsuarios");
+        requestContext.update("formularioTituloVerEditar");
     }
     
     public void seleccionarFuncionario(Usuario funcionarioEditar)
@@ -1138,10 +932,18 @@ public class VerEditarUsuarioController implements Serializable
        }
        else
        {
-                         
-           requestContext.execute("PF('seleccionarEditarFuncionario').hide()");
-           this.funcionarioFamiliar=funcionarioEditar;        
-           requestContext.update("formularioDatosAcademia"); 
+           if(this.usuario.getUsuid().equals(funcionarioEditar.getUsuid()))
+           {
+               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info", "No puede ser familiar de el mismo."));
+               requestContext.execute("PF('editarFuncionarioYaTieneFamiliarAsociado').show()");
+           }
+           else
+           {
+              requestContext.execute("PF('seleccionarEditarFuncionario').hide()");
+              this.funcionarioFamiliar=funcionarioEditar;        
+              requestContext.update("formularioOtrosDatos"); 
+           }
+            
        }       
 
    }
@@ -1163,7 +965,7 @@ public class VerEditarUsuarioController implements Serializable
             this.listaUnidadAcademica=this.unidadAcademicaEJB.findAll();
         }        
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        requestContext.update("formularioDatosAcademia");
+        requestContext.update("formularioOtrosDatos");
     }
     
     public void aceptarModificarDatosAcademicos()
@@ -1180,75 +982,91 @@ public class VerEditarUsuarioController implements Serializable
             this.camposFuncionario=true;
             this.camposEstudiante=false;
             this.camposFamiliar=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campos Datos Academicos actualizados.", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campos otros datos actualizados.", ""));
         }
         if(this.tipoUsuario.equals("Familiar"))
         {
-            if(this.funcionarioFamiliar!=null)
-            {
-                this.usuario.setCarid(null);
-                this.usuario.setUniid(null);
-                this.usuario.setConyugeid(this.funcionarioFamiliar);
-                this.usuarioEJB.edit(this.usuario);
-                this.camposFuncionario=false;
-                this.camposEstudiante=false;
-                this.camposFamiliar=true;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campos Datos Academicos actualizados.", "Info. Campos Datos Academicos actualizados."));
-
-            }
-            else
+            if(this.usuarioEJB.buscarPorConyugeid(this.usuario.getUsuid()))
             {
                 bandera=0;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe Selecccionar un Funcionario.", "Debe Selecccionar un Funcionario."));
- 
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se puede cambiar el funcionario tiene familiar asociado.", "No se puede cambiar el funcionario tiene familiar asociado."));
+            }
+            else 
+            {
+                if (this.funcionarioFamiliar != null) 
+                {
+                    this.usuario.setCarid(null);
+                    this.usuario.setUniid(null);
+                    this.usuario.setConyugeid(this.funcionarioFamiliar);
+                    this.usuarioEJB.edit(this.usuario);
+                    this.camposFuncionario = false;
+                    this.camposEstudiante = false;
+                    this.camposFamiliar = true;
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campos otros datos actualizados.", "Info. Campos Datos Academicos actualizados."));
+                } 
+                else 
+                {
+                    bandera = 0;
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe Selecccionar un Funcionario.", "Debe Selecccionar un Funcionario."));
+                }
             }
         }
         if(this.tipoUsuario.equals("Estudiante"))
         {
-            this.usuario.setCarid(null);
-            this.usuario.setConyugeid(null);
-            Unidadacademica uniid= unidadAcademicaEJB.buscarPorId(this.idUnidadAcademica).get(0);
-            this.usuario.setUniid(uniid);
-            this.usuarioEJB.edit(this.usuario);
-            this.camposFuncionario=false;
-            this.camposEstudiante=true;
-            this.camposFamiliar=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campos Datos Academicos actualizados.", ""));
-
+            if(this.usuarioEJB.buscarPorConyugeid(this.usuario.getUsuid()))
+            {
+                bandera=0;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se puede cambiar el funcionario tiene familiar asociado.", "No se puede cambiar el funcionario tiene familiar asociado."));
+            }
+            else 
+            {
+                this.usuario.setCarid(null);
+                this.usuario.setConyugeid(null);
+                Unidadacademica uniid= unidadAcademicaEJB.buscarPorId(this.idUnidadAcademica).get(0);
+                this.usuario.setUniid(uniid);
+                this.usuarioEJB.edit(this.usuario);
+                this.camposFuncionario=false;
+                this.camposEstudiante=true;
+                this.camposFamiliar=false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info. Campos otros datos actualizados.", ""));
+            }
         }
         if (bandera == 1) 
-        {
-            if (this.mostraUsuariosController.getListaFamiliares() != null) 
+        {           
+            this.mostraUsuariosController.getListaUsuarios().remove(this.usuario);
+            if (this.tipoUsuario.equals("Familiar")) 
             {
-                this.mostraUsuariosController.getListaFamiliares().remove(this.usuario);
-                if (this.tipoUsuario.equals("Familiar")) 
+                if(this.mostraUsuariosController.isHabilitarFamiliares()==true)
                 {
-                    this.mostraUsuariosController.getListaFamiliares().add(this.usuario);
+                    this.mostraUsuariosController.getListaUsuarios().add(this.usuario);
+
                 }
             }
-            if (this.mostraUsuariosController.getListaFuncionarios() != null) 
+            if (this.tipoUsuario.equals("Estudiante")) 
             {
-                this.mostraUsuariosController.getListaFuncionarios().remove(this.usuario);
-                if (this.tipoUsuario.equals("Funcionario")) 
+                if(this.mostraUsuariosController.isHabilitarEstudiantes()==true)
                 {
-                    this.mostraUsuariosController.getListaFuncionarios().add(this.usuario);
+                    this.mostraUsuariosController.getListaUsuarios().add(this.usuario);
+
                 }
             }
-            if (this.mostraUsuariosController.getListaestudiantes() != null) 
+            if (this.tipoUsuario.equals("Funcionario")) 
             {
-                this.mostraUsuariosController.getListaestudiantes().remove(this.usuario);
-                if (this.tipoUsuario.equals("Estudiante")) 
+                if(this.mostraUsuariosController.isHabilitarFuncionarios()==true)
                 {
-                    this.mostraUsuariosController.getListaestudiantes().add(this.usuario);
+                    this.mostraUsuariosController.getListaUsuarios().add(this.usuario);
+
                 }
             }
+            
+            
             this.aceptarCancelarModificarDatosAcademicos = false;
             this.modificarDatosAcademicos = true;
         }      
         RequestContext requestContext = RequestContext.getCurrentInstance();
-        requestContext.update("formularioDatosAcademia"); 
+        requestContext.update("formularioOtrosDatos"); 
         requestContext.update("tablasUsuarios"); 
-        requestContext.update("formularioFoto");      
+        requestContext.update("formularioTituloVerEditar");      
     }
     
     public void cambiarTipo()
@@ -1280,11 +1098,9 @@ public class VerEditarUsuarioController implements Serializable
                 this.listaFuncionarios=usuarioEJB.buscarPorUsuariosConCargo();
             }
         }        
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-        requestContext.update("formularioDatosAcademia"); 
-        requestContext.update("tablasUsuarios"); 
-        requestContext.update("formularioFoto");
-        requestContext.update("ventanaSeleccionarFuncionario");
+        RequestContext requestContext = RequestContext.getCurrentInstance();        
+        requestContext.update("formularioOtrosDatos");
+        requestContext.update("ventanaSeleccionarFuncionario"); 
     }
     
 }
