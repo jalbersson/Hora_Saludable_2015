@@ -19,6 +19,7 @@
             </ui:define>
 
             <ui:define name="body">
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <p:contentFlow value="#{imagesView.images}" var="image">
                     <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />
                     <div class="caption">#{image}

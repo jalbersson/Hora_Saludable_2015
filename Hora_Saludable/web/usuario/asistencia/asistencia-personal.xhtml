@@ -11,7 +11,7 @@
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-                Asistencia personal
+                Mi Asistencia
             </ui:define>
 
             <ui:define name="title">
@@ -19,23 +19,23 @@
             </ui:define>
 
             <ui:define name="body">               
-                
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>  
                 <div class="submenu">
                     <h5>MENU USUARIO</h5>
                     <h:form>
-                        <h:link style="text-decoration: none;" outcome="/faces/usuario/usuarios/perfilUsuario" >
+                        <h:link style="text-decoration: none;" outcome="/usuario/usuarios/perfilUsuario" >
                             <div class="botonSubmenu">
                                 Mi Perfil
                             </div>
                         </h:link>                  
                         <h:link style="text-decoration: none;" > 
                             <div class="botonSubmenu">
-                                Medidas
+                                Mis Medidas
                             </div>
                         </h:link>
-                        <h:link style="text-decoration: none;" outcome="/faces/usuario/asistencia/asistencia-personal"> 
+                        <h:link style="text-decoration: none;" outcome="/usuario/asistencia/asistencia-personal"> 
                             <div class="botonSubmenu">
-                                Asistencia
+                                Mi Asistencia
                             </div>
                         </h:link> 
                     </h:form>                    
@@ -43,11 +43,11 @@
                 <div style="margin-left: 200px; margin-top: 10px;">                    
                     <h:form>
                         <p:breadCrumb>
-                            <p:menuitem value="Inicio" url="../../index.xhtml" />                              
-                            <p:menuitem value="Asistencia personal" outcome="asistencia-personal" />                                        
+                            <p:menuitem value="Inicio" outcome="/index.xhtml" />                              
+                            <p:menuitem value="Asistencia personal" outcome="/usuario/asistencia/asistencia-personal" />                                        
                         </p:breadCrumb>
                         <div class="tituloContenido">                           
-                            Asistencia personal 
+                            Mi Asistencia 
                         </div>                        
                         <p:spacer height="20"/>
                         <p:panel header="Información personal">

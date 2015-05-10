@@ -25,9 +25,7 @@
             </ui:define>
             
             <ui:define name="body"> 
-                <p:dialog modal="true"  widgetVar="efectoCarga" showHeader="false">
-                    <h:graphicImage style="width:60px;height: 60px;" library="img/efectoCarga" name="carga.gif" />
-                </p:dialog>
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/> 
                 <h:form id="seleccionarUsuarios">
                     <h:panelGrid columns="2"> 
                         <p:outputLabel  value="Seleccione Tipo Usuario:" />                      

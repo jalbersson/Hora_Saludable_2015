@@ -108,8 +108,7 @@ public class asistencia_usuarios_con_session implements Serializable
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
         if (req.getUserPrincipal() != null) 
-        {
-             System.out.println(ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName()));
+        {            
             List<Usuario> lst = ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName());
             return lst;
         }

@@ -34,12 +34,13 @@
                         <ui:insert name="CuadroDeBotonesSesion"> 
                             <h:form>
                                 <h:link id="opcionesusuario" style="text-decoration: none;color:#FFFFFF; ">
-                                    root
+                                    #{usuarioSessionController.nombreUsuario()}
                                     <p:graphicImage style="width:20px; margin:0;margin-left: 5px;" library="img" name="usuario.png"/>
                                 </h:link>
                                 <p:menu overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">        
                                     <p:menuitem value="Mi Perfil"  />
-                                    <p:menuitem value="Cerrar Sesión" outcome="/index"/>
+                                    <p:menuitem value="Cerrar Sesión" action="#{usuarioSessionController.logout()}"
+                                                onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
                                 </p:menu>
                             </h:form>
                         </ui:insert>                       

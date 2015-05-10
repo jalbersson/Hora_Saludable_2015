@@ -65,7 +65,7 @@ public class UsuarioSessionController implements Serializable
                 req.getServletContext().log("Autenticacion exitosa");
                 if(this.usuarioGrupoEJB.buscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0).getUsuariogrupoPK().getGruid().equals("user"))
                 {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable");
                 }
                 else
                 {
@@ -74,7 +74,7 @@ public class UsuarioSessionController implements Serializable
             } 
             catch (ServletException e) 
             {
-                fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "FAILED", "Authentication failed"));
+                fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nombre de usuario o contraseña incorrectos", "Nombre de usuario o contraseña incorrectos"));
                 requestContext.update("formularioInicioSession");                
             }
         } 
@@ -109,7 +109,9 @@ public class UsuarioSessionController implements Serializable
        ViewHandler viewHandler = application.getViewHandler();
        UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());
        context.setViewRoot(viewRoot);       
-       context.renderResponse();          
+       context.renderResponse();
+       this.contrasena=null;
+       this.nombreDeUsuario=null;
        requestContext.update("formularioInicioSession");       
        requestContext.execute("PF('IniciarSesion').show()");
     }

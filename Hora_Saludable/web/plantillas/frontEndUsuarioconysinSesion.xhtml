@@ -48,8 +48,9 @@
                                     <p:graphicImage style="width:20px; margin:0;margin-left: 5px;" library="img" name="usuario.png"/>
                                 </h:link>
                                 <p:menu rendered="#{usuarioSessionController.esusuarioConSession()}" overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">        
-                                    <p:menuitem value="Mi Perfil" outcome="/faces/usuario/usuarios/perfilUsuario"  />
-                                    <p:menuitem value="Cerrar Sesión" action="#{usuarioSessionController.logout()}" />
+                                    <p:menuitem value="Mi Perfil" outcome="/usuario/usuarios/perfilUsuario"  />
+                                    <p:menuitem value="Cerrar Sesión" action="#{usuarioSessionController.logout()}" 
+                                                onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                 </p:menu> 
                                 
                                 <h:link rendered="#{usuarioSessionController.esAdministrador()}" id="opcionesadministrador" style="text-decoration: none;color:#FFFFFF; ">
@@ -58,7 +59,8 @@
                                 </h:link>
                                 <p:menu rendered="#{usuarioSessionController.esAdministrador()}" overlay="true" trigger="opcionesadministrador"  my="left top" at="left bottom">        
                                     <p:menuitem value="Mi Perfil"   />
-                                    <p:menuitem value="Cerrar Sesión" action="#{usuarioSessionController.logout()}" />
+                                    <p:menuitem value="Cerrar Sesión" action="#{usuarioSessionController.logout()}"
+                                                onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                 </p:menu> 
                             </h:form>
                         </ui:insert>                       
@@ -74,9 +76,9 @@
                             <li><span class="punta"></span><p:link outcome="/usuario/contenidos/principal" value="Inicio"/></li>
                             <!--<li><span class="punta"></span><p:link  value="Item 1"/></li>-->
                             <!--<li><span class="punta"></span><p:link  value="Item 2"/></li>-->
-                            <li><span class="punta"></span><p:link outcome="/usuario/asistencia/asistencia-personal" value="Asistencia personal"/></li>
+                            <!--<li><span class="punta"></span><p:link outcome="/usuario/asistencia/asistencia-personal" value="Asistencia personal"/></li>-->
                             <li><span class="punta"></span><p:link  outcome="/usuario/contenidos/principal" value="Contenidos"/></li>
-                            <li><span class="punta"></span><p:link  outcome="/usuario/medidas/consultaTest" value="Consultar Test"/></li>
+                            <!--<li><span class="punta"></span><p:link  outcome="/usuario/medidas/consultaTest" value="Consultar Test"/></li>-->
                         </ul>
                     </ui:insert>           
                 </nav>                
@@ -100,40 +102,74 @@
                     <div class="clear"></div>
                 </div>
             </div>
-        </footer>
-        
-        <p:dialog   header="Hora Saludable" showEffect="scale" modal="true"  widgetVar="IniciarSesion" width="650">
-            <h:form id="formularioInicioSession">                    
-                <p:panel id="panel" header="Iniciar sesion">
-
-                    <p:messages id="msgs" />
-
-                    <h:panelGrid columns="3" cellpadding="5">
-                        <p:outputLabel for="firstname" value="Usuario:" />
-                        <p:inputText id="firstname" value="#{usuarioSessionController.nombreDeUsuario}" required="true" label="Firstname" requiredMessage="Ingrese nombre de Usuario">
-
-                        </p:inputText>
-                        <p:message for="firstname" display="icon" />
-                        <p:outputLabel for="lastname" value="Contraseña:" />
-                        <p:inputText id="lastname" value="#{usuarioSessionController.contrasena}" label="Lastname" required="true" requiredMessage="Ingrese una contraseña">
-                            <f:validateLength minimum="2" />
-                            <p:ajax update="msgLastname" event="keyup" />
-                        </p:inputText>
-                        <p:message for="lastname" id="msgLastname" display="icon" />
-                    </h:panelGrid>
-                    <p:link outcome="/usuario/recuperarcontrasenia/recuperarContrasenia" value="¿Has olvidado tu contraseña?">
-                        <f:param name="productId" value="10" />
-                    </p:link>
-                    <br/>
-                    <br/>
-                    <p:commandButton value="Iniciar Sesion" update="panel"  action="#{usuarioSessionController.login()}" icon="ui-icon-check" />
-                </p:panel>
-            </h:form> 
-
-        </p:dialog> 
-        
-        
-        
-        
+        </footer>        
+        <p:dialog   header="Iniciar sesion" showEffect="scale" modal="true"  widgetVar="IniciarSesion"  width="450">
+            <h:form id="formularioInicioSession">                
+                <p:messages closable="true"/>
+                <p:panelGrid style="text-align:left;" styleClass="panelgrid">
+                    <p:row>
+                        <p:column></p:column>
+                        <p:column></p:column>
+                        <p:column></p:column>                        
+                    </p:row>
+                    <p:row>
+                        <p:column></p:column>
+                        <p:column></p:column>
+                        <p:column></p:column>                        
+                    </p:row>
+                    <p:row>
+                        <p:column style="text-align:right;">
+                            <p:outputLabel  value="Nombre Usuario:" />
+                            <p:outputLabel style="color:red;"  value=" * " />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="firstname" value="#{usuarioSessionController.nombreDeUsuario}" 
+                                         required="true" label="Firstname" requiredMessage="Ingrese nombre de Usuario"/>
+                            
+                        </p:column>
+                        <p:column>
+                            <p:message for="firstname" display="icon" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column style="text-align:right;">
+                            <p:outputLabel  value="Contraseña:" />
+                            <p:outputLabel style="color:red;"  value=" * " />
+                        </p:column>
+                        <p:column>
+                            <p:password id="contrasena" value="#{usuarioSessionController.contrasena}" 
+                                         label="Lastname" required="true" requiredMessage="Ingrese una contraseña">
+                                <f:validateLength minimum="6" />
+                                <p:ajax update="msgContrasena" event="keyup" />
+                            </p:password>                          
+                        </p:column>
+                        <p:column>
+                            <p:message for="contrasena" id="msgContrasena" display="icon" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>                                
+                        </p:column>
+                        <p:column>
+                            <p:link outcome="/usuario/recuperarcontrasenia/recuperarContrasenia" value="¿Has olvidado tu contraseña?">
+                                <f:param name="productId" value="10" />
+                            </p:link> 
+                        </p:column>
+                        <p:column>                            
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>                                
+                        </p:column>
+                        <p:column>
+                            <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic"
+                                             value="Iniciar Sesion" update="formularioInicioSession" action="#{usuarioSessionController.login()}"
+                                             onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>                                   
+            </h:form>
+            <p:separator/>
+        </p:dialog>     
     </h:body>
 </html>
