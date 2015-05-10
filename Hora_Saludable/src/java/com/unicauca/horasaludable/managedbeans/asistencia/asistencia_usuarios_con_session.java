@@ -9,6 +9,7 @@ import com.unicauca.horasaludable.entities.Detalleasistencia;
 import com.unicauca.horasaludable.entities.Usuario;
 import com.unicauca.horasaludable.jpacontrollers.AsistenciaFacade;
 import com.unicauca.horasaludable.jpacontrollers.DetalleasistenciaFacade;
+import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
@@ -40,10 +43,14 @@ public class asistencia_usuarios_con_session implements Serializable
     private AsistenciaFacade ebjUsuarioFacade;
     @EJB
     private DetalleasistenciaFacade ebjDetalleasistenciaFacade;
+    @EJB
+    private UsuarioFacade usuarioFacade;
     private ScheduleModel eventModel;
     private ScheduleEvent event;
     private CartesianChartModel meses;
     private String anioElegido;
+    
+    
 
     public String getAnioElegido() {
         return anioElegido;
@@ -52,7 +59,8 @@ public class asistencia_usuarios_con_session implements Serializable
     public void setAnioElegido(String anioElegido) {
         this.anioElegido = anioElegido;
     }
-
+    
+    
     
 
     
@@ -95,14 +103,31 @@ public class asistencia_usuarios_con_session implements Serializable
         event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
     }
 
-    public List<Usuario> obtener_usuario_usuid() {        
-        List<Usuario> lst = ebjUsuarioFacade.buscarporUsuid(20141109);
-        return lst;
+    public List<Usuario> obtener_usuario_usuid() {
+        
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
+        if (req.getUserPrincipal() != null) 
+        {
+             System.out.println(ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName()));
+            List<Usuario> lst = ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName());
+            return lst;
+        }
+        return null;
     }
 
     public List<Detalleasistencia> obtener_asistencia_usuid() {
-        List<Detalleasistencia> lst = ebjDetalleasistenciaFacade.obtenerAsisUsuid(20141109);
-        return lst;
+        
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
+        if (req.getUserPrincipal() != null) 
+        {
+           
+            List<Detalleasistencia> lst = ebjDetalleasistenciaFacade.obtenerAsisUsuid(ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0).getUsuid());
+            return lst;
+        }
+        return null;
+        
     }
 
     private void cargarSchedule() {
