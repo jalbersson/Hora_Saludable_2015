@@ -37,7 +37,7 @@
             </ui:define>
  
             <ui:define name="body">
-
+               
                 <p:panelGrid styleClass="fichapersonal">
 
                     <p:row>
@@ -92,17 +92,19 @@
                  
                 </p:panelGrid>
 
+               
                 <h:form>
                     <p:growl for="msg" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
                     
-                         <p:commandLink id="imagenmedidas2" actionListener="#{medidasController.redireccionar(medicionactual)}">
+
+                    
+                         <p:commandLink id="imagenmedidas2" actionListener="#{medidasController.imprimir}">
                              
                         <p:panelGrid columns="1" style="margin: 0 auto">
                             <h:graphicImage name="img/Imprimir.PNG" />
                         </p:panelGrid>
                     </p:commandLink>
-             
-                    
+              
 
                     <p:accordionPanel id="acord" styleClass="acciones" style="margin: 0 auto">
                         <p:tab title="Mediciones" >
@@ -327,8 +329,7 @@
 
                 </h:form>
              
-                <ui:include src="EfectosCarga.xhtml"/>  
-                <ui:include src="VistaImprimirMedida.xhtml"/>  
+                <ui:include src="EfectosCarga.xhtml"/> 
                 
             </ui:define>
 

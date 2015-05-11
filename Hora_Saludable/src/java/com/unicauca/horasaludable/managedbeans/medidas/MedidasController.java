@@ -5,20 +5,29 @@
  */
 package com.unicauca.horasaludable.managedbeans.medidas;
 
-import static com.sun.javafx.logging.PulseLogger.addMessage;
+import com.lowagie.text.Document;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
 import com.unicauca.horasaludable.entities.Medida;
-import java.io.IOException;
+
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
+
+
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import org.primefaces.context.RequestContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+
 
 /**
  *
@@ -64,20 +73,79 @@ public class MedidasController {
         this.servmed = servmed;
     }
 
+    private List<Medida> listaMedi;
+
+    public List<Medida> getListaMedi() {
+        return listaMedi;
+    }
+
+    public void setListaMedi(List<Medida> listaMedi) 
+    {
+        this.listaMedi = listaMedi;
+    }
+
+
+    
    public void redireccionar(Medida test) throws IOException 
    {
      
        this.medicionactual=test;
        
-         RequestContext requestContext = RequestContext.getCurrentInstance();
+     //    RequestContext requestContext = RequestContext.getCurrentInstance();
  
-         requestContext.update("formularioFoto");
-        requestContext.update("formularioEditarFoto");
-        requestContext.update("formularioDatosPersonales");
-        requestContext.update("formularioDatosAcademia");
-        requestContext.execute("PF('imprimir').show()");  
-       //FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/administrador/medidas/VistaImprimirMedida.xhtml");
+       
+       FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/administrador/medidas/VistaImprimirMedida.xhtml");
    }
+   public void imprimir() {
+        try {
+            //Generamos el archivo PDF
+            String directorioArchivos;
+            ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            directorioArchivos = ctx.getRealPath("/") + "reports";
+            String name = directorioArchivos + "document3221-report.pdf";
+            Document document = new Document();
+            
+            
+            PdfWriter.getInstance(document, new FileOutputStream(name));
+            document.open();
+            document.add(new Paragraph("                                   Composicion Corporal y Test Deportivos"));
+            document.add(new Paragraph("Nombre: " + getMedicionactual().getUsuid().getUsunombres()));
+            document.add(new Paragraph("Edad: " + getMedicionactual().getMedpeso()));
+            document.add(new Paragraph("Complexion: " + getMedicionactual().complexion()));
+            document.add(new Paragraph("Nombre: " + getMedicionactual().getMedpeso()));
+            document.add(new Paragraph("Nombre: " + getMedicionactual().getMedpeso()));
+            document.add(new Paragraph("Nombre: " + getMedicionactual().getMedpeso()));
+            
+            
+
+            document.close();
+            //----------------------------
+            //Abrimos el archivo PDF
+            
+            System.out.println("slkdmklsmflkemglksemkgte"+directorioArchivos);
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+            response.setContentType("application/pdf");
+            response.setHeader("Content-disposition","inline=filename=" + name);
+            
+            try {
+                response.getOutputStream().write(Util.getBytesFromFile(new File(name)));  
+                response.getOutputStream().flush();
+                response.getOutputStream().close();
+                context.responseComplete();
+            } catch (IOException e) 
+            {
+                  System.out.println("Error 11");
+                e.printStackTrace();
+            }
+        } catch (Exception e) 
+        {
+              System.out.println("Erro2");
+            e.printStackTrace();
+        }
+    }
+     
+   
     
       public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
