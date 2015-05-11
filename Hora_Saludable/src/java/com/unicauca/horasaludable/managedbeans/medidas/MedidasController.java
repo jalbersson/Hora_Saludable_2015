@@ -22,6 +22,9 @@ import javax.faces.context.ExternalContext;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -96,32 +99,46 @@ public class MedidasController {
        
        FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/administrador/medidas/VistaImprimirMedida.xhtml");
    }
+   
+   SimpleDateFormat formateador = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy", new Locale("es_ES"));
+   Date fechaDate = new Date();
+   String fecha = formateador.format(fechaDate);
+  
+String name;
+String nombreRutaFile;
    public void imprimir() {
         try {
             //Generamos el archivo PDF
             String directorioArchivos;
             ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-            directorioArchivos = ctx.getRealPath("/") + "reports";
-            String name = directorioArchivos + "document3221-report.pdf";
+           // directorioArchivos = ctx.getRealPath("/") + "reports";
+            directorioArchivos="Hora_Saludable\\build\\web\\reports";
+       
+            
+             name = directorioArchivos +"\\"+getMedicionactual().getUsuid().getUsuidentificacion()+"test-pdf";
             Document document = new Document();
             
             
             PdfWriter.getInstance(document, new FileOutputStream(name));
             document.open();
+             
+            document.add(new Paragraph(""));
             document.add(new Paragraph("                                   Composicion Corporal y Test Deportivos"));
-            document.add(new Paragraph("Nombre: " + getMedicionactual().getUsuid().getUsunombres()));
-            document.add(new Paragraph("Edad: " + getMedicionactual().getMedpeso()));
-            document.add(new Paragraph("Complexion: " + getMedicionactual().complexion()));
+            document.add(new Paragraph("____________________________________________________________________________"));
+            document.add(new Paragraph("Nombre: " + getMedicionactual().getUsuid().getUsunombres() + " "+getMedicionactual().getUsuid().getUsuapellidos()+ "                                                  Fecha:"+fecha));
+            document.add(new Paragraph("Identificacion: " + getMedicionactual().getUsuid().getUsuidentificacion() + "                               Genero: "+ getMedicionactual().getUsuid().getUsugenero()));
+
+            document.add(new Paragraph("Complexion: " + getMedicionactual().complexion()+"                                         Peso:"+getMedicionactual().getMedpeso()+"                   Talla :"+getMedicionactual().getMedtalla()));
             document.add(new Paragraph("Nombre: " + getMedicionactual().getMedpeso()));
             document.add(new Paragraph("Nombre: " + getMedicionactual().getMedpeso()));
             document.add(new Paragraph("Nombre: " + getMedicionactual().getMedpeso()));
-            
+            cargarArchivo();
             
 
             document.close();
             //----------------------------
             //Abrimos el archivo PDF
-            
+            System.out.println("Nombreeeeeeeeee "+name);
             System.out.println("slkdmklsmflkemglksemkgte"+directorioArchivos);
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
@@ -145,7 +162,30 @@ public class MedidasController {
         }
     }
      
+ public void cargarArchivo() 
+ {
+       abrir();
+   }
+ 
+
+  private void abrir() {
+  //ruta del archivo en el pc
+      
+       System.out.println("sdeeeeeeee "+nombreRutaFile);
+        
+      
+      
+      
+  String file = new String("\\reports\\"+nombreRutaFile); 
    
+ try{ 
+   //definiendo la ruta en la propiedad file
+   Runtime.getRuntime().exec("cmd /c start "+file);
+     
+   }catch(IOException e){
+      e.printStackTrace();
+   } 
+  }
     
       public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
