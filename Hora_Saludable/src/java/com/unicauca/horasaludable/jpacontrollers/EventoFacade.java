@@ -6,9 +6,11 @@
 package com.unicauca.horasaludable.jpacontrollers;
 
 import com.unicauca.horasaludable.entities.Evento;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +28,13 @@ public class EventoFacade extends AbstractFacade<Evento> {
 
     public EventoFacade() {
         super(Evento.class);
+    }
+    
+    public List<Evento> buscarEventos()
+    {
+        Query query = getEntityManager().createNamedQuery("Evento.findAll");        
+        List<Evento> resultList = query.getResultList();
+        return resultList;
     }
     
 }

@@ -40,24 +40,24 @@
                     <H1>Eliminar Evento</H1>
                 </f:facet>
                 <h:form>
-                    <p:dataTable var="evento" value="#{dtPaginatorView.eventos}" rows="10"
+                    <p:dataTable var="evento_de_lista" value="#{eventoController.eventos}" rows="10"
                                          paginator="true"
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15">
-                        <p:column headerText="Nombre">
-                            <h:outputText value="#{evento.nombre}" />
+                        <p:column headerText="Titulo">
+                            <h:outputText value="#{evento_de_lista.evetitulo}" />
                         </p:column>
 
                         <p:column headerText="Lugar">
-                            <h:outputText value="#{evento.lugar}" />
+                            <h:outputText value="#{evento_de_lista.evelugar}" />
                         </p:column>
 
                         <p:column headerText="Fecha">
-                            <h:outputText value="#{evento.fecha}" />
+                            <h:outputText value="#{evento_de_lista.evefechaevento}" />
                         </p:column>
 
                         <p:column headerText="Descripcion">
-                            <h:outputText value="#{evento.descripcion}" />
+                            <h:outputText value="#{evento_de_lista.evecontenido}" />
                         </p:column>
                         
                         <p:column headerText="Accion">
@@ -71,6 +71,8 @@
                                 </p:confirmDialog>
                         </p:column>
                     </p:dataTable>
+                    
+                    <p:commandButton value="Cargar" action="#{eventoController.cargarEventos()}"/>
                 </h:form> 
 
                 </p:panelGrid>

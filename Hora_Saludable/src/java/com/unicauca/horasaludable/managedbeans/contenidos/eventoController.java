@@ -8,6 +8,7 @@ package com.unicauca.horasaludable.managedbeans.contenidos;
 
 import com.unicauca.horasaludable.entities.Evento;
 import com.unicauca.horasaludable.jpacontrollers.EventoFacade;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -28,7 +29,7 @@ public class eventoController {
     EventoFacade ejbEvento;
     
     Evento evento;
-    //private List<Evento> eventos;
+    private List<Evento> eventos;
     String evefpublicacion;
     java.util.Date evefevento;
     
@@ -60,6 +61,15 @@ public class eventoController {
         this.evefevento = evefevento;
     }
     
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
+    }
+    
+    
     /*public String agregarEvento(){
         return "agregarEvento";
     }*/
@@ -82,30 +92,43 @@ public static Date convertStringToDate(java.util.Date date)
     
     public String guardarEvento(){
 
-        java.util.Date  fechaPublicado = new java.util.Date();
-        this.evento.setEvefechapublicacion(convertStringToDate(fechaPublicado));
-        this.evento.setEvefechaevento(convertStringToDate(evefevento));
-        this.evento.setEvecontenido("url_contenido");
-        this.evento.setEveimagen("url_imagen");
-        this.ejbEvento.create(this.evento);
-        /*
         try
         {
-        this.evento.setEvetitulo("Partido");
-        this.evento.setEvelugar("Tulcan");
-        this.evento.setEvefechapublicacion(convertStringToDate(fecha));
-        this.evento.setEvefechaevento(convertStringToDate(fecha));
-        this.evento.setEvecontenido("url_contenido");
-        this.evento.setEveimagen("url_imagen");
-        this.ejbEvento.create(this.evento);
+            java.util.Date  fechaPublicado = new java.util.Date();
+            this.evento.setEvefechapublicacion(convertStringToDate(fechaPublicado));
+            this.evento.setEvefechaevento(convertStringToDate(evefevento));
+            this.evento.setEvecontenido("url_contenido");
+            this.evento.setEveimagen("url_imagen");
+            this.ejbEvento.create(this.evento);
+            
         }
         catch(Exception e)
         {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Error: El evento no fue agregado!"));
             return "editarEvento";
-        }*/
+        }
 
         return "principal";
+    }
+    
+    public String cargarEventos()
+    {
+        eventos =this.ejbEvento.buscarEventos(); 
+        if(eventos.isEmpty())
+               return "principal";
+        else
+                return "agregarEvento";
+        
+        /*try
+        {
+           eventos =this.ejbEvento.buscarEventos(); 
+           
+        }
+        catch(Exception e)
+        {
+            return "editarEvento";
+        }
+        return "eliminarEvento";*/
     }
     
 }
