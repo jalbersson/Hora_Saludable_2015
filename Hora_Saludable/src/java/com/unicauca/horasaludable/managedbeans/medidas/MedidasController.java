@@ -9,6 +9,16 @@ package com.unicauca.horasaludable.managedbeans.medidas;
 import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;*/
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.unicauca.horasaludable.entities.Medida;
 
 import java.util.List;
@@ -23,14 +33,18 @@ import javax.faces.context.ExternalContext;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import org.primefaces.context.RequestContext;
 
 
 /**
@@ -101,8 +115,8 @@ public class MedidasController {
   
 String name;
 String nombreRutaFile;
-   public void imprimir() {
-       /*
+      /* public void imprimir() {
+   
         try {
             //Generamos el archivo PDF
             String directorioArchivos;
@@ -156,32 +170,79 @@ String nombreRutaFile;
               System.out.println("Erro2");
             e.printStackTrace();
         }*/
-    }
+  //  }
      
- public void cargarArchivo() 
- {
-       abrir();
-   }
- 
 
-  private void abrir() {
-  //ruta del archivo en el pc
-      
-       System.out.println("sdeeeeeeee "+nombreRutaFile);
-        
-      
-      
-      
-  String file = new String("\\reports\\"+nombreRutaFile); 
-   
- try{ 
-   //definiendo la ruta en la propiedad file
-   Runtime.getRuntime().exec("cmd /c start "+file);
-     
-   }catch(IOException e){
-      e.printStackTrace();
-   } 
-  }
+ private String pdfFileName = "Formato-A.pdf";
+
+    
+
+    public String getPdfFileName() {
+        return pdfFileName;
+    }
+
+    public void setPdfFileName(String pdfFileName) {
+        this.pdfFileName = pdfFileName;
+    }
+
+    public void generarPDF() {
+        try {
+          
+           
+            
+            File file = File.createTempFile("Formato-A", ".pdf");
+
+            pdfFileName = file.getName();
+
+            Document document = new Document();
+
+            PdfWriter pdfwriter = PdfWriter.getInstance(document, new FileOutputStream(file));
+
+            document.open();
+
+            Font bold = new Font(Font.FontFamily.HELVETICA, 12f, Font.BOLD);
+
+//            URL url = FacesContext.getCurrentInstance().getExternalContext().getResource("/resources/images/escudo-unicauca.jpg");
+    
+         //   Image imgLogoUnicauca = Image.getInstance(url);
+          //  imgLogoUnicauca.scaleAbsolute(118f, 131f);
+
+            PdfPTable tableEncabezado = new PdfPTable(2);
+
+            tableEncabezado.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+            tableEncabezado.setWidthPercentage(100);
+            tableEncabezado.setSpacingAfter(5);
+
+           // PdfPCell cell1 = new PdfPCell(imgLogoUnicauca);
+            //cell1.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell cell2 = new PdfPCell(new Paragraph("popUniversidad del Cauca\nFacultad de Ingeniería Electronica y\nTelecomunicaciones\nCI-FIET"));
+            cell2.setBorder(Rectangle.NO_BORDER);
+            cell2.setVerticalAlignment(Element.ALIGN_BOTTOM);
+            cell2.setHorizontalAlignment(Element.ALIGN_RIGHT);
+
+            PdfPCell cell3 = new PdfPCell(new Paragraph("FORMATO A: PRESENTACIÓN DE LA PROPUESTA DE TRABAJO DE GRADO AL\nDEPARTAMENTO", bold));
+            cell3.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell cell4 = new PdfPCell(new Paragraph("", bold));
+            cell4.setBorder(Rectangle.NO_BORDER);
+            cell4.setHorizontalAlignment(Element.ALIGN_RIGHT);
+
+//            tableEncabezado.addCell(cell1);
+            tableEncabezado.addCell(cell2);
+            tableEncabezado.addCell(cell3);
+            tableEncabezado.addCell(cell4);
+
+            document.add(tableEncabezado);
+
+            document.close();
+            RequestContext.getCurrentInstance().update("frmVerRutina");
+        } catch (DocumentException ex) {
+            Logger.getLogger(MedidasController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MedidasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
       public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
