@@ -8,73 +8,125 @@ package com.unicauca.horasaludable.entities;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author seven
+ * @author JuanJose
  */
 @Entity
 @Table(name = "HORARIO", catalog = "asae", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Horario.findAll", query = "SELECT h FROM Horario h"),
-    @NamedQuery(name = "Horario.findByHordia", query = "SELECT h FROM Horario h WHERE h.horarioPK.hordia = :hordia"),
-    @NamedQuery(name = "Horario.findByHorhora", query = "SELECT h FROM Horario h WHERE h.horarioPK.horhora = :horhora"),
-    @NamedQuery(name = "Horario.findByHordescripcion", query = "SELECT h FROM Horario h WHERE h.hordescripcion = :hordescripcion")})
+    @NamedQuery(name = "Horario.findByHorid", query = "SELECT h FROM Horario h WHERE h.horid = :horid"),
+    @NamedQuery(name = "Horario.findByHorhora", query = "SELECT h FROM Horario h WHERE h.horhora = :horhora"),
+    @NamedQuery(name = "Horario.findByHorlunes", query = "SELECT h FROM Horario h WHERE h.horlunes = :horlunes"),
+    @NamedQuery(name = "Horario.findByHormartes", query = "SELECT h FROM Horario h WHERE h.hormartes = :hormartes"),
+    @NamedQuery(name = "Horario.findByHormiercoles", query = "SELECT h FROM Horario h WHERE h.hormiercoles = :hormiercoles"),
+    @NamedQuery(name = "Horario.findByHorjueves", query = "SELECT h FROM Horario h WHERE h.horjueves = :horjueves"),
+    @NamedQuery(name = "Horario.findByHorviernes", query = "SELECT h FROM Horario h WHERE h.horviernes = :horviernes")})
 public class Horario implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected HorarioPK horarioPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
-    @Column(name = "HORDESCRIPCION")
-    private String hordescripcion;
+    @Column(name = "HORID")
+    private Long horid;
+    @Size(max = 10)
+    @Column(name = "HORHORA")
+    private String horhora;
+    @Size(max = 30)
+    @Column(name = "HORLUNES")
+    private String horlunes;
+    @Size(max = 30)
+    @Column(name = "HORMARTES")
+    private String hormartes;
+    @Size(max = 30)
+    @Column(name = "HORMIERCOLES")
+    private String hormiercoles;
+    @Size(max = 30)
+    @Column(name = "HORJUEVES")
+    private String horjueves;
+    @Size(max = 30)
+    @Column(name = "HORVIERNES")
+    private String horviernes;
 
     public Horario() {
     }
 
-    public Horario(HorarioPK horarioPK) {
-        this.horarioPK = horarioPK;
+    public Horario(Long horid) {
+        this.horid = horid;
     }
 
-    public Horario(HorarioPK horarioPK, String hordescripcion) {
-        this.horarioPK = horarioPK;
-        this.hordescripcion = hordescripcion;
+    public Long getHorid() {
+        return horid;
     }
 
-    public Horario(String hordia, int horhora) {
-        this.horarioPK = new HorarioPK(hordia, horhora);
+    public void setHorid(Long horid) {
+        this.horid = horid;
     }
 
-    public HorarioPK getHorarioPK() {
-        return horarioPK;
+    public String getHorhora() {
+        return horhora;
     }
 
-    public void setHorarioPK(HorarioPK horarioPK) {
-        this.horarioPK = horarioPK;
+    public void setHorhora(String horhora) {
+        this.horhora = horhora;
     }
 
-    public String getHordescripcion() {
-        return hordescripcion;
+    public String getHorlunes() {
+        return horlunes;
     }
 
-    public void setHordescripcion(String hordescripcion) {
-        this.hordescripcion = hordescripcion;
+    public void setHorlunes(String horlunes) {
+        this.horlunes = horlunes;
+    }
+
+    public String getHormartes() {
+        return hormartes;
+    }
+
+    public void setHormartes(String hormartes) {
+        this.hormartes = hormartes;
+    }
+
+    public String getHormiercoles() {
+        return hormiercoles;
+    }
+
+    public void setHormiercoles(String hormiercoles) {
+        this.hormiercoles = hormiercoles;
+    }
+
+    public String getHorjueves() {
+        return horjueves;
+    }
+
+    public void setHorjueves(String horjueves) {
+        this.horjueves = horjueves;
+    }
+
+    public String getHorviernes() {
+        return horviernes;
+    }
+
+    public void setHorviernes(String horviernes) {
+        this.horviernes = horviernes;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (horarioPK != null ? horarioPK.hashCode() : 0);
+        hash += (horid != null ? horid.hashCode() : 0);
         return hash;
     }
 
@@ -85,7 +137,7 @@ public class Horario implements Serializable {
             return false;
         }
         Horario other = (Horario) object;
-        if ((this.horarioPK == null && other.horarioPK != null) || (this.horarioPK != null && !this.horarioPK.equals(other.horarioPK))) {
+        if ((this.horid == null && other.horid != null) || (this.horid != null && !this.horid.equals(other.horid))) {
             return false;
         }
         return true;
@@ -93,7 +145,7 @@ public class Horario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unicauca.horasaludable.entities.Horario[ horarioPK=" + horarioPK + " ]";
+        return "com.unicauca.horasaludable.entities.Horario[ horid=" + horid + " ]";
     }
     
 }

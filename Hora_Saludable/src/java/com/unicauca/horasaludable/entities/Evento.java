@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author seven
+ * @author JuanJose
  */
 @Entity
 @Table(name = "EVENTO", catalog = "asae", schema = "")
@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Evento.findByEvefechapublicacion", query = "SELECT e FROM Evento e WHERE e.evefechapublicacion = :evefechapublicacion"),
     @NamedQuery(name = "Evento.findByEvefechaevento", query = "SELECT e FROM Evento e WHERE e.evefechaevento = :evefechaevento"),
     @NamedQuery(name = "Evento.findByEvelugar", query = "SELECT e FROM Evento e WHERE e.evelugar = :evelugar"),
-    @NamedQuery(name = "Evento.findByEvecontenido", query = "SELECT e FROM Evento e WHERE e.evecontenido = :evecontenido")})
+    @NamedQuery(name = "Evento.findByEvecontenido", query = "SELECT e FROM Evento e WHERE e.evecontenido = :evecontenido"),
+    @NamedQuery(name = "Evento.findByEveimagen", query = "SELECT e FROM Evento e WHERE e.eveimagen = :eveimagen")})
 public class Evento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,7 +47,7 @@ public class Evento implements Serializable {
     private Long eveid;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 75)
+    @Size(min = 1, max = 50)
     @Column(name = "EVETITULO")
     private String evetitulo;
     @Column(name = "EVEFECHAPUBLICACION")
@@ -59,12 +60,17 @@ public class Evento implements Serializable {
     private Date evefechaevento;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 75)
+    @Size(min = 1, max = 30)
     @Column(name = "EVELUGAR")
     private String evelugar;
-    @Size(max = 200)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 512)
     @Column(name = "EVECONTENIDO")
     private String evecontenido;
+    @Size(max = 250)
+    @Column(name = "EVEIMAGEN")
+    private String eveimagen;
 
     public Evento() {
     }
@@ -73,11 +79,12 @@ public class Evento implements Serializable {
         this.eveid = eveid;
     }
 
-    public Evento(Long eveid, String evetitulo, Date evefechaevento, String evelugar) {
+    public Evento(Long eveid, String evetitulo, Date evefechaevento, String evelugar, String evecontenido) {
         this.eveid = eveid;
         this.evetitulo = evetitulo;
         this.evefechaevento = evefechaevento;
         this.evelugar = evelugar;
+        this.evecontenido = evecontenido;
     }
 
     public Long getEveid() {
@@ -126,6 +133,14 @@ public class Evento implements Serializable {
 
     public void setEvecontenido(String evecontenido) {
         this.evecontenido = evecontenido;
+    }
+
+    public String getEveimagen() {
+        return eveimagen;
+    }
+
+    public void setEveimagen(String eveimagen) {
+        this.eveimagen = eveimagen;
     }
 
     @Override
