@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -15,11 +16,11 @@
 
 
             <ui:define name="title">
-                Quienes Somos
+                <big>  </big>
             </ui:define>
 
             <ui:define name="body">
-                <h:form style = "top: 500"  >
+                <h:form style = "top: 500px"  >
                     <p:growl autoUpdate="true"/>
                     <p:panelMenu style="width:200px; float: right">
                         <p:submenu label="Contenidos">
@@ -30,21 +31,61 @@
                         </p:submenu>
                     </p:panelMenu>
 
-                    <h3 style="margin-top:0">Quienes Somos</h3>
-                    <p:scrollPanel style="width:550px;height:300px">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit tortor a ipsum vehicula, in semper sapien auctor. Nulla tempor eget est non consequat. Nulla sit amet lorem justo. Cras non tellus eros. Sed ultricies orci ut quam interdum fringilla. Nam vitae massa ac mi elementum mattis vel vitae sem. Ut eros ipsum, scelerisque a erat a, eleifend luctus nibh. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-                        </p>
-                        <p>
-                            Vivamus ac ullamcorper magna. Aenean felis ante, elementum sit amet urna at, eleifend aliquet velit. Morbi a convallis magna. In nec leo vel dolor hendrerit pharetra. Cras in iaculis enim. Aenean porta sapien dignissim turpis dapibus, eu dictum velit elementum. Aliquam sollicitudin gravida luctus.
-                        </p>
+                    <h3 style="margin-top:0; font-size: 30px">  Quienes Somos </h3>
+                    <div style="height:500px">
+                        <h:form>
+                            <p:growl id="msgs" showDetail="true" />
 
-                    </p:scrollPanel>
-                </h:form> 
-                <h:panelGrid columns="2" style="margin-top: 10px">
+                            <p:dashboard id="board" model="#{dashboardView.model}">
+                                <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs" />
 
+                                <p:panel id="mision" header="Misión" style="height:250px;width: 300px;font-size: 20px" >
+                                    <h:outputText style="font-size: 14px" value="Ofrecer oportunidades de desarrollo tecnológico y comercial para las empresas, brindando un trabajo innovador, especializado y personalizado para así satisfacer las necesidades del mercado objetivo y ayudarles a adentrarse en el mundo virtual como complemento de sus actividades comerciales" />
+                                </p:panel>
+
+                                <p:panel id="objetivo" header="Objetivo" style="height:250px;width: 300px;font-size: 20px">
+                                    <h:outputText style="font-size: 14px" value="* Potenciar la presencia de su marca en Internet." />
+                                    <br></br>
+                                    <h:outputText style="font-size: 14px" value="* Incentivar la relación virtual entre un negocio y sus clientes." />
+                                    <br></br>
+                                    <h:outputText style="font-size: 14px" value="* Fortalecer la imagen corporativa de nuestros clientes." />
+                                    <br></br>
+                                    <h:outputText style="font-size: 14px" value="* Reforzar sus conocimientos sobre el mundo de la web." />
+                                    <br></br>
+                                    <h:outputText style="font-size: 14px" value="* Asegurar la interacción entre el sitio web y sus usuarios." />
+                                    <br></br>
+                                </p:panel>
+
+                                <p:panel id="experiencia" header="Experiencia" style="height:250px;width: 300px;font-size: 20px">
+                                    <h:outputText style="font-size: 14px" value="Desarrollo Web - 11 años Diseño Corporativo - 9 años Marketing Digital - 8 años
+                                                  Fotografía Profesional - 7 años"  />
+                                </p:panel>
+
+                                <p:panel id="equipo" header="Equipo de trabajo" style="height:250px;width: 300px;font-size: 20px">
+                                    <h:outputText style="font-size: 14px"  value="Weather Content" />
+                                </p:panel>
+                                <p:panel id="reglamento" header="Reglamento" style="height:100px;width: 300px;font-size: 15px">
+
+                                    <p:link outcome="reglamento" value="Ver Reglamento">
+                                        <f:param name="productId" value="10" />
+                                    </p:link>
+                                </p:panel>
+                            </p:dashboard>
+
+                            <div style="clear:both" />
+                        </h:form>
+<h:panelGrid columns="2" style="margin-top: 10px">
+
+                    <br></br>
                     <p:button outcome="principal" value="Volver" style="float:right" />
                 </h:panelGrid>
+
+                    </div>
+
+                </h:form> 
+                <br></br>
+                
+
             </ui:define>
 
         </ui:composition>
