@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -21,15 +22,18 @@
                     
                 <h1>Cambiar Contraseña</h1>
                 <h:form>
+                    <f:metadata>
+                        <f:viewParam name="ifo" value="#{cambiarContraseniaController.id}"/>
+                    </f:metadata>
                     <p:messages id="messages" showDetail="true" autoUpdate="true" />
                     <h:panelGrid columns="2" id="matchGrid" cellpadding="5">                   
                         <h:outputLabel for="pwd1" value="Nueva Contraseña: *" />
-                        <p:password id="pwd1" value="#{passwordView.password5}" match="pwd2" label="Password 1" required="true" />
+                        <p:password id="pwd1" value="#{cambiarContraseniaController.password1}" match="pwd2" label="Password 1" required="true" />
                         <h:outputLabel for="pwd2" value="Confirmar Contraseña: *" />
-                        <p:password id="pwd2" value="#{passwordView.password5}" label="Password 2" required="true" />
+                        <p:password id="pwd2" value="#{cambiarContraseniaController.password2}" label="Password 2" required="true" />
                     </h:panelGrid>
                     <br/>
-                    <p:commandButton update="matchGrid" value="Guardar Contraseña" />
+                    <p:commandButton update="matchGrid" value="Actualizar Contraseña" actionListener="#{cambiarContraseniaController.cambiarContrasenia}"/>
                 </h:form>
             </ui:define>
 

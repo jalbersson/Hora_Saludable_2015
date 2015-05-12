@@ -150,7 +150,14 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         List<Usuario> resultList = query.getResultList();
         return resultList;  
     }
-       
-       
     
+    public Usuario buscarUsuarioPorEmail(String usuemail){
+        Query query = getEntityManager().createNamedQuery("Usuario.findByUsuemail");
+        query.setParameter("usuemail", usuemail);
+        List<Usuario> listado = query.getResultList();
+        if(listado.isEmpty()){
+            return null;
+        }
+        return listado.get(0);
+    }    
 }

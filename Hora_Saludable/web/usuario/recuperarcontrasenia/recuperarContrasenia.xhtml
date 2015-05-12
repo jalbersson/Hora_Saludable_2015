@@ -19,16 +19,23 @@
 
             <ui:define name="body">
                 <h:form>
-                     <h:outputText 
-                value="Has olvidado tu contraseña, para recuperarla
-                por favor ingresa tu correo el ectronico con el cual te resgistraste" />
-                       <br/>
+                    <h1>Recuperar Contraseña</h1>
+                    <br/>
+                    <br/>
+                    <h:outputText 
+                        value="Has olvidado tu contraseña, para recuperarla
+                        por favor ingresa el correo electronico con el cual te resgistraste." style="width:150px;font-size: 15px;"/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                     <h:panelGrid columns="4" cellpadding="5">
+
+                        <h:outputLabel  value="Correo:" style="font-weight:bold; font-size: 20px" />
+                        <p:inputText id="correoElectronico" value="#{recuperarContraseniaController.correo}"  />
+                        <p:commandButton update="enviar" value="Enviar" actionListener="#{recuperarContraseniaController.recuperar}" icon="ui-icon-check" />
+                        <p:messages id="enviar" />
                        
-                        <h:outputLabel for="name" value="Correo:" style="font-weight:bold" />
-                        <p:inputText id="name" value="#{basicView.text}" />
-                        <p:commandButton value="Enviar" update="display" icon="ui-icon-check" />
-                        <h:outputText id="display" value="#{basicView.text}" />
                     </h:panelGrid>
                 </h:form>
             </ui:define>
