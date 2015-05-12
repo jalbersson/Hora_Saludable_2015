@@ -53,11 +53,13 @@ public class MedidasController {
     @PostConstruct
     public void init()
         {
-      int idusu = 20141224 ; //para probar
-      int idmed = 1 ; //para probar 
+      int idusu = 20141105 ; //para probar
+      int idmed = 5 ; //para probar 
+      
+    //  FacesContext context = FacesContext.getCurrentInstance();
+    //  MostrarUsuarioTestController s =  (MostrarUsuarioTestController)context.getApplication().evaluateExpressionGet(context, "#{mostrarUsuarioTestController}", MostrarUsuarioTestController.class);
       
       medicionactual =  ejbMedida.buscarporMedId(idmed).get(0);
-      servmed = new ServicioCalculoMedidas(medicionactual, 1, 155, 55);
         }
 
     public Medida getMedicionactual() {
@@ -66,14 +68,6 @@ public class MedidasController {
 
     public void setMedicionactual(Medida medicionactual) {
         this.medicionactual = medicionactual;
-    }
-    
-    public ServicioCalculoMedidas getServmed() {
-        return servmed;
-    }
-
-    public void setServmed(ServicioCalculoMedidas servmed) {
-        this.servmed = servmed;
     }
 
     private List<Medida> listaMedi;
