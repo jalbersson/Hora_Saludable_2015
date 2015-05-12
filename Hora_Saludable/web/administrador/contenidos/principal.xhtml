@@ -10,7 +10,7 @@
 
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
             <ui:define name="titulo">
-                Quienes Somos
+                Inicio
             </ui:define>
 
 
@@ -19,124 +19,100 @@
             </ui:define>
 
             <ui:define name="body">
-                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <p:contentFlow value="#{imagesView.images}" var="image">
                     <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />
-                    <div class="caption">#{image}
-                        <div>
-                            <p:button outcome="album" value="Editar albúm" icon="ui-icon-star" disabled="false">
-                                <f:param name="album" />
-                            </p:button>
-                        </div>
-                    </div>
-
+                    <div class="caption">#{image}</div>
 
                 </p:contentFlow>
                 <br/> <br/>
-                <h:form style="width: 350px">           
+                
+                <h:form>
+                    
                     <p:growl id="msgs" showDetail="true" />
-
-                    <p:dataTable style="width:700px" var="car" value="#{dtBasicView.cars}" rowStyleClass="#{car.year le 1990 ? 'old' : null}">
-                        <p:column headerText="Hora">
-                            <h:outputText value="#{car.id}" />
-                        </p:column>
-
-                        <p:column headerText="Lunes">
-                            <h:outputText value="#{car.year}" />
-                        </p:column>
-
-                        <p:column headerText="Martes">
-                            <h:outputText value="#{car.brand}" />
-                        </p:column>
-
-                        <p:column headerText="Miercoles">
-                            <h:outputText value="#{car.color}" />
-                        </p:column>
-
-                        <p:column headerText="Jueves">
-                            <h:outputText value="#{car.color}" />
-                        </p:column>
-
-                        <p:column headerText="Viernes">
-                            <h:outputText value="#{car.color}" />
-                        </p:column>
-
-                    </p:dataTable>
-
-                    <p:button style="margin-top: 20px;" outcome="editarHorario" value="Editar Horario" icon="ui-icon-star" disabled="false">
-                        <f:param name="editaHorario" />
-                    </p:button>
-
-                    <br/> <br/>
-
-                    <h3 style="margin-top:0">Noticias</h3>
-                    <p:accordionPanel>
-                        <p:tab title="Noticia I - 27 Marzo 2015">
-                            <h:panelGrid columns="2" cellpadding="10">
+                    
+                    <h:panelGrid columns="2">
+                         
+                        <h:panelGrid style="width: 650px" columns="2" cellpadding="10">
+                            <h3 style="margin-top:0">Noticias</h3>
+                            
                                 <p:graphicImage library="img/imagenSalud" name="salud1.jpg" width="80px" height="80px" style=""/>
                                 <h:outputText  value="Se condecoró estudiante de Octavo semestre de Ingenieria de Sistemas" />
                                 <h:outputText></h:outputText>
-                                <h:link outcome="visualizarNoticia" style="float: right">Ver mas</h:link>
-                            </h:panelGrid>
-                        </p:tab>
-                        <p:tab title="Noticia II - 26 Marzo 2015">
+                                <h:link style="float: right" outcome="visualizarNoticia"  >Ver mas</h:link>
+                        </h:panelGrid>
+                        
+                        <p:accordionPanel style="float:right; " >
+                            
+                        <p:tab title="Eventos ">
+                            
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage library="img/imagenSalud" name="salud2.jpg" width="80px" height="80px" style=""/>
-                                <h:outputText  value="En semana santa no habrá servicio" />
-                                <h:outputText></h:outputText>
-                                <h:link outcome="visualizarNoticia"  style="float: right">Ver mas</h:link>
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
+                                <h:outputText value="Marzo 30" />
+                                <h:outputText value="Competencia de Atletismo" />
                             </h:panelGrid>
-                        </p:tab>
-                        <p:tab title="Noticia III - 26 Marzo 2015">
+                            
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage library="img/imagenSalud" name="salud3.jpg" width="80px" height="80px" style=""/>
-                                <h:outputText  value="Próximo fin de semana inician juegos de verano InterUniversitario" />
-                                <h:outputText></h:outputText>
-                                <h:link outcome="visualizarNoticia" style="float: right">Ver mas</h:link>
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
+                                <h:outputText value="Marzo 30" />
+                                <h:outputText value="Competencia de Atletismo" />
                             </h:panelGrid>
-                        </p:tab>
+                            
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
+                                <h:outputText value="Marzo 30" />
+                                <h:outputText value="Competencia de Atletismo" />
+                            </h:panelGrid>
+                            
+                            
+                        </p:tab>    
                     </p:accordionPanel>
-
-                    <br/><br/>
-
-
-                    <h3 style="margin-top:0">Eventos</h3>
-                    <p:accordionPanel>
-                        <p:tab title="Evento I">
+                            
+           
+                 
+                        
+                        
+                        
+                    </h:panelGrid>
+                    
+                        <h:panelGrid columns="2">
+                            
+                            <p:accordionPanel style="float:right; width: 650px " >
+                        <p:tab title="Horario ">
+                            
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage library="img" name="antorcha.png" width="80px" height="80px" />
-                                <h:outputText
-                                    value="Inauguración de Torneo Infantil" />
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
+                                <h:outputText value="Lunes" />
+                                <h:outputText value="Competencia de Atletismo" />
                             </h:panelGrid>
-                        </p:tab>
-                        <p:tab title="Evento II">
+                            
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage library="img" name="Mediciones.PNG" width="80px" height="80px"  />
-                                <h:outputText value="Dia del corre corre" />
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
+                                <h:outputText value="Martes" />
+                                <h:outputText value="Competencia de Atletismo" />
                             </h:panelGrid>
-                        </p:tab>
-                        <p:tab title="Evento III">
+                            
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage library="img" name="mario.jpg" width="80px" height="80px"  />
-                                <h:outputText value="Visita del rector en la sede Tulcán para mejora de procesos" />
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
+                                <h:outputText value="Miercoles" />
+                                <h:outputText value="Competencia de Atletismo" />
                             </h:panelGrid>
-                        </p:tab>
-                    </p:accordionPanel>
-
-
+                            
+                            
+                        </p:tab>    
+                    </p:accordionPanel> 
+                            
+                        </h:panelGrid> 
                 </h:form>
+                
                 <br/> <br/>
-                <p:panelMenu style="width:200px; float: left">
-                    <p:submenu label="Quienes somos">
-                        <p:menuitem value="Ver Quienes Somos" outcome="quienesSomosPrincipal" ajax="false" />
-                        <p:menuitem value="Editar Quienes Somos" outcome="quienesSomos" ajax="false" />
-                    </p:submenu>
+                <p:button outcome="quienesSomos" value="Quienes somos" icon="ui-icon-star">
+                    <f:param name="productId" value="10" />
+                </p:button>
 
-                    <p:submenu label="Reglamento"  >
-                        <p:menuitem value="Ver Reglamento" outcome="reglamentoPrincipal" ajax="false"/>
-                        <p:menuitem value="Editar Reglamento" outcome="reglamento" ajax="false"/>
-                    </p:submenu>
-                </p:panelMenu>
+                <p:button outcome="reglamento" value="Reglamento" icon="ui-icon-star">
+                    <f:param name="productId" value="20" />
+                </p:button>
+
 
             </ui:define>
 

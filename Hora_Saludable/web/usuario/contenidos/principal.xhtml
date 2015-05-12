@@ -10,7 +10,7 @@
 
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
             <ui:define name="titulo">
-                Quienes Somos
+                Inicio
             </ui:define>
 
 
@@ -25,64 +25,85 @@
 
                 </p:contentFlow>
                 <br/> <br/>
-                <h:form style="width: 350px">           
+                
+                <h:form>
+                    
                     <p:growl id="msgs" showDetail="true" />
-
-                    <h3 style="margin-top:0">Noticias</h3>
-                    <p:accordionPanel>
-                        <p:tab title="Noticia I - 27 Marzo 2015">
-                            <h:panelGrid columns="2" cellpadding="10">
+                    
+                    <h:panelGrid columns="2">
+                         
+                        <h:panelGrid style="width: 650px" columns="2" cellpadding="10">
+                            <h3 style="margin-top:0">Noticias</h3>
+                            
                                 <p:graphicImage library="img/imagenSalud" name="salud1.jpg" width="80px" height="80px" style=""/>
                                 <h:outputText  value="Se condecoró estudiante de Octavo semestre de Ingenieria de Sistemas" />
                                 <h:outputText></h:outputText>
-                                
                                 <h:link style="float: right" outcome="visualizarNoticia"  >Ver mas</h:link>
-                            </h:panelGrid>
-                        </p:tab>
-                        <p:tab title="Noticia II - 26 Marzo 2015">
+                        </h:panelGrid>
+                        
+                        <p:accordionPanel style="float:right; " >
+                            
+                        <p:tab title="Eventos ">
+                            
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage library="img/imagenSalud" name="salud2.jpg" width="80px" height="80px" style=""/>
-                                <h:outputText  value="En semana santa no habrá servicio" />
-                                <h:outputText></h:outputText>
-                                <h:link style="float: right" outcome="visualizarNoticia" >Ver mas</h:link>
-                            </h:panelGrid>
-                        </p:tab>
-                        <p:tab title="Noticia III - 26 Marzo 2015">
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage library="img/imagenSalud" name="salud3.jpg" width="80px" height="80px" style=""/>
-                                <h:outputText  value="Próximo fin de semana inician juegos de verano InterUniversitario" />
-                                <h:outputText></h:outputText>
-                                <h:link style="float: right" outcome="visualizarNoticia" >Ver mas</h:link>
-                            </h:panelGrid>
-                        </p:tab>
-                    </p:accordionPanel>
-                    <br/> <br/>
-
-                    <h3 style="margin-top:0">Eventos de esta semana</h3>
-                    <p:accordionPanel>
-                        <p:tab title="Programate ">
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" />
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
                                 <h:outputText value="Marzo 30" />
                                 <h:outputText value="Competencia de Atletismo" />
                             </h:panelGrid>
                             
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" />
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
                                 <h:outputText value="Marzo 30" />
                                 <h:outputText value="Competencia de Atletismo" />
                             </h:panelGrid>
                             
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" />
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
                                 <h:outputText value="Marzo 30" />
                                 <h:outputText value="Competencia de Atletismo" />
                             </h:panelGrid>
+                            
+                            
                         </p:tab>    
                     </p:accordionPanel>
-
-
+                            
+           
+                 
+                        
+                        
+                        
+                    </h:panelGrid>
+                    
+                        <h:panelGrid columns="2">
+                            
+                            <p:accordionPanel style="float:right; width: 650px " >
+                        <p:tab title="Horario ">
+                            
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
+                                <h:outputText value="Lunes" />
+                                <h:outputText value="Competencia de Atletismo" />
+                            </h:panelGrid>
+                            
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
+                                <h:outputText value="Martes" />
+                                <h:outputText value="Competencia de Atletismo" />
+                            </h:panelGrid>
+                            
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
+                                <h:outputText value="Miercoles" />
+                                <h:outputText value="Competencia de Atletismo" />
+                            </h:panelGrid>
+                            
+                            
+                        </p:tab>    
+                    </p:accordionPanel> 
+                            
+                        </h:panelGrid> 
                 </h:form>
+                
                 <br/> <br/>
                 <p:button outcome="quienesSomos" value="Quienes somos" icon="ui-icon-star">
                     <f:param name="productId" value="10" />
