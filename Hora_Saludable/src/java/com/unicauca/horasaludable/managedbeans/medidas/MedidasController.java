@@ -5,9 +5,10 @@
  */
 package com.unicauca.horasaludable.managedbeans.medidas;
 
+/*
 import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.pdf.PdfWriter;*/
 import com.unicauca.horasaludable.entities.Medida;
 
 import java.util.List;
@@ -107,6 +108,7 @@ public class MedidasController {
 String name;
 String nombreRutaFile;
    public void imprimir() {
+       /*
         try {
             //Generamos el archivo PDF
             String directorioArchivos;
@@ -159,7 +161,7 @@ String nombreRutaFile;
         {
               System.out.println("Erro2");
             e.printStackTrace();
-        }
+        }*/
     }
      
  public void cargarArchivo() 

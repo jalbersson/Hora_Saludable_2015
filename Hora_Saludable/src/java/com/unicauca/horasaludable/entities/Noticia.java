@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author seven
+ * @author JuanJose
  */
 @Entity
 @Table(name = "NOTICIA", catalog = "asae", schema = "")
@@ -34,9 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Noticia.findByNotid", query = "SELECT n FROM Noticia n WHERE n.notid = :notid"),
     @NamedQuery(name = "Noticia.findByNottitulo", query = "SELECT n FROM Noticia n WHERE n.nottitulo = :nottitulo"),
     @NamedQuery(name = "Noticia.findByNotfechapublicacion", query = "SELECT n FROM Noticia n WHERE n.notfechapublicacion = :notfechapublicacion"),
-    @NamedQuery(name = "Noticia.findByNotvisible", query = "SELECT n FROM Noticia n WHERE n.notvisible = :notvisible"),
     @NamedQuery(name = "Noticia.findByNotfechaedicion", query = "SELECT n FROM Noticia n WHERE n.notfechaedicion = :notfechaedicion"),
-    @NamedQuery(name = "Noticia.findByNotcontenido", query = "SELECT n FROM Noticia n WHERE n.notcontenido = :notcontenido")})
+    @NamedQuery(name = "Noticia.findByNotvisible", query = "SELECT n FROM Noticia n WHERE n.notvisible = :notvisible"),
+    @NamedQuery(name = "Noticia.findByNotcontenido", query = "SELECT n FROM Noticia n WHERE n.notcontenido = :notcontenido"),
+    @NamedQuery(name = "Noticia.findByNotimagen", query = "SELECT n FROM Noticia n WHERE n.notimagen = :notimagen")})
 public class Noticia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,7 +47,7 @@ public class Noticia implements Serializable {
     private Long notid;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 75)
+    @Size(min = 1, max = 50)
     @Column(name = "NOTTITULO")
     private String nottitulo;
     @Basic(optional = false)
@@ -54,18 +55,21 @@ public class Noticia implements Serializable {
     @Column(name = "NOTFECHAPUBLICACION")
     @Temporal(TemporalType.TIMESTAMP)
     private Date notfechapublicacion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "NOTVISIBLE")
-    private boolean notvisible;
     @Column(name = "NOTFECHAEDICION")
     @Temporal(TemporalType.TIMESTAMP)
     private Date notfechaedicion;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 200)
+    @Column(name = "NOTVISIBLE")
+    private boolean notvisible;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10000)
     @Column(name = "NOTCONTENIDO")
     private String notcontenido;
+    @Size(max = 250)
+    @Column(name = "NOTIMAGEN")
+    private String notimagen;
 
     public Noticia() {
     }
@@ -106,14 +110,6 @@ public class Noticia implements Serializable {
         this.notfechapublicacion = notfechapublicacion;
     }
 
-    public boolean getNotvisible() {
-        return notvisible;
-    }
-
-    public void setNotvisible(boolean notvisible) {
-        this.notvisible = notvisible;
-    }
-
     public Date getNotfechaedicion() {
         return notfechaedicion;
     }
@@ -122,12 +118,28 @@ public class Noticia implements Serializable {
         this.notfechaedicion = notfechaedicion;
     }
 
+    public boolean getNotvisible() {
+        return notvisible;
+    }
+
+    public void setNotvisible(boolean notvisible) {
+        this.notvisible = notvisible;
+    }
+
     public String getNotcontenido() {
         return notcontenido;
     }
 
     public void setNotcontenido(String notcontenido) {
         this.notcontenido = notcontenido;
+    }
+
+    public String getNotimagen() {
+        return notimagen;
+    }
+
+    public void setNotimagen(String notimagen) {
+        this.notimagen = notimagen;
     }
 
     @Override
