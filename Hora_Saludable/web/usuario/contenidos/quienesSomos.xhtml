@@ -6,17 +6,23 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+
     <body>
 
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+
 
             <ui:define name="titulo">
                 Quienes Somos
             </ui:define>
 
+            <ui:define name="title">                  
 
-            <ui:define name="title">
-                <big>  </big>
+                <div class="tituloContenido">
+                    <br></br>
+                    Quienes Somos <br></br>
+                </div>
+
             </ui:define>
 
             <ui:define name="body">
@@ -31,60 +37,54 @@
                         </p:submenu>
                     </p:panelMenu>
 
-                    <h3 style="margin-top:0; font-size: 30px">  Quienes Somos </h3>
+
+                   <h:form>
+                    <p:growl autoUpdate="true"/>
+
                     <div style="height:500px">
                         <h:form>
                             <p:growl id="msgs" showDetail="true" />
 
-                            <p:dashboard id="board" model="#{dashboardView.model}">
+                            <p:dashboard id="board" model="#{dashboardView.model}" >
                                 <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs" />
 
                                 <p:panel id="mision" header="Misión" style="height:250px;width: 300px;font-size: 20px" >
-                                    <h:outputText style="font-size: 14px" value="Ofrecer oportunidades de desarrollo tecnológico y comercial para las empresas, brindando un trabajo innovador, especializado y personalizado para así satisfacer las necesidades del mercado objetivo y ayudarles a adentrarse en el mundo virtual como complemento de sus actividades comerciales" />
+                                    <h:outputText style="font-size: 14px" value="#{quienesSomos.devMision()}" />
                                 </p:panel>
 
-                                <p:panel id="objetivo" header="Objetivo" style="height:250px;width: 300px;font-size: 20px">
-                                    <h:outputText style="font-size: 14px" value="* Potenciar la presencia de su marca en Internet." />
-                                    <br></br>
-                                    <h:outputText style="font-size: 14px" value="* Incentivar la relación virtual entre un negocio y sus clientes." />
-                                    <br></br>
-                                    <h:outputText style="font-size: 14px" value="* Fortalecer la imagen corporativa de nuestros clientes." />
-                                    <br></br>
-                                    <h:outputText style="font-size: 14px" value="* Reforzar sus conocimientos sobre el mundo de la web." />
-                                    <br></br>
-                                    <h:outputText style="font-size: 14px" value="* Asegurar la interacción entre el sitio web y sus usuarios." />
-                                    <br></br>
+                                <p:panel id="experiencia" header="Vision" style="height:250px;width: 300px;font-size: 20px">
+                                    <h:outputText style="font-size: 14px" value="#{quienesSomos.devVision()}"  />
                                 </p:panel>
-
-                                <p:panel id="experiencia" header="Experiencia" style="height:250px;width: 300px;font-size: 20px">
-                                    <h:outputText style="font-size: 14px" value="Desarrollo Web - 11 años Diseño Corporativo - 9 años Marketing Digital - 8 años
-                                                  Fotografía Profesional - 7 años"  />
+                                <p:panel id="equipo" header="Responsables" style="height:250px;width: 300px;font-size: 20px">
+                                    <h:outputText style="font-size: 14px"  value="#{quienesSomos.devEquipo()}" />
                                 </p:panel>
-
-                                <p:panel id="equipo" header="Equipo de trabajo" style="height:250px;width: 300px;font-size: 20px">
-                                    <h:outputText style="font-size: 14px"  value="Weather Content" />
-                                </p:panel>
-                                <p:panel id="reglamento" header="Reglamento" style="height:100px;width: 300px;font-size: 15px">
+                                <p:panel id="reglamento" header="Reglamento" style="height:250px;width: 300px;font-size: 15px">
 
                                     <p:link outcome="reglamento" value="Ver Reglamento">
-                                        <f:param name="productId" value="10" />
+
                                     </p:link>
                                 </p:panel>
+
+
                             </p:dashboard>
 
                             <div style="clear:both" />
+                            <h:panelGrid columns="2" style="margin-top: 10px">
+                                
+                                <p:button outcome="principal" value="Volver" style="float:right" />
+                            </h:panelGrid>
                         </h:form>
-<h:panelGrid columns="2" style="margin-top: 10px">
 
-                    <br></br>
-                    <p:button outcome="principal" value="Volver" style="float:right" />
-                </h:panelGrid>
 
                     </div>
 
+
+
+                </h:form>
+
                 </h:form> 
                 <br></br>
-                
+
 
             </ui:define>
 

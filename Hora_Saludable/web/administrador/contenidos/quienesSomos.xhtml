@@ -13,28 +13,48 @@
                 Quienes Somos
             </ui:define>
 
+
             <ui:define name="title">
-                Quienes Somos
+
             </ui:define>
 
             <ui:define name="body">
-                Editar
-                <h:form>           
-                    <p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" width="600" />
+                <h1 style="margin-top:0;"> 
+                        Quienes somos
+                    </h1>
+                <h:form id="form" enctype="multipart/form-data">           
+                    
 
-                    <h:panelGrid columns="2" style="margin-top: 10px">
-                        <h:form>           
-                            <p:growl id="message" showDetail="true" />
+                    <h:panelGrid columns="1" style="margin-top: 10px">
+                        <h:outputLabel for="mision" value="Mision "  />
+                        <h:form id="mision" >
 
-                            <p:commandButton  value="Guardar" actionListener="#{dialogView.destroyWorld}" update="message">
-                                <p:confirm header="Confirmacion" message="Esta seguro?" icon="ui-icon-alert" />
-                            </p:commandButton>
-                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                                <p:button outcome="principal" value="Si" style="float:right; " />
-                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                            </p:confirmDialog>
+
+                            <h:inputTextarea id="mision" requiredMessage="Es necesario que ingrese el contenido de la mision" required="true" value="#{quienesSomos.mision}" rows="15" cols="79"/>
+
+                            <p:commandButton update="mision" action="#{quienesSomos.crearMision()}" process="@form" value="Registrar" />
                         </h:form>
-                        <p:button outcome="principal" value="Volver" style="float:right; " />
+                        <h:outputLabel for="vision" value="Vision "  />
+                        <h:form id="vision" >
+
+
+                            <h:inputTextarea id="vision" requiredMessage="Es necesario que ingrese el contenido de la mision" required="true" value="#{quienesSomos.vision}" rows="15" cols="79"/>
+
+                            <p:commandButton update="vision" action="#{quienesSomos.crearVision()}" process="@form" value="Registrar" />
+                        </h:form>
+                        <h:outputLabel for="responsables" value="Responsables "  />
+                        <h:form id="responsables" >
+
+
+                            <h:inputTextarea id="responsables" requiredMessage="Es necesario que ingrese el contenido de la mision" required="true" value="#{quienesSomos.equipo}" rows="15" cols="79"/>
+
+                            <p:commandButton update="responsables" action="#{quienesSomos.crearResponsables()}" process="@form" value="Registrar" />
+                        </h:form>
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" style="margin-top: 10px">
+
+                        <p:button outcome="quienesSomosPrincipal" value="Volver" style="float:right; " />
                     </h:panelGrid>
 
                     <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
