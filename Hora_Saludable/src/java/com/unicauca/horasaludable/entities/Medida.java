@@ -7,6 +7,7 @@ package com.unicauca.horasaludable.entities;
 
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -87,7 +88,10 @@ public class Medida implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "MEDTALLA")
-    private float medtalla;   
+    private float medtalla;
+    @Size(max = 30)
+    @Column(name = "MEDDEPORTE")
+    private String meddeporte;
     @Basic(optional = false)
     @NotNull
     @Column(name = "MEDTRICEPS")
@@ -195,11 +199,11 @@ public class Medida implements Serializable {
         this.medid = medid;
     }
 
-    public Medida(Long medid, Date medfecha, float medpeso,float medtalla,float medtriceps, float medsubescapular, float medsuprailiaco, float medabdominal, float medmuslo, float medpantorilla, float medperimetromuneca, float medperimetrocabeza, float meddiametrobiacromial, float meddiametrobiltiocristal, float meddiametrohumero, float meddiametrofemur, float medperimetrobrazo, float meddiametroantebrazo, float medperimetropantorrilla, float medperimetrocajatoraxica, float medperimetromuslo, float medpulso0, float medpulso1, float medpulso2, float medflexibilidad, float medembergadura, float medsaltomaximo, float medsaltoreal) {
+    public Medida(Long medid, Date medfecha, float medpeso, float medtalla, float medtriceps, float medsubescapular, float medsuprailiaco, float medabdominal, float medmuslo, float medpantorilla, float medperimetromuneca, float medperimetrocabeza, float meddiametrobiacromial, float meddiametrobiltiocristal, float meddiametrohumero, float meddiametrofemur, float medperimetrobrazo, float meddiametroantebrazo, float medperimetropantorrilla, float medperimetrocajatoraxica, float medperimetromuslo, float medpulso0, float medpulso1, float medpulso2, float medflexibilidad, float medembergadura, float medsaltomaximo, float medsaltoreal) {
         this.medid = medid;
         this.medfecha = medfecha;
         this.medpeso = medpeso;
-        this.medtalla=medtalla;
+        this.medtalla = medtalla;
         this.medtriceps = medtriceps;
         this.medsubescapular = medsubescapular;
         this.medsuprailiaco = medsuprailiaco;
@@ -224,7 +228,7 @@ public class Medida implements Serializable {
         this.medembergadura = medembergadura;
         this.medsaltomaximo = medsaltomaximo;
         this.medsaltoreal = medsaltoreal;
-        
+
     }
 
     public Long getMedid() {
@@ -258,15 +262,21 @@ public class Medida implements Serializable {
     public void setMedpeso(float medpeso) {
         this.medpeso = medpeso;
     }
-    
-     public float getMedtalla() 
-    {
+
+    public float getMedtalla() {
         return medtalla;
     }
 
-    public void setMedtalla(float medtalla) 
-    {
+    public void setMedtalla(float medtalla) {
         this.medtalla = medtalla;
+    }
+
+    public String getMeddeporte() {
+        return meddeporte;
+    }
+
+    public void setMeddeporte(String meddeporte) {
+        this.meddeporte = meddeporte;
     }
 
     public float getMedtriceps() {
@@ -521,7 +531,7 @@ public class Medida implements Serializable {
     }
 
     public double pesoideal() {
-        return (0.75 * (155 - 150) + 50);   ///cambiar 155 por est
+        return (0.75 * (medtalla - 150) + 50);   ///cambiar 155 por est
     }
 
     public double indicemasacorporal() {
@@ -529,15 +539,15 @@ public class Medida implements Serializable {
     }
 
     public double complexion() {
-        return Redondear(155 / medperimetromuneca);  ///cambiar 155 por est
+        return Redondear(medtalla / medperimetromuneca);  ///cambiar 155 por est
     }
 
     public double tasametabolicabasal() {
         double r;
         if (usuid.getUsugenero().equals('M')) {
-            r = 66 + (13.8 * medpeso) + (5 * 155) - (6.8 * 55);   ///cambiar 55 por edad,155 por est
+            r = 66 + (13.8 * medpeso) + (5 * medtalla) - (6.8 * 55);   ///cambiar 55 por edad,155 por est
         } else {
-            r = 655 + (9.6 * medpeso) + (1.7 * 155) - (4.7 * 55);   //cambiar 55 por edad,155 por est
+            r = 655 + (9.6 * medpeso) + (1.7 * medtalla) - (4.7 * 55);   //cambiar 55 por edad,155 por est
         }
         return Redondear(r);
     }
@@ -559,50 +569,164 @@ public class Medida implements Serializable {
     }
 
     public double porcentajegrasaideal() {
-        return 0;
+        if(meddeporte==null)meddeporte="";
+        switch (meddeporte) {
+            case "Atletismo":
+                if (usuid.getUsugenero().equals('M')) {
+                    return 7.04;
+                } else {
+                    return 14.61;
+                }
+            case "Baloncesto":
+                if (usuid.getUsugenero().equals('M')) {
+                    return 8.40;
+                } else {
+                    return 18.22;
+                }
+            case "Ciclismo":
+                return 6.48;
+            case "Gimnasia":
+                if (usuid.getUsugenero().equals('M')) {
+                    return 6.97;
+                } else {
+                    return 11.03;
+                }
+
+            case "Tiro":
+                return 10.92;
+
+            case "Boxeo":
+                return 8.09;
+
+            case "Karate Do":
+                if (usuid.getUsugenero().equals('M')) {
+                    return 7.93;
+                } else {
+                    return 17.63;
+                }
+
+            case "Tenis de Mesa":
+                return 8.82;
+            case "Voleibol":
+                if (usuid.getUsugenero().equals('M')) {
+                    return 8.23;
+                } else {
+                    return 18.08;
+                }
+            case "Futbol":
+                return 8.83;
+
+            case "Microfutbol":
+                return 9.33;
+
+            case "Tenis de Campo":
+                return 9.16;
+
+            case "Natacion":
+                return 8.98;
+
+            case "Lucha Olimpica":
+                return 9.23;
+
+            case "Levantamiento de Pesas":
+                return 7.78;
+
+            case "Judo":
+                return 7.86;
+
+            case "Taekondo":
+                return 8.28;
+
+            case "Esgrima":
+                if (usuid.getUsugenero().equals('M')) {
+                    return 9.55;
+                } else {
+                    return 19.71;
+                }
+
+            default:
+                return 0;
+        }
     }
-    
-    public double frecuenciaMaxima()
-            {
-           if(medpulso0>medpulso1)
-                 if(medpulso0>medpulso2)return medpulso0;
-                 else return medpulso2;
-           else if(medpulso1>medpulso2)return medpulso1;
-           else return medpulso2;
+
+    public String getEstadoPorcentajeGrasaIdeal() {
+        double x = porcentajeGrasa();
+        if (usuid.getUsugenero().equals('M')) {
+
+            if (x < 12) {
+                return "Excelente";
+            }
+            if (x < 16) {
+                return "Bueno";
+            }
+            if (x < 20) {
+                return "Aceptable";
+            }
+            if (x < 23) {
+                return "Malo";
+            }
+            else {
+                return "Pesimo";
+            }
+        } else {
+            if (x < 18) {
+                return "Excelente";
+            }
+            if (x < 20) {
+                return "Bueno";
+            }
+            if (x < 25) {
+                return "Aceptable";
+            }
+            if (x < 29) {
+                return "Malo";
+            }
+            else {
+                return "Pesimo";
+            }
+        }
     }
-    
-    public double rehabilitacion()
-          {
-            return  Redondear((frecuenciaMaxima() - medpulso0)*0.5 + medpulso0);              
-          }   
-    
-    public double quemadegrasa()           
-            {          
-                return  Redondear((frecuenciaMaxima() - medpulso0)*0.6 + medpulso0);              
-          }   
-    
-    public double desarrolloresistencia()           
-            {          
-                return  Redondear((frecuenciaMaxima() - medpulso0)*0.7 + medpulso0);              
-          }   
-    
-    public double desarrollopotenciaaerobica()           
-            {          
-                return  Redondear((frecuenciaMaxima() - medpulso0)*0.8 + medpulso0);              
-          } 
-    
-    public double aumentometanaerobico()           
-            {          
-                return  Redondear((frecuenciaMaxima() - medpulso0)*0.9 + medpulso0);              
-          } 
-    
+
+    public double frecuenciaMaxima() {
+        return 220 - getEdadusuid();
+    }
+
+    public double rehabilitacion() {
+        return Redondear((frecuenciaMaxima() - medpulso0) * 0.5 + medpulso0);
+    }
+
+    public double quemadegrasa() {
+        return Redondear((frecuenciaMaxima() - medpulso0) * 0.6 + medpulso0);
+    }
+
+    public double desarrolloresistencia() {
+        return Redondear((frecuenciaMaxima() - medpulso0) * 0.7 + medpulso0);
+    }
+
+    public double desarrollopotenciaaerobica() {
+        return Redondear((frecuenciaMaxima() - medpulso0) * 0.8 + medpulso0);
+    }
+
+    public double aumentometanaerobico() {
+        return Redondear((frecuenciaMaxima() - medpulso0) * 0.9 + medpulso0);
+    }
+
     public double Redondear(double numero) {
         return Math.rint(numero * 100) / 100;
     }
-    
-    public String obtenerFecha()
-          {
-              DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
-              return df.format(medfecha);                  
-          }  
+
+    public String obtenerFecha() {
+        DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
+        return df.format(medfecha);
+    }
+
+    public String edad() {
+        DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
+        return df.format(medfecha);
+    }
+
+    public int getEdadusuid() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+        return Integer.parseInt(dateFormat.format(new Date())) - Integer.parseInt(dateFormat.format(usuid.getUsufechanacimiento()));
+    }
 }

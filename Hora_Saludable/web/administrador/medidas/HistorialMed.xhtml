@@ -147,14 +147,17 @@
                     </p:row>
                     <p:row>
                         <p:column>
-                            <p:panelGrid id="tabmed1" columns="2" styleClass="paneleshistmed" style="margin-top: -60px;">
-                                <f:facet name="header">
+                            <p:panelGrid id="tabmed1" columns="2" styleClass="paneleshistmed">
+                                <f:facet name="header" class="titulomediciones">
                                     Variables
                                 </f:facet>
 
                                 <p:outputLabel value="Peso(kg): " />
                                 <p:outputLabel value="#{historialMedController.medhist1.medpeso}"   styleClass="txtboxmed"/>
 
+                                <p:outputLabel  value="Talla(cm): *"/>
+                                <p:outputLabel value="#{historialMedController.medhist1.medtalla}"   styleClass="txtboxmed"/>
+                                
                                 <p:outputLabel  value="Triceps(cm): " />
                                 <p:outputLabel  value="#{historialMedController.medhist1.medtriceps}"   styleClass="txtboxmed"/>
 
@@ -207,6 +210,8 @@
                                 <p:outputLabel  value="#{historialMedController.medhist1.medperimetromuslo}"  styleClass="txtboxmed"/>
 
                             </p:panelGrid>
+                            <p:spacer height="27" />
+                            
                             </p:column>
                          <p:column>
                             <p:panelGrid id="tabres1" columns="2" styleClass="paneleshistmed" >
@@ -245,7 +250,7 @@
                                 <p:separator />
                                 <p:separator />
                                 <p:outputLabel  value="% Grasa" />
-                                <p:outputLabel   value="----"  />
+                                <p:outputLabel  value="#{medidasController.medicionactual.estadoPorcentajeGrasaIdeal}"  />
                                 <p:outputLabel  value="Complexion" />
                                 <p:outputLabel   value="----"  />
                                 <p:outputLabel  value="Indice de Masa Corporal" />
@@ -257,7 +262,7 @@
 
                         <p:column>
 
-                            <p:panelGrid id="tabmed2" columns="2" styleClass="paneleshistmed" style="margin-top: -60px;">
+                            <p:panelGrid id="tabmed2" columns="2" styleClass="paneleshistmed">
                                 <f:facet name="header">
                                     Variables
                                 </f:facet>
@@ -265,6 +270,9 @@
                                 <p:outputLabel value="Peso(kg): " />
                                 <p:outputLabel value="#{historialMedController.medhist2.medpeso}"   styleClass="txtboxmed"/>
 
+                                <p:outputLabel  value="Talla(cm): *"/>
+                                <p:outputLabel value="#{historialMedController.medhist2.medtalla}"   styleClass="txtboxmed"/>
+                                
                                 <p:outputLabel  value="Triceps(cm): " />
                                 <p:outputLabel  value="#{historialMedController.medhist2.medtriceps}"   styleClass="txtboxmed"/>
 
@@ -317,6 +325,7 @@
                                 <p:outputLabel  value="#{historialMedController.medhist2.medperimetromuslo}"  styleClass="txtboxmed"/>
 
                             </p:panelGrid>
+                            <p:spacer height="27" />
                         </p:column>
                         <p:column>
                             <p:panelGrid id="tabres2" columns="2" styleClass="paneleshistmed" style="margin-left: 5px;">

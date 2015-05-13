@@ -14,39 +14,80 @@
             </ui:define>
 
             <ui:define name="title">
-               
+
             </ui:define>
 
             <ui:define name="body">
                 <h:form>
+                    <p:panelMenu style="width:200px; float: right">
+                        <p:submenu label="Gestión de Eventos">
+                            <p:menuitem value="Agregar evento" ajax="false" outcome="agregarEvento"/> 
+                            <p:menuitem value="Editar evento" ajax="false" outcome="editarEvento"/> 
+                            <p:menuitem value="Eliminar evento" ajax="false" outcome="eliminarEvento"/> 
+                        </p:submenu>
+
+
+                        <p:submenu label="Gestion de noticias">
+                            <p:menuitem value="Nueva Noticia"  ajax="false" outcome="nuevaNoticia" icon="ui-icon-close"/>
+                            <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false" icon="ui-icon-close"/>
+                        </p:submenu>
+
+                        <p:submenu label="Reglamento"  >
+                            <p:menuitem value="Ver Reglamento" outcome="reglamentoPrincipal" ajax="false"/>
+                            <p:menuitem value="Editar Reglamento" outcome="reglamento" ajax="false"/>
+                        </p:submenu>
+
+                        <p:submenu label="Quienes somos">
+                            <p:menuitem value="Ver Quienes Somos" outcome="quienesSomosPrincipal" ajax="false" />
+                            <p:menuitem value="Editar Quienes Somos" outcome="quienesSomos" ajax="false" />
+                        </p:submenu>
+
+                    </p:panelMenu>
+
+                </h:form>
+                <h:form>
                     <p:growl autoUpdate="true"/>
 
-                    
+                    <div style="height:500px">
+                        <h:form>
+                            <p:growl id="msgs" showDetail="true" />
 
-                    <h3 style="margin-top:0">Quienes Somos</h3>
-                    <p:scrollPanel style="width:550px;height:300px">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit tortor a ipsum vehicula, in semper sapien auctor. Nulla tempor eget est non consequat. Nulla sit amet lorem justo. Cras non tellus eros. Sed ultricies orci ut quam interdum fringilla. Nam vitae massa ac mi elementum mattis vel vitae sem. Ut eros ipsum, scelerisque a erat a, eleifend luctus nibh. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-                        </p>
-                        <p>
-                            Vivamus ac ullamcorper magna. Aenean felis ante, elementum sit amet urna at, eleifend aliquet velit. Morbi a convallis magna. In nec leo vel dolor hendrerit pharetra. Cras in iaculis enim. Aenean porta sapien dignissim turpis dapibus, eu dictum velit elementum. Aliquam sollicitudin gravida luctus.
-                        </p>
-                        <p>
-                            Ut vel nulla sit amet erat laoreet eleifend nec sed lacus. Quisque placerat diam vitae justo eleifend, rutrum mollis mauris fringilla. Curabitur turpis odio, euismod id lorem a, ultricies suscipit ligula. Pellentesque ut erat a leo rhoncus porta ac sed velit. Nunc at erat ligula. Fusce vehicula posuere interdum. Curabitur tempus, tortor at sollicitudin dapibus, erat ante varius nisl, id dictum erat ipsum porttitor ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla id varius enim, sed rutrum orci.
-                        </p>
-                        <p>
-                            Sed tincidunt urna quis metus lacinia commodo. Praesent convallis eros vel quam scelerisque bibendum. Mauris eget dignissim libero. Pellentesque sagittis sem quis ipsum viverra, sed consequat mi consectetur. Donec facilisis dapibus ultrices. Donec luctus auctor lacus, at congue nisi aliquet eu. Praesent in justo at risus faucibus ultricies. Fusce et libero lectus. Donec elementum pharetra sapien, at placerat purus sodales et. Vivamus iaculis lacus sed placerat rhoncus. Mauris iaculis sit amet nunc at placerat. Donec consequat euismod lacinia. Etiam nec quam vehicula, cursus massa in, ullamcorper erat.
-                        </p>
-                        <p>
-                            Praesent volutpat scelerisque vestibulum. In eu massa non neque rutrum commodo. Nunc vel enim nisi. Aenean leo ipsum, molestie vel justo nec, pharetra luctus dui. Nunc rhoncus turpis id lorem luctus consequat. Nulla condimentum adipiscing turpis consequat semper. Etiam ullamcorper velit nec hendrerit malesuada. Praesent venenatis leo sit amet arcu commodo, sit amet porta tellus suscipit. Quisque mi tortor, vestibulum in arcu non, pretium auctor libero. In commodo luctus placerat.
-                        </p>
-                    </p:scrollPanel>
-                </h:form> 
-                   <h:panelGrid columns="2" style="margin-top: 10px">
+                            <p:dashboard id="board" model="#{dashboardView.model}" >
+                                <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs" />
 
-                    <p:button outcome="principal" value="Volver" style="float:right" />
-                </h:panelGrid>
-                <h:panelGrid columns="2" style="margin-top: 10px"></h:panelGrid>
+                                <p:panel id="mision" header="Misión" style="height:250px;width: 300px;font-size: 20px" >
+                                    <h:outputText style="font-size: 14px" value="#{quienesSomos.devMision()}" />
+                                </p:panel>
+
+                                <p:panel id="experiencia" header="Vision" style="height:250px;width: 300px;font-size: 20px">
+                                    <h:outputText style="font-size: 14px" value="#{quienesSomos.devVision()}"  />
+                                </p:panel>
+                                <p:panel id="equipo" header="Responsables" style="height:250px;width: 300px;font-size: 20px">
+                                    <h:outputText style="font-size: 14px"  value="#{quienesSomos.devEquipo()}" />
+                                </p:panel>
+                                <p:panel id="reglamento" header="Reglamento" style="height:250px;width: 300px;font-size: 15px">
+
+                                    <p:link outcome="reglamentoPrincipal" value="Ver Reglamento">
+
+                                    </p:link>
+                                </p:panel>
+
+
+                            </p:dashboard>
+
+                            <div style="clear:both" />
+                            <h:panelGrid columns="2" style="margin-top: 10px">
+                                
+                                <p:button outcome="principal" value="Volver" style="float:right" />
+                            </h:panelGrid>
+                        </h:form>
+
+
+                    </div>
+
+
+
+                </h:form>
             </ui:define>
 
         </ui:composition>

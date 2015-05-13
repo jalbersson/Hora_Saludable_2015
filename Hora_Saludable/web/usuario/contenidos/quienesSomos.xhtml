@@ -3,23 +3,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 
     <body>
 
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
+
             <ui:define name="titulo">
                 Quienes Somos
             </ui:define>
 
+            <ui:define name="title">                  
 
-            <ui:define name="title">
-                Quienes Somos
+                <div class="tituloContenido">
+                    <br></br>
+                    Quienes Somos <br></br>
+                </div>
+
             </ui:define>
 
             <ui:define name="body">
-                <h:form style = "top: 500"  >
+                <h:form style = "top: 500px"  >
                     <p:growl autoUpdate="true"/>
                     <p:panelMenu style="width:200px; float: right">
                         <p:submenu label="Contenidos">
@@ -30,21 +37,55 @@
                         </p:submenu>
                     </p:panelMenu>
 
-                    <h3 style="margin-top:0">Quienes Somos</h3>
-                    <p:scrollPanel style="width:550px;height:300px">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit tortor a ipsum vehicula, in semper sapien auctor. Nulla tempor eget est non consequat. Nulla sit amet lorem justo. Cras non tellus eros. Sed ultricies orci ut quam interdum fringilla. Nam vitae massa ac mi elementum mattis vel vitae sem. Ut eros ipsum, scelerisque a erat a, eleifend luctus nibh. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-                        </p>
-                        <p>
-                            Vivamus ac ullamcorper magna. Aenean felis ante, elementum sit amet urna at, eleifend aliquet velit. Morbi a convallis magna. In nec leo vel dolor hendrerit pharetra. Cras in iaculis enim. Aenean porta sapien dignissim turpis dapibus, eu dictum velit elementum. Aliquam sollicitudin gravida luctus.
-                        </p>
 
-                    </p:scrollPanel>
+                   <h:form>
+                    <p:growl autoUpdate="true"/>
+
+                    <div style="height:500px">
+                        <h:form>
+                            <p:growl id="msgs" showDetail="true" />
+
+                            <p:dashboard id="board" model="#{dashboardView.model}" >
+                                <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs" />
+
+                                <p:panel id="mision" header="Misión" style="height:250px;width: 300px;font-size: 20px" >
+                                    <h:outputText style="font-size: 14px" value="#{quienesSomos.devMision()}" />
+                                </p:panel>
+
+                                <p:panel id="experiencia" header="Vision" style="height:250px;width: 300px;font-size: 20px">
+                                    <h:outputText style="font-size: 14px" value="#{quienesSomos.devVision()}"  />
+                                </p:panel>
+                                <p:panel id="equipo" header="Responsables" style="height:250px;width: 300px;font-size: 20px">
+                                    <h:outputText style="font-size: 14px"  value="#{quienesSomos.devEquipo()}" />
+                                </p:panel>
+                                <p:panel id="reglamento" header="Reglamento" style="height:250px;width: 300px;font-size: 15px">
+
+                                    <p:link outcome="reglamento" value="Ver Reglamento">
+
+                                    </p:link>
+                                </p:panel>
+
+
+                            </p:dashboard>
+
+                            <div style="clear:both" />
+                            <h:panelGrid columns="2" style="margin-top: 10px">
+                                
+                                <p:button outcome="principal" value="Volver" style="float:right" />
+                            </h:panelGrid>
+                        </h:form>
+
+
+                    </div>
+
+
+
+                </h:form>
+
                 </h:form> 
-                <h:panelGrid columns="2" style="margin-top: 10px">
+                <br></br>
 
-                    <p:button outcome="principal" value="Volver" style="float:right" />
-                </h:panelGrid>
+
             </ui:define>
 
         </ui:composition>

@@ -18,85 +18,71 @@
 
             </ui:define>
 
-            <ui:define name="body">
+            <ui:define name="body" >
+                <h:form id="form" enctype="multipart/form-data">
 
-
-
-
-                <h:form id="form">
                     <p:panelMenu style="width:200px; float: right">
                         <p:submenu label="Gestión de Noticias">
                             <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false"/>
                             <p:menuitem value="Nueva  Noticia" outcome="nuevaNoticia" ajax="false"/>
-
                         </p:submenu>
                     </p:panelMenu>
 
-                    <p:panelGrid  style="width: 60%;" columns="1" >
-
-
-
-
-
+                    <p:panelGrid  style="width: 60%;" columns="1">
                         <f:facet name="header">
                             <H1>Nueva noticia</H1>
                         </f:facet>
+                        <h:form id="nuevaNoticia">
+
+                            <h:panelGrid id="info" columns="2" >
+
+                                <h:outputLabel  for="visible" value="Mostrar noticia: " />
+                                <h:selectBooleanCheckbox id="visible" value="#{noticiaController.visible}"  />
+                                <h:outputLabel for="titulo" value="*Titulo: "  />
+                                <h:inputText id="titulo" requiredMessage="Es necesario de que introduzca el Titulo de la noticia" value="#{noticiaController.titulo}" required="true" size="65" />
+                                <h:outputLabel for="contenido" value="*Noticia: "  />
+                                <h:inputTextarea id="contenido" requiredMessage="Es necesario que ingrese el contenido de la noticia" required="true" value="#{noticiaController.contenido}" rows="15" cols="79"/>
+                                <h:outputLabel for="imagen" value="Imagen:"  />
+
+                                <p:fileUpload value="#{noticiaController.file}" mode="simple"/>
+                                <p:button outcome="principal" value="Voler" style="float:left" ></p:button>
+                                <p:commandButton ajax="false" update="nuevaNoticia" action="#{noticiaController.guardarNoticia}" actionListener="#{noticiaController.upload}" process="@form" value="Registrar" />
+                                
+                            </h:panelGrid>-
+
+                            <p:growl id="messages2" showDetail="true" />
 
 
-                        <p:messages id="messages" />
-                        <h:panelGrid columns="2" >
-                            <h:outputLabel value="*Titulo:"  />
-                            <p:inputText id="titulo" required="true" size="65" />
-
-                            <p:outputLabel value="Resumen:" />
-                            <p:inputText id="resumen" required="false" size="65" />
-
-
-                            <p:outputLabel  value="Mostrar noticia:" />
-                            <p:selectOneRadio id="mostrarNoticia" value="Mostrar noticia" >
-                                <f:selectItem itemLabel="Si" itemValue="Si" />   
-                                <f:selectItem itemLabel="No" itemValue="No" />
-                            </p:selectOneRadio>
-
-
-                        </h:panelGrid>
-
-                        <p:outputLabel value="* A continuacòn edite su noticia: " />
-
-                        <p:editor id="editor" widgetVar="editorWidget" value="Escribir nueva noticia!" width="600" />
-                        <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
-                            <h:outputText id="display" value="Nueva noticia!" escape="false" />
-                        </p:dialog>
+                        </h:form>
                     </p:panelGrid>
-                    <p:button outcome="visualizarNoticia" value="Visualizar" style="float:left" >
-                    </p:button>
-                    <h:form>
-                        <p:growl id="growl" life="2000" />
-                        <p:commandButton value="Guardar" id="nonAjax" actionListener="#{buttonView.buttonAction}" ajax="false" />
-                    </h:form>
-                    <p:button outcome="gestionContenidos" value="Volver" style="float:right; right: 33%" >
-                    </p:button>
+
+
+
 
 
                     <p:dialog header="Informacion de Noticias" widgetVar="noticias" modal="true" showEffect="blind" hideEffect="explode" resizable="true">
                         <p:outputPanel id="carDetail" style="text-align:center;">
                             <p:panelGrid  columns="2" rendered="#{DataListView.selectedNoticia}" columnClasses="label,value">
-
-
                                 <h:outputText value="Titulo:" />
                                 <h:outputText value="#{DataListView.selectedNoticia.titulo}" />
-
                                 <h:outputText value="Contenido" />
                                 <h:outputText value="#{DataListView.selectedNoticia.contenido}" />
-
-
                             </p:panelGrid>
                         </p:outputPanel>
                     </p:dialog>
-
                 </h:form>
 
+
+
+
+
+              
+
+
             </ui:define>
+
+
+
 
         </ui:composition>
 

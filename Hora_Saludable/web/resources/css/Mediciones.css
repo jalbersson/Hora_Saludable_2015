@@ -25,18 +25,18 @@ and open the template in the editor.
 .subtitulotabla
 {
     color: #CC1414;
-    font-size: 25px !important;
+    font-size: 18px !important;
 }
 .fuentefichatabla
 {
-    font-size: 18px !important;
+    font-size: 15px !important;
 }
 
 .titulomediciones
 {
     margin-top: 20px;
     margin-bottom: 10px;
-    font-size: 35px;
+    font-size: 30px;
     color: wheat;
     background-color: #CC1414;
     border-radius: 5px;
@@ -57,6 +57,13 @@ and open the template in the editor.
     float: left;
     font-weight: bold;
 }
+
+.panelmedidas thead td{
+   background-color: darkolivegreen;
+   font-size: 16px;
+   color:  #ece3a5;
+}
+
 .btncalcularmedidas
 {
     margin-top: 350px;
@@ -72,12 +79,20 @@ and open the template in the editor.
 .imagenmedidas2
 {
     float: right;
-    margin-top: 105px;
-    margin-right: 25px;
+    margin-top: 25px;
+    margin-right: 185px;
 }
 .btnesaccionesmediciones
 {
-    float: right;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.btnguardarmed
+{
+    bottom: 0;
+    right: 0;
+    position: fixed;
     margin-right: 20px;
     margin-top: 20px;
 }
@@ -101,6 +116,8 @@ and open the template in the editor.
 .txtboxmed
 {
     width:80px;
+    text-align: right;
+    float: right
 }
 
 .histmedpanel
@@ -113,19 +130,34 @@ and open the template in the editor.
 }
 
 .histmedpanel .ui-widget-content {
-    background-color: #FDFDE7;
-    color: black;
+    background-color: #ece3a5;
+    color: maroon;
 }
 
-.paneleshistmed
-{
-    
+.histmedpanel thead td{
+    background-color: #eaeacd;
+   font-size: 16px;
+   color:   darkred;
+   text-shadow: none;
+}
+
+.paneleshistmed{
+    margin-top: 15px;
+}
+
+.paneleshistmed thead td{
+   background-color: darkolivegreen;
+   font-size: 16px;
+   color:  #ece3a5;
+}
+
+.paneleshistmed td {
+    background-color: white;
 }
 
 .subtitulotablahist
 {
-    color: #092169;
-    font-size: 20px !important;
+    font-size: 18px !important;
 }
 
 .migadepan
@@ -145,4 +177,15 @@ and open the template in the editor.
 {
     margin-left: auto;
     margin-right: auto;
+}
+
+.paneltab
+{
+    background: #ece3a5;
+    overflow: hidden;
+}
+
+.subtitpaneltest
+{
+    color: maroon;
 }
