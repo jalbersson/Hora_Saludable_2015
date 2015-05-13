@@ -29,12 +29,24 @@ public class eventoController {
     EventoFacade ejbEvento;
     
     Evento evento;
-    private List<Evento> eventos;
+    private List<Evento> eventos = new ArrayList();
+    private List<Evento> ultimos = new ArrayList();
     String evefpublicacion;
+    String eveTitulo;
+
+    public String getEveTitulo() {
+       
+        return eveTitulo;
+    }
+
+    public void setEveTitulo(String eveTitulo) {
+        this.eveTitulo = eveTitulo;
+    }
     java.util.Date evefevento;
     
     public eventoController() {
        evento = new Evento() ;
+       System.out.println("Hola mundo");
     }
     
     public Evento getEvento() {
@@ -62,6 +74,7 @@ public class eventoController {
     }
     
     public List<Evento> getEventos() {
+        this.eventos = this.ejbEvento.buscarEventos();
         return eventos;
     }
 
@@ -70,11 +83,27 @@ public class eventoController {
     }
     
     
+    public List<Evento> getUltimos() {
+        try
+        {
+            this.ultimos = this.ejbEvento.ultimosEventos();
+        }
+        catch(Exception e)
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "msgs", "Error: No se puede conectar con la base de datos !!!"));
+        }
+        return ultimos;
+    }
+
+    public void setUltimos(List<Evento> ultimos) {
+        this.ultimos = ultimos;
+    }
+    
     /*public String agregarEvento(){
         return "agregarEvento";
     }*/
     
-public static Date convertStringToDate(java.util.Date date)
+    public Date convertToJavaDate(java.util.Date date)
     {
       java.sql.Date sqlDate = null;
         
@@ -95,8 +124,8 @@ public static Date convertStringToDate(java.util.Date date)
         try
         {
             java.util.Date  fechaPublicado = new java.util.Date();
-            this.evento.setEvefechapublicacion(convertStringToDate(fechaPublicado));
-            this.evento.setEvefechaevento(convertStringToDate(evefevento));
+            this.evento.setEvefechapublicacion(convertToJavaDate(fechaPublicado));
+            this.evento.setEvefechaevento(convertToJavaDate(evefevento));
             this.evento.setEvecontenido("url_contenido");
             this.evento.setEveimagen("url_imagen");
             this.ejbEvento.create(this.evento);
@@ -111,24 +140,9 @@ public static Date convertStringToDate(java.util.Date date)
         return "principal";
     }
     
-    public String cargarEventos()
+    public String detalleEvento(Long id)
     {
-        eventos =this.ejbEvento.buscarEventos(); 
-        if(eventos.isEmpty())
-               return "principal";
-        else
-                return "agregarEvento";
-        
-        /*try
-        {
-           eventos =this.ejbEvento.buscarEventos(); 
-           
-        }
-        catch(Exception e)
-        {
-            return "editarEvento";
-        }
-        return "eliminarEvento";*/
+        return "agregarEvento";
     }
     
 }

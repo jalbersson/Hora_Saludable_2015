@@ -40,29 +40,35 @@
                     <H1>Eliminar Evento</H1>
                 </f:facet>
                 <h:form>
+                 
                     <p:dataTable var="evento_de_lista" value="#{eventoController.eventos}" rows="10"
                                          paginator="true"
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15">
+                        
                         <p:column headerText="Titulo">
                             <h:outputText value="#{evento_de_lista.evetitulo}" />
                         </p:column>
-
+                        
                         <p:column headerText="Lugar">
                             <h:outputText value="#{evento_de_lista.evelugar}" />
                         </p:column>
-
-                        <p:column headerText="Fecha">
-                            <h:outputText value="#{evento_de_lista.evefechaevento}" />
+                        
+                        <p:column headerText="Fecha de evento">
+                            <h:outputText value="#{eventoController.convertToJavaDate(evento_de_lista.evefechaevento)}" />
                         </p:column>
-
-                        <p:column headerText="DescripcionNNNNNNNNNNN">
+                        
+                        <p:column headerText="Fecha de publicacion">
+                            <h:outputText value="#{eventoController.convertToJavaDate(evento_de_lista.evefechapublicacion)}" />
+                        </p:column>
+                        
+                        <p:column headerText="Descripcion">
                             <h:outputText value="#{evento_de_lista.evecontenido}" />
                         </p:column>
                         
                         <p:column headerText="Accion">
                            <p:growl id="message" showDetail="true" />
-                                <p:commandButton value="Eliminar" actionListener="#{dialogView.destroyWorld}" update="message">
+                                <p:commandButton value="Eliminar" actionListener="#//{dialogView.destroyWorld}" update="message">
                                     <p:confirm header="Confirmacion" message="¿Esta seguro que desea eliminar este evento?" icon="ui-icon-alert" />
                                 </p:commandButton>
                                 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
@@ -70,9 +76,7 @@
                                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>                                 
                                 </p:confirmDialog>
                         </p:column>
-                    </p:dataTable>
-                    
-                    <p:commandButton value="Cargar" action="#{eventoController.cargarEventos()}"/>
+                    </p:dataTable>                        
                 </h:form> 
 
                 </p:panelGrid>
