@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Noticia.findByNotfechaedicion", query = "SELECT n FROM Noticia n WHERE n.notfechaedicion = :notfechaedicion"),
     @NamedQuery(name = "Noticia.findByNotvisible", query = "SELECT n FROM Noticia n WHERE n.notvisible = :notvisible"),
     @NamedQuery(name = "Noticia.findByNotcontenido", query = "SELECT n FROM Noticia n WHERE n.notcontenido = :notcontenido"),
+    @NamedQuery(name = "Noticia.findUltimosContenido", query = "SELECT n FROM Noticia n ORDER BY n.notid DESC"),
     @NamedQuery(name = "Noticia.findByNotimagen", query = "SELECT n FROM Noticia n WHERE n.notimagen = :notimagen")})
 public class Noticia implements Serializable {
     private static final long serialVersionUID = 1L;
