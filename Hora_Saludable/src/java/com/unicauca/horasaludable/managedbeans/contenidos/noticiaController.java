@@ -78,7 +78,10 @@ public class noticiaController {
         //this.path = "..\\..\\img\\imgNoticias\\";
         this.path = "D:\\imagenesNoticias\\";
         this.imagen = this.path + "noticia.jpg";
-
+        
+        
+        FacesMessage msg = new FacesMessage("Ubicacion del momento", System.getProperty("user.dir"));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
         //this.path = new File("").getAbsolutePath()+"\\imagenesNoticias\\";
     }
 
@@ -93,7 +96,7 @@ public class noticiaController {
             this.noticia.setNotfechaedicion(convertStringToDate(fecha));
             this.noticia.setNotvisible(this.visible);
             this.noticia.setNotcontenido(this.contenido);
-            this.noticia.setNotimagen(this.imagen + "jpg");
+            this.noticia.setNotimagen(this.imagen + ".jpg");
             this.ebjNoticiaFacade.create(this.noticia);
         } catch (Exception e) {
             return "principal";

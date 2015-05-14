@@ -24,84 +24,38 @@
 
 
             <ui:define name="body">
-                <h:form id="form">
-                    <p:panelMenu style="width:200px; float: right">
-                        <p:submenu label="Gestión de Noticias">
-                            <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false"/>
-                            <p:menuitem value="Nueva  Noticia" outcome="nuevaNoticia" ajax="false"/>
 
-                        </p:submenu>
-                    </p:panelMenu>
+                <h:form> 
+                    <p:dataScroller value="#{listarNoticiasController.obtenerNoticias()}" var="noticia" chunkSize="3" mode="inline"  first="1" scrollHeight="350">
+                        <f:facet name="header">
 
+                        </f:facet>
 
-                    <p:panelGrid  style="width: 78%;" columns="1" >
+                        <h:panelGrid columns="2" style="width:100%">
+                            
+                          
 
-
-
-
-                        <p:fieldset legend="Noticia II - 27 Marzo 2015" style="margin-bottom:20px">
-                            <h:panelGrid columns="2" cellpadding="5">
-                                <p:graphicImage library="img/imagenSalud" name="salud3.jpg" width="200px"/>
-                                <h:outputText value="Unicauca y Secretaría Municipal de Deporte y Cultura presentan la campaña Popayán es mi Hogar" />
-                                <h:outputText></h:outputText>
-                                <h:form style="float: left">
-
-
-                                    <p:outputLabel  value="Publicar noticia:" />
-                                    <p:selectOneRadio id="mostrarNoticia" value="Publicar noticia" >
-                                        <f:selectItem itemLabel="Si" itemValue="Si" />   
-                                        <f:selectItem itemLabel="No" itemValue="No" />
-                                    </p:selectOneRadio>
-
-                                    <h:link style="float: right" outcome="nuevaNoticia">Editar Noticia </h:link>
-
-                                </h:form>
-
-
-                            </h:panelGrid>
-
-
-
-                        </p:fieldset>
-
- <p:fieldset legend="Noticia II - 27 Marzo 2015" style="margin-bottom:20px">
-                            <h:panelGrid columns="2" cellpadding="5">
-                                <p:graphicImage library="img/imagenSalud" name="salud1.jpg" width="200px"/>
-                                <h:outputText value=" Orquesta Sinfónica Bicentenario se vincula a la programación de la Semana Santa 2015     " />
-                                <h:outputText></h:outputText>
-                                <h:form style="float: left">
-
-                                    <p:outputLabel  value="Publicar noticia:" />
-                                    <p:selectOneRadio id="mostrarNoticia" value="Publicar noticia" >
-                                        <f:selectItem itemLabel="Si" itemValue="Si" />   
-                                        <f:selectItem itemLabel="No" itemValue="No" />
-                                    </p:selectOneRadio>
-
-                                    <h:link style="float: right" outcome="nuevaNoticia">Editar Noticia </h:link>
-
-                                </h:form>
-
-
-                            </h:panelGrid>
-
-
-
-                        </p:fieldset>
-                        
-
-
-                        <p:button outcome="gestionContenidos" value="Volver" style="float:right" >
-                        </p:button>
-                    </p:panelGrid>
-
-
-
-
-
-
-
-
-
+                            <p:outputPanel>
+                                <p:panelGrid  style="width: 78%;" columns="1" >
+                                    <p:fieldset legend="#{noticia.notcontenido} - Fecha Publicación #{listarNoticiasController.convertToJavaDate( noticia.notfechapublicacion )}" style="margin-bottom:20px">
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <p:graphicImage library="img/imagenSalud" name="salud3.jpg" width="200px"/>
+                                            <h:outputText value="#{noticia.notcontenido}" />
+                                            <h:outputText></h:outputText>
+                                            <h:form style="float: left">
+                                                <p:outputLabel  value="Publicar noticia:" />
+                                                <p:selectOneRadio id="mostrarNoticia" value="#{noticia.notvisible}" >
+                                                    <f:selectItem itemLabel="Si" itemValue="true" />   
+                                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                                </p:selectOneRadio>
+                                                <h:link style="float: right" outcome="visualizarNoticia?id=#{noticia.notid}">Editar Noticia </h:link>
+                                            </h:form>
+                                        </h:panelGrid>
+                                    </p:fieldset>
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </h:panelGrid>
+                    </p:dataScroller>
                 </h:form>
 
             </ui:define>
