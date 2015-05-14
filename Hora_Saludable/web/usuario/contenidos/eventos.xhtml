@@ -28,28 +28,62 @@
 
             <ui:define name="body">
                 
-                <h1 style="color: #DF0101; ">Programate </h1>
-                
-                <div style="position: relative; width: 200px; float: left; background-color: #F5A9A9; left: 40px; border:2px solid #F5A9A9;" >  
-                    <h1>Marzo 24</h1> 
-                    <h2>Partido de baloncesto Civil vs Electronica</h2>
-                    <p:button outcome="detalleEvento" value="Detalles" style="float:right" >
-                    </p:button>
-                </div>
-                
-                <div style="position: relative; border:2px solid #F5A9A9; width: 200px; float: left; left: 60px; right: 20px; background-color:#F5A9A9;  " >  
-                    <h1>Marzo 24</h1> 
-                    <h2>Partido de baloncesto Civil vs Electronica</h2>
-                    <p:button outcome="detalleEvento" value="Detalles" style="float:right" >
-                    </p:button>
-                </div>
-                
-                <div style="position: relative; border:2px solid #F5A9A9; width: 200px; float: left; left: 80px; background-color:#F5A9A9;" >  
-                    <h1>Marzo 24</h1> 
-                    <h2>Partido de baloncesto Civil vs Electronica</h2>
-                    <p:button outcome="detalleEvento" value="Detalles" style="float:right" >
-                    </p:button>
-                </div>
+            <h:form id="form">
+                <h2 style="margin-top:0" class="tituloContenido">Programate...</h2>
+                <p:dataGrid var="eventoLista" value="#{eventoController.eventos}" columns="3"
+                    rows="12" paginator="true" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="6,12,16">
+
+                    <f:facet name="header">
+                        Eventos
+                    </f:facet>
+
+                    <p:panel  class="tituloContenido" style="text-align:center">
+                        <h:panelGrid columns="2" style="width:100%">
+                            <p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" />
+                            <h:panelGrid style="text-align:left">
+                                <p:row>
+                                <p:column>
+                                    
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel class="CampoLabel" value="Evento :"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputLabel value="#{eventoLista.evetitulo}"/>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel class="CampoLabel" value="Lugar :"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputLabel value="#{eventoLista.evelugar}"/>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel class="CampoLabel" value="Fecha :"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputLabel value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}"/>
+                                </p:column>
+                            </p:row>
+                            
+                            <p:row>
+                                <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px">
+                                        <f:param name="eventoId" value="#{eventoLista.eveid}" />
+                                </p:link>
+                            </p:row>
+                            </h:panelGrid>  
+                        </h:panelGrid>
+                    </p:panel>
+
+                </p:dataGrid>
+            </h:form>
             <h:form>
                
 

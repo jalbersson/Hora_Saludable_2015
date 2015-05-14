@@ -25,7 +25,7 @@
                 <h:form id="form">
                     <p:panelMenu style="width:200px; float: right">
                         <p:submenu label="Gestión de eventos">
-                            <p:menuitem value="Agregar Evento" outcome="agregarEvento" ajax="false"/>
+                            <p:menuitem value="Editar Evento" outcome="editarEvento" ajax="false"/>
                             <p:menuitem value="Eliminar Evento" outcome="eliminarEvento" ajax="false"/>
 
                         </p:submenu>
@@ -34,34 +34,38 @@
                     <p:panelGrid  style="width: 60%;" columns="1" >
 
                         <f:facet name="header">
-                            <H1>Editar Evento</H1>
+                            <H1>Nuevo Evento</H1>
                         </f:facet>
 
 
                         <p:messages id="messages" />
                         <h:panelGrid columns="2" >
-                            <h:outputLabel value="*Nombre: "  />
-                            <p:inputText id="nombreEvento" required="true" size="80" value="Competencia de Atletismo"/>
+                            <p:outputLabel value="*Titulo: " />
+                            <p:inputText id="tituloEvento" value="#{eventoController.editarEvento.evetitulo}" required="true" size="80" requiredMessage="Introduzca titulo del evento." />
 
                             <p:outputLabel value="*Lugar: " />
-                            <p:inputText id="lugarEvento" required="false" size="80" value="CDU Tulcan"/>
+                            <p:inputText id="lugarEvento" value="#{eventoController.editarEvento.evelugar}" required="true"  size="80" requiredMessage="Introduzca lugar del evento."/>
                             
-                            <p:outputLabel  value="*Fecha: " />
-                            <p:calendar id="fechaEvento"  pattern="dd-MM-yyyy" mask="true" size ="80"/>
+                            <p:outputLabel  value="*Fecha de realizacion: " />
+                            <p:calendar id="fechaEvento"  value="#{eventoController.editarEvento.evefechaevento}" pattern="yyyy-MM-dd"  mask="true" required="true" requiredMessage="Introduzca fecha del evento." size ="80"/>
 
-                            <p:outputLabel  value="Descripcion: " />         
-                            <p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" width="600" />
-
-                            <h:form>           
+                            <!--p:outputLabel  value="*Descripcion: " />
+                            <p:inputText id="descripcionEvento" value="url_contenido" required="true" size="80" /-->
+                            <!--p:editor id="editor" widgetVar="editorWidget" value="" width="600" /-->
+                            
+                            <p:commandButton value="Guardar" action="#{eventoController.editarEvento()}" > </p:commandButton>
+                            
+                            
+                            <!--h:form>           
                                 <p:growl id="message" showDetail="true" />
-                                <p:commandButton value="Guardar" actionListener="#{dialogView.destroyWorld}" update="message">
-                                    <p:confirm header="Confirmacion" message="Evento editado con exito!!!" icon="ui-icon-alert" />
+                                <p:commandButton value="Guardar" action="" update="message">
+                                    <p:confirm header="Confirmacion" message="Evento agregado con exito!!!" icon="ui-icon-alert" />
                                 </p:commandButton>
                                 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                                     <p:button value="Aceptar" outcome="gestionContenidos" style="float:right; right: 25%"/>                                  
                                 </p:confirmDialog>
                             </h:form>
-                            <p:button outcome="gestionContenidos" value="Volver" style="float:right; right: 88%" ></p:button>
+                            <p:button outcome="gestionContenidos" value="Volver" style="float:right; right: 88%" ></p:button-->
                         </h:panelGrid>
                     </p:panelGrid>
                 </h:form>

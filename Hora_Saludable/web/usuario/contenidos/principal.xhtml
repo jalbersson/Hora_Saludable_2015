@@ -25,85 +25,74 @@
 
                 </p:contentFlow>
                 <br/> <br/>
-                
+
+                <p:growl id="msgs" showDetail="true" />
+
+
                 <h:form>
-                    
                     <p:growl id="msgs" showDetail="true" />
-                    
-                    <h:panelGrid columns="2">
-                         
-                        <h:panelGrid style="width: 650px" columns="2" cellpadding="10">
-                            <h3 style="margin-top:0">Noticias</h3>
-                            
-                                <p:graphicImage library="img/imagenSalud" name="salud1.jpg" width="80px" height="80px" style=""/>
-                                <h:outputText  value="Se condecoró estudiante de Octavo semestre de Ingenieria de Sistemas" />
-                                <h:outputText></h:outputText>
-                                <h:link style="float: right" outcome="visualizarNoticia"  >Ver mas</h:link>
-                        </h:panelGrid>
-                        
-                        <p:accordionPanel style="float:right; " >
-                            
-                        <p:tab title="Eventos ">
-                            
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
-                                <h:outputText value="Marzo 30" />
-                                <h:outputText value="Competencia de Atletismo" />
+
+                    <h:panelGrid columns="2" style="height: 50px; width: 50px " >
+                        <h:form>
+                            <h2 style="margin-top:0" class="tituloContenido">Noticias</h2>
+                            <p:dataScroller  var="noticiaLista" value="#{noticiacController.ultimos}" chunkSize="10" >
+
+                                <h:panelGrid columns="2" style="width:400px; height: 100px" columnClasses="logo,detail">
+                                    <p:graphicImage width="80px" height="80px"  library="img/imagenSalud" name="salud3.jpg" />
+
+                                    <p:outputPanel>
+                                        <h:panelGrid columns="2" cellpadding="5">
+
+                                            <h:outputText value="#{noticiaLista.nottitulo}" style="font-weight: bold; font-size: 25px"/>
+                                            <h:outputText value="" />
+
+                                            <h:outputText value="Fecha del evento:" />
+                                            <h:outputText value="#{noticiacController.convertToJavaDate(noticiaLista.notfechapublicacion)}" style="font-weight: bold; font-size: 15px"/>
+
+
+                                            <p:link value="Detalles" outcome="#{noticiacController.detalleNoticia(noticiaLista.notid)}" style="font-weight: bold; font-size: 15px"></p:link>
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+                                </h:panelGrid>
+                            </p:dataScroller>
+                        </h:form>
+
+                        <h:form style="width:400px;  position: relative; left: 100px; border: none">
+                            <h2 style="margin-top:0" class="tituloContenido">Eventos</h2>
+                            <p:dataScroller  var="eventoLista" value="#{eventoController.ultimos}" chunkSize="10" >
+
+                                <h:panelGrid columns="2" style="width:400px; height: 100px; border: none" columnClasses="logo,detail">
+                                    <p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" />
+                                <p:outputPanel style="border:none">
+                                        <h:panelGrid columns="2" cellpadding="5" style="border:none">
+
+                                            <h:outputText value="#{eventoLista.evetitulo}" style="font-weight: bold; font-size: 25px"/>
+                                            <h:outputText value="" />
+
+                                            <h:outputText value="Fecha del evento:" />
+                                            <h:outputText value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}" style="font-weight: bold; font-size: 15px"/>
+
+                                        <h:outputText value="Lugar:" />
+                                        <h:outputText value="#{eventoLista.evelugar}" style="font-weight: bold"/>
+                                        
+                                        <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px">
+                                        <f:param name="eventoId" value="#{eventoLista.eveid}" />
+                                        </p:link>
+                                    </h:panelGrid>
+                                </p:outputPanel>
                             </h:panelGrid>
-                            
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
-                                <h:outputText value="Marzo 30" />
-                                <h:outputText value="Competencia de Atletismo" />
-                            </h:panelGrid>
-                            
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
-                                <h:outputText value="Marzo 30" />
-                                <h:outputText value="Competencia de Atletismo" />
-                            </h:panelGrid>
-                            
-                            
-                        </p:tab>    
-                    </p:accordionPanel>
-                            
-           
-                 
+                        </p:dataScroller>
                         
-                        
-                        
+                        <p:button value="Ver mas" outcome="eventos"></p:button>
+                        </h:form>
+
+
                     </h:panelGrid>
-                    
-                        <h:panelGrid columns="2">
-                            
-                            <p:accordionPanel style="float:right; width: 650px " >
-                        <p:tab title="Horario ">
-                            
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
-                                <h:outputText value="Lunes" />
-                                <h:outputText value="Competencia de Atletismo" />
-                            </h:panelGrid>
-                            
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
-                                <h:outputText value="Martes" />
-                                <h:outputText value="Competencia de Atletismo" />
-                            </h:panelGrid>
-                            
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <!--p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" /-->
-                                <h:outputText value="Miercoles" />
-                                <h:outputText value="Competencia de Atletismo" />
-                            </h:panelGrid>
-                            
-                            
-                        </p:tab>    
-                    </p:accordionPanel> 
-                            
-                        </h:panelGrid> 
+
+
+
                 </h:form>
-                
+
                 <br/> <br/>
                 <p:button outcome="quienesSomos" value="Quienes somos" icon="ui-icon-star">
                     <f:param name="productId" value="10" />
@@ -115,7 +104,6 @@
 
 
             </ui:define>
-
         </ui:composition>
 
     </body>

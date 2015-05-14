@@ -2,56 +2,80 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Detalle del Evento
-            </ui:define>
-
-            <ui:define name="CuadroDeBotonesSesion">
-                CuadroDeBotonesSesion
-            </ui:define>
-
-            <ui:define name="menuprincipal">
-
+               Detalle del evento
             </ui:define>
 
             <ui:define name="title">
+
             </ui:define>
-
+            
             <ui:define name="body">
-                
                 <h:form>
-                 <p:panelGrid  style="width: 60%;" columns="1" >
+                    <p:growl id="msgs" showDetail="true" />
+                    <p:fieldset legend="Detalles del evento" style="margin-bottom:20px">
+                        <h:panelGrid columns="2" cellpadding="4">
+                            <p:graphicImage height="200px" width="200px" library="img/eventos" name="competencia.jpeg" />
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:form id="form">
+                                        <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
+                                                                      
+                                             
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputLabel class="CampoLabel" value="Evento :"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputLabel value="#{eventoController.eventoDetallado().evetitulo}"/>
+                                                </p:column>
+                                            </p:row>
+                                            
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputLabel class="CampoLabel" value="Lugar :"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputLabel value="#{eventoController.idE}"/>
+                                                </p:column>
+                                            </p:row>
+                                            
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputLabel class="CampoLabel" value=" Fecha de evento :"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputLabel value="#{eventoController.convertToJavaDate(eventoController.eventoDetallado().evefechaevento)}"/>
+                                                </p:column>
+                                            </p:row>
+                                            
+                                            <p:row>
+                                                <p:column>
+                                                    <h:outputLabel class="CampoLabel" value=" Descripcion :"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputLabel value="#{eventoController.eventoDetallado().evecontenido}"/>
+                                                </p:column>
+                                            </p:row>
+                                                                     
+                                        </p:panelGrid>                            
+                                    </h:form>    
 
-                        <f:facet name="header">
-                            <H1>Evento</H1>
-                        </f:facet>
-
-
-                        <p:messages id="messages" />
-                        <h:panelGrid columns="1" >
-                            <h:outputLabel value="Partido: Octavos de final"/>
-                            <h:outputLabel value="Lugar: CDU Tulcan"/>
-                            <h:outputLabel value="Hora: 8:00 p.m."/>
+                                    
+                                </h:panelGrid>
+                            </p:outputPanel>
+                            <p:link outcome="principal" value="Volver"> </p:link>
                         </h:panelGrid>
-
-
-                        <p:button outcome="eventos" value="Volver" style="float:right" >
-                        </p:button>
-                        
-                        <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
-                            <h:outputText id="display" value="Nueva noticia!" escape="false" />
-                        </p:dialog>
-                    </p:panelGrid>
-                    
-                    </h:form>
+                    </p:fieldset>
+                </h:form>
             </ui:define>
 
         </ui:composition>

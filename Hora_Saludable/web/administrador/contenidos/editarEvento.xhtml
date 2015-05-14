@@ -41,30 +41,48 @@
                 </f:facet>    
                     
                 <h:form>
-                    <p:dataTable var="evento" value="#{dtPaginatorView.eventos}" rows="10"
+                    <p:dataTable var="evento_de_lista" value="#{eventoController.eventos}" rows="10"
                                          paginator="true"
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15">
-                        <p:column headerText="Nombre">
-                            <h:outputText value="#{evento.nombre}" />
-                        </p:column>
-
-                        <p:column headerText="Lugar">
-                            <h:outputText value="#{evento.lugar}" />
-                        </p:column>
-
-                        <p:column headerText="Fecha">
-                            <h:outputText value="#{evento.fecha}" />
-                        </p:column>
-
-                        <p:column headerText="Descripcion">
-                            <h:outputText value="#{evento.descripcion}" />
+                        
+                        <p:column headerText="Titulo">
+                            <h:outputText value="#{evento_de_lista.evetitulo}" />
                         </p:column>
                         
-                        <p:column headerText="Edicion">
-                            <p:button outcome="editarEventoEspecifico" value="Editar" style="float:right; right: 25%"/>
+                        <p:column headerText="Lugar">
+                            <h:outputText value="#{evento_de_lista.evelugar}" />
                         </p:column>
-                    </p:dataTable>
+                        
+                        <p:column headerText="Fecha de evento">
+                            <h:outputText value="#{eventoController.convertToJavaDate(evento_de_lista.evefechaevento)}" />
+                        </p:column>
+                        
+                        <p:column headerText="Fecha de publicacion">
+                            <h:outputText value="#{eventoController.convertToJavaDate(evento_de_lista.evefechapublicacion)}" />
+                        </p:column>
+                        
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="#{evento_de_lista.evecontenido}" />
+                        </p:column>
+                        
+                        <p:column headerText="Accion">
+                            <p:commandButton value="Editar" action="#{eventoController.mostrarEventoEditar(evento_de_lista)}">
+                                
+                            </p:commandButton>
+                        </p:column>    
+                        
+                        <!--p:column headerText="Accion">
+                           <p:growl id="message" showDetail="true" />
+                                <p:commandButton value="Eliminar" actionListener="#//{dialogView.destroyWorld}" update="message">
+                                    <p:confirm header="Confirmacion" message="¿Esta seguro que desea eliminar este evento?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                    <p:button outcome="gestionContenidos" value="Si" style="float:left; " />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>                                 
+                                </p:confirmDialog>
+                        </p:column-->
+                    </p:dataTable> 
                 </h:form>  
                 
     
