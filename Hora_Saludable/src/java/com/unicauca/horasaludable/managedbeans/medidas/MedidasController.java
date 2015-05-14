@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unicauca.horasaludable.managedbeans.medidas;
 
 /*
@@ -20,6 +15,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.unicauca.horasaludable.entities.Medida;
+import com.unicauca.horasaludable.entities.Usuario;
 
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -53,29 +49,32 @@ import org.primefaces.context.RequestContext;
  */
 @ManagedBean
 @ViewScoped
-public class MedidasController {
-
-      
+public class MedidasController 
+{     
     @EJB
     private com.unicauca.horasaludable.jpacontrollers.MedidaFacade ejbMedida;
     private Medida medicionactual;  
     private ServicioCalculoMedidas servmed;
+    private List<Medida> listaTest;
+    private int idusu;
+    private Date fechaNuevoTest;
+
         
     public MedidasController() {
       
     }
     
     @PostConstruct
-    public void init()
-        {
-      int idusu = 20141105 ; //para probar
-      int idmed = 5 ; //para probar 
-      
-    //  FacesContext context = FacesContext.getCurrentInstance();
-    //  MostrarUsuarioTestController s =  (MostrarUsuarioTestController)context.getApplication().evaluateExpressionGet(context, "#{mostrarUsuarioTestController}", MostrarUsuarioTestController.class);
-      
-      medicionactual =  ejbMedida.buscarporMedId(idmed).get(0);
-        }
+    public void init() 
+    {
+         //para probar
+        int idmed = 5; //para probar 
+        FacesContext context = FacesContext.getCurrentInstance();
+        MostrarUsuarioTestController s =  (MostrarUsuarioTestController)context.getApplication().evaluateExpressionGet(context, "#{mostrarUsuarioTestController}", MostrarUsuarioTestController.class);
+        idusu = s.getUsuario().getUsuid().intValue();
+        listaTest= ejbMedida.buscarporUsuid(idusu);
+        medicionactual = ejbMedida.buscarporMedId(idmed).get(0);
+    }
 
     public Medida getMedicionactual() {
         return medicionactual;
@@ -95,9 +94,14 @@ public class MedidasController {
     {
         this.listaMedi = listaMedi;
     }
-
-
-    
+    public void agregarMedidas()
+    {
+        Medida nueva=new Medida();
+        nueva.setUsuid(new Usuario(Long.valueOf(idusu+"")));
+        nueva.setMedfecha(fechaNuevoTest);
+        ejbMedida.create(nueva);
+        
+    }
    public void redireccionar(Medida test) throws IOException 
    {
      
@@ -267,5 +271,21 @@ String nombreRutaFile;
     public void calcularSaltoReal()
     {
         medicionactual.setMedsaltoreal(medicionactual.getMedsaltomaximo()-medicionactual.getMedembergadura());
+    }
+    public List<Medida> getListaTest() 
+    {
+        return listaTest;
+    }
+    public void setListaTest(List<Medida> listaTest) 
+    {
+        this.listaTest = listaTest;
+    }
+    public Date getFechaNuevoTest() 
+    {
+        return fechaNuevoTest;
+    }
+    public void setFechaNuevoTest(Date fechaNuevoTest) 
+    {
+        this.fechaNuevoTest = fechaNuevoTest;
     }
 }

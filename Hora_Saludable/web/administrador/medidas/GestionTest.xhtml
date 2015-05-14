@@ -13,59 +13,44 @@
             <ui:define name="titulo">
                 Gestion Test
             </ui:define>
-
             <ui:define name="CuadroDeBotonesSesion">
                 CuadroDeBotonesSesion
             </ui:define>
-
             <ui:define name="title">
                 <p:panel style="border: none;">
-                <h:form>
-                    <p:breadCrumb id="migaDirector" styleClass="migadepan">
-                        <p:menuitem value="Usuarios" url="../../index.xhtml" />
-                        <p:menuitem value="Usuarios" outcome="consultaTest" />
-                        <p:menuitem value="Gestion de Mediciones" outcome="GestionTest" />
-                        <p:menuitem value="Test" url="#" />
-                    </p:breadCrumb>
-                </h:form>
+                    <h:form>
+                        <p:breadCrumb id="migaDirector" styleClass="migadepan">
+                            <p:menuitem value="Usuarios" url="../../index.xhtml" />
+                            <p:menuitem value="Usuarios" outcome="consultaTest" />
+                            <p:menuitem value="Gestion de Mediciones" outcome="GestionTest" />
+                            <p:menuitem value="Test" url="#" />
+                        </p:breadCrumb>
+                    </h:form>
                 </p:panel>
-                    <p:separator style="width: 100%;"/>
+                <p:separator style="width: 100%;"/>
                 <p:outputLabel styleClass="titulomediciones" value="Gestion de Mediciones" />
                 <br></br>     <br></br>     <br></br><br></br>     <br></br>   
-            
-
             </ui:define>
-          
             <ui:define name="body" >
-
-
                 <p:dialog showEffect="fade" hideEffect="explode" position="center" widgetVar="agregartest" header="Agregar Nuevo Test" modal="true">
-
                     <h:form>
                         <h:panelGrid columns="2" cellpadding="10">
-                            <p:outputLabel value="Nombre del Test:" />
-                            <p:inputText id="firstname" value="" label="Firstname" />
                             <p:outputLabel  value="Fecha" />
-                            <p:calendar  pattern="dd.MM.yyyy" navigator="true" showButtonPanel="true"/>
+                            <p:calendar  pattern="dd.MM.yyyy" navigator="true" showButtonPanel="true" value="#{medidasController.fechaNuevoTest}"/>
                             <f:facet name="footer">
-                                <p:commandButton  value="Agregar Nuevo Test" type="button" onclick="PF('agregartest').hide();" icon="ui-icon-disk" />              
+                                <p:commandButton  value="Agregar Nuevo Test" type="button" actionListener="#{medidasController.agregarMedidas}" onclick="PF('agregartest').hide();" icon="ui-icon-disk" update="tablaTest"/>              
                             </f:facet>                   
                         </h:panelGrid>
                     </h:form>
                 </p:dialog>
-
                 <p:panelGrid styleClass="fichapersonal" >
                     <p:row>
                         <p:column rowspan="9">
-                        <p:column  rendered="#{mostrarUsuarioTestController.campoFoto}">                                
-                                <p:graphicImage  width="100" height="100" library="#{mostrarUsuarioTestController.rutaFoto}" name="#{mostrarUsuarioTestController.usuario.usufoto}"
-                                                 />
+                            <p:column  rendered="#{mostrarUsuarioTestController.campoFoto}">                                
+                                <p:graphicImage  width="100" height="100" library="#{mostrarUsuarioTestController.rutaFoto}" name="#{mostrarUsuarioTestController.usuario.usufoto}"/>
                             </p:column>    
-                        
-                        
                         </p:column>
                     </p:row>
-
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Nombres:" />
@@ -74,7 +59,7 @@
                             <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usunombres}" />
                         </p:column>                      
                     </p:row>
-                     <p:row>
+                    <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Apellidos:" />
                         </p:column>
@@ -90,7 +75,6 @@
                             <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
                         </p:column>
                     </p:row>
-                  
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
@@ -99,89 +83,36 @@
                             <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usugenero}" />
                         </p:column>
                     </p:row>
-                  
                 </p:panelGrid>
-                 <p:growl for="msggestion" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
-                 <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-                 <div>
+                <p:growl for="msggestion" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
+                <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                <div>
                     <p:panelGrid columns="2" styleClass="Menuagregartest" >
                         <f:facet name="header" >
                             <h:outputLabel  value="Lista de Test registrados al usuario" />                      
-                           </f:facet>
+                        </f:facet>
                     </p:panelGrid> 
-  
+                    <h:form>
+                        <p:panelGrid columns="2" style="float: right; margin-top: 30px; "> 
+                            <f:facet name="header">
+                                <p:commandButton value="Agregar Nuevo Test" type="button" onclick="PF('agregartest').show();" icon="ui-icon-disk" />
+                                <p:commandButton value="Ver Historial" type="button" icon="ui-icon-refresh" /> 
+                            </f:facet> 
+                        </p:panelGrid>
+                    </h:form>
                 </div>
-                <p:panelGrid styleClass="tablas">
-
-                    <f:facet name="header">
-                        <p:row>
-                            <p:column>
-                                <h:outputLabel for="surname" value="No" />
-                            </p:column>
-                            <p:column>
-                                <h:outputLabel for="surname" value="Nombre" />
-                            </p:column>
-                            <p:column>
-                                <h:outputLabel for="surname" value="Fecha" />
-                            </p:column>
-                            <p:column>
-                                <h:outputLabel for="surname" value="Accion" />
-                            </p:column>
-
-                        </p:row>                      
-                    </f:facet>
-                    <p:row>
-                        <p:column>
-                            <h:outputLabel for="firstname" value="1" />   
+                <h:form>
+                    <p:dataTable id="tablaTest" value="#{medidasController.listaTest}" var="Tests" styleClass="tablas" paginator="true" rows="6">
+                        <p:column headerText="Fecha">
+                            <p:outputLabel value="#{Tests.medfecha}"></p:outputLabel>
                         </p:column>
-                        <p:column>
-                            <h:outputLabel for="surname" value="Test 1" />
-                        </p:column>
-                        <p:column>
-                            <h:outputLabel for="surname" value="10 de Mayo,2014" />
-                        </p:column>
-                        <p:column>                         
-                            <p:link value=" Editar  " outcome="Test">
-                            </p:link>
-                           
-                               <p:link value="    Ver " outcome="Test">
+                        <p:column headerText="Acción">
+                            <p:link value=" Gestionar Test  " outcome="Test">
                             </p:link> 
-
-                            <p:link value=" Eliminar " outcome="Test">
-                            </p:link>                      
                         </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <h:outputLabel for="firstname" value="2" />   
-                        </p:column>
-                        <p:column>
-                            <h:outputLabel for="surname" value="Test 2" />
-                        </p:column>
-                        <p:column>
-                            <h:outputLabel for="surname" value="30 de Mayo,2014" />
-                        </p:column>
-                        <p:column>
-                            <p:link value=" Editar ">
-                            </p:link>
-
-                       <p:link value="    Ver " outcome="Test">
-                            </p:link>   
-                         
-
-
-                            <p:link value=" Eliminar ">
-                            </p:link>
-                        </p:column>
-                    </p:row>
-
-                </p:panelGrid>
-
-
-
+                    </p:dataTable>
+                </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>
