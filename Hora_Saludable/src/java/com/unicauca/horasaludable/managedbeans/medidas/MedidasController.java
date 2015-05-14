@@ -264,5 +264,8 @@ String nombreRutaFile;
                 context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "Ocurrio algun error al intentar  efectuar la operacion"));
             }
     }       
-    
+    public void calcularSaltoReal()
+    {
+        medicionactual.setMedsaltoreal(medicionactual.getMedsaltomaximo()-medicionactual.getMedembergadura());
+    }
 }
