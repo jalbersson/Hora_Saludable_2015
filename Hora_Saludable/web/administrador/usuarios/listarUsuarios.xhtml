@@ -48,7 +48,7 @@
                                 <p:commandLink title="Ver Y Editar"   style="text-decoration: none;" action="#{verEditarUsuarioController.usuarioSeleccionado(usuarios,mostrarUsuariosController)}">                                    
                                     <p:graphicImage style="width:25px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
                                 </p:commandLink>                                
-                                <p:commandLink id="eliminar" style="text-decoration: none;margin-left: 5px; ">                                    
+                                <p:commandLink id="eliminar" style="text-decoration: none;margin-left: 5px; " title="Eliminar" action="#{eliminarUsuario.ventanaEliminarUsuario(usuarios, mostrarUsuariosController)}">                                    
                                     <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
                                 </p:commandLink>
                             </p:column>
