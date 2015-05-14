@@ -6,6 +6,8 @@
 package com.unicauca.horasaludable.jpacontrollers;
 
 import com.unicauca.horasaludable.entities.Noticia;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,6 +20,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class NoticiaFacade extends AbstractFacade<Noticia> {
+
     @PersistenceContext(unitName = "Hora_SaludablePU")
     private EntityManager em;
 
@@ -29,62 +32,17 @@ public class NoticiaFacade extends AbstractFacade<Noticia> {
     public NoticiaFacade() {
         super(Noticia.class);
     }
-        public boolean buscarPorIdNoticia(String idNoticia)
-    {
-     Query query = getEntityManager().createNamedQuery("Noticia.findByNotid");
-        query.setParameter("notid", idNoticia);
-        List<Noticia> resultList = query.getResultList();
-        return !resultList.isEmpty();     
-    }
-    public List<Noticia> retornarBuscarPorIdNoticia(String idNoticia)
-    {
-        Query query = getEntityManager().createNamedQuery("Noticia.findByNotid");
-        query.setParameter("notid", idNoticia);
+
+    public List<Noticia> buscarNoticias() {
+        Query query = getEntityManager().createNamedQuery("Noticia.findAll");
         List<Noticia> resultList = query.getResultList();
         return resultList;
     }
-    public boolean buscarPorTituloNoticia(String tituloNoticia)
-    {
-     Query query = getEntityManager().createNamedQuery("Noticia.findByNottitulo");
-        query.setParameter("nottitulo", tituloNoticia);
-        List<Noticia> resultList = query.getResultList();
-        return !resultList.isEmpty();     
-    }
-    public List<Noticia> retornarBuscarPorTituloNoticia(String tituloNoticia)
-    {
-        Query query = getEntityManager().createNamedQuery("Noticia.findByNottitulo");
-        query.setParameter("nottitulo", tituloNoticia);
+
+    public List<Noticia> ultimasNoticias() {
+        Query query = getEntityManager().createNamedQuery("Noticia.findUltimosContenido").setMaxResults(4);
         List<Noticia> resultList = query.getResultList();
         return resultList;
     }
-    
-    public boolean buscarPorFechaPublicacionNoticia(String fechaNoticia)
-    {
-     Query query = getEntityManager().createNamedQuery("Noticia.findByNotfechapublicacion");
-        query.setParameter("notfechapublicacion", fechaNoticia);
-        List<Noticia> resultList = query.getResultList();
-        return !resultList.isEmpty();     
-    }
-    public List<Noticia> retornarBuscarPorFechaPublicacionNoticia(String fechaNoticia)
-    {
-        Query query = getEntityManager().createNamedQuery("Noticia.findByNotfechapublicacion");
-        query.setParameter("notfechapublicacion", fechaNoticia);
-        List<Noticia> resultList = query.getResultList();
-        return resultList;
-    }
-    
-    public boolean buscarPorFechaPEdicionNoticia(String fechaENoticia)
-    {
-     Query query = getEntityManager().createNamedQuery("Noticia.findByNotfechaedicion");
-        query.setParameter("notfechaedicion", fechaENoticia);
-        List<Noticia> resultList = query.getResultList();
-        return !resultList.isEmpty();     
-    }
-    public List<Noticia> retornarBuscarPorFechaEdicionNoticia(String fechaENoticia)
-    {
-        Query query = getEntityManager().createNamedQuery("Noticia.findByNotfechaedicion");
-        query.setParameter("notfechaedicion", fechaENoticia);
-        List<Noticia> resultList = query.getResultList();
-        return resultList;
-    }
+
 }
