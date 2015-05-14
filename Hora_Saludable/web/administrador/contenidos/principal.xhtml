@@ -60,7 +60,9 @@
                                         <h:outputText value="Lugar:" />
                                         <h:outputText value="#{eventoLista.evelugar}" style="font-weight: bold"/>
                                         
-                                        <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px"></p:link>
+                                        <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px">
+                                        <f:param name="eventoId" value="#{eventoLista.eveid}" />
+                                        </p:link>
                                     </h:panelGrid>
                                 </p:outputPanel>
                             </h:panelGrid>

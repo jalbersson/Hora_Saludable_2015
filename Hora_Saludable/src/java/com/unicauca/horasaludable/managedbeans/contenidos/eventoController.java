@@ -11,10 +11,12 @@ import com.unicauca.horasaludable.jpacontrollers.EventoFacade;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -22,17 +24,19 @@ import javax.faces.context.FacesContext;
  * @author Angela
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class eventoController {
 
      @EJB
     EventoFacade ejbEvento;
     
     Evento evento;
+    Evento detallesEvento;
     private List<Evento> eventos = new ArrayList();
     private List<Evento> ultimos = new ArrayList();
     String evefpublicacion;
     String eveTitulo;
+    Long idE=null;
 
     public String getEveTitulo() {
        
@@ -46,7 +50,6 @@ public class eventoController {
     
     public eventoController() {
        evento = new Evento() ;
-       System.out.println("Hola mundo");
     }
     
     public Evento getEvento() {
@@ -82,7 +85,6 @@ public class eventoController {
         this.eventos = eventos;
     }
     
-    
     public List<Evento> getUltimos() {
         try
         {
@@ -99,9 +101,22 @@ public class eventoController {
         this.ultimos = ultimos;
     }
     
-    /*public String agregarEvento(){
-        return "agregarEvento";
-    }*/
+    
+    public Evento getDetallesEvento() {
+        return detallesEvento;
+    }
+
+    public void setDetallesEvento(Evento detallesEvento) {
+        this.detallesEvento = detallesEvento;
+    }
+    
+    public Long getIdE() {
+        return idE;
+    }
+
+    public void setIdE(Long idE) {
+        this.idE = idE;
+    }
     
     public Date convertToJavaDate(java.util.Date date)
     {
@@ -142,7 +157,50 @@ public class eventoController {
     
     public String detalleEvento(Long id)
     {
-        return "agregarEvento";
+        idE=id;
+        return "detalleEvento";
+    }
+    
+    
+    
+    public String country;
+ 
+	public String outcome(){
+ 
+		FacesContext fc = FacesContext.getCurrentInstance();
+		this.country = getCountryParam(fc);
+ 
+		return "result";
+	}
+ 
+	//get value from "f:param"
+	public String getCountryParam(FacesContext fc){
+ 
+		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+		return params.get("country");
+ 
+	}
+    
+    public Evento eventoDetallado()
+    {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+        //eveTitulo=params.get("eventoId");
+	idE = Long.parseLong(params.get("eventoId"));
+        
+        
+        
+        detallesEvento = new Evento();
+        //long numero= (long)idE;
+        for(int i=0;i<ultimos.size();i++)
+        {
+            if(ultimos.get(i).getEveid().equals(idE))
+            {
+                detallesEvento=ultimos.get(i);
+            }
+        }
+            //detallesEvento=ultimos.get(numero);
+            return detallesEvento;
     }
     
 }
