@@ -52,7 +52,69 @@
                 <p:separator/>
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <ui:include src="ventanaRegistroUsuario.xhtml"/>
-                <ui:include src="ventanaVerEditarUsuario.xhtml"/>  
+                <ui:include src="ventanaVerEditarUsuario.xhtml"/>
+                
+                <p:dialog modal="true" header="Confirmar" widgetVar="eliminarUsuario" closable="false">
+                    <h:form>
+                        <p:panelGrid style="text-align:left;" styleClass="panelgrid">
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel style="color: red;" value="Esta Seguro desea Eliminar el Usuario? (solo se Eliminaran usuarios que no tengan Registros.)"/>
+                                </p:column>                                
+                            </p:row>
+                            <p:row>
+                                <p:column width="200px;">
+                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 170px;" 
+                                                     value="Aceptar" action="#{eliminarUsuario.eliminarUsuario()}"/>
+                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic; margin-left: 10px;" value="Cancelar" onclick="PF('eliminarUsuario').hide()"/>
+                                </p:column>
+                                
+                            </p:row>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+                    
+                    <p:dialog modal="true" header="Error" widgetVar="noSePuedeEliminar" closable="false">
+                    <h:form>
+                        <p:panelGrid style="text-align:left;" styleClass="panelgrid">
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel style="color: red;" value="solo se Eliminaran usuarios que no tengan Registros."/>
+                                </p:column>                                
+                            </p:row>
+                            <p:row>
+                                <p:column width="200px;">
+                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 140px;" 
+                                                     value="Aceptar" onclick="PF('noSePuedeEliminar').hide()"/>                                    
+                                </p:column>
+                                
+                            </p:row>
+                        </p:panelGrid>
+                    </h:form>
+                    
+                    
+                </p:dialog>
+                
+                <p:dialog modal="true" header="Info" widgetVar="eliminacionCorrecta" closable="false">
+                    <h:form>
+                        <p:panelGrid style="text-align:left;" styleClass="panelgrid">
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel style="color: blue;" value="Se ha eliminado el usuario."/>
+                                </p:column>                                
+                            </p:row>
+                            <p:row>
+                                <p:column width="200px;">
+                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 150px;" 
+                                                     value="Aceptar" onclick="PF('eliminacionCorrecta').hide()"/>                                    
+                                </p:column>
+                                
+                            </p:row>
+                        </p:panelGrid>
+                    </h:form>
+                    
+                    
+                </p:dialog>
             </ui:define>
         </ui:composition>
 
