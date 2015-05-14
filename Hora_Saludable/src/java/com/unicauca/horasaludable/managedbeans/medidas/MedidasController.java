@@ -73,7 +73,7 @@ public class MedidasController
         MostrarUsuarioTestController s =  (MostrarUsuarioTestController)context.getApplication().evaluateExpressionGet(context, "#{mostrarUsuarioTestController}", MostrarUsuarioTestController.class);
         idusu = s.getUsuario().getUsuid().intValue();
         listaTest= ejbMedida.buscarporUsuid(idusu);
-        medicionactual = ejbMedida.buscarporMedId(idmed).get(0);
+        medicionactual =  s.getMedidaactual(); //ejbMedida.buscarporMedId(s.getMedidaactual()).get(0);
     }
 
     public Medida getMedicionactual() {
@@ -96,10 +96,25 @@ public class MedidasController
     }
     public void agregarMedidas()
     {
-        Medida nueva=new Medida();
-        nueva.setUsuid(new Usuario(Long.valueOf(idusu+"")));
-        nueva.setMedfecha(fechaNuevoTest);
-        ejbMedida.create(nueva);
+        
+        
+        FacesContext context = FacesContext.getCurrentInstance();      
+       try
+           {
+             
+             Medida nueva=new Medida();
+             nueva.setUsuid(new Usuario(Long.valueOf(idusu+"")));
+             nueva.setMedfecha(fechaNuevoTest);
+             ejbMedida.create(nueva);  
+               
+             context.addMessage("msggestion", new FacesMessage(FacesMessage.SEVERITY_INFO, "Completado", "Operacion realizada con exito"));
+              ExternalContext extcontext = context.getExternalContext();
+              extcontext.getFlash().setKeepMessages(true); 
+              extcontext.redirect("GestionTest.xhtml");
+           }
+        catch (Exception e) {
+                context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "Ocurrio algun error al intentar  efectuar la operacion"));
+            }
         
     }
    public void redireccionar(Medida test) throws IOException 

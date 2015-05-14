@@ -7,6 +7,7 @@ package com.unicauca.horasaludable.managedbeans.medidas;
 
 
 import com.unicauca.horasaludable.entities.Cargo;
+import com.unicauca.horasaludable.entities.Medida;
 import com.unicauca.horasaludable.entities.Unidadacademica;
 import com.unicauca.horasaludable.entities.Usuario;
 import com.unicauca.horasaludable.jpacontrollers.CargoFacade;
@@ -45,6 +46,7 @@ public class MostrarUsuarioTestController {
     private UsuariogrupoFacade usuarioGrupoEJB;
     private MostrarUsuariosController mostraUsuariosController;
     private Usuario usuario;
+    private Medida Medidaactual;
    
 
     private String rutaFoto;
@@ -271,6 +273,15 @@ public class MostrarUsuarioTestController {
     {
         this.usuario = usuario;
     }
+
+    public Medida getMedidaactual() {
+        return Medidaactual;
+    }
+
+    public void setMedidaactual(Medida Medidaactual) {
+        this.Medidaactual = Medidaactual;
+    }
+    
     
     
     public void estudianteSeleccionado(Usuario estudiante) throws IOException
@@ -283,8 +294,35 @@ public class MostrarUsuarioTestController {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/administrador/medidas/GestionTest.xhtml");
         
     }
+    
+    public void estudianteSeleccionadoUsu(Usuario estudiante) throws IOException
+    {
+       
+        this.usuario=estudiante;
+        this.campoFoto=true;
+     
+               
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/usuario/medidas/GestionTest.xhtml");
+        
+    }
    
     
+    public void medicionSeleccionada(Medida medida) throws IOException
+    {
+       
+        this.Medidaactual=medida;
+               
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/administrador/medidas/Test.xhtml");
+        
+    }
     
+    public void medicionSeleccionadaUsu(Medida medida) throws IOException
+    {
+       
+        this.Medidaactual=medida;
+               
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/usuario/medidas/Test.xhtml");
+        
+    }
     
 }
