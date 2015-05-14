@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unicauca.horasaludable.managedbeans.medidas;
 
 /*
@@ -20,6 +15,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.unicauca.horasaludable.entities.Medida;
+import com.unicauca.horasaludable.entities.Usuario;
 
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -53,29 +49,36 @@ import org.primefaces.context.RequestContext;
  */
 @ManagedBean
 @ViewScoped
-public class MedidasController {
-
-      
+public class MedidasController 
+{     
     @EJB
     private com.unicauca.horasaludable.jpacontrollers.MedidaFacade ejbMedida;
     private Medida medicionactual;  
     private ServicioCalculoMedidas servmed;
+    private List<Medida> listaTest;
+    private int idusu;
+    private Date fechaNuevoTest;
+    private String calificacion;
+
+
         
     public MedidasController() {
       
     }
     
     @PostConstruct
-    public void init()
-        {
-      int idusu = 20141105 ; //para probar
-      int idmed = 5 ; //para probar 
-      
-    //  FacesContext context = FacesContext.getCurrentInstance();
-    //  MostrarUsuarioTestController s =  (MostrarUsuarioTestController)context.getApplication().evaluateExpressionGet(context, "#{mostrarUsuarioTestController}", MostrarUsuarioTestController.class);
-      
-      medicionactual =  ejbMedida.buscarporMedId(idmed).get(0);
-        }
+    public void init() 
+    {
+         //para probar
+        int idmed = 5; //para probar 
+        FacesContext context = FacesContext.getCurrentInstance();
+        MostrarUsuarioTestController s =  (MostrarUsuarioTestController)context.getApplication().evaluateExpressionGet(context, "#{mostrarUsuarioTestController}", MostrarUsuarioTestController.class);
+        idusu = s.getUsuario().getUsuid().intValue();
+        listaTest= ejbMedida.buscarporUsuid(idusu);
+        medicionactual = ejbMedida.buscarporMedId(idmed).get(0);
+        calificacion="pendiente";
+        medicionactual =  s.getMedidaactual(); //ejbMedida.buscarporMedId(s.getMedidaactual()).get(0);
+    }
 
     public Medida getMedicionactual() {
         return medicionactual;
@@ -95,9 +98,29 @@ public class MedidasController {
     {
         this.listaMedi = listaMedi;
     }
-
-
-    
+    public void agregarMedidas()
+    {
+        
+        
+        FacesContext context = FacesContext.getCurrentInstance();      
+       try
+           {
+             
+             Medida nueva=new Medida();
+             nueva.setUsuid(new Usuario(Long.valueOf(idusu+"")));
+             nueva.setMedfecha(fechaNuevoTest);
+             ejbMedida.create(nueva);  
+               
+             context.addMessage("msggestion", new FacesMessage(FacesMessage.SEVERITY_INFO, "Completado", "Operacion realizada con exito"));
+              ExternalContext extcontext = context.getExternalContext();
+              extcontext.getFlash().setKeepMessages(true); 
+              extcontext.redirect("GestionTest.xhtml");
+           }
+        catch (Exception e) {
+                context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "Ocurrio algun error al intentar  efectuar la operacion"));
+            }
+        
+    }
    public void redireccionar(Medida test) throws IOException 
    {
      
@@ -267,5 +290,55 @@ String nombreRutaFile;
     public void calcularSaltoReal()
     {
         medicionactual.setMedsaltoreal(medicionactual.getMedsaltomaximo()-medicionactual.getMedembergadura());
+    }
+    public List<Medida> getListaTest() 
+    {
+        return listaTest;
+    }
+    public void setListaTest(List<Medida> listaTest) 
+    {
+        this.listaTest = listaTest;
+    }
+    public Date getFechaNuevoTest() 
+    {
+        return fechaNuevoTest;
+    }
+    public void setFechaNuevoTest(Date fechaNuevoTest) 
+    {
+        this.fechaNuevoTest = fechaNuevoTest;
+    }
+    public void testRufier()
+    {
+        float i=0;
+        i=(medicionactual.getMedpulso0()+medicionactual.getMedpulso1()+medicionactual.getMedpulso2()-200)/10;
+        if(i==0)
+        {
+            calificacion="Excelente";
+        }
+        if(i>=0.1 && i<=5)
+        {
+            calificacion="Bueno";
+        }
+        if(i>=5.1 && i<=10)
+        {
+            calificacion="Medio";
+        }
+        if(i>=10.1 && i<=15)
+        {
+            calificacion="Insuficiente";
+        }
+        if(i>=15.1 && i<=20)
+        {
+            calificacion="Malo, requiere evaluación médica";
+        }
+        System.out.println("así quedo la calificacion: "+calificacion);
+    }
+    public String getCalificacion() 
+    {
+        return calificacion;
+    }
+    public void setCalificacion(String calificacion) 
+    {
+        this.calificacion = calificacion;
     }
 }

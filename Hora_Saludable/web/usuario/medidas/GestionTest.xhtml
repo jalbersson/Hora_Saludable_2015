@@ -32,17 +32,7 @@
                 <br></br>     <br></br>     <br></br><br></br>     <br></br>   
             </ui:define>
             <ui:define name="body" >
-                <p:dialog showEffect="fade" hideEffect="explode" position="center" widgetVar="agregartest" header="Agregar Nuevo Test" modal="true">
-                    <h:form>
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:outputLabel  value="Fecha" />
-                            <p:calendar  pattern="dd.MM.yyyy" navigator="true" showButtonPanel="true" value="#{medidasController.fechaNuevoTest}"/>
-                            <f:facet name="footer">
-                                <p:commandButton  value="Agregar Nuevo Test" actionListener="#{medidasController.agregarMedidas()}" onclick="PF('agregartest').hide();" icon="ui-icon-disk" update=":formTest"/>              
-                            </f:facet>                   
-                        </h:panelGrid>
-                    </h:form>
-                </p:dialog>
+               
                 <p:panelGrid styleClass="fichapersonal" >
                     <p:row>
                         <p:column rowspan="9">
@@ -93,9 +83,8 @@
                         </f:facet>
                     </p:panelGrid> 
                     <h:form>
-                        <p:panelGrid columns="2" style="float: right; margin-top: 30px; "> 
-                            <f:facet name="header">
-                                <p:commandButton value="Agregar Nuevo Test" onclick="PF('agregartest').show();" icon="ui-icon-disk" />
+                        <p:panelGrid columns="1" style="float: right; margin-top: 30px; "> 
+                            <f:facet name="header">                               
                                 <p:button value="Ver Historial" icon="ui-icon-refresh" outcome="HistorialMed"/> 
                             </f:facet> 
                         </p:panelGrid>
@@ -105,11 +94,11 @@
                     <p:dataTable id="tablaTest" value="#{medidasController.listaTest}" var="Tests" styleClass="tablas" paginator="true" rows="6">
                         <p:column headerText="Fecha">
                             <p:outputLabel value="#{Tests.medfecha}">
-                                 <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                             <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
                             </p:outputLabel>
                         </p:column>
                         <p:column headerText="Acción">
-                            <p:commandLink actionListener="#{mostrarUsuarioTestController.medicionSeleccionada(Tests)}" value="Gestionar Test" style="color: #045491;">                                     
+                            <p:commandLink actionListener="#{mostrarUsuarioTestController.medicionSeleccionadaUsu(Tests)}" value="Gestionar Test" style="color: #045491;">                                     
                                 </p:commandLink>
                         </p:column>
                     </p:dataTable>

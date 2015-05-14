@@ -76,5 +76,17 @@ public class MedidaFacade extends AbstractFacade<Medida> {
         List<Medida> resultList2 = query.getResultList();
         return resultList2;
     }
- 
+    public List<Medida> buscarPorUsuID(int id)
+    {
+        try {
+            String queryString = "SELECT t FROM Medida t "
+                    + "where t.usuid=" + id;
+            Query query = getEntityManager().createQuery(queryString);
+            //System.out.println("ERR"+Long.valueOf(usuid.intValue()+""));
+            //query.set("usuid", Long.valueOf(usuid.intValue()+""));
+            return query.getResultList();
+        } finally {
+            // em.close();
+        }
+    }
 }
