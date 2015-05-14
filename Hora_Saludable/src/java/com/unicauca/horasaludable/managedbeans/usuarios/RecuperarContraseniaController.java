@@ -17,6 +17,8 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.*;
 import com.unicauca.horasaludable.cifrado.Cifrar;
+import com.unicauca.horasaludable.entities.Recuperarcontrasena;
+import com.unicauca.horasaludable.jpacontrollers.RecuperarcontrasenaFacade;
 
 /**
  *
@@ -28,9 +30,12 @@ public class RecuperarContraseniaController {
     
     @EJB
     private UsuarioFacade ejbUsuario;
+    @EJB
+    private RecuperarcontrasenaFacade ejbRecuperarcontrasena;
+    
     private String correo;
     private Usuario usuario;
-    
+    private Recuperarcontrasena recuperarContrasena;
     private String to;
     private String from;
     private String message;
@@ -106,9 +111,6 @@ public class RecuperarContraseniaController {
             usuario = ejbUsuario.buscarUsuarioPorEmail(correo);
             if(usuario != null){
                 sendMail();
-                //FacesContext.getCurrentInstance().addMessage(null,
-                   // new FacesMessage("Welcomeiiii "+ usu.getUsuapellidos()));
-                //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("USUARIO", usuario);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/usuario/recuperarcontrasenia/validar.xhtml");
             }else{
                 FacesContext.getCurrentInstance().addMessage(null,
@@ -125,8 +127,13 @@ public class RecuperarContraseniaController {
         subject = "Recuperar contraseña Hora Saludable";
         smtpServ = "smtp.gmail.com";
         String pass = "hora.saludable";
-        //String idcifrado = cifrado.sha256(usuario.getUsuid().toString());
-        String idcifrado = usuario.getUsuid().toString();
+        String idcifrado = cifrado.sha256(usuario.getUsuid().toString());
+        //String idcifrado = usuario.getUsuid().toString();
+        recuperarContrasena = new Recuperarcontrasena();
+        recuperarContrasena.setReid(usuario.getUsuid());
+        recuperarContrasena.setReidcifrado(idcifrado);
+        System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+        ejbRecuperarcontrasena.create(recuperarContrasena);
         String url = "http://localhost:8080/Hora_Saludable/faces/usuario/recuperarcontrasenia/cambiarContrasenia.xhtml?ifo="+ idcifrado;
         message = "<h1> Hola "+usuario.getUsunombres()+" Hemos recibido tu solicitud de cambio de contraseña, para hacer el"
                 + " cambio haz clic <a href="+url+">Aqui</a></h1>";
