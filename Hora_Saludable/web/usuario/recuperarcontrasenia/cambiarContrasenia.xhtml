@@ -18,22 +18,45 @@
             </ui:define>
             
             <ui:define name="body">
-                
-                    
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
                 <h1>Cambiar Contraseña</h1>
                 <h:form>
                     <f:metadata>
                         <f:viewParam name="ifo" value="#{cambiarContraseniaController.id}"/>
                     </f:metadata>
                     <p:messages id="messages" showDetail="true" autoUpdate="true" />
-                    <h:panelGrid columns="2" id="matchGrid" cellpadding="5">                   
-                        <h:outputLabel for="pwd1" value="Nueva Contraseña: *" />
-                        <p:password id="pwd1" value="#{cambiarContraseniaController.password1}" match="pwd2" label="Password 1" required="true" />
-                        <h:outputLabel for="pwd2" value="Confirmar Contraseña: *" />
-                        <p:password id="pwd2" value="#{cambiarContraseniaController.password2}" label="Password 2" required="true" />
-                    </h:panelGrid>
+                    <p:panelGrid id="matchGrid" styleClass="panelgrid"> 
+                        <p:row> 
+                            <p:column>
+                                <h:outputLabel for="contrasena" value="Nueva Contraseña: *" style="width: 120px;font-size:18px"/>
+                            </p:column>
+                            <p:column>
+                                <p:password style="width: 120px;font-size:15px" 
+                                    id="contrasena" value="#{cambiarContraseniaController.password1}"
+                                    required="true" requiredMessage="Campo Obligatorio."
+                                    validator="#{cambiarContraseniaController.validateContrasena}">
+                                <f:validator validatorId="ValidarCampoMaximo20Caracteres"/>
+                                <f:validator validatorId="ValidarCampoMinimo6Caracteres"/>
+                                </p:password>
+                            </p:column>                                
+                         </p:row>
+                       
+                        <p:row> 
+                            <p:column>
+                              <h:outputLabel for="confirmarContrasena" value="Confirmar Contraseña: *" style="width: 120px;font-size:18px"/>
+                            </p:column>
+                            <p:column>
+                                <p:password  style="width: 120px;font-size:15px" 
+                                        id="confirmarContrasena" value="#{cambiarContraseniaController.password2}"
+                                        required="true" requiredMessage="Campo Obligatorio."
+                                        validator="#{cambiarContraseniaController.validateRepitaContrasena}">                                            
+                                </p:password> 
+                            </p:column>                            
+                        </p:row>
+                    </p:panelGrid>
                     <br/>
-                    <p:commandButton update="matchGrid" value="Actualizar Contraseña" actionListener="#{cambiarContraseniaController.cambiarContrasenia}"/>
+                    <p:commandButton update="matchGrid" value="Actualizar Contraseña" actionListener="#{cambiarContraseniaController.cambiarContrasenia}"
+                                     onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                 </h:form>
             </ui:define>
 
