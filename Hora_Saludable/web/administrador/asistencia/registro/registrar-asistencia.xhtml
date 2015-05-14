@@ -35,23 +35,27 @@
                     <p:growl id="growl" sticky="true" showDetail="true" />
 
                     <h:panelGroup id="crearInscripcionPanelGroup">
-                        <p:panelGrid columns="4" rendered="#{crearInscripcionBean.ins != null}">
-                            <h:outputText value="Fecha:" />
+                        <h:panelGrid columns="4" cellpadding="5" cellspacing="5" rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
+                            <h:outputText value="Fecha:" style="font-size: 16px;"  />
                             <p:calendar id="fecha" value="#{asistenciaView.asi.asifecha}" pattern="dd-MM-yyyy" mask="true" size="7"/>                            
-                            <p:commandButton value="Buscar" actionListener="#{asistenciaView.buscarAsistencia()}" update="growl, usuariosDataTable, crearInscripcionForm" />
-                            <p:commandButton value="#{asistenciaView.accion}" actionListener="#{asistenciaView.crearAsistencia()}" update="growl" />
-                        </p:panelGrid>
+                            <p:commandButton value="Buscar" actionListener="#{asistenciaView.buscarAsistencia()}" update="growl, usuariosDataTable, crearInscripcionForm" icon="ui-icon-search" style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />                            
+                            <p:commandButton value="#{asistenciaView.accion}" actionListener="#{asistenciaView.crearAsistencia()}" update="growl" icon="ui-icon-pencil" style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                        </h:panelGrid>
                     </h:panelGroup>
-                    
+                    <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
+
                     <p:spacer height="25"/>
 
                     <p:panel header="Usuarios" >
+                        
+                        
                         <p:dataTable id="usuariosDataTable" value="#{asistenciaView.usuarios}" var="usu"
                                      paginator="true"
-                                     rows="10"
+                                     rows="20"
                                      selection="#{asistenciaView.selectedUsus}"
                                      rowKey="#{usu.usuid}"                                     
                                      >                            
+                            
                             <p:column headerText="NOMBRES" filterBy="#{usu.usunombres}" >
                                 <h:outputText value="#{usu.usunombres}" />
                             </p:column>
@@ -64,11 +68,21 @@
                             <p:column headerText="CÓDIGO" filterBy="#{usu.usuidentificacion}">
                                 <h:outputText value="#{usu.usuidentificacion}" />
                             </p:column>
-                            <p:column headerText="PROGRAMA ACADEMICO" ></p:column>
-                            <p:column headerText="PROGRAMA" ></p:column>
-                            <p:column headerText="ESTAMENTO" ></p:column>                    
+                            <p:column headerText="PROGRAMA ACADEMICO" >
+                                <h:outputText value="#{usu.uniid.uninombre}" />
+                            </p:column>                            
+                            <p:column headerText="ESTAMENTO" >
+                                <h:outputText value="#{usu.carid.carnombre}" />
+                            </p:column>                    
                             <p:column  selectionMode="multiple" style="width:10%;text-align:center" />
                         </p:dataTable>
+                        <br />
+                        <h:outputText value="Observaciones:" />
+                        <p:inputTextarea id="observaciones" 
+                                         value="#{asistenciaView.asi.asiobservaciones}" 
+                                         rows="10" cols="50"/>
+                        
+                        <p:watermark for="observaciones" value="Observaciones" id="watermark" />
                     </p:panel>
                 </h:form>
             </ui:define>

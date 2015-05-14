@@ -22,6 +22,7 @@
             </ui:define>
 
             <ui:define name="body">
+                
                 <p:breadCrumb>
                     <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
                     <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
@@ -40,7 +41,7 @@
                                 <p:column>
                                     <p:selectOneMenu id="tipoReporte" required="true"
                                                      requiredMessage="Seleccione el tipo de reporte."
-                                                     valueChangeListener="#{auxiliarAsistencia.cambiarTipo}">
+                                                     valueChangeListener="#{dependencias.cambiarTipo}">
                                         <f:selectItem itemValue="NingunReporte" itemLabel="Seleccione uno" /> 
                                         <f:selectItem itemValue="Anual" itemLabel="Anual" />
                                         <f:selectItem itemValue="Mensual" itemLabel="Mensual" />
@@ -52,13 +53,13 @@
                                 </p:column>
                             </p:row>
 
-                            <p:row rendered="#{auxiliarAsistencia.reporteAnual}">
+                            <p:row rendered="#{dependencias.comboAnio}">
                                 <p:column style="text-align:right">
                                     <h:outputLabel for="anioReporte" value="Año:" />
                                 </p:column>
                                 <p:column>
                                     <p:selectOneMenu id="anioReporte" required="true" requiredMessage="Seleccione el año."
-                                                     valueChangeListener="#{auxiliarAsistencia.cambiarAño}">
+                                                     valueChangeListener="#{dependencias.cambiarAño}">
                                         <f:selectItem itemValue="NingunAño" itemLabel="Seleccione uno" /> 
                                         <f:selectItem itemValue="2014" itemLabel="2014" />
                                         <f:selectItem itemValue="2015" itemLabel="2015" />
@@ -70,13 +71,13 @@
                                 </p:column>
                             </p:row>
 
-                            <p:row rendered="#{auxiliarAsistencia.reporteMensual}">
+                            <p:row rendered="#{dependencias.comboMes}">
                                 <p:column style="text-align:right">
                                     <h:outputLabel for="mesReporte" value="Mes:" />
                                 </p:column>
                                 <p:column>
                                     <p:selectOneMenu id="mesReporte" required="true" requiredMessage="Seleccione el mes."
-                                                     valueChangeListener="#{auxiliarAsistencia.cambiarMes}">
+                                                     valueChangeListener="#{dependencias.cambiarPorMes}">
                                         <f:selectItem itemValue="NingunMes" itemLabel="Seleccione uno" /> 
                                         <f:selectItem itemValue="Enero" itemLabel="Enero" />
                                         <f:selectItem itemValue="Febrero" itemLabel="Febrero" />
@@ -102,12 +103,20 @@
 
                     <p:spacer height="20"/>
                     
-                    <h:panelGrid id="panelGrid2" style="margin: 0 auto;" columns="1" cellpadding="7" rendered="#{auxiliarAsistencia.verReporte}"> 
+                    <h:panelGrid id="panelGrid2" style="margin: 0 auto;" columns="1" cellpadding="7" rendered="#{dependencias.mostrarPoraño}"> 
                         <h3>Este reporte muestra la asistencia de participantes por dependencias en el mes de enero de 2014</h3>
-                        <p:chart type="bar" model="#{chartView.barModel}" style="height:300px; width: 850px" widgetVar="chart"/>
+                        <p:chart type="bar" model="#{dependencias.barModel}" style="height:600px; width: 800px" widgetVar="chart"/>
                         <p:commandButton type="button" value="Exportar" icon="ui-icon-extlink" onclick="exportChart()"/>
                     </h:panelGrid>
+                
+                    <h:panelGrid id="panelGrid3" style="margin: 0 auto;" columns="1" cellpadding="7" rendered="#{dependencias.mostrarPorMes}"> 
+                        <h3>Este reporte muestra la asistencia de participantes por dependencias en el mes de enero de 2014</h3>
+                        <p:chart type="bar" model="#{dependencias.barModel}" style="height:600px; width: 800px" widgetVar="chart"/>
+                        <p:commandButton type="button" value="Exportar" icon="ui-icon-extlink" onclick="exportChart()"/>
+                    </h:panelGrid>
+                
                 </h:form>
+                
                 
                 <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Gráfica" resizable="false">
                     <p:outputPanel id="output" layout="block" style="width:610px; height:320px"/>

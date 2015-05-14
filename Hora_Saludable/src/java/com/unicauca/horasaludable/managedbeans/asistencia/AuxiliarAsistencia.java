@@ -1,5 +1,5 @@
 
-package com.unicauca.horasaludable.asistenciaManagedbeans;
+package com.unicauca.horasaludable.managedbeans.asistencia;
 
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.bean.ManagedBean;

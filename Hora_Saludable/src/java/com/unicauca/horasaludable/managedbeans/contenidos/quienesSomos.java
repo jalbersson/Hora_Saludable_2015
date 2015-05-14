@@ -5,7 +5,7 @@
  */
 package com.unicauca.horasaludable.managedbeans.contenidos;
 
-import static com.sun.javafx.logging.PulseLogger.addMessage;
+//import static com.sun.javafx.logging.PulseLogger.addMessage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

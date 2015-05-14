@@ -133,7 +133,7 @@ public class asistencia_usuarios_con_session implements Serializable
         List<Detalleasistencia> listaAsistencias = this.obtener_asistencia_usuid();
         eventModel = new DefaultScheduleModel();
         for (Detalleasistencia asistencias : listaAsistencias) {
-            eventModel.addEvent(new DefaultScheduleEvent(" ",
+            eventModel.addEvent(new DefaultScheduleEvent("",
                     asistencias.getAsistencia().getAsifecha(), asistencias.getAsistencia().getAsifecha()));
         }
     }

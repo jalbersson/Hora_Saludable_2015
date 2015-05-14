@@ -35,8 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Unidadacademica.findAll", query = "SELECT u FROM Unidadacademica u"),
     @NamedQuery(name = "Unidadacademica.findByUniid", query = "SELECT u FROM Unidadacademica u WHERE u.uniid = :uniid"),
     @NamedQuery(name = "Unidadacademica.findByUninombre", query = "SELECT u FROM Unidadacademica u WHERE u.uninombre = :uninombre"),
-    @NamedQuery(name = "Unidadacademica.findByTipo", query = "SELECT u FROM Unidadacademica u  WHERE u.tipid.tipnombre = :tiponombre")})
+    @NamedQuery(name = "Unidadacademica.findByTipo", query = "SELECT u FROM Unidadacademica u  WHERE u.tipid.tipnombre = :tiponombre"),
+    @NamedQuery(name = "Unidadacademica.retornarUnidadesAcademicas", query = "SELECT u.uninombre,0 FROM Unidadacademica u")})
 public class Unidadacademica implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -123,5 +125,5 @@ public class Unidadacademica implements Serializable {
     public String toString() {
         return "com.unicauca.horasaludable.entities.Unidadacademica[ uniid=" + uniid + " ]";
     }
-    
+
 }
