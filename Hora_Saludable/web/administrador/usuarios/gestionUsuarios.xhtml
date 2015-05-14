@@ -13,12 +13,19 @@
                 Gestión Usuarios                
             </ui:define> 
             <ui:define name="title">
+                                
+            </ui:define>
+            <ui:define name="body"> 
+                <br/>
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />                              
+                        <p:menuitem value="Gestion Usuarios" outcome="/administrador/usuarios/gestionUsuarios" />                                        
+                    </p:breadCrumb>
+                </h:form>
                 <div class="tituloContenido">
                     GESTIÓN DE USUARIOS                    
-                </div>                
-            </ui:define>
-            <ui:define name="body">                
-                <br/>
+                </div>
                 <h:form id="seleccionarUsuarios">
                     <h:panelGrid columns="3"> 
                         <p:outputLabel styleClass="CampoLabel" value="Seleccione Tipo Usuario:" />                      

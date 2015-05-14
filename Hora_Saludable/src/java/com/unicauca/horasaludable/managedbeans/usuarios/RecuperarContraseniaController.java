@@ -132,8 +132,10 @@ public class RecuperarContraseniaController {
         recuperarContrasena = new Recuperarcontrasena();
         recuperarContrasena.setReid(usuario.getUsuid());
         recuperarContrasena.setReidcifrado(idcifrado);
-        System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
-        ejbRecuperarcontrasena.create(recuperarContrasena);
+        ejbRecuperarcontrasena.buscarRecuperarContrasenaCifrado(idcifrado);
+        if(ejbRecuperarcontrasena == null){
+            ejbRecuperarcontrasena.create(recuperarContrasena);
+        }                
         String url = "http://localhost:8080/Hora_Saludable/faces/usuario/recuperarcontrasenia/cambiarContrasenia.xhtml?ifo="+ idcifrado;
         message = "<h1> Hola "+usuario.getUsunombres()+" Hemos recibido tu solicitud de cambio de contraseña, para hacer el"
                 + " cambio haz clic <a href="+url+">Aqui</a></h1>";
