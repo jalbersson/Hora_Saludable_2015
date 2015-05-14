@@ -83,24 +83,6 @@
                         </p:dataScroller>
                         </h:form>
                     </h:panelGrid>
-
-                    <p:outputPanel style="border:none">
-                        <h:panelGrid columns="2" cellpadding="5" style="border:none">
-
-                            <h:outputText value="#{eventoLista.evetitulo}" style="font-weight: bold; font-size: 25px"/>
-                            <h:outputText value="" />
-
-                            <h:outputText value="Fecha del evento:" />
-                            <h:outputText value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}" style="font-weight: bold; font-size: 15px"/>
-
-                            <h:outputText value="Lugar:" />
-                            <h:outputText value="#{eventoLista.evelugar}" style="font-weight: bold"/>
-
-                            <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px"></p:link>
-                        </h:panelGrid>
-                    </p:outputPanel>
-
-
                 </h:form>
 
 
