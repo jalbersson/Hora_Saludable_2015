@@ -86,21 +86,6 @@
                             <h:graphicImage name="img/Imprimir.PNG" />
                         </p:panelGrid>
                     </p:commandLink>
-                    <h:body>
-                        <h:form id="frmTablaRutina">
-                            <p:commandButton value="Descargar Formato A" actionListener="#{medidasController.generarPDF()}" oncomplete="PF('dlgVerRutina').show();"/> 
-                        </h:form>
-                        <h:form id="frmVerRutina">  
-                            <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
-                                <c:if test="#{pDFBean.pdfFileName != 'sin-cargar'}">
-                                    <p:inputText id="Peso" value="#{request.contextPath}/PDFServlet/#{pDFBean.pdfFileName}"   styleClass="txtboxmed"/>
-                                    <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{pDFBean.pdfFileName}" height="600px" width="820px">
-                                        Your browser can't display pdf, <a href="#{request.contextPath}./PDFServlet/#{pDFBean.pdfFileName}">click</a> to download pdf instead.
-                                    </object>   
-                                </c:if>
-                            </p:dialog>        
-                        </h:form>
-                    </h:body>
                     <p:accordionPanel id="acord" styleClass="acciones" style="margin: 0 auto">
                         <p:tab title="Mediciones" >
                             <p:commandLink styleClass="imagenmedidas">
@@ -244,7 +229,10 @@
                                     <p:outputLabel id="slider5" value="Tercer pulso" />
                                     <p:inputText id="inputTercerPulso" value="#{medidasController.medicionactual.medpulso2}"></p:inputText>
                                 </p:panelGrid><br/>
-                                <h2>Resultado: Bueno</h2><br></br>
+                                <p:commandButton value="Calcular resultado" actionListener="#{medidasController.testRufier()}" update="labelRufier"></p:commandButton><br/>
+                                Resultado:
+                                <p:outputLabel id="labelRufier" value="#{medidasController.calificacion}"></p:outputLabel>
+                                <br></br>
                                 <h2>Test de Leger</h2>
                                 <p:panelGrid columns="2" style="margin: 0 auto">
                                     <p:outputLabel  value="Consumo máximo de oxígeno: "/>
