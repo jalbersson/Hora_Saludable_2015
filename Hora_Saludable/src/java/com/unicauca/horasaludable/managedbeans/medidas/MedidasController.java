@@ -58,6 +58,8 @@ public class MedidasController
     private List<Medida> listaTest;
     private int idusu;
     private Date fechaNuevoTest;
+    private String calificacion;
+
 
         
     public MedidasController() {
@@ -73,6 +75,8 @@ public class MedidasController
         MostrarUsuarioTestController s =  (MostrarUsuarioTestController)context.getApplication().evaluateExpressionGet(context, "#{mostrarUsuarioTestController}", MostrarUsuarioTestController.class);
         idusu = s.getUsuario().getUsuid().intValue();
         listaTest= ejbMedida.buscarporUsuid(idusu);
+        medicionactual = ejbMedida.buscarporMedId(idmed).get(0);
+        calificacion="pendiente";
         medicionactual =  s.getMedidaactual(); //ejbMedida.buscarporMedId(s.getMedidaactual()).get(0);
     }
 
@@ -302,5 +306,39 @@ String nombreRutaFile;
     public void setFechaNuevoTest(Date fechaNuevoTest) 
     {
         this.fechaNuevoTest = fechaNuevoTest;
+    }
+    public void testRufier()
+    {
+        float i=0;
+        i=(medicionactual.getMedpulso0()+medicionactual.getMedpulso1()+medicionactual.getMedpulso2()-200)/10;
+        if(i==0)
+        {
+            calificacion="Excelente";
+        }
+        if(i>=0.1 && i<=5)
+        {
+            calificacion="Bueno";
+        }
+        if(i>=5.1 && i<=10)
+        {
+            calificacion="Medio";
+        }
+        if(i>=10.1 && i<=15)
+        {
+            calificacion="Insuficiente";
+        }
+        if(i>=15.1 && i<=20)
+        {
+            calificacion="Malo, requiere evaluación médica";
+        }
+        System.out.println("así quedo la calificacion: "+calificacion);
+    }
+    public String getCalificacion() 
+    {
+        return calificacion;
+    }
+    public void setCalificacion(String calificacion) 
+    {
+        this.calificacion = calificacion;
     }
 }

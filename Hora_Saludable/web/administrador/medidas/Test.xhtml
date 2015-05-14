@@ -229,7 +229,10 @@
                                     <p:outputLabel id="slider5" value="Tercer pulso" />
                                     <p:inputText id="inputTercerPulso" value="#{medidasController.medicionactual.medpulso2}"></p:inputText>
                                 </p:panelGrid><br/>
-                                <h2>Resultado: Bueno</h2><br></br>
+                                <p:commandButton value="Calcular resultado" actionListener="#{medidasController.testRufier()}" update="labelRufier"></p:commandButton><br/>
+                                Resultado:
+                                <p:outputLabel id="labelRufier" value="#{medidasController.calificacion}"></p:outputLabel>
+                                <br></br>
                                 <h2>Test de Leger</h2>
                                 <p:panelGrid columns="2" style="margin: 0 auto">
                                     <p:outputLabel  value="Consumo máximo de oxígeno: "/>
