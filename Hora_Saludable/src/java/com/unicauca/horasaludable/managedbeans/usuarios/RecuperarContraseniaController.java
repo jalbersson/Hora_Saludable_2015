@@ -131,9 +131,9 @@ public class RecuperarContraseniaController {
         //String idcifrado = usuario.getUsuid().toString();
         recuperarContrasena = new Recuperarcontrasena();
         recuperarContrasena.setReid(usuario.getUsuid());
-        recuperarContrasena.setReidcifrado(idcifrado);
-        ejbRecuperarcontrasena.buscarRecuperarContrasenaCifrado(idcifrado);
-        if(ejbRecuperarcontrasena == null){
+        recuperarContrasena.setReidcifrado(idcifrado);        
+        if(ejbRecuperarcontrasena.buscarRecuperarContrasenaCifrado(idcifrado)==null)
+        {
             ejbRecuperarcontrasena.create(recuperarContrasena);
         }                
         String url = "http://localhost:8080/Hora_Saludable/faces/usuario/recuperarcontrasenia/cambiarContrasenia.xhtml?ifo="+ idcifrado;
