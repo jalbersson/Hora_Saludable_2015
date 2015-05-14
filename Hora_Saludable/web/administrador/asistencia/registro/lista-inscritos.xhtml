@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
@@ -11,61 +11,78 @@
         <ui:composition template="./../../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Lista de inscritos
+                Inscribir Usuarios
             </ui:define>
 
             <ui:define name="title">
                 <div class="tituloContenido">
                     <br></br>
-                    Lista de inscritos <br></br>
+                    Inscribir Usuarios <br></br>
                 </div>
             </ui:define>
 
-            <ui:define name="body">
-                <p:breadCrumb>
-                    <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
-                    <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
-                    <p:menuitem value="Lista de inscritos" outcome="lista-inscritos" />                    
-                </p:breadCrumb>
-                <p:spacer height="20"/>
-                <h:form id="form">
+            <ui:define name="body">                
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
+                <h:form id="crearInscripcionForm">
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
+                        <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
+                        <p:menuitem value="Lista de inscritos" outcome="lista-inscritos" />                    
+                    </p:breadCrumb>
+                    
+                    <p:spacer height="20"/>
 
-                    <p:dataTable id="inscritosDT" var="inscrito" value="#{inscritoBean.inscritos}" selectionMode="single" selection="#{inscritoBean.selectedInscrito}" rowKey="#{inscrito.documentoIdentidad}" style="width:70%;margin: 0 auto;">
-                        <f:facet name="header">
-                            INSCRITOS                                        
-                        </f:facet>
-                        <p:column headerText="NOMBRES Y APELLIDOS">
-                            <h:outputText value="#{inscrito.primerApellido} #{inscrito.segundoApellido} #{inscrito.primerNombre} #{inscrito.segundoNombre}" />
-                        </p:column>
+                    <p:growl id="growl" sticky="true" showDetail="true" />
 
-                        <p:column style="width:10%;text-align: center">
-                            <p:commandButton update=":form:inscritoDetail" oncomplete="PF('inscritoDialog').show()" icon="ui-icon-search" title="Ver">
-                                <f:setPropertyActionListener value="#{inscrito}" target="#{inscritoBean.selectedInscrito}" />
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable>            
+                    <h:panelGroup id="crearInscripcionPanelGroup">
+                        <h:panelGrid columns="6" cellpadding="5" cellspacing="5" rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
+                            <h:outputText value="Mes:" style="font-size: 16px;" />
+                            <p:selectOneMenu value="#{crearInscripcionBean.ins.insmes}" style="size: 10;" >                                    
+                                <f:selectItems value="#{crearInscripcionBean.meses}" />                                                                        
+                            </p:selectOneMenu> 
+                            <h:outputText value="Año:" style="font-size: 16px;" />
+                            <p:spinner value="#{crearInscripcionBean.ins.insanio}" max="#{crearInscripcionBean.anio}" size="10" />                                                                                                                
+                            <p:commandButton value="Buscar" actionListener="#{crearInscripcionBean.buscarInscritos()}" update="growl, usuariosDataTable, crearInscripcionForm" icon="ui-icon-search"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                            <p:commandButton value="#{crearInscripcionBean.accion}" actionListener="#{crearInscripcionBean.crearIncripcion()}" update="growl" icon="ui-icon-pencil"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                        </h:panelGrid>
+                    </h:panelGroup>
+                    <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
+                    <p:spacer height="25"/>
 
-                    <p:dialog header="Información Inscrito" widgetVar="inscritoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                        <p:outputPanel id="inscritoDetail" style="text-align:center;">
-                            <p:panelGrid  columns="2" rendered="#{not empty inscritoBean.selectedInscrito}" columnClasses="label,value">
+                    <p:panel id="usuariosPanel" header="Usuarios" >
 
-                                <h:outputText value="Nombres y Apellidos:" />
-                                <h:outputText value="#{inscritoBean.selectedInscrito.primerApellido} 
-                                              #{inscritoBean.selectedInscrito.segundoApellido} 
-                                              #{inscritoBean.selectedInscrito.primerNombre} 
-                                              #{inscritoBean.selectedInscrito.segundoNombre}" />
+                        <p:dataTable id="usuariosDataTable" value="#{crearInscripcionBean.usuarios}" var="usu"
+                                     paginator="true"
+                                     rows="20"
+                                     selection="#{crearInscripcionBean.selectedUsus}"
+                                     rowKey="#{usu.usuid}"                                     
+                                     >                            
+                            <p:column headerText="NOMBRES" filterBy="#{usu.usunombres}" >
+                                <h:outputText value="#{usu.usunombres}" />
+                            </p:column>
+                            <p:column headerText="APELLIDOS" filterBy="#{usu.usuapellidos}">
+                                <h:outputText value="#{usu.usuapellidos}" />
+                            </p:column>
+                            <p:column headerText="SEXO" >
+                                <h:outputText value="#{usu.usugenero}" />
+                            </p:column>
+                            <p:column headerText="CÓDIGO" filterBy="#{usu.usuidentificacion}">
+                                <h:outputText value="#{usu.usuidentificacion}" />
+                            </p:column>
+                            <p:column headerText="PROGRAMA ACADEMICO" >
+                                <h:outputText value="#{usu.uniid.uninombre}" />
+                            </p:column>                            
+                            <p:column headerText="ESTAMENTO" >
+                                <h:outputText value="#{usu.carid.carnombre}" />
+                            </p:column>                    
+                            <p:column  selectionMode="multiple" style="width:10%;text-align:center" />
+                        </p:dataTable>
 
-                                <h:outputText value="Documento de Identidad No.:" />
-                                <h:outputText value="#{inscritoBean.selectedInscrito.documentoIdentidad}" />
-
-                                <h:outputText value="Dependencia Universitaria:" />
-                                <h:outputText value="#{inscritoBean.selectedInscrito.dependenciaUniversitaria}" />                        
-                            </p:panelGrid>
-                        </p:outputPanel>
-                    </p:dialog>
-                    <p:spacer height="15"/>
+                    </p:panel>
                 </h:form>
             </ui:define>
+
         </ui:composition>
+
     </body>
 </html>

@@ -45,7 +45,7 @@ public class CrearInscripcionBean {
     
     private List<Usuario> filteredUsus;
 
-    private String accion = "Inscribir Usuarios"; // "crear" "actualizar"
+    private String accion = "Inscribir"; // "crear" "actualizar"
 
     /**
      * Creates a new instance of CrearInscripcionBean
@@ -66,9 +66,9 @@ public class CrearInscripcionBean {
         int mes = ai.getMM(ins.getInsmes());
         selectedUsus = ejbFacadeDetins.usariosActivos(true, String.valueOf(mes), ins.getInsanio());
         if (selectedUsus.isEmpty()) {
-            accion = "Inscribir Usuarios";
+            accion = "Inscribir";
         } else {
-            accion = "Actualizar Inscritos";
+            accion = "Actualizar";
 
         }
     }
@@ -81,7 +81,7 @@ public class CrearInscripcionBean {
             int mes = ai.getMM(ins.getInsmes());
             ins.setInsmes(String.valueOf(mes));
 
-            if (accion.equals("Inscribir Usuarios")) {
+            if (accion.equals("Inscribir")) {
                 ejbFacadeIns.create(ins);
             } else {
                 ins = ejbFacadeIns.existeInscripcion(String.valueOf(mes), ins.getInsanio());
@@ -92,14 +92,14 @@ public class CrearInscripcionBean {
             }
 
             if (ejbFacadeIns.find(ins.getInsid()) != null) {
-                accion = "Actualizar Inscritos";
+                accion = "Actualizar";
                 context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Inscripcion Creada", ""));
             } else {
-                accion = "Inscribir Usuarios";
-                context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "no ha inscrito usuarios", ""));
+                accion = "Inscribir";
+                context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "No ha inscrito usuarios", ""));
             }
         } else {
-            context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "no ha inscrito usuarios", ""));
+            context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "No ha inscrito usuarios", ""));
         }
 
     }
@@ -110,11 +110,11 @@ public class CrearInscripcionBean {
         selectedUsus = ejbFacadeDetins.usariosActivos(true, String.valueOf(mes), ins.getInsanio());
         usuarios = ejbFacadeUsu.findAll();
         if (selectedUsus.isEmpty()) {
-            accion = "Inscribir Usuarios";
+            accion = "Inscribir";
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "No Hay Inscritos", ""));
         } else {
-            accion = "Actualizar Inscritos";
+            accion = "Actualizar";
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa", ""));
         }
@@ -134,10 +134,10 @@ public class CrearInscripcionBean {
         detins.getDetalleinscripcionPK().setInsid(detins.getInscripcion().getInsid());
         detins.getDetalleinscripcionPK().setUsuid(detins.getUsuario().getUsuid());
 
-        if (accion.equals("Inscribir Usuarios")) {
+        if (accion.equals("Inscribir")) {
             ejbFacadeDetins.create(detins);
         }
-        if (accion.equals("Actualizar Inscritos")) {
+        if (accion.equals("Actualizar")) {
             ejbFacadeDetins.edit(detins);
         }
     }
@@ -174,11 +174,11 @@ public class CrearInscripcionBean {
             selectedUsus = ejbFacadeDetins.usariosActivos(true, String.valueOf(mes), ins.getInsanio());
 
             if (selectedUsus.isEmpty()) {
-                accion = "Inscribir Usuarios";
+                accion = "Inscribir";
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "No Hay Inscritos", ""));
             } else {
-                accion = "Actualizar Inscritos";
+                accion = "Actualizar";
             }
 
             return usuarios;

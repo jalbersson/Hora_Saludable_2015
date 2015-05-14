@@ -39,11 +39,12 @@
                                     <p:column>
                                         <p:selectOneMenu id="tipoReporte" required="true"
                                                          requiredMessage="Seleccione el tipo de reporte."
-                                                         valueChangeListener="#{auxiliarAsistencia.cambiarTipo}">
+                                                         valueChangeListener="#{reporteAsistenciaUsuController.cambiarTipo}">
                                             <f:selectItem itemValue="NingunReporte" itemLabel="Seleccione uno" /> 
                                             <f:selectItem itemValue="Anual" itemLabel="Anual" />
                                             <f:selectItem itemValue="Mensual" itemLabel="Mensual" />
-                                            <f:ajax  execute="tipoReporte" render="form" />
+                                            <p:ajax update="form"/>
+                                            <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column>
@@ -51,288 +52,376 @@
                                     </p:column>
                                 </p:row>
 
-                                <p:row rendered="#{auxiliarAsistencia.reporteAnual}">
+                                <p:row rendered="#{reporteAsistenciaUsuController.verReporteAnual}">
                                     <p:column style="text-align:right">
                                         <h:outputLabel for="anioReporte" value="Año:" />
                                     </p:column>
                                     <p:column>
                                         <p:selectOneMenu id="anioReporte" required="true" requiredMessage="Seleccione el año."
-                                                         valueChangeListener="#{auxiliarAsistencia.cambiarAño}">
-                                            <f:selectItem itemValue="NingunAño" itemLabel="Seleccione uno" /> 
+                                                         valueChangeListener="#{reporteAsistenciaUsuController.cambiarAño}" value="#{reporteAsistenciaUsuController.año}">
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione uno" /> 
                                             <f:selectItem itemValue="2014" itemLabel="2014" />
                                             <f:selectItem itemValue="2015" itemLabel="2015" />
-                                            <f:ajax  execute="tipoReporte" render="form" />
+                                            <p:ajax update="form"/>
+                                            <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column>
                                         <p:message for="anioReporte"/>  
                                     </p:column>
                                 </p:row>
-
-                                <p:row rendered="#{auxiliarAsistencia.reporteMensual}">
+                                
+                                <p:row rendered="#{reporteAsistenciaUsuController.verReporteMensual}">
                                     <p:column style="text-align:right">
                                         <h:outputLabel for="mesReporte" value="Mes:" />
                                     </p:column>
                                     <p:column>
                                         <p:selectOneMenu id="mesReporte" required="true" requiredMessage="Seleccione el mes."
-                                                         valueChangeListener="#{auxiliarAsistencia.cambiarMes}">
-                                            <f:selectItem itemValue="NingunMes" itemLabel="Seleccione uno" /> 
-                                            <f:selectItem itemValue="Enero" itemLabel="Enero" />
-                                            <f:selectItem itemValue="Febrero" itemLabel="Febrero" />
-                                            <f:selectItem itemValue="Marzo" itemLabel="Marzo" />
-                                            <f:selectItem itemValue="Abril" itemLabel="Abril" />
-                                            <f:selectItem itemValue="Mayo" itemLabel="Mayo" />
-                                            <f:selectItem itemValue="Junio" itemLabel="Junio" />
-                                            <f:selectItem itemValue="Julio" itemLabel="Julio" />
-                                            <f:selectItem itemValue="Agosto" itemLabel="Agosto" />
-                                            <f:selectItem itemValue="Septiembre" itemLabel="Septiembre" />
-                                            <f:selectItem itemValue="Octubre" itemLabel="Octubre" />
-                                            <f:selectItem itemValue="Noviembre" itemLabel="Noviembre" />
-                                            <f:selectItem itemValue="Diciembre" itemLabel="Diciembre" />
-                                            <f:ajax  execute="tipoReporte" render="form" />
+                                                         valueChangeListener="#{reporteAsistenciaUsuController.cambiarMes}" value="#{reporteAsistenciaUsuController.mes}">
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione uno" /> 
+                                            <f:selectItem itemValue="1" itemLabel="Enero" />
+                                            <f:selectItem itemValue="2" itemLabel="Febrero" />
+                                            <f:selectItem itemValue="3" itemLabel="Marzo" />
+                                            <f:selectItem itemValue="4" itemLabel="Abril" />
+                                            <f:selectItem itemValue="5" itemLabel="Mayo" />
+                                            <f:selectItem itemValue="6" itemLabel="Junio" />
+                                            <f:selectItem itemValue="7" itemLabel="Julio" />
+                                            <f:selectItem itemValue="8" itemLabel="Agosto" />
+                                            <f:selectItem itemValue="9" itemLabel="Septiembre" />
+                                            <f:selectItem itemValue="10" itemLabel="Octubre" />
+                                            <f:selectItem itemValue="11" itemLabel="Noviembre" />
+                                            <f:selectItem itemValue="12" itemLabel="Diciembre" />
+                                            <p:ajax update="form"/>
+                                            <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column>
                                         <p:message for="mesReporte"/>  
                                     </p:column>
                                 </p:row>
+                                                                
                             </p:panelGrid>
                         </p:panel>
-                            
+                        
+                        <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
+                        
                         <p:spacer height="20"/>
-
-                        <h:panelGrid id="panelGrid2" columns="3" cellpadding="7" rendered="#{auxiliarAsistencia.verReporte}"> 
-                            <h:outputLabel class="CampoLabel" value="Nombres y apellidos del usuario:" />
+                        
+                        <h:panelGrid id="panelGrid2" columns="3" cellpadding="7" rendered="#{reporteAsistenciaUsuController.verReporte}"> 
+                            <h:outputLabel value="Nombre del usuario:" style="font-size: 15px;" />
                             <p:autoComplete />
                             <p:commandButton icon="ui-icon-search" value="Buscar" />
                         </h:panelGrid>
-
+                        
                         <p:spacer height="8"/>            
-                                        
-                        <p:dataTable id="tablaAsistenciaAnual" rendered="#{auxiliarAsistencia.tablaAnual}" var="AsistenciaUsuariosAnual"
-                                     value="" paginator="true" rows="10" rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
-                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-                            <p:column headerText="No" width="7">
-                                <h:outputText value="1" />
+                        
+                        <p:dataTable  id="tablaAsistenciaAnual" rendered="#{reporteAsistenciaUsuController.verTablaAnual}" var="tab" value="#{reporteAsistenciaUsuController.asistenciaAnual}"
+                                      paginator="true" rows="20" paginatorPosition="bottom" rowsPerPageTemplate="20,40,60" style="font-size: 12px; text-align: center;" emptyMessage="Lo sentimos, no hay asistencia registrada en dicho año.">
+                            <p:column headerText="No" width="14">
+                                <h:outputText value="#{tab.num}" />
                             </p:column>
-                            <p:column headerText="Nombres y apellidos" width="180">
-                                <h:outputText value="Daniel Cepeda" />
+                            <p:column headerText="NOMBRES Y APELLIDOS" width="290" style="text-align: left">
+                                <h:outputText value="#{tab.nombre}" />
                             </p:column>
-                            <p:column width="25">
+                            <p:column headerText="SEXO" exportable="true" style="display: none;" >
+                                <h:outputText value="#{tab.sexo}" />
+                            </p:column>
+                            <p:column headerText="CODIGO" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.codigo}" />
+                            </p:column>
+                            <p:column headerText="PROGRAMA" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.programa}" />
+                            </p:column>
+                            <p:column headerText="ESTAMENTO" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.estamento}" />
+                            </p:column>
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Ene" title="Enero"/>
+                                    <h:outputText value="ENE" title="Enero"/>
                                 </f:facet>
-                                <h:outputText value="12" style="float:right"/>
+                                <h:outputText  value="#{tab.getMeses(0)}" >
+                                    <f:convertNumber />
+                                </h:outputText>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Feb" title="Febrero"/>
+                                    <h:outputText value="FEB" title="Febrero" />
                                 </f:facet>
-                                <h:outputText value="25" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(1)}" >
+                                    <f:convertNumber />
+                                </h:outputText>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Mar" title="Marzo"/>
+                                    <h:outputText value="MAR" title="Marzo"/>
                                 </f:facet>
-                                <h:outputText value="20" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(2)}"/>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Abr" title="Abril"/>
+                                    <h:outputText value="ABR" title="Abril"/>
                                 </f:facet>
-                                <h:outputText value="26" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(3)}"/>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="May" title="Mayo"/>
+                                    <h:outputText value="MAY" title="Mayo"/>
                                 </f:facet>
-                                <h:outputText value="15" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(4)}"/>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Jun" title="Junio"/>
+                                    <h:outputText value="JUN" title="Junio"/>
                                 </f:facet>
-                                <h:outputText value="28" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(5)}"/>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Jul" title="Julio"/>
+                                    <h:outputText value="JUL" title="Julio"/>
                                 </f:facet>
-                                <h:outputText value="14" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(6)}"/>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Agos" title="Agosto"/>
+                                    <h:outputText value="AGO" title="Agosto"/>
                                 </f:facet>
-                                <h:outputText value="21" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(7)}"/>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Sept" title="Septiembre"/>
+                                    <h:outputText value="SEP" title="Septiembre"/>
                                 </f:facet>
-                                <h:outputText value="23" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(8)}"/>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Oct" title="Octubre"/>
+                                    <h:outputText value="OCT" title="Octubre"/>
                                 </f:facet>
-                                <h:outputText value="20" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(9)}"/>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Nov" title="Noviembre"/>
+                                    <h:outputText value="NOV" title="Noviembre"/>
                                 </f:facet>
-                                <h:outputText value="16" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(10)}"/>
                             </p:column>
 
-                            <p:column width="25">
+                            <p:column width="24">
                                 <f:facet name="header">
-                                    <h:outputText value="Dic" title="Diciembre"/>
+                                    <h:outputText value="DIC" title="Diciembre"/>
                                 </f:facet>
-                                <h:outputText value="24" style="float:right"/>
+                                <h:outputText value="#{tab.getMeses(11)}"/>
                             </p:column>
 
-                            <p:column width="30">
+                            <p:column width="28">
                                 <f:facet name="header">
-                                    <h:outputText value="Total" title="Total"/>
+                                    <h:outputText value="T/H" title="TOTAL (horas):"/>
                                 </f:facet>
-                                <h:outputText value="220" style="float:right"/>
+                                <h:outputText value="#{tab.asisTotal}"/>
                             </p:column>
-                        </p:dataTable>
-
-                        <p:dataTable id="tablaAsistenciaMensual" rendered="#{auxiliarAsistencia.tablaMensual}" var="AsistenciaUsuariosMensual"
-                                     value="" paginator="true" rows="10" rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
-                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-                            <p:column headerText="Nombres y apellidos" width="150">
-                                <h:outputText value="Daniel Cepeda" />
-                            </p:column>
-                            <p:column headerText="1">
-                                <h:outputText value="" style="text-align: left"/>
-                            </p:column>
-                            <p:column headerText="2">
-                                <h:outputText value="x" style="text-align: left"/>
-                            </p:column>
-                            <p:column headerText="3">
-                                <h:outputText value="" style="text-align: left"/>
-                            </p:column>
-                            <p:column headerText="4">
-                                <h:outputText value="x" style="text-align: left"/>
-                            </p:column>
-                            <p:column headerText="5">
-                                <h:outputText value="x" style="text-align: left"/>
-                            </p:column>
-                            <p:column headerText="6">
-                                <h:outputText value="" style="text-align: left"/>
-                            </p:column>
-                            <p:column headerText="7">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="8">
-                                <h:outputText value="x" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="9">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="10" width="5">
-                                <h:outputText value="x" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="11" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="12" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="13" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="14" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="15" width="5">
-                                <h:outputText value="x" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="16" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="17" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="18" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="19" width="5">
-                                <h:outputText value="x" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="20" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="21" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="22" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="23" width="5">
-                                <h:outputText value="x" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="24" width="5">
-                                <h:outputText value="x" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="25" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="26" width="5">
-                                <h:outputText value="x" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="27" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="28" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="29" width="5">
-                                <h:outputText value="x" style="text-align: right"/>
-                            </p:column>
-                            <p:column headerText="30" width="5">
-                                <h:outputText value="" style="text-align: right"/>
-                            </p:column>
-                            <p:column width="23">
-                                <f:facet name="header">
-                                    <h:outputText value="Total" title="Total"/>
-                                </f:facet>
-                                <h:outputText value="14" style="float:right"/>
-                            </p:column>
-                        </p:dataTable>
                             
+                            <p:columnGroup type="footer" >
+                                <p:row>
+                                    <p:column colspan="2" style="text-align:right" footerText="Total (Horas):" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[0]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[1]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[2]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[3]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[4]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[5]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[6]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[7]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[8]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[9]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[10]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasCadaMes[11]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasAño}" />
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+
+                        <p:dataTable  id="tablaAsistenciaMensual" rendered="#{reporteAsistenciaUsuController.verTablaMensual}" var="tab" value="#{reporteAsistenciaUsuController.asistenciaMensual}"
+                                      paginator="true" rows="20" paginatorPosition="bottom" rowsPerPageTemplate="20,40,60" emptyMessage="Lo sentimos, no hay asistencia registrada en dicho mes." style="font-size: 11px; text-align: center;">
+                            
+                            <p:column  headerText="No" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.num}" />
+                            </p:column>
+                            <p:column  headerText="NOMBRES Y APELLIDOS" width="147" style="text-align: left" >
+                                <h:outputText value="#{tab.nombre}" />
+                            </p:column>
+                            <p:column  headerText="SEXO" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.sexo}" />
+                            </p:column>
+                            <p:column  headerText="CODIGO" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.codigo}" />
+                            </p:column>
+                            <p:column  headerText="PROGRAMA" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.programa}" />
+                            </p:column>
+                            <p:column  headerText="ESTAMENTO" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.estamento}" />
+                            </p:column>
+                            <p:column  headerText="1" width="2">
+                                <h:outputText value="#{tab.getDias(0)}" />
+                            </p:column>
+                            <p:column  headerText="2" width="2">
+                                <h:outputText value="#{tab.getDias(1)}" />
+                            </p:column>
+                            <p:column  headerText="3" width="2">
+                                <h:outputText value="#{tab.getDias(2)}" />
+                            </p:column>
+                            <p:column  headerText="4" width="2">
+                                <h:outputText value="#{tab.getDias(3)}" />
+                            </p:column>
+                            <p:column  headerText="5" width="2">
+                                <h:outputText value="#{tab.getDias(4)}" />
+                            </p:column>
+                            <p:column  headerText="6" width="2">
+                                <h:outputText value="#{tab.getDias(5)}" />
+                            </p:column>
+                            <p:column  headerText="7" width="2">
+                                <h:outputText value="#{tab.getDias(6)}" />
+                            </p:column>
+                            <p:column  headerText="8" width="2">
+                                <h:outputText value="#{tab.getDias(7)}" />
+                            </p:column>
+                            <p:column  headerText="9" width="2">
+                                <h:outputText value="#{tab.getDias(8)}" />
+                            </p:column>
+                            <p:column  headerText="10" width="2">
+                                <h:outputText value="#{tab.getDias(9)}" />
+                            </p:column>
+                            <p:column  headerText="11" width="3">
+                                <h:outputText value="#{tab.getDias(10)}" />
+                            </p:column>
+                            <p:column  headerText="12" width="3">
+                                <h:outputText value="#{tab.getDias(11)}" />
+                            </p:column>
+                            <p:column  headerText="13" width="3">
+                                <h:outputText value="#{tab.getDias(12)}" />
+                            </p:column>
+                            <p:column  headerText="14" width="3">
+                                <h:outputText value="#{tab.getDias(13)}" />
+                            </p:column>
+                            <p:column  headerText="15" width="3">
+                                <h:outputText value="#{tab.getDias(14)}" />
+                            </p:column>
+                            <p:column  headerText="16" width="3">
+                                <h:outputText value="#{tab.getDias(15)}" />
+                            </p:column>
+                            <p:column  headerText="17" width="3">
+                                <h:outputText value="#{tab.getDias(16)}" />
+                            </p:column>
+                            <p:column  headerText="18" width="3">
+                                <h:outputText value="#{tab.getDias(17)}" />
+                            </p:column>
+                            <p:column  headerText="19" width="3">
+                                <h:outputText value="#{tab.getDias(18)}" />
+                            </p:column>
+                            <p:column  headerText="20" width="3">
+                                <h:outputText value="#{tab.getDias(19)}" />
+                            </p:column>
+                            <p:column  headerText="21" width="3">
+                                <h:outputText value="#{tab.getDias(20)}" />
+                            </p:column>
+                            <p:column  headerText="22" width="3">
+                                <h:outputText value="#{tab.getDias(21)}" />
+                            </p:column>
+                            <p:column  headerText="23" width="3">
+                                <h:outputText value="#{tab.getDias(22)}" />
+                            </p:column>
+                            <p:column  headerText="24" width="3">
+                                <h:outputText value="#{tab.getDias(23)}" />
+                            </p:column>
+                            <p:column  headerText="25" width="3">
+                                <h:outputText value="#{tab.getDias(24)}" />
+                            </p:column>
+                            <p:column  headerText="26" width="3">
+                                <h:outputText value="#{tab.getDias(25)}" />
+                            </p:column>
+                            <p:column  headerText="27" width="3">
+                                <h:outputText value="#{tab.getDias(26)}" />
+                            </p:column>
+                            <p:column  headerText="28" width="3">
+                                <h:outputText value="#{tab.getDias(27)}" />
+                            </p:column>
+                            <p:column  headerText="29" width="3">
+                                <h:outputText value="#{tab.getDias(28)}" />
+                            </p:column>
+                            <p:column headerText="30" width="3">
+                                <h:outputText value="#{tab.getDias(29)}" />
+                            </p:column>
+                            <p:column headerText="31" width="3">
+                                <h:outputText value="#{tab.getDias(30)}" />
+                            </p:column>
+                            
+                            <p:column width="18">
+                                <f:facet name="header">
+                                    <h:outputText value="T/H" title="Total (horas)"/>
+                                </f:facet>
+                                <h:outputText value="#{tab.asisTotal}"/>
+                            </p:column>
+                            
+                            <p:columnGroup type="footer" >
+                                <p:row>
+                                    <p:column style="text-align:right" footerText="Total (Horas):" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[0]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[1]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[2]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[3]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[4]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[5]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[6]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[7]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[8]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[9]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[10]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[11]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[12]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[13]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[14]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[15]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[16]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[17]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[18]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[19]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[20]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[21]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[22]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[23]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[24]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[25]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[26]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[27]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[28]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[29]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasDia[30]}" />
+                                    <p:column footerText="#{reporteAsistenciaUsuController.totalHorasMes}" />
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                        
                         <p:spacer height="25"/>
                         
-                        <p:panel header="Exportar a PDF o Excel" rendered="#{auxiliarAsistencia.verReporte}">
-                            <h:commandLink id="pdfAnual" rendered="#{auxiliarAsistencia.tablaAnual}">
-                                <p:graphicImage value="/resources/img/asistencia/pdf.png"/>
-                                <p:dataExporter type="pdf" target="tablaAsistenciaAnual" fileName="AsistenciaAnualUsuarios" />
-                            </h:commandLink>
-                            <h:commandLink id="xlsAnual" rendered="#{auxiliarAsistencia.tablaAnual}">
+                        <p:panel header="Exportar a Excel" rendered="#{reporteAsistenciaUsuController.verReporte}">
+                            <h:commandLink id="xlsAnual" rendered="#{reporteAsistenciaUsuController.verTablaAnual}">
                                 <p:graphicImage value="/resources/img/asistencia/excel.png"/>
-                                <p:dataExporter type="xls" target="tablaAsistenciaAnual" fileName="AsistenciaAnualUsuarios" />
+                                <p:dataExporter type="xls" target="tablaAsistenciaAnual" fileName="Asistencia Anual #{reporteAsistenciaUsuController.año}" postProcessor="#{reporteAsistenciaUsuController.postProcessXLSAnual}" />
                             </h:commandLink>
                             
-                            <h:commandLink id="pdfMes" rendered="#{auxiliarAsistencia.tablaMensual}">
-                                <p:graphicImage value="/resources/img/asistencia/pdf.png"/>
-                                <p:dataExporter type="pdf" target="tablaAsistenciaMensual" fileName="AsistenciaMensualUsuarios" />
-                            </h:commandLink>
-                            <h:commandLink id="xlsMes" rendered="#{auxiliarAsistencia.tablaMensual}">
+                            <h:commandLink id="xlsMes" rendered="#{reporteAsistenciaUsuController.verTablaMensual}">
                                 <p:graphicImage value="/resources/img/asistencia/excel.png"/>
-                                <p:dataExporter type="xls" target="tablaAsistenciaMensual" fileName="AsistenciaMensualUsuarios" />
+                                <p:dataExporter type="xls" target="tablaAsistenciaMensual" fileName="Asistencial Mensual #{reporteAsistenciaUsuController.nombreDelMes} #{reporteAsistenciaUsuController.año}" postProcessor="#{reporteAsistenciaUsuController.postProcessXLSMensual}" />
                             </h:commandLink>
                         </p:panel>
                     </h:form>

@@ -29,8 +29,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Detalleasistencia.findAll", query = "SELECT d FROM Detalleasistencia d"),
     @NamedQuery(name = "Detalleasistencia.findByAsiid", query = "SELECT d FROM Detalleasistencia d WHERE d.detalleasistenciaPK.asiid = :asiid"),
     @NamedQuery(name = "Detalleasistencia.findByUsuid", query = "SELECT d FROM Detalleasistencia d WHERE d.detalleasistenciaPK.usuid = :usuid"),
-    @NamedQuery(name = "Detalleasistencia.findByDetasistio", query = "SELECT d FROM Detalleasistencia d WHERE d.detasistio = :detasistio")})
+    @NamedQuery(name = "Detalleasistencia.findByDetasistio", query = "SELECT d FROM Detalleasistencia d WHERE d.detasistio = :detasistio"),
+    @NamedQuery(name = "Detalleasistencia.findByAsiidUsuid", query = "SELECT d FROM Detalleasistencia d WHERE d.detalleasistenciaPK.asiid = :asiid AND d.detalleasistenciaPK.usuid = :usuid AND d.detasistio = :detasistio"),
+    @NamedQuery(name = "Detalleasistencia.usuario", query = "SELECT d.usuario.uniid.uninombre,count(d.usuario.uniid.uniid) FROM Detalleasistencia d Where d.asistencia.asifecha BETWEEN :date1 AND :DATE2 GROUP BY d.usuario.uniid.uniid")})
 public class Detalleasistencia implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected DetalleasistenciaPK detalleasistenciaPK;
@@ -117,5 +120,5 @@ public class Detalleasistencia implements Serializable {
     public String toString() {
         return "com.unicauca.horasaludable.entities.Detalleasistencia[ detalleasistenciaPK=" + detalleasistenciaPK + " ]";
     }
-    
+
 }

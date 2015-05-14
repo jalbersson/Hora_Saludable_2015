@@ -30,28 +30,34 @@ public class UnidadacademicaFacade extends AbstractFacade<Unidadacademica> {
         super(Unidadacademica.class);
     }
     
-    public List<Unidadacademica> findBYFacultades()
-    {
+        public List<Unidadacademica> findBYFacultades() {
         Query query = getEntityManager().createNamedQuery("Unidadacademica.findByTipo");
         query.setParameter("tiponombre", "Facultad");
         List<Unidadacademica> resultList = query.getResultList();
-        
+
         return resultList;
     }
-    public List<Unidadacademica> findBYDivisiones()
-    {
+
+    public List<Unidadacademica> findBYDivisiones() {
         Query query = getEntityManager().createNamedQuery("Unidadacademica.findByTipo");
         query.setParameter("tiponombre", "Division");
         List<Unidadacademica> resultList = query.getResultList();
-        
+
         return resultList;
     }
-    public List<Unidadacademica> buscarPorId(Long uniid)
-    {
+
+    public List<Unidadacademica> buscarPorId(Long uniid) {
         Query query = getEntityManager().createNamedQuery("Unidadacademica.findByUniid");
         query.setParameter("uniid", uniid);
         List<Unidadacademica> resultList = query.getResultList();
-        
+
+        return resultList;
+    }
+
+    public List<Object[]> retornarUnidadesAcademicas() {
+        Query query = getEntityManager().createNamedQuery("Unidadacademica.retornarUnidadesAcademicas");
+        List<Object[]> resultList = query.getResultList();
+
         return resultList;
     }
 }

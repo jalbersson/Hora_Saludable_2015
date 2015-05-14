@@ -45,7 +45,7 @@ public class AsistenciaView {
 
     private List<Usuario> filteredUsus;
 
-    private String accion = "Registrar Asistencia";
+    private String accion = "Registrar";
 
     /**
      * Creates a new instance of AsistenciaView
@@ -70,7 +70,7 @@ public class AsistenciaView {
                     && asis.get(i).getAsifecha().getMonth() == date.getMonth()
                     && asis.get(i).getAsifecha().getDay() == date.getDay()) {
                 asi = asis.get(i);
-                accion = "Actualizar Asistencia";
+                accion = "Actualizar";
 
                 List<Detalleasistencia> detasis = asi.getDetalleasistenciaList();
                 for (int j = 0; j < detasis.size(); j++) {
@@ -81,18 +81,21 @@ public class AsistenciaView {
                 return;
             }
         }
-        accion = "Registrar Asistencia";
+        accion = "Registrar";
 
-        System.out.println(asi.getAsifecha().getYear() + "***" + date.getYear());
-        System.out.println(asi.getAsifecha().getMonth() + "***" + date.getMonth());
-        System.out.println(asi.getAsifecha().getDay() + "***" + date.getDay());
+//        System.out.println(asi.getAsifecha().getYear() + "***" + date.getYear());
+//        System.out.println(asi.getAsifecha().getMonth() + "***" + date.getMonth());
+//        System.out.println(asi.getAsifecha().getDay() + "***" + date.getDay());
     }
 
     public void crearAsistencia() {
         FacesContext context = FacesContext.getCurrentInstance();
 
-        if (accion.equals("Registrar Asistencia")) {
+        if (accion.equals("Registrar")) {
             ejbFacadeAsi.create(asi);
+        }
+        if (accion.equals("Actualizar")) {
+            ejbFacadeAsi.edit(asi);
         }
 
         for (int i = 0; i < usuarios.size(); i++) {
@@ -115,10 +118,10 @@ public class AsistenciaView {
         detasi.getDetalleasistenciaPK().setAsiid(detasi.getAsistencia().getAsiid());
         detasi.getDetalleasistenciaPK().setUsuid(detasi.getUsuario().getUsuid());
 
-        if (accion.equals("Registrar Asistencia")) {
+        if (accion.equals("Registrar")) {
             ejbFacadeDetasi.create(detasi);
         }
-        if (accion.equals("Actualizar Asistencia")) {
+        if (accion.equals("Actualizar")) {
             ejbFacadeDetasi.edit(detasi);
         }
     }
@@ -131,7 +134,7 @@ public class AsistenciaView {
                     && asis.get(i).getAsifecha().getMonth() == asi.getAsifecha().getMonth()
                     && asis.get(i).getAsifecha().getDay() == asi.getAsifecha().getDay()) {
                 asi = asis.get(i);
-                accion = "Actualizar Asistencia";
+                accion = "Actualizar";
 
                 List<Detalleasistencia> detasis = asi.getDetalleasistenciaList();
                 for (int j = 0; j < detasis.size(); j++) {
@@ -140,12 +143,24 @@ public class AsistenciaView {
                     }
                 }
                 FacesContext context = FacesContext.getCurrentInstance();
-                context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa++", ""));
+                context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa", ""));
                 return;
             }
         }
+        FacesContext context = FacesContext.getCurrentInstance();
+        //
+        Date date = new Date();
+        date = asi.getAsifecha();
+        
+        asi = new Asistencia();
+
+        asi.setAsifecha(date);
+        asi.setAsiobservaciones(new String());
+
         selectedUsus = new ArrayList();
-        accion = "Registrar Asistencia";
+        //
+        context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa " + selectedUsus.size(), ""));
+        accion = "Registrar";
     }
 
     public Asistencia getAsi() {

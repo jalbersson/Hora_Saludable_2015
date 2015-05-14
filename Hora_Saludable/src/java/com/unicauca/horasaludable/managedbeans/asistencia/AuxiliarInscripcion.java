@@ -25,18 +25,18 @@ public class AuxiliarInscripcion {
     }
     private List<String> meses() {
         List<String> me_eses = new ArrayList();
-        me_eses.add("enero");
-        me_eses.add("febrero");
-        me_eses.add("marzo");
-        me_eses.add("abril");
-        me_eses.add("mayo");
-        me_eses.add("junio");
-        me_eses.add("julio");
-        me_eses.add("agosto");
-        me_eses.add("septiembre");
-        me_eses.add("octubre");
-        me_eses.add("noviembre");
-        me_eses.add("diciembre");        
+        me_eses.add("Enero");
+        me_eses.add("Febrero");
+        me_eses.add("Marzo");
+        me_eses.add("Abril");
+        me_eses.add("Mayo");
+        me_eses.add("Junio");
+        me_eses.add("Julio");
+        me_eses.add("Agosto");
+        me_eses.add("Septiembre");
+        me_eses.add("Octubre");
+        me_eses.add("Noviembre");
+        me_eses.add("Diciembre");        
         return me_eses;
     }
     public int getDia() {

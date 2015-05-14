@@ -37,8 +37,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Asistencia.findAll", query = "SELECT a FROM Asistencia a"),
     @NamedQuery(name = "Asistencia.findByAsiid", query = "SELECT a FROM Asistencia a WHERE a.asiid = :asiid"),
     @NamedQuery(name = "Asistencia.findByAsifecha", query = "SELECT a FROM Asistencia a WHERE a.asifecha = :asifecha"),
+    @NamedQuery(name = "Asistencia.findByYearMonth", query = "SELECT a FROM Asistencia a WHERE FUNC('YEAR', a.asifecha) = :year AND FUNC('MONTH', a.asifecha) = :month"),
     @NamedQuery(name = "Asistencia.findByAsiobservaciones", query = "SELECT a FROM Asistencia a WHERE a.asiobservaciones = :asiobservaciones")})
 public class Asistencia implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -125,5 +127,5 @@ public class Asistencia implements Serializable {
     public String toString() {
         return "com.unicauca.horasaludable.entities.Asistencia[ asiid=" + asiid + " ]";
     }
-    
+
 }
