@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java.com.unicauca.tgu.servlets;
+package com.unicauca.horasaludable.servlet;
 
 import java.io.File;
 import java.io.IOException;

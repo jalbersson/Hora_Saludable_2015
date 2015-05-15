@@ -80,12 +80,30 @@
                     </p:row>
                 </p:panelGrid>
                 <h:form>
-                    <p:growl for="msg" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
-                    <p:commandLink styleClass="imagenmedidas2" actionListener="#{medidasController.imprimir}">                             
-                        <p:panelGrid columns="1">
-                            <h:graphicImage name="img/Imprimir.PNG" />
-                        </p:panelGrid>
-                    </p:commandLink>
+                    
+                    
+              
+        <h:form id="frmTablaRutina">
+             
+            <p:commandButton value="Descargar Formato A" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();"/> 
+        </h:form>
+
+        <h:form id="frmVerRutina">  
+            <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
+                <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">                    
+                    <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
+                        Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
+                    </object>   
+                </c:if>
+            </p:dialog>        
+        </h:form>
+  
+                    
+                  
+                    
+                    
+                    
+                    
                     <p:accordionPanel id="acord" styleClass="acciones" style="margin: 0 auto">
                         <p:tab title="Mediciones" >
                             <p:commandLink styleClass="imagenmedidas">
