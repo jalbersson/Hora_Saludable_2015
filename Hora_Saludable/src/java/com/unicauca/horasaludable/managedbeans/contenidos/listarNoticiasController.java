@@ -10,6 +10,7 @@ import com.unicauca.horasaludable.jpacontrollers.NoticiaFacade;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -55,6 +56,14 @@ public class listarNoticiasController {
     public List<Noticia> obtenerNoticias() {
         try {
             this.listaNoticias = this.ebjNoticiaFacade.buscarNoticias();
+            /**
+             * *****************PROVISIONAL ARREGLAR ESTO****************
+             */
+            asignacionImagenesAleatorias();
+            /**
+             * **********************************************************
+             */
+
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "msgs", "Error: No se puede conectar con la base de datos !!!"));
         }
@@ -70,6 +79,20 @@ public class listarNoticiasController {
         } catch (Exception e) {
         }
         return sqlDate;
+    }
+
+    public String aleatorioArchivos() {
+
+        int tam = 7;
+        Random rn = new Random();
+        return "imagen (" +(1+ rn.nextInt(tam) )+ ").jpg";
+    }
+
+    public void asignacionImagenesAleatorias() {
+        int tam = this.listaNoticias.size();
+        for (int i = 0; i < tam; i++) {
+            this.listaNoticias.get(i).setNotimagen(aleatorioArchivos());
+        }
     }
 
     public List<Noticia> getNoticias() {

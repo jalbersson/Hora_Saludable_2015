@@ -40,9 +40,29 @@ public class NoticiaFacade extends AbstractFacade<Noticia> {
     }
 
     public List<Noticia> ultimasNoticias() {
-        Query query = getEntityManager().createNamedQuery("Noticia.findUltimosContenido").setMaxResults(4);
+        Query query = getEntityManager().createNamedQuery("Noticia.findUltimosContenido").setMaxResults(3);
         List<Noticia> resultList = query.getResultList();
         return resultList;
+    }
+    
+    public List<Noticia> noticiaID(Long id){
+        Noticia result = new Noticia();
+    //Query query = getEntityManager().createNamedQuery("Noticia.findByNotid");
+        //
+        Query query = getEntityManager().createNamedQuery("Noticia.findByNotid").setMaxResults(4);
+        query.setParameter("notid", id);
+        List<Noticia> resultList = query.getResultList();
+        return resultList;
+    }
+    
+    public Noticia mostrarNoticia(Long id) {
+        Query query = getEntityManager().createNamedQuery("Noticia.findByNotid");
+        query.setParameter("notid", id);
+        List<Noticia> listado = query.getResultList();
+        if (listado.isEmpty()) {
+            return null;
+        }
+        return listado.get(0);
     }
 
 }

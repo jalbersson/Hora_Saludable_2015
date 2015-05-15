@@ -5,7 +5,7 @@
  */
 package com.unicauca.horasaludable.managedbeans.contenidos;
 
-//import static com.sun.javafx.logging.PulseLogger.addMessage;
+import static com.sun.javafx.logging.PulseLogger.addMessage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -186,8 +186,8 @@ public class quienesSomos {
             Logger.getLogger(quienesSomos.class.getName()).log(Level.SEVERE, null, ex);
             return "principal";
         }
-
-        return "quienesSomosPrincipal";
+        
+        return "quienesSomos";
     }
      
     public String crearVision() {
@@ -203,7 +203,7 @@ public class quienesSomos {
             return "principal";
         }
 
-        return "quienesSomosPrincipal";
+        return "quienesSomos";
     }
     
     public String crearResponsables() {
@@ -219,7 +219,7 @@ public class quienesSomos {
             return "principal";
         }
 
-        return "quienesSomosPrincipal";
+        return "quienesSomos";
     }
     
     

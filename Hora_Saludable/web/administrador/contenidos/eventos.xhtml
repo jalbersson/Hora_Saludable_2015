@@ -1,30 +1,98 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
-
+       <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
             <ui:define name="titulo">
-                titulo
+                Inicio
             </ui:define>
 
-            <ui:define name="CuadroDeBotonesSesion">
-                CuadroDeBotonesSesion
-            </ui:define>
-
-            <ui:define name="menuprincipal">
-                menuprincipal
-            </ui:define>
 
             <ui:define name="title">
-                title
+
             </ui:define>
 
             <ui:define name="body">
-                body
+                
+            <h:form id="form">
+                <h2 style="margin-top:0" class="tituloContenido">Programate...</h2>
+                <p:dataGrid var="eventoLista" value="#{eventoController.eventos}" columns="3"
+                    rows="12" paginator="true" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="6,12,16">
+
+                    <f:facet name="header">
+                        Eventos
+                    </f:facet>
+
+                    <p:panel  class="tituloContenido" style="text-align:center">
+                        <h:panelGrid columns="2" style="width:100%">
+                            <p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" />
+                            <h:panelGrid style="text-align:left">
+                                <p:row>
+                                <p:column>
+                                    
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel class="CampoLabel" value="Evento :"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputLabel value="#{eventoLista.evetitulo}"/>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel class="CampoLabel" value="Lugar :"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputLabel value="#{eventoLista.evelugar}"/>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel class="CampoLabel" value="Fecha :"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputLabel value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}"/>
+                                </p:column>
+                            </p:row>
+                            
+                            <p:row>
+                                <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px">
+                                        <f:param name="eventoId" value="#{eventoLista.eveid}" />
+                                </p:link>
+                            </p:row>
+                            </h:panelGrid>  
+                        </h:panelGrid>
+                    </p:panel>
+
+                </p:dataGrid>
+            </h:form>
+            <h:form>
+               
+
+
+                
+                <p:panelMenu style="width:200px; float: right">
+                      <p:submenu label="Contenidos">
+                          <p:menuitem value="Eventos" ajax="false" outcome="eventos"/> 
+                        <p:menuitem value="Noticias" outcome="noticias" ajax="false"/> 
+                        <p:menuitem value="Ofertas" ajax="false"/>
+                        <p:menuitem value="Reglamento" outcome="reglamento" ajax="false"/>
+                        <p:menuitem value="Quienes somos?" outcome="quienesSomos" ajax="false"/>
+                    </p:submenu>
+                </p:panelMenu>
+                
+            </h:form>
+                
             </ui:define>
 
         </ui:composition>

@@ -40,6 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Noticia.findUltimosContenido", query = "SELECT n FROM Noticia n ORDER BY n.notid DESC"),
     @NamedQuery(name = "Noticia.findByNotimagen", query = "SELECT n FROM Noticia n WHERE n.notimagen = :notimagen")})
 public class Noticia implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -131,6 +132,8 @@ public class Noticia implements Serializable {
         return notcontenido;
     }
 
+    
+
     public void setNotcontenido(String notcontenido) {
         this.notcontenido = notcontenido;
     }
@@ -167,5 +170,5 @@ public class Noticia implements Serializable {
     public String toString() {
         return "com.unicauca.horasaludable.entities.Noticia[ notid=" + notid + " ]";
     }
-    
+
 }

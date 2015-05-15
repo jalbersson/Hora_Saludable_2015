@@ -5,34 +5,22 @@
  */
 package com.unicauca.horasaludable.managedbeans.contenidos;
 
+import com.unicauca.horasaludable.entities.Evento;
 import com.unicauca.horasaludable.entities.Noticia;
 import com.unicauca.horasaludable.jpacontrollers.NoticiaFacade;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
-import javax.swing.JOptionPane;
-import javax.xml.crypto.Data;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -41,8 +29,11 @@ import org.primefaces.model.UploadedFile;
  */
 @ManagedBean
 @RequestScoped
-public class noticiaController {
+public class editarNoticiaController {
 
+    /**
+     * Creates a new instance of editarNoticiaController
+     */
     @EJB
     private NoticiaFacade ebjNoticiaFacade = new NoticiaFacade();
     Boolean visible = true;
@@ -54,8 +45,25 @@ public class noticiaController {
     private String contenido;
     private String imagen;
     private String path = "D:\\";
-
+    private Long idE;
     private UploadedFile file;
+    private Noticia noticiaEditar;
+
+    public Noticia getNoticiaEditar() {
+        return noticiaEditar;
+    }
+
+    public void setNoticiaEditar(Noticia noticiaEditar) {
+        this.noticiaEditar = noticiaEditar;
+    }
+
+    public Long getIdE() {
+        return idE;
+    }
+
+    public void setIdE(Long idE) {
+        this.idE = idE;
+    }
 
     public String otro() {
         try {
@@ -68,7 +76,31 @@ public class noticiaController {
 
     }
 
-    public noticiaController() {
+    public Noticia noticiaEditar() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+        //eveTitulo=params.get("eventoId");
+        Long idE;
+        noticiaEditar = new Noticia();
+        idE = Long.parseLong(params.get("id"));
+        if (ebjNoticiaFacade.noticiaID(new Long(idE)).size() > 0) {
+            noticiaEditar = ebjNoticiaFacade.noticiaID(new Long(idE)).get(0);
+            this.visible = noticiaEditar.getNotvisible();
+            this.titulo = noticiaEditar.getNottitulo();
+            this.fechapublicacion = noticiaEditar.getNotfechapublicacion();
+            this.fechaedicion = noticiaEditar.getNotfechaedicion();
+            this.contenido = noticiaEditar.getNotcontenido();
+
+            //this.path = "..\\..\\img\\imgNoticias\\";
+            this.path = "D:\\imagenesNoticias\\";
+            this.imagen = this.path + "noticia.jpg";
+        }
+        //noticiaEditar = ebjNoticiaFacade.noticiaID(new Long(idE)).get(0);
+        return noticiaEditar;
+    }
+
+    public editarNoticiaController() {
+        
         this.visible = true;
         this.titulo = "Aqui va el titulo";
         this.fechapublicacion = new Date();
@@ -78,8 +110,7 @@ public class noticiaController {
         //this.path = "..\\..\\img\\imgNoticias\\";
         this.path = "D:\\imagenesNoticias\\";
         this.imagen = this.path + "noticia.jpg";
-        
-        
+
         //FacesMessage msg = new FacesMessage("Ubicacion del momento", System.getProperty("user.dir"));
         //FacesContext.getCurrentInstance().addMessage(null, msg);
         //this.path = new File("").getAbsolutePath()+"\\imagenesNoticias\\";
@@ -91,13 +122,15 @@ public class noticiaController {
             //imagen = "../../resources/imagenNoticia.jpg";
             noticia = new Noticia();
             Date fecha = new java.util.Date();
+            this.noticia.setNotid(idE);
             this.noticia.setNottitulo(this.titulo);
-            this.noticia.setNotfechapublicacion(convertStringToDate(fecha));
+            //this.noticia.setNotfechapublicacion(convertStringToDate(fecha));
             this.noticia.setNotfechaedicion(convertStringToDate(fecha));
             this.noticia.setNotvisible(this.visible);
             this.noticia.setNotcontenido(this.contenido);
             this.noticia.setNotimagen(this.imagen + ".jpg");
-            this.ebjNoticiaFacade.create(this.noticia);
+            //this.ebjNoticiaFacade.create(this.noticia);
+            this.ebjNoticiaFacade.edit(this.noticia);
         } catch (Exception e) {
             return "principal";
         }

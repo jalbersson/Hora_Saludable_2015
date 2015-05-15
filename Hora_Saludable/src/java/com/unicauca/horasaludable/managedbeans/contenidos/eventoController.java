@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -32,10 +33,20 @@ public class eventoController {
     
     Evento evento;
     Evento detallesEvento;
-    Evento editarEvento;
     private List<Evento> eventos = new ArrayList();
     private List<Evento> ultimos = new ArrayList();
+    String evefpublicacion;
+    String eveTitulo;
     Long idE=null;
+
+    public String getEveTitulo() {
+       
+        return eveTitulo;
+    }
+
+    public void setEveTitulo(String eveTitulo) {
+        this.eveTitulo = eveTitulo;
+    }
     java.util.Date evefevento;
     
     public eventoController() {
@@ -48,6 +59,14 @@ public class eventoController {
 
     public void setEvento(Evento evento) {
         this.evento = evento;
+    }
+
+    public String getEvefpublicacion() {
+        return evefpublicacion;
+    }
+
+    public void setEvefpublicacion(String evefpublicacion) {
+        this.evefpublicacion = evefpublicacion;
     }
 
     public java.util.Date getEvefevento() {
@@ -71,6 +90,7 @@ public class eventoController {
         try
         {
             this.ultimos = this.ejbEvento.ultimosEventos();
+            asignacionImagenesAleatorias();
         }
         catch(Exception e)
         {
@@ -98,14 +118,6 @@ public class eventoController {
 
     public void setIdE(Long idE) {
         this.idE = idE;
-    }
-    
-    public Evento getEditarEvento() {
-        return editarEvento;
-    }
-
-    public void setEditarEvento(Evento editarEvento) {
-        this.editarEvento = editarEvento;
     }
     
     public Date convertToJavaDate(java.util.Date date)
@@ -151,67 +163,64 @@ public class eventoController {
         return "detalleEvento";
     }
     
-      
+    public String aleatorioArchivos() {
+
+        int tam = 7;
+        Random rn = new Random();
+        return "imagen (" +(11+ rn.nextInt(tam)) + ").jpg";
+    }
+
+    public void asignacionImagenesAleatorias() {
+        int tam = this.ultimos.size();
+        for (int i = 0; i < tam; i++) {
+            this.ultimos.get(i).setEveimagen(aleatorioArchivos());
+        }
+    }
+    
+    
+    public String country;
+ 
+	public String outcome(){
+ 
+		FacesContext fc = FacesContext.getCurrentInstance();
+		this.country = getCountryParam(fc);
+ 
+		return "result";
+	}
+ 
+	//get value from "f:param"
+	public String getCountryParam(FacesContext fc){
+ 
+		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+		return params.get("country");
+ 
+	}
+    
     public Evento eventoDetallado()
     {
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+        //eveTitulo=params.get("eventoId");
 	idE = Long.parseLong(params.get("eventoId"));
+        
+        
+        
         detallesEvento = new Evento();
-        for(int i=0;i<eventos.size();i++)
+        //long numero= (long)idE;
+        for(int i=0;i<ultimos.size();i++)
         {
-            if(eventos.get(i).getEveid().equals(idE))
+            if(ultimos.get(i).getEveid().equals(idE))
             {
-                detallesEvento=eventos.get(i);
+                detallesEvento=ultimos.get(i);
             }
         }
+            //detallesEvento=ultimos.get(numero);
             return detallesEvento;
     }
-    
-    public String eliminarEvento(Evento e)
-    {
-        try
-        {
-            this.ejbEvento.remove(e);
-        }
-        catch(Exception ex)
-        {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Error: El evento no fue agregado!"));
-            return "editarEvento";
-        }
-
-        return "principal";  
-    }
-    
     public String mostrarEventoEditar(Evento e)
     {
-        editarEvento = new Evento();
-        editarEvento = e;
-        return "editarEventoEspecifico";
+        
+        return "editarEventoEspecifico?id="+e.getEveid();
     }
-    
-    public String editarEvento()
-    {
-        try
-        {
-            this.editarEvento.setEvetitulo("Editado");
-            this.editarEvento.setEvelugar("Editado");
-            java.util.Date  fechaPublicado = new java.util.Date();
-            this.editarEvento.setEvefechapublicacion(convertToJavaDate(fechaPublicado));
-            this.editarEvento.setEvefechaevento(convertToJavaDate(evefevento));
-            this.editarEvento.setEvecontenido("url_contenido");
-            this.editarEvento.setEveimagen("url_imagen");
-            this.ejbEvento.edit(this.editarEvento);
-            
-        }
-        catch(Exception e)
-        {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Error: El evento no fue agregado!"));
-            return "quienesSomos";
-        }
-
-        return "principal";
-    }
-    
     
 }

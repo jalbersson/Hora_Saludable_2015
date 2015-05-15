@@ -1,78 +1,80 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-               Detalle del evento
+                Detalle del evento
             </ui:define>
 
             <ui:define name="title">
 
             </ui:define>
-            
+
             <ui:define name="body">
                 <h:form>
                     <p:growl id="msgs" showDetail="true" />
-                    <p:fieldset legend="Detalles del evento" style="margin-bottom:20px">
+                    <p:fieldset legend="Detalles de la noticia" style="margin-bottom:20px">
                         <h:panelGrid columns="2" cellpadding="4">
-                            <p:graphicImage height="200px" width="200px" library="img/eventos" name="competencia.jpeg" />
+                            <p:dataScroller  var="noticiaLista" value="#{noticiacController.ultimos}" chunkSize="1" mode="inline" scrollHeight="300" style="border: none">
+
+                                <p:graphicImage height="200px" width="200px" library="img/imagenesNoticias" name="#{noticiaLista.notimagen}" />
+                            </p:dataScroller>
                             <p:outputPanel>
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:form id="form">
                                         <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
-                                                                      
-                                             
+
+
                                             <p:row>
                                                 <p:column>
-                                                    <h:outputLabel class="CampoLabel" value="Evento :"/>
+                                                    <h:outputLabel class="CampoLabel" value="Noticia :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoController.eventoDetallado().evetitulo}"/>
+                                                    <h:outputLabel value="#{noticiacController.noticiaDetallada().nottitulo}"/>
                                                 </p:column>
                                             </p:row>
-                                            
                                             <p:row>
                                                 <p:column>
                                                     <h:outputLabel class="CampoLabel" value="Lugar :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoController.idE}"/>
+                                                    <h:outputLabel value="#{noticiacController.idN}"/>
                                                 </p:column>
                                             </p:row>
-                                            
                                             <p:row>
                                                 <p:column>
-                                                    <h:outputLabel class="CampoLabel" value=" Fecha de evento :"/>
+                                                    <h:outputLabel class="CampoLabel" value=" Fecha de la Noticia :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoController.convertToJavaDate(eventoController.eventoDetallado().evefechaevento)}"/>
+                                                    <h:outputLabel value="#{noticiacController.convertToJavaDate(noticiacController.noticiaDetallada().notfechapublicacion)}"/>
                                                 </p:column>
                                             </p:row>
-                                            
+
                                             <p:row>
                                                 <p:column>
                                                     <h:outputLabel class="CampoLabel" value=" Descripcion :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoController.eventoDetallado().evecontenido}"/>
+                                                    <h:outputLabel value="#{noticiacController.noticiaDetallada().notcontenido}"/>
                                                 </p:column>
                                             </p:row>
-                                                                     
+
                                         </p:panelGrid>                            
                                     </h:form>    
 
-                                    
+
                                 </h:panelGrid>
                             </p:outputPanel>
                             <p:link outcome="principal" value="Volver"> </p:link>
+
                         </h:panelGrid>
                     </p:fieldset>
                 </h:form>
@@ -82,3 +84,4 @@
 
     </body>
 </html>
+

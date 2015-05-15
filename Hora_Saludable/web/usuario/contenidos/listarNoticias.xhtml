@@ -8,7 +8,7 @@
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
                 titulo
@@ -26,7 +26,7 @@
             <ui:define name="body">
 
                 <h:form> 
-                    <p:dataScroller value="#{listarNoticiasController.obtenerNoticias()}" var="noticia" chunkSize="3" mode="inline"  first="1" scrollHeight="350" >
+                    <p:dataScroller value="#{listarNoticiasController.obtenerNoticias()}" var="noticia" chunkSize="3" mode="inline"  first="1" scrollHeight="350">
                         <f:facet name="header">
 
                         </f:facet>
@@ -42,17 +42,11 @@
                                             <p:graphicImage library="img/imagenesNoticias" name="#{noticia.notimagen}" width="120px" height="75px"/>
                                             <h:outputText value="#{noticia.notcontenido}" />
                                             <h:outputText></h:outputText>
-                                            <h:form style="float: left">
-                                                <p:outputLabel  value="Publicar noticia:" />
-                                                <p:selectOneRadio id="mostrarNoticia" value="#{noticia.notvisible}" >
-                                                    <f:selectItem itemLabel="Si" itemValue="true" />   
-                                                    <f:selectItem itemLabel="No" itemValue="false" />
-                                                </p:selectOneRadio>
-                                                <h:link style="float: right" outcome="editarNoticia?id=#{noticia.notid}">Editar Noticia </h:link>
 
-                                            </h:form>
                                         </h:panelGrid>
                                     </p:fieldset>
+                                    <br></br>
+                                    <br></br>
                                 </p:panelGrid>
                             </p:outputPanel>
                         </h:panelGrid>
