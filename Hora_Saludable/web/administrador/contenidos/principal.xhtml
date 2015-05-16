@@ -136,6 +136,16 @@
                     <f:param name="productId" value="20" />
                 </p:button>
 
+                <h:form>
+                    <h:panelGrid columns="2" class="position: absolute; height:300px;">
+                        <h:outputLabel value="Asunto: " id="asunto" />
+                        <h:inputText id="asunto_" title="Asunto"/>
+                        <h:outputFormat value="#{envioCorreo.subject}" title="Mensaje" />
+                        <h:inputTextarea value="#{envioCorreo.message_}" id="mensaje_" title="Mensaje"/>
+                        <h:commandButton value="Enviar a todos" action="#{envioCorreo.sendMail()}" />
+                    </h:panelGrid>
+
+                </h:form>
 
             </ui:define>
 
