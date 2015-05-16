@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Acerca de 
+            </ui:define>
+            Acerca de 
+            <ui:define name="title">
+
+
+            </ui:define>
+
+            <ui:define name="body">
+                <h:panelGrid columns="3">
+                    <h:form>    
+                        <h:outputText style="font-size: 20px" value="La Universidad del Cauca es una institución de educación superior pública de carácter nacional con 187 años de historia.
+                                      Ubicada en la ciudad de Popayán, ofrece sus servicios educativos a estudiantes de todo el país, quienes encuentran en la Universidad y la ciudad un espacio idóneo y tranquilo para realizar sus estudios de pregrado y posgrado.
+                                      Gracias a sus programas de descentralización, Unicauca ha ofrecido la posibilidad de educación superior a los caucanos de la región. Conozca a continuación algunos de los aspectos institucionales más importantes que hacen de ésta una de las mejores universidades colombianas.">
+                        </h:outputText>
+                    </h:form> 
+                    <h:form>
+
+                        <p:graphicImage width="200px" height="200px" library="img" name="bandera.jpg"   />
+
+                    </h:form>
+                    <h:form style="width:200px;  position: relative; left: 20px; border: none">
+                        <p:panelMenu style="width:200px; float: right">
+                            <p:submenu label="Gestión de Eventos">
+                                <p:menuitem value="Agregar evento" ajax="false" outcome="agregarEvento"/> 
+                                <p:menuitem value="Editar evento" ajax="false" outcome="editarEvento"/> 
+                                <p:menuitem value="Eliminar evento" ajax="false" outcome="eliminarEvento"/> 
+                            </p:submenu>
+
+
+                            <p:submenu label="Gestion de noticias">
+                                <p:menuitem value="Nueva Noticia"  ajax="false" outcome="nuevaNoticia" icon="ui-icon-close"/>
+                                <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false" icon="ui-icon-close"/>
+                            </p:submenu>
+
+                            <p:submenu label="Reglamento"  >
+                                <p:menuitem value="Ver Reglamento" outcome="reglamentoPrincipal" ajax="false"/>
+                                <p:menuitem value="Editar Reglamento" outcome="reglamento" ajax="false"/>
+                            </p:submenu>
+
+                            <p:submenu label="Quienes somos">
+                                <p:menuitem value="Ver Quienes Somos" outcome="quienesSomosPrincipal" ajax="false" />
+                                <p:menuitem value="Editar Quienes Somos" outcome="quienesSomos" ajax="false" />
+                            </p:submenu>
+
+                        </p:panelMenu>
+                    </h:form>
+
+
+                </h:panelGrid>
+                <h:panelGrid>
+                    <h:form style="width:200px;  position:relative ; left: 20px; border: none; left: 200px" >
+                        <p:graphicImage width="400px" height="200px" library="img" name="bandera.jpg" style=""  /> 
+                    </h:form>
+                </h:panelGrid>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
