@@ -49,7 +49,7 @@ public class NoticiaFacade extends AbstractFacade<Noticia> {
         Noticia result = new Noticia();
     //Query query = getEntityManager().createNamedQuery("Noticia.findByNotid");
         //
-        Query query = getEntityManager().createNamedQuery("Noticia.findByNotid").setMaxResults(6);
+        Query query = getEntityManager().createNamedQuery("Noticia.findByNotid").setMaxResults(3);
         query.setParameter("notid", id);
         List<Noticia> resultList = query.getResultList();
         return resultList;

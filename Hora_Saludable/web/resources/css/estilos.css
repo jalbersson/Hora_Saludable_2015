@@ -291,6 +291,22 @@ body {
     
 }
 
+.ui-carousel {
+    
+    overflow: hidden;
+    padding: 7px 10px 8px;
+    border: 0;  
+}
+
+.divPrincipal
+{
+    padding: 3px 10px;
+    border-radius: 6px;
+    border: 1px solid #0B2972;
+    background: #0B2972;
+}
+
+
 .submenu 
 {
     
