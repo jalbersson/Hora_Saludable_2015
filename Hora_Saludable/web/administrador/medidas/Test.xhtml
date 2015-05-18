@@ -80,30 +80,23 @@
                     </p:row>
                 </p:panelGrid>
                 <h:form>
-                    
-                    
-              
-        <h:form id="frmTablaRutina">
-             
-            <p:commandButton value="Descargar Formato A" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();"/> 
-        </h:form>
+                    <p:growl for="msg" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
 
-        <h:form id="frmVerRutina">  
-            <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
-                <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">                    
-                    <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
-                        Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
-                    </object>   
-                </c:if>
-            </p:dialog>        
-        </h:form>
-  
-                    
-                  
-                    
-                    
-                    
-                    
+                    <h:form id="frmTablaRutina">
+
+                        <p:commandButton value="Descargar Formato A" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();"/> 
+                    </h:form>
+
+                    <h:form id="frmVerRutina">  
+                        <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
+                            <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">                    
+                                <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
+                                    Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
+                                </object>   
+                            </c:if>
+                        </p:dialog>        
+                    </h:form>
+
                     <p:accordionPanel id="acord" styleClass="acciones" style="margin: 0 auto">
                         <p:tab title="Mediciones" >
                             <p:commandLink styleClass="imagenmedidas">
@@ -167,8 +160,8 @@
                                     <p:inputText id="DiametroFemur" value="#{medidasController.medicionactual.meddiametrofemur}"  styleClass="txtboxmed"/>
                                     <p:outputLabel for="PerimetroBrazo" value="Perimetro Brazo(cm): *" styleClass="subtitpaneltest"/>
                                     <p:inputText id="PerimetroBrazo" value="#{medidasController.medicionactual.medperimetrobrazo}"  styleClass="txtboxmed"/>
-                                    <p:outputLabel for="DiametroAntebrazo" value="Diametro Antebrazo(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="DiametroAntebrazo" value="#{medidasController.medicionactual.meddiametroantebrazo}"  styleClass="txtboxmed"/>
+                                    <p:outputLabel for="PerimetroAntebrazo" value="Perimetro Antebrazo(cm): *" styleClass="subtitpaneltest"/>
+                                    <p:inputText id="PerimetroAntebrazo" value="#{medidasController.medicionactual.meddiametroantebrazo}"  styleClass="txtboxmed"/>
                                     <p:outputLabel for="PerimetroPantorrilla" value="Perimetro Pantorrilla(cm): *" styleClass="subtitpaneltest"/>
                                     <p:inputText id="PerimetroPantorrilla" value="#{medidasController.medicionactual.medperimetropantorrilla}"  styleClass="txtboxmed"/>
                                     <p:outputLabel for="PerimetroCajaToraxica" value="Perimetro Caja Toraxica(cm): *" styleClass="subtitpaneltest"/>
@@ -215,9 +208,9 @@
                                     <p:outputLabel  value="% Grasa" styleClass="subtitpaneltest"/>
                                     <p:outputLabel  value="#{medidasController.medicionactual.estadoPorcentajeGrasaIdeal}"  />
                                     <p:outputLabel  value="Complexion" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel  value="----"  />
+                                    <p:outputLabel  value="#{medidasController.medicionactual.estadoComplexion}"  />
                                     <p:outputLabel  value="Indice de Masa Corporal" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel  value="----"  />
+                                    <p:outputLabel  value="#{medidasController.medicionactual.estadoIMC}"  />
                                 </p:panelGrid>
                             </p:panel>
                         </p:tab>
@@ -287,7 +280,7 @@
                                 <h:graphicImage name="img/Comentarios.PNG" />
                             </p:commandLink>
                             <div style="text-align: center">
-                                <p:inputTextarea rows="5" cols="50" counter="display" maxlength="200" counterTemplate="quedan {0} caracteres." autoResize="false" value="#{medidasController.medicionactual.medobservaciones}"/><br/>
+                                <p:inputTextarea rows="5" cols="100" counter="display" maxlength="200" counterTemplate="Quedan {0} caracteres." autoResize="false" value="#{medidasController.medicionactual.medobservaciones}"/><br/>
                                 <h:outputText id="display" />
                             </div>
                         </p:tab>

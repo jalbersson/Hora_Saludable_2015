@@ -146,9 +146,11 @@ public class noticiacController {
 
     public void asignacionImagenesAleatorias() {
         int tam = this.ultimos.size();
+        /*
         for (int i = 0; i < tam; i++) {
-            this.ultimos.get(i).setNotimagen(aleatorioArchivos());
+            //this.ultimos.get(i).setNotimagen(aleatorioArchivos());
         }
+        */
     }
 
     public String country;

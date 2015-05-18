@@ -28,12 +28,12 @@
                     </h:form> 
                     <h:form>
 
-                        <p:graphicImage width="200px" height="200px" library="img" name="bandera.jpg"   />
+                        <p:graphicImage width="200px" height="150px" library="img" name="bandera.jpg"   />
 
                     </h:form>
                     <h:form style="width:200px;  position: relative; left: 20px; border: none">
-                        <p:panelMenu style="width:200px; float: right">
-                            <p:submenu label="Gestión de Eventos">
+                        <p:panelMenu style="width:200px; float: right" >
+                            <p:submenu label="Gestión de Eventos" transient="">
                                 <p:menuitem value="Agregar evento" ajax="false" outcome="agregarEvento"/> 
                                 <p:menuitem value="Editar evento" ajax="false" outcome="editarEvento"/> 
                                 <p:menuitem value="Eliminar evento" ajax="false" outcome="eliminarEvento"/> 
@@ -62,7 +62,32 @@
                 </h:panelGrid>
                 <h:panelGrid>
                     <h:form style="width:200px;  position:relative ; left: 20px; border: none; left: 200px" >
-                        <p:graphicImage width="400px" height="200px" library="img" name="bandera.jpg" style=""  /> 
+                        <p:graphicImage width="350px" height="300px" library="img" name="personas.jpg" style=""  /> 
+                    </h:form>
+
+
+                </h:panelGrid>
+                <h:panelGrid columns="2" style="height: 100px; width: 400px ">
+                    <h:form>
+                        <h:panelGrid columns="1" style="height: 200px; width: 400px ">
+                            <p:panel id="usuarios" header="Usuarios"  >
+                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Usuarios" outcome="principal"/>
+                            </p:panel>
+                            <p:panel id="contenidos" header="Contenidos" >
+                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Contenidos" outcome="principal"/>
+                            </p:panel>
+                        </h:panelGrid>
+                    </h:form>
+                    <h:form style="width:200px;  position: relative; left: 50px; border: none">
+                        <h:panelGrid columns="1" style="height: 200px; width: 400px ">
+                            <p:panel id="asistencia" header="Asistencia">
+                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Asistencia" outcome="principal"/>
+                            </p:panel>
+                            <p:panel id="medidas" header="Medidas">
+                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Medidas" outcome="principal"/>
+                            </p:panel>
+
+                        </h:panelGrid>
                     </h:form>
                 </h:panelGrid>
             </ui:define>

@@ -1,12 +1,72 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Acerca de</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
 
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Acerca de 
+            </ui:define>
+            Acerca de 
+            <ui:define name="title">
+
+
+            </ui:define>
+
+            <ui:define name="body">
+                <h:panelGrid columns="3">
+                    <h:form style="width:  600px">    
+                        
+                        <h:outputText style="font-size: 20px" value="La Universidad del Cauca es una institución de educación superior pública de carácter nacional con 187 años de historia.
+                                      Ubicada en la ciudad de Popayán, ofrece sus servicios educativos a estudiantes de todo el país, quienes encuentran en la Universidad y la ciudad un espacio idóneo y tranquilo para realizar sus estudios de pregrado y posgrado.
+                                      Gracias a sus programas de descentralización, Unicauca ha ofrecido la posibilidad de educación superior a los caucanos de la región. Conozca a continuación algunos de los aspectos institucionales más importantes que hacen de ésta una de las mejores universidades colombianas.">
+                        </h:outputText>
+                    </h:form> 
+                    <h:form>
+
+                        <p:graphicImage width="300px" height="150px" library="img" name="bandera.jpg"   />
+
+                    </h:form>
+
+
+
+                </h:panelGrid>
+                <h:panelGrid>
+                    <h:form style="width:200px;  position:relative ; left: 20px; border: none; left: 200px" >
+                        <p:graphicImage width="350px" height="300px" library="img" name="personas.jpg" style=""  /> 
+                    </h:form>
+
+
+                </h:panelGrid>
+                <h:panelGrid columns="2" style="height: 100px; width: 400px ">
+                    <h:form>
+                        <h:panelGrid columns="1" style="height: 200px; width: 400px ">
+                            <p:panel id="usuarios" header="Usuarios"  >
+                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Usuarios" outcome="principal"/>
+                            </p:panel>
+                            <p:panel id="contenidos" header="Contenidos" >
+                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Contenidos" outcome="principal"/>
+                            </p:panel>
+                        </h:panelGrid>
+                    </h:form>
+                    <h:form style="width:200px;  position: relative; left: 50px; border: none">
+                        <h:panelGrid columns="1" style="height: 200px; width: 400px ">
+                            <p:panel id="asistencia" header="Asistencia">
+                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Asistencia" outcome="principal"/>
+                            </p:panel>
+                            <p:panel id="medidas" header="Medidas">
+                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Medidas" outcome="principal"/>
+                            </p:panel>
+
+                        </h:panelGrid>
+                    </h:form>
+                </h:panelGrid>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

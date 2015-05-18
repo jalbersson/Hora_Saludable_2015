@@ -85,14 +85,16 @@ public class listarNoticiasController {
 
         int tam = 7;
         Random rn = new Random();
-        return "imagen (" +(1+ rn.nextInt(tam) )+ ").jpg";
+        return "imagen (" + (1 + rn.nextInt(tam)) + ").jpg";
     }
 
     public void asignacionImagenesAleatorias() {
         int tam = this.listaNoticias.size();
-        for (int i = 0; i < tam; i++) {
-            this.listaNoticias.get(i).setNotimagen(aleatorioArchivos());
-        }
+        /*
+         for (int i = 0; i < tam; i++) {
+         this.listaNoticias.get(i).setNotimagen(aleatorioArchivos());
+         }
+         */
     }
 
     public List<Noticia> getNoticias() {

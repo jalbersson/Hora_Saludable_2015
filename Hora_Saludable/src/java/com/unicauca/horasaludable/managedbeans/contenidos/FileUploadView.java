@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicauca.horasaludable.contenidos.java;
+package com.unicauca.horasaludable.managedbeans.contenidos;
  
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;

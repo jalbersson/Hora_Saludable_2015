@@ -42,15 +42,18 @@
                                             <p:graphicImage library="img/imagenesNoticias" name="#{noticia.notimagen}" width="120px" height="75px"/>
                                             <h:outputText value="#{noticia.notcontenido}" />
                                             <h:outputText></h:outputText>
-                                            <h:form style="float: left">
-                                                <p:outputLabel  value="Publicar noticia:" />
+                                            <h:form style="float: left; ">
+
+                                                <!--p:outputLabel  value="Publicar noticia:" />
                                                 <p:selectOneRadio id="mostrarNoticia" value="#{noticia.notvisible}" >
                                                     <f:selectItem itemLabel="Si" itemValue="true" />   
                                                     <f:selectItem itemLabel="No" itemValue="false" />
-                                                </p:selectOneRadio>
-                                                <h:link style="float: right" outcome="editarNoticia?id=#{noticia.notid}">Editar Noticia </h:link>
+                                                </p:selectOneRadio-->
+                                                <h:outputText></h:outputText>
+                                                <h:link style="float: right; position: relative; " outcome="editarNoticia?id=#{noticia.notid}">Editar Noticia </h:link>
 
                                             </h:form>
+
                                         </h:panelGrid>
                                     </p:fieldset>
                                 </p:panelGrid>
