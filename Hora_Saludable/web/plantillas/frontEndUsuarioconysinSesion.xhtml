@@ -63,12 +63,16 @@
                                                 onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                 </p:menu> 
                             </h:form>
-                        </ui:insert>                       
+                        </ui:insert>  
+                        
                     </div>
-                    <div class="clear"></div>
+                    <div class="clear">
+                        
+                    </div>
                 </div>
                 <div class="bottom">
-
+                    <br></br>
+                    <p:link value="Quienes Somos" outcome="/usuario/contenidos/quienesSomos" style="float: right; margin-right: 10px; color: #FFFFFF; font-weight: bold; font-size:15px" ></p:link>
                 </div>                
                 <nav id="mainNav">                       
                     <ui:insert name="menuprincipal">
@@ -78,6 +82,7 @@
                             <!--<li><span class="punta"></span><p:link  value="Item 2"/></li>-->
                             <!--<li><span class="punta"></span><p:link outcome="/usuario/asistencia/asistencia-personal" value="Asistencia personal"/></li>-->
                             <li><span class="punta"></span><p:link  outcome="/usuario/contenidos/acercade" value="Acerca de"/></li>
+                            
                             <!--<li><span class="punta"></span><p:link  outcome="/usuario/medidas/consultaTest" value="Consultar Test"/></li>-->
                         </ul>
                     </ui:insert>           
