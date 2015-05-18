@@ -52,7 +52,6 @@ public class MedidasController {
     @EJB
     private com.unicauca.horasaludable.jpacontrollers.MedidaFacade ejbMedida;
     private Medida medicionactual;
-    private ServicioCalculoMedidas servmed;
     private List<Medida> listaTest;
     private int idusu;
     private Date fechaNuevoTest;

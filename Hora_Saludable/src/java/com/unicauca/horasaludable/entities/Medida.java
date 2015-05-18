@@ -527,11 +527,14 @@ public class Medida implements Serializable {
     }
 
     public double masamuscular() {
-        return Redondear(0);
+        
+        double ZMUS = medperimetrobrazo + meddiametroantebrazo + medperimetromuslo + medperimetropantorrilla + medperimetrocajatoraxica;
+        double MMUS = (ZMUS *(170.18/medtalla)-207.21)/13.74;
+        return Redondear((MMUS*5.4+24.5)/Math.pow(170.18/medtalla,3));
     }
 
     public double pesoideal() {
-        return (0.75 * (medtalla - 150) + 50);   ///cambiar 155 por est
+        return (0.75 * (medtalla - 150) + 50);   
     }
 
     public double indicemasacorporal() {
@@ -539,15 +542,15 @@ public class Medida implements Serializable {
     }
 
     public double complexion() {
-        return Redondear(medtalla / medperimetromuneca);  ///cambiar 155 por est
+        return Redondear(medtalla / medperimetromuneca);  
     }
 
     public double tasametabolicabasal() {
         double r;
         if (usuid.getUsugenero().equals('M')) {
-            r = 66 + (13.8 * medpeso) + (5 * medtalla) - (6.8 * 55);   ///cambiar 55 por edad,155 por est
+            r = 66 + (13.8 * medpeso) + (5 * medtalla) - (6.8 * getEdadusuid());  
         } else {
-            r = 655 + (9.6 * medpeso) + (1.7 * medtalla) - (4.7 * 55);   //cambiar 55 por edad,155 por est
+            r = 655 + (9.6 * medpeso) + (1.8 * medtalla) - (4.7 * getEdadusuid());   
         }
         return Redondear(r);
     }
@@ -561,11 +564,15 @@ public class Medida implements Serializable {
     }
 
     public double masaesqcuerpo() {
-        return 0;
+        
+        double SOSEACUERPO = meddiametrobiacromial + meddiametrobiltiocristal+(2*meddiametrohumero)+(2*meddiametrofemur);
+        double ZOSEACUERPO = ((SOSEACUERPO*(170.18/medtalla))-98.88)/5.33;
+        return Redondear(((ZOSEACUERPO *1.34)+6.7)/Math.pow(170.18/medtalla,3));
     }
 
     public double masatotalosea() {
-        return 0;
+        double MOSEACABEZA = (medperimetrocabeza - 1.2) / 0.18;
+        return Redondear(masaesqcuerpo()+MOSEACABEZA);
     }
 
     public double porcentajegrasaideal() {
@@ -654,35 +661,35 @@ public class Medida implements Serializable {
         if (usuid.getUsugenero().equals('M')) {
 
             if (x < 12) {
-                return "Excelente";
+                return "EXCELENTE";
             }
             if (x < 16) {
-                return "Bueno";
+                return "BUENO";
             }
             if (x < 20) {
-                return "Aceptable";
+                return "ACEPTABLE";
             }
             if (x < 23) {
-                return "Malo";
+                return "MALO";
             }
             else {
-                return "Pesimo";
+                return "PESIMO";
             }
         } else {
             if (x < 18) {
-                return "Excelente";
+                return "EXCELENTE";
             }
             if (x < 20) {
-                return "Bueno";
+                return "BUENO";
             }
             if (x < 25) {
-                return "Aceptable";
+                return "ACEPTABLE";
             }
             if (x < 29) {
-                return "Malo";
+                return "MALO";
             }
             else {
-                return "Pesimo";
+                return "PESIMO";
             }
         }
     }
@@ -727,6 +734,33 @@ public class Medida implements Serializable {
 
     public int getEdadusuid() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
-        return Integer.parseInt(dateFormat.format(new Date())) - Integer.parseInt(dateFormat.format(usuid.getUsufechanacimiento()));
+        int x = Integer.parseInt(dateFormat.format(new Date())) - Integer.parseInt(dateFormat.format(usuid.getUsufechanacimiento()));
+        return x;
     }
+    
+    public String getEstadoIMC()
+          {
+          double imc = indicemasacorporal();
+         if(imc >= 30)return "OBESIDAD"; 
+         if(imc >= 25) return "SOBREPESO";
+         if(imc >= 18.5)return "NORMAL";
+         if(imc >= 17)return "BAJO PESO";
+         else return "DESNUTRICION";                  
+    }
+    
+    public String getEstadoComplexion()
+          {
+          double c = complexion();
+          if (usuid.getUsugenero().equals('M')) {
+              if(c > 10.4)return "PEQUEÑA"; 
+              if(c >= 9.6) return "MEDIANA";
+              else return "GRANDE";           
+          }
+          else
+               {
+              if(c > 11)return "PEQUEÑA"; 
+              if(c >= 10.1) return "MEDIANA";
+              else return "GRANDE";           
+          }                 
+    } 
 }
