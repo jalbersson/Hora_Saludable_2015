@@ -76,13 +76,23 @@ public class noticiaController {
         this.contenido = "Aqui va el contenido";
 
         //this.path = "..\\..\\img\\imgNoticias\\";
-        this.path = "D:\\imagenesNoticias\\";
+        //this.path = "D:\\imagenesNoticias\\";
         this.imagen = this.path + "noticia.jpg";
-        
-        
+
+        File f = new File("."); // Creamos un objeto file
+        //System.out.println(f.getAbsolutePath()); // Llamamos al método que devuelve la ruta absoluta
+
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
+        this.path = realPath + "\\resources\\img\\imagenesNoticias\\";
+        FacesMessage msg = new FacesMessage("Ubicacion del momento", this.path);
+         //msg = new FacesMessage("Ubicacion del momento", );
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
         //FacesMessage msg = new FacesMessage("Ubicacion del momento", System.getProperty("user.dir"));
         //FacesContext.getCurrentInstance().addMessage(null, msg);
         //this.path = new File("").getAbsolutePath()+"\\imagenesNoticias\\";
+
     }
 
     public String guardarNoticia() {
