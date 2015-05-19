@@ -1,5 +1,5 @@
-1,Horario 1,principal
-2,Horario 2,principal
-3,Horario 3,principal
-4,Horario 4,principal
-5,Horario 5,principal
+1,Horario 1,horario1.jpg
+2,Horario 2,horario2.jpg
+3,Horario 3,horario3.jpg
+4,Horario 4,horario1.jpg
+5,Horario 5,horario2.jpg

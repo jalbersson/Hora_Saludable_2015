@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -26,15 +26,19 @@ import javax.servlet.ServletContext;
  */
 @ManagedBean
 @ViewScoped
-public class horarioController implements Serializable {
+public class verEditarHorario implements Serializable {
 
-    private ArrayList<Horario> h;
-    
+    private Horario verH;
+    private int id;
 
-    //metodos   
     @PostConstruct
     public void init() {
-        h = new ArrayList<>();
+        verH = new Horario();
+        
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+
+        id = Integer.parseInt((params.get("id")));
         
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
@@ -57,7 +61,8 @@ public class horarioController implements Serializable {
                     hor.setNombreH(array[1]);
                     hor.setRutaH(array[2]); 
                     
-                    h.add(hor);
+                    if(hor.getIdH() == id)
+                        this.verH = hor;
                 }
                 fr.close();
             } catch (IOException ex) {
@@ -70,17 +75,12 @@ public class horarioController implements Serializable {
         
     } 
     
-    public ArrayList<Horario> getH() {
-        return h;
+    public Horario getVerH() {
+        return verH;
     }
 
-    public void setH(ArrayList<Horario> h) {
-        this.h = h;
-    }
-    
-    public String mostrarHorario(Horario h)
-    {
-        return "verHorario?id="+h.getIdH();
+    public void setVerH(Horario verH) {
+        this.verH = verH;
     }
 
 }
