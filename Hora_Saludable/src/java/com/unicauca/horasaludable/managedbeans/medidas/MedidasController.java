@@ -26,6 +26,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Phrase;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -195,7 +196,7 @@ public class MedidasController {
             //   Image imgFondo = Image.getInstance(url2);
            //     imgFondo.setAbsolutePosition(100f, 150f);
         Font negrilla = new Font(Font.FontFamily.HELVETICA, 12f, Font.BOLD);
-          
+          Font boldSize = new Font(Font.FontFamily.HELVETICA, 10f, Font.BOLD);
                        
              document.add(new Paragraph("____________________________________________________________________________"));
              
@@ -229,7 +230,142 @@ public class MedidasController {
            
             
             document.add(new Paragraph("____________________________________________________________________________"));
+               document.add(new Paragraph(""));
+            
+  PdfPTable table = new PdfPTable(7);
+table.setWidthPercentage(100);
+        table.setSpacingAfter(5);
+        
+            
+        PdfPCell cell = new PdfPCell(new Phrase("ANTROPOMETRIA:",bold));
+        cell.setBorder(Rectangle.NO_BORDER);      
+       cell.setColspan(3);                    
+
+        PdfPCell cell02 = new PdfPCell(new Paragraph(""));
+         cell02.setBorder(Rectangle.NO_BORDER); 
+
+       PdfPCell cell31 = new PdfPCell(new Paragraph(""));
+            cell31.setBorder(Rectangle.NO_BORDER);
+            
+            PdfPCell cell41 = new PdfPCell(new Paragraph(""));
+            cell41.setBorder(Rectangle.NO_BORDER);
+            
+            PdfPCell cell5 = new PdfPCell(new Paragraph("PLIEGUES CUTANEOS:",bold));
+            cell5.setBorder(Rectangle.NO_BORDER);
+           cell5.setColspan(3);
+           
+            PdfPCell cel6 = new PdfPCell(new Phrase("PERIMETRO BRAZO:",boldSize));
+        cel6.setBorder(Rectangle.NO_BORDER);      
+       cel6.setColspan(2);
+       
+       PdfPCell cel9 = new PdfPCell(new Phrase("TRICEPS:",boldSize));
+        cel9.setBorder(Rectangle.NO_BORDER);
+        cel9.setColspan(2);
          
+           PdfPCell cel11 = new PdfPCell(new Phrase("PERIMETRO ANTEBRAZO:",boldSize));
+        cel11.setBorder(Rectangle.NO_BORDER);      
+       cel11.setColspan(2);
+       
+        table.addCell(cell);
+        table.addCell(cell02);
+        table.addCell(cell31);
+        table.addCell(cell5);
+        table.addCell(cel6);
+        table.addCell("rtrt");  
+        table.addCell("");  
+        table.addCell(cel9);
+        table.addCell("rrt");
+        table.addCell(cel11);
+        table.addCell("rt");
+        table.addCell("");  
+        
+         PdfPCell cel14 = new PdfPCell(new Phrase("ABDOMINAL:",boldSize));
+        cel14.setBorder(Rectangle.NO_BORDER); 
+         cel14.setColspan(2);
+         
+        table.addCell(cel14);
+        table.addCell("rrt2P");
+        
+        
+        
+         PdfPCell cel16 = new PdfPCell(new Phrase("PERIMETRO DE CAJA TORAXICA:",boldSize));
+        cel16.setBorder(Rectangle.NO_BORDER); 
+         cel16.setColspan(2);
+         
+        table.addCell(cel16);
+        table.addCell("rt2");
+        table.addCell("");  
+        
+        PdfPCell cel19 = new PdfPCell(new Phrase("MUSLO:",boldSize));
+        cel19.setBorder(Rectangle.NO_BORDER); 
+         cel19.setColspan(2);
+        
+        table.addCell(cel19);
+        table.addCell("rrt2");
+        
+        PdfPCell cel21 = new PdfPCell(new Phrase("PERIMETRO DE GATRONEMIO:",boldSize));
+        cel21.setBorder(Rectangle.NO_BORDER); 
+         cel21.setColspan(2);
+         
+        table.addCell(cel21);
+        table.addCell("rt2"); 
+        table.addCell("");  
+        PdfPCell cel24 = new PdfPCell(new Phrase("SUBESCAPULAR:",boldSize));
+        cel24.setBorder(Rectangle.NO_BORDER); 
+        cel24.setColspan(2);
+        
+        table.addCell(cel24);
+        table.addCell("rrt2");
+        
+        
+        PdfPCell cel26 = new PdfPCell(new Phrase("PERIMETRO DE MUSLO:",boldSize));
+        cel26.setBorder(Rectangle.NO_BORDER); 
+        cel26.setColspan(2);
+         
+        table.addCell(cel26);
+        table.addCell("rt2");
+        table.addCell("");  
+        
+        PdfPCell cel29 = new PdfPCell(new Phrase("SUPRAILIACO:",boldSize));
+        cel29.setBorder(Rectangle.NO_BORDER); 
+        cel29.setColspan(2);
+        
+        
+        table.addCell(cel29);
+        table.addCell("rrt2");
+        
+        PdfPCell cel31 = new PdfPCell(new Phrase("PERIMETRO DE MUÑECA:",boldSize));
+        cel31.setBorder(Rectangle.NO_BORDER); 
+        cel31.setColspan(2);
+         
+        table.addCell(cel31);
+        table.addCell("rt2");
+        table.addCell("");  
+        
+        PdfPCell cel34 = new PdfPCell(new Phrase("PANTORRILA:",boldSize));
+        cel34.setBorder(Rectangle.NO_BORDER); 
+         cel34.setColspan(2);
+         
+         
+        table.addCell(cel34);
+        table.addCell("rrt2");
+        
+        PdfPCell cel36 = new PdfPCell(new Phrase(""));
+        cel36.setBorder(Rectangle.NO_BORDER); 
+        cel36.setColspan(2);
+         
+        table.addCell(cel36);
+ 
+        table.addCell("");  
+        
+        PdfPCell cel39 = new PdfPCell(new Phrase("(+) PLIEGUES:",boldSize));
+        cel39.setBorder(Rectangle.NO_BORDER); 
+        table.addCell(cel39);
+        table.addCell("rrt2");        
+        
+        
+           
+           document.add(table);   
             
             
             
