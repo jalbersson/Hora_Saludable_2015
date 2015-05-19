@@ -25,11 +25,21 @@
                         </p:breadCrumb>
                     </h:form>
                 </p:panel>
-                <p:outputLabel styleClass="titulomediciones" value="Gestion de Test" />
-                <p:separator style="width: 100%;"/>
+              <p:separator style="width: 100%;"/>
+                <p:outputLabel styleClass="titulomediciones" value="Gestion de Test: #{medidasController.medicionactual.obtenerFecha()}" />
+               
             </ui:define>
             <ui:define name="body">
                 <p:panelGrid styleClass="fichapersonal">
+         
+                    <p:row>
+                        <p:column rowspan="9">
+                            <p:column  rendered="#{mostrarUsuarioTestController.campoFoto}">                                
+                                <p:graphicImage  width="100" height="100" library="#{mostrarUsuarioTestController.rutaFoto}" name="#{mostrarUsuarioTestController.usuario.usufoto}"/>
+                            </p:column>    
+                        </p:column>
+                    </p:row>
+                      
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Nombre:" />
@@ -79,25 +89,23 @@
                         </p:column>
                     </p:row>
                 </p:panelGrid>
-                <h:form>
-                    
-                    
-              
-        <h:form id="frmTablaRutina">
-             
-            <p:commandButton value="Descargar Formato A" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();"/> 
-        </h:form>
+               
 
-        <h:form id="frmVerRutina">  
-            <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
-                <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">                    
-                    <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
-                        Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
-                    </object>   
-                </c:if>
-            </p:dialog>        
-        </h:form>
-  
+                    <h:form id="frmTablaRutina">
+                        <p:commandButton value="Descargar Formato A" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();" styleClass="imagenmedidas2"/> 
+                    </h:form>
+
+                    <h:form id="frmVerRutina">  
+                        <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
+                            <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">                    
+                                <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
+                                    Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
+                                </object>   
+                            </c:if>
+                        </p:dialog>        
+                    </h:form>
+                <h:form id="formTest">
+                    <p:growl for="msg" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
                     <p:accordionPanel id="acord" styleClass="acciones" style="margin: 0 auto">
                         <p:tab title="Mediciones" >
                             <p:commandLink styleClass="imagenmedidas">
@@ -161,8 +169,8 @@
                                     <p:inputText id="DiametroFemur" value="#{medidasController.medicionactual.meddiametrofemur}"  styleClass="txtboxmed"/>
                                     <p:outputLabel for="PerimetroBrazo" value="Perimetro Brazo(cm): *" styleClass="subtitpaneltest"/>
                                     <p:inputText id="PerimetroBrazo" value="#{medidasController.medicionactual.medperimetrobrazo}"  styleClass="txtboxmed"/>
-                                    <p:outputLabel for="DiametroAntebrazo" value="Diametro Antebrazo(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="DiametroAntebrazo" value="#{medidasController.medicionactual.meddiametroantebrazo}"  styleClass="txtboxmed"/>
+                                    <p:outputLabel for="PerimetroAntebrazo" value="Perimetro Antebrazo(cm): *" styleClass="subtitpaneltest"/>
+                                    <p:inputText id="PerimetroAntebrazo" value="#{medidasController.medicionactual.meddiametroantebrazo}"  styleClass="txtboxmed"/>
                                     <p:outputLabel for="PerimetroPantorrilla" value="Perimetro Pantorrilla(cm): *" styleClass="subtitpaneltest"/>
                                     <p:inputText id="PerimetroPantorrilla" value="#{medidasController.medicionactual.medperimetropantorrilla}"  styleClass="txtboxmed"/>
                                     <p:outputLabel for="PerimetroCajaToraxica" value="Perimetro Caja Toraxica(cm): *" styleClass="subtitpaneltest"/>
@@ -209,58 +217,122 @@
                                     <p:outputLabel  value="% Grasa" styleClass="subtitpaneltest"/>
                                     <p:outputLabel  value="#{medidasController.medicionactual.estadoPorcentajeGrasaIdeal}"  />
                                     <p:outputLabel  value="Complexion" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel  value="----"  />
+                                    <p:outputLabel  value="#{medidasController.medicionactual.estadoComplexion}"  />
                                     <p:outputLabel  value="Indice de Masa Corporal" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel  value="----"  />
+                                    <p:outputLabel  value="#{medidasController.medicionactual.estadoIMC}"  />
                                 </p:panelGrid>
                             </p:panel>
                         </p:tab>
                         <p:tab title="Test Deportivos">
-                            <div style="text-align: center">
+                            <p:panel style="text-align: center">
                                 <h:graphicImage name="img/testDeportivos.PNG"/><br/>
-                                <h2 align="center">Test de Sargent</h2>
-                                <p:panelGrid columns="2" style="margin: 0 auto">
-                                    <p:outputLabel id="slider1" value="Embergadura:" />
-                                    <p:inputText id="inputEmbergadura" value="#{medidasController.medicionactual.medembergadura}">
-                                        <p:ajax event="keyup" update="inputEmbergadura"></p:ajax>
-                                    </p:inputText>
-                                    <p:outputLabel id="slider2" value="Salto Máximo:" />
-                                    <p:inputText id="inputSaltoMaximo" value="#{medidasController.medicionactual.medsaltomaximo}" >
-                                        <p:ajax event="keyup" update="labelSaltoReal" listener="#{medidasController.calcularSaltoReal}" /> 
-                                    </p:inputText>
-                                    <p:outputLabel  value="Salto Real: "/>
-                                    <p:outputLabel  id="labelSaltoReal" value="#{medidasController.medicionactual.medsaltoreal}"></p:outputLabel>  
+                                 <p:messages  /> 
+                                <p:separator style="width: 750px" />  
+                                
+                                <p:panel styleClass="paneltab" header="Test de Sargent">
+                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                                <f:facet name="header">
+                                    Test de Sargent
+                                </f:facet>
+                                    <p:outputLabel value="Embergadura:" for="inputEmbergadura"/>
+                                    <p:inputText id="inputEmbergadura" value="#{medidasController.medicionactual.medembergadura}"></p:inputText>
+                                    <p:outputLabel  value="Salto Maximo:" for="inputSaltoMaximo"/>
+                                    <p:inputText id="inputSaltoMaximo" value="#{medidasController.medicionactual.medsaltomaximo}" ></p:inputText>
                                 </p:panelGrid><br/>
-                                <h2 align="center">Resultado: Bueno</h2><br></br>
-                                <h2 align="center">Test de Rufier</h2>
-                                <p:panelGrid columns="2" style="margin: 0 auto">
-                                    <p:outputLabel id="slider3" value="Primer pulso" />
-                                    <p:inputText id="inputPrimerPulso" value="#{medidasController.medicionactual.medpulso0}"></p:inputText>
-                                    <p:outputLabel id="slider4" value="Segundo pulso" />
-                                    <p:inputText id="inputSegundoPulso" value="#{medidasController.medicionactual.medpulso1}"></p:inputText>
-                                    <p:outputLabel id="slider5" value="Tercer pulso" />
-                                    <p:inputText id="inputTercerPulso" value="#{medidasController.medicionactual.medpulso2}"></p:inputText>
-                                </p:panelGrid><br/>
-                                <p:commandButton value="Calcular resultado" actionListener="#{medidasController.testRufier()}" update="labelRufier"></p:commandButton><br/>
-                                Resultado:
-                                <p:outputLabel id="labelRufier" value="#{medidasController.calificacion}"></p:outputLabel>
-                                <br></br>
-                                <h2>Test de Leger</h2>
-                                <p:panelGrid columns="2" style="margin: 0 auto">
-                                    <p:outputLabel  value="Consumo máximo de oxígeno: "/>
-                                    <p:outputLabel  value="134" />
+                                
+                                <p:commandButton value="Calcular s" update="labelSaltoReal labelSargent" styleClass="btncalculartest"></p:commandButton>
+                               
+                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                                <f:facet name="header">
+                                    Resultado Test de Sargent
+                                </f:facet>
+                                <p:outputLabel  value="Salto Real: "/>
+                                <p:outputLabel  id="labelSaltoReal" value="#{medidasController.medicionactual.medsaltoreal}"></p:outputLabel>
+                                <p:outputLabel value="Resultado: " />
+                                <p:outputLabel id="labelSargent" value="#{medidasController.medicionactual.estadotestSargent}"></p:outputLabel>
+                                 </p:panelGrid>
+                                
+                                <p:panelGrid styleClass="panelayuda" columns="1">              
+                                <p:outputLabel value="AYUDA - Hombres: Salto real mayor a 70 Excelente, entre 61 y 70 Muy bueno, entre 51 y 60 Arriba del promedio, entre 41 y 50 En el promedio, entre 31 y 40 Por debajo del promedio, entre 21 y 30 Pobre y menor a 21 Muy pobre"></p:outputLabel>
+                                <p:outputLabel value="AYUDA - Mujeres: Salto real mayor a 60 Excelente, entre 51 y 60 Muy bueno, entre 41 y 50 Arriba del promedio, entre 31 y 40 En el promedio, entre 21 y 30 Por debajo del promedio, entre 11 y 20 Pobre y menor a 11 Muy pobre"></p:outputLabel>
                                 </p:panelGrid>
-                                <br></br>
-                            </div>
+                                
+                                </p:panel>
+                                
+                                <p:separator styleClass="separadorTest" />
+                                
+                                <p:panel styleClass="paneltab" header="Test de Rufier">
+                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                                <f:facet name="header">
+                                    Test de Rufier
+                                </f:facet>
+                                    <p:outputLabel value="Primer pulso" for="inputPrimerPulso"/>
+                                    <p:inputText id="inputPrimerPulso" value="#{medidasController.medicionactual.medpulso0}"></p:inputText>
+                                    <p:outputLabel value="Segundo pulso" for="inputSegundoPulso"/>
+                                    <p:inputText id="inputSegundoPulso" value="#{medidasController.medicionactual.medpulso1}"></p:inputText>
+                                    <p:outputLabel value="Tercer pulso" for="inputTercerPulso"/>
+                                    <p:inputText id="inputTercerPulso" value="#{medidasController.medicionactual.medpulso2}"></p:inputText>
+                                </p:panelGrid>
+                                
+                                <p:commandButton value="Calcular r" update="labelRufier valorRufier" styleClass="btncalculartest"/>
+                                
+                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                                <f:facet name="header">
+                                    Resultado Test de Rufier
+                                </f:facet>
+                                <p:outputLabel value="Resultado:" />
+                                <p:outputLabel id="labelRufier" value="#{medidasController.medicionactual.estadoRufier}"></p:outputLabel>
+                                <p:outputLabel value="I = "></p:outputLabel>
+                                <p:outputLabel id="valorRufier" value="#{medidasController.medicionactual.testRufier}"></p:outputLabel>
+                                </p:panelGrid>
+                                <p:panelGrid styleClass="panelayuda" columns="1">   
+                                <p:outputLabel value="AYUDA: I entre 0 y 1 Excelente, I entre 1 y 5 Muy bueno, I entre 6 y 10 Bueno, I entre 11 y 15 Medio, I mayor a 15 Malo"></p:outputLabel>
+                                </p:panelGrid>
+                                 </p:panel>
+                                
+                                <p:separator styleClass="separadorTest" />
+                                
+                                <p:panel styleClass="paneltab" header=" Test de Wells">
+                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                                <f:facet name="header">
+                                    Test de Wells
+                                </f:facet>
+                                    <p:outputLabel value="Flexibilidad:" for="Flexibilidad"></p:outputLabel>
+                                    <p:inputText id="Flexibilidad" value="#{medidasController.medicionactual.medflexibilidad}"></p:inputText>
+                                </p:panelGrid>
+                                
+                                <p:commandButton value="Calcular w" update="labelWells" styleClass="btncalculartest" />
+                                
+                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                                <f:facet name="header">
+                                    Resultado Test de Wells
+                                </f:facet>
+                                <p:outputLabel value="Resultado: "></p:outputLabel>
+                                <p:outputLabel id="labelWells" value="#{medidasController.medicionactual.estadoTestWells}"></p:outputLabel>
+                                </p:panelGrid>
+                                <p:spacer height="20" width="100"/>
+                                 </p:panel>
+                                
+                                <p:separator styleClass="separadorTest" />
+                                
+                              <!--   <p:panel styleClass="paneltab">
+                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                                <f:facet name="header">
+                                    Test de Leger
+                                </f:facet>
+                                    <p:outputLabel  value="Consumo maximo de oxigeno: "/>
+                                    <p:outputLabel  value="1345" />
+                                </p:panelGrid>
+                                 </p:panel>    -->                                
+                            </p:panel>
                         </p:tab>
                         <p:tab title="Test de Frecuencia Cardiaca">
                             <h:graphicImage styleClass="imagenmedidas" style="margin-left: 270px;" name="img/testFreccardiaca.png" />
-                            <h:panelGrid bgcolor="#D11919" columns="3" cellpadding="7" style="margin-top: 25px;">
-                                <p:commandButton value="Calcular por Edad" icon="ui-icon-contact" /> 
-                                <p:commandButton value="Calcular por Legger" icon="ui-icon-arrowstop-1-e" />  
-                                <p:commandButton value="Calculo Antiguo" icon="ui-icon-arrowrefresh-1-w" />  
+                            <p:panel styleClass="paneltab">
+                            <h:panelGrid bgcolor="#F2F2F2" columns="3" cellpadding="7" style="margin-top: 25px; margin-left: 320px;font-size: 16px; font-weight: bold;">
+                                <p:outputLabel value="Calculo por Edad"/>   
                             </h:panelGrid>
-                            <p:panelGrid   columns="2" styleClass="panelmedidas">
+                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="margin-left: 270px;">
                                 <f:facet name="header">
                                     Resultado
                                 </f:facet>
@@ -275,15 +347,18 @@
                                 <p:outputLabel  value="Aumento Metabolismo Anaeróbico:" />
                                 <p:outputLabel    value="#{medidasController.medicionactual.aumentometanaerobico()}"/>
                             </p:panelGrid>
+                                </p:panel>
                         </p:tab>
                         <p:tab title="Observaciones">
                             <p:commandLink styleClass="imagenmedidas">
                                 <h:graphicImage name="img/Comentarios.PNG" />
                             </p:commandLink>
+                            <p:panel styleClass="paneltab">
                             <div style="text-align: center">
-                                <p:inputTextarea rows="5" cols="50" counter="display" maxlength="200" counterTemplate="quedan {0} caracteres." autoResize="false" value="#{medidasController.medicionactual.medobservaciones}"/><br/>
+                                <p:inputTextarea rows="5" cols="100" counter="display" maxlength="200" counterTemplate="Quedan {0} caracteres." autoResize="false" value="#{medidasController.medicionactual.medobservaciones}"/><br/>
                                 <h:outputText id="display" />
                             </div>
+                            </p:panel>
                         </p:tab>
                     </p:accordionPanel>
                     <h:panelGrid columns="2" styleClass="btnguardarmed" cellpadding="5" bgcolor="#045491">
@@ -294,6 +369,4 @@
             </ui:define>
         </ui:composition>
     </body>
-</html>
-
-
+    </html>

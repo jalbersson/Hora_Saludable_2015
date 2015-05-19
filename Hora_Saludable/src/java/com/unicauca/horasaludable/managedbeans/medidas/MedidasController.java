@@ -104,7 +104,7 @@ public class MedidasController {
             nueva.setMedfecha(fechaNuevoTest);
             ejbMedida.create(nueva);
 
-            context.addMessage("msggestion", new FacesMessage(FacesMessage.SEVERITY_INFO, "Completado", "Operacion realizada con exito"));
+            context.addMessage("msggestion", new FacesMessage(FacesMessage.SEVERITY_INFO, "Completado", "Text creado con Exito"));
             ExternalContext extcontext = context.getExternalContext();
             extcontext.getFlash().setKeepMessages(true);
             extcontext.redirect("GestionTest.xhtml");
@@ -113,6 +113,24 @@ public class MedidasController {
         }
 
     }
+    
+    public void eliminarTest()
+        {
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+
+            ejbMedida.remove(medicionactual);
+
+            context.addMessage("msggestion", new FacesMessage(FacesMessage.SEVERITY_INFO, "Completado", "Test Eliminado"));
+            ExternalContext extcontext = context.getExternalContext();
+            extcontext.getFlash().setKeepMessages(true);
+            extcontext.redirect("GestionTest.xhtml");
+        } catch (Exception e) {
+            context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "Ocurrio algun error al intentar  efectuar la operacion"));
+        }
+
+    }    
 
     public void redireccionar(Medida test) throws IOException {
 
@@ -187,14 +205,10 @@ public class MedidasController {
             document.add(tableEncabezado);
   
 
-             Paragraph tituloPoL = new Paragraph("Composicion Corporal y Test Deportivos",bold); 
+             Paragraph tituloPoL = new Paragraph("POLComposicion Corporal y Test Deportivos",bold); 
              tituloPoL.setAlignment(Element.ALIGN_CENTER);  
             document.add(tituloPoL);
-            
-             //     URL url2 = FacesContext.getCurrentInstance().getExternalContext().getResource("/resources/img/antorcha.png");
-
-            //   Image imgFondo = Image.getInstance(url2);
-           //     imgFondo.setAbsolutePosition(100f, 150f);
+      
         Font negrilla = new Font(Font.FontFamily.HELVETICA, 12f, Font.BOLD);
           Font boldSize = new Font(Font.FontFamily.HELVETICA, 10f, Font.BOLD);
                        
@@ -470,34 +484,5 @@ table.setWidthPercentage(100);
 
     public void setFechaNuevoTest(Date fechaNuevoTest) {
         this.fechaNuevoTest = fechaNuevoTest;
-    }
-
-    public void testRufier() {
-        float i = 0;
-        i = (medicionactual.getMedpulso0() + medicionactual.getMedpulso1() + medicionactual.getMedpulso2() - 200) / 10;
-        if (i == 0) {
-            calificacion = "Excelente";
-        }
-        if (i >= 0.1 && i <= 5) {
-            calificacion = "Bueno";
-        }
-        if (i >= 5.1 && i <= 10) {
-            calificacion = "Medio";
-        }
-        if (i >= 10.1 && i <= 15) {
-            calificacion = "Insuficiente";
-        }
-        if (i >= 15.1 && i <= 20) {
-            calificacion = "Malo, requiere evaluación médica";
-        }
-        System.out.println("así quedo la calificacion: " + calificacion);
-    }
-
-    public String getCalificacion() {
-        return calificacion;
-    }
-
-    public void setCalificacion(String calificacion) {
-        this.calificacion = calificacion;
     }
 }

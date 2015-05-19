@@ -29,20 +29,26 @@
                 </p:panel>
                 <p:separator style="width: 100%;"/>
                 <p:outputLabel styleClass="titulomediciones" value="Gestion de Mediciones" />
-                <br></br>     <br></br>     <br></br><br></br>     <br></br>   
+                 <p:spacer height="60" width="500" />  
             </ui:define>
             <ui:define name="body" >
                 <p:dialog showEffect="fade" hideEffect="explode" position="center" widgetVar="agregartest" header="Agregar Nuevo Test" modal="true">
                     <h:form>
+                        <p:messages />
                         <h:panelGrid columns="2" cellpadding="10">
-                            <p:outputLabel  value="Fecha" />
-                            <p:calendar  pattern="dd.MM.yyyy" navigator="true" showButtonPanel="true" value="#{medidasController.fechaNuevoTest}"/>
+                            <p:outputLabel  value="Fecha: " for="fechanuevo"/>
+                            <p:calendar id="fechanuevo"  pattern="dd.MM.yyyy" navigator="true" required="true" showButtonPanel="true" value="#{medidasController.fechaNuevoTest}"/>
                             <f:facet name="footer">
                                 <p:commandButton  value="Agregar Nuevo Test" actionListener="#{medidasController.agregarMedidas()}" onclick="PF('agregartest').hide();" icon="ui-icon-disk" update=":formTest"/>              
                             </f:facet>                   
                         </h:panelGrid>
                     </h:form>
                 </p:dialog>
+                
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                    <p:commandButton value="Si" type="button"  styleClass="ui-confirmdialog-yes" style="margin-left: 20px;" icon="ui-icon-check"  />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" style="margin-left: 20px;" icon="ui-icon-close" />
+              </p:confirmDialog>
                 <p:panelGrid styleClass="fichapersonal" >
                     <p:row>
                         <p:column rowspan="9">
@@ -85,7 +91,7 @@
                     </p:row>
                 </p:panelGrid>
                 <p:growl for="msggestion" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
-                <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+              
                 <div>
                     <p:panelGrid columns="2" styleClass="Menuagregartest" >
                         <f:facet name="header" >
@@ -101,17 +107,27 @@
                         </p:panelGrid>
                     </h:form>
                 </div>
+                
+                  <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                    <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
                 <h:form id="formTest">
-                    <p:dataTable id="tablaTest" value="#{medidasController.listaTest}" var="Tests" styleClass="tablas" paginator="true" rows="6">
+                    <p:dataTable id="tablaTest" value="#{medidasController.listaTest}" var="Tests" styleClass="tablalistaTest" paginator="true" rows="6" emptyMessage="No hay Test registrados a este usuario">
                         <p:column headerText="Fecha">
-                            <p:outputLabel value="#{Tests.medfecha}">
-                                 <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-                            </p:outputLabel>
+                            <p:outputLabel value="#{Tests.obtenerFecha()}" />
                         </p:column>
-                        <p:column headerText="Acción">
+                        <p:column headerText="Gestión">
                             <p:commandLink actionListener="#{mostrarUsuarioTestController.medicionSeleccionada(Tests)}" value="Gestionar Test" style="color: #045491;">                                     
+                                </p:commandLink>  
+                             <p:commandLink value="Descargar" style=" margin-left: 10px;color: #045491;">                                     
                                 </p:commandLink>
                         </p:column>
+                         <p:column headerText="Eliminar Test">
+                             <p:commandLink  id="eliminar" action="#{medidasController.eliminarTest()}" >                                    
+                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="eliminar.png"/>
+                                    <f:setPropertyActionListener value="#{Tests}" target="#{medidasController.medicionactual}" />
+                                    <p:confirm header="Confirmation" message="Esta seguro que quiere eliminar el test de forma permanente?" icon="ui-icon-alert"/>       
+                         </p:commandLink> 
+                         </p:column>    
                     </p:dataTable>
                 </h:form>
                 
@@ -119,3 +135,4 @@
         </ui:composition>
     </body>
 </html>
+

@@ -464,7 +464,7 @@ public class Medida implements Serializable {
     }
 
     public float getMedsaltoreal() {
-        return medsaltoreal;
+        return medsaltomaximo-medembergadura;
     }
 
     public void setMedsaltoreal(float medsaltoreal) {
@@ -528,9 +528,16 @@ public class Medida implements Serializable {
 
     public double masamuscular() {
         
-        double ZMUS = medperimetrobrazo + meddiametroantebrazo + medperimetromuslo + medperimetropantorrilla + medperimetrocajatoraxica;
+        try
+             {
+          double ZMUS = medperimetrobrazo + meddiametroantebrazo + medperimetromuslo + medperimetropantorrilla + medperimetrocajatoraxica;
         double MMUS = (ZMUS *(170.18/medtalla)-207.21)/13.74;
-        return Redondear((MMUS*5.4+24.5)/Math.pow(170.18/medtalla,3));
+        double r = Redondear((MMUS*5.4+24.5)/Math.pow(170.18/medtalla,3));
+         return r;
+             }
+        catch(Exception e)
+             { return 0;}
+        
     }
 
     public double pesoideal() {
@@ -542,7 +549,12 @@ public class Medida implements Serializable {
     }
 
     public double complexion() {
-        return Redondear(medtalla / medperimetromuneca);  
+        try
+             {
+           return Redondear(medtalla / medperimetromuneca); 
+             }
+        catch(Exception e)
+             { return 0;}
     }
 
     public double tasametabolicabasal() {
@@ -565,14 +577,30 @@ public class Medida implements Serializable {
 
     public double masaesqcuerpo() {
         
-        double SOSEACUERPO = meddiametrobiacromial + meddiametrobiltiocristal+(2*meddiametrohumero)+(2*meddiametrofemur);
+        
+        try
+             {
+          double SOSEACUERPO = meddiametrobiacromial + meddiametrobiltiocristal+(2*meddiametrohumero)+(2*meddiametrofemur);
         double ZOSEACUERPO = ((SOSEACUERPO*(170.18/medtalla))-98.88)/5.33;
-        return Redondear(((ZOSEACUERPO *1.34)+6.7)/Math.pow(170.18/medtalla,3));
+         double r = Redondear(((ZOSEACUERPO *1.34)+6.7)/Math.pow(170.18/medtalla,3));
+            return r; 
+             }
+        catch(Exception e)
+             { return 0;}
+        
+        
     }
 
     public double masatotalosea() {
-        double MOSEACABEZA = (medperimetrocabeza - 1.2) / 0.18;
-        return Redondear(masaesqcuerpo()+MOSEACABEZA);
+        try
+             {
+          double MOSEACABEZA = (medperimetrocabeza - 1.2) / 0.18;
+        double r = Redondear(masaesqcuerpo()+MOSEACABEZA);
+        return r;
+             }
+        catch(Exception e)
+             { return 0;}
+        
     }
 
     public double porcentajegrasaideal() {
@@ -738,6 +766,11 @@ public class Medida implements Serializable {
         return x;
     }
     
+    public double getTestRufier()            
+    {
+        return (medpulso0+medpulso1+medpulso2-200)/10;
+    }
+    
     public String getEstadoIMC()
           {
           double imc = indicemasacorporal();
@@ -762,5 +795,382 @@ public class Medida implements Serializable {
               if(c >= 10.1) return "MEDIANA";
               else return "GRANDE";           
           }                 
-    } 
+    }
+    
+    public String getEstadoRufier()
+             {
+        double rufier= getTestRufier();
+        if(rufier>=0 && rufier<=1)
+        {
+            return "Excelente";
+        }
+        if(rufier>=1.1 && rufier<6)
+        {
+            return "Muy Bueno";
+        }
+        if(rufier>=6.1 && rufier<11)
+        {
+            return "Bueno";
+        }
+        if(rufier>=11 && rufier<=16)
+        {
+            return "Medio";
+        }
+        else 
+        {
+            return "Malo, requiere evaluacion medica";
+        }
+    }
+    
+    public String getEstadotestSargent()
+    {
+        if(usuid.getUsugenero().equals('M'))
+        {
+            if(getMedsaltoreal()>70)
+            {
+                return "Excelente";
+            }
+            if(getMedsaltoreal()>61 && getMedsaltoreal()<=70)
+            {
+                return "Muy bueno";
+            }
+            if(getMedsaltoreal()>51 && getMedsaltoreal()<=60)
+            {
+                return "Arriba del promedio";
+            }
+            if(getMedsaltoreal()>41 && getMedsaltoreal()<=50)
+            {
+                return "En el promedio";
+            }
+            if(getMedsaltoreal()>31 && getMedsaltoreal()<=40)
+            {
+                return "Por debajo del promedio";
+            }
+            if(getMedsaltoreal()>21 && getMedsaltoreal()<=30)
+            {
+                return "Pobre";
+            }
+            else
+            {
+                return "Muy pobre";
+            }
+        }
+        else
+        {
+            if(getMedsaltoreal()>60)
+            {
+                return "Excelente";
+            }
+            if(getMedsaltoreal()>51 && getMedsaltoreal()<=60)
+            {
+                return "Muy bueno";
+            }
+            if(getMedsaltoreal()>41 && getMedsaltoreal()<=50)
+            {
+                return "Arriba del pomedio";
+            }
+            if(getMedsaltoreal()>31 && getMedsaltoreal()<=40)
+            {
+                return "En el promedio";
+            }
+            if(getMedsaltoreal()>21 && getMedsaltoreal()<31)
+            {
+                return "Abajo del promedio";
+            }
+            if(getMedsaltoreal()>11 && getMedsaltoreal()<21)
+            {
+                return "Pobre";
+            }
+            else
+            {
+                return "Muy pobre";
+            }
+        }
+    }
+    
+    public String getEstadoTestWells()
+    {
+        if(usuid.getUsugenero().equals('M'))
+        {
+            if(getEdadusuid()>15 && getEdadusuid()<=19)
+            {
+                if(medflexibilidad>38)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=34 && medflexibilidad <=38)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=29 && medflexibilidad <34)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=24 && medflexibilidad <29)
+                {
+                    return "Por debajo del promedio";
+                }
+                else
+                {
+                    return "Pobre";
+                }
+            }
+            if(getEdadusuid()>19 && getEdadusuid()<=29)
+            {
+                if(medflexibilidad >39)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=34 && medflexibilidad <=39)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=30 && medflexibilidad <34)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=25 && medflexibilidad <30)
+                {
+                    return "Por debajo del promedio";
+                }
+                else
+                {
+                    return "Pobre";
+                }
+            }
+            if(getEdadusuid()>29 && getEdadusuid()<=39)
+            {
+                if(medflexibilidad >37)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=33 && medflexibilidad <=37)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=28 && medflexibilidad <33)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=23 && medflexibilidad <28)
+                {
+                    return "Por debajo del promedio";
+                }
+                else
+                {
+                    return "Pobre";
+                }
+            }
+            if(getEdadusuid()>39 && getEdadusuid()<=49)
+            {
+                if(medflexibilidad >34)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=29 && medflexibilidad <=34)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=24 && medflexibilidad <29)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=18 && medflexibilidad <24)
+                {
+                    return "Por debajo del promedio";
+                }
+                else
+                {
+                    return "Pobre";
+                }
+            }
+            if(getEdadusuid()>49 && getEdadusuid()<=59)
+            {
+                if(medflexibilidad >34)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=28 && medflexibilidad <=34)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=24 && medflexibilidad <28)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=15 && medflexibilidad <24)
+                {
+                    return "Por debajo del promedio";
+                }
+               else
+                {
+                    return "Pobre";
+                }
+            }
+            else
+            {
+                if(medflexibilidad >32)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=25 && medflexibilidad <=32)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=20 && medflexibilidad <25)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=15 && medflexibilidad <20)
+                {
+                    return "Por debajo del promedio";
+                }
+                else
+                {
+                    return "Pobre";
+                }
+            }
+        }
+        else
+        {
+            if(getEdadusuid()>15 && getEdadusuid()<=19)
+            {
+                if(medflexibilidad >42)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=38 && medflexibilidad <=42)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=34 && medflexibilidad <38)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=29 && medflexibilidad <34)
+                {
+                    return "Por debajo del promedio";
+                }
+                else
+                {
+                    return "Pobre";
+                }
+            }
+            if(getEdadusuid()>19 && getEdadusuid()<=29)
+            {
+                if(medflexibilidad >40)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=37 && medflexibilidad <=40)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=33 && medflexibilidad <37)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=28 && medflexibilidad <33)
+                {
+                    return "Por debajo del promedio";
+                }
+               else
+                {
+                    return "Pobre";
+                }
+            }
+            if(getEdadusuid()>29 && getEdadusuid()<=39)
+            {
+                if(medflexibilidad >40)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=36 && medflexibilidad <=40)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=32 && medflexibilidad <36)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=27 && medflexibilidad <32)
+                {
+                    return "Por debajo del promedio";
+                }
+                else
+                {
+                    return "Pobre";
+                }
+            }
+            if(getEdadusuid()>39 && getEdadusuid()<=49)
+            {
+                if(medflexibilidad >37)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=34 && medflexibilidad <=37)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=30 && medflexibilidad <34)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=25 && medflexibilidad <30)
+                {
+                    return "Por debajo del promedio";
+                }
+                else
+                {
+                    return "Pobre";
+                }
+            }
+            if(getEdadusuid()>49 && getEdadusuid()<=59)
+            {
+                if(medflexibilidad >38)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=33 && medflexibilidad <=38)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=30 && medflexibilidad <33)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=23 && medflexibilidad <30)
+                {
+                    return "Por debajo del promedio";
+                }
+                else
+                {
+                    return "Pobre";
+                }
+            }
+            else
+            {
+                if(medflexibilidad >34)
+                {
+                    return "Excelente";
+                }
+                if(medflexibilidad >=31 && medflexibilidad <=34)
+                {
+                    return "Encima del promedio";
+                }
+                if(medflexibilidad >=27 && medflexibilidad <31)
+                {
+                    return "En el promedio";
+                }
+                if(medflexibilidad >=23 && medflexibilidad <27)
+                {
+                    return "Por debajo del promedio";
+                }
+               else
+                {
+                    return "Pobre";
+                }
+            }
+        }
+    }
 }
