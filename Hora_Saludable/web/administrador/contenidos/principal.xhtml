@@ -28,133 +28,130 @@
                 <br/> <br/>
 
                 <p:growl id="msgs" showDetail="true" />
+
                 <h:form>
                     <p:growl id="msgs" showDetail="true" />
-
-                    <div style="float: left; width: 700px">
-
-                        <h:form > 
-                            <div style="padding: 3px 10px; background: #c7ccd5; border: 5px solid; border-color: #4a66c4; border-radius: 20px">
-                                <h2 style="margin-top:0" class="tituloContenido">Noticias</h2>
-                                <p:dataScroller  var="noticiaLista" value="#{noticiacController.ultimos}"  chunkSize="2" mode="inline"  first="1" scrollHeight="400">
-                                    <f:facet name="header">
-                                    </f:facet>
-                                    <h:panelGrid columns="2" style="width:600px; height: 50px;border: none" columnClasses="logo,detail">
-                                        <p:outputPanel>
-                                            <p:panelGrid  style="width: 600px; height: 50px;border: none" columns="2" >
-                                                <p:fieldset legend="#{noticiaLista.nottitulo} #{noticiacController.convertToJavaDate(noticiaLista.notfechapublicacion)}" style="margin-bottom:20px">
-                                                    <h:panelGrid columns="2" cellpadding="5" style="width: 300px; height: 100px;border: none" >
-                                                        <p:graphicImage library="img/imagenesNoticias" name="#{noticiaLista.notimagen}" width="120px" height="75px"/>
-                                                        <h:outputText value="#{noticiacController.convertToJavaDate(noticiaLista.notfechapublicacion)}" style="font-weight: bold; font-size: 15px"/>
-                                                        <h:outputText></h:outputText>
-                                                        <h:form style="float: left;border: none">
-                                                            <p:link value="Detalles" outcome="#{noticiacController.detalleNoticia(noticiaLista.notid)}" style="font-weight: bold; font-size: 12px"></p:link>
-                                                            <f:param name="noticiaId" value="#{noticiaLista.notid}" />
-                                                        </h:form>
-                                                    </h:panelGrid>
-                                                </p:fieldset>
-                                            </p:panelGrid>
-                                        </p:outputPanel>
-                                    </h:panelGrid>
-                                </p:dataScroller>
-                            </div>
-                        </h:form>    
-                        <br/><br/><br/>
+                    <h:panelGrid columns="2" style="margin-left: 10px; margin-top: 20px" cellpadding="5">
                         <h:form>
-                            <div style="float: left; height: 550px; width:200px; padding: 3px 10px; background: #c7ccd5; border: 5px solid; border-color: #4a66c4; border-radius: 20px">
-                                <h:panelGrid columns="1" class=" width:200px;">
-                                    <h:outputLabel value="Asunto: " id="asunto" />
-                                    <h:inputText id="asunto_" title="Asunto"/>
-                                    <h:outputLabel value="Mensaje: " id="mensaje" />
-                                    <h:outputFormat value="#{envioCorreo.subject}" title="Mensaje" />
-                                    <h:inputTextarea rows="29" cols="25" value="#{envioCorreo.message_}" id="mensaje_" title="Mensaje"/>
-                                    <h:commandButton value="Enviar a todos" action="#{envioCorreo.sendMail()}" />
-                                </h:panelGrid>
+                            <h:form> 
+                                <div class="divPrincipal">
+                                    <h1 style="color:#F2F2F2; text-align: center;">Noticias</h1>  
+                                    <p:carousel  value="#{noticiacController.ultimos}" var="noticiaLista" itemStyle="height:230px;width:600px;" autoPlayInterval="4000" numVisible="1" effect="easeInStrong" circular="true" class="ui-carousel">
 
-                            </div>
-                            <div style="float: right; height: 550px; width:400px; padding: 3px 10px; background: #c7ccd5; border: 5px solid; border-color: #4a66c4; border-radius: 20px">
-                                <br/>
-                                <h2 style="margin-top:0" class="tituloContenido">Eventos</h2>
-                                <p:dataScroller  var="eventoLista" value="#{eventoController.ultimos}" chunkSize="10" >
+                                        <h:panelGrid columns="2" style="width:600px " cellpadding="10" columnClasses="label,value">
+                                            <p:tab>
+                                                <h:outputText value="#{noticiacController.convertToJavaDate(noticiaLista.notfechapublicacion)}" style="float: right; font-weight: bold; font-size: 15px;"/>
+                                                <br></br>
+                                                <h:outputText value="#{noticiaLista.nottitulo}" style="font-weight: bold; font-size: 20px; text-align: center; color:#AA0000; " />
+                                                <h:panelGrid columns="2" cellpadding="10">
+                                                    <p:graphicImage width="150px" height="150px" library="img/imagenesNoticias" name="#{noticiaLista.notimagen}"/>
+                                                    <h:outputText value="#{noticiaLista.notcontenido}" style="font-weight: bold; font-size: 15px;"/> 
+                                                </h:panelGrid>
 
-                                    <h:panelGrid columns="2" style="width:400px; height: 100px; border: none" columnClasses="logo,detail">
-                                        <p:graphicImage width="100px" height="80px" library="img/imagenesNoticias" name="#{eventoLista.eveimagen}"   />
-                                        <p:outputPanel style="border: 1px">
-                                            <h:panelGrid columns="2" cellpadding="5" style="border:none">
 
-                                                <h:outputText value="#{eventoLista.evetitulo}" style="font-weight: bold; font-size: 15px"/>
-                                                <h:outputText value="" />
+                                            </p:tab>
+                                        </h:panelGrid>
 
-                                                <h:outputText value="Fecha del evento:" />
-                                                <h:outputText value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}" style="font-weight: bold; font-size: 15px"/>
+                                    </p:carousel>
+                                </div>
 
-                                                <h:outputText value="Lugar:" />
-                                                <h:outputText value="#{eventoLista.evelugar}" style="font-weight: bold"/>
+                            </h:form>
 
-                                                <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px">
+
+
+                        </h:form> 
+
+                        <h:form>
+
+
+                            <div class="divPrincipal">
+
+                                <h1 style="color:#F2F2F2; text-align: center;">Eventos</h1>
+                                <p:dataScroller  var="eventoLista" value="#{eventoController.ultimos}" chunkSize="15">
+
+                                    <br></br>
+                                    <h:outputText value="#{eventoLista.evetitulo}" style="font-weight: bold; font-size: 18px; color:#AA0000;"/>
+                                    <h:panelGrid columns="1" style="width:200px; height: 100px;">
+
+
+                                        <p:outputPanel style="border-color:#22419A;">
+
+                                            <h:panelGrid columns="2" cellpadding="10" style="border:none">
+                                                <h:outputText value="Fecha:" style="font-weight: bold; font-size: 15px"/>
+                                                <h:outputText value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}" style="font-size: 15px"/>
+
+                                                <h:outputText value="Lugar:" style="font-weight: bold; font-size: 15px"/>
+                                                <h:outputText value="#{eventoLista.evelugar}" style="font-size: 15px" />
+
+                                                <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px; color:#22419A;">
                                                     <f:param name="eventoId" value="#{eventoLista.eveid}" />
                                                 </p:link>
                                             </h:panelGrid>
                                         </p:outputPanel>
                                     </h:panelGrid>
-                                </p:dataScroller>
-                                <br/>
-                                <p:button style="background: #cc0000; color: #ffffff" outcome="principal" value="Más eventos" icon="ui-icon-plusthick">
-                                    <f:param name="productId" value="10" />
-                                </p:button>
-                                <br/><br/>
+
+                                </p:dataScroller> 
+                            </div>
+
+                        </h:form>
+                        
+                        <h:form>
+                            <div class="divPrincipal">
+                                <h1 style="color:#F2F2F2; text-align: center;">Envio Correo Masivo</h1>
+                                <h:panelGrid columns="1" class=" width:200px; ">
+                                    <h:outputLabel value="Asunto: " id="asunto" style="color:#F2F2F2; text-align: center;" />
+                                    <h:inputText id="asunto_" title="Asunto" style="width: 330px" />
+                                    <h:outputLabel value="Mensaje: " id="mensaje" style="color:#F2F2F2; text-align: center;" />
+                                    <h:outputFormat value="#{envioCorreo.subject}" title="Mensaje" />
+                                    <h:inputTextarea rows="7" cols="87" value="#{envioCorreo.message_}" id="mensaje_" title="Mensaje"/>
+                                    <p:commandButton value="Enviar a todos" action="#{envioCorreo.sendMail()}" />
+                                </h:panelGrid>
                             </div>
                         </h:form>
-                    </div>
+                        <h:form>
+                            
+                            <h:form style="width:250px;">
+                                <div class="divPrincipal">
+                                    <h1 style="color:#F2F2F2; text-align: center;">Horarios</h1>
+                                  <p:panel id="toggleable" header="Horarios" toggleable="true" closable="false" toggleSpeed="500" widgetVar="panel" style="border: none; ">
+                                            <p:link value="Editar Horario" outcome="principal" style="font-weight: bold; font-size: 15px; color: #cc0000" />
+                                            <p:dataScroller  var="hor" value="#{horarioController.h}" chunkSize="6" style="float:right;" >
+                                                <h:panelGrid columns="1" cellpadding="6" style="text-align: center;">
+                                                    <p:link value="#{hor.nombreH}" outcome="#{hor.rutaH}" style="font-weight: bold; font-size: 15px; color: #AA0000;" />
+                                                </h:panelGrid>
+                                            </p:dataScroller>
+                                   </p:panel>  
+                                </div>        
+                            </h:form>
+                            
+                            <br></br>
+                            <h:form style=" border: none; margin: 5px">
+                                <p:panelMenu style="width:250px; float: right" >
+                                    <p:submenu label="Gestión de Eventos" >
+                                        <p:menuitem value="Agregar evento" ajax="false" outcome="agregarEvento" /> 
+                                        <p:menuitem value="Editar evento" ajax="false" outcome="editarEvento"/> 
+                                        <p:menuitem value="Eliminar evento" ajax="false" outcome="eliminarEvento"/> 
+                                    </p:submenu>
+                                    <p:submenu label="Gestion de noticias">
+                                        <p:menuitem value="Nueva Noticia"  ajax="false" outcome="nuevaNoticia" icon="ui-icon-close"/>
+                                        <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false" icon="ui-icon-close"/>
+                                    </p:submenu>
 
-                    <div>
-                        <h:form style=" border: none; margin: 5px">
-                            <p:panelMenu style="width:200px; float: right">
-                                <p:submenu label="Gestión de Eventos">
-                                    <p:menuitem value="Agregar evento" ajax="false" outcome="agregarEvento"/> 
-                                    <p:menuitem value="Editar evento" ajax="false" outcome="editarEvento"/> 
-                                    <p:menuitem value="Eliminar evento" ajax="false" outcome="eliminarEvento"/> 
-                                </p:submenu>
-                                <p:submenu label="Gestion de noticias">
-                                    <p:menuitem value="Nueva Noticia"  ajax="false" outcome="nuevaNoticia" icon="ui-icon-close"/>
-                                    <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false" icon="ui-icon-close"/>
-                                </p:submenu>
+                                    <p:submenu label="Reglamento"  >
+                                        <p:menuitem value="Ver Reglamento" outcome="reglamentoPrincipal" ajax="false"/>
+                                        <p:menuitem value="Editar Reglamento" outcome="reglamento" ajax="false"/>
+                                    </p:submenu>
 
-                                <p:submenu label="Reglamento"  >
-                                    <p:menuitem value="Ver Reglamento" outcome="reglamentoPrincipal" ajax="false"/>
-                                    <p:menuitem value="Editar Reglamento" outcome="reglamento" ajax="false"/>
-                                </p:submenu>
-
-                                <p:submenu label="Quienes somos">
-                                    <p:menuitem value="Ver Quienes Somos" outcome="quienesSomosPrincipal" ajax="false" />
-                                    <p:menuitem value="Editar Quienes Somos" outcome="quienesSomos" ajax="false" />
-                                </p:submenu>
-                            </p:panelMenu>
+                                    <p:submenu label="Quienes somos">
+                                        <p:menuitem value="Ver Quienes Somos" outcome="quienesSomosPrincipal" ajax="false" />
+                                        <p:menuitem value="Editar Quienes Somos" outcome="quienesSomos" ajax="false" />
+                                    </p:submenu>
+                                </p:panelMenu>
+                            </h:form>
                         </h:form>
-
-                        <h:form style="margin: 5px">
-                            <p:button style="width:200px; float: right" outcome="quienesSomosPrincipal" value="Quienes somos" icon="ui-icon-star">
-                                <f:param name="productId" value="10" />
-                            </p:button>
-
-                            <p:button style="width:200px; float: right" outcome="reglamentoPrincipal" value="Reglamento" icon="ui-icon-star">
-                                <f:param name="productId" value="20" />
-                            </p:button>
-                        </h:form>
-
-                        <h:form style="float: right">
-                            <h:panelGrid columns="1" style="width:200px; height: 50px; border: none" columnClasses="logo,detail">
-                                <p:tab title="Horario ">
-                                    <h:form style="">                    
-                                        <h3 style="" class="tituloContenido">HORARIO</h3>
-                                        <p:graphicImage library="img/horario" name="horario2.jpg"  style="width: 200px;" />
-                                    </h:form>
-                                </p:tab>  
-                            </h:panelGrid>
-                        </h:form>
-                    </div>
+                        
+                    </h:panelGrid>
                 </h:form>
-
             </ui:define>
 
         </ui:composition>

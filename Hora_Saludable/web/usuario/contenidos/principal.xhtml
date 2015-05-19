@@ -59,19 +59,20 @@
                         
                             <br></br>
                             <br></br>
-                            <h:form>
+                            
+                            
+                            <h:form style="width:400px; margin-left: 130px;">
                                 <div class="divPrincipal">
-                                   <h1 style="color:#F2F2F2; text-align: center;">Envio de correo</h1>   
-                                    <h:panelGrid columns="2" class="position: absolute; height:300px;">
-                                        <p:outputLabel value="Asunto:" style="color:#F2F2F2; font-weight: bold; font-size: 12px;" id="asunto" />
-                                        <p:inputText id="asunto_" title="Asunto"  style="width: 450px;"/>
-                                        <h:outputFormat value="#{envioCorreo.subject}" title="Mensaje" />
-                                        <p:inputTextarea value="#{envioCorreo.message_}" id="mensaje_" title="Mensaje" style="width: 450px;"/>
-                                        <p:outputLabel value=""/>
-                                        <p:commandButton value="Enviar a todos" action="#{envioCorreo.sendMail()}" icon="ui-icon-star" />
-                                    </h:panelGrid> 
-                                </div>
-                               
+                                    <h1 style="color:#F2F2F2; text-align: center;">Horarios</h1>
+                                  <p:panel id="toggleable" header="Horarios" toggleable="true" closable="false" toggleSpeed="500" widgetVar="panel" style="border: none; ">
+                                            <!--p:link value="Editar Horario" outcome="principal" style="font-weight: bold; font-size: 15px; color: #cc0000" /-->
+                                            <p:dataScroller  var="hor" value="#{horarioController.h}" chunkSize="6" style="float:right;" >
+                                                <h:panelGrid columns="1" cellpadding="6" style="text-align: center;">
+                                                    <p:link value="#{hor.nombreH}" outcome="#{hor.rutaH}" style="font-weight: bold; font-size: 18px; color: #AA0000; margin-left: 120px;" />
+                                                </h:panelGrid>
+                                            </p:dataScroller>
+                                   </p:panel>  
+                                </div>        
                             </h:form>
                         
                         </h:form> 
@@ -126,25 +127,6 @@
                 </h:form>
                 <br></br>
                 <br></br>
-                   
-                <h:form>
-                    <div>
-                       <h:panelGrid columns="2" style="width:200px; height: 50px; border: none; margin-left: 100px;" columnClasses="logo,detail">
-
-                        <p:tab title="Horario ">
-                            <h:form style="">                    
-                                <h1 style="color: #AA0000; text-align: center;">Horario del Gimnasio</h1>
-                                <p:graphicImage library="img/horario" name="horario2.jpg"  style="width: 700px;" />
-                            </h:form>
-
-                        </p:tab>  
-
-                        </h:panelGrid> 
-                    </div>
-                    
-                </h:form> 
-              
-                 
 
             </ui:define>
 
