@@ -14,11 +14,12 @@
             </ui:define>
 
             <ui:define name="title">
-                Gestión de Contenidos
+                
             </ui:define>
             
             <ui:define name="body">
-                <br></br><h1> Editar Horarios... </h1>
+                <br></br>
+                <h1> Editar Horarios</h1>
 
                 <h:form id="form">
                     <p:growl id="msgs" showDetail="true"/>
@@ -101,7 +102,7 @@
                         
                     </p:dataTable>
                     
-                    <p:button style="margin-top: 15px; " outcome="gestionContenidos" value="Salir" icon="ui-icon-star" disabled="false">
+                    <p:button style="margin-top: 15px; " outcome="principal" value="Salir" icon="ui-icon-star" disabled="false">
                         <f:param name="editaHorario" />
                     </p:button>
                     
