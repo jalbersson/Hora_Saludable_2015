@@ -63,15 +63,19 @@
 
                                 <div class="divPrincipal" style="height: 310px">
                                     <h:form>
-                                        <h1 style="color:#F2F2F2; text-align: center;">Horarios</h1>
-                                        <p:panel id="toggleable" header="Horarios" toggleable="true" closable="false" toggleSpeed="500" widgetVar="panel" style="border: none; ">
-                                            <!--p:link value="Editar Horario" outcome="principal" style="font-weight: bold; font-size: 15px; color: #cc0000" /-->
-                                            <p:dataScroller  var="hor" value="#{horarioController.h}" chunkSize="6" style="float:right;" >
-                                                <h:panelGrid columns="1" cellpadding="6" style="text-align: center;">
-                                                    <p:link value="#{hor.nombreH}" outcome="#{hor.rutaH}" style="font-weight: bold; font-size: 18px; color: #AA0000; margin-left: 120px;" />
-                                                </h:panelGrid>
-                                            </p:dataScroller>
-                                        </p:panel>     
+                                        <h:form style="width:250px;">
+                                            <div class="divPrincipal">
+                                                <h1 style="color:#F2F2F2; text-align: center;">Horarios</h1>
+                                                <p:panel id="toggleable" header="Horarios" toggleable="true" closable="false" toggleSpeed="500" widgetVar="panel" style="border: none; ">
+                                                    <p:link value="Editar Horario" outcome="principal" style="font-weight: bold; font-size: 15px; color: #cc0000" />
+                                                    <p:dataScroller  var="hor" value="#{horarioController.h}" chunkSize="6" style="float:right;" >
+                                                        <h:panelGrid columns="1" cellpadding="6" style="text-align: center;">
+                                                            <p:link value="#{hor.nombreH}" outcome="#{horarioController.mostrarHorario(hor)}" style="font-weight: bold; font-size: 15px; color: #AA0000;" />
+                                                        </h:panelGrid>
+                                                    </p:dataScroller>
+                                                </p:panel>  
+                                            </div>        
+                                        </h:form>
                                     </h:form>
                                 </div>
 
