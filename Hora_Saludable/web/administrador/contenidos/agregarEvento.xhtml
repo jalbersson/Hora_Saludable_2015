@@ -40,23 +40,23 @@
 
 
                         <p:messages id="messages" />
-                        <h:panelGrid columns="2" >
-                            <p:outputLabel value="*Titulo: " />
+                        <h:panelGrid columns="2" style="margin-top:5px">
+                            <p:outputLabel value="*Titulo: "/>
                             <p:inputText id="tituloEvento" value="#{eventoController.evento.evetitulo}" required="true" size="80" requiredMessage="Introduzca titulo del evento." />
 
                             <p:outputLabel value="*Lugar: " />
                             <p:inputText id="lugarEvento" value="#{eventoController.evento.evelugar}" required="true"  size="80" requiredMessage="Introduzca lugar del evento."/>
-                            
+
                             <p:outputLabel  value="*Fecha de realizacion: " />
                             <p:calendar id="fechaEvento"  value="#{eventoController.evefevento}" pattern="yyyy-MM-dd"  mask="true" required="true" requiredMessage="Introduzca fecha del evento." size ="80"/>
-
-                            <!--p:outputLabel  value="*Descripcion: " />
-                            <p:inputText id="descripcionEvento" value="url_contenido" required="true" size="80" /-->
+                            
+                            <p:outputLabel  value="*Descripción: " />
+                            <p:editor id="editor" widgetVar="editorWidget" controls=" " value="#{eventoController.evento.evecontenido}" width="570" style="margin-top:5px " />
                             <!--p:editor id="editor" widgetVar="editorWidget" value="" width="600" /-->
-                            
-                            <p:commandButton value="Guardar" action="#{eventoController.guardarEvento()}" > </p:commandButton>
-                            
-                            
+
+                            <p:commandButton style="margin:10px; float: right" value="Guardar" action="#{eventoController.guardarEvento()}" > </p:commandButton>
+
+
                             <!--h:form>           
                                 <p:growl id="message" showDetail="true" />
                                 <p:commandButton value="Guardar" action="" update="message">
