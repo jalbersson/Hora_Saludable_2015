@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                QuienesSomosPrincipal
+            </ui:define>
+
+            <ui:define name="title">
+                
+            </ui:define>
+
+            <ui:define name="body">
+                <h:form>
+                    
+                   
+                    <object type="application/pdf" data="../../resources/docs/Resolución R-166 de 2002 Hora saludable.pdf" height="400px" width="100%" >
+                    </object>
+                </h:form> 
+                <h:panelGrid columns="2" style="margin-top: 10px">
+
+                    <p:button outcome="quienesSomos" value="Volver" style="float:right" />
+                </h:panelGrid>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
