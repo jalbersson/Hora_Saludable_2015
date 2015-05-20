@@ -16,6 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.mail.Message;
@@ -24,6 +25,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -49,7 +51,7 @@ public class envioCorreo {
 
     public envioCorreo() {
         listaCorreos = new ArrayList();
-    
+
     }
 
     public void cargarCorreos() {
@@ -70,7 +72,7 @@ public class envioCorreo {
             dirEmail = todosUsuarios.get(i).getUsuemail();
             if (validateEmail(dirEmail)) {
                 listaCorreos.add(dirEmail);
-            } 
+            }
         }
 
     }
@@ -101,15 +103,19 @@ public class envioCorreo {
 
             message.setSubject(this.subject);
             //this.message_ = this.message_ + "<em></br></br></br></br><h1>Programa Horasable</h1>" + "</br></br><h1> No responder a este correo  </h1></em>";
-            
+
             message.setText(this.message_, "ISO-8859-1", "html");
             Transport transport = session.getTransport("smtp");
             transport.connect(this.smtpServ, this.from, this.pass);
             transport.sendMessage(message, message.getAllRecipients());
+            FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_INFO, "Envio de mensaje masivo", "Mensaje enviado con exito.");
+
+            RequestContext.getCurrentInstance().showMessageInDialog(messages);
             transport.close();
         } catch (MessagingException e) {
             throw new RuntimeException(e);
-        }finally{
+        } finally {
+
             this.message_ = "";
             this.subject = "";
         }
