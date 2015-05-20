@@ -38,29 +38,35 @@
                         </f:facet>
 
                         <p:messages id="messages" />
+                        
+                            <h:panelGrid columns="2" >
+                                <h:outputLabel value="Nombre: "  />
+                                <p:inputText id="nombreEvento" required="true" size="80" value="#{eventoVerEditarController.evento.evetitulo}"/>
 
-                        <h:panelGrid columns="2" >
-                            <h:outputLabel value="Nombre: "  />
-                            <p:inputText id="nombreEvento" required="true" size="80" value="#{eventoVerEditarController.evento.evetitulo}"/>
+                                <p:outputLabel value="Lugar: " />
+                                <p:inputText id="lugarEvento" required="false" size="80" value="#{eventoVerEditarController.evento.evelugar}"/>
 
-                            <p:outputLabel value="Lugar: " />
-                            <p:inputText id="lugarEvento" required="false" size="80" value="#{eventoVerEditarController.evento.evelugar}"/>
+                                <p:outputLabel  value="Fecha: " />
+                                <p:calendar id="fechaEvento"  pattern="dd-MM-yyyy" mask="true" size ="80" value="#{eventoVerEditarController.evento.evefechaevento}"/>
 
-                            <p:outputLabel  value="Fecha: " />
-                            <p:calendar id="fechaEvento"  pattern="dd-MM-yyyy" mask="true" size ="80" value="#{eventoVerEditarController.evento.evefechaevento}"/>
+                                <p:outputLabel  value="Descripcion: " />         
+                                <p:editor id="editor" widgetVar="editorWidget" controls=" " value="#{eventoVerEditarController.evento.evecontenido}" width="600" />
 
-                            <p:outputLabel  value="Descripcion: " />         
-                            <p:editor id="editor" widgetVar="editorWidget" controls=" " value="#{eventoVerEditarController.evento.evecontenido}" width="570" style="margin-top:5px" />
+                            </h:panelGrid>
 
-                            <p:commandButton style="margin: 5px" value="Guardar" action="#{eventoVerEditarController.actualizarEvento()}" ></p:commandButton>
-                            <p:button style="margin: 5px" outcome="editarEvento" value="Cancelar" ></p:button>
+                            <br/>
+                            <h:panelGrid columns="2" >
+                                <h:form>  
+                                    <p:growl id="message" showDetail="true" />
+                                    <p:commandButton value="Guardar" action="#{eventoVerEditarController.actualizarEvento()}" ></p:commandButton>
+                                    
 
-                        </h:panelGrid>
+                                    <p:button outcome="editarEvento" value="Cancelar" style="float:right" ></p:button>
 
+                                </h:form>
+                            </h:panelGrid>
 
-
-
-
+                        
                     </p:panelGrid>
                 </h:form>
             </ui:define>

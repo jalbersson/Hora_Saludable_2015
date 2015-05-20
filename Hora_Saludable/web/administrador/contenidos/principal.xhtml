@@ -45,20 +45,20 @@
                                 <div class="divPrincipal">
                                     <h1 style="color:#F2F2F2; text-align: center;">Envio Correo Masivo</h1>
                                     <h:panelGrid columns="1" class=" width:200px; ">
-                                        <h:outputLabel value="Asunto: " id="asunto" style="color:#F2F2F2; text-align: center;" />
-                                        <h:inputText id="asunto_" title="Asunto" style="width: 330px" />
+                                        <h:outputLabel value="Asunto: " id="asunto" style="color:#F2F2F2; text-align: center" />
+                                        <h:inputText id="asunto_" title="Asunto" style="width: 610px" />
                                         <h:outputLabel value="Mensaje: " id="mensaje" style="color:#F2F2F2; text-align: center;" />
                                         <h:outputFormat value="#{envioCorreo.subject}" title="Mensaje" />
                                         <h:inputTextarea rows="7" cols="87" value="#{envioCorreo.message_}" id="mensaje_" title="Mensaje"/>
-                                        <p:commandButton value="Enviar a todos" action="#{envioCorreo.sendMail()}" />
+                                        <p:commandButton value="Enviar a todos" actionListener="#{envioCorreo.sendMail()}" />
                                     </h:panelGrid>
                                 </div>
                             </h:form>
                         </h:form> 
                         <h:form>
-                            <div class="divPrincipal" style="height: 630px">
+                            <div class="divPrincipal" style="height: 600px">
                                 <h1 style="color:#F2F2F2; text-align: center;">Eventos</h1>
-                                <p:dataScroller  var="eventoLista" value="#{eventoController.ultimos}" chunkSize="15">
+                                <p:dataScroller  var="eventoLista" value="#{eventoController.ultimos}" chunkSize="4">
                                     <h:outputText value="#{eventoLista.evetitulo}" style="font-weight: bold; font-size: 18px; color:#AA0000;"/>
                                     <h:panelGrid columns="1" style="width:200px; height: 100px;">
                                         <p:outputPanel style="border-color:#22419A;">
@@ -77,7 +77,7 @@
                             </div>
                         </h:form>
                         <h:form>
-                            <h:form style="width:250px;">
+                            
                                 <div class="divPrincipal">
                                     <h1 style="color:#F2F2F2; text-align: center;">Horarios</h1>
                                     <p:panel id="toggleable" header="Horarios" toggleable="true" closable="false" toggleSpeed="500" widgetVar="panel" style="border: none; ">
@@ -89,7 +89,7 @@
                                         </p:dataScroller>
                                     </p:panel>  
                                 </div>        
-                            </h:form>
+                           
                         </h:form>
                         <p:panelMenu style="width:250px; float: right" >
                             <p:submenu label="Gestión de Eventos" >
