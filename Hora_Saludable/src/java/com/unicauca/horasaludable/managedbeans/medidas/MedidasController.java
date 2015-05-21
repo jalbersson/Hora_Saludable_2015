@@ -161,12 +161,8 @@ public class MedidasController {
         try {
 
             
-            
-            
-            
             File file = File.createTempFile(user.getUsunombres()+user.getUsuapellidos(), ".pdf");
-            pdfFileName = file.getName();
-      
+            pdfFileName = file.getName();      
 
             Document document = new Document();
 
@@ -205,7 +201,7 @@ public class MedidasController {
             document.add(tableEncabezado);
   
 
-             Paragraph tituloPoL = new Paragraph("POLComposicion Corporal y Test Deportivos",bold); 
+             Paragraph tituloPoL = new Paragraph("Composicion Corporal y Test Deportivos",bold); 
              tituloPoL.setAlignment(Element.ALIGN_CENTER);  
             document.add(tituloPoL);
       
@@ -246,14 +242,13 @@ public class MedidasController {
             document.add(new Paragraph("____________________________________________________________________________"));
                document.add(new Paragraph(""));
             
-  PdfPTable table = new PdfPTable(7);
-table.setWidthPercentage(100);
-        table.setSpacingAfter(5);
-        
-            
-        PdfPCell cell = new PdfPCell(new Phrase("ANTROPOMETRIA:",bold));
-        cell.setBorder(Rectangle.NO_BORDER);      
-       cell.setColspan(3);                    
+            PdfPTable table = new PdfPTable(7);
+            table.setWidthPercentage(100);
+            table.setSpacingAfter(5);
+
+            PdfPCell cell = new PdfPCell(new Phrase("ANTROPOMETRIA:", bold));
+            cell.setBorder(Rectangle.NO_BORDER);
+            cell.setColspan(3);                   
 
         PdfPCell cell02 = new PdfPCell(new Paragraph(""));
          cell02.setBorder(Rectangle.NO_BORDER); 
@@ -280,56 +275,93 @@ table.setWidthPercentage(100);
         cel11.setBorder(Rectangle.NO_BORDER);      
        cel11.setColspan(2);
        
+        PdfPCell cell101 = new PdfPCell(new Paragraph(getMedicionactual().getMedperimetrobrazo()+"res perimetro brazo"));
+            cell101.setBorder(Rectangle.NO_BORDER);
+            
+            PdfPCell cell102 = new PdfPCell(new Paragraph(""));
+            cell102.setBorder(Rectangle.NO_BORDER); 
+            
+            PdfPCell cell103 = new PdfPCell(new Paragraph(getMedicionactual().getMedtriceps()+"Triceps"));
+            cell103.setBorder(Rectangle.NO_BORDER); 
+            
+             PdfPCell cell104 = new PdfPCell(new Paragraph(getMedicionactual().getMeddiametroantebrazo()+"peri Antebra"));
+            cell104.setBorder(Rectangle.NO_BORDER); 
+            
+            PdfPCell cell105 = new PdfPCell(new Paragraph(""));
+            cell105.setBorder(Rectangle.NO_BORDER);
+            
         table.addCell(cell);
         table.addCell(cell02);
         table.addCell(cell31);
         table.addCell(cell5);
         table.addCell(cel6);
-        table.addCell("rtrt");  
-        table.addCell("");  
+        table.addCell(cell101);  
+        table.addCell(cell102);  
         table.addCell(cel9);
-        table.addCell("rrt");
+        table.addCell(cell103);
         table.addCell(cel11);
-        table.addCell("rt");
-        table.addCell("");  
+        table.addCell(cell104);
+        table.addCell(cell105);  
         
          PdfPCell cel14 = new PdfPCell(new Phrase("ABDOMINAL:",boldSize));
         cel14.setBorder(Rectangle.NO_BORDER); 
          cel14.setColspan(2);
          
         table.addCell(cel14);
-        table.addCell("rrt2P");
         
-        
-        
+        PdfPCell cell106 = new PdfPCell(new Paragraph(getMedicionactual().getMedabdominal()+"abdominal"));
+            cell106.setBorder(Rectangle.NO_BORDER);
+        table.addCell(cell106);
          PdfPCell cel16 = new PdfPCell(new Phrase("PERIMETRO DE CAJA TORAXICA:",boldSize));
         cel16.setBorder(Rectangle.NO_BORDER); 
          cel16.setColspan(2);
          
         table.addCell(cel16);
-        table.addCell("rt2");
-        table.addCell("");  
+        PdfPCell cell107 = new PdfPCell(new Paragraph(getMedicionactual().getMedperimetrocajatoraxica()+"caja tora"));
+            cell107.setBorder(Rectangle.NO_BORDER);
+        table.addCell(cell107);
+        
+        PdfPCell cell108 = new PdfPCell(new Paragraph(""));
+            cell108.setBorder(Rectangle.NO_BORDER);
+        table.addCell(cell108);  
         
         PdfPCell cel19 = new PdfPCell(new Phrase("MUSLO:",boldSize));
         cel19.setBorder(Rectangle.NO_BORDER); 
          cel19.setColspan(2);
         
         table.addCell(cel19);
-        table.addCell("rrt2");
+        
+          PdfPCell cell109 = new PdfPCell(new Paragraph(getMedicionactual().getMedmuslo()+"res muslo"));
+            cell109.setBorder(Rectangle.NO_BORDER);
+            
+        table.addCell(cell109);
         
         PdfPCell cel21 = new PdfPCell(new Phrase("PERIMETRO DE GATRONEMIO:",boldSize));
         cel21.setBorder(Rectangle.NO_BORDER); 
          cel21.setColspan(2);
          
         table.addCell(cel21);
-        table.addCell("rt2"); 
-        table.addCell("");  
+        
+        PdfPCell cell110 = new PdfPCell(new Paragraph("res gastronemico"));
+            cell110.setBorder(Rectangle.NO_BORDER);
+            
+        table.addCell(cell110);
+        
+        
+                PdfPCell cell111 = new PdfPCell(new Paragraph(""));
+            cell111.setBorder(Rectangle.NO_BORDER);
+        table.addCell(cell111); 
+        
         PdfPCell cel24 = new PdfPCell(new Phrase("SUBESCAPULAR:",boldSize));
         cel24.setBorder(Rectangle.NO_BORDER); 
         cel24.setColspan(2);
         
         table.addCell(cel24);
-        table.addCell("rrt2");
+        
+        PdfPCell cell112 = new PdfPCell(new Paragraph(getMedicionactual().getMedsubescapular()+"res subesca"));
+            cell112.setBorder(Rectangle.NO_BORDER);
+        table.addCell(cell112);
+        
         
         
         PdfPCell cel26 = new PdfPCell(new Phrase("PERIMETRO DE MUSLO:",boldSize));
@@ -337,8 +369,14 @@ table.setWidthPercentage(100);
         cel26.setColspan(2);
          
         table.addCell(cel26);
-        table.addCell("rt2");
-        table.addCell("");  
+        
+       PdfPCell cell113 = new PdfPCell(new Paragraph(getMedicionactual().getMedperimetromuslo()+"res perimetro muslo"));
+            cell113.setBorder(Rectangle.NO_BORDER);
+        table.addCell(cell113);
+        
+               PdfPCell cell114 = new PdfPCell(new Paragraph(""));
+            cell114.setBorder(Rectangle.NO_BORDER);
+        table.addCell(cell114);  
         
         PdfPCell cel29 = new PdfPCell(new Phrase("SUPRAILIACO:",boldSize));
         cel29.setBorder(Rectangle.NO_BORDER); 
@@ -346,15 +384,26 @@ table.setWidthPercentage(100);
         
         
         table.addCell(cel29);
-        table.addCell("rrt2");
+        
+        PdfPCell cell115 = new PdfPCell(new Paragraph(getMedicionactual().getMedsuprailiaco()+"suprailidac"));
+            cell115.setBorder(Rectangle.NO_BORDER);
+        
+        
+        table.addCell(cell115);
         
         PdfPCell cel31 = new PdfPCell(new Phrase("PERIMETRO DE MUÑECA:",boldSize));
         cel31.setBorder(Rectangle.NO_BORDER); 
         cel31.setColspan(2);
          
         table.addCell(cel31);
-        table.addCell("rt2");
-        table.addCell("");  
+        
+        PdfPCell cell116 = new PdfPCell(new Paragraph(getMedicionactual().getMedperimetromuneca()+"per muñek"));
+            cell116.setBorder(Rectangle.NO_BORDER);
+        table.addCell(cell116);
+        
+        PdfPCell cell117 = new PdfPCell(new Paragraph(""));
+            cell117.setBorder(Rectangle.NO_BORDER);
+        table.addCell(cell117);  
         
         PdfPCell cel34 = new PdfPCell(new Phrase("PANTORRILA:",boldSize));
         cel34.setBorder(Rectangle.NO_BORDER); 
@@ -362,7 +411,11 @@ table.setWidthPercentage(100);
          
          
         table.addCell(cel34);
-        table.addCell("rrt2");
+        
+        PdfPCell cell118 = new PdfPCell(new Paragraph(getMedicionactual().getMedpantorilla()+"res pantorilla"));
+            cell118.setBorder(Rectangle.NO_BORDER);
+            
+        table.addCell(cell118);
         
         PdfPCell cel36 = new PdfPCell(new Phrase(""));
         cel36.setBorder(Rectangle.NO_BORDER); 
@@ -370,19 +423,398 @@ table.setWidthPercentage(100);
          
         table.addCell(cel36);
  
-        table.addCell("");  
+        
+        PdfPCell cel190 = new PdfPCell(new Phrase(""));
+        cel190.setBorder(Rectangle.NO_BORDER); 
+        table.addCell(cel190);  
         
         PdfPCell cel39 = new PdfPCell(new Phrase("(+) PLIEGUES:",boldSize));
         cel39.setBorder(Rectangle.NO_BORDER); 
         table.addCell(cel39);
-        table.addCell("rrt2");        
         
+        PdfPCell cel191 = new PdfPCell(new Phrase("pliegues"));
+        cel191.setBorder(Rectangle.NO_BORDER); 
+        table.addCell(cel191);   
         
+        document.add(table); 
+        document.add(new Paragraph("____________________________________________________________________________"));
+            document.add(new Paragraph(""));
+
+            PdfPTable tabla = new PdfPTable(13);
+            tabla.setWidthPercentage(100);
+            //  tabla.setSpacingAfter(5);
+
+            PdfPCell celda = new PdfPCell(new Phrase("COMPOSICION CORPORAL:", bold));
+            celda.setBorder(Rectangle.NO_BORDER);
+            celda.setColspan(7);
+
+            PdfPCell celda2 = new PdfPCell(new Phrase(""));
+            celda2.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell celda3 = new PdfPCell(new Phrase(""));
+            celda3.setBorder(Rectangle.NO_BORDER);
+            PdfPCell celda4 = new PdfPCell(new Phrase(""));
+            celda4.setBorder(Rectangle.NO_BORDER);
+            PdfPCell celda5 = new PdfPCell(new Phrase(""));
+            celda5.setBorder(Rectangle.NO_BORDER);
+            PdfPCell celda6 = new PdfPCell(new Phrase(""));
+            celda6.setBorder(Rectangle.NO_BORDER);
+            PdfPCell celda7 = new PdfPCell(new Phrase(""));
+            celda7.setBorder(Rectangle.NO_BORDER);
+            
+            PdfPCell celda110 = new PdfPCell(new Phrase("\n"));
+            celda110.setBorder(Rectangle.NO_BORDER);
+            celda110.setColspan(13);
+
+            PdfPCell celda8 = new PdfPCell(new Phrase("PORCENTAJE DE GRASA:", negrilla));
+            celda8.setBorder(Rectangle.NO_BORDER);
+            celda8.setColspan(4);
+
+            PdfPCell celda9 = new PdfPCell(new Phrase("1.2 SOBREPESO"));
+            celda9.setBorder(Rectangle.NO_BORDER);
+            celda9.setColspan(3);
+
+            PdfPCell celda11 = new PdfPCell(new Phrase(""));
+            celda11.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell celda12 = new PdfPCell(new Phrase("PESO OPTIMO:", negrilla));
+            celda12.setBorder(Rectangle.NO_BORDER);
+            celda12.setColspan(4);
+
+            PdfPCell celda13 = new PdfPCell(new Phrase((float) getMedicionactual().pesooptimo()+"RES PES OPTIMO"));
+            celda13.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell celda14 = new PdfPCell(new Phrase("PESO GRASO:", negrilla));
+            celda14.setBorder(Rectangle.NO_BORDER);
+            celda14.setColspan(4);
+
+            PdfPCell celda15 = new PdfPCell(new Phrase((float) getMedicionactual().pesoGraso()+"RES PESO GRASO"));
+            celda15.setBorder(Rectangle.NO_BORDER);
+ celda15.setColspan(3);
+
+            PdfPCell celda17 = new PdfPCell(new Phrase(""));
+            celda17.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell celda18 = new PdfPCell(new Phrase("PESO LIBRE DE GRASA:", negrilla));
+            celda18.setBorder(Rectangle.NO_BORDER);
+            celda18.setColspan(4);
+
+            PdfPCell celda19 = new PdfPCell(new Phrase((float) getMedicionactual().pesolibregrasa()+"PESO LIBRE DE GRASA"));
+            celda19.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell celda20 = new PdfPCell(new Phrase("MASA TOTAL OSEA:", negrilla));
+            celda20.setBorder(Rectangle.NO_BORDER);
+            celda20.setColspan(4);
+
+            PdfPCell celda21 = new PdfPCell(new Phrase((float) getMedicionactual().masatotalosea()+"MASA OSEATOTAL"));
+            celda21.setBorder(Rectangle.NO_BORDER);
+            celda21.setColspan(3);
+
+            PdfPCell celda23 = new PdfPCell(new Phrase(""));
+            celda23.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell celda24 = new PdfPCell(new Phrase("TASA METABOLICA BASAL: ", negrilla));
+            celda24.setBorder(Rectangle.NO_BORDER);
+            celda24.setColspan(4);
+
+            PdfPCell celda25 = new PdfPCell(new Phrase((float) getMedicionactual().tasametabolicabasal()+"TASA"));
+            celda25.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell celda26 = new PdfPCell(new Phrase("EXCESO DE PESO:", negrilla));
+            celda26.setBorder(Rectangle.NO_BORDER);
+            celda26.setColspan(4);
+
+            PdfPCell celda27 = new PdfPCell(new Phrase((float) getMedicionactual().excesodepeso()+"EXCESO DE PESO"));
+            celda27.setBorder(Rectangle.NO_BORDER);
+             celda27.setColspan(3);
+
+            PdfPCell celda29 = new PdfPCell(new Phrase(""));
+            celda29.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell celda30 = new PdfPCell(new Phrase("MASA MUSCULAR:", negrilla));
+            celda30.setBorder(Rectangle.NO_BORDER);
+            celda30.setColspan(4);
+
+            PdfPCell celda31 = new PdfPCell(new Phrase((float) getMedicionactual().masamuscular()+"MASA MUS"));
+            celda31.setBorder(Rectangle.NO_BORDER);
+
+            PdfPCell celda32 = new PdfPCell(new Phrase("IND. MASA CORPORAL:", negrilla));
+            celda32.setBorder(Rectangle.NO_BORDER);
+            celda32.setColspan(4);
+
+            PdfPCell celda33 = new PdfPCell(new Phrase((float) getMedicionactual().indicemasacorporal()+"EXCESO DE PESO"));
+            celda33.setBorder(Rectangle.NO_BORDER);
+             celda33.setColspan(3);
+
+            PdfPCell celda35 = new PdfPCell(new Phrase(""));
+            celda35.setBorder(Rectangle.NO_BORDER);
+            celda35.setColspan(4);
+
+            tabla.addCell(celda);
+
+            tabla.addCell(celda2);
+            tabla.addCell(celda3);
+            tabla.addCell(celda4);
+            tabla.addCell(celda5);
+            tabla.addCell(celda6);
+            tabla.addCell(celda7);            
+            tabla.addCell(celda110);
+            tabla.addCell(celda8);
+            tabla.addCell(celda9);
+            tabla.addCell(celda11);
+            tabla.addCell(celda12);
+            tabla.addCell(celda13);
+            tabla.addCell(celda14);
+            tabla.addCell(celda15);
+            tabla.addCell(celda17);
+            tabla.addCell(celda18);
+            tabla.addCell(celda19);
+            tabla.addCell(celda20);
+            tabla.addCell(celda21);
+            tabla.addCell(celda23);
+            tabla.addCell(celda24);
+            tabla.addCell(celda25);
+            tabla.addCell(celda26);
+            tabla.addCell(celda27);
+            tabla.addCell(celda29);
+            tabla.addCell(celda30);
+            tabla.addCell(celda31);
+            tabla.addCell(celda32);
+            tabla.addCell(celda33);
+            tabla.addCell(celda35);           
+            document.add(tabla);  
+         
+         
+          document.add(new Paragraph("____________________________________________________________________________"));
+        document.add(new Paragraph(""));
+        
+        PdfPTable tablass1 = new PdfPTable(20);       
+           tablass1.setWidthPercentage(100);
+            tablass1.setSpacingAfter(5);
+    
+            
+        PdfPCell celdda = new PdfPCell(new Phrase("",bold));        
+        celdda.setColspan(6);
+        
+         PdfPCell celdda1 = new PdfPCell(new Phrase(""));         
+        celdda1.setBorder(Rectangle.NO_BORDER);   
            
-           document.add(table);   
+        PdfPCell celdda2 = new PdfPCell(new Phrase(""));
+        celdda2.setColspan(6);   
+            
+             PdfPCell celdda3 = new PdfPCell(new Phrase(""));
+        celdda3.setBorder(Rectangle.NO_BORDER); 
+            
+              PdfPCell celdda4 = new PdfPCell(new Phrase(""));              
+             celdda4.setColspan(6);   
+              
+             
+             PdfPTable tablass2 = new PdfPTable(3);
+             tablass2.setWidthPercentage(100);
+            tablass2.setSpacingAfter(5);
+           
+             
+             PdfPCell celdda901 = new PdfPCell(new Phrase("     TEST DE SARGENT",bold));
+             celdda901.setBorder(Rectangle.NO_BORDER);
+             celdda901.setColspan(3); 
+             
+              PdfPCell celdda909 = new PdfPCell(new Phrase("\n"));
+             celdda909.setBorder(Rectangle.NO_BORDER);
+             celdda909.setColspan(3);
+             
+             PdfPCell celdda902 = new PdfPCell(new Phrase("Embergadura:",bold));
+             celdda902.setBorder(Rectangle.NO_BORDER);
+             celdda902.setColspan(2);
+             
+             PdfPCell celdda9022 = new PdfPCell(new Phrase("resul emb"));
+             celdda9022.setBorder(Rectangle.NO_BORDER); 
+             
+             
+             PdfPCell celdda903 = new PdfPCell(new Phrase("Salto Máximo",bold));
+             celdda903.setBorder(Rectangle.NO_BORDER);
+               celdda903.setColspan(2);
+             
+             PdfPCell celdda9032 = new PdfPCell(new Phrase("resul salto"));
+             celdda9032.setBorder(Rectangle.NO_BORDER);                           
+             
+             PdfPCell celdda904 = new PdfPCell(new Phrase("Salto Real",bold));
+             celdda904.setBorder(Rectangle.NO_BORDER);
+             celdda904.setColspan(2);
+             
+             PdfPCell celdda905 = new PdfPCell(new Phrase("resSaltor eal"));
+             celdda905.setBorder(Rectangle.NO_BORDER);   
+             
+             PdfPCell celdda906 = new PdfPCell(new Phrase("\n \n\n"));
+             celdda906.setBorder(Rectangle.NO_BORDER);
+             celdda906.setColspan(4);
+             
+             PdfPCell celdda907 = new PdfPCell(new Phrase("\n"));
+             celdda907.setBorder(Rectangle.NO_BORDER); 
+             celdda907.setColspan(4);
+             
+             
+             tablass2.addCell(celdda901);
+             tablass2.addCell(celdda909); 
+             tablass2.addCell(celdda902);
+             tablass2.addCell(celdda9022);
+             tablass2.addCell(celdda903);             
+             tablass2.addCell(celdda9032);
+             tablass2.addCell(celdda904);
+             tablass2.addCell(celdda905);            
+             tablass2.addCell(celdda906);
+             tablass2.addCell(celdda907);
+             
+            celdda.addElement(tablass2);
+                 
+             
+           PdfPTable tablass3 = new PdfPTable(3);
+           tablass3.setWidthPercentage(100);
+           tablass3.setSpacingAfter(5);
+            
+            PdfPCell tablaPOL = new PdfPCell(new Phrase("      TEST DE RUFIER",bold));
+             tablaPOL.setBorder(Rectangle.NO_BORDER); 
+             tablaPOL.setColspan(4);
             
             
+             
+              PdfPCell tablaPOL1 = new PdfPCell(new Phrase("\n"));
+             tablaPOL1.setBorder(Rectangle.NO_BORDER);
+             tablaPOL1.setColspan(3);
+             
+             PdfPCell tablaPOL2 = new PdfPCell(new Phrase("Pulso 1:",bold));
+             tablaPOL2.setBorder(Rectangle.NO_BORDER);
+             tablaPOL2.setColspan(2);
+             
+             PdfPCell tablaPOL3 = new PdfPCell(new Phrase("res pulso"));
+             tablaPOL3.setBorder(Rectangle.NO_BORDER); 
+             
+             PdfPCell tablaPOL4 = new PdfPCell(new Phrase("Pulso 2:",bold));
+             tablaPOL4.setBorder(Rectangle.NO_BORDER);
+             tablaPOL4.setColspan(2);
+             
+             PdfPCell tablaPOL5 = new PdfPCell(new Phrase("res pulso2"));
+             tablaPOL5.setBorder(Rectangle.NO_BORDER);
+             
+             
+             PdfPCell tablaPOL6 = new PdfPCell(new Phrase("Pulso 3:",bold));
+             tablaPOL6.setBorder(Rectangle.NO_BORDER);
+             tablaPOL6.setColspan(2);
+             
+             PdfPCell tablaPOL7 = new PdfPCell(new Phrase("res pulso3"));
+             tablaPOL7.setBorder(Rectangle.NO_BORDER);
+             
+             
+                   PdfPCell tablaPOL8 = new PdfPCell(new Phrase("Resultado:",bold));
+             tablaPOL8.setBorder(Rectangle.NO_BORDER);
+             tablaPOL8.setColspan(2);
+             
+             PdfPCell tablaPOL9 = new PdfPCell(new Phrase("res "));
+             tablaPOL9.setBorder(Rectangle.NO_BORDER);
+             
+               PdfPCell tablaPOL11 = new PdfPCell(new Phrase("\n "));
+             tablaPOL11.setBorder(Rectangle.NO_BORDER);
+             tablaPOL11.setColspan(3);
+             
+             PdfPCell tablaPOL12 = new PdfPCell(new Phrase("\n "));
+             tablaPOL12.setBorder(Rectangle.NO_BORDER);
+             tablaPOL12.setColspan(3);
+             
+              PdfPCell tablaPOL10 = new PdfPCell(new Phrase("res presultado"));
+              tablaPOL10.setColspan(6);
+              
+              
+            tablass3.addCell(tablaPOL); 
+            tablass3.addCell(tablaPOL1); 
+            tablass3.addCell(tablaPOL2); 
+            tablass3.addCell(tablaPOL3); 
+            tablass3.addCell(tablaPOL4); 
+            tablass3.addCell(tablaPOL5); 
+            tablass3.addCell(tablaPOL6); 
+            tablass3.addCell(tablaPOL7); 
+            tablass3.addCell(tablaPOL8); 
+            tablass3.addCell(tablaPOL9); 
+            tablass3.addCell(tablaPOL11); 
+            tablass3.addCell(tablaPOL10); 
+            celdda2.addElement(tablass3);
+            //
+                    
+            PdfPTable tablass4 = new PdfPTable(3);
+           tablass4.setWidthPercentage(100);
+           tablass4.setSpacingAfter(5);
             
+            PdfPCell tablePOL100 = new PdfPCell(new Phrase("      TEST DE LEGER:",bold));
+             tablePOL100.setBorder(Rectangle.NO_BORDER); 
+             tablePOL100.setColspan(4);
+             
+             
+             PdfPCell tablePOL101 = new PdfPCell(new Phrase("    \n       CONSUMO MAX. \n             OXIGENO:\n\n"));
+             tablePOL101.setBorder(Rectangle.NO_BORDER); 
+              tablePOL101.setColspan(4);
+              
+              
+              PdfPCell tablePOL102 = new PdfPCell(new Phrase("  RES CONSU OXIGENO"));
+              tablePOL102.setBorder(Rectangle.NO_BORDER); 
+              tablePOL102.setColspan(4);
+             
+              PdfPCell tablePOL103 = new PdfPCell(new Phrase("-------------------------------------"));
+              tablePOL103.setBorder(Rectangle.NO_BORDER); 
+              tablePOL103.setColspan(4);
+              
+              PdfPCell tablePOL104 = new PdfPCell(new Phrase("      TEST DE WELLS:\n",bold));
+              tablePOL104.setBorder(Rectangle.NO_BORDER); 
+              tablePOL104.setColspan(4);
+              
+              PdfPCell tablePOL105 = new PdfPCell(new Phrase("Flexibilidad",bold));
+              tablePOL105.setBorder(Rectangle.NO_BORDER); 
+              tablePOL105.setColspan(2);
+              
+               PdfPCell tablePOL106 = new PdfPCell(new Phrase("res flexi "));
+              tablePOL106.setBorder(Rectangle.NO_BORDER);
+              
+                PdfPCell tablePOL108 = new PdfPCell(new Phrase("\n "));
+             tablePOL108.setBorder(Rectangle.NO_BORDER);
+             tablePOL108.setColspan(3); 
+             
+              PdfPCell tablaPOL107 = new PdfPCell(new Phrase("res presultado"));
+              tablaPOL107.setColspan(6);
+              
+             tablass4.addCell(tablePOL100);
+             tablass4.addCell(tablePOL101);
+             tablass4.addCell(tablePOL102);
+            tablass4.addCell(tablePOL103);
+            tablass4.addCell(tablePOL104);
+            tablass4.addCell(tablePOL105);
+            tablass4.addCell(tablePOL106);  
+             tablass4.addCell(tablePOL108); 
+            tablass4.addCell(tablaPOL107);
+            celdda4.addElement(tablass4);
+            
+                    
+        tablass1.addCell(celdda);        
+        tablass1.addCell(celdda1);
+        tablass1.addCell(celdda2);
+        tablass1.addCell(celdda3);
+        tablass1.addCell(celdda4);
+        
+            document.add(tablass1);
+        
+        
+         document.add(new Paragraph("____________________________________________________________________________"));
+        
+          
+           PdfPTable Poltable = new PdfPTable(7);
+            Poltable.setWidthPercentage(100);
+            Poltable.setSpacingAfter(5);
+            
+            PdfPCell comeCelda = new PdfPCell(new Phrase("COMENTARIOS",bold));
+            comeCelda.setBorder(Rectangle.NO_BORDER);  
+            
+            
+       Poltable.addCell(comeCelda);
+       
+            
+            
+            document.add(Poltable);
             document.close();
             RequestContext.getCurrentInstance().update("frmVerRutina");
         } catch (IOException ex) {
@@ -392,62 +824,7 @@ table.setWidthPercentage(100);
         }
     }
 
-    /* public void imprimir() {
    
-     try {
-     //Generamos el archivo PDF
-     String directorioArchivos;
-     ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-     // directorioArchivos = ctx.getRealPath("/") + "reports";
-     directorioArchivos="Hora_Saludable\\build\\web\\reports";
-       
-            
-     name = directorioArchivos +"\\"+getMedicionactual().getUsuid().getUsuidentificacion()+"test-pdf";
-     Document document = new Document();
-            
-            
-     PdfWriter.getInstance(document, new FileOutputStream(name));
-     document.open();
-             
-     document.add(new Paragraph(""));
-     document.add(new Paragraph("                                   Composicion Corporal y Test Deportivos"));
-     document.add(new Paragraph("____________________________________________________________________________"));
-     document.add(new Paragraph("Nombre: " + getMedicionactual().getUsuid().getUsunombres() + " "+getMedicionactual().getUsuid().getUsuapellidos()+ "                                                  Fecha:"+fecha));
-     document.add(new Paragraph("Identificacion: " + getMedicionactual().getUsuid().getUsuidentificacion() + "                               Genero: "+ getMedicionactual().getUsuid().getUsugenero()));
-
-     document.add(new Paragraph("Complexion: " + getMedicionactual().complexion()+"                                         Peso:"+getMedicionactual().getMedpeso()+"                   Talla :"+getMedicionactual().getMedtalla()));
-     document.add(new Paragraph("Nombre: " + getMedicionactual().getMedpeso()));
-     document.add(new Paragraph("Nombre: " + getMedicionactual().getMedpeso()));
-     document.add(new Paragraph("Nombre: " + getMedicionactual().getMedpeso()));
-     cargarArchivo();
-            
-
-     document.close();
-     //----------------------------
-     //Abrimos el archivo PDF
-     System.out.println("Nombreeeeeeeeee "+name);
-     System.out.println("slkdmklsmflkemglksemkgte"+directorioArchivos);
-     FacesContext context = FacesContext.getCurrentInstance();
-     HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
-     response.setContentType("application/pdf");
-     response.setHeader("Content-disposition","inline=filename=" + name);
-            
-     try {
-     response.getOutputStream().write(Util.getBytesFromFile(new File(name)));  
-     response.getOutputStream().flush();
-     response.getOutputStream().close();
-     context.responseComplete();
-     } catch (IOException e) 
-     {
-     System.out.println("Error 11");
-     e.printStackTrace();
-     }
-     } catch (Exception e) 
-     {
-     System.out.println("Erro2");
-     e.printStackTrace();
-     }*/
-  //  }
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
