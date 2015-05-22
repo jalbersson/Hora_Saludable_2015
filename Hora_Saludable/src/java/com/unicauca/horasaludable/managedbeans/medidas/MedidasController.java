@@ -470,7 +470,7 @@ public class MedidasController {
             celda8.setBorder(Rectangle.NO_BORDER);
             celda8.setColspan(4);
 
-            PdfPCell celda9 = new PdfPCell(new Phrase("1.2 SOBREPESO"));
+            PdfPCell celda9 = new PdfPCell(new Phrase(getMedicionactual().porcentajeGrasa()+" " + getMedicionactual().getEstadoPorcentajeGrasaIdeal()));
             celda9.setBorder(Rectangle.NO_BORDER);
             celda9.setColspan(3);
 
@@ -481,14 +481,14 @@ public class MedidasController {
             celda12.setBorder(Rectangle.NO_BORDER);
             celda12.setColspan(4);
 
-            PdfPCell celda13 = new PdfPCell(new Phrase((float) getMedicionactual().pesooptimo()+"RES PES OPTIMO"));
+            PdfPCell celda13 = new PdfPCell(new Phrase(getMedicionactual().pesooptimo()+"RES PES OPTIMO"));
             celda13.setBorder(Rectangle.NO_BORDER);
 
             PdfPCell celda14 = new PdfPCell(new Phrase("PESO GRASO:", negrilla));
             celda14.setBorder(Rectangle.NO_BORDER);
             celda14.setColspan(4);
 
-            PdfPCell celda15 = new PdfPCell(new Phrase((float) getMedicionactual().pesoGraso()+"RES PESO GRASO"));
+            PdfPCell celda15 = new PdfPCell(new Phrase(getMedicionactual().pesoGraso()+"RES PESO GRASO"));
             celda15.setBorder(Rectangle.NO_BORDER);
  celda15.setColspan(3);
 
@@ -499,14 +499,14 @@ public class MedidasController {
             celda18.setBorder(Rectangle.NO_BORDER);
             celda18.setColspan(4);
 
-            PdfPCell celda19 = new PdfPCell(new Phrase((float) getMedicionactual().pesolibregrasa()+"PESO LIBRE DE GRASA"));
+            PdfPCell celda19 = new PdfPCell(new Phrase( getMedicionactual().pesolibregrasa()+"PESO LIBRE DE GRASA"));
             celda19.setBorder(Rectangle.NO_BORDER);
 
             PdfPCell celda20 = new PdfPCell(new Phrase("MASA TOTAL OSEA:", negrilla));
             celda20.setBorder(Rectangle.NO_BORDER);
             celda20.setColspan(4);
 
-            PdfPCell celda21 = new PdfPCell(new Phrase((float) getMedicionactual().masatotalosea()+"MASA OSEATOTAL"));
+            PdfPCell celda21 = new PdfPCell(new Phrase(getMedicionactual().masatotalosea()+"MASA OSEATOTAL"));
             celda21.setBorder(Rectangle.NO_BORDER);
             celda21.setColspan(3);
 
@@ -517,14 +517,14 @@ public class MedidasController {
             celda24.setBorder(Rectangle.NO_BORDER);
             celda24.setColspan(4);
 
-            PdfPCell celda25 = new PdfPCell(new Phrase((float) getMedicionactual().tasametabolicabasal()+"TASA"));
+            PdfPCell celda25 = new PdfPCell(new Phrase( getMedicionactual().tasametabolicabasal()+"TASA"));
             celda25.setBorder(Rectangle.NO_BORDER);
 
             PdfPCell celda26 = new PdfPCell(new Phrase("EXCESO DE PESO:", negrilla));
             celda26.setBorder(Rectangle.NO_BORDER);
             celda26.setColspan(4);
 
-            PdfPCell celda27 = new PdfPCell(new Phrase((float) getMedicionactual().excesodepeso()+"EXCESO DE PESO"));
+            PdfPCell celda27 = new PdfPCell(new Phrase( getMedicionactual().excesodepeso()+"EXCESO DE PESO"));
             celda27.setBorder(Rectangle.NO_BORDER);
              celda27.setColspan(3);
 
@@ -535,14 +535,14 @@ public class MedidasController {
             celda30.setBorder(Rectangle.NO_BORDER);
             celda30.setColspan(4);
 
-            PdfPCell celda31 = new PdfPCell(new Phrase((float) getMedicionactual().masamuscular()+"MASA MUS"));
+            PdfPCell celda31 = new PdfPCell(new Phrase( getMedicionactual().masamuscular()+"MASA MUS"));
             celda31.setBorder(Rectangle.NO_BORDER);
 
             PdfPCell celda32 = new PdfPCell(new Phrase("IND. MASA CORPORAL:", negrilla));
             celda32.setBorder(Rectangle.NO_BORDER);
             celda32.setColspan(4);
 
-            PdfPCell celda33 = new PdfPCell(new Phrase((float) getMedicionactual().indicemasacorporal()+"EXCESO DE PESO"));
+            PdfPCell celda33 = new PdfPCell(new Phrase(getMedicionactual().indicemasacorporal()+" "+getMedicionactual().getEstadoIMC()));
             celda33.setBorder(Rectangle.NO_BORDER);
              celda33.setColspan(3);
 
@@ -626,7 +626,7 @@ public class MedidasController {
              celdda902.setBorder(Rectangle.NO_BORDER);
              celdda902.setColspan(2);
              
-             PdfPCell celdda9022 = new PdfPCell(new Phrase("resul emb"));
+             PdfPCell celdda9022 = new PdfPCell(new Phrase(getMedicionactual().getMedembergadura()));
              celdda9022.setBorder(Rectangle.NO_BORDER); 
              
              
@@ -634,14 +634,14 @@ public class MedidasController {
              celdda903.setBorder(Rectangle.NO_BORDER);
                celdda903.setColspan(2);
              
-             PdfPCell celdda9032 = new PdfPCell(new Phrase("resul salto"));
+             PdfPCell celdda9032 = new PdfPCell(new Phrase(getMedicionactual().getMedsaltomaximo()));
              celdda9032.setBorder(Rectangle.NO_BORDER);                           
              
              PdfPCell celdda904 = new PdfPCell(new Phrase("Salto Real",bold));
              celdda904.setBorder(Rectangle.NO_BORDER);
              celdda904.setColspan(2);
              
-             PdfPCell celdda905 = new PdfPCell(new Phrase("resSaltor eal"));
+             PdfPCell celdda905 = new PdfPCell(new Phrase(getMedicionactual().getMedsaltoreal()));
              celdda905.setBorder(Rectangle.NO_BORDER);   
              
              PdfPCell celdda906 = new PdfPCell(new Phrase("\n \n\n"));
@@ -685,14 +685,14 @@ public class MedidasController {
              tablaPOL2.setBorder(Rectangle.NO_BORDER);
              tablaPOL2.setColspan(2);
              
-             PdfPCell tablaPOL3 = new PdfPCell(new Phrase("res pulso"));
+             PdfPCell tablaPOL3 = new PdfPCell(new Phrase(getMedicionactual().getMedpulso0()+""));
              tablaPOL3.setBorder(Rectangle.NO_BORDER); 
              
              PdfPCell tablaPOL4 = new PdfPCell(new Phrase("Pulso 2:",bold));
              tablaPOL4.setBorder(Rectangle.NO_BORDER);
              tablaPOL4.setColspan(2);
              
-             PdfPCell tablaPOL5 = new PdfPCell(new Phrase("res pulso2"));
+             PdfPCell tablaPOL5 = new PdfPCell(new Phrase(getMedicionactual().getMedpulso1()+""));
              tablaPOL5.setBorder(Rectangle.NO_BORDER);
              
              
@@ -700,7 +700,7 @@ public class MedidasController {
              tablaPOL6.setBorder(Rectangle.NO_BORDER);
              tablaPOL6.setColspan(2);
              
-             PdfPCell tablaPOL7 = new PdfPCell(new Phrase("res pulso3"));
+             PdfPCell tablaPOL7 = new PdfPCell(new Phrase(getMedicionactual().getMedpulso2()+""));
              tablaPOL7.setBorder(Rectangle.NO_BORDER);
              
              
@@ -708,7 +708,7 @@ public class MedidasController {
              tablaPOL8.setBorder(Rectangle.NO_BORDER);
              tablaPOL8.setColspan(2);
              
-             PdfPCell tablaPOL9 = new PdfPCell(new Phrase("res "));
+             PdfPCell tablaPOL9 = new PdfPCell(new Phrase(getMedicionactual().getTestRufier()+""));
              tablaPOL9.setBorder(Rectangle.NO_BORDER);
              
                PdfPCell tablaPOL11 = new PdfPCell(new Phrase("\n "));
@@ -719,7 +719,7 @@ public class MedidasController {
              tablaPOL12.setBorder(Rectangle.NO_BORDER);
              tablaPOL12.setColspan(3);
              
-              PdfPCell tablaPOL10 = new PdfPCell(new Phrase("res presultado"));
+              PdfPCell tablaPOL10 = new PdfPCell(new Phrase(getMedicionactual().getEstadoRufier()));
               tablaPOL10.setColspan(6);
               
               
@@ -752,7 +752,7 @@ public class MedidasController {
               tablePOL101.setColspan(4);
               
               
-              PdfPCell tablePOL102 = new PdfPCell(new Phrase("  RES CONSU OXIGENO"));
+              PdfPCell tablePOL102 = new PdfPCell(new Phrase("no esta"));
               tablePOL102.setBorder(Rectangle.NO_BORDER); 
               tablePOL102.setColspan(4);
              
@@ -768,14 +768,14 @@ public class MedidasController {
               tablePOL105.setBorder(Rectangle.NO_BORDER); 
               tablePOL105.setColspan(2);
               
-               PdfPCell tablePOL106 = new PdfPCell(new Phrase("res flexi "));
+               PdfPCell tablePOL106 = new PdfPCell(new Phrase(getMedicionactual().getMedflexibilidad()));
               tablePOL106.setBorder(Rectangle.NO_BORDER);
               
                 PdfPCell tablePOL108 = new PdfPCell(new Phrase("\n "));
              tablePOL108.setBorder(Rectangle.NO_BORDER);
              tablePOL108.setColspan(3); 
              
-              PdfPCell tablaPOL107 = new PdfPCell(new Phrase("res presultado"));
+              PdfPCell tablaPOL107 = new PdfPCell(new Phrase(getMedicionactual().getEstadoTestWells()+""));
               tablaPOL107.setColspan(6);
               
              tablass4.addCell(tablePOL100);
@@ -799,22 +799,27 @@ public class MedidasController {
             document.add(tablass1);
         
         
-         document.add(new Paragraph("____________________________________________________________________________"));
-        
-          
-           PdfPTable Poltable = new PdfPTable(7);
-            Poltable.setWidthPercentage(100);
-            Poltable.setSpacingAfter(5);
+          PdfPTable tablassPoL = new PdfPTable(4);
+           tablassPoL.setWidthPercentage(100);
+           tablassPoL.setSpacingAfter(5);           
+                     
+              document.add(new Paragraph("____________________________________________________________________________"));
             
-            PdfPCell comeCelda = new PdfPCell(new Phrase("COMENTARIOS",bold));
-            comeCelda.setBorder(Rectangle.NO_BORDER);  
-            
-            
-       Poltable.addCell(comeCelda);
+              
+             PdfPCell tablePOLTa1 = new PdfPCell(new Phrase("  COMENTARIOS \n \n",bold));
+             tablePOLTa1.setBorder(Rectangle.NO_BORDER); 
+             tablePOLTa1.setColspan(4);
+             
+             PdfPCell tablePOLTa2 = new PdfPCell(new Phrase("  \n \n\n \n\n \n\n \n",bold));
+             tablePOLTa2.setColspan(4);
        
+                        
+
+      tablassPoL.addCell(tablePOLTa1);
+      tablassPoL.addCell(tablePOLTa2);
+           
+           document.add(tablassPoL);
             
-            
-            document.add(Poltable);
             document.close();
             RequestContext.getCurrentInstance().update("frmVerRutina");
         } catch (IOException ex) {
