@@ -28,99 +28,51 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Horario.findAll", query = "SELECT h FROM Horario h"),
     @NamedQuery(name = "Horario.findByHorid", query = "SELECT h FROM Horario h WHERE h.horid = :horid"),
-    @NamedQuery(name = "Horario.findByHorhora", query = "SELECT h FROM Horario h WHERE h.horhora = :horhora"),
-    @NamedQuery(name = "Horario.findByHorlunes", query = "SELECT h FROM Horario h WHERE h.horlunes = :horlunes"),
-    @NamedQuery(name = "Horario.findByHormartes", query = "SELECT h FROM Horario h WHERE h.hormartes = :hormartes"),
-    @NamedQuery(name = "Horario.findByHormiercoles", query = "SELECT h FROM Horario h WHERE h.hormiercoles = :hormiercoles"),
-    @NamedQuery(name = "Horario.findByHorjueves", query = "SELECT h FROM Horario h WHERE h.horjueves = :horjueves"),
-    @NamedQuery(name = "Horario.findByHorviernes", query = "SELECT h FROM Horario h WHERE h.horviernes = :horviernes")})
+    @NamedQuery(name = "Horario.findByHornombre", query = "SELECT h FROM Horario h WHERE h.hornombre = :hornombre"),
+    @NamedQuery(name = "Horario.findByHorcontenido", query = "SELECT h FROM Horario h WHERE h.horcontenido = :horcontenido")})
 public class Horario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "HORID")
-    private Long horid;
-    @Size(max = 10)
-    @Column(name = "HORHORA")
-    private String horhora;
-    @Size(max = 30)
-    @Column(name = "HORLUNES")
-    private String horlunes;
-    @Size(max = 30)
-    @Column(name = "HORMARTES")
-    private String hormartes;
-    @Size(max = 30)
-    @Column(name = "HORMIERCOLES")
-    private String hormiercoles;
-    @Size(max = 30)
-    @Column(name = "HORJUEVES")
-    private String horjueves;
-    @Size(max = 30)
-    @Column(name = "HORVIERNES")
-    private String horviernes;
+    private Integer horid;
+    @Size(max = 100)
+    @Column(name = "HORNOMBRE")
+    private String hornombre;
+    @Size(max = 10000)
+    @Column(name = "HORCONTENIDO")
+    private String horcontenido;
 
     public Horario() {
     }
 
-    public Horario(Long horid) {
+    public Horario(Integer horid) {
         this.horid = horid;
     }
 
-    public Long getHorid() {
+    public Integer getHorid() {
         return horid;
     }
 
-    public void setHorid(Long horid) {
+    public void setHorid(Integer horid) {
         this.horid = horid;
     }
 
-    public String getHorhora() {
-        return horhora;
+    public String getHornombre() {
+        return hornombre;
     }
 
-    public void setHorhora(String horhora) {
-        this.horhora = horhora;
+    public void setHornombre(String hornombre) {
+        this.hornombre = hornombre;
     }
 
-    public String getHorlunes() {
-        return horlunes;
+    public String getHorcontenido() {
+        return horcontenido;
     }
 
-    public void setHorlunes(String horlunes) {
-        this.horlunes = horlunes;
-    }
-
-    public String getHormartes() {
-        return hormartes;
-    }
-
-    public void setHormartes(String hormartes) {
-        this.hormartes = hormartes;
-    }
-
-    public String getHormiercoles() {
-        return hormiercoles;
-    }
-
-    public void setHormiercoles(String hormiercoles) {
-        this.hormiercoles = hormiercoles;
-    }
-
-    public String getHorjueves() {
-        return horjueves;
-    }
-
-    public void setHorjueves(String horjueves) {
-        this.horjueves = horjueves;
-    }
-
-    public String getHorviernes() {
-        return horviernes;
-    }
-
-    public void setHorviernes(String horviernes) {
-        this.horviernes = horviernes;
+    public void setHorcontenido(String horcontenido) {
+        this.horcontenido = horcontenido;
     }
 
     @Override

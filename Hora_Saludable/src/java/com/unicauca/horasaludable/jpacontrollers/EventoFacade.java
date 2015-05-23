@@ -18,7 +18,6 @@ import javax.persistence.Query;
  */
 @Stateless
 public class EventoFacade extends AbstractFacade<Evento> {
-
     @PersistenceContext(unitName = "Hora_SaludablePU")
     private EntityManager em;
 
@@ -30,7 +29,7 @@ public class EventoFacade extends AbstractFacade<Evento> {
     public EventoFacade() {
         super(Evento.class);
     }
-
+    
     public List<Evento> buscarEventos() {
         Query query = getEntityManager().createNamedQuery("Evento.findAll");
         List<Evento> resultList = query.getResultList();
@@ -52,5 +51,4 @@ public class EventoFacade extends AbstractFacade<Evento> {
         }
         return listado.get(0);
     }
-
 }

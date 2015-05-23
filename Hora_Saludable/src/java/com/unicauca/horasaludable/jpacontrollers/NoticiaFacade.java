@@ -6,8 +6,6 @@
 package com.unicauca.horasaludable.jpacontrollers;
 
 import com.unicauca.horasaludable.entities.Noticia;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,7 +18,6 @@ import javax.persistence.Query;
  */
 @Stateless
 public class NoticiaFacade extends AbstractFacade<Noticia> {
-
     @PersistenceContext(unitName = "Hora_SaludablePU")
     private EntityManager em;
 
@@ -32,7 +29,7 @@ public class NoticiaFacade extends AbstractFacade<Noticia> {
     public NoticiaFacade() {
         super(Noticia.class);
     }
-
+    
     public List<Noticia> buscarNoticias() {
         Query query = getEntityManager().createNamedQuery("Noticia.findUltimosContenido");
         List<Noticia> resultList = query.getResultList();
@@ -64,5 +61,4 @@ public class NoticiaFacade extends AbstractFacade<Noticia> {
         }
         return listado.get(0);
     }
-
 }

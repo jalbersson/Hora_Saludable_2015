@@ -48,7 +48,7 @@ public class Evento implements Serializable {
     private Long eveid;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 500)
     @Column(name = "EVETITULO")
     private String evetitulo;
     @Column(name = "EVEFECHAPUBLICACION")
@@ -61,15 +61,15 @@ public class Evento implements Serializable {
     private Date evefechaevento;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 250)
     @Column(name = "EVELUGAR")
     private String evelugar;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 512)
+    @Size(min = 1, max = 10000)
     @Column(name = "EVECONTENIDO")
     private String evecontenido;
-    @Size(max = 250)
+    @Size(max = 350)
     @Column(name = "EVEIMAGEN")
     private String eveimagen;
 
