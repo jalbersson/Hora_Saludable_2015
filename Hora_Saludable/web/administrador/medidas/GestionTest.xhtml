@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -118,8 +119,20 @@
                         <p:column headerText="Gestión">
                             <p:commandLink actionListener="#{mostrarUsuarioTestController.medicionSeleccionada(Tests)}" value="Gestionar Test" style="color: #045491;">                                     
                                 </p:commandLink>  
-                             <p:commandLink value="Descargar" style=" margin-left: 10px;color: #045491;">                                     
-                                </p:commandLink>
+                             <p:commandLink actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}"  value="Descargar" oncomplete="PF('dlgVerRutina').show();"  style=" margin-left: 10px;color: #045491;" >                                     
+                             </p:commandLink>
+                            
+
+                    <h:form id="frmVerRutina">  
+                        <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
+                            <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">    
+                              
+                                <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
+                                    Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
+                                </object>   
+                            </c:if>
+                        </p:dialog>        
+                    </h:form>
                         </p:column>
                          <p:column headerText="Eliminar Test">
                              <p:commandLink  id="eliminar" action="#{medidasController.eliminarTest()}" >                                    

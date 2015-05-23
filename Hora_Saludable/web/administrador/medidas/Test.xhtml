@@ -88,13 +88,16 @@
                             <p:outputLabel styleClass="fuentefichatabla" value="#{medidasController.medicionactual.medtalla} Cm" />
                         </p:column>
                     </p:row>
-                </p:panelGrid>
-               
-
+                <p:row>
+              <p:column>  
                     <h:form id="frmTablaRutina">
                         <p:commandButton value="Descargar Test" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();" styleClass="imagenmedidas2"/> 
                     </h:form>
-
+                  </p:column>
+                      </p:row>
+ </p:panelGrid>
+                
+                
                     <h:form id="frmVerRutina">  
                         <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
                             <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">                    
@@ -364,6 +367,7 @@
                     <h:panelGrid columns="2" styleClass="btnguardarmed" cellpadding="5" bgcolor="#045491">
                         <p:commandButton value="Guardar" icon="ui-icon-check"  update="acord" actionListener="#{medidasController.guardarmed}"/>
                         <p:button value="Cancelar" icon="ui-icon-cancel" outcome="GestionTest"/>
+                        <p:outputLabel value="#{medidasController.medicionactual.obtenerFecha()}"/>
                     </h:panelGrid> 
                 </h:form>
             </ui:define>
