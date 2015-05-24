@@ -16,6 +16,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -23,6 +24,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
+@Transactional
 public class verEditarNoticiaController implements Serializable {
 
     @EJB

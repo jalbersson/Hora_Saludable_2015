@@ -43,14 +43,24 @@
                                 <div style="height: 10px">
                                 </div>
                                 <div class="divPrincipal">
+                                    
                                     <h1 style="color:#F2F2F2; text-align: center;">Envio Correo Masivo</h1>
+                                    <h:outputLabel style="font-style: normal;font-size: 16px;text-align: left; color:red;" value="*"/>
+                                    <h:outputLabel class="CampoLabelObligatorios" value="Campos Obligatorios" style="color: #AFAFAF;"/>
+
                                     <h:panelGrid columns="1" class=" width:200px; ">
-                                        <h:outputLabel value="Asunto: " id="asunto" style="color:#F2F2F2; text-align: center" />
-                                        <h:inputText id="asunto_" title="Asunto" style="width: 610px" />
-                                        <h:outputLabel value="Mensaje: " id="mensaje" style="color:#F2F2F2; text-align: center;" />
+                                        <h:column>
+                                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
+                                            <h:outputLabel class="CampoLabelObligatorios" for="asunto" value="Asunto "  style="color:#FFFFFF" />
+                                        </h:column>
+                                        <h:inputText id="asunto_" title="Asunto" style="width: 100%" />
+                                        <h:column>
+                                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
+                                            <h:outputLabel class="CampoLabelObligatorios" for="mensaje" value="Mensaje: " style="color:#FFFFFF" />
+                                        </h:column>
                                         <h:outputFormat value="#{envioCorreo.subject}" title="Mensaje" />
-                                        <h:inputTextarea rows="7" cols="87" value="#{envioCorreo.message_}" id="mensaje_" title="Mensaje"/>
-                                        <p:commandButton value="Enviar a todos" actionListener="#{envioCorreo.sendMail()}" />
+                                        <h:inputTextarea rows="7" cols="87" value="#{envioCorreo.message_}" style="width: 100%" id="mensaje_" title="Mensaje"/>
+                                        <p:commandButton style="background: #AA0000;color:#FFFFFF;font-style: italic; left: 78%"  value="Enviar a todos" actionListener="#{envioCorreo.sendMail()}" />
                                     </h:panelGrid>
                                 </div>
                             </h:form>
@@ -77,19 +87,19 @@
                             </div>
                         </h:form>
                         <h:form>
-                            
-                                <div class="divPrincipal">
-                                    <h1 style="color:#F2F2F2; text-align: center;">Horarios</h1>
-                                    <p:panel id="toggleable" header="Horarios" toggleable="true" closable="false" toggleSpeed="500" widgetVar="panel" style="border: none; ">
-                                        <p:link value="Editar Horario" outcome="principal" style="font-weight: bold; font-size: 15px; color: #cc0000" />
-                                        <p:dataScroller  var="hor" value="#{horarioController.h}" chunkSize="6" style="float:right;" >
-                                            <h:panelGrid columns="1" cellpadding="6" style="text-align: center;">
-                                                <p:link value="#{hor.nombreH}" outcome="#{horarioController.mostrarHorario(hor)}" style="font-weight: bold; font-size: 15px; color: #AA0000;" />
-                                            </h:panelGrid>
-                                        </p:dataScroller>
-                                    </p:panel>  
-                                </div>        
-                           
+
+                            <div class="divPrincipal">
+                                <h1 style="color:#F2F2F2; text-align: center;">Horarios</h1>
+                                <p:panel id="toggleable" header="Horarios" toggleable="true" closable="false" toggleSpeed="500" widgetVar="panel" style="border: none; ">
+                                    <p:link value="Editar Horario" outcome="principal" style="font-weight: bold; font-size: 15px; color: #cc0000" />
+                                    <p:dataScroller  var="hor" value="#{horarioController.h}" chunkSize="6" style="float:right;" >
+                                        <h:panelGrid columns="1" cellpadding="6" style="text-align: center;">
+                                            <p:link value="#{hor.nombreH}" outcome="#{horarioController.mostrarHorario(hor)}" style="font-weight: bold; font-size: 15px; color: #AA0000;" />
+                                        </h:panelGrid>
+                                    </p:dataScroller>
+                                </p:panel>  
+                            </div>        
+
                         </h:form>
                         <p:panelMenu style="width:250px; float: right" >
                             <p:submenu label="Gestión de Eventos" >

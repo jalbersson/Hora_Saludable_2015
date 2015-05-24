@@ -57,28 +57,19 @@ public class noticiaController {
 
     private UploadedFile file;
 
-    public String otro() {
-        try {
-            System.out.println("Esto esta funcionando");
-            return "agregarEvento";
-        } catch (Exception e) {
-            System.out.println("Esto no esta funcionando");
-            return "principal";
-        }
 
-    }
 
     public noticiaController() {
         this.visible = true;
-        this.titulo = "Aqui va el titulo";
+        //this.titulo = "Aqui va el titulo";
         this.fechapublicacion = new Date();
         this.fechaedicion = new Date();
-        this.contenido = "Aqui va el contenido";
+        //this.contenido = "Aqui va el contenido";
 
         //this.path = "..\\..\\img\\imgNoticias\\";
         //this.path = "D:\\imagenesNoticias\\";
-        this.imagen = this.path + "noticia.jpg";
-
+        //this.imagen = this.path + "noticia.jpg";
+        this.imagen = "default";
         File f = new File("."); // Creamos un objeto file
         //System.out.println(f.getAbsolutePath()); // Llamamos al método que devuelve la ruta absoluta
 
@@ -126,10 +117,17 @@ public class noticiaController {
     }
 
     public void upload() {
-        if (file != null) {
+        try {
+            if (file != null) {
             //guardarNoticia();
-            subirImagen();
+                subirImagen();
+            } else {
+                this.imagen = "default";
+            }
+        } catch (Exception e) {
+             this.imagen = "default";
         }
+        
     }
 
     public void subirImagen() {
