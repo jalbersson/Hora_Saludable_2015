@@ -127,14 +127,12 @@
                             <p:commandLink actionListener="#{mostrarUsuarioTestController.medicionSeleccionada(Tests)}" title="Ver Y Editar Test" style="color: #045491;">                                     
                                 <p:graphicImage style="width:25px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
                                 </p:commandLink>  
-                            
-                            <!--
-                            <p:commandLink action="#{medidasController.generarPDF(medidasController.medicionactual.getUsuid())}"  title="Exportar Test" oncomplete="PF('dlgVerRutina').show();" update="frmVerRutina" style=" margin-left: 10px;color: #045491;" >                                     
+                             <p:commandLink action="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}"  title="Exportar Test" oncomplete="PF('dlgVerRutina').show();" update="frmVerRutina" style=" margin-left: 10px;color: #045491;" >                                     
                                   <p:graphicImage style="width:20px;margin-left: 5px;" library="img" name="pdf_icon.png"/>
                                   <f:setPropertyActionListener value="#{Tests}" target="#{medidasController.medicionactual}" />
                              </p:commandLink>
                             
-                         -->
+                            
                              
                              <p:commandLink  id="eliminar" action="#{medidasController.eliminarTest()}" title="Eliminar Test" style=" margin-left: 10px;color: #045491;" >                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="eliminar.png"/>

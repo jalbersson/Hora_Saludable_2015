@@ -27,6 +27,9 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Phrase;
+import com.lowagie.text.pdf.BaseFont;
+import static com.lowagie.text.pdf.BidiOrder.R;
+import java.io.ByteArrayOutputStream;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -158,7 +161,7 @@ public class MedidasController {
 
 
 
-    public void generarPDF(Usuario user) {
+    public void generarPDF(Usuario user) throws com.lowagie.text.DocumentException {
         try {
 
             
@@ -173,34 +176,7 @@ public class MedidasController {
       
 
             Font bold = new Font(Font.FontFamily.HELVETICA, 12f, Font.BOLD | Font.UNDERLINE);
-           
-
-            /*URL url = FacesContext.getCurrentInstance().getExternalContext().getResource("/resources/img/logo-unicauca-negro.png");
-
-            Image imgLogoUnicauca = Image.getInstance(url);
-            imgLogoUnicauca.scaleAbsolute(118f, 131f);
-
-            PdfPTable tableEncabezado = new PdfPTable(2);
-
-            tableEncabezado.getDefaultCell().setBorder(Rectangle.NO_BORDER);
-            tableEncabezado.setWidthPercentage(100);
-            tableEncabezado.setSpacingAfter(5);
-
-            PdfPCell cell1 = new PdfPCell(imgLogoUnicauca);
-            cell1.setBorder(Rectangle.NO_BORDER);
-            
-             PdfPCell cell2 = new PdfPCell(new Paragraph("Universidad del Cauca\n División de Recreación y Deporte\n         Hora saludable"));
-             
-            cell2.setBorder(Rectangle.NO_BORDER);
-            cell2.setVerticalAlignment(Element.ALIGN_BOTTOM);
-            cell2.setHorizontalAlignment(Element.ALIGN_RIGHT);
-            document.add(new Paragraph(""));
-                       
-            tableEncabezado.addCell(cell1);
-            tableEncabezado.addCell(cell2);         
-        
-            document.add(tableEncabezado);
-  */
+       
 
              Paragraph tituloPoL = new Paragraph("Composicion Corporal y Test Deportivos",bold); 
              tituloPoL.setAlignment(Element.ALIGN_CENTER);  
@@ -213,7 +189,7 @@ public class MedidasController {
              
                   
             document.add((Element) new Chunk("Nombre: ",negrilla));document.add((Element) new Chunk(user.getUsunombres() + " "+user.getUsuapellidos()));            
-            document.add((Element) new Chunk("                                      Fecha:"+fecha));
+            document.add((Element) new Chunk("                               Fecha Impresión:"+fecha));
             
             document.add(new Paragraph(""));
             document.add((Element) new Chunk("Identificacion: ",negrilla));  document.add((Element) new Chunk(user.getUsuidentificacion()+""));
@@ -817,6 +793,23 @@ public class MedidasController {
 
       tablassPoL.addCell(tablePOLTa1);
       tablassPoL.addCell(tablePOLTa2);
+      
+     URL url = FacesContext.getCurrentInstance().getExternalContext().getResource("/resources/img/antorcha.png");
+            Image imgLogoUnicauca = Image.getInstance(url); 
+
+
+    BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, 
+    BaseFont.WINANSI, BaseFont.EMBEDDED);
+
+  imgLogoUnicauca.setAbsolutePosition(140, 110);
+  
+  document.add(imgLogoUnicauca);
+      
+      
+      
+      
+      
+      
            
            document.add(tablassPoL);
             
