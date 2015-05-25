@@ -146,7 +146,7 @@ and open the template in the editor.
 .histmedpanel thead td{
    font-size: 15px;
    color:   #000000;
-   text-shadow: none;
+   text-shadow: none; 
 }
 
 .paneleshistmed{
