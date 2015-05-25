@@ -14,8 +14,7 @@
             </ui:define>
             <ui:define name="body">
                 <p:contentFlow value="#{imagesView.images}" var="image">
-                    <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />
-                    <div class="caption">#{image}</div>
+                    <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />                    
                 </p:contentFlow>
                 <br/> <br/>
                 <p:growl id="msgs" showDetail="true" />
@@ -25,7 +24,7 @@
                         <h:form>
                             <h:form> 
                                 <div class="divPrincipal">
-                                    <h1 style="color:#F2F2F2; text-align: center;">Noticias</h1>  
+                                    <h1 style="color:#F2F2F2; text-align: center;">Noticias</h1>                                     
                                     <p:carousel  value="#{noticiacController.ultimos}" var="noticiaLista" itemStyle="height:230px;width:600px;" autoPlayInterval="4000" numVisible="1" effect="easeInStrong" circular="true" class="ui-carousel">
                                         <h:panelGrid columns="2" style="width:600px " cellpadding="10" columnClasses="label,value">
                                             <p:tab>
@@ -43,10 +42,12 @@
                                 <div style="height: 10px">
                                 </div>
                                 <div class="divPrincipal">
-                                    
+
                                     <h1 style="color:#F2F2F2; text-align: center;">Envio Correo Masivo</h1>
+                                    <h:outputLabel class="CampoLabelObligatorios" value="Todos los campos con " style="color: #AFAFAF;"/>
                                     <h:outputLabel style="font-style: normal;font-size: 16px;text-align: left; color:red;" value="*"/>
-                                    <h:outputLabel class="CampoLabelObligatorios" value="Campos Obligatorios" style="color: #AFAFAF;"/>
+                                    <h:outputLabel class="CampoLabelObligatorios" value=" son obligatorios" style="color: #AFAFAF;"/>
+
 
                                     <h:panelGrid columns="1" class=" width:200px; ">
                                         <h:column>
@@ -90,13 +91,22 @@
 
                             <div class="divPrincipal">
                                 <h1 style="color:#F2F2F2; text-align: center;">Horarios</h1>
-                                <p:panel id="toggleable" header="Horarios" toggleable="true" closable="false" toggleSpeed="500" widgetVar="panel" style="border: none; ">
-                                    <p:link value="Editar Horario" outcome="principal" style="font-weight: bold; font-size: 15px; color: #cc0000" />
-                                    <p:dataScroller  var="hor" value="#{horarioController.h}" chunkSize="6" style="float:right;" >
-                                        <h:panelGrid columns="1" cellpadding="6" style="text-align: center;">
-                                            <p:link value="#{hor.nombreH}" outcome="#{horarioController.mostrarHorario(hor)}" style="font-weight: bold; font-size: 15px; color: #AA0000;" />
-                                        </h:panelGrid>
-                                    </p:dataScroller>
+                                <p:panel id="toggleable" header="" toggleable="true" closable="false" toggleSpeed="500" widgetVar="panel" style="border: none; ">                                 
+                                    <p:button style="background: #AA0000;color:#FFFFFF;font-style: italic; margin: 5px"  value="Agregar Horario" outcome="agregarHorario" icon="ui-icon-circle-plus"/>                       
+
+                                    <p:dataTable id="basicDT" var="hor" value="#{agregarHorarioController.lista()}">
+                                        <p:column headerText="Nombre Horario">
+                                            <p:link value="#{hor.hornombre}" outcome="#{agregarHorarioController.verHorario(hor)}" style="font-weight: bold; font-size: 15px; color: #22419A" />                                           
+                                        </p:column>
+
+                                        <p:column headerText="Acciones" style="text-align: center">  
+                                            <p:button style="height: 30px; width: 30px; margin-right: 10px"  value="" outcome="#{agregarHorarioController.verHorario(hor)}" icon="ui-icon-search"/>                                             
+                                            <p:button style="height: 30px; width: 30px; margin-right: 10px"  value="" outcome="#{agregarHorarioController.editarHorario(hor)}" icon="ui-icon-pencil"/>  
+                                            <p:button style="height: 30px; width: 30px; margin-right: 10px"  value="" outcome="#{agregarHorarioController.eliminarHorario(hor)}" icon="ui-icon-trash"/> 
+
+                                        </p:column>
+                                    </p:dataTable>
+
                                 </p:panel>  
                             </div>        
 

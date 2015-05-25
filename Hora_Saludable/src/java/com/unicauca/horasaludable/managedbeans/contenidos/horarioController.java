@@ -28,7 +28,7 @@ import javax.servlet.ServletContext;
 @ViewScoped
 public class horarioController implements Serializable {
 
-    private ArrayList<Horario> h;
+    /*private ArrayList<Horario> h;
     
 
     //metodos   
@@ -82,5 +82,5 @@ public class horarioController implements Serializable {
     {
         return "verHorario?id="+h.getIdH();
     }
-
+*/
 }

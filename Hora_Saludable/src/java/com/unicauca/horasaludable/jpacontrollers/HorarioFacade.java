@@ -6,13 +6,15 @@
 package com.unicauca.horasaludable.jpacontrollers;
 
 import com.unicauca.horasaludable.entities.Horario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
- * @author JuanJose
+ * @author Yuri
  */
 @Stateless
 public class HorarioFacade extends AbstractFacade<Horario> {
@@ -26,6 +28,22 @@ public class HorarioFacade extends AbstractFacade<Horario> {
 
     public HorarioFacade() {
         super(Horario.class);
+    }
+    
+    public List<Horario> lista() {
+        Query query = getEntityManager().createNamedQuery("Horario.findAll");
+        List<Horario> resultList = query.getResultList();
+        return resultList;
+    }
+    
+    public Horario mostrarHorario(Long id) {
+        Query query = getEntityManager().createNamedQuery("Horario.findByHorid");
+        query.setParameter("horid", id);
+        List<Horario> listado = query.getResultList();
+        if (listado.isEmpty()) {
+            return null;
+        }
+        return listado.get(0);
     }
     
 }

@@ -11,13 +11,13 @@
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Editar Horario
+                Agregar Horario
             </ui:define>
 
             <ui:define name="title">
                 <div class="tituloContenido">
                     <br></br>
-                    Editar Horario
+                    Agregar Horario
                     <br></br>
                 </div>
             </ui:define>
@@ -30,20 +30,33 @@
                         <p:messages style="border: none" id="messages" />
                         <h:panelGrid columns="2" >
                             <p:outputLabel style="font-weight: bold " value="* Titulo: " />
-                            <p:inputText style="margin: 5px" id="tituloEvento" value="#{verEditarHorarioController.horario.hornombre}" required="true" size="60" requiredMessage="Introduzca titulo del horario." />
+                            <p:inputText style="margin: 5px" id="tituloEvento" value="#{agregarHorarioController.titulo}" required="true" size="60" requiredMessage="Introduzca titulo del horario." />
+
+                            <!--h:form>           
+                                <p:growl id="message" showDetail="true" />
+                                <p:commandButton value="Guardar" action="" update="message">
+                                    <p:confirm header="Confirmacion" message="Evento agregado con exito!!!" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                    <p:button value="Aceptar" outcome="gestionContenidos" style="float:right; right: 25%"/>                                  
+                                </p:confirmDialog>
+                            </h:form>
+                            <p:button outcome="gestionContenidos" value="Volver" style="float:right; right: 88%" ></p:button-->
                         </h:panelGrid>   
 
-                        <p:editor id="editor" widgetVar="editorWidget" value="#{verEditarHorarioController.horario.horcontenido}" width="800" height="400" />
+                        <p:editor id="editor" widgetVar="editorWidget" value="#{agregarHorarioController.cont}" width="800" height="400" />
 
                     </p:panelGrid>
 
-                    <p:commandButton ajax="false" action="#{verEditarHorarioController.actualizarHorario()}" process="@form" value="Guardar" 
+                    <p:commandButton ajax="false" action="#{agregarHorarioController.crearHorario()}" process="@form" value="Registrar" 
                                      style="background: #22419A;color:#FFFFFF;font-style: italic; margin: 10px" />
+                        
                     
-                    <p:commandButton ajax="false" action="principal" value="Volver" 
+
+                    <p:commandButton ajax="false" action="principal" value="Cancelar" 
                                      style="background: #22419A;color:#FFFFFF;font-style: italic; margin: 10px" />
 
-                    <p:commandButton ajax="false" action="#{verEditarHorarioController.insertarFila()}" process="@form" value="Insertar Fila" 
+                    <p:commandButton ajax="false" action="#{agregarHorarioController.insertarFila()}" process="@form" value="Insertar Fila" 
                                      style="background: #22419A;color:#FFFFFF;font-style: italic; margin: 10px" />
 
                     <p:commandButton ajax="false" action="#{agregarHorarioController.eliminarFila()}" process="@form" value="Eliminar Fila" 
