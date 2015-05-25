@@ -475,7 +475,7 @@ public class MedidasController {
             celda8.setBorder(Rectangle.NO_BORDER);
             celda8.setColspan(4);
 
-            PdfPCell celda9 = new PdfPCell(new Phrase(getMedicionactual().porcentajeGrasa()+" " + getMedicionactual().getEstadoPorcentajeGrasaIdeal()));
+            PdfPCell celda9 = new PdfPCell(new Phrase(getMedicionactual().porcentajeGrasa()+"   " + getMedicionactual().getEstadoPorcentajeGrasaIdeal()));
             celda9.setBorder(Rectangle.NO_BORDER);
             celda9.setColspan(3);
 
@@ -547,7 +547,7 @@ public class MedidasController {
             celda32.setBorder(Rectangle.NO_BORDER);
             celda32.setColspan(4);
 
-            PdfPCell celda33 = new PdfPCell(new Phrase(getMedicionactual().indicemasacorporal()+" "+getMedicionactual().getEstadoIMC()));
+            PdfPCell celda33 = new PdfPCell(new Phrase(getMedicionactual().indicemasacorporal()+"   "+getMedicionactual().getEstadoIMC()+""));
             celda33.setBorder(Rectangle.NO_BORDER);
              celda33.setColspan(3);
 
@@ -755,7 +755,7 @@ public class MedidasController {
               tablePOL101.setColspan(4);
               
               
-              PdfPCell tablePOL102 = new PdfPCell(new Phrase("no esta"));
+              PdfPCell tablePOL102 = new PdfPCell(new Phrase("                    0.0"));
               tablePOL102.setBorder(Rectangle.NO_BORDER); 
               tablePOL102.setColspan(4);
              

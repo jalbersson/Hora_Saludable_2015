@@ -17,7 +17,7 @@
             <ui:define name="title">
                 <p:panel style="border: none;">
                     <h:form>
-                        <p:breadCrumb id="migaDirector" styleClass="migadepan">
+                        <p:breadCrumb >
                             <p:menuitem value="Usuarios" url="../../index.xhtml" />
                             <p:menuitem value="Usuarios" outcome="consultaTest" />
                             <p:menuitem value="Gestion de  Mediciones" outcome="GestionTest" />
@@ -26,7 +26,14 @@
                     </h:form>
                 </p:panel>
               <p:separator style="width: 100%;"/>
-                <p:outputLabel styleClass="titulomediciones" value="Gestion de Test: #{medidasController.medicionactual.obtenerFecha()}" />
+              
+              <div class="tituloContenido">
+                    <br></br>
+                    Edicion de Test :  <br></br>
+ #{medidasController.medicionactual.obtenerFecha()}
+
+                </div>
+               
                
             </ui:define>
             <ui:define name="body">
@@ -91,7 +98,7 @@
                 <p:row>
               <p:column>  
                     <h:form id="frmTablaRutina">
-                        <p:commandButton value="Descargar Test" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();" styleClass="imagenmedidas2"/> 
+                        <p:commandButton value="Exportar Test" icon="ui-icon-extlink" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();" styleClass="imagenmedidas2"/> 
                     </h:form>
                   </p:column>
                       </p:row>

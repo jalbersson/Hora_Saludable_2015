@@ -11,24 +11,33 @@
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Consutas Test
-            </ui:define>        
-
+                Consultas Test
+            </ui:define>   
+            
+             <ui:define name="body"> 
+                  <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />                              
+                        <p:menuitem value="Consultar Test" outcome="/administrador/medidas/consultaTest" />                                        
+                    </p:breadCrumb>
+                </h:form>
             <ui:define name="title">                  
 
                 <div class="tituloContenido">
                     <br></br>
-                    GESTIÓN DE MEDIDAS<br></br>
+                     Evaluación Antropométrica y funcional <br></br>
 
 
                 </div>
             </ui:define>
             
-            <ui:define name="body"> 
+                 <br></br><br></br><br></br>
+                
+               
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/> 
                 <h:form id="seleccionarUsuarios">
                     <h:panelGrid columns="2"> 
-                        <p:outputLabel  value="Seleccione Tipo Usuario:" />                      
+                        <p:outputLabel  value="Seleccione Tipo Usuario:" class="CampoLabel"/>                      
                         <p:selectOneMenu  id="tipoUsuario" style="width:150px;font-size: 15px;" 
                                           valueChangeListener="#{listasUsuariosMedidasController.cambiarTipoUsuario}"
                                           >
@@ -93,7 +102,7 @@
                                 #{usuarios.conyugeid.carid.carnombre}
                                 
                             </p:column>
-                            <p:column headerText="Gestionionar Test" width="90">
+                            <p:column headerText="Acciones" width="90">
                                 <p:commandLink  id="ver" style="text-decoration: none;" action="#{mostrarUsuarioTestController.estudianteSeleccionado(usuarios)}" >                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
                                 </p:commandLink>                                
