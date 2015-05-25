@@ -28,11 +28,13 @@
 
                     <br/><br/><br/><br/>
 
-                    <h2 style="margin-top:30px" class="tituloContenido">Estas seguro de eliminar este horario?</h2>
+                    <h2 style="margin-top:30px; color: #AA0000" >Estas seguro de eliminar este horario?</h2>
                     
-                    <p:button style="background:#22419A ; color: #ffffff; font-style: italic" outcome="#{verEditarHorarioController.eliminarHorario()}" value="Eliminar" />
+                    <p:commandButton ajax="false" action="#{verEditarHorarioController.eliminarHorario()}" process="@form" value="Eliminar" 
+                                     style="background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 10px" /> 
                     
-                    <p:button style="background:#22419A ; color: #ffffff; font-style: italic;" outcome="principal" value="Cancelar" />
+                    <p:commandButton ajax="false" action="principal" process="@form" value="Cancelar" 
+                                     style="background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 10px" /> 
 
                 </h:form>
             </ui:define>

@@ -14,8 +14,8 @@
             <ui:define name="title">
             </ui:define>
             <ui:define name="body">
-                <p:contentFlow value="#{imagesView.images}" var="image">
-                    <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />
+                <p:contentFlow value="#{imagenController.images}" var="image">
+                    <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />                    
                 </p:contentFlow>
                 <p:growl id="msgs" showDetail="true" />
                 <h:form>
@@ -41,7 +41,7 @@
                                 </div>
                                 <div style="height: 10px">
                                 </div>
-                                
+
                                 <div class="divPrincipal" style="height: 310px">
                                     <h:form style="width:250px;">
                                         <div class="divPrincipal">
@@ -56,7 +56,7 @@
                                         </div>        
                                     </h:form>                                    
                                 </div>
-                                
+
                             </h:form>
                             <h:form>
                                 <div class="divPrincipal" style="height: 720px" >
@@ -90,7 +90,7 @@
                         </h:panelGrid>
                     </h:panelGrid>
                 </h:form>
-                
+
             </ui:define>
         </ui:composition>
     </body>
