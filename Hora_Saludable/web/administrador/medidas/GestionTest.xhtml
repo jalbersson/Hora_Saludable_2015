@@ -36,7 +36,7 @@
                 </p:panel>
                 <p:separator style="width: 100%;"/>
               
-                 <p:spacer height="60" width="500" />  
+                 <p:spacer height="50" width="600" />  
             </ui:define>
             <ui:define name="body" >
                 <p:dialog showEffect="fade" hideEffect="explode" position="center" widgetVar="agregartest" header="Agregar Nuevo Test" modal="true">
@@ -127,8 +127,9 @@
                             <p:commandLink actionListener="#{mostrarUsuarioTestController.medicionSeleccionada(Tests)}" title="Ver Y Editar Test" style="color: #045491;">                                     
                                 <p:graphicImage style="width:25px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
                                 </p:commandLink>  
-                             <p:commandLink actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}"  title="Exportar Test" oncomplete="PF('dlgVerRutina').show();" update="frmVerRutina" style=" margin-left: 10px;color: #045491;" >                                     
+                             <p:commandLink action="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}"  title="Exportar Test" oncomplete="PF('dlgVerRutina').show();" update="frmVerRutina" style=" margin-left: 10px;color: #045491;" >                                     
                                   <p:graphicImage style="width:20px;margin-left: 5px;" library="img" name="pdf_icon.png"/>
+                                  <f:setPropertyActionListener value="#{Tests}" target="#{medidasController.medicionactual}" />
                              </p:commandLink>
                             
                             

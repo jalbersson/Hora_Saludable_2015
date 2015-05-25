@@ -95,16 +95,12 @@
                             <p:outputLabel styleClass="fuentefichatabla" value="#{medidasController.medicionactual.medtalla} Cm" />
                         </p:column>
                     </p:row>
-                <p:row>
-              <p:column>  
-                    <h:form id="frmTablaRutina">
-                        <p:commandButton value="Exportar Test" icon="ui-icon-extlink" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();" styleClass="imagenmedidas2"/> 
-                    </h:form>
-                  </p:column>
-                      </p:row>
+
  </p:panelGrid>
                 
-                
+                <h:form id="frmTablaRutina" styleClass="imagenmedidas2">
+                        <p:commandButton value="Exportar Test" icon="ui-icon-extlink" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();" /> 
+                    </h:form>
                     <h:form id="frmVerRutina">  
                         <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
                             <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">                    
@@ -118,9 +114,7 @@
                     <p:growl for="msg" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
                     <p:accordionPanel id="acord" styleClass="acciones" style="margin: 0 auto">
                         <p:tab title="Mediciones" >
-                            <p:commandLink styleClass="imagenmedidas">
-                                <h:graphicImage name="img/Mediciones.PNG" />
-                            </p:commandLink>
+                           
                             <p:messages  />
                             <p:panel styleClass="paneltab">
                                 <p:panelGrid columns="2" styleClass="panelmedidas">
@@ -235,7 +229,7 @@
                         </p:tab>
                         <p:tab title="Test Deportivos">
                             <p:panel style="text-align: center">
-                                <h:graphicImage name="img/testDeportivos.PNG"/><br/>
+                               
                                  <p:messages  /> 
                                 <p:separator style="width: 750px" />  
                                 
@@ -337,7 +331,7 @@
                             </p:panel>
                         </p:tab>
                         <p:tab title="Test de Frecuencia Cardiaca">
-                            <h:graphicImage styleClass="imagenmedidas" style="margin-left: 270px;" name="img/testFreccardiaca.png" />
+                           
                             <p:panel styleClass="paneltab">
                             <h:panelGrid bgcolor="#F2F2F2" columns="3" cellpadding="7" style="margin-top: 25px; margin-left: 320px;font-size: 16px; font-weight: bold;">
                                 <p:outputLabel value="Calculo por Edad"/>   
@@ -360,9 +354,7 @@
                                 </p:panel>
                         </p:tab>
                         <p:tab title="Observaciones">
-                            <p:commandLink styleClass="imagenmedidas">
-                                <h:graphicImage name="img/Comentarios.PNG" />
-                            </p:commandLink>
+                            
                             <p:panel styleClass="paneltab">
                             <div style="text-align: center">
                                 <p:inputTextarea rows="5" cols="100" counter="display" maxlength="200" counterTemplate="Quedan {0} caracteres." autoResize="false" value="#{medidasController.medicionactual.medobservaciones}"/><br/>
@@ -374,7 +366,6 @@
                     <h:panelGrid columns="2" styleClass="btnguardarmed" cellpadding="5" bgcolor="#045491">
                         <p:commandButton value="Guardar" icon="ui-icon-check"  update="acord" actionListener="#{medidasController.guardarmed}"/>
                         <p:button value="Cancelar" icon="ui-icon-cancel" outcome="GestionTest"/>
-                        <p:outputLabel value="#{medidasController.medicionactual.obtenerFecha()}"/>
                     </h:panelGrid> 
                 </h:form>
             </ui:define>

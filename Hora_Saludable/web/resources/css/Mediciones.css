@@ -12,7 +12,7 @@ and open the template in the editor.
 .fichapersonal
 {
  width: auto;
- margin-top: 30px;
+ margin-top: 15px;
  margin-left: 20px;
  float: left;
  
@@ -24,7 +24,7 @@ and open the template in the editor.
 }
 .subtitulotabla
 {
-    color: #CC1414;
+    color: #092169;
     font-size: 18px !important;
 }
 .fuentefichatabla
@@ -59,9 +59,9 @@ and open the template in the editor.
 }
 
 .panelmedidas thead td{
-   background-color: darkolivegreen;
+   background-color: #EBEDEB;
    font-size: 16px;
-   color:  #ece3a5;
+   color:  #3C3C3C;
    font-weight: normal;
 }
 
@@ -89,7 +89,7 @@ and open the template in the editor.
 .imagenmedidas2
 {
     float: right;
-    margin-top: 25px;
+    margin-top: 170px;
     margin-right: 185px;
 }
 .btnesaccionesmediciones
@@ -135,19 +135,17 @@ and open the template in the editor.
     margin-top: 45px !important;
     float: left;
     font-size: 12px;
-    font-weight: bold;
     width: 100%;
 }
 
 .histmedpanel .ui-widget-content {
-    background-color: #eaeacd ;
-    color: maroon;
+    background-color: whitesmoke ;
+    color: #3C3C3C;
 }
 
 .histmedpanel thead td{
-    background-color: #F2F2F2;
-   font-size: 16px;
-   color:   darkred;
+   font-size: 15px;
+   color:   #000000;
    text-shadow: none;
 }
 
@@ -157,9 +155,9 @@ and open the template in the editor.
 }
 
 .paneleshistmed thead td{
-   background-color: darkolivegreen;
+   background-color: #EBEDEB;
    font-size: 16px;
-   color:  #ece3a5;
+   color:  #3C3C3C;
 }
 
 .paneleshistmed td {
@@ -192,13 +190,13 @@ and open the template in the editor.
 
 .paneltab
 {
-    background: #EBEDEB;
+    background: whitesmoke;
     overflow: hidden;
 }
 
 .subtitpaneltest
 {
-    color: maroon;
+    color: black;
 }
 
 .separadorTest
