@@ -60,7 +60,7 @@ public class eventoController {
         //System.out.println(f.getAbsolutePath()); // Llamamos al método que devuelve la ruta absoluta
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
-        this.path = realPath + "\\resources\\img\\imagenesNoticias\\";
+        this.path = realPath + "\\resources\\img\\imagenesEventos\\";
         FacesMessage msg = new FacesMessage("Ubicacion del momento", this.path);
          //msg = new FacesMessage("Ubicacion del momento", );
 
@@ -201,12 +201,12 @@ public class eventoController {
         return "imagen (" +(11+ rn.nextInt(tam)) + ").jpg";
     }
 
-    public void asignacionImagenesAleatorias() {
+    /*public void asignacionImagenesAleatorias() {
         int tam = this.ultimos.size();
         for (int i = 0; i < tam; i++) {
             this.ultimos.get(i).setEveimagen(aleatorioArchivos());
         }
-    }
+    }*/
     
     
     public String country;
@@ -300,7 +300,6 @@ public class eventoController {
         try
         {
             this.ultimos = this.ejbEvento.ultimosEventos();
-            asignacionImagenesAleatorias();
         }
         catch(Exception e)
         {
