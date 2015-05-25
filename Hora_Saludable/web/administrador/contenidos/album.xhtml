@@ -23,31 +23,37 @@
 
             <ui:define name="body">
 
-                <h:form>
+                <h:form id="form"  enctype="multipart/form-data">
                     <div>
                         <h2 style="color: #22419A">Imagenes cargadas previamente:</h2>
+                        <h3 style="color: #22419A; float: left">Para eliminar las imagenes basta con dar click en el siguiente botón, ubicado en la parte de abajo de cada imagen: </h3>
+                        <p:commandButton value="Disabled" id="disabled" disabled="false" style="height: 30px; width: 30px; margin-left: 40px" icon="ui-icon-trash"/>                         
 
                         <p:ring id="basic" value="#{imagenController.images}" var="image">
                             <p:outputPanel style="text-align: center;" layout="block">                            
                                 <h:graphicImage name="/img/imagenSalud/#{image}" style="height: 100px; width: 150px; border: 2px solid #22419A" />
-                                <p:button outcome="album" value="" style="height: 30px; width: 30px; margin-left: 40px" icon="ui-icon-trash" disabled="false"/>
+                                <p:commandButton ajax="false"  update="nuevaNoticia" action="#{imagenController.eliminarImagen(image)}" process="@form" value="Subir Imagen" 
+                                                 style="height: 30px; width: 30px; margin-left: 40px" icon="ui-icon-trash"/>   
                             </p:outputPanel>
                         </p:ring>
 
                     </div>
                     <br/><br/><br/><br/><br/><br/><br/><br/>
                     <div>
-                        <h2 style="color: #22419A">Cargar nuevas imagenes en esta área: </h2>
+                        <h2 style="color: #22419A">Cargar nuevas imagenes en esta área: </h2>      
                         
-                        <p:fileUpload  fileUploadListener="#{imagenController.cargarFoto}" mode="advanced" dragDropSupport="false" label="Cargar" auto="true" sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-                        <p:commandLink action="#{imagenController.actualizarFoto()}" style="color:blue;"  value="Aceptar"/>
+                        <h3 style="color: #22419A"> <strong style="color: red">*</strong> Cargar imagen aqui:</h3>     
 
-                        <p:growl id="messages" showDetail="true" />
-
-                        <br/><br/>
-                        <p:button style="margin-top: 15px; " outcome="principal" value="Salir" icon="ui-icon-star" disabled="false">
-                            <f:param name="editaHorario" />
-                        </p:button>
+                        <p:fileUpload style="color:red" value="#{imagenSubirController.file}" mode="simple"/>
+                        
+                    </div>
+                    <br/><br/><br/>
+                    <div>
+                        <p:commandButton ajax="false"  update="nuevaNoticia" action="#{imagenSubirController.upload()}" process="@form" value="Subir Imagen" 
+                                         style="background: #22419A;color:#FFFFFF;font-style: italic"/>
+                        
+                        <p:commandButton ajax="false"  update="nuevaNoticia" action="principal" process="@form" value="Salir" 
+                                         style="background: #22419A;color:#FFFFFF;font-style: italic"/>                   
 
 
                         <p:growl autoUpdate="true"/>

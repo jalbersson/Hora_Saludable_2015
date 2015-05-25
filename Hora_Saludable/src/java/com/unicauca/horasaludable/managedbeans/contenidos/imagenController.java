@@ -14,7 +14,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
-
 /**
  *
  * @author Yuri
@@ -22,11 +21,11 @@ import javax.servlet.ServletContext;
 @ManagedBean
 @RequestScoped
 public class imagenController {
-    
+
     private List<String> images;
 
-    String dir;
-    File f;
+    String dir, dir2;
+    File f, f2;
 
     @PostConstruct
     public void init() {
@@ -41,8 +40,21 @@ public class imagenController {
         if (f.exists()) {
             File[] ficheros = f.listFiles();
             for (File fichero : ficheros) {
-                images.add(fichero.getName());                
+                images.add(fichero.getName());
             }
+        }
+    }    
+    public String eliminarImagen(String nombre) {
+        
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
+        dir2 = realPath + "\\resources\\img\\imagenSalud\\" +nombre;
+ 
+        f2 = new File(dir2);
+        if (f2.delete()) {
+            return "album";
+        } else {
+            return "album";
         }
     }
 
@@ -51,3 +63,5 @@ public class imagenController {
     }
 
 }
+
+
