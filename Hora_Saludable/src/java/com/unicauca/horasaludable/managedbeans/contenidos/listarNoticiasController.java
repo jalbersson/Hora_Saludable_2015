@@ -10,6 +10,7 @@ import com.unicauca.horasaludable.jpacontrollers.NoticiaFacade;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -44,13 +45,13 @@ public class listarNoticiasController {
     public listarNoticiasController() {
         listaNoticias = new ArrayList<>();
         this.visible = true;
-        this.titulo = "*Sin titulo";
+        this.titulo = "";
         this.fechapublicacion = new Date();
         this.fechaedicion = new Date();
-        this.contenido = "*Sin contenido";
+        this.contenido = "o";
         //this.path = "..\\..\\img\\imgNoticias\\";
-        this.path = "D:\\imagenesNoticias\\";
-        this.imagen = this.path + "noticia.jpg";
+        this.path = "s";
+        this.imagen = this.path + "";
     }
 
     public List<Noticia> obtenerNoticias() {
@@ -97,12 +98,21 @@ public class listarNoticiasController {
          */
     }
 
-    public List<Noticia> getNoticias() {
-        return listaNoticias;
-    }
+    public void eliminarNoticia() {
+        try {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
 
-    public void setNoticias(List<Noticia> noticias) {
-        this.listaNoticias = noticias;
+            Long _id = Long.parseLong(params.get("id"));
+            noticia = ebjNoticiaFacade.mostrarNoticia(_id);
+            ebjNoticiaFacade.remove(noticia);
+
+            FacesContext contex = FacesContext.getCurrentInstance();
+            contex.getExternalContext().redirect("listarNoticias.xhtml");
+        } catch (Exception e) {
+            
+        }
+
     }
 
     public NoticiaFacade getEbjNoticiaFacade() {

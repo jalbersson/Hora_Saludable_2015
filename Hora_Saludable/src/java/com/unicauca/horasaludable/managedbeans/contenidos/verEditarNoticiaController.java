@@ -54,6 +54,7 @@ public class verEditarNoticiaController implements Serializable {
     public String actualizarNoticia() {
 
         ejbNoticia.edit(noticia);
+        
         return "listarNoticias";
     }
 
