@@ -22,7 +22,7 @@
                     <h:form>
                         <p:breadCrumb>
                             <p:menuitem value="Usuarios" url="../../index.xhtml" />
-                            <p:menuitem value="Usuarios" outcome="consultaTest" />
+                            <p:menuitem value="Consultar Test" outcome="consultaTest" />
                             <p:menuitem value="Gestion de Mediciones" outcome="GestionTest" />
                             <p:menuitem value="Test" url="#" />
                         </p:breadCrumb>
@@ -40,8 +40,6 @@
             </ui:define>
             <ui:define name="body" >
                 <p:dialog showEffect="fade" hideEffect="explode" position="center" widgetVar="agregartest" header="Agregar Nuevo Test" modal="true">
-                
-                        <p:messages />
                             <h:form>
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:outputLabel  value="Fecha: " for="fechanuevo"/>
@@ -127,15 +125,11 @@
                             <p:commandLink actionListener="#{mostrarUsuarioTestController.medicionSeleccionada(Tests)}" title="Ver Y Editar Test" style="color: #045491;">                                     
                                 <p:graphicImage style="width:25px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
                                 </p:commandLink>  
-                            
-                            <!--
-                            <p:commandLink action="#{medidasController.generarPDF(medidasController.medicionactual.getUsuid())}"  title="Exportar Test" oncomplete="PF('dlgVerRutina').show();" update="frmVerRutina" style=" margin-left: 10px;color: #045491;" >                                     
+                             <p:commandLink action="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}"  title="Exportar Test" oncomplete="PF('dlgVerRutina').show();" update=":frmVerRutina" style=" margin-left: 10px;color: #045491;" >                                     
                                   <p:graphicImage style="width:20px;margin-left: 5px;" library="img" name="pdf_icon.png"/>
                                   <f:setPropertyActionListener value="#{Tests}" target="#{medidasController.medicionactual}" />
                              </p:commandLink>
                             
-                         -->
-                             
                              <p:commandLink  id="eliminar" action="#{medidasController.eliminarTest()}" title="Eliminar Test" style=" margin-left: 10px;color: #045491;" >                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="eliminar.png"/>
                                     <f:setPropertyActionListener value="#{Tests}" target="#{medidasController.medicionactual}" />
@@ -143,23 +137,23 @@
                          </p:commandLink> 
                    
                           
-                    <h:form id="frmVerRutina">  
-                        <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
-                            <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">    
-                              
-                                <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
-                                    Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
-                                </object>   
-                            </c:if>
-                        </p:dialog>        
-                    </h:form>
+                    
                         </p:column>
                         
                  
                          
                     </p:dataTable>
                 </h:form>
-                
+                <h:form id="frmVerRutina">  
+                        <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
+                            <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">    
+                              
+                                <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
+                                    Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al instante.
+                                </object>   
+                            </c:if>
+                        </p:dialog>        
+                    </h:form>
             </ui:define>
         </ui:composition>
     </body>

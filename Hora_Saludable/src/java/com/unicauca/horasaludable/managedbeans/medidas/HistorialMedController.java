@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -36,8 +37,9 @@ public class HistorialMedController {
         {
       int idusu = 20141105 ; //para probar
       int idmed = 5 ; //para probar
-      
-      medidas = ejbMedida.buscarporUsuid(idusu);
+      FacesContext context = FacesContext.getCurrentInstance();
+      MostrarUsuarioTestController s = (MostrarUsuarioTestController) context.getApplication().evaluateExpressionGet(context, "#{mostrarUsuarioTestController}", MostrarUsuarioTestController.class);
+      medidas = ejbMedida.buscarporUsuid(s.getUsuario().getUsuid().intValue());
       
       if(medidas.size()>0)medhist1 = medidas.get(0);
       if(medidas.size()>1)medhist2 = medidas.get(1);

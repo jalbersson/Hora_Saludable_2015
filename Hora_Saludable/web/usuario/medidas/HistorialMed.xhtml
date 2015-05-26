@@ -14,22 +14,22 @@
                 titulo
             </ui:define>
 
-            <ui:define name="CuadroDeBotonesSesion">
-                CuadroDeBotonesSesion
-            </ui:define>
+      
 
             <ui:define name="title">
                 <p:panel style="border: none;">
                 <h:form>
-                     <p:breadCrumb id="migaDirector" styleClass="migadepan">
+                     <p:breadCrumb >
                        <p:menuitem value="Usuarios" url="../../index.xhtml" />
-                        <p:menuitem value="Usuarios" outcome="consultaTest" />
                         <p:menuitem value="Gestion de Mediciones" outcome="GestionTest" />
                         <p:menuitem value="Historial de Medidas" url="#" />
                     </p:breadCrumb>
                 </h:form>
                 </p:panel>
-                <p:outputLabel styleClass="titulomediciones" value="Historial de Mediciones" />
+              
+               <div class="tituloContenido">
+                     Historial de Mediciones                   
+                </div>
                 <p:separator style="width: 100%;"/>
             </ui:define>
 
@@ -38,6 +38,14 @@
                 <h:form>
                 
                 <p:panelGrid styleClass="fichapersonal">
+                    
+                    <p:row>
+                        <p:column rowspan="9">
+                            <p:column  rendered="#{mostrarUsuarioTestController.campoFoto}">                                
+                                <p:graphicImage  width="100" height="100" library="#{mostrarUsuarioTestController.rutaFoto}" name="#{mostrarUsuarioTestController.usuario.usufoto}"/>
+                            </p:column>    
+                        </p:column>
+                    </p:row>
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Nombre:" />
@@ -75,7 +83,7 @@
                             <p:outputLabel styleClass="subtitulotabla" value="Peso:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{medidasController.medicionactual.medpeso} Kg" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{historialMedController.medhist1.medpeso} Kg" />
                         </p:column>
                     </p:row>
                     <p:row>
@@ -83,7 +91,7 @@
                             <p:outputLabel styleClass="subtitulotabla" value="Talla:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{medidasController.medicionactual.medtalla} Cm" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{historialMedController.medhist1.medtalla} Cm" />
                         </p:column>
                     </p:row>
                 </p:panelGrid>
@@ -165,7 +173,7 @@
                                 <p:outputLabel  value="Pantorrilla(cm): " />
                                 <p:outputLabel  value="#{historialMedController.medhist1.medpantorilla}"  styleClass="txtboxmed"/>
 
-                                <p:outputLabel  value="Perimetro Muñeca(cm): " />
+                                <p:outputLabel  value="Perimetro MuÃ±eca(cm): " />
                                 <p:outputLabel  value="#{historialMedController.medhist1.medperimetromuneca}"  styleClass="txtboxmed"/>
 
                                 <p:outputLabel  value="Perimetro Cabeza(cm): " />
@@ -186,7 +194,7 @@
                                 <p:outputLabel value="Perimetro Brazo(cm): " />
                                 <p:outputLabel value="#{historialMedController.medhist1.medperimetrobrazo}"  styleClass="txtboxmed"/>
 
-                                <p:outputLabel value="Diametro Antebrazo(cm): " />
+                                <p:outputLabel value="Perimetro Antebrazo(cm): " />
                                 <p:outputLabel value="#{historialMedController.medhist1.meddiametroantebrazo}"  styleClass="txtboxmed"/>
 
                                 <p:outputLabel  value="Perimetro Pantorrilla(cm): " />
@@ -238,13 +246,12 @@
                                 <p:outputLabel    value="#{historialMedController.medhist1.porcentajegrasaideal()}"/>
                                 <p:separator />
                                 <p:separator />
-                                <p:outputLabel  value="% Grasa" />
-                                <p:outputLabel  value="#{medidasController.medicionactual.estadoPorcentajeGrasaIdeal}"  />
-                                <p:outputLabel  value="Complexion" />
-                                <p:outputLabel   value="----"  />
-                                <p:outputLabel  value="Indice de Masa Corporal" />
-                                <p:outputLabel   value="----"  />
-
+                                 <p:outputLabel  value="% Grasa" styleClass="subtitpaneltest"/>
+                                    <p:outputLabel  value="#{historialMedController.medhist1.estadoPorcentajeGrasaIdeal}"  />
+                                    <p:outputLabel  value="Complexion" styleClass="subtitpaneltest"/>
+                                    <p:outputLabel  value="#{historialMedController.medhist1.estadoComplexion}"  />
+                                    <p:outputLabel  value="Indice de Masa Corporal" styleClass="subtitpaneltest"/>
+                                    <p:outputLabel  value="#{historialMedController.medhist1.estadoIMC}"  />
                             </p:panelGrid>
                                 
                         </p:column>
@@ -280,7 +287,7 @@
                                 <p:outputLabel  value="Pantorrilla(cm): " />
                                 <p:outputLabel  value="#{historialMedController.medhist2.medpantorilla}"  styleClass="txtboxmed"/>
 
-                                <p:outputLabel value="Perimetro Muñeca(cm): " />
+                                <p:outputLabel value="Perimetro MuÃ±eca(cm): " />
                                 <p:outputLabel value="#{historialMedController.medhist2.medperimetromuneca}"  styleClass="txtboxmed"/>
 
                                 <p:outputLabel value="Perimetro Cabeza(cm): " />
@@ -301,7 +308,7 @@
                                 <p:outputLabel  value="Perimetro Brazo(cm): " />
                                 <p:outputLabel  value="#{historialMedController.medhist2.medperimetrobrazo}"  styleClass="txtboxmed"/>
 
-                                <p:outputLabel  value="Diametro Antebrazo(cm): " />
+                                <p:outputLabel  value="Perimetro Antebrazo(cm): " />
                                 <p:outputLabel  value="#{historialMedController.medhist2.meddiametroantebrazo}"  styleClass="txtboxmed"/>
 
                                 <p:outputLabel  value="Perimetro Pantorrilla(cm): " />
@@ -352,13 +359,12 @@
                                 <p:outputLabel    value="#{historialMedController.medhist2.porcentajegrasaideal()}"/>
                                 <p:separator />
                                 <p:separator />
-                                <p:outputLabel  value="% Grasa" />
-                                <p:outputLabel   value="----"  />
-                                <p:outputLabel  value="Complexion" />
-                                <p:outputLabel   value="----"  />
-                                <p:outputLabel  value="Indice de Masa Corporal" />
-                                <p:outputLabel   value="----"  />
-
+                                <p:outputLabel  value="% Grasa" styleClass="subtitpaneltest"/>
+                                <p:outputLabel  value="#{historialMedController.medhist1.estadoPorcentajeGrasaIdeal}"  />
+                                <p:outputLabel  value="Complexion" styleClass="subtitpaneltest"/>
+                                <p:outputLabel  value="#{historialMedController.medhist1.estadoComplexion}"  />
+                                <p:outputLabel  value="Indice de Masa Corporal" styleClass="subtitpaneltest"/>
+                                <p:outputLabel  value="#{historialMedController.medhist1.estadoIMC}"  />
                             </p:panelGrid>
                         </p:column>    
 
