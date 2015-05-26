@@ -18,7 +18,7 @@
                     <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />                  
                 </p:contentFlow>
                 <div style="text-align: center">
-                <p:button style="background: #AA0000;color:#FFFFFF;font-style: italic"  value="Editar Álbum" outcome="album" />   
+                <p:button style="background: #AA0000;color:#FFFFFF;font-style: italic"  value="Editar Álbum" outcome="album" icon="ui-icon-star"/>   
                 </div>
                 
                 <br/> <br/>
@@ -29,7 +29,7 @@
                         <h:form>
                             <h:form> 
                                 <div class="divPrincipal">
-                                    <h1 style="color:#F2F2F2; text-align: center;">Noticias</h1>                                     
+                                    <h1 style="color:#F2F2F2; text-align: center;">Noticias</h1> 
                                     <p:carousel  value="#{noticiacController.ultimos}" var="noticiaLista" itemStyle="height:230px;width:600px;" autoPlayInterval="4000" numVisible="1" effect="easeInStrong" circular="true" class="ui-carousel">                                    
                                         <h:panelGrid columns="2" style="width:600px " cellpadding="10" columnClasses="label,value">
                                             <p:tab>

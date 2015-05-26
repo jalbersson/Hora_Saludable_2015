@@ -32,7 +32,7 @@ public class agregarHorarioController implements Serializable {
     
     public agregarHorarioController() {
         this.titulo = "Ingresa aqui titulo del horario";
-        this.cont = "<br/><table align=\"center\" border=\"4\" bordercolor=\"#fe5050\" cellpadding=\"10\" cellspacing=\"20\">\n"
+        this.cont = "<br/><table align=\"center\" border=\"4\" bordercolor=\"#22419a\" cellpadding=\"10\" cellspacing=\"20\">\n"
                 + "<tr style=\"color:#ffffff\" bgcolor=\"#22419a\">\n"
                 + "<th width=\"40px\">HORA</th><th width=\"80px\" >LUNES</th><th width=\"80px\" >MARTES</th><th width=\"80px\" >MIERCOLES</th> <th width=\"80px\" >JUEVES</th><th width=\"80px\" >VIERNES</th>\n"
                 + "</tr>\n"

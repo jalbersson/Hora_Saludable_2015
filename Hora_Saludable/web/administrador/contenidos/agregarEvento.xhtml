@@ -4,72 +4,78 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:r="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
 
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Agregar Evento
-            </ui:define>
-
-            <ui:define name="CuadroDeBotonesSesion">
-                CuadroDeBotonesSesion
+                Hora Saludable: Nueva Noticia
             </ui:define>
 
             <ui:define name="title">
-
+                <div class="tituloContenido">
+                    <br></br>
+                    Nuevo Evento 
+                    <br></br>
+                </div>
             </ui:define>
 
-            <ui:define name="body">
-                <h:form id="form">
-                    <p:panelMenu style="width:200px; float: right">
-                        <p:submenu label="Gestión de eventos">
-                            <p:menuitem value="Editar Evento" outcome="editarEvento" ajax="false"/>
-                            <p:menuitem value="Eliminar Evento" outcome="eliminarEvento" ajax="false"/>
 
-                        </p:submenu>
-                    </p:panelMenu>
+            <ui:define name="body"  >
 
-                    <p:panelGrid  style="width: 60%;" columns="1" >
+                <div class="wrap" style="width: 63%;">
+                    
+                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" value="*"/>
+                    <h:outputLabel class="CampoLabelObligatorios" value=" Campos Obligatorios" />
 
-                        <f:facet name="header">
-                            <H1>Nuevo Evento</H1>
-                        </f:facet>
+                    <h:form id="form"  enctype="multipart/form-data">
+                        <p:growl id="messages2" showDetail="true" />
+                        <p:panelGrid  columns="2" >
 
+                            <h:form id="nuevoEvento" >
+                                <h:panelGrid id="info" columns="2" >                                   
+                                    
+                                    <h:column>
+                                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
+                                        <h:outputLabel class="CampoLabelObligatorios" for="titulo" value="Titulo: "  />
+                                    </h:column>
+                                    <h:inputText  r:placeholder="Titulo" id="titulo" requiredMessage="Es necesario de que introduzca el Titulo del evento" value="#{eventoController.evento.evetitulo}" required="true" size="65" maxlength="500" style="width: 100%" />
+                                    <h:column>
+                                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
+                                        <h:outputLabel class="CampoLabelObligatorios" for="lugar" value="Lugar: "  />
+                                    </h:column>
+                                    <h:inputText  r:placeholder="Lugar" id="lugar" requiredMessage="Es necesario de que introduzca el Lugar del evento" value="#{eventoController.evento.evelugar}" required="true" size="65" maxlength="500" style="width: 100%" />
+                                    <h:column>
+                                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
+                                        <h:outputLabel class="CampoLabelObligatorios" for="fecha" value="Fecha: "  />
+                                    </h:column>
+                                    <p:calendar r:placeholder="Fecha de realizacion del evento" id="datetime" requiredMessage="Es necesario de que introduzca la Fecha del evento" value="#{eventoController.evefevento}" pattern="yyyy-MMM-dd HH:mm:ss" required="true" size="65" maxlength="500" style="width: 100%" />
+                                    <h:column>
+                                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
+                                        <h:outputLabel class="CampoLabelObligatorios" for="contenido" value="Descripcion: "  />
+                                    </h:column>
+                                    <h:inputTextarea r:placeholder="Descripcion del evento" id="contenido" requiredMessage="Es necesario que ingrese el contenido del evento" required="true" value="#{eventoController.evento.evecontenido}" rows="15" cols="65" style="width: 99%"/>
+                                    <h:column>
+                                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
+                                        <h:outputLabel class="CampoLabelObligatorios" for="imagen" value="Imagen: "  />
+                                    </h:column>      
+                                    <p:fileUpload value="#{eventoController.file}" mode="simple"/>
+                                    
+                                    <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic" > </p:button>
+                                    <p:commandButton ajax="false"  update="nuevoEvento" action="#{eventoController.guardarEvento()}" actionListener="#{eventoController.upload()}" process="@form" value="Registrar" 
+                                                     style="background: #22419A;color:#FFFFFF;font-style: italic" 
+                                                     />
+                                </h:panelGrid>
 
-                        <p:messages id="messages" />
-                        <h:panelGrid columns="2" >
-                            <p:outputLabel value="*Titulo: " />
-                            <p:inputText id="tituloEvento" value="#{eventoController.evento.evetitulo}" required="true" size="80" requiredMessage="Introduzca titulo del evento." />
-
-                            <p:outputLabel value="*Lugar: " />
-                            <p:inputText id="lugarEvento" value="#{eventoController.evento.evelugar}" required="true"  size="80" requiredMessage="Introduzca lugar del evento."/>
-                            
-                            <p:outputLabel  value="*Fecha de realizacion: " />
-                            <p:calendar id="fechaEvento"  value="#{eventoController.evefevento}" pattern="yyyy-MM-dd"  mask="true" required="true" requiredMessage="Introduzca fecha del evento." size ="80"/>
-
-                            <!--p:outputLabel  value="*Descripcion: " />
-                            <p:inputText id="descripcionEvento" value="url_contenido" required="true" size="80" /-->
-                            <!--p:editor id="editor" widgetVar="editorWidget" value="" width="600" /-->
-                            
-                            <p:commandButton value="Guardar" action="#{eventoController.guardarEvento()}" > </p:commandButton>
-                            
-                            
-                            <!--h:form>           
-                                <p:growl id="message" showDetail="true" />
-                                <p:commandButton value="Guardar" action="" update="message">
-                                    <p:confirm header="Confirmacion" message="Evento agregado con exito!!!" icon="ui-icon-alert" />
-                                </p:commandButton>
-                                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                                    <p:button value="Aceptar" outcome="gestionContenidos" style="float:right; right: 25%"/>                                  
-                                </p:confirmDialog>
                             </h:form>
-                            <p:button outcome="gestionContenidos" value="Volver" style="float:right; right: 88%" ></p:button-->
-                        </h:panelGrid>
-                    </p:panelGrid>
-                </h:form>
+                        </p:panelGrid>
+                    </h:form>
+
+                </div>
+
             </ui:define>
         </ui:composition>
     </body>
