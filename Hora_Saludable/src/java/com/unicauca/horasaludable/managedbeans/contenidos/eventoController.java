@@ -94,10 +94,25 @@ public class eventoController {
         }
         catch(Exception e)
         {
-            return "editarEvento";
+            return "listarEventos";
         }
 
         return "principal";
+    }
+    
+        public String eliminarEvento(Evento e)
+    {
+        try
+        {
+            this.ejbEvento.remove(e);
+        }
+        catch(Exception ex)
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Error: El evento no fue agregado!"));
+            return "listarEventos";
+        }
+
+        return "principal";  
     }
     
     public void upload() {
@@ -207,25 +222,7 @@ public class eventoController {
             this.ultimos.get(i).setEveimagen(aleatorioArchivos());
         }
     }*/
-    
-    
-    public String country;
- 
-	public String outcome(){
- 
-		FacesContext fc = FacesContext.getCurrentInstance();
-		this.country = getCountryParam(fc);
- 
-		return "result";
-	}
- 
-	//get value from "f:param"
-	public String getCountryParam(FacesContext fc){
- 
-		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
-		return params.get("country");
- 
-	}
+
     
     public Evento eventoDetallado()
     {

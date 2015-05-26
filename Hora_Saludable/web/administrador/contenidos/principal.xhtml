@@ -118,21 +118,20 @@
                         </h:form>
                         <p:panelMenu style="width:250px; float: right" >
                             <p:submenu label="Gestión de Eventos" >
-                                <p:menuitem value="Agregar evento" ajax="false" outcome="agregarEvento" /> 
-                                <p:menuitem value="Editar evento" ajax="false" outcome="editarEvento"/> 
-                                <p:menuitem value="Eliminar evento" ajax="false" outcome="eliminarEvento"/> 
+                                <p:menuitem value="Agregar evento" ajax="false" outcome="agregarEvento" icon="ui-icon-check"/> 
+                                <p:menuitem value="Listar Eventos" ajax="false" outcome="listarEventos" icon="ui-icon-check"/> 
                             </p:submenu>
                             <p:submenu label="Gestion de noticias">
-                                <p:menuitem value="Nueva Noticia"  ajax="false" outcome="nuevaNoticia" icon="ui-icon-close"/>
-                                <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false" icon="ui-icon-close"/>
+                                <p:menuitem value="Nueva Noticia"  ajax="false" outcome="nuevaNoticia" icon="ui-icon-check"/>
+                                <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false" icon="ui-icon-check"/>
                             </p:submenu>
                             <p:submenu label="Reglamento"  >
-                                <p:menuitem value="Ver Reglamento" outcome="reglamentoPrincipal" ajax="false"/>
-                                <p:menuitem value="Editar Reglamento" outcome="reglamento" ajax="false"/>
+                                <p:menuitem value="Ver Reglamento" outcome="reglamentoPrincipal" ajax="false" icon="ui-icon-check"/>
+                                <p:menuitem value="Editar Reglamento" outcome="reglamento" ajax="false" icon="ui-icon-check"/>
                             </p:submenu>
                             <p:submenu label="Quienes somos ">
-                                <p:menuitem value="Ver Quienes Somos" outcome="quienesSomosPrincipal" ajax="false" />
-                                <p:menuitem value="Editar Quienes Somos" outcome="quienesSomos" ajax="false" />
+                                <p:menuitem value="Ver Quienes Somos" outcome="quienesSomosPrincipal" ajax="false" icon="ui-icon-check" />
+                                <p:menuitem value="Editar Quienes Somos" outcome="quienesSomos" ajax="false" icon="ui-icon-check" />
                             </p:submenu>
                         </p:panelMenu>
 

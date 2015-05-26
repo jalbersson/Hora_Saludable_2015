@@ -23,13 +23,7 @@
 
             <ui:define name="body" >
                 <h:form id="form">
-                    <p:panelMenu style="width:200px; float: right">
-                        <p:submenu label="Gestión de eventos">
-                            <p:menuitem value="Editar Evento" outcome="editarEvento" ajax="false"/>
-                            <p:menuitem value="Eliminar Evento" outcome="eliminarEvento" ajax="false"/>
-
-                        </p:submenu>
-                    </p:panelMenu>
+                    
 
                     <p:panelGrid  style="width: 60%;" columns="1" >
 
@@ -61,7 +55,7 @@
                                     <p:commandButton value="Guardar" action="#{eventoVerEditarController.actualizarEvento()}" ></p:commandButton>
                                     
 
-                                    <p:button outcome="editarEvento" value="Cancelar" style="float:right" ></p:button>
+                                    <p:button outcome="listarEventos" value="Cancelar" style="float:right" ></p:button>
 
                                 </h:form>
                             </h:panelGrid>

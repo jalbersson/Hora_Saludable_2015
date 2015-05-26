@@ -27,7 +27,7 @@
                     
                 <h:form>
                     <p:dataTable var="evento_de_lista" value="#{eventoController.eventos}" rows="10" 
-                                         paginator="true"
+                                 paginator="true" 
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15">
                         
@@ -47,14 +47,18 @@
                             <h:outputText value="#{eventoController.convertToJavaDate(evento_de_lista.evefechapublicacion)}" />
                         </p:column>
                         
-                        <p:column headerText="Descripcion">
+                        <p:column headerText="Descripcion" width="30%">
                             <h:outputText value="#{evento_de_lista.evecontenido}" />
                         </p:column>
                         
                         <p:column headerText="Accion">
-                            <h:button value="Editar" outcome="#{eventoController.mostrarEventoEditar(evento_de_lista)}" />
-                              
-                            
+                            <p:row>
+                                <p:commandButton value="Editar" action="#{eventoController.mostrarEventoEditar(evento_de_lista)}" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" />     
+                            </p:row>
+                            <br></br><br></br>
+                            <p:row>
+                                <p:commandButton value="Eliminar" action="#{eventoController.eliminarEvento(evento_de_lista)}" style="background: #22419A;color:#FFFFFF;font-style: italic; width:100px"/>
+                            </p:row>
                         </p:column>    
                         
                         
