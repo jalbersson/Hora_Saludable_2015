@@ -23,6 +23,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
@@ -61,9 +62,16 @@ public class perfilUsuarioController implements Serializable
     
     public perfilUsuarioController() 
     {
+        
         rutaFoto="img/fotosUploads";
-        this.rutaAbsolutaFotos="/home/geovanny/Documentos/Asae/Hora_Saludable_2015/Hora_Saludable/web/resources/img/fotosUploads/";
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String realPath = (String) servletContext.getRealPath("/");        
+        this.rutaAbsolutaFotos=realPath.replace("build/", "")+"resources/img/fotosUploads/";
         this.sdf=new SimpleDateFormat("yyyy-MM-dd");
+        
+        
+        String OS = System.getProperty("os.name").toLowerCase();
+        System.out.println(OS);
         
     }
     
