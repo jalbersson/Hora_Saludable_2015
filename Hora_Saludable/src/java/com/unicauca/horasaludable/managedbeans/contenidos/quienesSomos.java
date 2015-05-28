@@ -17,7 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -77,7 +79,17 @@ public class quienesSomos {
     }
 
     public String devMision() {
-        File fl = new File("C:\\Users\\Leidi\\Documents\\NetBeansProjects\\Hora_Saludable_2015\\Hora_Saludable\\web\\resources\\docs\\mision.txt");
+        String path;
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        path = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
+        String OS =System.getProperty("os.name").toLowerCase();
+        if (OS.contains("nux") || OS.contains("nux")) 
+        {
+            path =path.replace("build/", "")+"/resources/docs/mision.txt";
+        }else{
+            path =path.replace("build\\", "")+"\\resources\\docs\\mision.txt";
+        }
+        File fl = new File(path);
         FileReader fr;
         this.mision="";
         try {
@@ -101,7 +113,17 @@ public class quienesSomos {
     }
 
     public String devObjetivo() {
-        File fl = new File("C:\\Users\\Leidi\\Documents\\NetBeansProjects\\Hora_Saludable_2015\\Hora_Saludable\\web\\resources\\docs\\objetivo.txt");
+        String path;
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        path = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
+        String OS =System.getProperty("os.name").toLowerCase();
+        if (OS.contains("nux") || OS.contains("nux")) 
+        {
+            path =path.replace("build/", "")+"/resources/docs/objetivo.txt";
+        }else{
+            path =path.replace("build\\", "")+"\\resources\\docs\\objetivo.txt";
+        }
+        File fl = new File(path);
         FileReader fr;
         this.objetivo="";
         try {
@@ -125,7 +147,17 @@ public class quienesSomos {
     }
 
     public String devVision() {
-        File fl = new File("C:\\Users\\Leidi\\Documents\\NetBeansProjects\\Hora_Saludable_2015\\Hora_Saludable\\web\\resources\\docs\\vision.txt");
+        String path;
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        path = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
+        String OS =System.getProperty("os.name").toLowerCase();
+        if (OS.contains("nux") || OS.contains("nux")) 
+        {
+            path =path.replace("build/", "")+"/resources/docs/vision.txt";
+        }else{
+            path =path.replace("build\\", "")+"\\resources\\docs\\vision.txt";
+        }
+        File fl = new File(path);
         FileReader fr;
         this.vision="";
         try {
@@ -149,7 +181,17 @@ public class quienesSomos {
     }
     
     public String devEquipo() {
-        File fl = new File("C:\\Users\\Leidi\\Documents\\NetBeansProjects\\Hora_Saludable_2015\\Hora_Saludable\\web\\resources\\docs\\equipo.txt");
+        String path;
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        path = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
+        String OS =System.getProperty("os.name").toLowerCase();
+        if (OS.contains("nux") || OS.contains("nux")) 
+        {
+            path =path.replace("build/", "")+"/resources/docs/equipo.txt";
+        }else{
+            path =path.replace("build\\", "")+"\\resources\\docs\\equipo.txt";
+        }
+        File fl = new File(path);
         FileReader fr;
         try {
             fr = new FileReader(fl);
@@ -174,7 +216,17 @@ public class quienesSomos {
     }
     
     public String crearMision() {
-        File fl = new File("C:\\Users\\Leidi\\Documents\\NetBeansProjects\\Hora_Saludable_2015\\Hora_Saludable\\web\\resources\\docs\\mision.txt");
+        String path;
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        path = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
+        String OS =System.getProperty("os.name").toLowerCase();
+        if (OS.contains("nux") || OS.contains("nux")) 
+        {
+            path =path.replace("build/", "")+"/resources/docs/mision.txt";
+        }else{
+            path =path.replace("build\\", "")+"\\resources\\docs\\mision.txt";
+        }
+        File fl = new File(path);
         FileWriter fw;
         try {
             fw = new FileWriter(fl);
@@ -190,7 +242,17 @@ public class quienesSomos {
     }
      
     public String crearVision() {
-        File fl = new File("C:\\Users\\Leidi\\Documents\\NetBeansProjects\\Hora_Saludable_2015\\Hora_Saludable\\web\\resources\\docs\\vision.txt");
+        String path;
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        path = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
+        String OS =System.getProperty("os.name").toLowerCase();
+        if (OS.contains("nux") || OS.contains("nux")) 
+        {
+            path =path.replace("build/", "")+"/resources/docs/vision.txt";
+        }else{
+            path =path.replace("build\\", "")+"\\resources\\docs\\vision.txt";
+        }
+        File fl = new File(path);
         FileWriter fw;
         try {
             fw = new FileWriter(fl);
@@ -206,7 +268,17 @@ public class quienesSomos {
     }
     
     public String crearResponsables() {
-        File fl = new File("C:\\Users\\Leidi\\Documents\\NetBeansProjects\\Hora_Saludable_2015\\Hora_Saludable\\web\\resources\\docs\\equipo.txt");
+        String path;
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        path = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
+        String OS =System.getProperty("os.name").toLowerCase();
+        if (OS.contains("nux") || OS.contains("nux")) 
+        {
+            path =path.replace("build/", "")+"/resources/docs/equipo.txt";
+        }else{
+            path =path.replace("build\\", "")+"\\resources\\docs\\equipo.txt";
+        }
+        File fl = new File(path);
         FileWriter fw;
         try {
             fw = new FileWriter(fl);
