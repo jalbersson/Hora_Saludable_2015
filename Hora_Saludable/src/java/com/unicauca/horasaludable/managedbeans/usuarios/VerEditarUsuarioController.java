@@ -24,6 +24,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -92,7 +93,17 @@ public class VerEditarUsuarioController implements Serializable
     public VerEditarUsuarioController() 
     {
         this.rutaFoto="img/fotosUploads";
-        this.rutaAbsolutaFotos="/home/geovanny/Documentos/Asae/Hora_Saludable_2015/Hora_Saludable/web/resources/img/fotosUploads/";
+        String OS = System.getProperty("os.name").toLowerCase();
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String realPath = (String) servletContext.getRealPath("/"); 
+        if(OS.contains("nux"))
+        {
+           this.rutaAbsolutaFotos=realPath.replace("build/", "")+"resources/img/fotosUploads/"; 
+        }
+        else
+        {
+            this.rutaAbsolutaFotos=realPath.replace("build\\", "")+"resources\\img\\fotosUploads\\";
+        }
         this.sdf=new SimpleDateFormat("yyyy-MM-dd");
     }
     
