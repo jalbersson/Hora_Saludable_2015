@@ -32,7 +32,7 @@
                                          rowsPerPageTemplate="5,10,15">
                         
                         <p:column headerText="Titulo">
-                            <h:outputText value="#{evento_de_lista.evetitulo}" />
+                            <p:link value="#{evento_de_lista.evetitulo}" outcome="#{eventoController.mostrarEvento(evento_de_lista)}" style="font-weight: bold; color: #22419A" />
                         </p:column>
                         
                         <p:column headerText="Lugar">
