@@ -370,6 +370,10 @@
                                                        action="#{registrarUsuarioController.registrarUsuario()}" value="Registrar" ajax="true" 
                                                        update="panel" id="registrar" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"
                                                        />
+                                    <p:commandButton   style="background: #22419A;color:#FFFFFF;font-style: italic" 
+                                                       value="Cancelar" onclick="PF('RegistrarUsuario').hide()"
+                                                        id="cancelar" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"
+                                                       />
                                 </p:column>
                             </p:row>                               
                         </p:panelGrid>                            
