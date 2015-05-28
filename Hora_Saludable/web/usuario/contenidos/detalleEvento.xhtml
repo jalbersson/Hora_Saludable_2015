@@ -8,7 +8,7 @@
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
                Detalle del evento
@@ -19,6 +19,7 @@
             </ui:define>
             
             <ui:define name="body">
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <h:form>
                     <p:growl id="msgs" showDetail="true" />
                     <p:fieldset legend="Detalles del evento" style="margin-bottom:20px">

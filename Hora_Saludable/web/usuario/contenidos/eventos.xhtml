@@ -11,15 +11,9 @@
        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
             <ui:define name="titulo">
                 Eventos
-            </ui:define>
+            </ui:define>          
 
-            <ui:define name="CuadroDeBotonesSesion">
-                CuadroDeBotonesSesion
-            </ui:define>
-
-            <ui:define name="menuprincipal">
-                
-            </ui:define>
+            
 
             <ui:define name="title">
                 <div class="tituloContenido">
@@ -30,7 +24,7 @@
 
             <ui:define name="body">
                 
-            <h:form id="form">
+            <h:form id="form1">
                 <p:dataGrid var="eventoLista" value="#{eventoController.eventos}" columns="3"
                     rows="12" paginator="true" 
                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
