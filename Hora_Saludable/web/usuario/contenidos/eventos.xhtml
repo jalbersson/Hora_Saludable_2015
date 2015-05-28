@@ -22,34 +22,28 @@
             </ui:define>
 
             <ui:define name="title">
-               
+                <div class="tituloContenido">
+                    Programate... 
+                    <br></br>
+                </div>
             </ui:define>
 
             <ui:define name="body">
                 
             <h:form id="form">
-                <h2 style="margin-top:0" class="tituloContenido">Programate...</h2>
                 <p:dataGrid var="eventoLista" value="#{eventoController.eventos}" columns="3"
                     rows="12" paginator="true" 
                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                     rowsPerPageTemplate="6,12,16">
 
-                    <f:facet name="header">
-                        Eventos
-                    </f:facet>
-
-                    <p:panel  class="tituloContenido" style="text-align:center">
-                        <h:panelGrid columns="2" style="width:100%">
-                            <p:graphicImage width="80px" height="80px" library="img/eventos" name="competencia.jpeg" />
-                            <h:panelGrid style="text-align:left">
-                                <p:row>
-                                <p:column>
-                                    
-                                </p:column>
-                            </p:row>
+                    <p:panel  class="tituloContenido" style="text-align:left; border:none;">
+                        <div style="border:solid 1px #0B2972; border-radius: 5px; height: 130px; padding-left: 10px;">
+                            <br></br>
+                            <h:form>
+                                <h:panelGrid columns="1" style="width:100%; border: none; ">
                             <p:row>
                                 <p:column>
-                                    <h:outputLabel class="CampoLabel" value="Evento :"/>
+                                    <h:outputLabel value="Evento :" style="color:#0B2972; font-size:15px; font-style: italic; "/>
                                 </p:column>
                                 <p:column>
                                     <h:outputLabel value="#{eventoLista.evetitulo}"/>
@@ -57,7 +51,7 @@
                             </p:row>
                             <p:row>
                                 <p:column>
-                                    <h:outputLabel class="CampoLabel" value="Lugar :"/>
+                                    <h:outputLabel class="CampoLabel" value="Lugar :" style="color:#0B2972; font-size:15px; font-style: italic;"/>
                                 </p:column>
                                 <p:column>
                                     <h:outputLabel value="#{eventoLista.evelugar}"/>
@@ -65,41 +59,25 @@
                             </p:row>
                             <p:row>
                                 <p:column>
-                                    <h:outputLabel class="CampoLabel" value="Fecha :"/>
+                                    <h:outputLabel class="CampoLabel" value="Fecha :" style="color:#0B2972; font-size:15px; font-style: italic;"/>
                                 </p:column>
                                 <p:column>
                                     <h:outputLabel value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}"/>
                                 </p:column>
                             </p:row>
-                            
                             <p:row>
-                                <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px">
+                                <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px; color:#aa0000;">
                                         <f:param name="eventoId" value="#{eventoLista.eveid}" />
                                 </p:link>
                             </p:row>
-                            </h:panelGrid>  
-                        </h:panelGrid>
+                            </h:panelGrid> 
+                            </h:form>   
+                        </div>
+                        
                     </p:panel>
 
                 </p:dataGrid>
-            </h:form>
-            <h:form>
-               
-
-
-                
-                <p:panelMenu style="width:200px; float: right">
-                      <p:submenu label="Contenidos">
-                          <p:menuitem value="Eventos" ajax="false" outcome="eventos"/> 
-                        <p:menuitem value="Noticias" outcome="noticias" ajax="false"/> 
-                        <p:menuitem value="Ofertas" ajax="false"/>
-                        <p:menuitem value="Reglamento" outcome="reglamento" ajax="false"/>
-                        <p:menuitem value="Quienes somos?" outcome="quienesSomos" ajax="false"/>
-                    </p:submenu>
-                </p:panelMenu>
-                
-            </h:form>
-                
+            </h:form>               
             </ui:define>
 
         </ui:composition>

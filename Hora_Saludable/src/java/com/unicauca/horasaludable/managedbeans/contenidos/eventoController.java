@@ -245,6 +245,29 @@ public class eventoController {
             //detallesEvento=ultimos.get(numero);
             return detallesEvento;
     }
+    
+        public Evento eventoDetalladoTodos()
+    {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+        //eveTitulo=params.get("eventoId");
+	idE = Long.parseLong(params.get("eventoId"));
+        
+        
+        
+        detallesEvento = new Evento();
+        //long numero= (long)idE;
+        for(int i=0;i<eventos.size();i++)
+        {
+            if(eventos.get(i).getEveid().equals(idE))
+            {
+                detallesEvento=eventos.get(i);
+            }
+        }
+            //detallesEvento=ultimos.get(numero);
+            return detallesEvento;
+    }
+        
     public String mostrarEventoEditar(Evento e)
     {
         
