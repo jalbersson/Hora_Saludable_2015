@@ -43,7 +43,8 @@ public class imagenController {
                 images.add(fichero.getName());
             }
         }
-    }    
+    } 
+    
     public String eliminarImagen(String nombre) {
         
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();

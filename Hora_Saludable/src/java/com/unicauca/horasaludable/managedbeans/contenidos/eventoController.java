@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -29,7 +28,7 @@ import org.primefaces.model.UploadedFile;
 
 /**
  *
- * @author Angela
+ * @author Angela & Yuri
  */
 @ManagedBean
 @SessionScoped
@@ -272,6 +271,11 @@ public class eventoController {
     {
         
         return "editarEventoEspecifico?id="+e.getEveid();
+    }
+    
+    public String mostrarEvento(Evento e) {
+
+        return "detalleEvento?id=" + e.getEveid();
     }
     
     public String getEveTitulo() {

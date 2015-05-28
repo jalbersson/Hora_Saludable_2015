@@ -33,9 +33,40 @@
             <url-pattern>/usuario/usuarios/*</url-pattern>
             <url-pattern>/faces/usuario/usuarios/*</url-pattern>
         </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>asistencia usuario</web-resource-name>
+            <description/>
+            <url-pattern>/usuario/asistencia/*</url-pattern>
+            <url-pattern>/faces/usuario/asistencia/*</url-pattern>
+        </web-resource-collection>
         <auth-constraint>
             <description/>
             <role-name>user</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>admin pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>gestionusuarios</web-resource-name>
+            <description/>
+            <url-pattern>/administrador/usuarios/*</url-pattern>
+            <url-pattern>/faces/administrador/usuarios/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>gestionmedidas</web-resource-name>
+            <description/>
+            <url-pattern>/administrador/medidas/*</url-pattern>
+            <url-pattern>/faces/administrador/medidas/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>controlAsistencia</web-resource-name>
+            <description/>
+            <url-pattern>/administrador/asistencia/*</url-pattern>
+            <url-pattern>/faces/administrador/asistencia/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>
@@ -49,5 +80,9 @@
     <security-role>
         <description>usuarios normales</description>
         <role-name>user</role-name>
+    </security-role>
+    <security-role>
+        <description>administrador equipo</description>
+        <role-name>admin</role-name>
     </security-role>
 </web-app>

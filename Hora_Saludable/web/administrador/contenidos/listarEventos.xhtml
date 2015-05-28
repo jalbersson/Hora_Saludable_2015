@@ -32,7 +32,7 @@
                                          rowsPerPageTemplate="5,10,15">
                         
                         <p:column headerText="Titulo">
-                            <h:outputText value="#{evento_de_lista.evetitulo}" />
+                            <p:link value="#{evento_de_lista.evetitulo}" outcome="#{eventoController.mostrarEvento(evento_de_lista)}" style="font-weight: bold; color: #22419A" />
                         </p:column>
                         
                         <p:column headerText="Lugar">
@@ -53,7 +53,7 @@
                         
                         <p:column headerText="Accion">
                             <p:row>
-                                <p:commandButton value="Editar" action="#{eventoController.mostrarEventoEditar(evento_de_lista)}" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" />     
+                                <p:button outcome="#{eventoController.mostrarEventoEditar(evento_de_lista)}" value="Editar" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" > </p:button>   
                             </p:row>
                             <br></br><br></br>
                             <p:row>
