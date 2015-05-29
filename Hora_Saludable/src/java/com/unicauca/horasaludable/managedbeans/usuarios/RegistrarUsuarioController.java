@@ -79,6 +79,7 @@ public class RegistrarUsuarioController implements Serializable {
         this.cargarListaTipo();
         this.inicializarCamposUsuarioEspecificos(); 
         this.usuario=new Usuario();
+        this.usuario.setUsugenero('M');
         
     }
     
