@@ -57,8 +57,6 @@ public class noticiaController {
 
     private UploadedFile file;
 
-
-
     public noticiaController() {
         this.visible = true;
         this.fechapublicacion = new Date();
@@ -66,20 +64,19 @@ public class noticiaController {
 
         this.imagen = "default";
         File f = new File("."); // Creamos un objeto file
-       
+
         String OS = System.getProperty("os.name").toLowerCase();
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        String realPath = (String) servletContext.getRealPath("/"); 
-        if(OS.contains("nux") || OS.contains("debian"))
-        {
-           this.path = realPath.replace("build/", "") + "/resources/img/imagenesNoticias/";
-        }
-        else
-        {
-            this.path = realPath.replace("build\\", "") + "\\resources\\img\\imagenesNoticias\\";
-            
+        String realPath = (String) servletContext.getRealPath("/");
+        if (OS.contains("nux") || OS.contains("debian")) {
+            this.path = realPath + "/resources/img/imagenesNoticias/";
+        } else {
+            this.path = realPath + "\\resources\\img\\imagenesNoticias\\";
+
         }
     }
+
+  
 
     public String guardarNoticia() {
 
@@ -118,12 +115,12 @@ public class noticiaController {
                 this.imagen = "default";
             }
         } catch (Exception e) {
-             this.imagen = "default";
+            this.imagen = "default";
         }
-        
+
     }
 
-    public void subirImagen() { 
+    public void subirImagen() {
         File f = null;
         InputStream in = null;
         String ubicacionImagen = "";
@@ -152,7 +149,7 @@ public class noticiaController {
             BufferedImage imgs[] = new BufferedImage[chunks]; //Image array to hold image chunks
             for (int x = 0; x < rows; x++) {
                 for (int y = 0; y < cols; y++) {
-                   
+
                     imgs[count] = new BufferedImage(chunkWidth, chunkHeight, image.getType());
 
                     Graphics2D gr = imgs[count++].createGraphics();
@@ -161,12 +158,10 @@ public class noticiaController {
                 }
             }
 
-            
             for (int i = 0; i < imgs.length; i++) {
                 ImageIO.write(imgs[i], "jpg", new File(this.path + this.imagen + ".jpg"));
             }
 
-            
         } catch (Exception ex) {
             FacesMessage msg = new FacesMessage("Error", " No ha podido cargar la imagen.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -269,7 +264,7 @@ public class noticiaController {
     }
 
     public void setFile(UploadedFile file) {
-        
+
         this.file = file;
     }
 

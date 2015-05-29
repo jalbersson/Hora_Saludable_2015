@@ -7,6 +7,7 @@ package com.unicauca.horasaludable.managedbeans.contenidos;
 
 import com.unicauca.horasaludable.entities.Noticia;
 import com.unicauca.horasaludable.jpacontrollers.NoticiaFacade;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -107,10 +109,35 @@ public class listarNoticiasController {
             noticia = ebjNoticiaFacade.mostrarNoticia(_id);
             ebjNoticiaFacade.remove(noticia);
 
+            try {
+                eliminarImagen(noticia.getNotimagen());
+            } catch (Exception e) {
+
+            }
+
             FacesContext contex = FacesContext.getCurrentInstance();
             contex.getExternalContext().redirect("listarNoticias.xhtml");
         } catch (Exception e) {
-            
+
+        }
+
+    }
+
+    public void eliminarImagen(String nombre) {
+
+        String pathElimninar;
+        String OS = System.getProperty("os.name").toLowerCase();
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String realPath = (String) servletContext.getRealPath("/");
+        if (OS.contains("nux") || OS.contains("debian")) {
+            pathElimninar = realPath + "/resources/img/imagenesNoticias/";
+        } else {
+            pathElimninar = realPath + "\\resources\\img\\imagenesNoticias\\";
+
+        }
+        if (!nombre.equals("default.jpg")) {
+            File f2 = new File(pathElimninar + nombre);
+            f2.delete();
         }
 
     }
