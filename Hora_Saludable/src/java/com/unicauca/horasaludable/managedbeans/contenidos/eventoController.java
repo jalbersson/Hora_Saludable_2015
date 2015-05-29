@@ -56,14 +56,16 @@ public class eventoController {
        
         this.imagen = "default";
         File f = new File("."); // Creamos un objeto file
-        //System.out.println(f.getAbsolutePath()); // Llamamos al método que devuelve la ruta absoluta
-        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
-        this.path = realPath + "\\resources\\img\\imagenesEventos\\";
-        FacesMessage msg = new FacesMessage("Ubicacion del momento", this.path);
-         //msg = new FacesMessage("Ubicacion del momento", );
 
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        String OS = System.getProperty("os.name").toLowerCase();
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String realPath = (String) servletContext.getRealPath("/");
+        if (OS.contains("nux") || OS.contains("debian")) {
+            this.path = realPath + "/resources/img/imagenesEventos/";
+        } else {
+            this.path = realPath + "\\resources\\img\\imagenesEventos\\";
+
+        }
     }
     
     public Date convertToJavaDate(java.util.Date date)
