@@ -31,8 +31,18 @@ public class imagenController {
     public void init() {
 
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String OS = System.getProperty("os.name").toLowerCase();
         String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
-        dir = realPath + "\\resources\\img\\imagenSalud";
+        if(OS.contains("nux"))
+        {
+            dir = realPath + "/resources/img/imagenSalud";
+           
+        }
+        else
+        {
+            dir = realPath + "\\resources\\img\\imagenSalud";
+        }
+        
 
         f = new File(dir);
         images = new ArrayList<>();
