@@ -16,10 +16,7 @@
             </ui:define>
 
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Registro de asistencia <br></br>
-                </div>
+                
             </ui:define>
 
             <ui:define name="body">                
@@ -29,8 +26,13 @@
                         <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
                         <p:menuitem value="Registro de asistencia" outcome="registrar-asistencia" />
                     </p:breadCrumb>
-
-                    <p:spacer height="25"/>
+                    
+                    <p:spacer height="10"/>
+                    <div class="tituloContenido">
+                        Registro de asistencia
+                    </div>
+                    
+                    <p:spacer height="20"/>
 
                     <p:growl id="growl" sticky="true" showDetail="true" />
 

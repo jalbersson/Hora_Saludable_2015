@@ -6,12 +6,6 @@ import com.unicauca.horasaludable.entities.Usuario;
 import com.unicauca.horasaludable.jpacontrollers.AsistenciaFacade;
 import com.unicauca.horasaludable.jpacontrollers.DetalleasistenciaFacade;
 import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -54,10 +48,8 @@ public class ReporteAsistenciaUsuController implements Serializable
 {
     @EJB
     private UsuarioFacade usuarioEJB;
-    
     @EJB
     private AsistenciaFacade asistenciaEJB;
-    
     @EJB
     private DetalleasistenciaFacade detalleAsistenciaEJB;
     
@@ -76,8 +68,10 @@ public class ReporteAsistenciaUsuController implements Serializable
     private boolean verReporte;
     private boolean verTablaAnual;
     private boolean verTablaMensual;
+    private String nombreUsuario;
     
     public ReporteAsistenciaUsuController() {
+        nombreUsuario = "";
         mes = 0;
         año = 0;
         totalHorasDia = new int[31];
@@ -98,18 +92,18 @@ public class ReporteAsistenciaUsuController implements Serializable
         String nombreMes = "";
         switch(mes)
         {
-            case 1: nombreMes = "ENERO";    break;
-            case 2: nombreMes = "FEBRERO";  break;
-            case 3: nombreMes = "MARZO";    break;
-            case 4: nombreMes = "ABRIL";    break;
-            case 5: nombreMes = "MAYO";     break;
-            case 6: nombreMes = "JUNIO";    break;
-            case 7: nombreMes = "JULIO";     break;
-            case 8: nombreMes = "AGOSTO";   break;
-            case 9: nombreMes = "SEPTIEMBRE"; break;
-            case 10: nombreMes = "OCTUBRE";   break;
-            case 11: nombreMes = "NOVIEMBRE"; break;
-            case 12: nombreMes = "DICIEMBRE"; break;     
+            case 1: nombreMes = "Enero";    break;
+            case 2: nombreMes = "Febrero";  break;
+            case 3: nombreMes = "Marzo";    break;
+            case 4: nombreMes = "Abril";    break;
+            case 5: nombreMes = "Mayo";     break;
+            case 6: nombreMes = "Junio";    break;
+            case 7: nombreMes = "Julio";    break;
+            case 8: nombreMes = "Agosto";   break;
+            case 9: nombreMes = "Septiembre"; break;
+            case 10: nombreMes = "Octubre";   break;
+            case 11: nombreMes = "Noviembre"; break;
+            case 12: nombreMes = "Diciembre"; break;     
         }
         
         return nombreMes;
@@ -130,23 +124,94 @@ public class ReporteAsistenciaUsuController implements Serializable
     public void setAño(int año) {
         this.año = año;
     }
+
+    public List<TablaAsistenciaAnual> getTablaAnual() {
+        return tablaAnual;
+    }
+
+    public void setTablaAnual(List<TablaAsistenciaAnual> tablaAnual) {
+        this.tablaAnual = tablaAnual;
+    }
+
+    public List<TablaAsistenciaMensual> getTablaMensual() {
+        return tablaMensual;
+    }
+
+    public void setTablaMensual(List<TablaAsistenciaMensual> tablaMensual) {
+        this.tablaMensual = tablaMensual;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
     
-    public List<TablaAsistenciaAnual> getAsistenciaAnual()
+    public void asistenciaAnual()
     {
-        tablaAnual = new ArrayList();
-        TablaAsistenciaAnual obj;
-        List<Usuario> lstUsuarios = usuarioEJB.buscarTodos();
-        boolean ban;
-        int cont = 1;
-        totalHorasAño = 0;
-        
-        for (Usuario u : lstUsuarios)   //Se recorren todos los usuarios
+        if(verReporteAnual == true && verReporteMensual == false)
         {
-            obj = new TablaAsistenciaAnual();
-            ban = false;
-            for(int i=1; i<=1; i++)
+            tablaAnual = new ArrayList();
+            TablaAsistenciaAnual obj;
+            boolean ban;
+            int cont = 1;
+            List<Usuario> lstUsuarios = usuarioEJB.buscarPorNombresApellidos(nombreUsuario);
+
+            for (Usuario u : lstUsuarios)   //Se recorren todos los usuarios
             {
-                List<Asistencia> lstAsistencia = asistenciaEJB.findByYearMonth(año, i);
+                obj = new TablaAsistenciaAnual();
+                ban = false;
+                for(int i=1; i<=12; i++)
+                {
+                    List<Asistencia> lstAsistencia = asistenciaEJB.findByYearMonth(año, i);
+                    for(Asistencia a : lstAsistencia)
+                    {
+                        List<Detalleasistencia> lstDetalleAsistencia = detalleAsistenciaEJB.obtenerDetalleAsistenciaPorUsuIDAsiID(a.getAsiid(), u.getUsuid(), true);
+
+                        if(lstDetalleAsistencia.size() > 0)
+                        {
+                            ban  = true;
+                            obj.setMeses((i-1), obj.getMeses(i-1)+1);
+                        }
+                    }
+                }
+                if(ban == true){
+                    obj.setNum(cont);
+                    obj.setNombre(u.getUsuapellidos()+" "+u.getUsunombres());
+                    obj.setSexo(u.getUsugenero());
+                    obj.setCodigo(u.getUsuid());
+                    if(u.getUniid() != null)
+                        obj.setPrograma(u.getUniid().getUninombre());
+                    if(u.getCarid() != null)
+                        obj.setEstamento(u.getCarid().getCarnombre());
+                    obj.setAsisTotal(obj.getMeses(0)+obj.getMeses(1)+obj.getMeses(2)+obj.getMeses(3)+obj.getMeses(4)+obj.getMeses(5)+obj.getMeses(6)+obj.getMeses(7)+obj.getMeses(8)+obj.getMeses(9)+obj.getMeses(10)+obj.getMeses(11));
+                    tablaAnual.add(obj);
+                    cont ++;
+                }
+            }
+        }
+    }
+    
+    public void asistenciaMensual()
+    {
+        if(verReporteMensual)
+        {
+            tablaMensual = new ArrayList();
+            TablaAsistenciaMensual obj;
+            Calendar c;
+            boolean ban;
+            int cont = 1, aux;
+            List<Usuario> lstUsuarios = usuarioEJB.buscarPorNombresApellidos(nombreUsuario);
+
+            List<Asistencia> lstAsistencia = asistenciaEJB.findByYearMonth(año, mes);
+
+            for (Usuario u : lstUsuarios)   //Se recorren todos los usuarios
+            {
+                obj = new TablaAsistenciaMensual();
+                ban = false;
+                aux = 0;
                 for(Asistencia a : lstAsistencia)
                 {
                     List<Detalleasistencia> lstDetalleAsistencia = detalleAsistenciaEJB.obtenerDetalleAsistenciaPorUsuIDAsiID(a.getAsiid(), u.getUsuid(), true);
@@ -154,72 +219,28 @@ public class ReporteAsistenciaUsuController implements Serializable
                     if(lstDetalleAsistencia.size() > 0)
                     {
                         ban  = true;
-                        obj.setMeses((i-1), obj.getMeses(i-1)+1);
+                        c = GregorianCalendar.getInstance();
+                        c.setTime(a.getAsifecha());
+                        int dia = c.get(Calendar.DAY_OF_MONTH);
+                        obj.setDias(dia-1, "X");
+                        aux ++;
                     }
                 }
-            }
-            if(ban == true){
-                obj.setNum(cont);
-                obj.setNombre(u.getUsuapellidos()+" "+u.getUsunombres());
-                obj.setSexo(u.getUsugenero());
-                obj.setCodigo(u.getUsuid());
-                if(u.getUniid() != null)
-                    obj.setPrograma(u.getUniid().getUninombre());
-                if(u.getCarid() != null)
-                    obj.setEstamento(u.getCarid().getCarnombre());
-                obj.setAsisTotal(obj.getMeses(0)+obj.getMeses(1)+obj.getMeses(2)+obj.getMeses(3)+obj.getMeses(4)+obj.getMeses(5)+obj.getMeses(6)+obj.getMeses(7)+obj.getMeses(8)+obj.getMeses(9)+obj.getMeses(10)+obj.getMeses(11));
-                tablaAnual.add(obj);
-                cont ++;
-            }
-        }
-        return tablaAnual;
-    }
-    
-    public List<TablaAsistenciaMensual> getAsistenciaMensual()
-    {
-        tablaMensual = new ArrayList();
-        TablaAsistenciaMensual obj;
-        Calendar c;
-        boolean ban;
-        int cont = 1, aux;
-        
-        List<Usuario> lstUsuarios = usuarioEJB.buscarTodos();
-        List<Asistencia> lstAsistencia = asistenciaEJB.findByYearMonth(año, mes);
-        
-        for (Usuario u : lstUsuarios)   //Se recorren todos los usuarios
-        {
-            obj = new TablaAsistenciaMensual();
-            ban = false;
-            aux = 0;
-            for(Asistencia a : lstAsistencia)
-            {
-                List<Detalleasistencia> lstDetalleAsistencia = detalleAsistenciaEJB.obtenerDetalleAsistenciaPorUsuIDAsiID(a.getAsiid(), u.getUsuid(), true);
-
-                if(lstDetalleAsistencia.size() > 0)
-                {
-                    ban  = true;
-                    c = GregorianCalendar.getInstance();
-                    c.setTime(a.getAsifecha());
-                    int dia = c.get(Calendar.DAY_OF_MONTH);
-                    obj.setDias(dia-1, "X");
-                    aux ++;
+                if(ban == true){
+                    obj.setNum(cont);
+                    obj.setNombre(u.getUsuapellidos()+" "+u.getUsunombres());
+                    obj.setSexo(u.getUsugenero());
+                    obj.setCodigo(u.getUsuid());
+                    if(u.getUniid() != null)
+                        obj.setPrograma(u.getUniid().getUninombre());
+                    if(u.getCarid() != null)
+                        obj.setEstamento(u.getCarid().getCarnombre());
+                    obj.setAsisTotal(aux);
+                    tablaMensual.add(obj);
+                    cont ++;
                 }
             }
-            if(ban == true){
-                obj.setNum(cont);
-                obj.setNombre(u.getUsuapellidos()+" "+u.getUsunombres());
-                obj.setSexo(u.getUsugenero());
-                obj.setCodigo(u.getUsuid());
-                if(u.getUniid() != null)
-                    obj.setPrograma(u.getUniid().getUninombre());
-                if(u.getCarid() != null)
-                    obj.setEstamento(u.getCarid().getCarnombre());
-                obj.setAsisTotal(aux);
-                tablaMensual.add(obj);
-                cont ++;
-            }
         }
-        return tablaMensual;
     }
     
     public void postProcessXLSAnual(Object document)
@@ -228,7 +249,7 @@ public class ReporteAsistenciaUsuController implements Serializable
         wb.setSheetName(0, "CONSOLIDADO " + año);
         HSSFSheet sheet = wb.getSheetAt(0);  
         
-        sheet.shiftRows(0, 6, 6);
+        sheet.shiftRows(0, sheet.getLastRowNum(), 6);
         
         sheet.addMergedRegion(new CellRangeAddress(0,1,0,18));
         
@@ -316,7 +337,7 @@ public class ReporteAsistenciaUsuController implements Serializable
         
         HSSFFont font4 = wb.createFont();
         font4.setFontName(HSSFFont.FONT_ARIAL);
-        font4.setFontHeightInPoints((short)7);
+        font4.setFontHeightInPoints((short)8);
         HSSFCellStyle cellStyle5 = wb.createCellStyle();
         cellStyle5.setAlignment(CellStyle.ALIGN_CENTER);
         cellStyle5.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
@@ -333,9 +354,9 @@ public class ReporteAsistenciaUsuController implements Serializable
         cellStyle6.setBorderTop(HSSFCellStyle.BORDER_MEDIUM);
         cellStyle6.setBorderRight(HSSFCellStyle.BORDER_MEDIUM);
         cellStyle6.setBorderLeft(HSSFCellStyle.BORDER_MEDIUM);        
-        cellStyle6.setFont(font4);
-        
-        long[] totales = new long[13];
+        cellStyle6.setFont(font4);	
+
+	long[] totales = new long[13];
         for(int i=0; i<13; i++)
             totales[i] = 0;
         
@@ -346,17 +367,24 @@ public class ReporteAsistenciaUsuController implements Serializable
             {
                 for (int cn=row.getFirstCellNum(); cn<row.getLastCellNum(); cn++)
                 {
+                    long aux;
                     Cell c = row.getCell(cn, Row.RETURN_BLANK_AS_NULL);
+                    c.setCellStyle(cellStyle5);
                     if(cn == 1) {
                         c.setCellStyle(cellStyle6);
                     }
-                    else {
-                        c.setCellStyle(cellStyle5);    
-                        if(cn > 5) {
-                            //c.setCellType(Cell.CELL_TYPE_NUMERIC);
-                            totales[cn-6] += Long.parseLong(c.getStringCellValue());
-                        }
+                    else if(cn == 0 || cn == 3 || cn >= 6)
+                    {
+                        aux = Long.parseLong(c.getStringCellValue());
+                        row.removeCell(c);
+                        Cell cell = row.createCell(cn);
+                        cell.setCellType(Cell.CELL_TYPE_NUMERIC);
+                        cell.setCellValue(aux);
+                        cell.setCellStyle(cellStyle5);
+                        if(cn > 5)
+                            totales[cn-6] += aux;
                     }
+                    sheet.autoSizeColumn(cn);
                 }
             }
         }
@@ -412,6 +440,7 @@ public class ReporteAsistenciaUsuController implements Serializable
         cellStyle8.setBorderRight(HSSFCellStyle.BORDER_MEDIUM);
         cellStyle8.setBorderLeft(HSSFCellStyle.BORDER_MEDIUM);  
         cellStyle8.setFont(font3);
+        cellStyle8.setWrapText(true);
         
         sheet.addMergedRegion(new CellRangeAddress(obsRow,obsRow+2,0,18));
         
@@ -477,13 +506,13 @@ public class ReporteAsistenciaUsuController implements Serializable
         footer.setCellStyle(cellStyle10);
     }
         
-    public void postProcessXLSMensual(Object document) throws IOException
+    public void postProcessXLSMensual(Object document)
     {
         HSSFWorkbook wb = (HSSFWorkbook) document;  
         wb.setSheetName(0, getNombreDelMes()+" "+año);
         HSSFSheet sheet = wb.getSheetAt(0);  
         
-        sheet.shiftRows(0, 8, 8);
+        sheet.shiftRows(0, sheet.getLastRowNum(), 8);
         
         // Header 
         sheet.addMergedRegion(new CellRangeAddress(0,4,0,1));
@@ -582,12 +611,20 @@ public class ReporteAsistenciaUsuController implements Serializable
             
             HSSFCell cell = titulosTabla.getCell(i);
             cell.setCellStyle(cellStyle3);
+            if(i>5 && i<37) {
+                long aux = Long.parseLong(cell.getStringCellValue());
+                titulosTabla.removeCell(cell);
+                Cell cellActual = titulosTabla.createCell(i);
+                cellActual.setCellType(Cell.CELL_TYPE_NUMERIC);
+                cellActual.setCellValue(aux);
+                cellActual.setCellStyle(cellStyle3);
+            }
             sheet.autoSizeColumn(i);
         }
         
         HSSFFont font4 = wb.createFont();
         font4.setFontName(HSSFFont.FONT_ARIAL);
-        font4.setFontHeightInPoints((short)7);
+        font4.setFontHeightInPoints((short)8);
         HSSFCellStyle cellStyle4 = wb.createCellStyle();
         cellStyle4.setAlignment(CellStyle.ALIGN_CENTER);
         cellStyle4.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
@@ -628,10 +665,19 @@ public class ReporteAsistenciaUsuController implements Serializable
                                 totales[cn-6] += 1;
                             }
                         }
-                        if(cn == 37) {
-                            totales[cn-6] += Long.parseLong(c.getStringCellValue());
+                        if(cn == 0 || cn == 3 || cn == 37)
+                        {
+                            long aux = Long.parseLong(c.getStringCellValue());
+                            row.removeCell(c);
+                            Cell cell = row.createCell(cn);
+                            cell.setCellType(Cell.CELL_TYPE_NUMERIC);
+                            cell.setCellValue(aux);
+                            cell.setCellStyle(cellStyle4);
+                            if(cn == 37)
+                                totales[cn-6] += aux;
                         }
                     }
+                    sheet.autoSizeColumn(cn);
                 }
             }
         }
@@ -768,6 +814,7 @@ public class ReporteAsistenciaUsuController implements Serializable
     }
 
     public int getTotalHorasMes() {
+        totalHorasMes = 0;
         for(int i=0; i<tablaMensual.size(); i++)
             totalHorasMes += tablaMensual.get(i).getAsisTotal();
         return totalHorasMes;
@@ -792,6 +839,7 @@ public class ReporteAsistenciaUsuController implements Serializable
     }
 
     public int getTotalHorasAño() {
+        totalHorasAño = 0;
         for(int i=0; i<tablaAnual.size(); i++)
             totalHorasAño += tablaAnual.get(i).getAsisTotal();
         return totalHorasAño;
@@ -873,6 +921,7 @@ public class ReporteAsistenciaUsuController implements Serializable
         String tipo=e.getNewValue().toString();        
         año = 0;
         mes = 0;
+        nombreUsuario = "";
         if(tipo.equals("Anual"))
         {
             this.verReporteAnual = true;
@@ -920,8 +969,9 @@ public class ReporteAsistenciaUsuController implements Serializable
         if(!tipo.equals("0"))
         {
             verMes = true;
-            if(verReporteMensual == true && verAño == true)
+            if(verReporteMensual == true && verAño == true) {
                 verReporte = true;
+            }
             else
                 verReporte = false;
         }

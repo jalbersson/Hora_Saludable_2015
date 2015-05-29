@@ -15,20 +15,21 @@
                 </ui:define>
 
                 <ui:define name="title">
-                    <div class="tituloContenido">
-                        <br></br>Reporte: Asistencia de usuarios<br></br>
-                    </div>
                 </ui:define>
 
-                <ui:define name="body"> 
+                <ui:define name="body">
                     <p:breadCrumb>
                         <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
                         <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
                         <p:menuitem value="Reporte: Asistencia de usuarios" outcome="reporte-asistencia-usuarios" />
                     </p:breadCrumb>
 
-                    <p:spacer height="20"/> 
-
+                    <p:spacer height="10"/> 
+                    <div class="tituloContenido">
+                        Reporte: Asistencia de usuarios
+                    </div>
+                    <p:spacer height="10"/> 
+                    
                     <h:form id="form">
                         <p:panel>
                             <p:panelGrid id="panelGrid1" styleClass="panelgrid">
@@ -58,12 +59,11 @@
                                     </p:column>
                                     <p:column>
                                         <p:selectOneMenu id="anioReporte" required="true" requiredMessage="Seleccione el año."
-                                                         valueChangeListener="#{reporteAsistenciaUsuController.cambiarAño}" value="#{reporteAsistenciaUsuController.año}">
+                                                         valueChangeListener="#{reporteAsistenciaUsuController.cambiarAño}" value="#{reporteAsistenciaUsuController.año}" >
                                             <f:selectItem itemValue="0" itemLabel="Seleccione uno" /> 
                                             <f:selectItem itemValue="2014" itemLabel="2014" />
                                             <f:selectItem itemValue="2015" itemLabel="2015" />
-                                            <p:ajax update="form"/>
-                                            <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                                            <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" oncomplete="#{reporteAsistenciaUsuController.asistenciaAnual()}" update="form" />
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column>
@@ -91,8 +91,7 @@
                                             <f:selectItem itemValue="10" itemLabel="Octubre" />
                                             <f:selectItem itemValue="11" itemLabel="Noviembre" />
                                             <f:selectItem itemValue="12" itemLabel="Diciembre" />
-                                            <p:ajax update="form"/>
-                                            <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                                            <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" oncomplete="#{reporteAsistenciaUsuController.asistenciaMensual()}" update="form"/>
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column>
@@ -107,21 +106,29 @@
                         
                         <p:spacer height="20"/>
                         
-                        <h:panelGrid id="panelGrid2" columns="3" cellpadding="7" rendered="#{reporteAsistenciaUsuController.verReporte}"> 
-                            <h:outputLabel value="Nombre del usuario:" style="font-size: 15px;" />
-                            <p:autoComplete />
-                            <p:commandButton icon="ui-icon-search" value="Buscar" />
+                        <h:panelGrid id="panelGridA" columns="3" cellpadding="7" rendered="#{reporteAsistenciaUsuController.verTablaAnual}"> 
+                            <h:outputLabel value="Nombre del usuario a buscar:" style="font-size: 15px;" />
+                            <p:inputText style="width: 240px;" value="#{reporteAsistenciaUsuController.nombreUsuario}"  >
+                                <p:ajax event="keyup" update="tablaAsistenciaAnual" listener="#{reporteAsistenciaUsuController.asistenciaAnual()}" />                                
+                            </p:inputText>
                         </h:panelGrid>
                         
-                        <p:spacer height="8"/>            
+                        <h:panelGrid id="panelGridM" columns="2" cellpadding="7" rendered="#{reporteAsistenciaUsuController.verTablaMensual}"> 
+                            <h:outputLabel value="Nombre del usuario a buscar:" style="font-size: 15px;" />
+                            <p:inputText style="width: 240px;" value="#{reporteAsistenciaUsuController.nombreUsuario}"  >
+                                <p:ajax event="keyup" update="tablaAsistenciaMensual" listener="#{reporteAsistenciaUsuController.asistenciaMensual()}" />                                
+                            </p:inputText>
+                        </h:panelGrid>
+                                                
+                        <p:spacer height="8"/>
                         
-                        <p:dataTable  id="tablaAsistenciaAnual" rendered="#{reporteAsistenciaUsuController.verTablaAnual}" var="tab" value="#{reporteAsistenciaUsuController.asistenciaAnual}"
-                                      paginator="true" rows="20" paginatorPosition="bottom" rowsPerPageTemplate="20,40,60" style="font-size: 12px; text-align: center;" emptyMessage="Lo sentimos, no hay asistencia registrada en dicho año.">
+                        <p:dataTable  id="tablaAsistenciaAnual" rendered="#{reporteAsistenciaUsuController.verTablaAnual}" var="tab" value="#{reporteAsistenciaUsuController.tablaAnual}"
+                                      paginator="true" rows="15" paginatorPosition="bottom" rowsPerPageTemplate="15,30,45,60,75" style="font-size: 12px; text-align: center;" emptyMessage="Lo sentimos, no hay asistencia registrada.">
                             <p:column headerText="No" width="14">
                                 <h:outputText value="#{tab.num}" />
                             </p:column>
                             <p:column headerText="NOMBRES Y APELLIDOS" width="290" style="text-align: left">
-                                <h:outputText value="#{tab.nombre}" />
+                                <h:outputText value="#{tab.nombre}" style="text-transform: uppercase;"/>
                             </p:column>
                             <p:column headerText="SEXO" exportable="true" style="display: none;" >
                                 <h:outputText value="#{tab.sexo}" />
@@ -129,7 +136,7 @@
                             <p:column headerText="CODIGO" exportable="true" style="display: none;">
                                 <h:outputText value="#{tab.codigo}" />
                             </p:column>
-                            <p:column headerText="PROGRAMA" exportable="true" style="display: none;">
+                            <p:column headerText="PROGRAMA ACADEMICO O DEPENDENCIA" exportable="true" style="display: none;">
                                 <h:outputText value="#{tab.programa}" />
                             </p:column>
                             <p:column headerText="ESTAMENTO" exportable="true" style="display: none;">
@@ -250,14 +257,14 @@
                             </p:columnGroup>
                         </p:dataTable>
 
-                        <p:dataTable  id="tablaAsistenciaMensual" rendered="#{reporteAsistenciaUsuController.verTablaMensual}" var="tab" value="#{reporteAsistenciaUsuController.asistenciaMensual}"
-                                      paginator="true" rows="20" paginatorPosition="bottom" rowsPerPageTemplate="20,40,60" emptyMessage="Lo sentimos, no hay asistencia registrada en dicho mes." style="font-size: 11px; text-align: center;">
+                        <p:dataTable  id="tablaAsistenciaMensual" rendered="#{reporteAsistenciaUsuController.verTablaMensual}" var="tab" value="#{reporteAsistenciaUsuController.tablaMensual}"
+                                      paginator="true" rows="15" paginatorPosition="bottom" rowsPerPageTemplate="15,30,45,60,75" emptyMessage="Lo sentimos, no hay asistencia registrada." style="font-size: 11px; text-align: center;">
                             
                             <p:column  headerText="No" exportable="true" style="display: none;">
                                 <h:outputText value="#{tab.num}" />
                             </p:column>
                             <p:column  headerText="NOMBRES Y APELLIDOS" width="147" style="text-align: left" >
-                                <h:outputText value="#{tab.nombre}" />
+                                <h:outputText value="#{tab.nombre}" style="text-transform: uppercase;"/>
                             </p:column>
                             <p:column  headerText="SEXO" exportable="true" style="display: none;">
                                 <h:outputText value="#{tab.sexo}" />
@@ -265,7 +272,7 @@
                             <p:column  headerText="CODIGO" exportable="true" style="display: none;">
                                 <h:outputText value="#{tab.codigo}" />
                             </p:column>
-                            <p:column  headerText="PROGRAMA" exportable="true" style="display: none;">
+                            <p:column  headerText="PROGRAMA ACADEMICO O DEPENDENCIA" exportable="true" style="display: none;">
                                 <h:outputText value="#{tab.programa}" />
                             </p:column>
                             <p:column  headerText="ESTAMENTO" exportable="true" style="display: none;">
@@ -421,7 +428,7 @@
                             
                             <h:commandLink id="xlsMes" rendered="#{reporteAsistenciaUsuController.verTablaMensual}">
                                 <p:graphicImage value="/resources/img/asistencia/excel.png"/>
-                                <p:dataExporter type="xls" target="tablaAsistenciaMensual" fileName="Asistencial Mensual #{reporteAsistenciaUsuController.nombreDelMes} #{reporteAsistenciaUsuController.año}" postProcessor="#{reporteAsistenciaUsuController.postProcessXLSMensual}" />
+                                <p:dataExporter type="xls" target="tablaAsistenciaMensual" fileName="Asistencial Mensual - #{reporteAsistenciaUsuController.nombreDelMes} #{reporteAsistenciaUsuController.año}" postProcessor="#{reporteAsistenciaUsuController.postProcessXLSMensual}" />
                             </h:commandLink>
                         </p:panel>
                     </h:form>
