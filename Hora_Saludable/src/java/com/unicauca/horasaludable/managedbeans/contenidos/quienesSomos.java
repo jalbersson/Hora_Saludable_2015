@@ -85,9 +85,9 @@ public class quienesSomos {
         String OS =System.getProperty("os.name").toLowerCase();
         if (OS.contains("nux") || OS.contains("nux")) 
         {
-            path =path.replace("build/", "")+"/resources/docs/mision.txt";
+            path =path +"/resources/docs/mision.txt";
         }else{
-            path =path.replace("build\\", "")+"\\resources\\docs\\mision.txt";
+            path =path +"\\resources\\docs\\mision.txt";
         }
         File fl = new File(path);
         FileReader fr;
@@ -119,9 +119,9 @@ public class quienesSomos {
         String OS =System.getProperty("os.name").toLowerCase();
         if (OS.contains("nux") || OS.contains("nux")) 
         {
-            path =path.replace("build/", "")+"/resources/docs/objetivo.txt";
+            path =path +"/resources/docs/objetivo.txt";
         }else{
-            path =path.replace("build\\", "")+"\\resources\\docs\\objetivo.txt";
+            path =path +"\\resources\\docs\\objetivo.txt";
         }
         File fl = new File(path);
         FileReader fr;
@@ -153,9 +153,9 @@ public class quienesSomos {
         String OS =System.getProperty("os.name").toLowerCase();
         if (OS.contains("nux") || OS.contains("nux")) 
         {
-            path =path.replace("build/", "")+"/resources/docs/vision.txt";
+            path =path +"/resources/docs/vision.txt";
         }else{
-            path =path.replace("build\\", "")+"\\resources\\docs\\vision.txt";
+            path =path +"\\resources\\docs\\vision.txt";
         }
         File fl = new File(path);
         FileReader fr;
@@ -187,9 +187,9 @@ public class quienesSomos {
         String OS =System.getProperty("os.name").toLowerCase();
         if (OS.contains("nux") || OS.contains("nux")) 
         {
-            path =path.replace("build/", "")+"/resources/docs/equipo.txt";
+            path =path +"/resources/docs/equipo.txt";
         }else{
-            path =path.replace("build\\", "")+"\\resources\\docs\\equipo.txt";
+            path =path +"\\resources\\docs\\equipo.txt";
         }
         File fl = new File(path);
         FileReader fr;
@@ -222,9 +222,9 @@ public class quienesSomos {
         String OS =System.getProperty("os.name").toLowerCase();
         if (OS.contains("nux") || OS.contains("nux")) 
         {
-            path =path.replace("build/", "")+"/resources/docs/mision.txt";
+            path =path +"/resources/docs/mision.txt";
         }else{
-            path =path.replace("build\\", "")+"\\resources\\docs\\mision.txt";
+            path =path +"\\resources\\docs\\mision.txt";
         }
         File fl = new File(path);
         FileWriter fw;
@@ -248,9 +248,9 @@ public class quienesSomos {
         String OS =System.getProperty("os.name").toLowerCase();
         if (OS.contains("nux") || OS.contains("nux")) 
         {
-            path =path.replace("build/", "")+"/resources/docs/vision.txt";
+            path =path +"/resources/docs/vision.txt";
         }else{
-            path =path.replace("build\\", "")+"\\resources\\docs\\vision.txt";
+            path =path +"\\resources\\docs\\vision.txt";
         }
         File fl = new File(path);
         FileWriter fw;
@@ -274,9 +274,9 @@ public class quienesSomos {
         String OS =System.getProperty("os.name").toLowerCase();
         if (OS.contains("nux") || OS.contains("nux")) 
         {
-            path =path.replace("build/", "")+"/resources/docs/equipo.txt";
+            path =path +"/resources/docs/equipo.txt";
         }else{
-            path =path.replace("build\\", "")+"\\resources\\docs\\equipo.txt";
+            path =path +"\\resources\\docs\\equipo.txt";
         }
         File fl = new File(path);
         FileWriter fw;
