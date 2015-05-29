@@ -85,9 +85,9 @@ public class quienesSomos {
         String OS =System.getProperty("os.name").toLowerCase();
         if (OS.contains("nux") || OS.contains("nux")) 
         {
-            path =path.replace("build/", "")+"/resources/docs/mision.txt";
+            path =path.replace("build/", "/")+"/resources/docs/mision.txt";
         }else{
-            path =path.replace("build\\", "")+"\\resources\\docs\\mision.txt";
+            path =path.replace("build\\", "\\")+"\\resources\\docs\\mision.txt";
         }
         File fl = new File(path);
         FileReader fr;
