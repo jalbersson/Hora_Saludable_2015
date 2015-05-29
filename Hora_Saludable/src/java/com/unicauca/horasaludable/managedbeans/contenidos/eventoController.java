@@ -267,6 +267,24 @@ public class eventoController {
             return detallesEvento;
     }
         
+    public String cortarTitulo(String s)
+    {
+        if(s.length()>20)
+        {
+            return s.substring(0,20)+"...";
+        }
+        return s;
+    }
+    
+        public String cortarLugar(String s)
+    {
+        if(s.length()>15)
+        {
+            return s.substring(0,15)+"...";
+        }
+        return s;
+    }
+        
     public String mostrarEventoEditar(Evento e)
     {
         
