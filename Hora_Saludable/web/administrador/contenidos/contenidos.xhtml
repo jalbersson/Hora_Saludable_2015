@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Contenidos 
+            </ui:define>
+            Contenidos 
+            <ui:define name="title">
+
+
+            </ui:define>
+
+            <ui:define name="body">
+
+                <br></br>
+                <br></br>
+
+                <h:panelGrid columns="2" style="width:700px; height: 200px;">
+                    <h:form>    
+
+
+                        <div class="divPrincipal" style="height: 350px">
+                            <h:panelGrid columns="1" style="width:400px; height: 200px;">
+                                <h1 style="color:#F2F2F2; text-align: center">  Contenidos</h1> 
+                                <p:dataScroller  var="Contenidos" value="">
+
+                                    <h:form>
+                                        <h:outputText value="Este módulo estuvo encargado de gestionar las noticias 
+                                                      y eventos que se van a mostrar en la página principal, de tal 
+                                                      forma que el administrador pueda crear, editar, eliminar una 
+                                                      noticia o un evento, también de mostrar el reglamento y la 
+                                                      Resolución del programa hora saludable. Por otro lado se encargó
+                                                      del envío de correos masivos, en el cual el administrador puede 
+                                                      enviar un correo a los usuarios activos.  Además elaboró Acerca 
+                                                      de y quienes somos para este último el administrador puede editar
+                                                      el contenido." style="font-weight: bold; font-size: 18px"/>
+                                    </h:form>
+                                </p:dataScroller>
+
+
+                            </h:panelGrid>
+                        </div>
+
+                    </h:form>
+                    <h:form>
+
+                        <p:graphicImage style="float: right" width="300px" height="250px" library="img" name="contenidos.jpg"   />
+
+
+                    </h:form>
+
+                </h:panelGrid>
+                <br></br>
+                <p:button style="height: 30px; width: 100px; margin-right: 10px"  value="Volver" outcome="acercade" /> 
+
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

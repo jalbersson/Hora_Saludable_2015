@@ -19,7 +19,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/usuario/contenidos/principal.xhtml</welcome-file>
     </welcome-file-list>
     <error-page>
         <error-code>403</error-code>

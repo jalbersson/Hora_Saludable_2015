@@ -40,7 +40,7 @@
                             <f:validator validatorId="validarCorreoElectronico"/>
                             </p:inputText>
                                
-                        <p:commandButton update="enviar" value="Enviar" actionListener="#{recuperarContraseniaController.recuperar}" 
+                        <p:commandButton update="enviar" value="Enviar" action="#{recuperarContraseniaController.recuperar}" 
                                          icon="ui-icon-check" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                         <p:messages id="enviar" />
                     </h:panelGrid>

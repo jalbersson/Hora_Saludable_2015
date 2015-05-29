@@ -14,9 +14,7 @@
             <ui:define name="titulo">
                 Gestion Test
             </ui:define>
-            <ui:define name="CuadroDeBotonesSesion">
-                CuadroDeBotonesSesion
-            </ui:define>
+            
             <ui:define name="title">
                 <p:panel style="border: none;">
                     <h:form>
@@ -39,6 +37,7 @@
                  <p:spacer height="50" width="600" />  
             </ui:define>
             <ui:define name="body" >
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <p:dialog showEffect="fade" hideEffect="explode" position="center" widgetVar="agregartest" header="Agregar Nuevo Test" modal="true">
                             <h:form>
                         <h:panelGrid columns="2" cellpadding="10">

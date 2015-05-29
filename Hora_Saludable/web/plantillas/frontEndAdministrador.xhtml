@@ -37,8 +37,8 @@
                                     #{usuarioSessionController.nombreUsuario()}
                                     <p:graphicImage style="width:20px; margin:0;margin-left: 5px;" library="img" name="usuario.png"/>
                                 </h:link>
-                                <p:menu overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">        
-                                    <p:menuitem value="Mi Perfil"  />
+                                <p:menu overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">     
+                                    
                                     <p:menuitem value="Cerrar Sesión" action="#{usuarioSessionController.logout()}"
                                                 onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
                                 </p:menu>
@@ -53,7 +53,7 @@
                 <nav id="mainNav">                       
                     <ui:insert name="menuprincipal">
                         <ul>
-                            <li><span class="punta"></span><p:link outcome="/administrador/contenidos/principal" value="inicio"/></li>
+                            <li><span class="punta"></span><p:link outcome="/administrador/contenidos/principal" value="Inicio"/></li>
                             <li><span class="punta"></span><p:link outcome="/administrador/usuarios/gestionUsuarios" value="Gestión Usuarios"/></li>
                             <li><span class="punta"></span><p:link outcome="/administrador/medidas/consultaTest" value="Gestión de Medidas"/></li>
                             <li><span class="punta"></span><p:link outcome="/administrador/asistencia/indexAsistencia" value="Control Asistencia"/></li>

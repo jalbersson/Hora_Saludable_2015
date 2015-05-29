@@ -53,43 +53,34 @@ public class noticiaController {
     private Date fechaedicion;
     private String contenido;
     private String imagen;
-    private String path = "D:\\";
+    private String path;
 
     private UploadedFile file;
 
-
-
     public noticiaController() {
         this.visible = true;
-        //this.titulo = "Aqui va el titulo";
         this.fechapublicacion = new Date();
         this.fechaedicion = new Date();
-        //this.contenido = "Aqui va el contenido";
 
-        //this.path = "..\\..\\img\\imgNoticias\\";
-        //this.path = "D:\\imagenesNoticias\\";
-        //this.imagen = this.path + "noticia.jpg";
         this.imagen = "default";
         File f = new File("."); // Creamos un objeto file
-        //System.out.println(f.getAbsolutePath()); // Llamamos al método que devuelve la ruta absoluta
 
+        String OS = System.getProperty("os.name").toLowerCase();
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
-        this.path = realPath + "\\resources\\img\\imagenesNoticias\\";
-        FacesMessage msg = new FacesMessage("Ubicacion del momento", this.path);
-         //msg = new FacesMessage("Ubicacion del momento", );
+        String realPath = (String) servletContext.getRealPath("/");
+        if (OS.contains("nux") || OS.contains("debian")) {
+            this.path = realPath + "/resources/img/imagenesNoticias/";
+        } else {
+            this.path = realPath + "\\resources\\img\\imagenesNoticias\\";
 
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        //FacesMessage msg = new FacesMessage("Ubicacion del momento", System.getProperty("user.dir"));
-        //FacesContext.getCurrentInstance().addMessage(null, msg);
-        //this.path = new File("").getAbsolutePath()+"\\imagenesNoticias\\";
-
+        }
     }
+
+  
 
     public String guardarNoticia() {
 
-        try {
-            //imagen = "../../resources/imagenNoticia.jpg";
+        try {      //imagen = "../../resources/imagenNoticia.jpg";
             noticia = new Noticia();
             Date fecha = new java.util.Date();
             this.noticia.setNottitulo(this.titulo);
@@ -119,19 +110,17 @@ public class noticiaController {
     public void upload() {
         try {
             if (file != null) {
-            //guardarNoticia();
                 subirImagen();
             } else {
                 this.imagen = "default";
             }
         } catch (Exception e) {
-             this.imagen = "default";
+            this.imagen = "default";
         }
-        
+
     }
 
     public void subirImagen() {
-
         File f = null;
         InputStream in = null;
         String ubicacionImagen = "";
@@ -160,26 +149,19 @@ public class noticiaController {
             BufferedImage imgs[] = new BufferedImage[chunks]; //Image array to hold image chunks
             for (int x = 0; x < rows; x++) {
                 for (int y = 0; y < cols; y++) {
-                    //Initialize the image array with image chunks
+
                     imgs[count] = new BufferedImage(chunkWidth, chunkHeight, image.getType());
 
-                    // draws the image chunk
                     Graphics2D gr = imgs[count++].createGraphics();
                     gr.drawImage(image, 0, 0, chunkWidth, chunkHeight, chunkWidth * y, chunkHeight * x, chunkWidth * y + chunkWidth, chunkHeight * x + chunkHeight, null);
                     gr.dispose();
                 }
             }
 
-            //writing mini images into image files
             for (int i = 0; i < imgs.length; i++) {
                 ImageIO.write(imgs[i], "jpg", new File(this.path + this.imagen + ".jpg"));
             }
 
-            /*
-             ubicacionImagen = this.path;
-             FacesMessage msg = new FacesMessage("Success! ", " is uploaded.");
-             FacesContext.getCurrentInstance().addMessage(null, msg);
-             */
         } catch (Exception ex) {
             FacesMessage msg = new FacesMessage("Error", " No ha podido cargar la imagen.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -282,9 +264,7 @@ public class noticiaController {
     }
 
     public void setFile(UploadedFile file) {
-        /*FacesMessage msg = new FacesMessage("Imagen Cargada! ", this.path);
-         FacesContext.getCurrentInstance().addMessage(null, msg);
-         */
+
         this.file = file;
     }
 

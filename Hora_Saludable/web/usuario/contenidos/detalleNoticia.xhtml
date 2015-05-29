@@ -11,7 +11,7 @@
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Detalle del evento
+                Hora Saludable: Detalle Noticia
             </ui:define>
 
             <ui:define name="title">
@@ -31,8 +31,6 @@
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:form id="form">
                                         <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
-
-
                                             <p:row>
                                                 <p:column>
                                                     <h:outputLabel class="CampoLabel" value="Noticia :"/>
@@ -73,10 +71,11 @@
 
                                 </h:panelGrid>
                             </p:outputPanel>
-                            <p:link outcome="principal" value="Volver"> </p:link>
-
+                            
                         </h:panelGrid>
                     </p:fieldset>
+                    <p:button outcome="listarNoticias" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; left: 90%" > </p:button>
+
                 </h:form>
             </ui:define>
 

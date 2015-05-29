@@ -58,7 +58,7 @@
                                     <p:graphicImage style="width:20px; margin:0;margin-left: 5px;" library="img" name="usuario.png"/>
                                 </h:link>
                                 <p:menu rendered="#{usuarioSessionController.esAdministrador()}" overlay="true" trigger="opcionesadministrador"  my="left top" at="left bottom">        
-                                    <p:menuitem value="Mi Perfil"   />
+                                    <p:menuitem value="Administrar" outcome="/administrador/contenidos/principal"  />
                                     <p:menuitem value="Cerrar Sesión" action="#{usuarioSessionController.logout()}"
                                                 onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                 </p:menu> 

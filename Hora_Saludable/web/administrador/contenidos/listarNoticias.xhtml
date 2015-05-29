@@ -8,72 +8,65 @@
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
-
+              <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Hora Saludable: Noticias
+                Hora Saludable: Lista Noticias
             </ui:define>
-
-            <ui:define name="CuadroDeBotonesSesion">
-            </ui:define>
-
 
             <ui:define name="title">
                 <div class="tituloContenido">
                     <br></br>
-                    Listado de Noticias
+                    Noticias
                     <br></br>
                 </div>
             </ui:define>
 
+            <ui:define name="body" >
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                <div class="wrap" style="width: 90%;">    
 
-            <ui:define name="body">
+                    <h:form>
+                        <p:dataTable var="noticia" value="#{listarNoticiasController.obtenerNoticias()}" rows="10" 
+                                     paginator="true" 
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15">
 
-                <h:form> 
-                    <p:dataScroller value="#{listarNoticiasController.obtenerNoticias()}" var="noticia" chunkSize="3" mode="inline"  first="1" scrollHeight="350" >
-                        <f:facet name="header">
+                            <p:column headerText="Titulo">
+                                <p:link value="#{noticia.nottitulo}" outcome="detalleNoticia?noticiaId=#{noticia.notid}" style="font-weight: bold; color: #22419A" />
+                            </p:column>
 
-                        </f:facet>
+                            <p:column headerText="Fecha publicación">
+                                <h:outputText value="#{noticia.notfechapublicacion}" />
+                            </p:column>
 
-                        <h:panelGrid columns="2" style="width:100%">
+                            <p:column headerText="Noticia">
+                                <h:outputText value="#{noticia.notcontenido}" />
+                            </p:column>
 
 
 
-                            <p:outputPanel>
-                                <p:panelGrid  style="width: 100%;" columns="1" >
-                                    <p:fieldset legend="#{noticia.nottitulo} - Fecha Publicación #{listarNoticiasController.convertToJavaDate( noticia.notfechapublicacion )}" style="font-size: medium; margin-bottom:20px; font-family: cursive;font-weight:lighter">
-                                        <h:panelGrid columns="2" cellpadding="5">
-                                            <p:graphicImage library="img/imagenesNoticias" name="#{noticia.notimagen}" width="170px" height="140px"/>
-                                            <h:outputText value="#{noticia.notcontenido}" style="text-justify: kashida; font:large Palatino bold italic; font-stretch: expanded;  "/>
-                                            <h:outputText></h:outputText>
-                                            <h:form style="float: left; ">
+                            <p:column headerText="Accion">
+                                <p:row>
+                                    <p:button outcome="editarNoticia?id=#{noticia.notid}" value="Editar" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px"/>
+                                </p:row>
+                                <br></br><br></br>
+                                <p:row>
+                                    <p:button outcome="eliminarNoticia?id=#{noticia.notid}" value="Eliminar" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px"/>
+                                </p:row>
+                            </p:column>    
 
-                                                <!--p:outputLabel  value="Publicar noticia:" />
-                                                <p:selectOneRadio id="mostrarNoticia" value="#{noticia.notvisible}" >
-                                                    <f:selectItem itemLabel="Si" itemValue="true" />   
-                                                    <f:selectItem itemLabel="No" itemValue="false" />
-                                                </p:selectOneRadio-->
-                                                <h:outputText></h:outputText>
-                                                <h:link style="float: right; position: relative; color: #AA0000; " outcome="editarNoticia?id=#{noticia.notid}"> [ Editar ] </h:link>
-                                                <h:link style="float: right; position: relative; color: #AA0000; " outcome="eliminarNoticia?id=#{noticia.notid}"> [ Eliminar ] </h:link>
 
-                                            </h:form>
+                        </p:dataTable> 
+                    </h:form>  
 
-                                        </h:panelGrid>
-                                    </p:fieldset>
-                                </p:panelGrid>
-                            </p:outputPanel>
-                        </h:panelGrid>
-                    </p:dataScroller>
-                </h:form>
-                <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; left: 90%" > </p:button>
+                    <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; left: 90%" > </p:button>
 
+                </div>
 
             </ui:define>
 
         </ui:composition>
-
     </body>
 </html>
 

@@ -64,14 +64,24 @@ public class perfilUsuarioController implements Serializable
     {
         
         rutaFoto="img/fotosUploads";
+        String OS = System.getProperty("os.name").toLowerCase();
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        String realPath = (String) servletContext.getRealPath("/");        
-        this.rutaAbsolutaFotos=realPath.replace("build/", "")+"resources/img/fotosUploads/";
+        String realPath = (String) servletContext.getRealPath("/"); 
+        if(OS.contains("nux"))
+        {
+           this.rutaAbsolutaFotos=realPath.replace("build/", "")+"resources/img/fotosUploads/"; 
+        }
+        else
+        {
+            this.rutaAbsolutaFotos=realPath.replace("build\\", "")+"resources\\img\\fotosUploads\\";
+        }
+               
+        
         this.sdf=new SimpleDateFormat("yyyy-MM-dd");
         
         
-        String OS = System.getProperty("os.name").toLowerCase();
-        System.out.println(OS);
+        
+        
         
     }
     
