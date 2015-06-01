@@ -20,7 +20,7 @@
                     <h:form>
                         <p:breadCrumb>
                             <p:menuitem value="Usuarios" url="../../index.xhtml" />
-                            <p:menuitem value="Consultar Test" outcome="consultaTest" />
+                            <p:menuitem value="Consultar Medidas" outcome="consultaTest" />
                             <p:menuitem value="Gestion de Mediciones" outcome="GestionTest" />
                             <p:menuitem value="Test" url="#" />
                         </p:breadCrumb>
@@ -44,7 +44,7 @@
                             <p:outputLabel  value="Fecha: " for="fechanuevo"/>
                             <p:calendar id="fechanuevo"  pattern="dd.MM.yyyy" navigator="true" required="true" showButtonPanel="true" value="#{medidasController.fechaNuevoTest}"/>
                             <f:facet name="footer">
-                                <p:commandButton  value="Agregar Nuevo Test" actionListener="#{medidasController.agregarMedidas()}" onclick="PF('agregartest').hide();" icon="ui-icon-disk" update=":formTest"/>              
+                                <p:commandButton  value="Agregar Nueva Medida" actionListener="#{medidasController.agregarMedidas()}" onclick="PF('agregartest').hide();" icon="ui-icon-disk" update=":formTest"/>              
                             </f:facet>                   
                         </h:panelGrid>
                     </h:form>
@@ -100,13 +100,13 @@
                 <div>
                     <p:panelGrid columns="2" styleClass="Menuagregartest" >
                         <f:facet name="header" >
-                            <h:outputLabel  value="Lista de Test registrados al usuario" />                      
+                            <h:outputLabel  value="Evaluaciónes realizadas" />                      
                         </f:facet>
                     </p:panelGrid> 
                     <h:form>
                         <p:panelGrid columns="2" style="float: right; margin-top: 30px; "> 
                             <f:facet name="header">
-                                <p:commandButton value="Agregar Nuevo Test" onclick="PF('agregartest').show();" icon="ui-icon-disk" />
+                                <p:commandButton value="Agregar Nueva Medida" onclick="PF('agregartest').show();" icon="ui-icon-disk" />
                                 <p:button value="Ver Historial" icon="ui-icon-refresh" outcome="HistorialMed"/> 
                             </f:facet> 
                         </p:panelGrid>

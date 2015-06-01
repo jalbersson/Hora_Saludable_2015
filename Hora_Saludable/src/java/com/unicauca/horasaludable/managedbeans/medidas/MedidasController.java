@@ -189,7 +189,7 @@ public class MedidasController {
              
                   
             document.add((Element) new Chunk("Nombre: ",negrilla));document.add((Element) new Chunk(user.getUsunombres() + " "+user.getUsuapellidos()));            
-            document.add((Element) new Chunk("                               Fecha Impresión:"+fecha));
+            document.add((Element) new Chunk("                    Fecha Impresión:"+fecha));
             
             document.add(new Paragraph(""));
             document.add((Element) new Chunk("Identificacion: ",negrilla));  document.add((Element) new Chunk(user.getUsuidentificacion()+""));
