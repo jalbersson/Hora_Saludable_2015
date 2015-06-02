@@ -19,6 +19,7 @@ import java.util.*;
 import com.unicauca.horasaludable.cifrado.Cifrar;
 import com.unicauca.horasaludable.entities.Recuperarcontrasena;
 import com.unicauca.horasaludable.jpacontrollers.RecuperarcontrasenaFacade;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -121,6 +122,8 @@ public class RecuperarContraseniaController {
     }
     
     public void sendMail(){
+        HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();      
+        
         to = correo;
         from = "horasaludable@gmail.com";
         
@@ -136,7 +139,7 @@ public class RecuperarContraseniaController {
         {
             ejbRecuperarcontrasena.create(recuperarContrasena);
         }                
-        String url = "http://localhost:8080/Hora_Saludable/faces/usuario/recuperarcontrasenia/cambiarContrasenia.xhtml?ifo="+ idcifrado;
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/faces/usuario/recuperarcontrasenia/cambiarContrasenia.xhtml?ifo="+ idcifrado;
         message = "<h1> Hola "+usuario.getUsunombres()+" Hemos recibido tu solicitud de cambio de contraseña, para hacer el"
                 + " cambio haz clic <a href="+url+">Aqui</a></h1>";
          

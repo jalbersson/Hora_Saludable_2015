@@ -77,12 +77,7 @@ public class perfilUsuarioController implements Serializable
         }
                
         
-        this.sdf=new SimpleDateFormat("yyyy-MM-dd");
-        
-        
-        
-        
-        
+        this.sdf=new SimpleDateFormat("yyyy-MM-dd");        
     }
     
     @PostConstruct
