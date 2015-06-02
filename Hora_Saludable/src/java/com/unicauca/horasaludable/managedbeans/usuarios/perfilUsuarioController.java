@@ -257,7 +257,7 @@ public class perfilUsuarioController implements Serializable
     
     private void definirSexo()
     {
-        if(this.usuario.getUsugenero().equals("M"))
+        if(this.usuario.getUsugenero().equals('M'))
         {
             this.sexo="Masculino";
         }
