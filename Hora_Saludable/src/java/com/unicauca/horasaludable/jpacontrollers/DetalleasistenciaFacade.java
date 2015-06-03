@@ -51,14 +51,14 @@ public class DetalleasistenciaFacade extends AbstractFacade<Detalleasistencia> {
                 + "select count(*) "
                 + "from "
                 + "( "
-                + "select DA.usuID, count(DA.asiId) "
-                + "from DetalleAsistencia DA NATURAL JOIN Asistencia A "
-                + "WHERE month(A.asiFecha) = " + mes + " "
-                + "AND year(A.asiFecha) = " + anio + " "
-                + "AND DA.detAsistio = 1 "
-                + "GROUP BY DA.usuId "
-                + "HAVING count(DA.asiid) > 0"
-                + ") Asi";
+                + "select DA.USUID, count(DA.ASIId) "
+                + "from DETALLEASISTENCIA DA NATURAL JOIN ASISTENCIA A "
+                + "WHERE month(A.ASIFECHA) = " + mes + " "
+                + "AND year(A.ASIFECHA) = " + anio + " "
+                + "AND DA.DETASISTIO = 1 "
+                + "GROUP BY DA.USUId "
+                + "HAVING count(DA.ASIID) > 0"
+                + ") ASI";
         Query query = em.createNativeQuery(sqlString);
 
 //        int asistentes = -1;

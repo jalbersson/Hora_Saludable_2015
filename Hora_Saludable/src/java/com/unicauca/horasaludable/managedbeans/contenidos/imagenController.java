@@ -30,17 +30,17 @@ public class imagenController {
     @PostConstruct
     public void init() {
 
-        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String OS = System.getProperty("os.name").toLowerCase();
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
-        if(OS.contains("nux"))
+        if(OS.contains("nux") || OS.contains("debian"))
         {
-            dir = realPath + "/resources/img/imagenSalud";
+            this.dir = realPath + "/resources/img/imagenSalud/";
            
         }
         else
         {
-            dir = realPath + "\\resources\\img\\imagenSalud";
+            this.dir = realPath + "\\resources\\img\\imagenSalud\\";
         }
         
 
@@ -57,10 +57,19 @@ public class imagenController {
     
     public String eliminarImagen(String nombre) {
         
+        String OS = System.getProperty("os.name").toLowerCase();
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
-        dir2 = realPath + "\\resources\\img\\imagenSalud\\" +nombre;
- 
+        if(OS.contains("nux") || OS.contains("debian"))
+        {
+            this.dir2 = realPath + "/resources/img/imagenSalud/"+nombre;
+           
+        }
+        else
+        {
+            this.dir2 = realPath + "\\resources\\img\\imagenSalud\\"+nombre;
+        }
+        
         f2 = new File(dir2);
         if (f2.delete()) {
             return "album";

@@ -19,6 +19,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -41,7 +42,7 @@ public class envioCorreo {
     @EJB
     private UsuarioFacade ejbUsuario;
     private String from = "horasaludable@gmail.com";
-    private String subject = "";
+    private String subject;
     private String smtpServ = "smtp.gmail.com";
     private String pass = "hora.saludable";
     private String url = "http://localhost:8080/Hora_Saludable/faces/usuario/recuperarcontrasenia/cambiarContrasenia.xhtml?ifo=" + "id_cifrado_prueba";
@@ -78,6 +79,8 @@ public class envioCorreo {
     }
 
     public void sendMail() {
+        
+        
         cargarCorreos();
         Properties props = System.getProperties();
         props.put("mail.smtp.auth", "true");
@@ -92,25 +95,22 @@ public class envioCorreo {
         try {
             MimeMessage message = new MimeMessage(session);//se inicia una session
             message.setFrom(new InternetAddress(this.from));
-            if (listaCorreos.size() == 0) {
-                listaCorreos.add("leidi@unicauca.edu.co");
-                listaCorreos.add("pruebaeynz@gmail.com");
-                this.message_ = "Envio fallido!!.. ";
-            }
+
             for (int i = 0; i < listaCorreos.size(); i++) {
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(this.listaCorreos.get(i)));
             }
 
             message.setSubject(this.subject);
-            //this.message_ = this.message_ + "<em></br></br></br></br><h1>Programa Horasable</h1>" + "</br></br><h1> No responder a este correo  </h1></em>";
 
             message.setText(this.message_, "ISO-8859-1", "html");
             Transport transport = session.getTransport("smtp");
             transport.connect(this.smtpServ, this.from, this.pass);
             transport.sendMessage(message, message.getAllRecipients());
-            FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_INFO, "Envio de mensaje masivo", "Mensaje enviado con exito.");
+            //FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_INFO, "Envio de mensaje masivo", "Mensaje enviado con exito.");
+            //RequestContext.getCurrentInstance().showMessageInDialog(messages);
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("El correo se ha enviado!"));
 
-            RequestContext.getCurrentInstance().showMessageInDialog(messages);
             transport.close();
         } catch (MessagingException e) {
             throw new RuntimeException(e);
@@ -120,6 +120,7 @@ public class envioCorreo {
             this.subject = "";
         }
     }
+
 
     /**
      * VALIDACION DE DIRECCIONES DE CORREO*

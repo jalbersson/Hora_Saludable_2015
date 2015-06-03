@@ -14,10 +14,6 @@
             </ui:define>
 
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Reporte: Asistencia general <br></br>
-                </div>
             </ui:define>
 
             <ui:define name="body">
@@ -27,7 +23,11 @@
                     <p:menuitem value="Reporte: Asistencia general" outcome="reporte-asistencia-general" />
                     <p:menuitem value="Reporte Generado" outcome="ReporteAsistenciaGeneral" />
                 </p:breadCrumb>
-                <p:spacer height="20"/>                
+                <p:spacer height="10"/> 
+                <div class="tituloContenido">
+                    Reporte: Asistencia general
+                </div>
+                <p:spacer height="20"/>
 
                 <h:form id="reporteViewForm">
                     <h:panelGroup>                        

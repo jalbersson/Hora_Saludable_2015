@@ -14,11 +14,7 @@
                 Reporte | Asistencia por dependencias
             </ui:define>
 
-            <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Reporte: Asistencia por dependencias <br></br>
-                </div>                
+            <ui:define name="title">         
             </ui:define>
 
             <ui:define name="body">
@@ -28,7 +24,11 @@
                     <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
                     <p:menuitem value="Reporte: Asistencia por dependencias" outcome="reporte-asistencia-dependencias" />                    
                 </p:breadCrumb>
-
+                
+                <p:spacer height="10"/>
+                <div class="tituloContenido">
+                    Reporte: Asistencia por dependencias
+                </div>   
                 <p:spacer height="20"/>
 
                 <h:form id="form">

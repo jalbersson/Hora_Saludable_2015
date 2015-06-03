@@ -64,6 +64,12 @@
             <url-pattern>/administrador/asistencia/*</url-pattern>
             <url-pattern>/faces/administrador/asistencia/*</url-pattern>
         </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>gestionContenidos</web-resource-name>
+            <description/>
+            <url-pattern>/administrador/contenidos/*</url-pattern>
+            <url-pattern>/faces/administrador/contenidos/*</url-pattern>
+        </web-resource-collection>
         <auth-constraint>
             <description/>
             <role-name>admin</role-name>

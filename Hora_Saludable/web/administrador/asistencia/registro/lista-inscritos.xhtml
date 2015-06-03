@@ -15,10 +15,7 @@
             </ui:define>
 
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Inscribir Usuarios <br></br>
-                </div>
+                
             </ui:define>
 
             <ui:define name="body">                
@@ -30,7 +27,11 @@
                         <p:menuitem value="Lista de inscritos" outcome="lista-inscritos" />                    
                     </p:breadCrumb>
                     
-                    <p:spacer height="20"/>
+                    <p:spacer height="10"/>
+                    <div class="tituloContenido">
+                        Inscribir Usuarios
+                    </div>
+                    <p:spacer height="15"/>
 
                     <p:growl id="growl" sticky="true" showDetail="true" />
 

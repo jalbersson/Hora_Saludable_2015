@@ -35,18 +35,19 @@ public class imagenSubirController {
 
         this.imagen = "default";
         File f = new File("."); // Creamos un objeto file
-        //System.out.println(f.getAbsolutePath()); // Llamamos al método que devuelve la ruta absoluta
 
+        String OS = System.getProperty("os.name").toLowerCase();
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
-        this.path = realPath + "\\resources\\img\\imagenSalud\\";
-        //FacesMessage msg = new FacesMessage("Imagen subida a: ", this.path);
-        //msg = new FacesMessage("Ubicacion del momento", );
-
-        //FacesContext.getCurrentInstance().addMessage(null, msg);
-        //FacesMessage msg = new FacesMessage("Ubicacion del momento", System.getProperty("user.dir"));
-        //FacesContext.getCurrentInstance().addMessage(null, msg);
-        //this.path = new File("").getAbsolutePath()+"\\imagenesNoticias\\";
+        if(OS.contains("nux") || OS.contains("debian"))
+        {
+            this.path = realPath + "/resources/img/imagenSalud/";
+           
+        }
+        else
+        {
+            this.path = realPath + "\\resources\\img\\imagenSalud\\";
+        }
 
     }
 
@@ -107,14 +108,7 @@ public class imagenSubirController {
             //writing mini images into image files
             for (int i = 0; i < imgs.length; i++) {
                 ImageIO.write(imgs[i], "jpg", new File(this.path + this.imagen + ".jpg"));
-            }
-
-            /*
-             ubicacionImagen = this.path;
-             FacesMessage msg = new FacesMessage("Success! ", " is uploaded.");
-             FacesContext.getCurrentInstance().addMessage(null, msg);
-             */
-            
+            }            
 
             FacesContext contex = FacesContext.getCurrentInstance();
             contex.getExternalContext().redirect("album.xhtml");
@@ -123,8 +117,7 @@ public class imagenSubirController {
             FacesMessage msg = new FacesMessage("Error, no hay imagen seleccionada", " No ha podido cargar la imagen.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-
-        // Do what you want with the file        
+      
     }
 
     String getNombreImagen() {
@@ -169,9 +162,3 @@ public class imagenSubirController {
     }
 
 }
-
-
-/*<p:fileUpload  fileUploadListener="#{imagenController.cargarFoto}" mode="advanced" dragDropSupport="false" label="Cargar" auto="true" sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-                        <p:commandLink action="#{imagenController.actualizarFoto()}" style="color:blue;"  value="Aceptar"/>
-
-                        <p:growl id="messages" showDetail="true" />*/

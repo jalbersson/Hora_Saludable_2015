@@ -46,6 +46,8 @@
                                             <h:outputText></h:outputText>
                                             <h:form style="float: left; ">
                                                 <h:outputText></h:outputText>
+                                                <p:link value="Ver noticia" outcome="detalleNoticia?noticiaId=#{noticia.notid}" style="font-weight: bold; color: #22419A" />
+
                                             </h:form>
                                         </h:panelGrid>
                                     </p:fieldset>
@@ -54,7 +56,7 @@
                         </h:panelGrid>
                     </p:dataScroller>
                 </h:form>
-<p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; left: 90%" > </p:button>
+                <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; left: 90%" > </p:button>
 
             </ui:define>
 

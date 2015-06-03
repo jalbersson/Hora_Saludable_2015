@@ -18,7 +18,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
@@ -58,12 +57,21 @@ public class eventoVerEditarController implements Serializable {
         
         this.imagen = "default";
         File f = new File("."); // Creamos un objeto file
-        //System.out.println(f.getAbsolutePath()); // Llamamos al método que devuelve la ruta absoluta
+        
+        String OS = System.getProperty("os.name").toLowerCase();
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String realPath = (String) servletContext.getRealPath("/"); // Sustituye "/" por el directorio ej: "/upload"
-        this.path = realPath + "\\resources\\img\\imagenesEventos\\";
+        if(OS.contains("nux") || OS.contains("debian"))
+        {
+            this.path = realPath + "/resources/img/imagenesEventos/";
+           
+        }
+        else
+        {
+            this.path = realPath + "\\resources\\img\\imagenesEventos\\";
+        }       
+        
         FacesMessage msg = new FacesMessage("Ubicacion del momento", this.path);
-         //msg = new FacesMessage("Ubicacion del momento", );
 
         FacesContext.getCurrentInstance().addMessage(null, msg);
         
@@ -161,18 +169,10 @@ public class eventoVerEditarController implements Serializable {
             for (int i = 0; i < imgs.length; i++) {
                 ImageIO.write(imgs[i], "jpg", new File(this.path + this.imagen + ".jpg"));
             }
-
-            /*
-             ubicacionImagen = this.path;
-             FacesMessage msg = new FacesMessage("Success! ", " is uploaded.");
-             FacesContext.getCurrentInstance().addMessage(null, msg);
-             */
         } catch (Exception ex) {
             FacesMessage msg = new FacesMessage("Error", " No ha podido cargar la imagen.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-
-        // Do what you want with the file        
+        }   
     }
 
     String getNombreImagen() {
@@ -204,11 +204,4 @@ public class eventoVerEditarController implements Serializable {
             return false;
         }
     }
-    
-    /*<p:commandButton value="Guardar" actionListener="#{eventoVerEditarController.actualizarEvento()}" update="message">
-                                        <p:confirm header="Confirmacion" message="Evento editado con exito!!!" icon="ui-icon-alert" />                                        
-                                    </p:commandButton>
-                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                                        <p:button value="Aceptar" outcome="editarEvento" style="float:right; right: 25%"/>                                  
-                                    </p:confirmDialog>*/
 }

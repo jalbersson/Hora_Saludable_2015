@@ -77,12 +77,7 @@ public class perfilUsuarioController implements Serializable
         }
                
         
-        this.sdf=new SimpleDateFormat("yyyy-MM-dd");
-        
-        
-        
-        
-        
+        this.sdf=new SimpleDateFormat("yyyy-MM-dd");        
     }
     
     @PostConstruct
@@ -257,7 +252,7 @@ public class perfilUsuarioController implements Serializable
     
     private void definirSexo()
     {
-        if(this.usuario.getUsugenero().equals("M"))
+        if(this.usuario.getUsugenero().equals('M'))
         {
             this.sexo="Masculino";
         }
