@@ -38,13 +38,13 @@
             </ui:define>
             <ui:define name="body" >
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                <p:dialog showEffect="fade" hideEffect="explode" position="center" widgetVar="agregartest" header="Agregar Nuevo Test" modal="true">
+                <p:dialog showEffect="fade" hideEffect="explode" position="center" resizable="false" widgetVar="agregartest" header="Agregar Nueva Medida" modal="true">
                             <h:form>
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:outputLabel  value="Fecha: " for="fechanuevo"/>
                             <p:calendar id="fechanuevo"  pattern="dd.MM.yyyy" navigator="true" required="true" showButtonPanel="true" value="#{medidasController.fechaNuevoTest}"/>
                             <f:facet name="footer">
-                                <p:commandButton  value="Agregar Nueva Medida" actionListener="#{medidasController.agregarMedidas()}" onclick="PF('agregartest').hide();" icon="ui-icon-disk" update=":formTest" />              
+                                <p:commandButton  value="Agregar Nueva Medida" actionListener="#{medidasController.agregarMedidas()}" onclick="PF('agregartest').hide();" icon="ui-icon-plus" update=":formTest" />              
                             </f:facet>                   
                         </h:panelGrid>
                     </h:form>

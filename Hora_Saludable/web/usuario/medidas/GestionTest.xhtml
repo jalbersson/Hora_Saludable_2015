@@ -117,7 +117,7 @@
                    
                     <h:form id="frmVerRutina">  
                         <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
-                            <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">    
+                            <c:if test="#{medidasController.pdfFileName != null}">    
                               
                                 <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
                                     Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
