@@ -14,11 +14,15 @@
             </ui:define>
 
             <ui:define name="title">
-                
+                <div class="tituloContenido">
+                    <br></br>
+                    Reglamento <br></br>
+                </div>
             </ui:define>
 
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                
                 <h:form>
                     
                    
@@ -27,7 +31,8 @@
                 </h:form> 
                 <h:panelGrid columns="2" style="margin-top: 10px">
 
-                    <p:button outcome="quienesSomosPrincipal" value="Volver" style="float:right" />
+                    <p:button style="background:#22419A ; color: #ffffff; font-style: italic" outcome="quienesSomosPrincipal" value="Volver" />
+
                 </h:panelGrid>
             </ui:define>
 

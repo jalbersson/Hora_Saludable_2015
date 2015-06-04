@@ -20,55 +20,58 @@
 
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                <h1 style="margin-top:0;"> 
-                    Quienes somos
-                </h1>
+                <br></br>
+                <br></br>
+
                 <h:form id="form" enctype="multipart/form-data">           
 
 
                     <h:panelGrid columns="1" style="margin-top: 10px">
-                        <h:outputLabel for="mision" value="Mision "  />
+                        <h1 style="color:#0B2972; text-align: center">  Mision</h1>
+
                         <h:form id="mision" >
 
+                            <h:inputTextarea style="font-weight: normal; font-size: 16px; resize: none" id="mision" requiredMessage="Es necesario que ingrese el contenido 
+                                             de la mision" required="true" value="#{quienesSomos.mision}" rows="10" cols="70" />
 
-                            <h:inputTextarea id="mision" requiredMessage="Es necesario que ingrese el contenido de la mision" required="true" value="#{quienesSomos.mision}" rows="15" cols="79"/>
-
-                            <p:commandButton update="mision" action="#{quienesSomos.crearMision()}" process="@form" value="Registrar"  onclick="PF('dlg1').show();" />
+                            <br></br>
+                            <br></br>
+                            <p:commandButton  style="background:#22419A ; color: #ffffff; font-style: italic " update="mision" action="#{quienesSomos.crearMision()}" process="@form" value="Registrar"  onclick="PF('dlg1').show();" />
 
                         </h:form>
                         <p:dialog header="Mision" widgetVar="dlg1" minHeight="40">
                             <h:outputText value="Se ha modificado la Mision con exito!" />
                         </p:dialog>
-                        <h:outputLabel for="vision" value="Vision "  />
+                        <h1 style="color:#0B2972; text-align: center">  Vision</h1>
                         <h:form id="vision" >
-
-
-                            <h:inputTextarea id="vision" requiredMessage="Es necesario que ingrese el contenido de la mision" required="true" value="#{quienesSomos.vision}" rows="15" cols="79"/>
-
-                            <p:commandButton update="vision" action="#{quienesSomos.crearVision()}" process="@form" value="Registrar" onclick="PF('dlg2').show();"/>
-
-
+                            <h:inputTextarea style="font-weight: normal; font-size: 16px; resize: none" id="vision" requiredMessage="Es necesario que ingrese el contenido de la 
+                                             mision" required="true" value="#{quienesSomos.vision}" rows="10" cols="70" />
+                            <br></br>
+                            <br></br>
+                            <p:commandButton style="background:#22419A ; color: #ffffff; font-style: italic " update="vision" action="#{quienesSomos.crearVision()}" process="@form" value="Registrar" onclick="PF('dlg2').show();"/>
                         </h:form>
                         <p:dialog header="Vision" widgetVar="dlg2" minHeight="40">
                             <h:outputText value="Se ha modificado la Vision con exito!" />
                         </p:dialog>
-                        
-                        <h:outputLabel for="responsables" value="Responsables "  />
+
+                        <h1 style="color:#0B2972; text-align: center">  Responsables</h1>
                         <h:form id="responsables" >
-
-
-                            <h:inputTextarea id="responsables" requiredMessage="Es necesario que ingrese el contenido de la mision" required="true" value="#{quienesSomos.equipo}" rows="15" cols="79"/>
-
-                            <p:commandButton update="responsables" action="#{quienesSomos.crearResponsables()}" process="@form" value="Registrar" onclick="PF('dlg3').show();"/>
+                            <h:inputTextarea style="font-weight: normal; font-size: 16px; resize: none"  id="responsables" 
+                                             requiredMessage="Es necesario que ingrese el contenido de la mision" required="true" value="#{quienesSomos.equipo}" rows="10" cols="70"/>
+                            <br></br>
+                            <br></br>
+                            <p:commandButton style="background:#22419A ; color: #ffffff; font-style: italic " update="responsables" action="#{quienesSomos.crearResponsables()}" process="@form" value="Registrar" onclick="PF('dlg3').show();"/>
                         </h:form>
                         <p:dialog header="Responsables" widgetVar="dlg3" minHeight="40">
                             <h:outputText value="Se ha modificado Los Responsables con exito!" />
                         </p:dialog>
 
                     </h:panelGrid>
-                    <h:panelGrid columns="2" style="margin-top: 10px">
+                    <br></br>
+                    <br></br>
+                    <h:panelGrid columns="1" style="margin-top: 10px">
 
-                        <p:button outcome="quienesSomosPrincipal" value="Volver" style="float:right; " />
+                        <p:button style="background:#22419A ; color: #ffffff; font-style: italic " outcome="quienesSomosPrincipal" value="Volver"  />
                     </h:panelGrid>
 
                     <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">

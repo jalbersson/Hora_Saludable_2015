@@ -19,6 +19,9 @@
 
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                <br></br>
+                <br></br>
+                <br></br>
                 <h:form style = "top: 500px"  >
                     <p:growl autoUpdate="true"/>
 
@@ -34,6 +37,7 @@
                                         <p:dataScroller  var="Mision" value="">
 
                                             <h:form>
+
                                                 <h:outputText style="font-weight: bold; font-size: 16px" value="#{quienesSomos.devMision()}" />
                                             </h:form>
                                         </p:dataScroller>
@@ -103,7 +107,10 @@
 
                 </h:form> 
                 <br></br>
+                <h:panelGrid columns="1" style="margin-top: 10px">
 
+                    <p:button style="background:#22419A ; color: #ffffff; font-style: italic " outcome="principal" value="Volver"  />
+                </h:panelGrid>
 
             </ui:define>
 
