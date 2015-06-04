@@ -112,11 +112,11 @@ public class CrearInscripcionBean {
         if (selectedUsus.isEmpty()) {
             accion = "Inscribir";
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "No Hay Inscritos", ""));
+            context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "No Hay Inscritos" + accion, ""));
         } else {
             accion = "Actualizar";
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa", ""));
+            context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa" + accion, ""));
         }
 
     }

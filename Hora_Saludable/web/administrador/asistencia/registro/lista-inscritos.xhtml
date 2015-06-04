@@ -36,22 +36,26 @@
                     <p:growl id="growl" sticky="true" showDetail="true" />
 
                     <h:panelGroup id="crearInscripcionPanelGroup">
-                        <h:panelGrid columns="6" cellpadding="5" cellspacing="5" rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
+                        <h:panelGrid columns="5" cellpadding="4" cellspacing="5" rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
                             <h:outputText value="Mes:" style="font-size: 16px;" />
                             <p:selectOneMenu value="#{crearInscripcionBean.ins.insmes}" style="size: 10;" >                                    
                                 <f:selectItems value="#{crearInscripcionBean.meses}" />                                                                        
                             </p:selectOneMenu> 
                             <h:outputText value="Año:" style="font-size: 16px;" />
                             <p:spinner value="#{crearInscripcionBean.ins.insanio}" max="#{crearInscripcionBean.anio}" size="10" />                                                                                                                
-                            <p:commandButton value="Buscar" actionListener="#{crearInscripcionBean.buscarInscritos()}" update="growl, usuariosDataTable, crearInscripcionForm" icon="ui-icon-search"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
-                            <p:commandButton value="#{crearInscripcionBean.accion}" actionListener="#{crearInscripcionBean.crearIncripcion()}" update="growl" icon="ui-icon-pencil"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                            <p:commandButton value="Buscar" actionListener="#{crearInscripcionBean.buscarInscritos()}" update="growl, usuariosDataTable, crearInscripcionForm" icon="ui-icon-search"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />                            
                         </h:panelGrid>
                     </h:panelGroup>
                     <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
                     <p:spacer height="25"/>
 
                     <p:panel id="usuariosPanel" header="Usuarios" >
-
+                        
+                        <h:panelGrid rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
+                            <p:commandButton value="#{crearInscripcionBean.accion}" actionListener="#{crearInscripcionBean.crearIncripcion()}" update="growl" icon="ui-icon-pencil"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                        </h:panelGrid>
+                        <p:spacer height="25"/>
+                        
                         <p:dataTable id="usuariosDataTable" value="#{crearInscripcionBean.usuarios}" var="usu"
                                      paginator="true"
                                      rows="20"
