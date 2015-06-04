@@ -21,8 +21,8 @@
                         <p:breadCrumb>
                             <p:menuitem value="Usuarios" url="../../index.xhtml" />
                             <p:menuitem value="Consultar Medidas" outcome="consultaTest" />
-                            <p:menuitem value="Gestion de Mediciones" outcome="GestionTest" />
-                            <p:menuitem value="Test" url="#" />
+                            <p:menuitem value="Evaluacion Antropometrica y Funcional" outcome="#" />
+                   
                         </p:breadCrumb>
                         
                          
@@ -44,7 +44,7 @@
                             <p:outputLabel  value="Fecha: " for="fechanuevo"/>
                             <p:calendar id="fechanuevo"  pattern="dd.MM.yyyy" navigator="true" required="true" showButtonPanel="true" value="#{medidasController.fechaNuevoTest}"/>
                             <f:facet name="footer">
-                                <p:commandButton  value="Agregar Nueva Medida" actionListener="#{medidasController.agregarMedidas()}" onclick="PF('agregartest').hide();" icon="ui-icon-disk" update=":formTest"/>              
+                                <p:commandButton  value="Agregar Nueva Medida" actionListener="#{medidasController.agregarMedidas()}" onclick="PF('agregartest').hide();" icon="ui-icon-disk" update=":formTest" />              
                             </f:facet>                   
                         </h:panelGrid>
                     </h:form>
@@ -106,7 +106,7 @@
                     <h:form>
                         <p:panelGrid columns="2" style="float: right; margin-top: 30px; "> 
                             <f:facet name="header">
-                                <p:commandButton value="Agregar Nueva Medida" onclick="PF('agregartest').show();" icon="ui-icon-disk" />
+                                <p:commandButton value="Agregar Nueva Medida" onclick="PF('agregartest').show();" icon="ui-icon-plus" />
                                 <p:button value="Ver Historial" icon="ui-icon-refresh" outcome="HistorialMed"/> 
                             </f:facet> 
                         </p:panelGrid>
@@ -132,7 +132,7 @@
                              <p:commandLink  id="eliminar" action="#{medidasController.eliminarTest()}" title="Eliminar Test" style=" margin-left: 10px;color: #045491;" >                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="eliminar.png"/>
                                     <f:setPropertyActionListener value="#{Tests}" target="#{medidasController.medicionactual}" />
-                                    <p:confirm header="Confirmation" message="Esta seguro que quiere eliminar el test de forma permanente?" icon="ui-icon-alert"/>       
+                                    <p:confirm header="Confirmacion" message="¿Está seguro que quiere eliminar esta Medida de forma permanente?" icon="ui-icon-alert"/>       
                          </p:commandLink> 
                    
                           
