@@ -77,6 +77,7 @@ public class MedidasController {
         medicionactual = ejbMedida.buscarporMedId(idmed).get(0);
         calificacion = "pendiente";
         medicionactual = s.getMedidaactual(); //ejbMedida.buscarporMedId(s.getMedidaactual()).get(0);
+        
        
     }
 
