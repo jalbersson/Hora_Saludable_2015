@@ -68,9 +68,11 @@
                                             <h:outputLabel class="CampoLabelObligatorios" for="mensaje" value="Mensaje: " style="color:#FFFFFF" />
                                         </h:column>
 
-                                        <h:inputTextarea rows="7" cols="100" value="#{envioCorreo.message_}" style="width: 100%" id="mensaje_" title="Mensaje"
+                                        <h:inputText value="#{envioCorreo.message_}" style="width: 100%; height: 250px; width: 550px" id="mensaje_" title="Mensaje"
                                                          requiredMessage="Se requiere de un mensaje para enviar el correo a todos." required="true" />
-                                        <p:commandButton style="background: #AA0000;color:#FFFFFF;font-style: italic; left: 78%"  
+                                        <br></br>
+                                        
+                                        <p:commandButton style="background: #AA0000;color:#FFFFFF;font-style: italic"  
                                                          value="Enviar a todos" actionListener="#{envioCorreo.sendMail()}" update="messages" 
                                                          />
                                     </h:panelGrid>

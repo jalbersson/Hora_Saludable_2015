@@ -11,7 +11,7 @@
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Detalle de la noticia
+                Detalle del evento
             </ui:define>
 
             <ui:define name="title">
@@ -63,7 +63,9 @@
                                                     <h:outputLabel class="CampoLabel" value=" Descripcion :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{noticiacController.noticiaDetallada().notcontenido}"/>
+                                                    <p align="justify">
+                                                        <h:outputLabel value="#{noticiacController.noticiaDetallada().notcontenido}"/>
+                                                    </p>
                                                 </p:column>
                                             </p:row>
 
@@ -73,9 +75,10 @@
 
                                 </h:panelGrid>
                             </p:outputPanel>
-                            <p:link outcome="principal" value="Volver"> </p:link>
-
+                            <br></br>
+                            <br></br>
                         </h:panelGrid>
+                        <p:button outcome="listarNoticias" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; " > </p:button>
                     </p:fieldset>
                 </h:form>
             </ui:define>
