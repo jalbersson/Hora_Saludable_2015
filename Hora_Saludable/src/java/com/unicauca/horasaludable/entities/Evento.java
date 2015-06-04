@@ -30,14 +30,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "EVENTO", catalog = "asae", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM Evento e"),
+    @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM Evento e "),
     @NamedQuery(name = "Evento.findByEveid", query = "SELECT e FROM Evento e WHERE e.eveid = :eveid"),
     @NamedQuery(name = "Evento.findByEvetitulo", query = "SELECT e FROM Evento e WHERE e.evetitulo = :evetitulo"),
     @NamedQuery(name = "Evento.findByEvefechapublicacion", query = "SELECT e FROM Evento e WHERE e.evefechapublicacion = :evefechapublicacion"),
     @NamedQuery(name = "Evento.findByEvefechaevento", query = "SELECT e FROM Evento e WHERE e.evefechaevento = :evefechaevento"),
     @NamedQuery(name = "Evento.findByEvelugar", query = "SELECT e FROM Evento e WHERE e.evelugar = :evelugar"),
     @NamedQuery(name = "Evento.findByEvecontenido", query = "SELECT e FROM Evento e WHERE e.evecontenido = :evecontenido"),
-    @NamedQuery(name = "Evento.findUltimosEventos", query = "SELECT e FROM Evento e ORDER BY e.eveid DESC "),
+    @NamedQuery(name = "Evento.findUltimosEventos", query = "SELECT e FROM Evento e ORDER BY e.evefechaevento DESC "),
     @NamedQuery(name = "Evento.findByEveimagen", query = "SELECT e FROM Evento e WHERE e.eveimagen = :eveimagen")})
 public class Evento implements Serializable {
     private static final long serialVersionUID = 1L;

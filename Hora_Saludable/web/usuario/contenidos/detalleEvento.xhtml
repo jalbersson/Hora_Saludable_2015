@@ -54,7 +54,7 @@
                                                     <h:outputLabel class="CampoLabel" value=" Fecha de evento :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoController.convertToJavaDate(eventoController.eventoDetalladoTodos().evefechaevento)}"/>
+                                                    <h:outputLabel value="#{eventoController.eventoDetalladoTodos().evefechaevento}"/>
                                                 </p:column>
                                             </p:row>
                            
@@ -73,7 +73,7 @@
                                     
                                 </h:panelGrid>
                             </p:outputPanel>
-                            <p:link outcome="principal" value="Volver"> </p:link>
+                            <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" > </p:button>
                         </h:panelGrid>
                     </p:fieldset>
                 </h:form>

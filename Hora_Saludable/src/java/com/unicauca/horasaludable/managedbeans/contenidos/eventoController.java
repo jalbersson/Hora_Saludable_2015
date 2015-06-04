@@ -254,7 +254,7 @@ public class eventoController {
         //eveTitulo=params.get("eventoId");
 	idE = Long.parseLong(params.get("eventoId"));
         
-        
+        this.eventos = this.ejbEvento.buscarEventos();
         
         detallesEvento = new Evento();
         //long numero= (long)idE;

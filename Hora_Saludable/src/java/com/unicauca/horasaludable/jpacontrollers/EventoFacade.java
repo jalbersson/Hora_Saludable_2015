@@ -31,7 +31,7 @@ public class EventoFacade extends AbstractFacade<Evento> {
     }
     
     public List<Evento> buscarEventos() {
-        Query query = getEntityManager().createNamedQuery("Evento.findAll");
+        Query query = getEntityManager().createNamedQuery("Evento.findUltimosEventos");
         List<Evento> resultList = query.getResultList();
         return resultList;
     }
