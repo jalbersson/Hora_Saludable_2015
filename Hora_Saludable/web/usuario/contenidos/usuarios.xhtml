@@ -19,7 +19,6 @@
             </ui:define>
 
             <ui:define name="body">
-                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
 
                 <br></br>
                 <br></br>
@@ -28,19 +27,37 @@
                     <h:form>    
 
 
-                        <div class="divPrincipal" style="height: 300px">
+                        <div class="divPrincipal" style="height: 360px">
                             <h:panelGrid columns="1" style="width:400px; height: 200px;">
                                 <h1 style="color:#F2F2F2; text-align: center">  Usuarios</h1> 
                                 <p:dataScroller  var="Usuarios" value="">
 
                                     <h:form>
+                                        <p align="justify">
                                         <h:outputText value="Este módulo tuvo como objetivo controlar el Inicio 
                                                       de Sesión ya sea para el administrador o para un usuario 
                                                       del gimnasio, el Registro de usuarios (Solo es realizado 
                                                       por el administrador) y Recuperar contraseña que le permite 
                                                       a los usuarios que hayan olvidado su contraseña o nombre de 
                                                       usuario recuperar su cuenta." style="font-weight: bold; font-size: 18px"/>
+                                        </p>
                                     </h:form>
+
+                                    <br></br>
+                                    <br></br>
+                                    <h:form>
+                                        <h:outputText value="Los creadores de este modulo son:" style="font-weight: bold; font-size: 18px"/>
+                                    </h:form>
+                                    <h:form>
+                                        <h:outputText value="Lucy Viviana Araujo Agudelo" style="font-weight: bold; font-size: 18px"/>
+                                    </h:form>
+                                    <h:form>
+                                        <h:outputText value="Annjy Natalia Torres Castrillon" style="font-weight: bold; font-size: 18px"/>
+                                    </h:form>
+                                    <h:form>
+                                        <h:outputText value="Wilson Geovanny Molina Carvajal" style="font-weight: bold; font-size: 18px"/>
+                                    </h:form>
+                                   
                                 </p:dataScroller>
 
 
@@ -50,7 +67,7 @@
                     </h:form>
                     <h:form>
 
-                        <p:graphicImage style="float: right" width="300px" height="250px" library="img" name="usuarios.jpg"   />
+                        <p:graphicImage style="float: right" width="400px" height="320px" library="img" name="usuarios.jpg"   />
 
 
                     </h:form>
