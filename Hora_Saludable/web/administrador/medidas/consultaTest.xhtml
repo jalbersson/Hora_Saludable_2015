@@ -56,6 +56,7 @@
                         <p:inputText style="width: 240px;" value="#{listasUsuariosMedidasController.identificacion}"  >
                             <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarporIdentificacion}" /> 
                         <!--     <f:validator validatorId="ValidarCampoNumeroIdentificacion"/> -->
+                        <f:validator validatorId="ValidarCampoNumerico"/>  
                         </p:inputText>
                         
                                        
@@ -68,7 +69,8 @@
                         <h:outputLabel class="CampoLabel" value="Nombre: " />
                         <p:inputText style="width: 240px;" value="#{listasUsuariosMedidasController.nombreUsuario}"  >
                             <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarPorNombreUsuario}" />                                
-                                    <f:validator validatorId="ValidarCampoNumerico"/>  
+                            <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>  
+                                    
                         </p:inputText>                                                   
                     </h:panelGrid>
               
