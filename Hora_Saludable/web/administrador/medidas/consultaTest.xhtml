@@ -22,14 +22,10 @@
                         
                     </p:breadCrumb>
                 </h:form>
-            <ui:define name="title">                  
-
-                <div class="tituloContenido">
+           <div class="tituloContenido">
                     <br></br>
                   Consultar Evaluación Antropométrica y Funcional 
                 </div>
-            </ui:define>
-            
                  <br />
                  <br></br><br></br>
                
@@ -58,8 +54,12 @@
                         
                         <h:outputLabel class="CampoLabel" value="Identificacion:" />
                         <p:inputText style="width: 240px;" value="#{listasUsuariosMedidasController.identificacion}"  >
-                            <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarporIdentificacion}" />                                
+                            <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarporIdentificacion}" /> 
+                        <!--     <f:validator validatorId="ValidarCampoNumeroIdentificacion"/> -->
                         </p:inputText>
+                        
+                                       
+                        
                         <p:outputLabel style="font-size: 12px; font-style: italic;" value="(Debe digitar el número de identificación completo.)"/>
                         
                         
