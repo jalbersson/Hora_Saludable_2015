@@ -85,15 +85,14 @@
                                 <p:outputLabel value="A continuación se muestra una gráfica donde se refleja su asistencia al programa Hora Saludable" />
                                 <p:selectOneMenu value="#{asistencia_usuarios_con_session.anioElegido}">
 
-                                    <f:selectItem itemLabel="2015" itemValue="2015" />
-                                    <f:selectItem itemLabel="2014" itemValue="2014" />
-                                    <f:selectItem itemLabel="2013" itemValue="2013" />
-                                    <f:selectItem itemLabel="2012" itemValue="2012" />
+                                    <f:selectItems value="#{asistencia_usuarios_con_session.obtenerAniosAsistencia()}" var="anio" itemLabel="#{anio}" itemValue="#{anio}" />
+                                    
                                     <p:ajax update="Barra"  />
                                 </p:selectOneMenu>
-                                <p:barChart id="Barra" value="#{asistencia_usuarios_con_session.estadisticas()}" legendPosition="ne"
-                                            title="Asistencia 2014" style="height:300px; width: 500px;"
+                                <p:barChart rendered="#{asistencia_usuarios_con_session.mostrarEstadisticas}" id="Barra" value="#{asistencia_usuarios_con_session.estadisticas()}" legendPosition="ne"
+                                            title="Asistencia #{asistencia_usuarios_con_session.anioElegido}" style="height:300px; width: 500px;"
                                             xaxisLabel="Meses" yaxisLabel="Total días" />
+                                <p:outputLabel rendered="#{!asistencia_usuarios_con_session.mostrarEstadisticas}" value="No registra Asistencias."/>
                             </h:panelGrid>
 
 
