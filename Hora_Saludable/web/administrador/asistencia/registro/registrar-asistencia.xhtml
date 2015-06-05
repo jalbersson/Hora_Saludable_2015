@@ -37,10 +37,11 @@
                     <p:growl id="growl" sticky="true" showDetail="true" />
 
                     <h:panelGroup id="crearInscripcionPanelGroup">
-                        <h:panelGrid columns="3" cellpadding="5" cellspacing="5" rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
+                        <h:panelGrid columns="4" cellpadding="5" cellspacing="5" rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
                             <h:outputText value="Fecha:" style="font-size: 16px;"  />
                             <p:calendar id="fecha" value="#{asistenciaView.asi.asifecha}" pattern="dd-MM-yyyy" mask="true" size="7"/>                            
                             <p:commandButton value="Buscar" actionListener="#{asistenciaView.buscarAsistencia()}" update="growl, usuariosDataTable, crearInscripcionForm" icon="ui-icon-search" style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />                            
+                            <p:commandButton value="#{crearInscripcionBean.accion}" actionListener="#{crearInscripcionBean.crearIncripcion()}" update="growl" icon="ui-icon-pencil"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                         </h:panelGrid>
                     </h:panelGroup>
                     <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
@@ -48,12 +49,7 @@
                     <p:spacer height="25"/>
 
                     <p:panel header="Usuarios" >
-
-                        <h:panelGrid rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
-                            <p:commandButton value="#{crearInscripcionBean.accion}" actionListener="#{crearInscripcionBean.crearIncripcion()}" update="growl" icon="ui-icon-pencil"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
-                        </h:panelGrid>
-                        <p:spacer height="25"/>                        
-
+                        
                         <p:dataTable id="usuariosDataTable" value="#{asistenciaView.usuarios}" var="usu"
                                      paginator="true"
                                      rows="20"
