@@ -111,25 +111,25 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     }
 
-    public List<Usuario> buscarPorIdentificacionEstudiante(Long usuidentificacion) {
+    public List<Usuario> buscarPorIdentificacionEstudiante(String usuidentificacion) {
         Query query = getEntityManager().createNamedQuery("Usuario.findByIdentiEstudiante");
-        query.setParameter("usuidentificacion", usuidentificacion);
+        query.setParameter("usuidentificacion", usuidentificacion+"%");
         List<Usuario> resultList = query.getResultList();
         return resultList;
 
     }
 
-    public List<Usuario> buscarPorIdentificacionFamiliares(Long usuidentificacion) {
+    public List<Usuario> buscarPorIdentificacionFamiliares(String usuidentificacion) {
         Query query = getEntityManager().createNamedQuery("Usuario.findByIdentiFamiliar");
-        query.setParameter("usuidentificacion", usuidentificacion);
+        query.setParameter("usuidentificacion", usuidentificacion+"%");
         List<Usuario> resultList = query.getResultList();
         return resultList;
 
     }
 
-    public List<Usuario> buscarPorIdentificacionFuncionario(Long usuidentificacion) {
+    public List<Usuario> buscarPorIdentificacionFuncionario(String usuidentificacion) {
         Query query = getEntityManager().createNamedQuery("Usuario.findByIdentiFuncionarios");
-        query.setParameter("usuidentificacion", usuidentificacion);
+        query.setParameter("usuidentificacion", usuidentificacion+"%");
         List<Usuario> resultList = query.getResultList();
         return resultList;
     }
