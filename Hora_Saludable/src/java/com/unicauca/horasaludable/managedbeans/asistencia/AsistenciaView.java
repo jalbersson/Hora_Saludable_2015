@@ -143,7 +143,7 @@ public class AsistenciaView {
                     }
                 }
                 FacesContext context = FacesContext.getCurrentInstance();
-                context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa", ""));
+                context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa Acutalizar", ""));
                 return;
             }
         }
@@ -159,8 +159,8 @@ public class AsistenciaView {
 
         selectedUsus = new ArrayList();
         //
-        context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa " + selectedUsus.size(), ""));
         accion = "Registrar";
+        context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa Registrar" + selectedUsus.size(), ""));        
     }
 
     public Asistencia getAsi() {

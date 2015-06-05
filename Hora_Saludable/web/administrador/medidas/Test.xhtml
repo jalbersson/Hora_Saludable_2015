@@ -11,17 +11,15 @@
             <ui:define name="titulo">
                 Toma de medidas
             </ui:define>
-            <ui:define name="CuadroDeBotonesSesion">
-                CuadroDeBotonesSesion
-            </ui:define>
+         
             <ui:define name="title">
                 <p:panel style="border: none;">
                     <h:form>
                         <p:breadCrumb >
-                            <p:menuitem value="Usuarios" url="../../index.xhtml" />
+                            <p:menuitem value="Inicio" url="/administrador/contenidos/principal" />
                             <p:menuitem value="Consultar Medidas" outcome="consultaTest" />
-                            <p:menuitem value="Gestion de  Mediciones" outcome="GestionTest" />
-                            <p:menuitem value="Test" url="#" />
+                            <p:menuitem value="Evaluacion Antropometrica y Funcional" outcome="GestionTest" />
+                            <p:menuitem value="Toma de Medidas" url="#" />
                         </p:breadCrumb>
                     </h:form>
                 </p:panel>
@@ -144,43 +142,84 @@
                                         <f:selectItem itemLabel="Esgrima" itemValue="Esgrima" />
                                     </p:selectOneMenu>
                                     <p:outputLabel for="Peso" value="Peso(kg): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Peso" value="#{medidasController.medicionactual.medpeso}"   styleClass="txtboxmed"/>
+                                    <p:inputText id="Peso" value="#{medidasController.medicionactual.medpeso}"  styleClass="txtboxmed"           
+                                                 <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
+                                              
                                     <p:outputLabel for="Talla" value="Talla(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Talla" value="#{medidasController.medicionactual.medtalla}"   styleClass="txtboxmed"/>
+                                    <p:inputText id="Talla" value="#{medidasController.medicionactual.medtalla}"   styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
+                                    
                                     <p:outputLabel for="Triceps" value="Triceps(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Triceps"  value="#{medidasController.medicionactual.medtriceps}"   styleClass="txtboxmed"/>
+                                    <p:inputText id="Triceps"  value="#{medidasController.medicionactual.medtriceps}"   styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="SubEscapular" value="Sub Escapular(cm): *" styleClass="subtitpaneltest" />
-                                    <p:inputText id="SubEscapular" value="#{medidasController.medicionactual.medsubescapular}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="SubEscapular" value="#{medidasController.medicionactual.medsubescapular}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="Suprailiaco" value="Suprailiaco(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Suprailiaco" value="#{medidasController.medicionactual.medsuprailiaco}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="Suprailiaco" value="#{medidasController.medicionactual.medsuprailiaco}"  styleClass="txtboxmed" 
+                                                 <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="Abdominal" value="Abdominal(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Abdominal" value="#{medidasController.medicionactual.medabdominal}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="Abdominal" value="#{medidasController.medicionactual.medabdominal}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="Muslo" value="Muslo(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Muslo" value="#{medidasController.medicionactual.medmuslo}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="Muslo" value="#{medidasController.medicionactual.medmuslo}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="Pantorrilla" value="Pantorrilla(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Pantorrilla" value="#{medidasController.medicionactual.medpantorilla}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="Pantorrilla" value="#{medidasController.medicionactual.medpantorilla}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="PerimetroMuneca" value="Perimetro Muñeca(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroMuneca" value="#{medidasController.medicionactual.medperimetromuneca}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="PerimetroMuneca" value="#{medidasController.medicionactual.medperimetromuneca}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="PerimetroCabeza" value="Perimetro Cabeza(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroCabeza" value="#{medidasController.medicionactual.medperimetrocabeza}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="PerimetroCabeza" value="#{medidasController.medicionactual.medperimetrocabeza}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="DiametroBiacromial" value="Diametro Biacromial(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="DiametroBiacromial" value="#{medidasController.medicionactual.meddiametrobiacromial}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="DiametroBiacromial" value="#{medidasController.medicionactual.meddiametrobiacromial}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
+                                    
                                     <p:outputLabel for="DiametroBiltiocristal" value="Diametro Biltiocristal(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="DiametroBiltiocristal" value="#{medidasController.medicionactual.meddiametrobiltiocristal}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="DiametroBiltiocristal" value="#{medidasController.medicionactual.meddiametrobiltiocristal}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="DiametroHumero" value="Diametro Humero(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="DiametroHumero" value="#{medidasController.medicionactual.meddiametrohumero}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="DiametroHumero" value="#{medidasController.medicionactual.meddiametrohumero}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="DiametroFemur" value="Diametro Femur(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="DiametroFemur" value="#{medidasController.medicionactual.meddiametrofemur}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="DiametroFemur" value="#{medidasController.medicionactual.meddiametrofemur}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="PerimetroBrazo" value="Perimetro Brazo(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroBrazo" value="#{medidasController.medicionactual.medperimetrobrazo}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="PerimetroBrazo" value="#{medidasController.medicionactual.medperimetrobrazo}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="PerimetroAntebrazo" value="Perimetro Antebrazo(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroAntebrazo" value="#{medidasController.medicionactual.meddiametroantebrazo}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="PerimetroAntebrazo" value="#{medidasController.medicionactual.meddiametroantebrazo}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="PerimetroPantorrilla" value="Perimetro Pantorrilla(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroPantorrilla" value="#{medidasController.medicionactual.medperimetropantorrilla}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="PerimetroPantorrilla" value="#{medidasController.medicionactual.medperimetropantorrilla}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="PerimetroCajaToraxica" value="Perimetro Caja Toraxica(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroCajaToraxica" value="#{medidasController.medicionactual.medperimetrocajatoraxica}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="PerimetroCajaToraxica" value="#{medidasController.medicionactual.medperimetrocajatoraxica}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel for="PerimetroMuslo" value="Perimetro Muslo(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroMuslo" value="#{medidasController.medicionactual.medperimetromuslo}"  styleClass="txtboxmed"/>
+                                    <p:inputText id="PerimetroMuslo" value="#{medidasController.medicionactual.medperimetromuslo}"  styleClass="txtboxmed"
+                                                  <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                 </p:panelGrid>
                                 <p:commandButton value="Calcular" icon="ui-icon-arrowthick-1-e" 
                                                  styleClass="btncalcularmedidas" update="result"/>
@@ -239,9 +278,13 @@
                                     Test de Sargent
                                 </f:facet>
                                     <p:outputLabel value="Embergadura:" for="inputEmbergadura"/>
-                                    <p:inputText id="inputEmbergadura" value="#{medidasController.medicionactual.medembergadura}"></p:inputText>
+                                    <p:inputText id="inputEmbergadura" value="#{medidasController.medicionactual.medembergadura}">
+                                         <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel  value="Salto Maximo:" for="inputSaltoMaximo"/>
-                                    <p:inputText id="inputSaltoMaximo" value="#{medidasController.medicionactual.medsaltomaximo}" ></p:inputText>
+                                    <p:inputText id="inputSaltoMaximo" value="#{medidasController.medicionactual.medsaltomaximo}" >
+                                         <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                 </p:panelGrid><br/>
                                 
                                 <p:commandButton value="Calcular s" update="labelSaltoReal labelSargent" styleClass="btncalculartest"></p:commandButton>
@@ -271,11 +314,17 @@
                                     Test de Rufier
                                 </f:facet>
                                     <p:outputLabel value="Primer pulso" for="inputPrimerPulso"/>
-                                    <p:inputText id="inputPrimerPulso" value="#{medidasController.medicionactual.medpulso0}"></p:inputText>
+                                    <p:inputText id="inputPrimerPulso" value="#{medidasController.medicionactual.medpulso0}">
+                                     <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel value="Segundo pulso" for="inputSegundoPulso"/>
-                                    <p:inputText id="inputSegundoPulso" value="#{medidasController.medicionactual.medpulso1}"></p:inputText>
+                                    <p:inputText id="inputSegundoPulso" value="#{medidasController.medicionactual.medpulso1}">
+                                         <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                     <p:outputLabel value="Tercer pulso" for="inputTercerPulso"/>
-                                    <p:inputText id="inputTercerPulso" value="#{medidasController.medicionactual.medpulso2}"></p:inputText>
+                                    <p:inputText id="inputTercerPulso" value="#{medidasController.medicionactual.medpulso2}">
+                                         <f:validator validatorId="ValidarCampoNumerico"/>  
+                                    </p:inputText>
                                 </p:panelGrid>
                                 
                                 <p:commandButton value="Calcular r" update="labelRufier valorRufier" styleClass="btncalculartest"/>
@@ -334,7 +383,7 @@
                            
                             <p:panel styleClass="paneltab">
                             <h:panelGrid bgcolor="#F2F2F2" columns="3" cellpadding="7" style="margin-top: 25px; margin-left: 320px;font-size: 16px; font-weight: bold;">
-                                <p:outputLabel value="Calculo por Edad"/>   
+                                <p:outputLabel value="Cálculo por Edad"/>   
                             </h:panelGrid>
                                 <p:panelGrid   columns="2" styleClass="panelmedidas" style="margin-left: 270px;">
                                 <f:facet name="header">

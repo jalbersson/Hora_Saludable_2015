@@ -12,21 +12,17 @@
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Gestion Test
+                 Evaluación Antropométrica y funcional 
             </ui:define>
-            <ui:define name="CuadroDeBotonesSesion">
-                CuadroDeBotonesSesion
-            </ui:define>
+         
             <ui:define name="title">
                 <p:panel style="border: none;">
                     <h:form>
                         <p:breadCrumb>
-                            <p:menuitem value="Usuarios" url="../../index.xhtml" />
-                            <p:menuitem value="Gestion de Mediciones" outcome="GestionTest" />
-                            <p:menuitem value="Test" url="#" />
+                           <p:menuitem value="Inicio" url="/usuario/contenidos/principal" />
+                           <p:menuitem value="Evaluacion Antropometrica y Funcional" outcome="GestionTest" />
+                
                         </p:breadCrumb>
-                        
-                         
                         
                          <div class="tituloContenido">
                     Evaluación Antropométrica y funcional                    
@@ -119,7 +115,7 @@
                    
                     <h:form id="frmVerRutina">  
                         <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
-                            <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">    
+                            <c:if test="#{medidasController.pdfFileName != null}">    
                               
                                 <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
                                     Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.

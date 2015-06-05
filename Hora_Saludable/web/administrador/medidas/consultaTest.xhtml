@@ -18,17 +18,14 @@
                   <h:form>
                     <p:breadCrumb>
                         <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />                              
-                        <p:menuitem value="Consultar Test" outcome="/administrador/medidas/consultaTest" />                                        
+                        <p:menuitem value="Consultar Test" outcome="/administrador/medidas/consultaTest" />   
+                        
                     </p:breadCrumb>
                 </h:form>
-            <ui:define name="title">                  
-
-                <div class="tituloContenido">
+           <div class="tituloContenido">
                     <br></br>
                   Consultar Evaluación Antropométrica y Funcional 
                 </div>
-            </ui:define>
-            
                  <br />
                  <br></br><br></br>
                
@@ -57,8 +54,13 @@
                         
                         <h:outputLabel class="CampoLabel" value="Identificacion:" />
                         <p:inputText style="width: 240px;" value="#{listasUsuariosMedidasController.identificacion}"  >
-                            <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarporIdentificacion}" />                                
+                            <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarporIdentificacion}" /> 
+                        <!--     <f:validator validatorId="ValidarCampoNumeroIdentificacion"/> -->
+                        <f:validator validatorId="ValidarCampoNumerico"/>  
                         </p:inputText>
+                        
+                                       
+                        
                         <p:outputLabel style="font-size: 12px; font-style: italic;" value="(Debe digitar el número de identificación completo.)"/>
                         
                         
@@ -67,6 +69,8 @@
                         <h:outputLabel class="CampoLabel" value="Nombre: " />
                         <p:inputText style="width: 240px;" value="#{listasUsuariosMedidasController.nombreUsuario}"  >
                             <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarPorNombreUsuario}" />                                
+                            <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>  
+                                    
                         </p:inputText>                                                   
                     </h:panelGrid>
               
@@ -75,7 +79,8 @@
                         <p:dataTable  var="usuarios" value="#{listasUsuariosMedidasController.listaUsuarios}"
                                       paginator="true" rows="10"  
                                       paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
-                                      rowsPerPageTemplate="5,10,15">
+                                      rowsPerPageTemplate="5,10,15"
+                                      emptyMessage="No Se encuentran Datos registrados a este usuario">
 
                             <p:column headerText="No. Identificacion" width="100">                               
                                     #{usuarios.usuidentificacion}
@@ -103,8 +108,8 @@
                                 
                             </p:column>
                             <p:column headerText="Acciones" width="90">
-                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{mostrarUsuarioTestController.estudianteSeleccionado(usuarios)}" >                                    
-                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{mostrarUsuarioTestController.estudianteSeleccionado(usuarios)}" title="Ver Y Editar las Mediciones">                                    
+                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png" />
                                 </p:commandLink>                                
                             
                             </p:column>

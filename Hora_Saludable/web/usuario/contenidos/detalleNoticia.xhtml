@@ -8,7 +8,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
                 Hora Saludable: Detalle Noticia
@@ -61,20 +61,22 @@
                                                     <h:outputLabel class="CampoLabel" value=" Descripcion :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{noticiacController.noticiaDetallada().notcontenido}"/>
+                                                    <p align="justify">
+                                                        <h:outputLabel value="#{noticiacController.noticiaDetallada().notcontenido}"/>
+                                                    </p>
                                                 </p:column>
                                             </p:row>
 
                                         </p:panelGrid>                            
                                     </h:form>    
-
+                                    <br></br>
 
                                 </h:panelGrid>
                             </p:outputPanel>
-                            
+
                         </h:panelGrid>
                     </p:fieldset>
-                    <p:button outcome="listarNoticias" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; left: 90%" > </p:button>
+                    <p:button outcome="listarNoticias" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic" > </p:button>
 
                 </h:form>
             </ui:define>

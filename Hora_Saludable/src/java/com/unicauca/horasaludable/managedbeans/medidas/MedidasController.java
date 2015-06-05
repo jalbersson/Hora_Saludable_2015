@@ -77,6 +77,7 @@ public class MedidasController {
         medicionactual = ejbMedida.buscarporMedId(idmed).get(0);
         calificacion = "pendiente";
         medicionactual = s.getMedidaactual(); //ejbMedida.buscarporMedId(s.getMedidaactual()).get(0);
+        
        
     }
 
@@ -108,7 +109,7 @@ public class MedidasController {
             nueva.setMedfecha(fechaNuevoTest);
             ejbMedida.create(nueva);
 
-            context.addMessage("msggestion", new FacesMessage(FacesMessage.SEVERITY_INFO, "Completado", "Text creado con Exito"));
+            context.addMessage("msggestion", new FacesMessage(FacesMessage.SEVERITY_INFO, "Completado", "Medida creada con Exito"));
             ExternalContext extcontext = context.getExternalContext();
             extcontext.getFlash().setKeepMessages(true);
             extcontext.redirect("GestionTest.xhtml");
@@ -126,7 +127,7 @@ public class MedidasController {
 
             ejbMedida.remove(medicionactual);
 
-            context.addMessage("msggestion", new FacesMessage(FacesMessage.SEVERITY_INFO, "Completado", "Test Eliminado"));
+            context.addMessage("msggestion", new FacesMessage(FacesMessage.SEVERITY_INFO, "Completado", "Medida Eliminada"));
             ExternalContext extcontext = context.getExternalContext();
             extcontext.getFlash().setKeepMessages(true);
             extcontext.redirect("GestionTest.xhtml");

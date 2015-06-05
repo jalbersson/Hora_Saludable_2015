@@ -11,16 +11,14 @@
             <ui:define name="titulo">
                 Toma de medidas
             </ui:define>
-            <ui:define name="CuadroDeBotonesSesion">
-                CuadroDeBotonesSesion
-            </ui:define>
+
             <ui:define name="title">
                 <p:panel style="border: none;">
                     <h:form>
                         <p:breadCrumb >
-                            <p:menuitem value="Usuarios" url="../../index.xhtml" />
-                            <p:menuitem value="Gestion de  Mediciones" outcome="GestionTest" />
-                            <p:menuitem value="Test" url="#" />
+                            <p:menuitem value="Inicio" url="/usuario/contenidos/principal" />
+                            <p:menuitem value="Evaluacion Antropometrica y Funcional" outcome="GestionTest" />
+                            <p:menuitem value="Toma de Medidas" url="#" />
                         </p:breadCrumb>
                     </h:form>
                 </p:panel>
@@ -28,7 +26,7 @@
               
               <div class="tituloContenido">
                     <br></br>
-                    Edicion de Test :  <br></br>
+                    Edicion de Medidas :  <br></br>
  #{medidasController.medicionactual.obtenerFecha()}
 
                 </div>
@@ -333,7 +331,7 @@
                            
                             <p:panel styleClass="paneltab">
                             <h:panelGrid bgcolor="#F2F2F2" columns="3" cellpadding="7" style="margin-top: 25px; margin-left: 320px;font-size: 16px; font-weight: bold;">
-                                <p:outputLabel value="Calculo por Edad"/>   
+                                <p:outputLabel value="Cálculo por Edad"/>   
                             </h:panelGrid>
                                 <p:panelGrid   columns="2" styleClass="panelmedidas" style="margin-left: 270px;">
                                 <f:facet name="header">

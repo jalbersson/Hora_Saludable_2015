@@ -8,7 +8,7 @@
 
     <body>
 
-              <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
                 Hora Saludable: Lista Noticias
@@ -23,7 +23,6 @@
             </ui:define>
 
             <ui:define name="body" >
-                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <div class="wrap" style="width: 90%;">    
 
                     <h:form>
@@ -41,9 +40,11 @@
                             </p:column>
 
                             <p:column headerText="Noticia">
-                                <h:outputText value="#{noticia.notcontenido}" />
-                            </p:column>
+                                <p align="justify">
+                                    <h:outputText value="#{noticia.notcontenido}" />
+                                </p>
 
+                            </p:column>
 
 
                             <p:column headerText="Accion">
@@ -60,7 +61,8 @@
                         </p:dataTable> 
                     </h:form>  
 
-                    <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; left: 90%" > </p:button>
+                    <br></br>
+                    <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; " > </p:button>
 
                 </div>
 

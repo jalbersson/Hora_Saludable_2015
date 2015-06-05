@@ -26,14 +26,12 @@
                         <br></br>
                         <br></br>
                         <p align="justify">
-                        <h:outputText style="font-weight: normal; font-size: 22px;"  value="La Universidad del Cauca es una institución de educación superior pública de carácter nacional con 187 años de historia.
-                                      Ubicada en la ciudad de Popayán, ofrece sus servicios educativos a estudiantes de todo el país, quienes encuentran en la Universidad y la ciudad un espacio idóneo y tranquilo para realizar sus estudios de pregrado y posgrado.
-                                      Gracias a sus programas de descentralización, Unicauca ha ofrecido la posibilidad de educación superior a los caucanos de la región. Conozca a continuación algunos de los aspectos institucionales más importantes que hacen de ésta una de las mejores universidades colombianas.">
-                        </h:outputText>
+                            <h:outputText style="font-weight: normal; font-size: 22px;"  value="La Universidad del Cauca es una institución de educación superior pública de carácter nacional con 187 años de historia.
+                                          Ubicada en la ciudad de Popayán, ofrece sus servicios educativos a estudiantes de todo el país, quienes encuentran en la Universidad y la ciudad un espacio idóneo y tranquilo para realizar sus estudios de pregrado y posgrado.
+                                          Gracias a sus programas de descentralización, Unicauca ha ofrecido la posibilidad de educación superior a los caucanos de la región. Conozca a continuación algunos de los aspectos institucionales más importantes que hacen de ésta una de las mejores universidades colombianas.">
+                            </h:outputText>
                         </p>
                     </h:form> 
-            
-
                 </h:panelGrid>
                 <br></br>
                 <br></br>
@@ -41,29 +39,62 @@
                     <h:form style="width:200px;  position:relative ; left: 20px; border: none; left: 200px" >
                         <p:graphicImage width="550px" height="400px" library="img" name="principal.jpg" style=""  /> 
                     </h:form>
-
-
                 </h:panelGrid>
+                <br></br>
+                <br></br>
+                <br></br>
                 <h:panelGrid columns="2" style="height: 100px; width: 400px ">
                     <h:form>
                         <h:panelGrid columns="1" style="height: 200px; width: 400px ">
-                            <p:panel id="usuarios" header="Usuarios"  >
-                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Usuarios" outcome="usuarios"/>
-                            </p:panel>
-                            <p:panel id="contenidos" header="Contenidos" >
-                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Contenidos" outcome="contenidos"/>
-                            </p:panel>
+                            <h:form>    
+                                <div class="divPrincipal" style="height: 130px;float: right">
+                                    <h:panelGrid columns="1" style="width:400px; height: 100px;">
+                                        <h1 style="color:#F2F2F2; text-align: center">  Usuarios</h1> 
+                                        <p:dataScroller  var="Usuarios" value="">
+                                            <p:link style="font-weight: bold; font-size: 16px" outcome="usuarios" value="Contiene toda la informacion de los desarrolladores del modulo Usuarios"></p:link>
+                                        </p:dataScroller>
+                                    </h:panelGrid>
+                                </div>
+                            </h:form>
+                            <br></br>
+                            <br></br>
+                            <h:form>    
+                                <div class="divPrincipal" style="height: 130px;float: right">
+                                    <h:panelGrid columns="1" style="width:400px; height: 100px;">
+                                        <h1 style="color:#F2F2F2; text-align: center">  Contenidos</h1> 
+                                        <p:dataScroller  var="Contenidos" value="">
+                                            <p:link style="font-weight: bold; font-size: 16px" outcome="contenidos" value="Contiene toda la informacion de los desarrolladores del modulo Contenidos"></p:link>
+                                        </p:dataScroller>
+                                    </h:panelGrid>
+                                </div>
+                            </h:form>
                         </h:panelGrid>
                     </h:form>
                     <h:form style="width:200px;  position: relative; left: 50px; border: none">
                         <h:panelGrid columns="1" style="height: 200px; width: 400px ">
-                            <p:panel id="asistencia" header="Asistencia">
-                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Asistencia" outcome="asistencia"/>
-                            </p:panel>
-                            <p:panel id="medidas" header="Medidas">
-                                <h:link value="Contiene toda la informacion de los desarrolladores del modulo Medidas" outcome="medidas"/>
-                            </p:panel>
 
+                            <h:form>    
+                                <div class="divPrincipal" style="height: 130px;float: right">
+                                    <h:panelGrid columns="1" style="width:400px; height: 100px;">
+                                        <h1 style="color:#F2F2F2; text-align: center">  Asistencia</h1> 
+                                        <p:dataScroller  var="Asistencia" value="">
+                                            <p:link style="font-weight: bold; font-size: 16px" outcome="asistencia" value="Contiene toda la informacion de los desarrolladores del modulo Asistencia"></p:link>
+                                        </p:dataScroller>
+                                    </h:panelGrid>
+                                </div>
+                            </h:form>
+                            <br></br>
+                            <br></br>
+                            <h:form>    
+                                <div class="divPrincipal" style="height: 130px;float: right">
+                                    <h:panelGrid columns="1" style="width:400px; height: 100px;">
+                                        <h1 style="color:#F2F2F2; text-align: center">  Medidas</h1> 
+                                        <p:dataScroller  var="Medidas" value="">
+                                            <p:link style="font-weight: bold; font-size: 16px" outcome="medidas" value="Contiene toda la informacion de los desarrolladores del modulo Medidas"></p:link>
+                                        </p:dataScroller>
+                                    </h:panelGrid>
+                                </div>
+                            </h:form>
                         </h:panelGrid>
                     </h:form>
                 </h:panelGrid>
