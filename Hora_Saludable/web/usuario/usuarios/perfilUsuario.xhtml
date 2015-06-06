@@ -28,11 +28,9 @@
                                 Mi Perfil
                             </div>
                         </h:link>                  
-                        <h:link style="text-decoration: none;" outcome="/usuario/medidas/GestionTest" > 
-                            <div class="botonSubmenu">
+                        <p:commandLink style="text-decoration: none; width: 130px;height: 13;" styleClass="botonSubmenu" action="#{mostrarUsuarioTestController.estudianteSeleccionadoUsu(usuarioSessionController.nombreDeUsuario)}"> 
                                 Mis Medidas
-                            </div>
-                        </h:link>
+                        </p:commandLink>
                         <h:link style="text-decoration: none;" outcome="/usuario/asistencia/asistencia-personal"> 
                             <div class="botonSubmenu">
                                 Mi Asistencia

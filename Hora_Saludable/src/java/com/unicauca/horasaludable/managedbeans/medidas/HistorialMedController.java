@@ -39,7 +39,7 @@ public class HistorialMedController {
       int idmed = 5 ; //para probar
       FacesContext context = FacesContext.getCurrentInstance();
       MostrarUsuarioTestController s = (MostrarUsuarioTestController) context.getApplication().evaluateExpressionGet(context, "#{mostrarUsuarioTestController}", MostrarUsuarioTestController.class);
-      medidas = ejbMedida.buscarporUsuid(s.getUsuario().getUsuid().intValue());
+      medidas = ejbMedida.buscarporUsuidH(s.getUsuario().getUsuid().intValue());
       
       if(medidas.size()>0)medhist1 = medidas.get(0);
       if(medidas.size()>1)medhist2 = medidas.get(1);

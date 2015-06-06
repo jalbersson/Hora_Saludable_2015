@@ -8,7 +8,7 @@
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
                 Historial de Medidas
@@ -238,10 +238,6 @@
                                 <p:outputLabel    value="#{historialMedController.medhist1.excesodepeso()}"/>
                                 <p:outputLabel  value="Peso Optimo(kg):" />
                                 <p:outputLabel   value="#{historialMedController.medhist1.pesooptimo()}" />
-                                <p:outputLabel  value="Masa Esq. Cuerpo(kg):" />
-                                <p:outputLabel    value="#{historialMedController.medhist1.masaesqcuerpo()}"/>
-                                <p:outputLabel  value="Masa Total Osea(kg):" />
-                                <p:outputLabel    value="#{historialMedController.medhist1.masatotalosea()}"/>
                                 <p:outputLabel  value="% Grasa Ideal" />
                                 <p:outputLabel    value="#{historialMedController.medhist1.porcentajegrasaideal()}"/>
                                 <p:separator />
@@ -351,10 +347,6 @@
                                 <p:outputLabel    value="#{historialMedController.medhist2.excesodepeso()}"/>
                                 <p:outputLabel  value="Peso Optimo(kg):" />
                                 <p:outputLabel   value="#{historialMedController.medhist2.pesooptimo()}" />
-                                <p:outputLabel  value="Masa Esq. Cuerpo(kg):" />
-                                <p:outputLabel    value="#{historialMedController.medhist2.masaesqcuerpo()}"/>
-                                <p:outputLabel  value="Masa Total Osea(kg):" />
-                                <p:outputLabel    value="#{historialMedController.medhist2.masatotalosea()}"/>
                                 <p:outputLabel  value="% Grasa Ideal" />
                                 <p:outputLabel    value="#{historialMedController.medhist2.porcentajegrasaideal()}"/>
                                 <p:separator />

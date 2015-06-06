@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <body>
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
             <ui:define name="titulo">
                 Toma de medidas
             </ui:define>
@@ -207,10 +207,6 @@
                                     <p:outputLabel    value="#{medidasController.medicionactual.excesodepeso()}"/>
                                     <p:outputLabel  value="Peso Optimo(kg):" styleClass="subtitpaneltest"/>
                                     <p:outputLabel   value="#{medidasController.medicionactual.pesooptimo()}" />
-                                    <p:outputLabel  value="Masa Esq. Cuerpo(kg):" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.masaesqcuerpo()}"/>
-                                    <p:outputLabel  value="Masa Total Osea(kg):" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.masatotalosea()}"/>
                                     <p:outputLabel  value="% Grasa Ideal" styleClass="subtitpaneltest"/>
                                     <p:outputLabel    value="#{medidasController.medicionactual.porcentajegrasaideal()}"/>
                                     <p:separator />
@@ -360,10 +356,6 @@
                             </p:panel>
                         </p:tab>
                     </p:accordionPanel>
-                    <h:panelGrid columns="2" styleClass="btnguardarmed" cellpadding="5" bgcolor="#045491">
-                        <p:commandButton value="Guardar" icon="ui-icon-check"  update="acord" actionListener="#{medidasController.guardarmed}"/>
-                        <p:button value="Cancelar" icon="ui-icon-cancel" outcome="GestionTest"/>
-                    </h:panelGrid> 
                 </h:form>
             </ui:define>
         </ui:composition>
