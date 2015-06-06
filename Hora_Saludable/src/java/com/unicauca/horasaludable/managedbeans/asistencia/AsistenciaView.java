@@ -119,6 +119,7 @@ public class AsistenciaView {
         detasi.getDetalleasistenciaPK().setUsuid(detasi.getUsuario().getUsuid());
 
         if (accion.equals("Registrar")) {
+            accion = "Actualizar";
             ejbFacadeDetasi.create(detasi);
         }
         if (accion.equals("Actualizar")) {
@@ -127,12 +128,20 @@ public class AsistenciaView {
     }
 
     public void buscarAsistencia() {
+//        Date date = new Date();
+        Date date = asi.getAsifecha();
+
+        asi = new Asistencia();
+
+        asi.setAsifecha(date);
+        //
         List<Asistencia> asis = ejbFacadeAsi.findAll();
 
         for (int i = 0; i < asis.size(); i++) {
-            if (asis.get(i).getAsifecha().getYear() == asi.getAsifecha().getYear()
-                    && asis.get(i).getAsifecha().getMonth() == asi.getAsifecha().getMonth()
+            if (asis.get(i).getAsifecha().getYear() == asi.getAsifecha().getYear() 
+                    && asis.get(i).getAsifecha().getMonth() == asi.getAsifecha().getMonth() 
                     && asis.get(i).getAsifecha().getDay() == asi.getAsifecha().getDay()) {
+                
                 asi = asis.get(i);
                 accion = "Actualizar";
 
@@ -149,18 +158,12 @@ public class AsistenciaView {
         }
         FacesContext context = FacesContext.getCurrentInstance();
         //
-        Date date = new Date();
-        date = asi.getAsifecha();
-        
-        asi = new Asistencia();
-
-        asi.setAsifecha(date);
         asi.setAsiobservaciones(new String());
 
         selectedUsus = new ArrayList();
         //
         accion = "Registrar";
-        context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa Registrar" + selectedUsus.size(), ""));        
+        context.addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Busqueda Completa Registrar" + selectedUsus.size(), ""));
     }
 
     public Asistencia getAsi() {

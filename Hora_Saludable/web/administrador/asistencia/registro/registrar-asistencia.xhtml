@@ -37,11 +37,17 @@
                     <p:growl id="growl" sticky="true" showDetail="true" />
 
                     <h:panelGroup id="crearInscripcionPanelGroup">
-                        <h:panelGrid columns="4" cellpadding="5" cellspacing="5" rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
+                        <h:panelGrid columns="3" cellpadding="5" cellspacing="5" rendered="#{asistenciaView.asi != null}" style="margin: 0 auto;" >
                             <h:outputText value="Fecha:" style="font-size: 16px;"  />
                             <p:calendar id="fecha" value="#{asistenciaView.asi.asifecha}" pattern="dd-MM-yyyy" mask="true" size="7"/>                            
-                            <p:commandButton value="Buscar" actionListener="#{asistenciaView.buscarAsistencia()}" update="growl, usuariosDataTable, crearInscripcionForm" icon="ui-icon-search" style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />                            
-                            <p:commandButton value="#{crearInscripcionBean.accion}" actionListener="#{crearInscripcionBean.crearIncripcion()}" update="growl" icon="ui-icon-pencil"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                            <p:commandButton value="Buscar" 
+                                             actionListener="#{asistenciaView.buscarAsistencia()}" 
+                                             update="growl, usuariosDataTable, crearInscripcionForm" 
+                                             icon="ui-icon-search" 
+                                             onstart="PF('efectoCarga').show()"  
+                                             onsuccess="PF('efectoCarga').hide()" 
+                                             style="background:#22419A; color: #FFFFFF; width: 100px; " />
+
                         </h:panelGrid>
                     </h:panelGroup>
                     <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
@@ -49,7 +55,17 @@
                     <p:spacer height="25"/>
 
                     <p:panel header="Usuarios" >
-                        
+                        <h:panelGrid rendered="#{asistenciaView.asi != null}" style="margin: 0 auto;" >
+                            <p:commandButton value="#{asistenciaView.accion}" 
+                                             actionListener="#{asistenciaView.crearAsistencia()}" 
+                                             update="growl, usuariosDataTable, crearInscripcionForm" 
+                                             icon="ui-icon-pencil"  
+                                             onstart="PF('efectoCarga').show()"  
+                                             onsuccess="PF('efectoCarga').hide()" 
+                                             style="background:#22419A; color: #FFFFFF; width: 100px; " />
+                        </h:panelGrid>
+                        <p:spacer />
+
                         <p:dataTable id="usuariosDataTable" value="#{asistenciaView.usuarios}" var="usu"
                                      paginator="true"
                                      rows="20"
@@ -78,12 +94,13 @@
                             <p:column  selectionMode="multiple" style="width:10%;text-align:center" />
                         </p:dataTable>
                         <br />
-                        <h:outputText value="Observaciones:" />
-                        <p:inputTextarea id="observaciones" 
-                                         value="#{asistenciaView.asi.asiobservaciones}" 
-                                         rows="10" cols="50"/>
+                        <h:panelGrid rendered="#{asistenciaView.asi != null}" style="margin: 0 auto;" >
+                            <p:inputTextarea id="observaciones" 
+                                             value="#{asistenciaView.asi.asiobservaciones}" 
+                                             rows="10" cols="50"/>
 
-                        <p:watermark for="observaciones" value="Observaciones" id="watermark" />
+                            <p:watermark for="observaciones" value="Observaciones" id="watermark" />
+                        </h:panelGrid>
                     </p:panel>
                 </h:form>
             </ui:define>
