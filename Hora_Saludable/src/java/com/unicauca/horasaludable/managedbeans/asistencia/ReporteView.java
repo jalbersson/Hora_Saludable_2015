@@ -66,7 +66,7 @@ public class ReporteView implements Serializable {
         tipos.add("Anual");
         tipos.add("Semestral");
         tipos.add("Mensual");
-        tipos.add("Por rango de fechas");
+//        tipos.add("Por rango de fechas");
         return tipos;
     }
 

@@ -122,8 +122,14 @@ public class ChartViewInscritos implements Serializable {
                 }
             }
             long numAsistentes = ejbFacadeDetAsi.asistenciaPorMes(mes, AuxiliarReporte.anio);
-
-            asistencia.set(meses[mes - 1], numAsistentes);
+            
+            for (int i = 0; i < 12; i++) {
+                if(i == mes - 1) {
+                    asistencia.set(meses[i], numAsistentes);
+                } else {
+                    asistencia.set(meses[i], 0);
+                }
+            }
         }
         if (AuxiliarReporte.tipo.equals("Por rango de fechas")) {
             int mesIncio = AuxiliarReporte.fechaIncio.getMonth();

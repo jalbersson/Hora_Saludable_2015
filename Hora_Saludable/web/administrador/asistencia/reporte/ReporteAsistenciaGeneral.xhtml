@@ -35,7 +35,11 @@
                             <h:panelGrid id="panelGrid2" style="margin: 0 auto;" columns="1" cellpadding="7" > 
                                 <p:outputLabel value="Este reporte muestra el número de participantes por mes que asistieron al Programa Hora Saludable" />
                                 <p:chart type="bar" model="#{chartViewInscritos.barModel}" style="height:300px" widgetVar="chart"/>
-                                <p:commandButton type="button" value="Exportar como imagen" icon="ui-icon-extlink" onclick="exportChart()"/>                                
+                                <p:commandButton type="button" 
+                                                 value="Ver como imagen" 
+                                                 icon="ui-icon-extlink" 
+                                                 onclick="exportChart()"
+                                                 style="background:#22419A; color: #FFFFFF; " />                                
                             </h:panelGrid>                   
                         </p:panel>
                     </h:panelGroup>                
