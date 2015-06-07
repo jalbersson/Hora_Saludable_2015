@@ -57,8 +57,8 @@ public class verEditarHorarioController implements Serializable {
         
         ejbHorario.remove(horario);
         return "principal";
-    }
-
+    }    
+    
     public void insertarFila() {
         String cont2 = this.horario.getHorcontenido().substring(0, this.horario.getHorcontenido().length() - 8);
         cont2 = cont2 + "<tr>  <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>\n" + "</table>";
@@ -77,7 +77,29 @@ public class verEditarHorarioController implements Serializable {
         }
 
         this.horario.setHorcontenido(cont2);
-
+    }
+    
+    public void limpiar()
+    {
+        this.horario.setHornombre(" ");
+        this.horario.setHorcontenido("<br/><table align=\"center\" border=\"4\" bordercolor=\"#22419a\" cellpadding=\"10\" cellspacing=\"20\">\n"
+                + "<tr style=\"color:#ffffff\" bgcolor=\"#22419a\">\n"
+                + "<th width=\"80px\">HORA</th><th width=\"80px\" >LUNES</th><th width=\"80px\" >MARTES</th><th width=\"80px\" >MIERCOLES</th> <th width=\"80px\" >JUEVES</th><th width=\"80px\" >VIERNES</th>\n"
+                + "</tr>\n"
+                + "<tr>  <td>8:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
+                + "<tr>  <td>9:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
+                + "<tr>  <td>10:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
+                + "<tr>  <td>11:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>12:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>1:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>2:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>3:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>4:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>5:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>6:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>7:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>8:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "</table>");
     }
 
 }

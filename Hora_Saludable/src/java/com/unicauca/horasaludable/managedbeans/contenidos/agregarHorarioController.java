@@ -34,12 +34,21 @@ public class agregarHorarioController implements Serializable {
         this.titulo = "Ingresa aqui titulo del horario";
         this.cont = "<br/><table align=\"center\" border=\"4\" bordercolor=\"#22419a\" cellpadding=\"10\" cellspacing=\"20\">\n"
                 + "<tr style=\"color:#ffffff\" bgcolor=\"#22419a\">\n"
-                + "<th width=\"40px\">HORA</th><th width=\"80px\" >LUNES</th><th width=\"80px\" >MARTES</th><th width=\"80px\" >MIERCOLES</th> <th width=\"80px\" >JUEVES</th><th width=\"80px\" >VIERNES</th>\n"
+                + "<th width=\"80px\">HORA</th><th width=\"80px\" >LUNES</th><th width=\"80px\" >MARTES</th><th width=\"80px\" >MIERCOLES</th> <th width=\"80px\" >JUEVES</th><th width=\"80px\" >VIERNES</th>\n"
                 + "</tr>\n"
-                + "<tr>  <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
-                + "<tr>  <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
-                + "<tr>  <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
-                + "<tr>  <td></td> <td></td> <td></td> <td></td> <td></td> <td>Karate</td>   </tr>\n"
+                + "<tr>  <td>8:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
+                + "<tr>  <td>9:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
+                + "<tr>  <td>10:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
+                + "<tr>  <td>11:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td>Grupo C</td>   </tr>\n"
+                + "<tr>  <td>12:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td>Grupo C</td>   </tr>\n"
+                + "<tr>  <td>1:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td>Grupo C</td>   </tr>\n"
+                + "<tr>  <td>2:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>3:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>4:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>5:00 p.m.</td> <td></td> <td>Grupo A</td> <td>Grupo B</td> <td>Grupo A</td> <td>Grupo B</td>   </tr>\n"
+                + "<tr>  <td>6:00 p.m.</td> <td></td> <td>Grupo A</td> <td>Grupo B</td> <td>Grupo A</td> <td>Grupo B</td>   </tr>\n"
+                + "<tr>  <td>7:00 p.m.</td> <td></td> <td>Grupo A</td> <td>Grupo B</td> <td>Grupo A</td> <td>Grupo B</td>   </tr>\n"
+                + "<tr>  <td>8:00 p.m.</td> <td></td> <td>Grupo A</td> <td>Grupo B</td> <td>Grupo A</td> <td>Grupo B</td>   </tr>\n"
                 + "</table>";
 
     }
@@ -78,6 +87,29 @@ public class agregarHorarioController implements Serializable {
         }
         return "principal";
 
+    }
+    
+    public void limpiar()
+    {
+        this.titulo = " ";
+        this.cont = "<br/><table align=\"center\" border=\"4\" bordercolor=\"#22419a\" cellpadding=\"10\" cellspacing=\"20\">\n"
+                + "<tr style=\"color:#ffffff\" bgcolor=\"#22419a\">\n"
+                + "<th width=\"80px\">HORA</th><th width=\"80px\" >LUNES</th><th width=\"80px\" >MARTES</th><th width=\"80px\" >MIERCOLES</th> <th width=\"80px\" >JUEVES</th><th width=\"80px\" >VIERNES</th>\n"
+                + "</tr>\n"
+                + "<tr>  <td>8:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
+                + "<tr>  <td>9:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
+                + "<tr>  <td>10:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>  </tr>\n"
+                + "<tr>  <td>11:00 a.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>12:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>1:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>2:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>3:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>4:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>5:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>6:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>7:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "<tr>  <td>8:00 p.m.</td> <td></td> <td></td> <td></td> <td></td> <td></td>   </tr>\n"
+                + "</table>";
     }
     
     public List<Horario> lista()
@@ -135,11 +167,3 @@ public class agregarHorarioController implements Serializable {
     }
 
 }
-
-/*
- <p:dataScroller  var="hor" value="#{horarioController.h}" chunkSize="6" style="float:right;" >
-                                        <h:panelGrid columns="1" cellpadding="6" style="text-align: center;">
-                                            <p:link value="#{hor.nombreH}" outcome="#{horarioController.mostrarHorario(hor)}" style="font-weight: bold; font-size: 15px; color: #AA0000;" />
-                                        </h:panelGrid>
-                                    </p:dataScroller>
- */

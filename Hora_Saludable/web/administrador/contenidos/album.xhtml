@@ -32,7 +32,7 @@
                         <p:ring id="basic" value="#{imagenController.images}" var="image">
                             <p:outputPanel style="text-align: center;" layout="block">                            
                                 <h:graphicImage name="/img/imagenSalud/#{image}" style="height: 100px; width: 150px; border: 2px solid #22419A" />
-                                <p:commandButton ajax="false"  update="nuevaNoticia" action="#{imagenController.eliminarImagen(image)}" process="@form" value="Subir Imagen" 
+                                <p:commandButton ajax="false"  update=":album" action="#{imagenController.eliminarImagen(image)}" process="@form" value="Subir Imagen" 
                                                  style="height: 30px; width: 30px; margin-left: 40px" icon="ui-icon-trash"/>   
                             </p:outputPanel>
                         </p:ring>

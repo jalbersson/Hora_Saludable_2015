@@ -62,13 +62,13 @@
                                         <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
                                         <h:outputLabel class="CampoLabelObligatorios" for="imagen" value="Imagen: "  />
                                     </h:column>      
-                                    <p:fileUpload value="#{eventoVerEditarController.file}" mode="simple"/>
-                                    
-                                    <p:button outcome="listarEventos" value="Cancelar" style="background: #22419A;color:#FFFFFF;font-style: italic" > </p:button>
-                                    <p:commandButton ajax="false"  update="editarEvento" action="#{eventoVerEditarController.actualizarEvento()}" actionListener="#{eventoVerEditarController.upload()}" process="@form" value="Editar" 
-                                                     style="background: #22419A;color:#FFFFFF;font-style: italic" 
-                                                     />
+                                    <p:fileUpload value="#{eventoVerEditarController.file}" mode="simple"/>                                    
                                 </h:panelGrid>
+                                <br/>
+                                
+                                <p:commandButton ajax="false" action="#{eventoVerEditarController.actualizarEvento()}" actionListener="#{eventoVerEditarController.upload()}" process="@form" value="Editar" style="background: #22419A;color:#FFFFFF;font-style: italic"/>
+                                <p:commandButton ajax="false" action="#{eventoVerEditarController.limpiar()}" actionListener="#{eventoVerEditarController.upload()}" process="@form" value="Limpiar" style="background: #22419A;color:#FFFFFF;font-style: italic"/>
+                                <p:button outcome="listarEventos" value="Cancelar" style="background: #22419A;color:#FFFFFF;font-style: italic" > </p:button>
 
                             </h:form>
                         </p:panelGrid>

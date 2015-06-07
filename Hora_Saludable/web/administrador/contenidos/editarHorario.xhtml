@@ -26,7 +26,7 @@
                 
                 <h:form id="form" style="text-align: center">
 
-                    <p:panelGrid  style="width: 70%; margin-left: 50px" columns="1" >
+                    <p:panelGrid  style="width: 70%; margin-left: 20px" columns="1" >
 
                         <p:messages style="border: none" id="messages" />
                         <h:panelGrid columns="2" >
@@ -34,21 +34,25 @@
                             <p:inputText style="margin: 5px" id="tituloEvento" value="#{verEditarHorarioController.horario.hornombre}" required="true" size="60" requiredMessage="Introduzca titulo del horario." />
                         </h:panelGrid>   
 
-                        <p:editor id="editor" widgetVar="editorWidget" value="#{verEditarHorarioController.horario.horcontenido}" width="800" height="400" />
+                        <p:editor id="editor" widgetVar="editorWidget" value="#{verEditarHorarioController.horario.horcontenido}" width="870" height="400" />
 
                     </p:panelGrid>
 
+                    <br/>
                     <p:commandButton ajax="false" action="#{verEditarHorarioController.actualizarHorario()}" process="@form" value="Guardar" 
-                                     style="background: #22419A;color:#FFFFFF;font-style: italic; margin: 10px" />
+                                     style="width: 110px;background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px; margin-left: 20px" />
                     
                     <p:commandButton ajax="false" action="principal" value="Volver" 
-                                     style="background: #22419A;color:#FFFFFF;font-style: italic; margin: 10px" />
+                                     style="width: 110px;background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px" />
+                    
+                    <p:commandButton ajax="false" action="#{agregarHorarioController.limpiar()}" process="@form" value="Limpiar" 
+                                     style="width: 110px; background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px" />
 
                     <p:commandButton ajax="false" action="#{verEditarHorarioController.insertarFila()}" process="@form" value="Insertar Fila" 
-                                     style="background: #22419A;color:#FFFFFF;font-style: italic; margin: 10px" />
+                                     style="width: 110px;background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px" />
 
                     <p:commandButton ajax="false" action="#{agregarHorarioController.eliminarFila()}" process="@form" value="Eliminar Fila" 
-                                     style="background: #22419A;color:#FFFFFF;font-style: italic; margin: 10px" />
+                                     style="width: 110px;background: #22419A;color:#FFFFFF;font-style: italic" />
 
                 </h:form>
             </ui:define>

@@ -6,8 +6,11 @@
 package com.unicauca.horasaludable.managedbeans.contenidos;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -55,7 +58,7 @@ public class imagenController {
         }
     } 
     
-    public String eliminarImagen(String nombre) {
+    public void eliminarImagen(String nombre) {
         
         String OS = System.getProperty("os.name").toLowerCase();
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -72,9 +75,19 @@ public class imagenController {
         
         f2 = new File(dir2);
         if (f2.delete()) {
-            return "album";
+            try {
+                FacesContext contex = FacesContext.getCurrentInstance();
+                contex.getExternalContext().redirect("album.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(imagenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
-            return "album";
+            try {
+                FacesContext contex = FacesContext.getCurrentInstance();
+                contex.getExternalContext().redirect("album.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(imagenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
