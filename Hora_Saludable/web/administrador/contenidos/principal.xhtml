@@ -30,7 +30,7 @@
                             <h:form> 
                                 <div class="divPrincipal">
                                     <h1 style="color:#F2F2F2; text-align: center;">Noticias</h1> 
-                                    <p:carousel  value="#{noticiacController.ultimos}" var="noticiaLista" itemStyle="height:230px;width:600px;" autoPlayInterval="6000" numVisible="1" effect="easeInStrong" circular="true" class="ui-carousel">   
+                                    <p:carousel  value="#{noticiacController.ultimos}" var="noticiaLista" itemStyle="height:230px;width:600px;" autoPlayInterval="6000" numVisible="1" effect="easeInStrong" circular="true" class="ui-carousel">
                                         <h:panelGrid columns="2" style="width:600px " cellpadding="10" columnClasses="label,value">
                                             <p:tab>
                                                 <h:outputText value="#{noticiacController.convertToJavaDate(noticiaLista.notfechapublicacion)}" style="float: right; font-weight: bold; font-size: 15px;"/>
@@ -116,7 +116,7 @@
                                             <p:button style="height: 30px; width: 80px; margin-right: 10px; background: #22419A;color:#FFFFFF;font-style: italic"  value="Ver" outcome="#{agregarHorarioController.verHorario(hor)}" />                                             
                                             <p:button style="height: 30px; width: 80px; margin-right: 10px; background: #22419A;color:#FFFFFF;font-style: italic"  value="Editar" outcome="#{agregarHorarioController.editarHorario(hor)}" />  
                                             <p:button style="height: 30px; width: 80px; background: #22419A;color:#FFFFFF;font-style: italic"  value="Eliminar" outcome="#{agregarHorarioController.eliminarHorario(hor)}" /> 
-
+                                            
                                         </p:column>
                                     </p:dataTable>
 

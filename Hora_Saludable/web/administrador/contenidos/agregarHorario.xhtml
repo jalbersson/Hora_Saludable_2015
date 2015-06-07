@@ -24,7 +24,12 @@
 
             <ui:define name="body">
                 <h:form id="form" style="">
-
+                    
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />  
+                        <p:menuitem value="Agregar Horario" url="agregarHorario.xhtml" />    
+                    </p:breadCrumb>
+                    <br/>
                     <p:panelGrid  style="width: 80%; margin-left: 20px" columns="1" >
 
                         <p:messages style="border: none" id="messages" />

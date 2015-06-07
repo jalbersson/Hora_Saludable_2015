@@ -20,6 +20,12 @@
 
             <ui:define name="body">
                 <h:form style="text-align: center">
+                    
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />  
+                        <p:menuitem value="Ver Horario" url="" />    
+                    </p:breadCrumb>
+                    
                     <p:growl id="msgs" showDetail="true" />
 
                     <h2 style="margin-top:30px" class="tituloContenido">#{verEditarHorarioController.horario.hornombre}</h2>
