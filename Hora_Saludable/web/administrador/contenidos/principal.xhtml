@@ -35,7 +35,7 @@
                                             <p:tab>
                                                 <h:outputText value="#{noticiacController.convertToJavaDate(noticiaLista.notfechapublicacion)}" style="float: right; font-weight: bold; font-size: 15px;"/>
                                                 <br></br>
-                                                <h:outputText value="#{noticiaLista.nottitulo}" style="font-weight: bold; font-size: 20px; text-align: center; color:#AA0000; " />
+                                                <h:link value="#{noticiaLista.nottitulo}" outcome="detalleNoticia?noticiaId=#{noticiaLista.notid}" style="font-weight: bold; font-size: 20px; text-align: center; color:#AA0000; " />
                                                 <h:panelGrid columns="2" cellpadding="10">
                                                     <p:graphicImage width="150px" height="150px" library="img/imagenesNoticias" name="#{noticiaLista.notimagen}"/>
                                                     <h:outputText value="#{noticiaLista.notcontenido}" style="font-weight: bold; font-size: 15px;"/> 
