@@ -39,6 +39,12 @@
             <url-pattern>/usuario/asistencia/*</url-pattern>
             <url-pattern>/faces/usuario/asistencia/*</url-pattern>
         </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>medidas usuario</web-resource-name>
+            <description/>
+            <url-pattern>/usuario/medidas/*</url-pattern>
+            <url-pattern>/faces/usuario/medidas/*</url-pattern>
+        </web-resource-collection>
         <auth-constraint>
             <description/>
             <role-name>user</role-name>

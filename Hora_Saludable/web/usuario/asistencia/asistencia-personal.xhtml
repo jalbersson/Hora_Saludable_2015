@@ -28,11 +28,11 @@
                                 Mi Perfil
                             </div>
                         </h:link>                  
-                        <h:link style="text-decoration: none;" > 
+                        <p:commandLink style="text-decoration: none;" action="#{mostrarUsuarioTestController.estudianteSeleccionadoUsu(usuarioSessionController.nombreDeUsuario)}" > 
                             <div class="botonSubmenu">
                                 Mis Medidas
                             </div>
-                        </h:link>
+                        </p:commandLink>
                         <h:link style="text-decoration: none;" outcome="/usuario/asistencia/asistencia-personal"> 
                             <div class="botonSubmenu">
                                 Mi Asistencia
@@ -43,7 +43,7 @@
                 <div style="margin-left: 200px; margin-top: 10px;">                    
                     <h:form>
                         <p:breadCrumb>
-                            <p:menuitem value="Inicio" outcome="/index.xhtml" />                              
+                            <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />                              
                             <p:menuitem value="Asistencia personal" outcome="/usuario/asistencia/asistencia-personal" />                                        
                         </p:breadCrumb>
                         <div class="tituloContenido">                           

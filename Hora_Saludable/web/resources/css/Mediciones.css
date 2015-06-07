@@ -52,7 +52,7 @@ and open the template in the editor.
 
 .panelmedidas
 {
-    margin-top: 25px;
+    margin-top: 20px;
     margin-left: 25px;
     float: left;
     font-weight: bold;
@@ -75,7 +75,7 @@ and open the template in the editor.
 
 .btncalculartest
 {
-    margin-top: 50px;
+    margin-top: 40px;
     float: left;
     margin-left: 20px;
     margin-right: 20px;
@@ -91,6 +91,12 @@ and open the template in the editor.
     float: right;
     margin-top: 150px;
     margin-right: 185px;
+}
+.imagenmedidas9
+{
+    float: right;
+    margin-top: 150px;
+    margin-right: 100px;
 }
 .btnesaccionesmediciones
 {
@@ -202,6 +208,13 @@ and open the template in the editor.
 .separadorTest
 {
    width: 750px;
+   margin-top: 25px;
+   margin-bottom: 25px;
+}
+
+.separadorTestUsuario
+{
+   width: 600px;
    margin-top: 25px;
    margin-bottom: 25px;
 }
