@@ -11,7 +11,7 @@
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-
+                Recuperar Contraseña
             </ui:define>
 
             <ui:define name="title">
@@ -20,10 +20,11 @@
 
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/> 
+                <div class="tituloContenido">Recuperar Contraseña</div>
+                    <br/>
+                    <br/>
                 <h:form>
-                    <h1>Recuperar Contraseña</h1>
-                    <br/>
-                    <br/>
+                    
                     <h:outputText 
                         value="Has olvidado tu contraseña, para recuperarla
                         por favor ingresa el correo electrónico con el cual te resgistraste." style="width:150px;font-size: 15px;"/>
@@ -40,7 +41,7 @@
                             <f:validator validatorId="validarCorreoElectronico"/>
                             </p:inputText>
                                
-                        <p:commandButton update="enviar" value="Enviar" action="#{recuperarContraseniaController.recuperar}" 
+                        <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;" update="enviar" value="Enviar" action="#{recuperarContraseniaController.recuperar}" 
                                          icon="ui-icon-check" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                         <p:messages id="enviar" />
                     </h:panelGrid>

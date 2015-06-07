@@ -20,12 +20,13 @@
                 <h:form>
                     <p:breadCrumb>
                         <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />                              
-                        <p:menuitem value="Gestion Usuarios" outcome="/administrador/usuarios/gestionUsuarios" />                                        
+                        <p:menuitem value="Gestion de Usuarios" outcome="/administrador/usuarios/gestionUsuarios" />                                        
                     </p:breadCrumb>
                 </h:form>
                 <div class="tituloContenido">
-                    GESTIÓN DE USUARIOS                    
+                    Gestión de Usuarios                    
                 </div>
+                <br/>
                 <h:form id="seleccionarUsuarios">
                     <h:panelGrid columns="3"> 
                         <p:outputLabel styleClass="CampoLabel" value="Seleccione Tipo Usuario:" />                      
@@ -47,8 +48,7 @@
                 </h:form>                   
                 <p:separator/>
                 <br/>
-                <ui:include src="listarUsuarios.xhtml"/>
-                <br/>
+                <ui:include src="listarUsuarios.xhtml"/>               
                 <p:separator/>
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <ui:include src="ventanaRegistroUsuario.xhtml"/>

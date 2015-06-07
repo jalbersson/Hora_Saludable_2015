@@ -15,7 +15,7 @@ body {
     background: url(../img/body-bkg.png) repeat-x scroll 0% 0% #C8CDD6;
     font-family: "Vegur-Regular", "Arial Narrow", Arial, sans-serif;
     line-height: 1;
-    font-size: 12px;
+    font-size: 12px;    
 }
 
 /***** Main Header ******/
@@ -133,6 +133,7 @@ body {
 #contenido .contenedor {
 
     width: 932px;
+    min-height:320px;
     margin: auto;
     border-top: 1px solid rgba(0,0,0,0.5);
     padding: 30px 20px 10px;

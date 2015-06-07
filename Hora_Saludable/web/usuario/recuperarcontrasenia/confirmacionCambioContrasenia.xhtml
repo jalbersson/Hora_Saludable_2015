@@ -9,7 +9,7 @@
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-                titulo
+                Confirmacion
             </ui:define>
 
 
@@ -18,7 +18,8 @@
             </ui:define>
 
             <ui:define name="body">
-                <h1>Cambiar Contraseña</h1>
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                <div class="tituloContenido">Cambiar Contraseña</div>
               <h:outputText 
                         value="Su contraseña se cambió exitosamente. Inicie sesion. " style="width:150px;font-size: 20px;"/>
                     <br/>
