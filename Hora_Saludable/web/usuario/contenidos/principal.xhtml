@@ -31,10 +31,13 @@
                                             <p:tab>
                                                 <h:outputText value="#{noticiacController.convertToJavaDate(noticiaLista.notfechapublicacion)}" style="float: right; font-weight: bold; font-size: 15px;"/>
                                                 <h:outputText value="#{noticiaLista.nottitulo}" style="font-weight: bold; font-size: 20px; text-align: center; color:#AA0000; " />
-                                                <h:panelGrid columns="2" cellpadding="10">
+                                                <h:panelGrid columns="3" cellpadding="10">
                                                     <p:graphicImage width="150px" height="150px" library="img/imagenesNoticias" name="#{noticiaLista.notimagen}"/>
-                                                    <h:outputText value="#{noticiaLista.notcontenido}" style="font-weight: bold; font-size: 15px;"/> 
+                                                    <p align="justify">
+                                                        <h:outputText value="#{noticiaLista.notcontenido}"  style="font-weight: bold; font-size: 15px;"/> 
+                                                    </p>
                                                 </h:panelGrid>
+
                                             </p:tab>
                                         </h:panelGrid>
                                     </p:carousel>
@@ -67,7 +70,7 @@
                                         <h1 style="color:#F2F2F2; text-align: center;">Eventos</h1>
                                         <p:dataScroller  var="eventoLista" value="#{eventoController.ultimos}" chunkSize="10">
                                             <p:link value="#{eventoController.cortarTitulo(eventoLista.evetitulo)}" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; color: #AA0000; font-size: 16px;">                                           
-                                             <f:param name="eventoId" value="#{eventoLista.eveid}" />
+                                                <f:param name="eventoId" value="#{eventoLista.eveid}" />
                                             </p:link>
                                             <h:panelGrid columns="1" style="width:200px; height: 100px;">
                                                 <p:outputPanel style="border-color:#22419A;">
@@ -77,7 +80,7 @@
                                                         <h:outputText value="Lugar:" style="font-weight: bold; font-size: 15px"/>
                                                         <h:outputText value="#{eventoController.cortarLugar(eventoLista.evelugar)}" style="font-size: 15px" /> 
                                                     </h:panelGrid>
-                                                    
+
                                                 </p:outputPanel>
                                             </h:panelGrid>
                                         </p:dataScroller> 
