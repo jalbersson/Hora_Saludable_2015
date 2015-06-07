@@ -16,18 +16,26 @@
             </ui:define>
 
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Nueva Noticia 
-                    <br></br>
-                </div>
+
             </ui:define>
 
 
             <ui:define name="body"  >
-                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                <h:form>
+                    <p:breadCrumb>
+                    <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                    <p:menuitem value="Nueva noticia" url="nuevaNoticia.xhtml" />
+                </p:breadCrumb>
+                </h:form>
+                
+
+                <p:spacer height="10"/>
+                <div class="tituloContenido">
+                    Noticia nueva
+                </div>
+
                 <div class="wrap" style="width: 63%;">
-                    
+                 
                     <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" value="*"/>
                     <h:outputLabel class="CampoLabelObligatorios" value=" Campos Obligatorios" />
 
@@ -71,16 +79,7 @@
                         <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
                             <h:outputText id="infgoNoticia" value="La noticia ha sido guardada exitosamente" escape="false" />
                         </p:dialog>
-                        <p:dialog header="Informacion de Noticias" widgetVar="noticias" modal="true" showEffect="blind" hideEffect="explode" resizable="true">
-                            <p:outputPanel id="carDetail" style="text-align:center;">
-                                <p:panelGrid  columns="2" rendered="#{DataListView.selectedNoticia}" columnClasses="label,value">
-                                    <h:outputText value="Titulo:" />
-                                    <h:outputText value="#{DataListView.selectedNoticia.titulo}" />
-                                    <h:outputText value="Contenido" />
-                                    <h:outputText value="#{DataListView.selectedNoticia.contenido}" />
-                                </p:panelGrid>
-                            </p:outputPanel>
-                        </p:dialog>
+                        
                     </h:form>
 
                 </div>
