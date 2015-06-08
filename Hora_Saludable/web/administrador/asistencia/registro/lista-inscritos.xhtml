@@ -24,12 +24,12 @@
                     <p:breadCrumb>
                         <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
                         <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
-                        <p:menuitem value="Lista de inscritos" outcome="lista-inscritos" />                    
+                        <p:menuitem value="Inscripción mensual de usuarios" outcome="lista-inscritos" />                    
                     </p:breadCrumb>
                     
                     <p:spacer height="10"/>
                     <div class="tituloContenido">
-                        Inscribir Usuarios
+                        Inscripción mensual de usuarios
                     </div>
                     <p:spacer height="15"/>
 
@@ -43,18 +43,30 @@
                             </p:selectOneMenu> 
                             <h:outputText value="Año:" style="font-size: 16px;" />
                             <p:spinner value="#{crearInscripcionBean.ins.insanio}" max="#{crearInscripcionBean.anio}" size="10" />                                                                                                                
-                            <p:commandButton value="Buscar" actionListener="#{crearInscripcionBean.buscarInscritos()}" update="growl, usuariosDataTable, crearInscripcionForm" icon="ui-icon-search"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />                            
+                            <p:commandButton value="Buscar" 
+                                             actionListener="#{crearInscripcionBean.buscarInscritos()}" 
+                                             update="growl, usuariosDataTable, crearInscripcionForm" 
+                                             icon="ui-icon-search"  
+                                             onstart="PF('efectoCarga').show()"  
+                                             onsuccess="PF('efectoCarga').hide()" 
+                                             style="background:#22419A; color: #FFFFFF; width: 100px; " />                            
+                            
                         </h:panelGrid>
                     </h:panelGroup>
                     <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
                     <p:spacer height="25"/>
 
                     <p:panel id="usuariosPanel" header="Usuarios" >
-                        
                         <h:panelGrid rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
-                            <p:commandButton value="#{crearInscripcionBean.accion}" actionListener="#{crearInscripcionBean.crearIncripcion()}" update="growl" icon="ui-icon-pencil"  style=" width: 100px; " onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
-                        </h:panelGrid>
-                        <p:spacer height="25"/>
+                            <p:commandButton value="#{crearInscripcionBean.accion}" 
+                                             actionListener="#{crearInscripcionBean.crearIncripcion()}" 
+                                             update="growl, usuariosDataTable, crearInscripcionForm" 
+                                             icon="ui-icon-pencil"  
+                                             onstart="PF('efectoCarga').show()"  
+                                             onsuccess="PF('efectoCarga').hide()" 
+                                             style="background:#22419A; color: #FFFFFF; width: 100px; " />
+                        </h:panelGrid>                        
+                        <p:spacer />
                         
                         <p:dataTable id="usuariosDataTable" value="#{crearInscripcionBean.usuarios}" var="usu"
                                      paginator="true"

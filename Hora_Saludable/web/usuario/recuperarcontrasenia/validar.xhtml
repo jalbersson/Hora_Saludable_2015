@@ -9,7 +9,7 @@
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-                titulo
+                Validar
             </ui:define>
 
             <ui:define name="title">
@@ -17,7 +17,8 @@
             </ui:define>
 
             <ui:define name="body">
-                <h1>Recuperar Contraseña</h1>
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                <div class="tituloContenido">Recuperar Contraseña</div>
                 <br/>
                 <h:outputText 
                         value="Un mensaje fue enviado a su correo electrónico para cambiar su contraseña. Por favor consulte su correo electronico. " style="width:150px;font-size: 20px;"/>

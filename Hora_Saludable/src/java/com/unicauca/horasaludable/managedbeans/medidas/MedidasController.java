@@ -4,7 +4,6 @@ package com.unicauca.horasaludable.managedbeans.medidas;
  import com.lowagie.text.Document;
  import com.lowagie.text.Paragraph;
  import com.lowagie.text.pdf.PdfWriter;*/
-import com.itextpdf.text.Image;
 import com.unicauca.horasaludable.entities.Medida;
 import com.unicauca.horasaludable.entities.Usuario;
 
@@ -28,8 +27,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Phrase;
 import com.lowagie.text.pdf.BaseFont;
-import static com.lowagie.text.pdf.BidiOrder.R;
-import java.io.ByteArrayOutputStream;
 
 import java.io.File;
 import java.io.FileOutputStream;

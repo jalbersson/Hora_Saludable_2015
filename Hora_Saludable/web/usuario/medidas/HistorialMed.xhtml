@@ -8,7 +8,7 @@
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
                 Historial de Medidas
@@ -17,12 +17,19 @@
       
 
             <ui:define name="title">
+                
+                
+            </ui:define>
+
+            <ui:define name="body">
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                
                 <p:panel style="border: none;">
                 <h:form>
                      <p:breadCrumb >
-                      <p:menuitem value="Inicio" url="/usuario/contenidos/principal" />
-                       <p:menuitem value="Evaluacion Antropometrica y Funcional" outcome="GestionTest" />
-                        <p:menuitem value="Historial de Medidas" url="#" />
+                      <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />
+                       <p:menuitem value="Mis Medidas" outcome="GestionTest" />
+                       <p:menuitem value="Historial de Medidas" outcome="HistorialMed" />
                     </p:breadCrumb>
                 </h:form>
                 </p:panel>
@@ -30,11 +37,6 @@
                <div class="tituloContenido">
                      Historial de Medidas              
                 </div>
-                <p:separator style="width: 100%;"/>
-            </ui:define>
-
-            <ui:define name="body">
-
                 <h:form>
                 
                 <p:panelGrid styleClass="fichapersonal">
@@ -96,7 +98,7 @@
                     </p:row>
                 </p:panelGrid>
 
-                <p:panelGrid styleClass="histmedpanel">
+                    <p:panelGrid styleClass="histmedpanel">
 
                     <f:facet name="header">
                         <p:row>
@@ -238,10 +240,6 @@
                                 <p:outputLabel    value="#{historialMedController.medhist1.excesodepeso()}"/>
                                 <p:outputLabel  value="Peso Optimo(kg):" />
                                 <p:outputLabel   value="#{historialMedController.medhist1.pesooptimo()}" />
-                                <p:outputLabel  value="Masa Esq. Cuerpo(kg):" />
-                                <p:outputLabel    value="#{historialMedController.medhist1.masaesqcuerpo()}"/>
-                                <p:outputLabel  value="Masa Total Osea(kg):" />
-                                <p:outputLabel    value="#{historialMedController.medhist1.masatotalosea()}"/>
                                 <p:outputLabel  value="% Grasa Ideal" />
                                 <p:outputLabel    value="#{historialMedController.medhist1.porcentajegrasaideal()}"/>
                                 <p:separator />
@@ -351,10 +349,6 @@
                                 <p:outputLabel    value="#{historialMedController.medhist2.excesodepeso()}"/>
                                 <p:outputLabel  value="Peso Optimo(kg):" />
                                 <p:outputLabel   value="#{historialMedController.medhist2.pesooptimo()}" />
-                                <p:outputLabel  value="Masa Esq. Cuerpo(kg):" />
-                                <p:outputLabel    value="#{historialMedController.medhist2.masaesqcuerpo()}"/>
-                                <p:outputLabel  value="Masa Total Osea(kg):" />
-                                <p:outputLabel    value="#{historialMedController.medhist2.masatotalosea()}"/>
                                 <p:outputLabel  value="% Grasa Ideal" />
                                 <p:outputLabel    value="#{historialMedController.medhist2.porcentajegrasaideal()}"/>
                                 <p:separator />
@@ -374,6 +368,7 @@
                 </p:panelGrid>
 
             </h:form>
+                    
             </ui:define>
 
         </ui:composition>

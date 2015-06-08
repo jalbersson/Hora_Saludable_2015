@@ -6,28 +6,32 @@
       xmlns:p="http://primefaces.org/ui">
 
     <body>
-        
-            <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
-                <ui:define name="titulo">
-                    Eliminar Evento
-                </ui:define>
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
-                <ui:define name="CuadroDeBotonesSesion">
-                    CuadroDeBotonesSesion
-                </ui:define>
+            <ui:define name="titulo">
+                Eliminar Evento
+            </ui:define>
 
-                <ui:define name="title">
+            <ui:define name="CuadroDeBotonesSesion">
+                CuadroDeBotonesSesion
+            </ui:define>
 
-                </ui:define>
+            <ui:define name="title">
 
-                <ui:define name="body">
-                    <h1>Eliminando noticia, por favor espere</h1>
-                    #{listarNoticiasController.eliminarNoticia()}
-                    
-                </ui:define>
+            </ui:define>
 
-            </ui:composition>
+            <ui:define name="body">
+                <p:breadCrumb>
+                    <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                    <p:menuitem value="" url="eliminarNoticia.xhtml" />
+                </p:breadCrumb>
+                <h1>Eliminando noticia, por favor espere</h1>
+                #{listarNoticiasController.eliminarNoticia()}
+
+            </ui:define>
+
+        </ui:composition>
 
     </body>
 </html>

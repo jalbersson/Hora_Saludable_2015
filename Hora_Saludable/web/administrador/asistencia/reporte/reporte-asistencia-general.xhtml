@@ -63,7 +63,10 @@
                                 <h:outputText value="Fecha final:" rendered="#{reporteView.rangoRow}" />
                                 <p:calendar id="fechaFinCalendar" rendered="#{reporteView.rangoRow}" value="#{reporteView.fechaFin}" pattern="dd-MM-yyyy" mask="true" mode="popup" showOn="button" locale="es" navigator="true" />                                
                                 <br />
-                                <p:commandButton actionListener="#{btnGenerarBean.btnGenerarReporte}" value="Generar Reporte" disabled="#{reporteView.disabledButton}" >                                     
+                                <p:commandButton actionListener="#{btnGenerarBean.btnGenerarReporte}" 
+                                                 value="Generar Reporte" 
+                                                 disabled="#{reporteView.disabledButton}" 
+                                                 style="background:#22419A; color: #FFFFFF; " >                                     
                                     <f:attribute name="tipo" value="#{reporteView.tipo}" />  
                                     <f:attribute name="anio" value="#{reporteView.anio}" /> 
                                     <f:attribute name="perido" value="#{reporteView.perido}" />                                      

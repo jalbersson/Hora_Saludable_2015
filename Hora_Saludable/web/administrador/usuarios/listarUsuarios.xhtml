@@ -16,9 +16,9 @@
                     </h:panelGrid>
             <p:panel id="tablaUsuario" rendered="#{mostrarUsuariosController.habilitarTablaUsuarios}">                                            
                         <p:dataTable  var="usuarios" value="#{mostrarUsuariosController.listaUsuarios}"
-                                      paginator="true" rows="10"  
+                                      paginator="true" rows="20"  
                                       paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
-                                      rowsPerPageTemplate="5,10,15">
+                                      >
 
                             <p:column headerText="No. Identificacion" width="100">                               
                                     #{usuarios.usuidentificacion}

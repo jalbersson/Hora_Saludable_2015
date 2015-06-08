@@ -11,7 +11,7 @@
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-                
+                Cambiar Contraseña
             </ui:define>
              <ui:define name="title">
                
@@ -19,7 +19,7 @@
             
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
-                <h1>Cambiar Contraseña</h1>
+                <div class="tituloContenido">Cambiar Contraseña</div>
                 <h:form>
                     <f:metadata>
                         <f:viewParam name="ifo" value="#{cambiarContraseniaController.id}"/>
@@ -28,7 +28,8 @@
                     <p:panelGrid id="matchGrid" styleClass="panelgrid"> 
                         <p:row> 
                             <p:column>
-                                <h:outputLabel for="contrasena" value="Nueva Contraseña: *" style="width: 120px;font-size:18px"/>
+                                <h:outputLabel for="contrasena" value="Nueva Contraseña: " style="width: 120px;font-size:18px"/>
+                                <h:outputLabel value=" *" style="font-size:18px;color: red"/>
                             </p:column>
                             <p:column>
                                 <p:password style="width: 120px;font-size:15px" 
@@ -43,7 +44,8 @@
                        
                         <p:row> 
                             <p:column>
-                              <h:outputLabel for="confirmarContrasena" value="Confirmar Contraseña: *" style="width: 120px;font-size:18px"/>
+                              <h:outputLabel for="confirmarContrasena" value="Confirmar Contraseña: " style="width: 120px;font-size:18px"/>
+                              <h:outputLabel value="*" style="font-size:18px;color: red"/>
                             </p:column>
                             <p:column>
                                 <p:password  style="width: 120px;font-size:15px" 
@@ -53,10 +55,17 @@
                                 </p:password> 
                             </p:column>                            
                         </p:row>
-                    </p:panelGrid>
-                    <br/>
-                    <p:commandButton update="matchGrid" value="Actualizar Contraseña" actionListener="#{cambiarContraseniaController.cambiarContrasenia}"
+                        <p:row> 
+                            <p:column>                              
+                            </p:column>
+                            <p:column>
+                                <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;" update="matchGrid" value="Actualizar Contraseña" actionListener="#{cambiarContraseniaController.cambiarContrasenia}"
                                      onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                            </p:column>                            
+                        </p:row>
+                    </p:panelGrid>
+                    
+                    
                 </h:form>
             </ui:define>
 

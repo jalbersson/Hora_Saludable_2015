@@ -18,15 +18,23 @@
             </ui:define>
 
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Listado de Noticias
-                    <br></br>
-                </div>
+
             </ui:define>
 
             <ui:define name="body">
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />    
+                        <p:menuitem value="Noticias" url="listarNoticias.xhtml" />                        
 
+                    </p:breadCrumb>
+                </h:form>
+
+
+                <p:spacer height="10"/>
+                <div class="tituloContenido">
+                    Noticias
+                </div>
                 <h:form> 
                     <p:dataScroller value="#{listarNoticiasController.obtenerNoticias()}" var="noticia" chunkSize="3" mode="inline"  first="1" scrollHeight="350" >
                         <f:facet name="header">
@@ -49,7 +57,7 @@
                                             <h:form style="float: left; ">
                                                 <h:outputText></h:outputText>
                                             </h:form>
-                                            
+
                                         </h:panelGrid>
                                     </p:fieldset>
                                 </p:panelGrid>

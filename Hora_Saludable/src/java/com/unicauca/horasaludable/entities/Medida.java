@@ -613,19 +613,11 @@ public class Medida implements Serializable {
                     return 14.61;
                 }
             case "Baloncesto":
-                if (usuid.getUsugenero().equals('M')) {
                     return 8.40;
-                } else {
-                    return 18.22;
-                }
             case "Ciclismo":
                 return 6.48;
             case "Gimnasia":
-                if (usuid.getUsugenero().equals('M')) {
                     return 6.97;
-                } else {
-                    return 11.03;
-                }
 
             case "Tiro":
                 return 10.92;
@@ -634,20 +626,12 @@ public class Medida implements Serializable {
                 return 8.09;
 
             case "Karate Do":
-                if (usuid.getUsugenero().equals('M')) {
                     return 7.93;
-                } else {
-                    return 17.63;
-                }
 
             case "Tenis de Mesa":
                 return 8.82;
             case "Voleibol":
-                if (usuid.getUsugenero().equals('M')) {
                     return 8.23;
-                } else {
-                    return 18.08;
-                }
             case "Futbol":
                 return 8.83;
 
@@ -673,11 +657,7 @@ public class Medida implements Serializable {
                 return 8.28;
 
             case "Esgrima":
-                if (usuid.getUsugenero().equals('M')) {
                     return 9.55;
-                } else {
-                    return 19.71;
-                }
 
             default:
                 return 0;

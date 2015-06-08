@@ -37,6 +37,12 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         List<Usuario> resultList = query.getResultList();
         return !resultList.isEmpty();
     }
+    
+    public List<Usuario> buscarUsuarioPorNombreUsuario(String nombreUsuario) {
+        Query query = getEntityManager().createNamedQuery("Usuario.findByUsunombreusuario");
+        query.setParameter("usunombreusuario", nombreUsuario);
+        return query.getResultList();
+    }
 
     public List<Usuario> retornarBuscarPorNombreUsuario(String nombreUsuario) {
         Query query = getEntityManager().createNamedQuery("Usuario.findByUsunombreusuario");
@@ -111,25 +117,25 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     }
 
-    public List<Usuario> buscarPorIdentificacionEstudiante(Long usuidentificacion) {
+    public List<Usuario> buscarPorIdentificacionEstudiante(String usuidentificacion) {
         Query query = getEntityManager().createNamedQuery("Usuario.findByIdentiEstudiante");
-        query.setParameter("usuidentificacion", usuidentificacion);
+        query.setParameter("usuidentificacion", usuidentificacion+"%");
         List<Usuario> resultList = query.getResultList();
         return resultList;
 
     }
 
-    public List<Usuario> buscarPorIdentificacionFamiliares(Long usuidentificacion) {
+    public List<Usuario> buscarPorIdentificacionFamiliares(String usuidentificacion) {
         Query query = getEntityManager().createNamedQuery("Usuario.findByIdentiFamiliar");
-        query.setParameter("usuidentificacion", usuidentificacion);
+        query.setParameter("usuidentificacion", usuidentificacion+"%");
         List<Usuario> resultList = query.getResultList();
         return resultList;
 
     }
 
-    public List<Usuario> buscarPorIdentificacionFuncionario(Long usuidentificacion) {
+    public List<Usuario> buscarPorIdentificacionFuncionario(String usuidentificacion) {
         Query query = getEntityManager().createNamedQuery("Usuario.findByIdentiFuncionarios");
-        query.setParameter("usuidentificacion", usuidentificacion);
+        query.setParameter("usuidentificacion", usuidentificacion+"%");
         List<Usuario> resultList = query.getResultList();
         return resultList;
     }

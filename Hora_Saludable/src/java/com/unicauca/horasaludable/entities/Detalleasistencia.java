@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Detalleasistencia.findByUsuid", query = "SELECT d FROM Detalleasistencia d WHERE d.detalleasistenciaPK.usuid = :usuid"),
     @NamedQuery(name = "Detalleasistencia.findByDetasistio", query = "SELECT d FROM Detalleasistencia d WHERE d.detasistio = :detasistio"),
     @NamedQuery(name = "Detalleasistencia.findByAsiidUsuid", query = "SELECT d FROM Detalleasistencia d WHERE d.detalleasistenciaPK.asiid = :asiid AND d.detalleasistenciaPK.usuid = :usuid AND d.detasistio = :detasistio"),
-    @NamedQuery(name = "Detalleasistencia.usuario", query = "SELECT d.usuario.uniid.uninombre,count(d.usuario.uniid.uniid) FROM Detalleasistencia d Where d.asistencia.asifecha BETWEEN :date1 AND :DATE2 GROUP BY d.usuario.uniid.uniid")})
+    @NamedQuery(name = "Detalleasistencia.usuario", query = "SELECT d.usuario.uniid.uninombre,count(d.usuario.uniid.uniid) FROM Detalleasistencia d Where d.asistencia.asifecha BETWEEN :date1 AND :DATE2 GROUP BY d.usuario.uniid.uniid"),
+    @NamedQuery(name = "Detalleasistencia.obtenerAniosAsistencia", query = "SELECT FUNC('YEAR',d.asistencia.asifecha) as anio FROM Detalleasistencia d Where d.usuario.usunombreusuario = :usunombreusuario GROUP BY anio ")})
 public class Detalleasistencia implements Serializable {
 
     private static final long serialVersionUID = 1L;

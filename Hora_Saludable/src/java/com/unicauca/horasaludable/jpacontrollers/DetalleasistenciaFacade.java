@@ -91,4 +91,13 @@ public class DetalleasistenciaFacade extends AbstractFacade<Detalleasistencia> {
         }
         return resultList;
     }
+    
+    public List<Integer> obtenerAniosAsistencia(String usunombreusuario) {
+
+        Query query = getEntityManager().createNamedQuery("Detalleasistencia.obtenerAniosAsistencia");
+        query.setParameter("usunombreusuario", usunombreusuario);        
+        List<Integer> resultList = query.getResultList();
+        return resultList;
+
+    }
 }

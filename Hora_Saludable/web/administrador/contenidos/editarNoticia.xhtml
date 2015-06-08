@@ -16,14 +16,24 @@
             </ui:define>
 
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                        Noticia nueva 
-                    <br></br>
-                </div>
+  
             </ui:define>
 
             <ui:define name="body" >
+                 <h:form>
+                    <p:breadCrumb>
+                    <p:menuitem value="Inicio" url="principal.xhtml" />    
+                    <p:menuitem value="Noticias" url="listarNoticias.xhtml" />                        
+                    <p:menuitem value="Editar noticia" url="" />
+                </p:breadCrumb>
+                </h:form>
+                
+
+                <p:spacer height="10"/>
+                <div class="tituloContenido">
+                    Editar noticia
+                </div>
+
                 <div class="wrap" style="width: 63%;">
 
                     <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" value="*"/>

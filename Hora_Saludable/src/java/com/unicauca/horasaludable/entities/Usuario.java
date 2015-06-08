@@ -60,9 +60,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByNameFamiliar", query = "SELECT u FROM Usuario u WHERE LOWER(CONCAT(CONCAT(u.usunombres,' '),u.usuapellidos)) LIKE :nombre AND u.conyugeid IS NOT NULL"),
     @NamedQuery(name = "Usuario.findByNombresApellidos", query = "SELECT u FROM Usuario u WHERE LOWER(CONCAT(CONCAT(u.usunombres,' '),u.usuapellidos)) LIKE :nombresApellidos"),
     
-    @NamedQuery(name = "Usuario.findByIdentiFuncionarios", query = "SELECT u FROM Usuario u WHERE u.usuidentificacion =:usuidentificacion AND u.carid IS NOT NULL"),
-    @NamedQuery(name = "Usuario.findByIdentiEstudiante", query = "SELECT u FROM Usuario u WHERE u.usuidentificacion =:usuidentificacion AND u.carid IS NULL AND u.conyugeid IS NULL AND u.uniid IS NOT NULL"),
-    @NamedQuery(name = "Usuario.findByIdentiFamiliar", query = "SELECT u FROM Usuario u WHERE u.usuidentificacion =:usuidentificacion AND u.conyugeid IS NOT NULL")})
+    @NamedQuery(name = "Usuario.findByIdentiFuncionarios", query = "SELECT u FROM Usuario u WHERE TRIM(u.usuidentificacion) LIKE :usuidentificacion AND u.carid IS NOT NULL"),
+    @NamedQuery(name = "Usuario.findByIdentiEstudiante", query = "SELECT u FROM Usuario u WHERE TRIM(u.usuidentificacion) LIKE :usuidentificacion AND u.carid IS NULL AND u.conyugeid IS NULL AND u.uniid IS NOT NULL"),
+    @NamedQuery(name = "Usuario.findByIdentiFamiliar", query = "SELECT u FROM Usuario u WHERE TRIM(u.usuidentificacion) LIKE :usuidentificacion AND u.conyugeid IS NOT NULL")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

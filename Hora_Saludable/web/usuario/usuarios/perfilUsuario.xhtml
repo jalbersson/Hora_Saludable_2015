@@ -28,11 +28,9 @@
                                 Mi Perfil
                             </div>
                         </h:link>                  
-                        <h:link style="text-decoration: none;" outcome="/usuario/medidas/GestionTest" > 
-                            <div class="botonSubmenu">
+                        <p:commandLink style="text-decoration: none; width: 130px;height: 13;" styleClass="botonSubmenu" action="#{mostrarUsuarioTestController.estudianteSeleccionadoUsu(usuarioSessionController.nombreDeUsuario)}"> 
                                 Mis Medidas
-                            </div>
-                        </h:link>
+                        </p:commandLink>
                         <h:link style="text-decoration: none;" outcome="/usuario/asistencia/asistencia-personal"> 
                             <div class="botonSubmenu">
                                 Mi Asistencia
@@ -43,11 +41,11 @@
                 <div style="margin-left: 200px;margin-top: 10px;" >
                     <h:form>
                         <p:breadCrumb>
-                            <p:menuitem value="Inicio" outcome="/index" />                              
+                            <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />                              
                             <p:menuitem value="Mi Perfil" outcome="/usuario/usuarios/perfilUsuario" />                                        
                         </p:breadCrumb>
                     </h:form>
-                    <div class="tituloContenido">MI PERFIL</div>                    
+                    <div class="tituloContenido">Mi Perfil</div>                    
                     <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
                     <p:panel header="Foto de Perfil">
                         <div style="float:left">

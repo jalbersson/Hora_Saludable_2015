@@ -15,7 +15,6 @@ import com.unicauca.horasaludable.jpacontrollers.UnidadacademicaFacade;
 import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
 import com.unicauca.horasaludable.jpacontrollers.UsuariogrupoFacade;
 import com.unicauca.horasaludable.managedbeans.usuarios.MostrarUsuariosController;
-import com.unicauca.horasaludable.validadores.ValidarEdicionUsuarios;
 import java.io.IOException;
 
 import java.text.SimpleDateFormat;
@@ -25,7 +24,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -38,17 +36,10 @@ public class MostrarUsuarioTestController {
 
     @EJB
     private UsuarioFacade usuarioEJB;
-    @EJB
-    private CargoFacade cargoEJB;
-    @EJB
-    private UnidadacademicaFacade unidadAcademicaEJB;
-    @EJB
-    private UsuariogrupoFacade usuarioGrupoEJB;
-    private MostrarUsuariosController mostraUsuariosController;
+    
     private Usuario usuario;
     private Medida Medidaactual;
    
-
     private String rutaFoto;
     private String rutaAbsolutaFotos;
     private UploadedFile foto;
@@ -295,10 +286,10 @@ public class MostrarUsuarioTestController {
         
     }
     
-    public void estudianteSeleccionadoUsu(Usuario estudiante) throws IOException
+    public void estudianteSeleccionadoUsu(String login) throws IOException
     {
        
-        this.usuario=estudiante;
+        this.usuario = usuarioEJB.buscarUsuarioPorNombreUsuario(login).get(0);    
         this.campoFoto=true;
      
                

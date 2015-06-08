@@ -26,8 +26,17 @@
 
             <ui:define name="body"  >
 
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />  
+                        <p:menuitem value="Listar Eventos" url="listarEventos.xhtml" />   
+                        <p:menuitem value="Editar Evento" url="" /> 
+                    </p:breadCrumb>
+                </h:form>
+                <br/>
+
                 <div class="wrap" style="width: 63%;">
-                    
+
                     <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" value="*"/>
                     <h:outputLabel class="CampoLabelObligatorios" value=" Campos Obligatorios" />
 
@@ -37,7 +46,7 @@
 
                             <h:form id="nuevoEvento" >
                                 <h:panelGrid id="info" columns="2" >                                   
-                                    
+
                                     <h:column>
                                         <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
                                         <h:outputLabel class="CampoLabelObligatorios" for="titulo" value="Titulo: "  />
@@ -62,13 +71,13 @@
                                         <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
                                         <h:outputLabel class="CampoLabelObligatorios" for="imagen" value="Imagen: "  />
                                     </h:column>      
-                                    <p:fileUpload value="#{eventoVerEditarController.file}" mode="simple"/>
-                                    
-                                    <p:button outcome="listarEventos" value="Cancelar" style="background: #22419A;color:#FFFFFF;font-style: italic" > </p:button>
-                                    <p:commandButton ajax="false"  update="editarEvento" action="#{eventoVerEditarController.actualizarEvento()}" actionListener="#{eventoVerEditarController.upload()}" process="@form" value="Editar" 
-                                                     style="background: #22419A;color:#FFFFFF;font-style: italic" 
-                                                     />
+                                    <p:fileUpload value="#{eventoVerEditarController.file}" mode="simple"/>                                    
                                 </h:panelGrid>
+                                <br/>
+
+                                <p:commandButton ajax="false" action="#{eventoVerEditarController.actualizarEvento()}" actionListener="#{eventoVerEditarController.upload()}" process="@form" value="Editar" style="background: #22419A;color:#FFFFFF;font-style: italic"/>
+                                <p:commandButton ajax="false" action="#{eventoVerEditarController.limpiar()}" actionListener="#{eventoVerEditarController.upload()}" process="@form" value="Limpiar" style="background: #22419A;color:#FFFFFF;font-style: italic"/>
+                                <p:button outcome="listarEventos" value="Cancelar" style="background: #22419A;color:#FFFFFF;font-style: italic" > </p:button>
 
                             </h:form>
                         </p:panelGrid>

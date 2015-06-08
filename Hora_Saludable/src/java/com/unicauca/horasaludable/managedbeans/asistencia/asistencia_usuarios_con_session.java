@@ -49,6 +49,9 @@ public class asistencia_usuarios_con_session implements Serializable
     private ScheduleEvent event;
     private CartesianChartModel meses;
     private String anioElegido;
+    private boolean mostrarEstadisticas;
+
+    
     
     
 
@@ -97,6 +100,15 @@ public class asistencia_usuarios_con_session implements Serializable
 
     public void setMeses(CartesianChartModel meses) {
         this.meses = meses;
+    }
+    public boolean isMostrarEstadisticas() 
+    {
+        return mostrarEstadisticas;
+    }
+
+    public void setMostrarEstadisticas(boolean mostrarEstadisticas) 
+    {
+        this.mostrarEstadisticas = mostrarEstadisticas;
     }
 
     public void onDateSelect(SelectEvent selectEvent) {
@@ -212,5 +224,34 @@ public class asistencia_usuarios_con_session implements Serializable
         meses.addSeries(contendido);
 
         return meses;
+    }
+    
+    public List<String> obtenerAniosAsistencia()
+    {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
+        if (req.getUserPrincipal() != null) 
+        {            
+            List<Integer> lst = this.ebjDetalleasistenciaFacade.obtenerAniosAsistencia(req.getUserPrincipal().getName());
+            List<String> anios=new ArrayList();
+            int contador=0;
+            for(Integer objeto:lst)
+            {
+                anios.add(objeto+"");
+                contador++;
+            }
+            if(contador>0)
+            {
+                this.anioElegido=anios.get(contador-1);
+                this.mostrarEstadisticas=true;
+                return anios;
+                
+            }
+            this.mostrarEstadisticas=false;
+            return null;
+        }
+        return null;
+        
+        
     }
 }

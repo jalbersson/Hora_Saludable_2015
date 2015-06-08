@@ -27,13 +27,13 @@ public class ListasUsuariosMedidasController implements Serializable {
     private UsuarioFacade usuarioEJB;
     
     
-    private Long identificacion;
+    private String identificacion;
 
-    public Long getIdentificacion() {
+    public String getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(Long identificacion) {
+    public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
     private String nombreUsuario;

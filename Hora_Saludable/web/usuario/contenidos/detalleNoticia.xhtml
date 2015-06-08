@@ -8,7 +8,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <body>
 
-         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
                 Hora Saludable: Detalle Noticia
@@ -19,6 +19,15 @@
             </ui:define>
 
             <ui:define name="body">
+
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />  
+                        <p:menuitem value="Noticias" url="listarNoticias.xhtml" />  
+                        <p:menuitem value="Noticia" url="" />
+                    </p:breadCrumb>
+                </h:form>
+                <p:spacer height="10"/>
                 <h:form>
                     <p:growl id="msgs" showDetail="true" />
                     <p:fieldset legend="Detalles de la noticia" style="margin-bottom:20px">

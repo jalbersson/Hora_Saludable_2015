@@ -30,12 +30,12 @@
                             <h:form> 
                                 <div class="divPrincipal">
                                     <h1 style="color:#F2F2F2; text-align: center;">Noticias</h1> 
-                                    <p:carousel  value="#{noticiacController.ultimos}" var="noticiaLista" itemStyle="height:230px;width:600px;" autoPlayInterval="6000" numVisible="1" effect="easeInStrong" circular="true" class="ui-carousel">    
+                                    <p:carousel  value="#{noticiacController.ultimos}" var="noticiaLista" itemStyle="height:230px;width:600px;" autoPlayInterval="6000" numVisible="1" effect="easeInStrong" circular="true" class="ui-carousel">
                                         <h:panelGrid columns="2" style="width:600px " cellpadding="10" columnClasses="label,value">
                                             <p:tab>
                                                 <h:outputText value="#{noticiacController.convertToJavaDate(noticiaLista.notfechapublicacion)}" style="float: right; font-weight: bold; font-size: 15px;"/>
                                                 <br></br>
-                                                <h:outputText value="#{noticiaLista.nottitulo}" style="font-weight: bold; font-size: 20px; text-align: center; color:#AA0000; " />
+                                                <h:link value="#{noticiaLista.nottitulo}" outcome="detalleNoticia?noticiaId=#{noticiaLista.notid}" style="font-weight: bold; font-size: 20px; text-align: center; color:#AA0000; " />
                                                 <h:panelGrid columns="2" cellpadding="10">
                                                     <p:graphicImage width="150px" height="150px" library="img/imagenesNoticias" name="#{noticiaLista.notimagen}"/>
                                                     <h:outputText value="#{noticiaLista.notcontenido}" style="font-weight: bold; font-size: 15px;"/> 
@@ -113,10 +113,10 @@
                                         </p:column>
 
                                         <p:column headerText="Acciones" style="text-align: center">  
-                                            <p:button style="height: 30px; width: 30px; margin-right: 10px"  value="" outcome="#{agregarHorarioController.verHorario(hor)}" icon="ui-icon-search"/>                                             
-                                            <p:button style="height: 30px; width: 30px; margin-right: 10px"  value="" outcome="#{agregarHorarioController.editarHorario(hor)}" icon="ui-icon-pencil"/>  
-                                            <p:button style="height: 30px; width: 30px; margin-right: 10px"  value="" outcome="#{agregarHorarioController.eliminarHorario(hor)}" icon="ui-icon-trash"/> 
-
+                                            <p:button style="height: 30px; width: 80px; margin-right: 10px; background: #22419A;color:#FFFFFF;font-style: italic"  value="Ver" outcome="#{agregarHorarioController.verHorario(hor)}" />                                             
+                                            <p:button style="height: 30px; width: 80px; margin-right: 10px; background: #22419A;color:#FFFFFF;font-style: italic"  value="Editar" outcome="#{agregarHorarioController.editarHorario(hor)}" />  
+                                            <p:button style="height: 30px; width: 80px; background: #22419A;color:#FFFFFF;font-style: italic"  value="Eliminar" outcome="#{agregarHorarioController.eliminarHorario(hor)}" /> 
+                                            
                                         </p:column>
                                     </p:dataTable>
 
@@ -130,7 +130,7 @@
                                 <p:menuitem value="Listar Eventos" ajax="false" outcome="listarEventos" icon="ui-icon-check"/> 
                             </p:submenu>
                             <p:submenu label="Gestion de Noticias">
-                                <p:menuitem value="Nueva Noticia"  ajax="false" outcome="nuevaNoticia" icon="ui-icon-check"/>
+                                <p:menuitem value="Agregar Noticia"  ajax="false" outcome="nuevaNoticia" icon="ui-icon-check"/>
                                 <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false" icon="ui-icon-check"/>
                             </p:submenu>
 

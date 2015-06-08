@@ -53,6 +53,15 @@ public class eventoVerEditarController implements Serializable {
         evento = ejbEvento.mostrarEvento(id);
     }
 
+    public void limpiar()
+    {
+        evento.setEvetitulo(" ");
+        evento.setEvelugar(" ");
+        evento.setEvefechaevento(null);
+        evento.setEvecontenido(" ");
+        
+    }
+    
     public eventoVerEditarController() {
         
         this.imagen = "default";
@@ -170,8 +179,7 @@ public class eventoVerEditarController implements Serializable {
                 ImageIO.write(imgs[i], "jpg", new File(this.path + this.imagen + ".jpg"));
             }
         } catch (Exception ex) {
-            FacesMessage msg = new FacesMessage("Error", " No ha podido cargar la imagen.");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
+            
         }   
     }
 

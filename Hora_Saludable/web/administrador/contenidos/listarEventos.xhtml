@@ -40,6 +40,13 @@
                 <div class="wrap" style="width: 90%;">    
                     
                 <h:form>
+                    
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />  
+                        <p:menuitem value="Listar Eventos" url="listarEventos.xhtml" />    
+                    </p:breadCrumb>
+                    <br/>
+                    
                     <p:dataTable var="evento_de_lista" value="#{eventoController.eventos}" rows="10" 
                                  paginator="true" 
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
