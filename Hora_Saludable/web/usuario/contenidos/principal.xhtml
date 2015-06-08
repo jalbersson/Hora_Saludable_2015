@@ -66,7 +66,7 @@
                                     <div style="height: 500px">
                                         <h1 style="color:#F2F2F2; text-align: center;">Eventos</h1>
                                         <p:dataScroller  var="eventoLista" value="#{eventoController.ultimos}" chunkSize="10">
-                                            <p:link value="#{eventoController.cortarTitulo(eventoLista.evetitulo)}" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; color: #AA0000; font-size: 16px;">                                           
+                                            <p:link value="#{eventoController.cortarTitulo(eventoLista.evetitulo)}" outcome="#{eventoController.detalleEventoPrincipal(eventoLista.eveid)}" style="font-weight: bold; color: #AA0000; font-size: 16px;">                                           
                                              <f:param name="eventoId" value="#{eventoLista.eveid}" />
                                             </p:link>
                                             <h:panelGrid columns="1" style="width:200px; height: 100px;">

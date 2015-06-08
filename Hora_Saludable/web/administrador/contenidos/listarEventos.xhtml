@@ -15,14 +15,27 @@
             </ui:define>
 
             <ui:define name="title">
+                
+            </ui:define>
+
+            <ui:define name="body" >
+                
+                <br></br> 
+                <h:form>
+                  <p:breadCrumb>
+                    <p:menuitem value="Inicio" outcome="principal" />                              
+                    <p:menuitem value="Lista de eventos" />                                        
+                  </p:breadCrumb>  
+                </h:form>
+                
+                
+                
                 <div class="tituloContenido">
                     <br></br>
                         Eventos 
                     <br></br>
                 </div>
-            </ui:define>
 
-            <ui:define name="body" >
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <div class="wrap" style="width: 90%;">    
                     
@@ -33,7 +46,9 @@
                                          rowsPerPageTemplate="5,10,15">
                         
                         <p:column headerText="Titulo">
-                            <p:link value="#{evento_de_lista.evetitulo}" outcome="#{eventoController.mostrarEvento(evento_de_lista)}" style="font-weight: bold; color: #22419A" />
+                            <p:link value="#{eventoController.cortarTitulo(evento_de_lista.evetitulo)}" outcome="#{eventoController.detalleEventoEventos(evento_de_lista.eveid)}" style="font-weight: bold; color: #22419A;">                                           
+                                <f:param name="eventoId" value="#{evento_de_lista.eveid}" />
+                            </p:link>
                         </p:column>
                         
                         <p:column headerText="Lugar">

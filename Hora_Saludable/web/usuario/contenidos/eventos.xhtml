@@ -24,6 +24,13 @@
 
             <ui:define name="body">
                 
+            <p:breadCrumb>
+                    <p:menuitem value="Inicio" outcome="principal" />                              
+                    <p:menuitem value="Eventos" outcome="eventos"/>                                        
+            </p:breadCrumb>    
+            
+            <br></br>    
+                
             <h:form id="form1">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <p:dataGrid var="eventoLista" value="#{eventoController.eventos}" columns="3"
@@ -61,7 +68,7 @@
                                 </p:column>
                             </p:row>
                             <p:row>
-                                <p:link value="Detalles" outcome="#{eventoController.detalleEvento(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px; color:#aa0000;">
+                                <p:link value="Detalles" outcome="#{eventoController.detalleEventoEventos(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px; color:#aa0000;">
                                         <f:param name="eventoId" value="#{eventoLista.eveid}" />
                                 </p:link>
                             </p:row>

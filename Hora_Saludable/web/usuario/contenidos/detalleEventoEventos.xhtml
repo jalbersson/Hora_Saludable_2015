@@ -8,7 +8,7 @@
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
                Detalle del evento
@@ -19,15 +19,31 @@
             </ui:define>
             
             <ui:define name="body">
+                
+                <br></br>
+                
+                <h:form>
+                   <p:breadCrumb>
+                    <p:menuitem value="Inicio" outcome="principal" />
+                    <p:menuitem value="Eventos" outcome="eventos" />
+                    <p:menuitem value="Detalles del evento"/>  
+                    </p:breadCrumb> 
+                </h:form>
+                
+                
+                <br></br>
+
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                
                 <h:form>
                     <p:growl id="msgs" showDetail="true" />
                     <p:fieldset legend="Detalles del evento" style="margin-bottom:20px">
                         <h:panelGrid columns="2" cellpadding="4">
-                            <p:graphicImage height="200px" width="200px" library="img/imagenesEventos" name="#{eventoVerEditarController.evento.eveimagen}" />
+                            <p:graphicImage height="200px" width="200px" library="img/imagenesEventos" name="#{eventoController.eventoDetalladoTodos().eveimagen}" />
                             <p:outputPanel>
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:form id="form">
-                                        <p:panelGrid style="text-align:left; width:100%;" styleClass="panelgrid"  id="panel">
+                                        <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
                                                                       
                                              
                                             <p:row>
@@ -35,7 +51,7 @@
                                                     <h:outputLabel class="CampoLabel" value="Evento :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoVerEditarController.evento.evetitulo}"/>
+                                                    <h:outputLabel value="#{eventoController.eventoDetalladoTodos().evetitulo}"/>
                                                 </p:column>
                                             </p:row>
                                             
@@ -44,7 +60,7 @@
                                                     <h:outputLabel class="CampoLabel" value="Lugar :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoVerEditarController.evento.evelugar}"/>
+                                                    <h:outputLabel value="#{eventoController.eventoDetalladoTodos().evelugar}"/>
                                                 </p:column>
                                             </p:row>
                                             
@@ -53,7 +69,7 @@
                                                     <h:outputLabel class="CampoLabel" value=" Fecha de evento :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoVerEditarController.evento.evefechaevento}"/>
+                                                    <h:outputLabel value="#{eventoController.eventoDetalladoTodos().evefechaevento}"/>
                                                 </p:column>
                                             </p:row>
                            
@@ -62,7 +78,7 @@
                                                     <h:outputLabel class="CampoLabel" value=" Descripcion :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoVerEditarController.evento.evecontenido}"/>
+                                                    <h:outputLabel value="#{eventoController.eventoDetallado().evecontenido}"/>
                                                 </p:column>
                                             </p:row>
                                                                      
@@ -72,10 +88,9 @@
                                     
                                 </h:panelGrid>
                             </p:outputPanel>
-                          
+                            
                         </h:panelGrid>
-                         <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" > </p:button>
-                         <p:button outcome="listarEventos" value="Mas Eventos" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 120px" > </p:button>
+                        <p:button outcome="eventos" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" > </p:button>                       
                     </p:fieldset>
                 </h:form>
             </ui:define>

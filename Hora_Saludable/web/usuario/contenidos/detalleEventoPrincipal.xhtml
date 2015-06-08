@@ -19,7 +19,20 @@
             </ui:define>
             
             <ui:define name="body">
+                <br></br>
+                
+                <h:form>
+                   <p:breadCrumb>
+                    <p:menuitem value="Inicio" outcome="principal" />
+                    <p:menuitem value="Detalles del evento"/>  
+                    </p:breadCrumb> 
+                </h:form>
+                
+                
+                <br></br>
+
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                
                 <h:form>
                     <p:growl id="msgs" showDetail="true" />
                     <p:fieldset legend="Detalles del evento" style="margin-bottom:20px">
@@ -75,8 +88,7 @@
                             </p:outputPanel>
                             
                         </h:panelGrid>
-                        <p:button outcome="principal" value="Inicio" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" > </p:button>
-                        <p:button outcome="eventos" value="Mas Eventos" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 150px" > </p:button>
+                        <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" > </p:button>                       
                     </p:fieldset>
                 </h:form>
             </ui:define>

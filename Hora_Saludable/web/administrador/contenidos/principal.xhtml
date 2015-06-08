@@ -83,17 +83,17 @@
                             <div class="divPrincipal" style="height: 600px">
                                 <h1 style="color:#F2F2F2; text-align: center;">Eventos</h1>
                                 <p:dataScroller  var="eventoLista" value="#{eventoController.ultimos}" chunkSize="4" >
-                                    <p:link value="#{eventoController.cortarTitulo(eventoLista.evetitulo)}" outcome="#{eventoController.mostrarEvento(eventoLista)}" style="font-weight: bold; color: #AA0000; font-size: 16px;">                                           
+                                        <p:link value="#{eventoController.cortarTitulo(eventoLista.evetitulo)}" outcome="#{eventoController.detalleEventoPrincipal(eventoLista.eveid)}" style="font-weight: bold; color: #AA0000; font-size: 16px;">                                           
                                              <f:param name="eventoId" value="#{eventoLista.eveid}" />
-                                            </p:link>
+                                        </p:link>
                                             <h:panelGrid columns="1" style="width:200px; height: 100px;">
                                                 <p:outputPanel style="border-color:#22419A;">
-                                                    <h:panelGrid columns="2" cellpadding="10" style="border:none">
-                                                        <h:outputText value="Fecha:" style="font-weight: bold; font-size: 15px"/>
-                                                        <h:outputText value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}" style="font-size: 15px"/>
-                                                        <h:outputText value="Lugar:" style="font-weight: bold; font-size: 15px"/>
-                                                        <h:outputText value="#{eventoController.cortarLugar(eventoLista.evelugar)}" style="font-size: 15px" /> 
-                                                        
+                                            <h:panelGrid columns="2" cellpadding="10" style="border:none">
+                                                <h:outputText value="Fecha:" style="font-weight: bold; font-size: 15px"/>
+                                                <h:outputText value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}" style="font-size: 15px"/>
+                                                <h:outputText value="Lugar:" style="font-weight: bold; font-size: 15px"/>
+                                                <h:outputText value="#{eventoController.cortarLugar(eventoLista.evelugar)}" style="font-size: 15px" /> 
+
                                             </h:panelGrid>
                                         </p:outputPanel>
                                     </h:panelGrid>
@@ -126,7 +126,7 @@
                         </h:form>
                         <p:panelMenu style="width:250px; float: right" >
                             <p:submenu label="Gestión de Eventos" >
-                                <p:menuitem value="Agregar Evento" ajax="false" outcome="agregarEvento" icon="ui-icon-check"/> 
+                                <p:menuitem value="Nuevo Evento" ajax="false" outcome="agregarEvento" icon="ui-icon-check"/> 
                                 <p:menuitem value="Listar Eventos" ajax="false" outcome="listarEventos" icon="ui-icon-check"/> 
                             </p:submenu>
                             <p:submenu label="Gestion de Noticias">

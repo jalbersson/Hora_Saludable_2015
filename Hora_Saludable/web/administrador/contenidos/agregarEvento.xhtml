@@ -16,15 +16,27 @@
             </ui:define>
 
             <ui:define name="title">
+                
+            </ui:define>
+
+
+            <ui:define name="body"  >
+                <br></br>
+                
+                <h:form>
+                    <p:breadCrumb>
+                    <p:menuitem value="Inicio" outcome="principal" />                              
+                    <p:menuitem value="Nuevo Evento" outcome="agregarEvento"/>                                        
+                </p:breadCrumb>
+                </h:form>
+                
+                
                 <div class="tituloContenido">
                     <br></br>
                     Nuevo Evento 
                     <br></br>
                 </div>
-            </ui:define>
-
-
-            <ui:define name="body"  >
+                
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <div class="wrap" style="width: 63%;">
                     

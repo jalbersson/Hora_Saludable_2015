@@ -204,10 +204,16 @@ public class eventoController {
         return cadenaAleatoria;
     }
     
-    public String detalleEvento(Long id)
+    public String detalleEventoPrincipal(Long id)
     {
         idE=id;
-        return "detalleEvento";
+        return "detalleEventoPrincipal";
+    }
+    
+        public String detalleEventoEventos(Long id)
+    {
+        idE=id;
+        return "detalleEventoEventos";
     }
     
     public String aleatorioArchivos() {
@@ -295,7 +301,7 @@ public class eventoController {
     
     public String mostrarEvento(Evento e) {
 
-        return "detalleEvento?id=" + e.getEveid();
+        return "detalleEventoPrincipal?id=" + e.getEveid();
     }
     
     public String getEveTitulo() {
