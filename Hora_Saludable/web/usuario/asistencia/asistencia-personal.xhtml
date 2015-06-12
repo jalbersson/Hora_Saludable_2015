@@ -28,11 +28,11 @@
                                 Mi Perfil
                             </div>
                         </h:link>                  
-                        <p:commandLink style="text-decoration: none;" action="#{mostrarUsuarioTestController.estudianteSeleccionadoUsu(usuarioSessionController.nombreDeUsuario)}" > 
+                        <h:link style="text-decoration: none;" outcome="/usuario/medidas/GestionTest" >
                             <div class="botonSubmenu">
-                                Mis Medidas
+                                Mis Valoraciónes
                             </div>
-                        </p:commandLink>
+                        </h:link>
                         <h:link style="text-decoration: none;" outcome="/usuario/asistencia/asistencia-personal"> 
                             <div class="botonSubmenu">
                                 Mi Asistencia
@@ -44,32 +44,31 @@
                     <h:form>
                         <p:breadCrumb>
                             <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />                              
-                            <p:menuitem value="Asistencia personal" outcome="/usuario/asistencia/asistencia-personal" />                                        
+                            <p:menuitem value="Mi Asistencia" outcome="/usuario/asistencia/asistencia-personal" />                                        
                         </p:breadCrumb>
                         <div class="tituloContenido">                           
                             Mi Asistencia 
                         </div>                        
                         <p:spacer height="20"/>
                         <p:panel header="Información personal">
-                            <p:dataGrid var="usu" value="#{asistencia_usuarios_con_session.obtener_usuario_usuid()}">
+                            
                                 <h:panelGrid columns="2" cellpadding="5" >
+                                    <p:outputLabel id="lblCodigo" value="Identificación:" />
+                                #{asistencia_usuarios_con_session.usuario.usuidentificacion}
+                                
                                     <p:outputLabel id="lblNombre" value="Nombres y Apellidos:" />
-                                #{usu.usunombres}  #{usu.usuapellidos}
+                                #{asistencia_usuarios_con_session.usuario.usunombres}  #{asistencia_usuarios_con_session.usuario.usuapellidos}
 
 
                                     <p:outputLabel id="lblSexo" value="Sexo:" />
-                                #{usu.usugenero}
-
-                                    <p:outputLabel id="lblCodigo" value="Código:" />
-                                #{usu.usuidentificacion}
+                                #{asistencia_usuarios_con_session.sexo}
 
                                     <p:outputLabel id="lblProgramaAcademico" value="Facultad:" />
-                                #{usu.uniid.uninombre}
+                                #{asistencia_usuarios_con_session.usuario.uniid.uninombre}
 
                                     <p:outputLabel id="lblEstamento" value="Estamento:" />
-                                #{usu.carid.carnombre}
-                                </h:panelGrid>
-                            </p:dataGrid>
+                                #{asistencia_usuarios_con_session.usuario.carid.carnombre}
+                                </h:panelGrid>                           
                         </p:panel>
                         <p:spacer height="30"/>
                         <p:panel header="Asistencia">

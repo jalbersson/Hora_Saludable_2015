@@ -28,7 +28,7 @@
                 <h:form>
                      <p:breadCrumb >
                       <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />
-                       <p:menuitem value="Mis Medidas" outcome="GestionTest" />
+                       <p:menuitem value="Mis Valoraciónes" outcome="GestionTest" />
                        <p:menuitem value="Historial de Medidas" outcome="HistorialMed" />
                     </p:breadCrumb>
                 </h:form>
@@ -50,6 +50,14 @@
                     </p:row>
                     <p:row>
                         <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Nombre:" />
                         </p:column>
                         <p:column>
@@ -63,21 +71,22 @@
                         <p:column>
                             <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuapellidos}" />
                         </p:column>                      
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
-                        </p:column>
-                    </p:row>
+                    </p:row>                    
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usugenero}" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.sexo}" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Edad:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.edad} " />
+                            <p:outputLabel styleClass="fuentefichatabla" value="años"/>
                         </p:column>
                     </p:row>
                     <p:row>

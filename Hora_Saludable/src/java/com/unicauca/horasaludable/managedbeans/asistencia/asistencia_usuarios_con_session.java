@@ -50,23 +50,8 @@ public class asistencia_usuarios_con_session implements Serializable
     private CartesianChartModel meses;
     private String anioElegido;
     private boolean mostrarEstadisticas;
-
-    
-    
-    
-
-    public String getAnioElegido() {
-        return anioElegido;
-    }
-
-    public void setAnioElegido(String anioElegido) {
-        this.anioElegido = anioElegido;
-    }
-    
-    
-    
-
-    
+    private String sexo;
+    private Usuario usuario;    
 
     public asistencia_usuarios_con_session() {
 
@@ -75,9 +60,60 @@ public class asistencia_usuarios_con_session implements Serializable
     @PostConstruct
     public void init() {
         this.cargarSchedule();
+        this.buscarUsuario();
+        this.definirSexo();
         meses = new CartesianChartModel();
     }
+    private void buscarUsuario()
+    {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
+        if (req.getUserPrincipal() != null)
+        {
+            this.usuario=this.usuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0);
+        }
+    }
+    public Usuario getUsuario() 
+    {
+        return usuario;
+    }
 
+    public void setUsuario(Usuario usuario) 
+    {
+        this.usuario = usuario;
+    }
+    
+    public String getAnioElegido() 
+    {
+        return anioElegido;
+    }
+
+    public void setAnioElegido(String anioElegido) 
+    {
+        this.anioElegido = anioElegido;
+    } 
+    
+    public String getSexo()
+    {
+        return sexo;
+    }
+
+    public void setSexo(String sexo)
+    {
+        this.sexo = sexo;
+    }
+    
+    private void definirSexo()
+    {
+        if(this.usuario.getUsugenero().equals('M'))
+        {
+            this.sexo="Masculino";
+        }
+        else
+        {
+            this.sexo="Femenino";
+        }
+    }
     public ScheduleEvent getEvent() {
         return event;
     }
@@ -121,7 +157,7 @@ public class asistencia_usuarios_con_session implements Serializable
         HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
         if (req.getUserPrincipal() != null) 
         {            
-            List<Usuario> lst = ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName());
+            List<Usuario> lst = ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName());            
             return lst;
         }
         return null;

@@ -25,9 +25,11 @@
                                 Mi Perfil
                             </div>
                         </h:link>                  
-                        <p:commandLink style="text-decoration: none; width: 130px;height: 13;" styleClass="botonSubmenu" action="#{mostrarUsuarioTestController.estudianteSeleccionadoUsu(usuarioSessionController.nombreDeUsuario)}"> 
-                                Mis Medidas
-                        </p:commandLink>
+                        <h:link style="text-decoration: none;" outcome="GestionTest" > 
+                            <div class="botonSubmenu">
+                                Mis Valoraciónes
+                            </div>
+                        </h:link>
                         <h:link style="text-decoration: none;" outcome="/usuario/asistencia/asistencia-personal"> 
                             <div class="botonSubmenu">
                                 Mi Asistencia
@@ -40,7 +42,7 @@
                     <h:form>
                         <p:breadCrumb >
                             <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />
-                            <p:menuitem value="Mis Medidas" outcome="GestionTest" />
+                            <p:menuitem value="Mis Valoraciónes" outcome="GestionTest" />
                             <p:menuitem value="Mi Medición" outcome="Test" />
                         </p:breadCrumb>
                     </h:form>
@@ -59,7 +61,14 @@
                             </p:column>    
                         </p:column>
                     </p:row>
-                      
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
+                        </p:column>
+                    </p:row>  
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Nombre:" />
@@ -75,21 +84,22 @@
                         <p:column>
                             <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuapellidos}" />
                         </p:column>                      
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
-                        </p:column>
-                    </p:row>
+                    </p:row>                    
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usugenero}" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.sexo}" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Edad:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.edad} " />
+                            <p:outputLabel styleClass="fuentefichatabla" value="años"/>
                         </p:column>
                     </p:row>
                     <p:row>

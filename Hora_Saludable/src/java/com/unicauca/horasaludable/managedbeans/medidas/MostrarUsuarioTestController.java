@@ -20,10 +20,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -49,18 +51,7 @@ public class MostrarUsuarioTestController {
     private Date fechaNacimiento;
     private SimpleDateFormat sdf;
     private float peso;
-
-    public float getPeso() {
-        return peso;
-    }
-
-    public void setPeso(float peso) {
-        this.peso = peso;
-    }
-
-
-
-
+    private int edad;
     private String tipoUsuario;
     private List<Cargo> listaCargo;    
     private List<Unidadacademica> listaUnidadAcademica;
@@ -69,24 +60,60 @@ public class MostrarUsuarioTestController {
     private Usuario funcionarioFamiliar;
     private List<Usuario> listaFuncionarios;
     private String nombreOApellidos;   
-     private boolean campoFoto;
+    private boolean campoFoto;
+    private String sexo;    
 
-    public boolean isCampoFoto() {
-        return campoFoto;
-    }
-
-    public void setCampoFoto(boolean campoFoto) {
-        this.campoFoto = campoFoto;
-    }
-    
-   
-    
        
     public MostrarUsuarioTestController() 
     {
         this.rutaFoto="img/fotosUploads";
         this.rutaAbsolutaFotos="/home/geovanny/Documentos/Asae/Hora_Saludable_2015/Hora_Saludable/web/resources/img/fotosUploads/";
         this.sdf=new SimpleDateFormat("yyyy-MM-dd");
+    }
+    @PostConstruct
+    private void init()
+    {        
+        this.buscarUsuario();
+        this.definirSexo();        
+        this.calcularEdad();
+        this.campoFoto=true;    
+    }
+    
+    public float getPeso() 
+    {
+        return peso;
+    }
+
+    public void setPeso(float peso) 
+    {
+        this.peso = peso;
+    }
+    public boolean isCampoFoto() 
+    {
+        return campoFoto;
+    }
+
+    public void setCampoFoto(boolean campoFoto) 
+    {
+        this.campoFoto = campoFoto;
+    }
+    
+    public String getSexo() 
+    {
+        return sexo;
+    }
+    public void setSexo(String sexo) 
+    {
+        this.sexo = sexo;
+    }
+    public int getEdad() 
+    {
+        return edad;
+    }
+
+    public void setEdad(int edad) 
+    {
+        this.edad = edad;
     }
     
     public String getNombreOApellidos()
@@ -289,7 +316,9 @@ public class MostrarUsuarioTestController {
     public void estudianteSeleccionadoUsu(String login) throws IOException
     {
        
-        this.usuario = usuarioEJB.buscarUsuarioPorNombreUsuario(login).get(0);    
+        this.usuario = usuarioEJB.buscarUsuarioPorNombreUsuario(login).get(0);
+        this.calcularEdad();
+        this.definirSexo();
         this.campoFoto=true;
      
                
@@ -314,6 +343,48 @@ public class MostrarUsuarioTestController {
                
         FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/usuario/medidas/Test.xhtml");
         
+    }
+    
+    public void calcularEdad()
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha_nac = formato.format(this.usuario.getUsufechanacimiento());
+        Date fechaActual= new Date();
+        String hoy = formato.format(fechaActual);
+        String[] dat1 = fecha_nac.split("/");
+        String[] dat2 = hoy.split("/");
+        this.edad= Integer.parseInt(dat2[2]) - Integer.parseInt(dat1[2]);
+        int mes = Integer.parseInt(dat2[1]) - Integer.parseInt(dat1[1]);
+        if (mes < 0) {
+          this.edad = this.edad - 1;
+        } else if (mes == 0) {
+          int dia = Integer.parseInt(dat2[0]) - Integer.parseInt(dat1[0]);
+          if (dia > 0) {
+            this.edad = this.edad - 1;
+          }
+        }        
+    }
+    
+    private void definirSexo()
+    {
+        if(this.usuario.getUsugenero().equals('M'))
+        {
+            this.sexo="Masculino";
+        }
+        else
+        {
+            this.sexo="Femenino";
+        }
+    }
+    
+    private void buscarUsuario()
+    {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
+        if (req.getUserPrincipal() != null)
+        {
+            this.usuario=this.usuarioEJB.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0);
+        }
     }
     
 }

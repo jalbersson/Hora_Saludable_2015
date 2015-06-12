@@ -13,7 +13,7 @@
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-                 Mis Medidas 
+                 Mis Valoraciónes 
             </ui:define>
          
             <ui:define name="title">                
@@ -30,7 +30,7 @@
                             </div>
                         </h:link>                  
                         <p:commandLink style="text-decoration: none; width: 130px;height: 13;" styleClass="botonSubmenu" action="#{mostrarUsuarioTestController.estudianteSeleccionadoUsu(usuarioSessionController.nombreDeUsuario)}"> 
-                                Mis Medidas
+                                Mis Valoraciónes
                         </p:commandLink>
                         <h:link style="text-decoration: none;" outcome="/usuario/asistencia/asistencia-personal"> 
                             <div class="botonSubmenu">
@@ -44,12 +44,12 @@
                     <h:form>
                         <p:breadCrumb>
                            <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />
-                           <p:menuitem value="Mis Medidas" outcome="GestionTest" />
+                           <p:menuitem value="Mis Valoraciónes" outcome="GestionTest" />
                 
                         </p:breadCrumb>
                         
                 <div class="tituloContenido">
-                    Mis Medidas                    
+                    Mis Valoraciónes                    
                 </div>
                     </h:form>
                 </p:panel>
@@ -67,6 +67,14 @@
                     </p:row>
                     <p:row>
                         <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Nombres:" />
                         </p:column>
                         <p:column>
@@ -80,21 +88,22 @@
                         <p:column>
                             <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuapellidos}" />
                         </p:column>                      
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
-                        </p:column>
-                    </p:row>
+                    </p:row>                    
                     <p:row>
                         <p:column>
                             <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
                         </p:column>
                         <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usugenero}" />
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.sexo}" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel styleClass="subtitulotabla" value="Edad:" />
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.edad}" />
+                            <p:outputLabel styleClass="fuentefichatabla" value=" años"/>
                         </p:column>
                     </p:row>
                 </p:panelGrid>
