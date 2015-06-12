@@ -91,7 +91,7 @@ public class ValidarEdicionUsuarios implements Serializable
     {
        if(fecha==null)
        {
-           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo fecha naciemiento obligatorio.", "Campo fecha naciemiento obligatorio."));
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo fecha de nacimiento obligatorio.", "Campo fecha de nacimiento obligatorio."));
            return false;
        }
        else 

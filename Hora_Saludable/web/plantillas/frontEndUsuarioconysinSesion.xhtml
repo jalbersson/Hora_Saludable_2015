@@ -108,7 +108,7 @@
                 </div>
             </div>
         </footer>        
-        <p:dialog   header="Iniciar sesion" showEffect="scale" modal="true"  widgetVar="IniciarSesion"  width="450">
+        <p:dialog  resizable="false"   header="Iniciar Sesión" showEffect="scale" modal="true"  widgetVar="IniciarSesion"  width="450">
             <h:form id="formularioInicioSession">                
                 <p:messages closable="true"/>
                 <p:panelGrid style="text-align:left;" styleClass="panelgrid">
@@ -124,12 +124,12 @@
                     </p:row>
                     <p:row>
                         <p:column style="text-align:right;">
-                            <p:outputLabel  value="Nombre Usuario:" />
+                            <p:outputLabel  value="Nombre de Usuario:" />
                             <p:outputLabel style="color:red;"  value=" * " />
                         </p:column>
                         <p:column>
                             <p:inputText id="firstname" value="#{usuarioSessionController.nombreDeUsuario}" 
-                                         required="true" label="Firstname" requiredMessage="Ingrese nombre de Usuario"/>
+                                         required="true" label="Firstname" requiredMessage="Ingrese nombre de usuario"/>
                             
                         </p:column>
                         <p:column>
@@ -167,7 +167,7 @@
                         </p:column>
                         <p:column>
                             <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic"
-                                             value="Iniciar Sesion" update="formularioInicioSession" action="#{usuarioSessionController.login()}"
+                                             value="Iniciar Sesión" update="formularioInicioSession" action="#{usuarioSessionController.login()}"
                                              onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                         </p:column>
                     </p:row>

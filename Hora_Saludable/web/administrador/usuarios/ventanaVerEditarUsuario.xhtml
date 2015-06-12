@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <ui:composition>
-        <p:dialog modal="true" position="top"  widgetVar="verEditarUsuario" closable="true">
+        <p:dialog header="Ver o Editar Usuario" modal="true" resizable="false" position="top"  widgetVar="verEditarUsuario" closable="true">
             <h:form id="formularioTituloVerEditar">
                 <p:outputLabel value="Funcionario" style="font-size: 25px; margin-left:140px;color:#22419A;" 
                                rendered="#{verEditarUsuarioController.camposFuncionario}"/>
@@ -31,9 +31,10 @@
                                     <p:commandLink style="color: blue;" action="#{verEditarUsuarioController.mostraSubirFoto()}" value="Cambiar"/>                                                                 
                                 </p:column>
                                 <p:column  rendered="#{!verEditarUsuarioController.campoFoto}">
+                                    Peso máximo de la imagen 1 MegaByte
                                     <p:fileUpload  fileUploadListener="#{verEditarUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
                                                    label="Cargar" auto="true"  
-                                                   sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                   sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido"   fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                                                    onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
                                 </p:column>
                                 <p:column rendered="#{!verEditarUsuarioController.campoFoto}">
@@ -81,7 +82,7 @@
                             </p:column>
                             <p:column>
                                 <p:calendar value="#{verEditarUsuarioController.fechaNacimiento}" size="10"    
-                                            showOn="button" navigator="true" pattern="yyyy-MM-dd" 
+                                            showOn="button" navigator="true" pattern="yyyy-MM-dd" yearRange="c-90:c+10" 
                                             />
                             </p:column>
                             <p:column>
@@ -120,7 +121,7 @@
                         </p:row>
                         <p:row rendered="#{verEditarUsuarioController.campoNombre}">
                             <p:column>
-                                <p:outputLabel style="font-size: 15px;" value="Nombre: "/>
+                                <p:outputLabel style="font-size: 15px;" value="Nombres: "/>
                             </p:column>
                             <p:column>
                                 <p:outputLabel value="#{verEditarUsuarioController.usuario.usunombres}"/>
@@ -396,7 +397,7 @@
                                     <p:outputLabel style="font-size: 15px;" value="Funcionario:* "/>
                                 </p:column>
                                 <p:column>
-                                    <p:commandButton value="seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic"
+                                    <p:commandButton value="Seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic"
                                                      onclick="PF('seleccionarEditarFuncionario').show()" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                                 </p:column>
                             </p:row>

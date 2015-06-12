@@ -55,7 +55,7 @@ public class ValidarCampoNombreUsuario implements Validator
                 }
                 else
                 {
-                    Pattern patron = Pattern.compile("[^A-Za-z_.ñÑ]");
+                    Pattern patron = Pattern.compile("[^A-Za-z_.ñÑ0-9]");
                     Matcher encaja = patron.matcher(texto);        
                     if(encaja.find())
                     {

@@ -20,7 +20,7 @@
                 <h:form>
                     <p:breadCrumb>
                         <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />                              
-                        <p:menuitem value="Gestion de Usuarios" outcome="/administrador/usuarios/gestionUsuarios" />                                        
+                        <p:menuitem value="Gestión de Usuarios" outcome="/administrador/usuarios/gestionUsuarios" />                                        
                     </p:breadCrumb>
                 </h:form>
                 <div class="tituloContenido">
@@ -54,12 +54,13 @@
                 <ui:include src="ventanaRegistroUsuario.xhtml"/>
                 <ui:include src="ventanaVerEditarUsuario.xhtml"/>
                 
-                <p:dialog modal="true" header="Confirmar" widgetVar="eliminarUsuario" closable="false">
+                <p:dialog modal="true" resizable="false" header="Confirmar" widgetVar="eliminarUsuario" closable="false">
                     <h:form>
                         <p:panelGrid style="text-align:left;" styleClass="panelgrid">
                             <p:row>
                                 <p:column>
-                                    <h:outputLabel style="color: red;" value="Esta Seguro desea Eliminar el Usuario? (solo se Eliminaran usuarios que no tengan Registros.)"/>
+                                    <h:outputLabel style="color: red;" value="¿Está seguro que desea eliminar el usuario?"/><br/>
+                                    <h:outputLabel style="color: red;" value="(solo se eliminaran usuarios que no tengan registros o familiares asociados.)"/><br/>
                                 </p:column>                                
                             </p:row>
                             <p:row>
@@ -79,12 +80,12 @@
                         <p:panelGrid style="text-align:left;" styleClass="panelgrid">
                             <p:row>
                                 <p:column>
-                                    <h:outputLabel style="color: red;" value="solo se Eliminaran usuarios que no tengan Registros."/>
+                                    <h:outputLabel style="color: red;" value="El usario tiene registros o familiares asociados."/>
                                 </p:column>                                
                             </p:row>
                             <p:row>
                                 <p:column width="200px;">
-                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 140px;" 
+                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 100px;" 
                                                      value="Aceptar" onclick="PF('noSePuedeEliminar').hide()"/>                                    
                                 </p:column>
                                 
@@ -95,7 +96,7 @@
                     
                 </p:dialog>
                 
-                <p:dialog modal="true" header="Info" widgetVar="eliminacionCorrecta" closable="false">
+                <p:dialog modal="true" header="Información" resizable="false" widgetVar="eliminacionCorrecta" closable="false">
                     <h:form>
                         <p:panelGrid style="text-align:left;" styleClass="panelgrid">
                             <p:row>

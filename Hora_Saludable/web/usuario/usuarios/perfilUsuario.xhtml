@@ -62,9 +62,10 @@
                                             <p:commandLink style="color: blue;" action="#{perfilUsuarioController.mostraSubirFoto()}" value="Cambiar"/>
                                         </p:column>
                                         <p:column  rendered="#{!perfilUsuarioController.mostrarFoto}">
+                                            Peso máximo de la imagen 1 MegaByte
                                             <p:fileUpload  fileUploadListener="#{perfilUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
                                                            label="Cargar" auto="true"  
-                                                           sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                           sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                                                            onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"
                                                            />                              
                                         </p:column>
@@ -137,7 +138,7 @@
                                 </p:row>
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Telélfono: "/>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Teléfono: "/>
                                     </p:column>
                                     <p:column rendered="#{perfilUsuarioController.mostrarTelefono}">
                                         <p:outputLabel value="#{perfilUsuarioController.usuario.usutelefono}"/>
@@ -162,6 +163,15 @@
                                     </p:column>
                                     <p:column>
                                         <p:outputLabel value="#{perfilUsuarioController.sexo}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Edad: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.edad}"/>
+                                        <p:outputLabel value=" años"/>
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>

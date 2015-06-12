@@ -18,7 +18,7 @@ public class ValidarCampoSoloLetrasYespacio implements Validator
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException 
     {
         String texto = String.valueOf(value);
-        Pattern patron = Pattern.compile("[^A-Za-z ñÑ]");
+        Pattern patron = Pattern.compile("[^A-Za-z ñÑáéíóú]");
         Matcher encaja = patron.matcher(texto);        
         if(encaja.find())
         {

@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog modal="true"  widgetVar="mensajeRegistroExitoso" closable="false">
+        <p:dialog resizable="false" header="Información" modal="true"  widgetVar="mensajeRegistroExitoso" closable="false">
             <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
             <h:form>
                 <p:commandButton  value="Aceptar" style="background:#22419A; 
@@ -133,7 +133,7 @@
                                                    value="*"/>
                                 </p:column>
                                 <p:column>                                
-                                    <p:commandButton value="seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic" 
+                                    <p:commandButton value="Seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic" 
                                                      onclick="PF('seleccionarFuncionario').show()" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                 </p:column>
                                 <p:column>
@@ -142,7 +142,7 @@
                             </p:row>
                             <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
                                 <p:column style="text-align:right;height: 30px;">
-                                    <h:outputLabel class="CampoLabel" for="nombreFuncionario" value="Nombre Funcionario: " />
+                                    <h:outputLabel class="CampoLabel" for="nombreFuncionario" value="Nombre del Funcionario: " />
                                     <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
                                                    value="*"/>
                                 </p:column>
@@ -159,7 +159,7 @@
                             </p:row>
                             <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
                                 <p:column style="text-align:right;height:30px; ">
-                                    <h:outputLabel class="CampoLabel" for="dependenciaFuncionario" value="Dependencia Funcionario: " />
+                                    <h:outputLabel class="CampoLabel" for="dependenciaFuncionario" value="Dependencia del Funcionario: " />
                                     <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
                                                    value="*"/>
                                 </p:column>
@@ -241,7 +241,7 @@
                             </p:row>
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="nombreUsuario" value="Nombre Usuario: " />
+                                    <h:outputLabel class="CampoLabel" for="nombreUsuario" value="Nombre de Usuario: " />
                                     <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
                                                    value="*"/>
                                 </p:column>
@@ -279,7 +279,7 @@
                                 <p:column>                                        
                                 </p:column>
                                 <p:column>
-                                    <h:outputLabel class="CampoLabelEspecificacion"   value="Entre 6 y 20 caracteres AlfaNumericos." />
+                                    <h:outputLabel class="CampoLabelEspecificacion"   value="Entre 6 y 20 caracteres AlfaNuméricos." />
                                 </p:column>
                                 <p:column>                                        
                                 </p:column>                                        

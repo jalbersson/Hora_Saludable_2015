@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -54,7 +55,8 @@ public class perfilUsuarioController implements Serializable
     private boolean mostrarContrasena;      
     private String telefono;
     private String contrasena;
-    private String confirmarContrasena;   
+    private String confirmarContrasena;
+    private int edad;   
     
     
     private ValidarEdicionUsuarios validarEdicionUsuario;
@@ -86,10 +88,20 @@ public class perfilUsuarioController implements Serializable
         this.buscarUsuario();
         this.definirSexo();
         this.definirTipo();
+        this.calcularEdad();
         this.inicializarCampos();
         
     }
     
+    public int getEdad() 
+    {
+        return edad;
+    }
+
+    public void setEdad(int edad) 
+    {
+        this.edad = edad;
+    }
     private void buscarUsuario()
     {
         FacesContext fc = FacesContext.getCurrentInstance();
@@ -456,6 +468,25 @@ public class perfilUsuarioController implements Serializable
         }
         requestContext.update("formularioPerfilDatosCuenta");
         
+    }
+    public void calcularEdad()
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha_nac = formato.format(this.usuario.getUsufechanacimiento());
+        Date fechaActual= new Date();
+        String hoy = formato.format(fechaActual);
+        String[] dat1 = fecha_nac.split("/");
+        String[] dat2 = hoy.split("/");
+        this.edad= Integer.parseInt(dat2[2]) - Integer.parseInt(dat1[2]);
+        int mes = Integer.parseInt(dat2[1]) - Integer.parseInt(dat1[1]);
+        if (mes < 0) {
+          this.edad = this.edad - 1;
+        } else if (mes == 0) {
+          int dia = Integer.parseInt(dat2[0]) - Integer.parseInt(dat1[0]);
+          if (dia > 0) {
+            this.edad = this.edad - 1;
+          }
+        }        
     }
     
 }

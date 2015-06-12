@@ -35,7 +35,7 @@ public class EliminarUsuario implements Serializable
     }
     
     public void ventanaEliminarUsuario(Usuario usuario, MostrarUsuariosController mgb)
-    {
+    {        
         RequestContext requestContext = RequestContext.getCurrentInstance();
         this.usuarioSeleccionado=usuario;
         this.managebUsuarios=mgb;
@@ -47,7 +47,7 @@ public class EliminarUsuario implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance();
         if(this.usuarioSeleccionado!=null)
         {
-            if(this.usuarioSeleccionado.getMedidaList().isEmpty() && this.usuarioSeleccionado.getDetalleasistenciaList().isEmpty() && this.usuarioSeleccionado.getDetalleinscripcionList().isEmpty())
+            if(this.usuarioSeleccionado.getMedidaList().isEmpty() && this.usuarioSeleccionado.getDetalleasistenciaList().isEmpty() && this.usuarioSeleccionado.getDetalleinscripcionList().isEmpty() && !this.usuarioEJB.buscarPorConyugeid(this.usuarioSeleccionado.getUsuid()))
             {
                 Usuariogrupo usuarioGrupo=this.usuarioGrupoEJB.buscarPorNombreUsuario(this.usuarioSeleccionado.getUsunombreusuario()).get(0);
                 this.usuarioGrupoEJB.remove(usuarioGrupo);

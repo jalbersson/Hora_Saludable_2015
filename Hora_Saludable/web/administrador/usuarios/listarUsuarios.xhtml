@@ -20,7 +20,7 @@
                                       paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                       >
 
-                            <p:column headerText="No. Identificacion" width="100">                               
+                            <p:column headerText="No. Identificación" width="100">                               
                                     #{usuarios.usuidentificacion}
                             </p:column> 
                             <p:column headerText="Nombres">
@@ -45,7 +45,7 @@
                                 #{usuarios.conyugeid.carid.carnombre}
                             </p:column>
                             <p:column headerText="Acciones" width="70">                                
-                                <p:commandLink title="Ver Y Editar"   style="text-decoration: none;" action="#{verEditarUsuarioController.usuarioSeleccionado(usuarios,mostrarUsuariosController)}">                                    
+                                <p:commandLink title="Ver o Editar"   style="text-decoration: none;" action="#{verEditarUsuarioController.usuarioSeleccionado(usuarios,mostrarUsuariosController)}">                                    
                                     <p:graphicImage style="width:25px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
                                 </p:commandLink>                                
                                 <p:commandLink id="eliminar" style="text-decoration: none;margin-left: 5px; " title="Eliminar" action="#{eliminarUsuario.ventanaEliminarUsuario(usuarios, mostrarUsuariosController)}">                                    
