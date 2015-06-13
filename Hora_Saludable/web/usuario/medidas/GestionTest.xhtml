@@ -13,7 +13,7 @@
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-                 Mis Valoraciónes 
+                 Mis Valoraciones 
             </ui:define>
          
             <ui:define name="title">                
@@ -30,7 +30,7 @@
                             </div>
                         </h:link>                  
                         <p:commandLink style="text-decoration: none; width: 130px;height: 13;" styleClass="botonSubmenu" action="#{mostrarUsuarioTestController.estudianteSeleccionadoUsu(usuarioSessionController.nombreDeUsuario)}"> 
-                                Mis Valoraciónes
+                                Mis Valoraciones
                         </p:commandLink>
                         <h:link style="text-decoration: none;" outcome="/usuario/asistencia/asistencia-personal"> 
                             <div class="botonSubmenu">
@@ -44,12 +44,12 @@
                     <h:form>
                         <p:breadCrumb>
                            <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />
-                           <p:menuitem value="Mis Valoraciónes" outcome="GestionTest" />
+                           <p:menuitem value="Mis Valoraciones" outcome="GestionTest" />
                 
                         </p:breadCrumb>
                         
                 <div class="tituloContenido">
-                    Mis Valoraciónes                    
+                    Mis Valoraciones                    
                 </div>
                     </h:form>
                 </p:panel>
