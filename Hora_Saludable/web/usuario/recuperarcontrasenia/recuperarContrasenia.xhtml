@@ -41,7 +41,7 @@
                             <f:validator validatorId="validarCorreoElectronico"/>
                             </p:inputText>
                                
-                        <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;" update="enviar" value="Enviar" action="#{recuperarContraseniaController.recuperar}" 
+                        <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;" update="enviar" value="Enviar" action="#{recuperarContraseniaController.recuperar}" 
                                          icon="ui-icon-check" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                         <p:messages id="enviar" />
                     </h:panelGrid>

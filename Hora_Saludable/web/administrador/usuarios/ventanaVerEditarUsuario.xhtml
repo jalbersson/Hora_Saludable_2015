@@ -82,7 +82,7 @@
                             </p:column>
                             <p:column>
                                 <p:calendar value="#{verEditarUsuarioController.fechaNacimiento}" size="10"    
-                                            showOn="button" navigator="true" pattern="yyyy-MM-dd" yearRange="c-90:c+10" 
+                                            showOn="button" navigator="true" pattern="yyyy-MM-dd" yearRange="c-100:c" 
                                             />
                             </p:column>
                             <p:column>
@@ -397,7 +397,7 @@
                                     <p:outputLabel style="font-size: 15px;" value="Funcionario:* "/>
                                 </p:column>
                                 <p:column>
-                                    <p:commandButton value="Seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic"
+                                    <p:commandButton value="Seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;"
                                                      onclick="PF('seleccionarEditarFuncionario').show()" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                                 </p:column>
                             </p:row>
@@ -502,7 +502,7 @@
                     <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
                     <h:form>
                         <p:commandButton  value="Aceptar" style="background:#22419A; 
-                                             color: #FFFFFF;margin-left:150px;"
+                                             color: #FFFFFF;margin-left:150px;font-weight: normal;"
                                           onclick="PF('editarFuncionarioYaTieneFamiliarAsociado').hide()"/>
                     </h:form>
                 </p:dialog>

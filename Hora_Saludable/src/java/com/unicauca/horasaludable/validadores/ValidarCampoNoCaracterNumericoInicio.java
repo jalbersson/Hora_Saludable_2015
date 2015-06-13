@@ -32,7 +32,7 @@ public class ValidarCampoNoCaracterNumericoInicio implements Validator
         
         if(validacion==0)
         {
-            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Campo Nombre Usuario No puede Comenzar con un Numero.");
+            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Campo nombre usuario no puede comenzar con un número.");
             throw new ValidatorException(msg); 
         }
         

@@ -38,7 +38,7 @@
                             <h:form id="form">
                                 
                                 <p:commandButton rendered="#{usuarioSessionController.esusuarioSinSession()}"  style="border: none; font-family: inherit; width: 120px;
-                                              border-radius: 5px;background: #092169;font-size: 13px;color: #FFFFFF"
+                                              border-radius: 5px;background: #092169;font-size: 13px;color: #FFFFFF;font-weight: normal;"
                                               value="Iniciar Sesión" action="#{usuarioSessionController.ventanaInicioSession()}"> 
 
                             </p:commandButton>
@@ -166,7 +166,7 @@
                         <p:column>                                
                         </p:column>
                         <p:column>
-                            <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic"
+                            <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;"
                                              value="Iniciar Sesión" update="formularioInicioSession" action="#{usuarioSessionController.login()}"
                                              onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                         </p:column>

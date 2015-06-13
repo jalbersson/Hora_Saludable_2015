@@ -22,7 +22,7 @@ public class ValidarCampoMaximo13Numeros implements Validator
         
         if(texto.length()>13)
         {
-             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Campo No Mas de 13 Numeros.");
+             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Campo no mas de 13 números.");
              throw new ValidatorException(msg);  
         }           
         

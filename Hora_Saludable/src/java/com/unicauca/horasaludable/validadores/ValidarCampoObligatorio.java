@@ -20,7 +20,7 @@ public class ValidarCampoObligatorio implements Validator
         
         if(texto.equals(""))
         {
-           FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Debe Seleccionar un Empleado.");
+           FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Debe seleccionar un empleado.","Debe seleccionar un empleado.");
            throw new ValidatorException(msg);  
         }
         

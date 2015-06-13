@@ -36,21 +36,21 @@ public class ValidarCampoNombreUsuario implements Validator
         
         if(validacion==0)
         {
-            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Campo Nombre Usuario No puede Comenzar con un Numero.");
+            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Campo nombre de usuario no puede comenzar con un número.","Campo nombre de usuario no puede comenzar con un número.");
             throw new ValidatorException(msg); 
         }
         else
         {
             if(texto.length()>20)
             {
-                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Nombre de Usuario No Mas de 20 Caracteres.");
+                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"nombre de usuario no mas de 20 caracteres.","nombre de usuario no mas de 20 caracteres.");
                 throw new ValidatorException(msg); 
             }
             else
             {
                 if(texto.length()<3)
                 {
-                    FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Nombre de Usuario No Menos de 3 Caracteres.");
+                    FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"nombre de usuario no menos de 3 caracteres.","nombre de usuario no menos de 3 caracteres.");
                     throw new ValidatorException(msg);  
                 }
                 else
@@ -59,14 +59,14 @@ public class ValidarCampoNombreUsuario implements Validator
                     Matcher encaja = patron.matcher(texto);        
                     if(encaja.find())
                     {
-                        FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Solo se Permiten Caracteres AlfaNumericos, Guiones Bajos y puntos");
+                        FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Solo se permiten caracteres alfanúmericos, guiones bajos y puntos.","Solo se permiten caracteres alfanúmericos, guiones bajos y puntos.");
                         throw new ValidatorException(msg);
                     }
                     else
                     {
                         if(usuarioEJB.buscarPorNombreUsuario(texto))
                         {
-                            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Nombre de Usuario ya esta Uso.");
+                            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nombre de usuario ya esta en uso.","Nombre de usuario ya esta en uso.");
                             throw new ValidatorException(msg);  
                         }  
                     }

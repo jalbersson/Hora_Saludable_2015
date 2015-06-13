@@ -20,7 +20,7 @@ public class ValidarCampoMaximo20Caracteres implements Validator
         
         if(texto.length()>20)
         {
-             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Campo No Mas de 20 Caracteres.");
+             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Campo no mas de 20 caracteres.");
              throw new ValidatorException(msg);  
         }           
         

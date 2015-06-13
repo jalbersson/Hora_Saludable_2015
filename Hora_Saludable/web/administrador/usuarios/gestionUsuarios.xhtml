@@ -41,7 +41,7 @@
                             <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>                                        
                         </p:selectOneMenu>                     
                         <p:commandButton  value="Registrar Nuevo Usuario" style="background:#22419A; 
-                                         color: #FFFFFF; margin-left: 395px;" 
+                                         color: #FFFFFF; margin-left: 395px;font-weight: normal;" 
                                           action="#{registrarUsuarioController.abrirVentanaRegistrarUsuario()}"
                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                     </h:panelGrid>
@@ -65,9 +65,9 @@
                             </p:row>
                             <p:row>
                                 <p:column width="200px;">
-                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 170px;" 
+                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 170px;font-weight: normal;" 
                                                      value="Aceptar" action="#{eliminarUsuario.eliminarUsuario()}"/>
-                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic; margin-left: 10px;" value="Cancelar" onclick="PF('eliminarUsuario').hide()"/>
+                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic; margin-left: 10px;font-weight: normal;" value="Cancelar" onclick="PF('eliminarUsuario').hide()"/>
                                 </p:column>
                                 
                             </p:row>
@@ -75,17 +75,17 @@
                     </h:form>
                 </p:dialog>
                     
-                    <p:dialog modal="true" header="Error" widgetVar="noSePuedeEliminar" closable="false">
+                <p:dialog modal="true" resizable="false" header="Error" widgetVar="noSePuedeEliminar" closable="false">
                     <h:form>
                         <p:panelGrid style="text-align:left;" styleClass="panelgrid">
                             <p:row>
                                 <p:column>
-                                    <h:outputLabel style="color: red;" value="El usario tiene registros o familiares asociados."/>
+                                    <h:outputLabel style="color: red;" value="El usuario tiene registros o familiares asociados."/>
                                 </p:column>                                
                             </p:row>
                             <p:row>
                                 <p:column width="200px;">
-                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 100px;" 
+                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 100px;font-weight: normal;" 
                                                      value="Aceptar" onclick="PF('noSePuedeEliminar').hide()"/>                                    
                                 </p:column>
                                 
@@ -106,7 +106,7 @@
                             </p:row>
                             <p:row>
                                 <p:column width="200px;">
-                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 150px;" 
+                                    <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 60px;font-weight: normal;" 
                                                      value="Aceptar" onclick="PF('eliminacionCorrecta').hide()"/>                                    
                                 </p:column>
                                 

@@ -26,7 +26,7 @@ public class ValidarCampoCorreoElectronico implements Validator
         Matcher encaja = patron.matcher(texto);        
         if(!encaja.find())
         {
-            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Formato de Correo Invalido.","Formato de Correo Invalido.");
+            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Formato de correo invalido.","formato de Correo invalido.");
             throw new ValidatorException(msg);
         }
         else

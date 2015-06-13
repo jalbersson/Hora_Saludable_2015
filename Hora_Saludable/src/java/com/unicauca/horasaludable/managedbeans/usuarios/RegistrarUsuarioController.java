@@ -7,7 +7,6 @@ package com.unicauca.horasaludable.managedbeans.usuarios;
 
 import com.unicauca.horasaludable.cifrado.Cifrar;
 import com.unicauca.horasaludable.entities.Cargo;
-import com.unicauca.horasaludable.entities.Grupo;
 import com.unicauca.horasaludable.entities.Unidadacademica;
 import com.unicauca.horasaludable.entities.Usuario;
 import com.unicauca.horasaludable.entities.Usuariogrupo;
@@ -420,7 +419,7 @@ public class RegistrarUsuarioController implements Serializable {
    {
       String texto = String.valueOf(arg2);      
       if (!(texto.equals(this.contrasena))) {
-         throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Las Contraseñas no Coinciden."));
+         throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Las contraseñas no coinciden."));
           
       }
       
@@ -430,7 +429,7 @@ public class RegistrarUsuarioController implements Serializable {
        RequestContext requestContext = RequestContext.getCurrentInstance();
        if(this.usuarioEJB.buscarPorConyugeid(usuario.getUsuid()))
        {
-           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info", "El Funcionario ya tiene un Familiar Asociado."));
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info", "El funcionario ya tiene un familiar asociado."));
            requestContext.execute("PF('FuncionarioYaTieneFamiliarAsociado').show()");
        }
        else

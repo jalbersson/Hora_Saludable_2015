@@ -21,7 +21,7 @@ public class ValidarEdicionUsuarios implements Serializable
     {  
         if(numeroIdentificacion.isEmpty())
         {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo Número de Identificación Obligatorio.", "Campo Número de Identificación Obligatorio."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo número de identificación obligatorio.", "Campo número de identificación obligatorio."));
             return false;
         }
         else
@@ -29,17 +29,17 @@ public class ValidarEdicionUsuarios implements Serializable
             try {
                 Long numero = Long.parseLong(numeroIdentificacion);
             } catch (Exception e) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo numero de Identificacion Solo Puede Contener Numeros.", "Campo Solo Puede Contener Numeros."));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo número de identificación solo puede contener números.", "Campo número de identificación solo puede contener números."));
                 return false;
 
             }
             if (numeroIdentificacion.length() > 15) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo numero de Identificacion No Mas de 15 Numeros.", "Campo No Mas de 15 Numeros."));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo número de identificación no mas de 15 números.", "Campo número de identificación no mas de 15 números."));
                 return false;
             } else {
                 Long numeroide = Long.parseLong(numeroIdentificacion);
                 if (usuariosEJB.buscarPorNumeroIdentificacion(numeroide)) {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Número de Identificación ya se Encuentra Registrado.", "Número de Identificación ya se Encuentra Registrado."));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Número de identificación ya se encuentra registrado.", "Número de identificación ya se encuentra registrado."));
                     return false;
                 }
             }
@@ -56,10 +56,10 @@ public class ValidarEdicionUsuarios implements Serializable
        }
        else 
        {
-            Pattern patron = Pattern.compile("[^A-Za-z ñÑ]");
+            Pattern patron = Pattern.compile("[^A-Za-z ñÑáéíóú]");
             Matcher encaja = patron.matcher(nombre);
             if (encaja.find()) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo Nombre Solo Letras y Espacios.", "Campo Nombre Solo Letras y Espacios."));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo nombre solo letras y espacios.", "Campo nombre solo letras y espacios"));
                 return false;
             }
             return true;
@@ -76,7 +76,7 @@ public class ValidarEdicionUsuarios implements Serializable
        }
        else 
        {
-            Pattern patron = Pattern.compile("[^A-Za-z ñÑ]");
+            Pattern patron = Pattern.compile("[^A-Za-z ñÑáéíóú]");
             Matcher encaja = patron.matcher(apellido);
             if (encaja.find()) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo apellidos solo letras y espacios.", "Campo apellido solo letras y espacios."));
@@ -91,13 +91,22 @@ public class ValidarEdicionUsuarios implements Serializable
     {
        if(fecha==null)
        {
-           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo fecha de nacimiento obligatorio.", "Campo fecha de nacimiento obligatorio."));
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo fecha de nacimiento es obligatorio.", "Campo fecha de nacimiento es obligatorio."));
            return false;
        }
-       else 
+       else
        {
-            return true;
-       }
+           Date fechaActual=new Date();
+           if(fecha.compareTo(fechaActual)>0)
+           {
+               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo fecha de nacimiento no puede ser mayor a la fecha actual.", "Campo fecha de nacimiento no puede ser mayor a la fecha actual."));
+               return false;
+           }
+           else 
+           {
+               return true;
+           }
+       }      
         
     }
     
@@ -105,7 +114,7 @@ public class ValidarEdicionUsuarios implements Serializable
     {  
         if(correo.isEmpty())
         {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo correo electrónico Obligatorio.", "Campo correo electrónico Obligatorio."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo correo electrónico obligatorio.", "Campo correo electrónico obligatorio."));
             return false;
         }
         else
@@ -114,7 +123,7 @@ public class ValidarEdicionUsuarios implements Serializable
             Matcher encaja = patron.matcher(correo);        
             if(!encaja.find())
             {
-                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Formato de correo electrónico Invalido.","Formato de correo electrónico Invalido."));
+                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Formato de correo electrónico inválido.","Formato de correo electrónico inválido."));
                 return false;
             }
             else
@@ -142,7 +151,7 @@ public class ValidarEdicionUsuarios implements Serializable
 
             }catch(Exception e)
             {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo teléfono solo puede contener numeros.", "Campo teléfono solo puede contener números."));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Campo teléfono solo puede contener números.", "Campo teléfono solo puede contener números."));
                 return false;
             }  
             
@@ -192,18 +201,18 @@ public class ValidarEdicionUsuarios implements Serializable
                     }
                     else
                     {
-                        Pattern patron = Pattern.compile("[^A-Za-z_.ñÑ]");
+                        Pattern patron = Pattern.compile("[^A-Za-z_.ñÑ0-9]");
                         Matcher encaja = patron.matcher(nombreUsuario);        
                         if(encaja.find())
                         {
-                            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Solo se permiten caracteres alfanumericos, guiones bajos y puntos.","Solo se permiten caracteres alfanumericos, guiones bajos y puntos."));
+                            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Solo se permiten caracteres alfanúmericos, guiones bajos y puntos.","Solo se permiten caracteres alfanúmericos, guiones bajos y puntos."));
                             return false;
                         }
                         else
                         {
                             if(usuariosEJB.buscarPorNombreUsuario(nombreUsuario))
                             {
-                                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nombre de usuario ya esta uso.","Nombre de usuario ya esta uso."));
+                                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nombre de usuario ya esta en uso.","Nombre de usuario ya esta en uso."));
                                 return false;  
                             } 
                             return true;

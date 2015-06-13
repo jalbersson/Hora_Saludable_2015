@@ -23,7 +23,7 @@ public class ValidarCampoSoloLetrasNumerosGuionBajoPuntos implements Validator
         Matcher encaja = patron.matcher(texto);        
         if(encaja.find())
         {
-            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Solo se Permiten Caracteres AlfaNumericos, Guiones Bajos y puntos");
+            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Solo se permiten caracteres Alfanúmericos, guiones bajos y puntos.","Solo se permiten caracteres Alfanúmericos, guiones bajos y puntos.");
             throw new ValidatorException(msg);
         }
     }

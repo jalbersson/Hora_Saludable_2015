@@ -20,7 +20,7 @@ public class ValidarCampoMinimo3Caracteres implements Validator
         
         if(texto.length()<3)
         {
-             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Nombre de Usuario No Menos de 3 Caracteres.");
+             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nombre de usuario no menos de 3 caracteres.","Nombre de usuario no menos de 3 caracteres.");
              throw new ValidatorException(msg);  
         }           
         

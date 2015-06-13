@@ -11,11 +11,11 @@
             <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
             <h:form>
                 <p:commandButton  value="Aceptar" style="background:#22419A; 
-                                     color: #FFFFFF;margin-left:70px;"
+                                     color: #FFFFFF;margin-left:70px;font-weight: normal;"
                                   onclick="PF('mensajeRegistroExitoso').hide()"/>
             </h:form>
         </p:dialog>
-        <p:dialog position="top"   header="Registrar Usuario" showEffect="scale" modal="true"  widgetVar="RegistrarUsuario">
+        <p:dialog position="top" resizable="false"   header="Registrar Usuario" showEffect="scale" modal="true"  widgetVar="RegistrarUsuario">
 
                     <h:form id="form">
                         <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
@@ -133,7 +133,7 @@
                                                    value="*"/>
                                 </p:column>
                                 <p:column>                                
-                                    <p:commandButton value="Seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic" 
+                                    <p:commandButton value="Seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;" 
                                                      onclick="PF('seleccionarFuncionario').show()" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                 </p:column>
                                 <p:column>
@@ -179,9 +179,11 @@
                                 </p:column>
                                 <p:column>
                                     <p:calendar value="#{registrarUsuarioController.usuario.usufechanacimiento}" size="10" id="fechaNacimiento"  required="true" 
-                                                requiredMessage="Seleccione una Fecha de Nacimiento." 
-                                                showOn="button" navigator="true" yearRange="c-90:c+10" pattern="yyyy-MM-dd" 
-                                                />
+                                                requiredMessage="Seleccione una fecha de nacimiento." 
+                                                showOn="button" navigator="true" yearRange="c-100:c" pattern="yyyy-MM-dd" 
+                                                >
+                                        <f:validator validatorId="ValidarCampoFechaNacimiento"/>
+                                    </p:calendar>
                                 </p:column>
 
                                 <p:column>
@@ -197,7 +199,7 @@
                                 <p:column>
                                     <p:inputText style="width: 110px;font-size:15px" 
                                                  id="numeroIdentificacion" value="#{registrarUsuarioController.numeroIdentificacion}"
-                                                 required="true" requiredMessage="Campo Obligatorio.">                                             
+                                                 required="true" requiredMessage="Campo obligatorio.">                                             
                                         <f:validator validatorId="ValidarCampoNumeroIdentificacion"/>                                                                                    
                                     </p:inputText>                                
                                 </p:column>
@@ -214,7 +216,7 @@
                                 <p:column>
                                     <p:inputText style="width: 140px;font-size:15px" 
                                                  id="nombres" value="#{registrarUsuarioController.usuario.usunombres}"
-                                                 required="true" requiredMessage="Campo Obligatorio.">
+                                                 required="true" requiredMessage="Campo obligatorio.">
                                         <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
                                     </p:inputText>                                
                                 </p:column>
@@ -231,7 +233,7 @@
                                 <p:column>
                                     <p:inputText style="width: 140px;font-size:15px" 
                                                  id="apellidos" value="#{registrarUsuarioController.usuario.usuapellidos}"
-                                                 required="true" requiredMessage="Campo Obligatorio.">
+                                                 required="true" requiredMessage="Campo obligatorio.">
                                         <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
                                     </p:inputText>                                
                                 </p:column>
@@ -248,7 +250,7 @@
                                 <p:column>
                                     <p:inputText style="width: 120px;font-size:15px" 
                                                  id="nombreUsuario" value="#{registrarUsuarioController.usuario.usunombreusuario}"
-                                                 required="true" requiredMessage="Campo Obligatorio.">                                            
+                                                 required="true" requiredMessage="Campo obligatorio.">                                            
                                         <f:validator validatorId="ValidarCampoNombreUsuario"/>
                                     </p:inputText>                                
                                 </p:column>
@@ -265,7 +267,7 @@
                                 <p:column>
                                     <p:password style="width: 120px;font-size:15px" 
                                                 id="contrasena" value="#{registrarUsuarioController.contrasena}"
-                                                required="true" requiredMessage="Campo Obligatorio."
+                                                required="true" requiredMessage="Campo obligatorio."
                                                 validator="#{registrarUsuarioController.validateContrasena}">
                                         <f:validator validatorId="ValidarCampoMaximo20Caracteres"/>
                                         <f:validator validatorId="ValidarCampoMinimo6Caracteres"/>
@@ -293,7 +295,7 @@
                                 <p:column>
                                     <p:password  style="width: 120px;font-size:15px" 
                                                  id="confirmarContrasena" value="#{registrarUsuarioController.repetircontrasena}"
-                                                 required="true" requiredMessage="Campo Obligatorio."
+                                                 required="true" requiredMessage="Campo obligatorio."
                                                  validator="#{registrarUsuarioController.validateRepitaContrasena}">                                            
                                     </p:password>                                
                                 </p:column>
@@ -310,7 +312,7 @@
                                 <p:column>
                                     <p:inputText style="width: 180px;font-size:15px" 
                                                  id="correoElectronico" value="#{registrarUsuarioController.usuario.usuemail}"
-                                                 required="true" requiredMessage="Campo Obligatorio.">
+                                                 required="true" requiredMessage="Campo obligatorio.">
                                         <f:validator validatorId="ValidarCampoCorreoElectronico"/>
                                     </p:inputText>
                                 </p:column>
@@ -366,11 +368,11 @@
 
                                 </p:column>
                                 <p:column>
-                                    <p:commandButton   style="background: #22419A;color:#FFFFFF;font-style: italic" 
+                                    <p:commandButton   style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;" 
                                                        action="#{registrarUsuarioController.registrarUsuario()}" value="Registrar" ajax="true" 
                                                        update="panel" id="registrar" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"
                                                        />
-                                    <p:commandButton   style="background: #22419A;color:#FFFFFF;font-style: italic" 
+                                    <p:commandButton   style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;" 
                                                        value="Cancelar" onclick="PF('RegistrarUsuario').hide()"
                                                         id="cancelar" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"
                                                        />
@@ -379,7 +381,7 @@
                         </p:panelGrid>                            
                     </h:form>       
                 </p:dialog>
-                <p:dialog header="Seleccionar Funcionario" width="700"  modal="true"  widgetVar="seleccionarFuncionario">
+        <p:dialog header="Seleccionar Funcionario" resizable="false" width="700"  modal="true"  widgetVar="seleccionarFuncionario">
                     <h:form id="funcionarios">
                         <br/>
                         <h:panelGrid columns="2">
@@ -393,7 +395,7 @@
                         <br/>
                         <p:panel id="tablaFuncionarios">
                             <p:dataTable  var="funcionario" value="#{registrarUsuarioController.listaFuncionarios}" 
-                                          paginator="true" rows="8"  
+                                          paginator="true" rows="6"  
                                           paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                           rowsPerPageTemplate="5,8">
 
@@ -427,14 +429,14 @@
                     </h:form>
                 </p:dialog>
 
-                <p:dialog modal="true"  widgetVar="FuncionarioYaTieneFamiliarAsociado" closable="false">
+        <p:dialog header="Error" resizable="false" width="440" modal="true" widgetVar="FuncionarioYaTieneFamiliarAsociado"  closable="false">                    
+            <h:form>                
                     <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
-                    <h:form>
-                        <p:commandButton  value="Aceptar" style="background:#22419A; 
-                                             color: #FFFFFF;margin-left:150px;"
-                                          onclick="PF('FuncionarioYaTieneFamiliarAsociado').hide()"/>
-                    </h:form>
-                </p:dialog>
+                    <p:commandButton  value="Aceptar" style="background:#22419A; 
+                                             color: #FFFFFF;margin-left:150px;font-weight: normal;"
+                                      onclick="PF('FuncionarioYaTieneFamiliarAsociado').hide()"/>                
+            </h:form>            
+        </p:dialog>
     </ui:composition>
     
 </html>

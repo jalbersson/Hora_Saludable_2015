@@ -27,20 +27,20 @@ public class ValidarCampoNumeroIdentificacion implements Validator
         }catch(Exception e)
         {
             
-            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Campo Solo Puede Contener Numeros.","Campo Solo Puede Contener Numeros.");
+            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Campo solo puede contener números.","Campo solo puede contener números.");
             throw new ValidatorException(msg);
             
         }        
         if(texto.length()>15)
         {
-            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Campo No Mas de 15 Numeros.","Campo No Mas de 15 Numeros.");
+            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Campo no mas de 15 números.","Campo no mas de 15 números.");
             throw new ValidatorException(msg); 
         }
         else
         {
             if(usuarioEJB.buscarPorNumeroIdentificacion(numeroIdentificacion))
             {
-                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Número de Identificación ya se Encuentra Registrado.","Número de Identificación ya se Encuentra Registrado.");
+                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Número de identificación ya se encuentra registrado.","Número de identificación ya se encuentra registrado.");
                 throw new ValidatorException(msg);  
             }  
         }        

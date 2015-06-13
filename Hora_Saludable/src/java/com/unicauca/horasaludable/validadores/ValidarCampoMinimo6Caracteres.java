@@ -20,7 +20,7 @@ public class ValidarCampoMinimo6Caracteres implements Validator
         
         if(texto.length()<6)
         {
-             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Campo No Menos de 6 Caracteres.");
+             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Campo no menos de 6 caracteres.","Campo no menos de 6 caracteres.");
              throw new ValidatorException(msg);  
         }           
         

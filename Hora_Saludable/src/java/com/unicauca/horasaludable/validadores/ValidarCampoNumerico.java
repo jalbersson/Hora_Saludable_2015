@@ -24,7 +24,7 @@ public class ValidarCampoNumerico implements Validator
             
         }catch(Exception e)
         {
-           FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Campo Solo Puede Contener Numeros.");
+           FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Campo solo puede contener números.","Campo solo puede contener números.");
            throw new ValidatorException(msg);
         }
         
