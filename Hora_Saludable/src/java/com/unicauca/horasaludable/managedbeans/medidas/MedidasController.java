@@ -56,7 +56,9 @@ public class MedidasController {
     private List<Medida> listaTest;
     private int idusu;
     private Date fechaNuevoTest;
-    private String calificacion;
+    private String calificacionLeger;
+    private double[] velocidades=new double[16];
+    private double[] consumoOxigeno=new double[16];
 
     public MedidasController() {
 
@@ -72,7 +74,7 @@ public class MedidasController {
         
         listaTest = ejbMedida.buscarporUsuid(idusu);
         medicionactual = ejbMedida.buscarporMedId(idmed).get(0);
-        calificacion = "pendiente";
+        calificacionLeger = "pendiente";
         medicionactual = s.getMedidaactual(); //ejbMedida.buscarporMedId(s.getMedidaactual()).get(0);
         
        
@@ -857,5 +859,234 @@ public class MedidasController {
 
     public void setFechaNuevoTest(Date fechaNuevoTest) {
         this.fechaNuevoTest = fechaNuevoTest;
+    }
+
+    public double[] getConsumoOxigeno() {
+        return consumoOxigeno;
+    }
+
+    public void setConsumoOxigeno(double[] consumoOxigeno) {
+        this.consumoOxigeno = consumoOxigeno;
+    }
+
+    public double[] getVelocidades() {
+        return velocidades;
+    }
+
+    public void setVelocidades(double[] velocidades) {
+        this.velocidades = velocidades;
+    }
+    
+    public void cambiarVelocidad1()
+    {
+        velocidades[0]=8.5;
+        cambiarConsumoOxigeno1();
+    }
+    public void cambiarConsumoOxigeno1()
+    {
+        consumoOxigeno[0]=30.35;
+    }
+    public void cambiarVelocidad2()
+    {
+        velocidades[1]=9;
+        cambiarConsumoOxigeno2();
+    }
+    public void cambiarConsumoOxigeno2()
+    {
+        consumoOxigeno[1]=33.28;
+    }
+    public void cambiarVelocidad3()
+    {
+        velocidades[2]=9.5;
+        cambiarConsumoOxigeno3();
+    }
+    public void cambiarConsumoOxigeno3()
+    {
+        consumoOxigeno[2]=36.21;
+    }
+    public void cambiarVelocidad4()
+    {
+        velocidades[3]=10;
+        cambiarConsumoOxigeno4();
+    }
+    public void cambiarConsumoOxigeno4()
+    {
+        consumoOxigeno[3]=39.14;
+    }
+    public void cambiarVelocidad5()
+    {
+        velocidades[4]=10.5;
+        cambiarConsumoOxigeno5();
+    }
+    public void cambiarConsumoOxigeno5()
+    {
+        consumoOxigeno[4]=42.07;
+    }
+    public void cambiarVelocidad6()
+    {
+        velocidades[5]=11;
+        cambiarConsumoOxigeno6();
+    }
+    public void cambiarConsumoOxigeno6()
+    {
+        consumoOxigeno[5]=45;
+    }
+    public void cambiarVelocidad7()
+    {
+        velocidades[6]=11.5;
+        cambiarConsumoOxigeno7();
+    }
+    public void cambiarConsumoOxigeno7()
+    {
+        consumoOxigeno[6]=47.93;
+    }
+    public void cambiarVelocidad8()
+    {
+        velocidades[7]=12;
+        cambiarConsumoOxigeno8();
+    }
+    public void cambiarConsumoOxigeno8()
+    {
+        consumoOxigeno[7]=50.86;
+    }
+    public void cambiarVelocidad9()
+    {
+        velocidades[8]=12.5;
+        cambiarConsumoOxigeno9();
+    }
+    public void cambiarConsumoOxigeno9()
+    {
+        consumoOxigeno[8]=53.79;
+    }
+    public void cambiarVelocidad10()
+    {
+        velocidades[9]=13;
+        cambiarConsumoOxigeno10();
+    }
+    public void cambiarConsumoOxigeno10()
+    {
+        consumoOxigeno[9]=56.72;
+    }
+    public void cambiarVelocidad11()
+    {
+        velocidades[10]=13.5;
+        cambiarConsumoOxigeno11();
+    }
+    public void cambiarConsumoOxigeno11()
+    {
+        consumoOxigeno[10]=59.65;
+    }
+    public void cambiarVelocidad12()
+    {
+        velocidades[11]=14;
+        cambiarConsumoOxigeno12();
+    }
+    public void cambiarConsumoOxigeno12()
+    {
+        consumoOxigeno[11]=62.58;
+    }
+    public void cambiarVelocidad13()
+    {
+        velocidades[12]=14.5;
+        cambiarConsumoOxigeno13();
+    }
+    public void cambiarConsumoOxigeno13()
+    {
+        consumoOxigeno[12]=65.51;
+    }
+    public void cambiarVelocidad14()
+    {
+        velocidades[13]=15;
+        cambiarConsumoOxigeno14();
+    }
+    public void cambiarConsumoOxigeno14()
+    {
+        consumoOxigeno[13]=68.44;
+    }
+    public void cambiarVelocidad15()
+    {
+        velocidades[14]=15.5;
+        cambiarConsumoOxigeno15();
+    }
+    public void cambiarConsumoOxigeno15()
+    {
+        consumoOxigeno[14]=71.37;
+    }
+    public void cambiarVelocidad16()
+    {
+        velocidades[15]=16;
+        cambiarConsumoOxigeno16();
+    }
+    public void cambiarConsumoOxigeno16()
+    {
+        consumoOxigeno[15]=74.3;
+    }
+
+    public String getCalificacionLeger() {
+        return calificacionLeger;
+    }
+
+    public void setCalificacionLeger(String calificacionLeger) {
+        this.calificacionLeger = calificacionLeger;
+    }
+    public void calcularResultadoLeger()
+    {
+        System.out.println("entro");
+        double r = 0;
+        for (int i = 15; i >= 0; i--) 
+        {
+            if (consumoOxigeno[i] != 0) 
+            {
+                r = consumoOxigeno[i];
+                i = -1;
+            }
+        }
+        if (medicionactual.getUsuid().getUsugenero().equals('F')) 
+        {
+            if(r<24)
+            {
+                calificacionLeger="Baja";
+            }
+            if(r>=24 && r<=30)
+            {
+                calificacionLeger="Regular";
+            }
+            if(r>=31 && r<=37)
+            {
+                calificacionLeger="Media";
+            }
+            if(r>=38 && r<=48)
+            {
+                calificacionLeger="Buena";
+            }
+            if(r>48)
+            {
+                calificacionLeger="Excelente";
+            }
+        }
+        else
+        {
+            if(r<25)
+            {
+                calificacionLeger="Baja";
+            }
+            if(r>=25 && r<=33)
+            {
+                calificacionLeger="Regular";
+            }
+            if(r>=34 && r<=42)
+            {
+                calificacionLeger="Media";
+            }
+            if(r>=43 && r<=52)
+            {
+                calificacionLeger="Buena";
+            }
+            if(r>52)
+            {
+                calificacionLeger="Excelente";
+            }
+        }
+        System.out.println("salio "+calificacionLeger);
     }
 }

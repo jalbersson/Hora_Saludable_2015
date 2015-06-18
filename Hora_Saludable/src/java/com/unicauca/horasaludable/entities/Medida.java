@@ -66,6 +66,38 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Medida.findByMedidasPorUsuario", query = "SELECT m FROM Medida m WHERE m.usuid.usuidentificacion = :usuidentificacion"),
     @NamedQuery(name = "Medida.findByporApellido", query = "SELECT m FROM Medida m WHERE m.usuid.usuapellidos = :usuapellidos")})
 public class Medida implements Serializable {
+    @Column(name = "MEDFCARDIACA1")
+    private Integer medfcardiaca1;
+    @Column(name = "MEDFCARDIACA2")
+    private Integer medfcardiaca2;
+    @Column(name = "MEDFCARDIACA3")
+    private Integer medfcardiaca3;
+    @Column(name = "MEDFCARDIACA4")
+    private Integer medfcardiaca4;
+    @Column(name = "MEDFCARDIACA5")
+    private Integer medfcardiaca5;
+    @Column(name = "MEDFCARDIACA6")
+    private Integer medfcardiaca6;
+    @Column(name = "MEDFCARDIACA7")
+    private Integer medfcardiaca7;
+    @Column(name = "MEDFCARDIACA8")
+    private Integer medfcardiaca8;
+    @Column(name = "MEDFCARDIACA9")
+    private Integer medfcardiaca9;
+    @Column(name = "MEDFCARDIACA10")
+    private Integer medfcardiaca10;
+    @Column(name = "MEDFCARDIACA11")
+    private Integer medfcardiaca11;
+    @Column(name = "MEDFCARDIACA12")
+    private Integer medfcardiaca12;
+    @Column(name = "MEDFCARDIACA13")
+    private Integer medfcardiaca13;
+    @Column(name = "MEDFCARDIACA14")
+    private Integer medfcardiaca14;
+    @Column(name = "MEDFCARDIACA15")
+    private Integer medfcardiaca15;
+    @Column(name = "MEDFCARDIACA16")
+    private Integer medfcardiaca16;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -1152,5 +1184,133 @@ public class Medida implements Serializable {
                 }
             }
         }
+    }
+
+    public Integer getMedfcardiaca1() {
+        return medfcardiaca1;
+    }
+
+    public void setMedfcardiaca1(Integer medfcardiaca1) {
+        this.medfcardiaca1 = medfcardiaca1;
+    }
+
+    public Integer getMedfcardiaca2() {
+        return medfcardiaca2;
+    }
+
+    public void setMedfcardiaca2(Integer medfcardiaca2) {
+        this.medfcardiaca2 = medfcardiaca2;
+    }
+
+    public Integer getMedfcardiaca3() {
+        return medfcardiaca3;
+    }
+
+    public void setMedfcardiaca3(Integer medfcardiaca3) {
+        this.medfcardiaca3 = medfcardiaca3;
+    }
+
+    public Integer getMedfcardiaca4() {
+        return medfcardiaca4;
+    }
+
+    public void setMedfcardiaca4(Integer medfcardiaca4) {
+        this.medfcardiaca4 = medfcardiaca4;
+    }
+
+    public Integer getMedfcardiaca5() {
+        return medfcardiaca5;
+    }
+
+    public void setMedfcardiaca5(Integer medfcardiaca5) {
+        this.medfcardiaca5 = medfcardiaca5;
+    }
+
+    public Integer getMedfcardiaca6() {
+        return medfcardiaca6;
+    }
+
+    public void setMedfcardiaca6(Integer medfcardiaca6) {
+        this.medfcardiaca6 = medfcardiaca6;
+    }
+
+    public Integer getMedfcardiaca7() {
+        return medfcardiaca7;
+    }
+
+    public void setMedfcardiaca7(Integer medfcardiaca7) {
+        this.medfcardiaca7 = medfcardiaca7;
+    }
+
+    public Integer getMedfcardiaca8() {
+        return medfcardiaca8;
+    }
+
+    public void setMedfcardiaca8(Integer medfcardiaca8) {
+        this.medfcardiaca8 = medfcardiaca8;
+    }
+
+    public Integer getMedfcardiaca9() {
+        return medfcardiaca9;
+    }
+
+    public void setMedfcardiaca9(Integer medfcardiaca9) {
+        this.medfcardiaca9 = medfcardiaca9;
+    }
+
+    public Integer getMedfcardiaca10() {
+        return medfcardiaca10;
+    }
+
+    public void setMedfcardiaca10(Integer medfcardiaca10) {
+        this.medfcardiaca10 = medfcardiaca10;
+    }
+
+    public Integer getMedfcardiaca11() {
+        return medfcardiaca11;
+    }
+
+    public void setMedfcardiaca11(Integer medfcardiaca11) {
+        this.medfcardiaca11 = medfcardiaca11;
+    }
+
+    public Integer getMedfcardiaca12() {
+        return medfcardiaca12;
+    }
+
+    public void setMedfcardiaca12(Integer medfcardiaca12) {
+        this.medfcardiaca12 = medfcardiaca12;
+    }
+
+    public Integer getMedfcardiaca13() {
+        return medfcardiaca13;
+    }
+
+    public void setMedfcardiaca13(Integer medfcardiaca13) {
+        this.medfcardiaca13 = medfcardiaca13;
+    }
+
+    public Integer getMedfcardiaca14() {
+        return medfcardiaca14;
+    }
+
+    public void setMedfcardiaca14(Integer medfcardiaca14) {
+        this.medfcardiaca14 = medfcardiaca14;
+    }
+
+    public Integer getMedfcardiaca15() {
+        return medfcardiaca15;
+    }
+
+    public void setMedfcardiaca15(Integer medfcardiaca15) {
+        this.medfcardiaca15 = medfcardiaca15;
+    }
+
+    public Integer getMedfcardiaca16() {
+        return medfcardiaca16;
+    }
+
+    public void setMedfcardiaca16(Integer medfcardiaca16) {
+        this.medfcardiaca16 = medfcardiaca16;
     }
 }
