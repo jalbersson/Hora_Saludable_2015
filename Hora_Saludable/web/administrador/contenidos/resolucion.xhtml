@@ -14,16 +14,24 @@
             </ui:define>
 
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Resolución <br></br>
-                </div>
+
             </ui:define>
 
             <ui:define name="body">
                 <h:form>
-                    
-                   
+
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                            <p:menuitem value="Quienes Somos" url="quienesSomosPrincipal.xhtml" />
+                            <p:menuitem value="Resolución" url="resolucion.xhtml" />
+                        </p:breadCrumb>
+                    </h:form>
+                    <p:spacer height="10"/>
+                    <div class="tituloContenido">
+                        <br></br>
+                        Resolución <br></br>
+                    </div>
                     <object type="application/pdf" data="../../resources/docs/Resolución R-166 de 2002 Hora saludable.pdf" height="400px" width="100%" >
                     </object>
                 </h:form> 

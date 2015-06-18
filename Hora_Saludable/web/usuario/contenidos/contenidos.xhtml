@@ -20,8 +20,14 @@
 
             <ui:define name="body">
 
-                <br></br>
-                <br></br>
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                        <p:menuitem value="Acerca de" url="acercade.xhtml" />
+                        <p:menuitem value="Contenidos" url="contenidos.xhtml" />
+                    </p:breadCrumb>
+                </h:form>
+                <p:spacer height="10"/>
 
                 <h:panelGrid columns="2" style="width:700px; height: 200px;">
                     <h:form>    
@@ -34,15 +40,15 @@
 
                                     <h:form>
                                         <p align="justify">
-                                        <h:outputText value="Este módulo estuvo encargado de gestionar las noticias 
-                                                      y eventos que se van a mostrar en la página principal, de tal 
-                                                      forma que el administrador pueda crear, editar, eliminar una 
-                                                      noticia o un evento, también de mostrar el reglamento y la 
-                                                      Resolución del programa hora saludable. Por otro lado se encargó
-                                                      del envío de correos masivos, en el cual el administrador puede 
-                                                      enviar un correo a los usuarios activos.  Además elaboró Acerca 
-                                                      de y quienes somos para este último el administrador puede editar
-                                                      el contenido." style="font-weight: normal; font-size: 18px"/>
+                                            <h:outputText value="Este módulo estuvo encargado de gestionar las noticias 
+                                                          y eventos que se van a mostrar en la página principal, de tal 
+                                                          forma que el administrador pueda crear, editar, eliminar una 
+                                                          noticia o un evento, también de mostrar el reglamento y la 
+                                                          Resolución del programa hora saludable. Por otro lado se encargó
+                                                          del envío de correos masivos, en el cual el administrador puede 
+                                                          enviar un correo a los usuarios activos.  Además elaboró Acerca 
+                                                          de y quienes somos para este último el administrador puede editar
+                                                          el contenido." style="font-weight: normal; font-size: 18px"/>
                                         </p>
                                     </h:form>
                                     <br></br>

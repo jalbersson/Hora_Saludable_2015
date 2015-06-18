@@ -16,12 +16,18 @@
             <ui:define name="title">
 
 
-             </ui:define>
+            </ui:define>
 
             <ui:define name="body">
 
-                <br></br>
-                <br></br>
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                        <p:menuitem value="Acerca de" url="acercade.xhtml" />
+                        <p:menuitem value="Medidas" url="medidas.xhtml" />
+                    </p:breadCrumb>
+                </h:form>
+                <p:spacer height="10"/>
 
                 <h:panelGrid columns="2" style="width:700px; height: 200px;">
                     <h:form>    
@@ -34,14 +40,14 @@
 
                                     <h:form>
                                         <p align="justify">
-                                        <h:outputText value="Este módulo se encargó la gestión de 
-                                                      las medidas de los usuarios del gimnasio lo cual 
-                                                      consiste en que el administrador del sistema podrá
-                                                      registrar, en diferentes fechas, las medidas de los
-                                                      usuarios del gimnasio con el fin de llevar un control
-                                                      en la evolución de estado físico de los usuarios. Los
-                                                      usuarios registrados pueden ingresar al sistema y 
-                                                      consultar sus medidas y test realizados." style="font-weight: normal; font-size: 18px"/>
+                                            <h:outputText value="Este módulo se encargó la gestión de 
+                                                          las medidas de los usuarios del gimnasio lo cual 
+                                                          consiste en que el administrador del sistema podrá
+                                                          registrar, en diferentes fechas, las medidas de los
+                                                          usuarios del gimnasio con el fin de llevar un control
+                                                          en la evolución de estado físico de los usuarios. Los
+                                                          usuarios registrados pueden ingresar al sistema y 
+                                                          consultar sus medidas y test realizados." style="font-weight: normal; font-size: 18px"/>
                                         </p>
                                     </h:form>
                                     <br></br>
@@ -55,7 +61,7 @@
                                         <h:outputText value="Jalbersson Guillermo Plazas Londoño" style="font-weight: bold; font-size: 18px"/>
                                     </h:form>
                                     <h:form>
-                                        <h:outputText value="Jhonny Paul Mosquera Taborda" style="font-weight: bold; font-size: 18px"/>
+                                        <h:outputText value="Jhonny Paul Taborda Mosquera" style="font-weight: bold; font-size: 18px"/>
                                     </h:form>
                                     <h:form>
                                         <h:outputText value="Orlando Paz Duarte" style="font-weight: bold; font-size: 18px"/>
@@ -79,7 +85,7 @@
 
                 </h:panelGrid>
                 <br></br>
-               <p:button style="background:#22419A ; color: #ffffff; font-style: italic" outcome="acercade" value="Volver" />
+                <p:button style="background:#22419A ; color: #ffffff; font-style: italic" outcome="acercade" value="Volver" />
 
             </ui:define>
         </ui:composition>

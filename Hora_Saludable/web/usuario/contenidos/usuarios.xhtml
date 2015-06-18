@@ -19,9 +19,14 @@
             </ui:define>
 
             <ui:define name="body">
-
-                <br></br>
-                <br></br>
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                        <p:menuitem value="Acerca de" url="acercade.xhtml" />
+                        <p:menuitem value="Usuarios" url="usuarios.xhtml" />
+                    </p:breadCrumb>
+                </h:form>
+                <p:spacer height="10"/>
 
                 <h:panelGrid columns="2" style="width:700px; height: 200px;">
                     <h:form>    
@@ -34,12 +39,12 @@
 
                                     <h:form>
                                         <p align="justify">
-                                        <h:outputText value="Este módulo tuvo como objetivo controlar el Inicio 
-                                                      de Sesión ya sea para el administrador o para un usuario 
-                                                      del gimnasio, el Registro de usuarios (Solo es realizado 
-                                                      por el administrador) y Recuperar contraseña que le permite 
-                                                      a los usuarios que hayan olvidado su contraseña o nombre de 
-                                                      usuario recuperar su cuenta." style="font-weight: normal; font-size: 18px"/>
+                                            <h:outputText value="Este módulo tuvo como objetivo controlar el Inicio 
+                                                          de Sesión ya sea para el administrador o para un usuario 
+                                                          del gimnasio, el Registro de usuarios (Solo es realizado 
+                                                          por el administrador) y Recuperar contraseña que le permite 
+                                                          a los usuarios que hayan olvidado su contraseña o nombre de 
+                                                          usuario recuperar su cuenta." style="font-weight: normal; font-size: 18px"/>
                                         </p>
                                     </h:form>
 
@@ -59,7 +64,7 @@
                                     <h:form>
                                         <h:outputText value="Wilson Geovanny Molina Carvajal" style="font-weight: bold; font-size: 18px"/>
                                     </h:form>
-                                   
+
                                 </p:dataScroller>
 
 

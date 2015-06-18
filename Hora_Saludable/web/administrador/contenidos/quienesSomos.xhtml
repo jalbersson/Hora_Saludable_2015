@@ -20,8 +20,14 @@
 
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                <br></br>
-                <br></br>
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                        <p:menuitem value="Editar Quienes Somos" url="quienesSomos.xhtml" />
+                       
+                    </p:breadCrumb>
+                </h:form>
+                <p:spacer height="10"/>
 
                 <h:form id="form" enctype="multipart/form-data">           
 

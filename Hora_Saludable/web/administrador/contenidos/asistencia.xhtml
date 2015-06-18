@@ -20,8 +20,15 @@
 
             <ui:define name="body">
 
-                <br></br>
-                <br></br>
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />    
+                        <p:menuitem value="Acerca de" url="acercade.xhtml" />                                                  
+                        <p:menuitem value="Asistencia" url="asistencia.xhtml" />
+                    </p:breadCrumb>
+                </h:form>
+                <p:spacer height="10"/>
+
 
                 <h:panelGrid columns="2" style="width:700px; height: 200px;">
                     <h:form>    
@@ -34,11 +41,11 @@
 
                                     <h:form>
                                         <p align="justify">
-                                        <h:outputText value="Este módulo tuvo como objetivo controlar el registro 
-                                                      de asistencia en donde el Administrativo podrá llevar un registro y control de 
-                                                      la asistencia diaria de los usuarios que asisten al gimnasio. Además  la generación 
-                                                      de reportes mensuales, anuales o en un rango de fechas determinado incluyendo reportes 
-                                                      de la asistencia de los usuarios promedio ya sea mensual, semestral o anual." style="font-weight: normal; font-size: 18px"/>
+                                            <h:outputText value="Este módulo tuvo como objetivo controlar el registro 
+                                                          de asistencia en donde el Administrativo podrá llevar un registro y control de 
+                                                          la asistencia diaria de los usuarios que asisten al gimnasio. Además  la generación 
+                                                          de reportes mensuales, anuales o en un rango de fechas determinado incluyendo reportes 
+                                                          de la asistencia de los usuarios promedio ya sea mensual, semestral o anual." style="font-weight: normal; font-size: 18px"/>
                                         </p>
                                     </h:form>
                                     <br></br>
@@ -77,7 +84,7 @@
 
                 <br></br>
                 <p:button style="background:#22419A ; color: #ffffff; font-style: italic" outcome="acercade" value="Volver" />
- 
+
             </ui:define>
         </ui:composition>
     </body>

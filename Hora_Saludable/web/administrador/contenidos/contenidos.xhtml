@@ -19,9 +19,15 @@
             </ui:define>
 
             <ui:define name="body">
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />    
+                        <p:menuitem value="Acerca de" url="acercade.xhtml" />                                                  
+                        <p:menuitem value="Contenidos" url="contenidos.xhtml" />
+                    </p:breadCrumb>
+                </h:form>
+                <p:spacer height="10"/>
 
-                <br></br>
-                <br></br>
 
                 <h:panelGrid columns="2" style="width:700px; height: 200px;">
                     <h:form>    
