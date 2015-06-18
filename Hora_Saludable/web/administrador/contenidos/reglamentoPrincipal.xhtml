@@ -12,20 +12,36 @@
             <ui:define name="titulo">
                 QuienesSomosPrincipal
             </ui:define>
+            <h:form>
+                <p:breadCrumb>
+                    <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                    <p:menuitem value="Quienes Somos" url="quienesSomosPrincipal.xhtml" />
+                </p:breadCrumb>
+            </h:form>
+            <p:spacer height="10"/>
 
             <ui:define name="title">
+
+            </ui:define>
+
+            <ui:define name="body">
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                        <p:menuitem value="Quienes Somos" url="quienesSomosPrincipal.xhtml" />
+                         <p:menuitem value="Reglamento" url="reglamentoPrincipal.xhtml" />
+                    </p:breadCrumb>
+                </h:form>
+                <p:spacer height="10"/>
                 <div class="tituloContenido">
                     <br></br>
                     Reglamento <br></br>
                 </div>
-            </ui:define>
-
-            <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                
+
                 <h:form>
-                    
-                   
+
+
                     <object type="application/pdf" data="../../resources/docs/ReglamentoHoraSaludable.pdf" height="400px" width="100%" >
                     </object>
                 </h:form> 

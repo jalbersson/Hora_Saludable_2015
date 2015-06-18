@@ -14,23 +14,32 @@
             </ui:define>
 
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Resolución <br></br>
-                </div>
+
             </ui:define>
 
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <h:form>
-                    
-                   
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                        <p:menuitem value="Quienes Somos" url="quienesSomos.xhtml" />
+                        <p:menuitem value="Resolución" url="resolucion.xhtml" />
+                    </p:breadCrumb>
+                </h:form>
+                <p:spacer height="10"/>
+                <div class="tituloContenido">
+                    <br></br>
+                    Resolución <br></br>
+                </div>
+                <h:form>
+
+
                     <object type="application/pdf" data="../../resources/docs/Resolución R-166 de 2002 Hora saludable.pdf" height="400px" width="100%" >
                     </object>
                 </h:form> 
                 <h:panelGrid columns="2" style="margin-top: 10px">
 
-                   <p:button style="background:#22419A ; color: #ffffff; font-style: italic" outcome="quienesSomos" value="Volver" />
+                    <p:button style="background:#22419A ; color: #ffffff; font-style: italic" outcome="quienesSomos" value="Volver" />
 
                 </h:panelGrid>
             </ui:define>

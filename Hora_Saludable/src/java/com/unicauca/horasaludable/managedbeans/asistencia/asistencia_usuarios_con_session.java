@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unicauca.horasaludable.managedbeans.asistencia;
 
 import com.unicauca.horasaludable.entities.Detalleasistencia;
@@ -29,6 +24,9 @@ import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
@@ -38,7 +36,6 @@ import org.primefaces.model.chart.ChartSeries;
 @ViewScoped
 public class asistencia_usuarios_con_session implements Serializable 
 {
-
     @EJB
     private AsistenciaFacade ebjUsuarioFacade;
     @EJB
@@ -47,11 +44,18 @@ public class asistencia_usuarios_con_session implements Serializable
     private UsuarioFacade usuarioFacade;
     private ScheduleModel eventModel;
     private ScheduleEvent event;
-    private CartesianChartModel meses;
+    private BarChartModel meses;
     private String anioElegido;
     private boolean mostrarEstadisticas;
-    private String sexo;
-    private Usuario usuario;    
+
+    
+    public String getAnioElegido() {
+        return anioElegido;
+    }
+
+    public void setAnioElegido(String anioElegido) {
+        this.anioElegido = anioElegido;
+    }
 
     public asistencia_usuarios_con_session() {
 
@@ -60,60 +64,9 @@ public class asistencia_usuarios_con_session implements Serializable
     @PostConstruct
     public void init() {
         this.cargarSchedule();
-        this.buscarUsuario();
-        this.definirSexo();
-        meses = new CartesianChartModel();
-    }
-    private void buscarUsuario()
-    {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
-        if (req.getUserPrincipal() != null)
-        {
-            this.usuario=this.usuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0);
-        }
-    }
-    public Usuario getUsuario() 
-    {
-        return usuario;
+        meses = new BarChartModel();
     }
 
-    public void setUsuario(Usuario usuario) 
-    {
-        this.usuario = usuario;
-    }
-    
-    public String getAnioElegido() 
-    {
-        return anioElegido;
-    }
-
-    public void setAnioElegido(String anioElegido) 
-    {
-        this.anioElegido = anioElegido;
-    } 
-    
-    public String getSexo()
-    {
-        return sexo;
-    }
-
-    public void setSexo(String sexo)
-    {
-        this.sexo = sexo;
-    }
-    
-    private void definirSexo()
-    {
-        if(this.usuario.getUsugenero().equals('M'))
-        {
-            this.sexo="Masculino";
-        }
-        else
-        {
-            this.sexo="Femenino";
-        }
-    }
     public ScheduleEvent getEvent() {
         return event;
     }
@@ -134,7 +87,7 @@ public class asistencia_usuarios_con_session implements Serializable
         return meses;
     }
 
-    public void setMeses(CartesianChartModel meses) {
+    public void setMeses(BarChartModel meses) {
         this.meses = meses;
     }
     public boolean isMostrarEstadisticas() 
@@ -157,7 +110,7 @@ public class asistencia_usuarios_con_session implements Serializable
         HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
         if (req.getUserPrincipal() != null) 
         {            
-            List<Usuario> lst = ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName());            
+            List<Usuario> lst = ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName());
             return lst;
         }
         return null;
@@ -180,15 +133,17 @@ public class asistencia_usuarios_con_session implements Serializable
     private void cargarSchedule() {
         List<Detalleasistencia> listaAsistencias = this.obtener_asistencia_usuid();
         eventModel = new DefaultScheduleModel();
+        int numAsis = 1;
         for (Detalleasistencia asistencias : listaAsistencias) {
-            eventModel.addEvent(new DefaultScheduleEvent("",
-                    asistencias.getAsistencia().getAsifecha(), asistencias.getAsistencia().getAsifecha()));
+            eventModel.addEvent(new DefaultScheduleEvent("Asistencia #"+numAsis,
+                    asistencias.getAsistencia().getAsifecha(), asistencias.getAsistencia().getAsifecha(), numAsis));
+            numAsis++;
         }
     }
 
     private Map<Integer, Integer> obtenerNumAsisMes() {
         List<Detalleasistencia> lst = this.obtener_asistencia_usuid();
-        Map<Integer, Integer> meses = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> meses = new HashMap();
 
         String formato = "MM";
         String formato1 = "YYYY";
@@ -198,7 +153,7 @@ public class asistencia_usuarios_con_session implements Serializable
         String aux2;
         String aux3;
 
-        ArrayList<Integer> numeros = new ArrayList<Integer>();
+        ArrayList<Integer> numeros = new ArrayList();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
         SimpleDateFormat dateFormat1 = new SimpleDateFormat(formato1);
@@ -228,7 +183,7 @@ public class asistencia_usuarios_con_session implements Serializable
     }
 
     private Map<Integer, Integer> llenarmap() {
-        Map<Integer, Integer> meses2 = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> meses2 = new HashMap();
         meses2 = this.obtenerNumAsisMes();
         for (int i = 1; i <= 12; i++) {
             if (!meses2.containsKey(i)) {
@@ -238,8 +193,8 @@ public class asistencia_usuarios_con_session implements Serializable
         return meses2;
     }
 
-    public CartesianChartModel estadisticas() {
-        Map<Integer, Integer> meses1 = new HashMap<Integer, Integer>();
+    public BarChartModel estadisticas() {
+        Map<Integer, Integer> meses1 = new HashMap();
         meses1 = this.llenarmap();
 
         final ChartSeries contendido = new ChartSeries("Asistencia Anual");
@@ -250,7 +205,7 @@ public class asistencia_usuarios_con_session implements Serializable
         contendido.set("May", meses1.get(5));
         contendido.set("Jun", meses1.get(6));
         contendido.set("Jul", meses1.get(7));
-        contendido.set("Ag", meses1.get(8));
+        contendido.set("Ago", meses1.get(8));
         contendido.set("Sep", meses1.get(9));
         contendido.set("Oct", meses1.get(10));
         contendido.set("Nov", meses1.get(11));
@@ -258,7 +213,20 @@ public class asistencia_usuarios_con_session implements Serializable
 
         meses.clear();
         meses.addSeries(contendido);
-
+        
+        meses.setTitle("ASISTENCIA PERSONAL - AÑO: "+anioElegido);
+        meses.setLegendPosition("ne");
+        meses.setShowPointLabels(true);
+        meses.setSeriesColors("4D94FF, 1975FF");
+        
+        Axis xAxis = meses.getAxis(AxisType.X);
+        xAxis.setLabel("Mes");
+        
+        Axis yAxis = meses.getAxis(AxisType.Y);
+        yAxis.setLabel("Total de días");
+        yAxis.setMin(0);
+        yAxis.setMax(102);
+        
         return meses;
     }
     
@@ -287,7 +255,5 @@ public class asistencia_usuarios_con_session implements Serializable
             return null;
         }
         return null;
-        
-        
     }
 }

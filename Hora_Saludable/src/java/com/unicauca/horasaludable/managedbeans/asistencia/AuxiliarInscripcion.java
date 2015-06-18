@@ -16,11 +16,11 @@ import java.util.List;
  */
 public class AuxiliarInscripcion {
     
-//    private List<String> meses;
     /**
      * Creates a new instance of AuxiliarAsistencia
      */
     public AuxiliarInscripcion() {
+        
 //        meses = meses();
     }
     private List<String> meses() {
@@ -39,12 +39,14 @@ public class AuxiliarInscripcion {
         me_eses.add("Diciembre");        
         return me_eses;
     }
+    
     public int getDia() {
         return 29;
     }
     public List<String> getMeses() {
         return meses();
     }
+    
     public int getMM(String mes) {
         List<String> meses = meses();
         for(int i=0; i<meses.size(); i++) {

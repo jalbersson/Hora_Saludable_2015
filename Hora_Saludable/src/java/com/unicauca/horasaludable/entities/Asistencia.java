@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Asistencia.findByAsiid", query = "SELECT a FROM Asistencia a WHERE a.asiid = :asiid"),
     @NamedQuery(name = "Asistencia.findByAsifecha", query = "SELECT a FROM Asistencia a WHERE a.asifecha = :asifecha"),
     @NamedQuery(name = "Asistencia.findByYearMonth", query = "SELECT a FROM Asistencia a WHERE FUNC('YEAR', a.asifecha) = :year AND FUNC('MONTH', a.asifecha) = :month"),
+    @NamedQuery(name = "Asistencia.findByYearMonthDay", query = "SELECT a FROM Asistencia a WHERE FUNC('YEAR', a.asifecha) = :year AND FUNC('MONTH', a.asifecha) = :month AND FUNC('DAY', a.asifecha) = :day"),
     @NamedQuery(name = "Asistencia.findByAsiobservaciones", query = "SELECT a FROM Asistencia a WHERE a.asiobservaciones = :asiobservaciones")})
 public class Asistencia implements Serializable {
 

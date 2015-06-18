@@ -22,9 +22,14 @@
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <h:panelGrid columns="1" style="width:800px; height: 200px;">
                     <h:form>    
-                        <br></br>
-                        <br></br>
-                        <br></br>
+                        <h:form>
+                            <p:breadCrumb>
+                                <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                                <p:menuitem value="Acerca de" url="acercade.xhtml" />
+
+                            </p:breadCrumb>
+                        </h:form>
+                        <p:spacer height="10"/>
                         <p align="justify">
                             <h:outputText style="font-weight: normal; font-size: 22px;"  value="La Universidad del Cauca es una institución de educación superior pública de carácter nacional con 187 años de historia.
                                           Ubicada en la ciudad de Popayán, ofrece sus servicios educativos a estudiantes de todo el país, quienes encuentran en la Universidad y la ciudad un espacio idóneo y tranquilo para realizar sus estudios de pregrado y posgrado.

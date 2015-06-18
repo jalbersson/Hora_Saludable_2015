@@ -6,9 +6,8 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-
+  
     <body>
-
         <ui:composition template="./../../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
@@ -19,7 +18,9 @@
 
             </ui:define>
 
-            <ui:define name="body">                
+            <ui:define name="body">
+                #{asistenciaView.mensajeInicial()}
+                <h:outputScript library="js" name="calendar_es.js" />
                 <h:form id="crearInscripcionForm">
                     <p:breadCrumb>
                         <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
@@ -32,80 +33,79 @@
                         Registro de asistencia
                     </div>
 
-                    <p:spacer height="20"/>
+                    <p:spacer height="15"/>
 
-                    <p:growl id="growl" sticky="true" showDetail="true" />
+                    <p:growl id="growl" sticky="false" showDetail="true" life="35000" />
+                    
+                    <p:panel>
+                        <h:panelGroup id="crearInscripcionPanelGroup">
+                            <h:panelGrid columns="3" cellpadding="5" cellspacing="5" style="margin: 0 auto;" >
+                                <h:outputText value="Fecha:" style="font-size: 16px;"  />
+                                <p:calendar id="fecha" value="#{asistenciaView.asi.asifecha}" pattern="dd-MMMM-yyyy" showOn="button" size="13" locale="es"/>                            
+                                <p:commandButton value="Buscar" 
+                                                 actionListener="#{asistenciaView.buscarAsistencia()}" 
+                                                 update="growl, usuariosDataTable, crearInscripcionForm" 
+                                                 icon="ui-icon-search" 
+                                                 onstart="PF('efectoCarga').show()"  
+                                                 onsuccess="PF('efectoCarga').hide()" 
+                                                 style="background:#22419A; color: #FFFFFF; width: 100px; font-weight: normal;" />
 
-                    <h:panelGroup id="crearInscripcionPanelGroup">
-                        <h:panelGrid columns="3" cellpadding="5" cellspacing="5" rendered="#{asistenciaView.asi != null}" style="margin: 0 auto;" >
-                            <h:outputText value="Fecha:" style="font-size: 16px;"  />
-                            <p:calendar id="fecha" value="#{asistenciaView.asi.asifecha}" pattern="dd-MM-yyyy" mask="true" size="7"/>                            
-                            <p:commandButton value="Buscar" 
-                                             actionListener="#{asistenciaView.buscarAsistencia()}" 
-                                             update="growl, usuariosDataTable, crearInscripcionForm" 
-                                             icon="ui-icon-search" 
-                                             onstart="PF('efectoCarga').show()"  
-                                             onsuccess="PF('efectoCarga').hide()" 
-                                             style="background:#22419A; color: #FFFFFF; width: 100px; " />
-
-                        </h:panelGrid>
-                    </h:panelGroup>
+                            </h:panelGrid>
+                        </h:panelGroup>
+                    </p:panel>
+                        
                     <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
+                    <p:spacer height="30"/>
 
-                    <p:spacer height="25"/>
-
-                    <p:panel header="Usuarios" >
-                        <h:panelGrid rendered="#{asistenciaView.asi != null}" style="margin: 0 auto;" >
+                    <p:panel header="Lista de usuarios" rendered="#{asistenciaView.usuarios.size()>0}">
+                        <h:panelGrid style="margin: 0 auto;" >
                             <p:commandButton value="#{asistenciaView.accion}" 
                                              actionListener="#{asistenciaView.crearAsistencia()}" 
                                              update="growl, usuariosDataTable, crearInscripcionForm" 
                                              icon="ui-icon-pencil"  
                                              onstart="PF('efectoCarga').show()"  
                                              onsuccess="PF('efectoCarga').hide()" 
-                                             style="background:#22419A; color: #FFFFFF; width: 100px; " />
+                                             style="background:#22419A; color: #FFFFFF; width: 190px; font-weight: normal;" />
                         </h:panelGrid>
                         <p:spacer />
 
                         <p:dataTable id="usuariosDataTable" value="#{asistenciaView.usuarios}" var="usu"
                                      paginator="true"
                                      rows="20"
+                                     rowsPerPageTemplate="20,40,60,80"
                                      selection="#{asistenciaView.selectedUsus}"
-                                     rowKey="#{usu.usuid}"                                     
+                                     rowKey="#{usu.usuid}"
+                                     emptyMessage="No hay usuarios inscritos con ese filtro. Por favor, dirigase a la opcion: 'Inscripción mensual de usuarios' e inscribalos."
                                      >                            
-
-                            <p:column headerText="NOMBRES" filterBy="#{usu.usunombres}" >
-                                <h:outputText value="#{usu.usunombres}" />
-                            </p:column>
-                            <p:column headerText="APELLIDOS" filterBy="#{usu.usuapellidos}">
-                                <h:outputText value="#{usu.usuapellidos}" />
-                            </p:column>
-                            <p:column headerText="SEXO" >
-                                <h:outputText value="#{usu.usugenero}" />
-                            </p:column>
-                            <p:column headerText="CÓDIGO" filterBy="#{usu.usuidentificacion}">
+                            <p:column headerText="IDENTIFICACIÓN" filterBy="#{usu.usuidentificacion}"  width="130" style="text-align:center;" sortBy="#{usu.usuidentificacion}">
                                 <h:outputText value="#{usu.usuidentificacion}" />
                             </p:column>
-                            <p:column headerText="PROGRAMA ACADEMICO" >
+                            <p:column headerText="NOMBRES" filterBy="#{usu.usunombres}" filterFunction="#{asistenciaView.filtrarPorNombre}" sortBy="#{usu.usunombres}" >
+                                <h:outputText value="#{usu.usunombres}" style="text-transform: uppercase;" />
+                            </p:column>
+                            <p:column headerText="APELLIDOS" filterBy="#{usu.usuapellidos}" filterFunction="#{asistenciaView.filtrarPorApellido}" sortBy="#{usu.usuapellidos}">
+                                <h:outputText value="#{usu.usuapellidos}" style="text-transform: uppercase;" />
+                            </p:column>
+                            <p:column headerText="SEXO" width="60" style="text-align: center;" sortBy="#{usu.usugenero}">
+                                <h:outputText value="#{usu.usugenero}" />
+                            </p:column>
+                            <p:column headerText="PROGRAMA ACADEMICO"  sortBy="#{usu.uniid.uninombre}" >
                                 <h:outputText value="#{usu.uniid.uninombre}" />
                             </p:column>                            
-                            <p:column headerText="ESTAMENTO" >
+                            <p:column headerText="ESTAMENTO" width="110" style="text-align: center;" sortBy="#{usu.carid.carnombre}" >
                                 <h:outputText value="#{usu.carid.carnombre}" />
                             </p:column>                    
-                            <p:column  selectionMode="multiple" style="width:10%;text-align:center" />
+                            <p:column  selectionMode="multiple" width="20" style="text-align:center" />
                         </p:dataTable>
                         <br />
-                        <h:panelGrid rendered="#{asistenciaView.asi != null}" style="margin: 0 auto;" >
+                        <h:panelGrid rendered="#{asistenciaView.usuarios.size()>0}" style="margin: 0 auto;" >
                             <p:inputTextarea id="observaciones" 
                                              value="#{asistenciaView.asi.asiobservaciones}" 
-                                             rows="10" cols="50"/>
-
-                            <p:watermark for="observaciones" value="Observaciones" id="watermark" />
+                                             rows="5" cols="122" placeholder="Escriba aquí sus observaciones..."/>
                         </h:panelGrid>
                     </p:panel>
                 </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>
