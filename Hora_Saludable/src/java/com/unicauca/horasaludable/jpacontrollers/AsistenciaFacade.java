@@ -54,4 +54,14 @@ public class AsistenciaFacade extends AbstractFacade<Asistencia> {
         List<Asistencia> resultList = query.getResultList();
         return resultList;
     }
+    
+    public List<Asistencia> findByYearMonthDay(Integer anio, Integer mes, Integer dia)
+    {
+        Query query = getEntityManager().createNamedQuery("Asistencia.findByYearMonthDay");
+        query.setParameter("year", anio);
+        query.setParameter("month", mes);
+        query.setParameter("day", dia);
+        List<Asistencia> resultList = query.getResultList();
+        return resultList;
+    }
 }

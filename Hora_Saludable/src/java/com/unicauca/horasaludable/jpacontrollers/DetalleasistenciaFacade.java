@@ -46,14 +46,18 @@ public class DetalleasistenciaFacade extends AbstractFacade<Detalleasistencia> {
         }
     }
 
-    public long asistenciaPorMes(int mes, int anio) {
+    public long asistenciaPorMesGrafica2(int mes, int anio) {
         String sqlString = ""
                 + "select count(*) "
                 + "from "
                 + "( "
                 + "select DA.USUID, count(DA.ASIId) "
-                + "from DETALLEASISTENCIA DA NATURAL JOIN ASISTENCIA A "
-                + "WHERE month(A.ASIFECHA) = " + mes + " "
+                + "from INSCRIPCION I NATURAL JOIN DETALLEINSCRIPCION DI "
+                + "NATURAL JOIN DETALLEASISTENCIA DA NATURAL JOIN ASISTENCIA A "
+                + "WHERE DI.DETACTIVO = 1 "
+                + "AND I.INSMES = " + mes + " "
+                + "AND I.INSANIO = " + anio + " "
+                + "AND month(A.ASIFECHA) = " + mes + " "
                 + "AND year(A.ASIFECHA) = " + anio + " "
                 + "AND DA.DETASISTIO = 1 "
                 + "GROUP BY DA.USUId "
@@ -65,6 +69,98 @@ public class DetalleasistenciaFacade extends AbstractFacade<Detalleasistencia> {
         long asistentes = (long) query.getSingleResult();
 
 //        System.out.println("*1*2*3*4*5*6*7*8*9*****"+asistentes);
+        return asistentes;
+    }
+    
+    public long asistenciaPorMesGrafica1(int mes, int anio) {
+        String sqlString = ""
+                + "select count(*) "
+                + "from INSCRIPCION I NATURAL JOIN DETALLEINSCRIPCION DI "
+                + "NATURAL JOIN DETALLEASISTENCIA DA NATURAL JOIN ASISTENCIA A "
+                + "WHERE DI.DETACTIVO = 1 "
+                + "AND I.INSMES = " + mes + " "
+                + "AND I.INSANIO = " + anio + " "
+                + "AND month(A.ASIFECHA) = " + mes + " "
+                + "AND year(A.ASIFECHA) = " + anio + " "
+                + "AND DA.DETASISTIO = 1 ";
+        
+        Query query = em.createNativeQuery(sqlString);
+
+//        int asistentes = -1;
+        long asistentes = (long) query.getSingleResult();
+
+//        System.out.println("*1*2*3*4*5*6*7*8*9*****"+asistentes);
+        return asistentes;
+    }
+    
+    public long asistenciaDependenciaPorAño(int anio, long uniid) {
+        String sqlString = ""
+                + "select count(*) "
+                + "from "
+                + "( "
+                + "select DA.USUID, count(DA.ASIId) "
+                + "from USUARIO U NATURAL JOIN INSCRIPCION I NATURAL JOIN DETALLEINSCRIPCION DI "
+                + "NATURAL JOIN DETALLEASISTENCIA DA NATURAL JOIN ASISTENCIA A "
+                + "WHERE U.UNIID = " +uniid+ " "
+                + "AND DI.DETACTIVO = 1 "
+                + "AND I.INSANIO = " + anio + " "
+                + "AND year(A.ASIFECHA) = " + anio + " "
+                + "AND DA.DETASISTIO = 1 "
+                + "GROUP BY DA.USUId "
+                + "HAVING count(DA.ASIID) > 0"
+                + ") ASI";
+        Query query = em.createNativeQuery(sqlString);
+
+        long asistentes = (long) query.getSingleResult();
+
+        return asistentes;
+    }
+    
+    public long asistenciaDependenciaPorMes(int mes, int anio, long uniid) {
+        String sqlString = ""
+                + "select count(*) "
+                + "from "
+                + "( "
+                + "select DA.USUID, count(DA.ASIId) "
+                + "from USUARIO U NATURAL JOIN INSCRIPCION I NATURAL JOIN DETALLEINSCRIPCION DI "
+                + "NATURAL JOIN DETALLEASISTENCIA DA NATURAL JOIN ASISTENCIA A "
+                + "WHERE U.UNIID = " +uniid+ " "
+                + "AND DI.DETACTIVO = 1 "
+                + "AND I.INSMES = " + mes + " "
+                + "AND I.INSANIO = " + anio + " "
+                + "AND month(A.ASIFECHA) = " + mes + " "
+                + "AND year(A.ASIFECHA) = " + anio + " "
+                + "AND DA.DETASISTIO = 1 "
+                + "GROUP BY DA.USUId "
+                + "HAVING count(DA.ASIID) > 0"
+                + ") ASI";
+        Query query = em.createNativeQuery(sqlString);
+
+        long asistentes = (long) query.getSingleResult();
+
+        return asistentes;
+    }
+    
+    public long asistenciaDependenciaPorSemestre(String fechaI, String fechaF, long uniid) {
+        String sqlString = ""
+                + "select count(*) "
+                + "from "
+                + "( "
+                + "select DA.USUID, count(DA.ASIId) "
+                + "from USUARIO U NATURAL JOIN INSCRIPCION I NATURAL JOIN DETALLEINSCRIPCION DI "
+                + "NATURAL JOIN DETALLEASISTENCIA DA NATURAL JOIN ASISTENCIA A "
+                + "WHERE U.UNIID = " +uniid+ " "
+                + "AND DI.DETACTIVO = 1 "
+                + "AND (A.ASIFECHA BETWEEN '" + fechaI + "' "
+                + "AND '" + fechaF + "') "
+                + "AND DA.DETASISTIO = 1 "
+                + "GROUP BY DA.USUId "
+                + "HAVING count(DA.ASIID) > 0"
+                + ") ASI";
+        Query query = em.createNativeQuery(sqlString);
+
+        long asistentes = (long) query.getSingleResult();
+
         return asistentes;
     }
 
@@ -99,5 +195,18 @@ public class DetalleasistenciaFacade extends AbstractFacade<Detalleasistencia> {
         List<Integer> resultList = query.getResultList();
         return resultList;
 
+    }
+    
+    public List<Detalleasistencia> obtenerPorAsiid(Long asiid, Boolean detasistio) {
+        List<Detalleasistencia> resultList;
+        try {
+            Query query = getEntityManager().createNamedQuery("Detalleasistencia.findByAsiidAsistio");
+            query.setParameter("asiid", asiid);
+            query.setParameter("detasistio", detasistio);
+            resultList = query.getResultList();
+        } catch (Exception e) {
+            resultList = new ArrayList();
+        }
+        return resultList;
     }
 }

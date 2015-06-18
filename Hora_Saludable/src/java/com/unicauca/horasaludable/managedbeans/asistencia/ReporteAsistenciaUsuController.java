@@ -6,6 +6,7 @@ import com.unicauca.horasaludable.entities.Usuario;
 import com.unicauca.horasaludable.jpacontrollers.AsistenciaFacade;
 import com.unicauca.horasaludable.jpacontrollers.DetalleasistenciaFacade;
 import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
+import com.unicauca.horasaludable.jpacontrollers.DetalleinscripcionFacade;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -52,6 +53,8 @@ public class ReporteAsistenciaUsuController implements Serializable
     private AsistenciaFacade asistenciaEJB;
     @EJB
     private DetalleasistenciaFacade detalleAsistenciaEJB;
+    @EJB
+    private DetalleinscripcionFacade detalleInsEJB;
     
     private int mes;
     private int año;
@@ -155,41 +158,37 @@ public class ReporteAsistenciaUsuController implements Serializable
         {
             tablaAnual = new ArrayList();
             TablaAsistenciaAnual obj;
-            boolean ban;
             int cont = 1;
-            List<Usuario> lstUsuarios = usuarioEJB.buscarPorNombresApellidos(nombreUsuario);
+            List<Usuario> lstUsuarios = detalleInsEJB.usariosActivosPorAño(true, año, nombreUsuario);
 
             for (Usuario u : lstUsuarios)   //Se recorren todos los usuarios
             {
                 obj = new TablaAsistenciaAnual();
-                ban = false;
                 for(int i=1; i<=12; i++)
                 {
-                    List<Asistencia> lstAsistencia = asistenciaEJB.findByYearMonth(año, i);
-                    for(Asistencia a : lstAsistencia)
+                    if(detalleInsEJB.usuarioActivo(u.getUsuid(), true, String.valueOf(i), año))
                     {
-                        List<Detalleasistencia> lstDetalleAsistencia = detalleAsistenciaEJB.obtenerDetalleAsistenciaPorUsuIDAsiID(a.getAsiid(), u.getUsuid(), true);
-
-                        if(lstDetalleAsistencia.size() > 0)
+                        List<Asistencia> lstAsistencia = asistenciaEJB.findByYearMonth(año, i);
+                        for(Asistencia a : lstAsistencia)
                         {
-                            ban  = true;
-                            obj.setMeses((i-1), obj.getMeses(i-1)+1);
+                            List<Detalleasistencia> lstDetalleAsistencia = detalleAsistenciaEJB.obtenerDetalleAsistenciaPorUsuIDAsiID(a.getAsiid(), u.getUsuid(), true);
+
+                            if(lstDetalleAsistencia.size() > 0)
+                                obj.setMeses((i-1), obj.getMeses(i-1)+1);
                         }
                     }
                 }
-                if(ban == true){
-                    obj.setNum(cont);
-                    obj.setNombre(u.getUsuapellidos()+" "+u.getUsunombres());
-                    obj.setSexo(u.getUsugenero());
-                    obj.setCodigo(u.getUsuid());
-                    if(u.getUniid() != null)
-                        obj.setPrograma(u.getUniid().getUninombre());
-                    if(u.getCarid() != null)
-                        obj.setEstamento(u.getCarid().getCarnombre());
-                    obj.setAsisTotal(obj.getMeses(0)+obj.getMeses(1)+obj.getMeses(2)+obj.getMeses(3)+obj.getMeses(4)+obj.getMeses(5)+obj.getMeses(6)+obj.getMeses(7)+obj.getMeses(8)+obj.getMeses(9)+obj.getMeses(10)+obj.getMeses(11));
-                    tablaAnual.add(obj);
-                    cont ++;
-                }
+                obj.setNum(cont);
+                obj.setNombre(u.getUsuapellidos()+" "+u.getUsunombres());
+                obj.setSexo(u.getUsugenero());
+                obj.setCodigo(u.getUsuid());
+                if(u.getUniid() != null)
+                    obj.setPrograma(u.getUniid().getUninombre());
+                if(u.getCarid() != null)
+                    obj.setEstamento(u.getCarid().getCarnombre());
+                obj.setAsisTotal(obj.getMeses(0)+obj.getMeses(1)+obj.getMeses(2)+obj.getMeses(3)+obj.getMeses(4)+obj.getMeses(5)+obj.getMeses(6)+obj.getMeses(7)+obj.getMeses(8)+obj.getMeses(9)+obj.getMeses(10)+obj.getMeses(11));
+                tablaAnual.add(obj);
+                cont ++;
             }
         }
     }
@@ -201,44 +200,43 @@ public class ReporteAsistenciaUsuController implements Serializable
             tablaMensual = new ArrayList();
             TablaAsistenciaMensual obj;
             Calendar c;
-            boolean ban;
             int cont = 1, aux;
-            List<Usuario> lstUsuarios = usuarioEJB.buscarPorNombresApellidos(nombreUsuario);
+            
+            List<Usuario> lstUsuarios = detalleInsEJB.usariosActivos(true, String.valueOf(mes), año, nombreUsuario);
 
             List<Asistencia> lstAsistencia = asistenciaEJB.findByYearMonth(año, mes);
 
             for (Usuario u : lstUsuarios)   //Se recorren todos los usuarios
             {
                 obj = new TablaAsistenciaMensual();
-                ban = false;
                 aux = 0;
-                for(Asistencia a : lstAsistencia)
+                if(detalleInsEJB.usuarioActivo(u.getUsuid(), true, String.valueOf(mes), año))
                 {
-                    List<Detalleasistencia> lstDetalleAsistencia = detalleAsistenciaEJB.obtenerDetalleAsistenciaPorUsuIDAsiID(a.getAsiid(), u.getUsuid(), true);
-
-                    if(lstDetalleAsistencia.size() > 0)
+                    for(Asistencia a : lstAsistencia)
                     {
-                        ban  = true;
-                        c = GregorianCalendar.getInstance();
-                        c.setTime(a.getAsifecha());
-                        int dia = c.get(Calendar.DAY_OF_MONTH);
-                        obj.setDias(dia-1, "X");
-                        aux ++;
+                        List<Detalleasistencia> lstDetalleAsistencia = detalleAsistenciaEJB.obtenerDetalleAsistenciaPorUsuIDAsiID(a.getAsiid(), u.getUsuid(), true);
+
+                        if(lstDetalleAsistencia.size() > 0)
+                        {
+                            c = GregorianCalendar.getInstance();
+                            c.setTime(a.getAsifecha());
+                            int dia = c.get(Calendar.DAY_OF_MONTH);
+                            obj.setDias(dia-1, "X");
+                            aux ++;
+                        }
                     }
                 }
-                if(ban == true){
-                    obj.setNum(cont);
-                    obj.setNombre(u.getUsuapellidos()+" "+u.getUsunombres());
-                    obj.setSexo(u.getUsugenero());
-                    obj.setCodigo(u.getUsuid());
-                    if(u.getUniid() != null)
-                        obj.setPrograma(u.getUniid().getUninombre());
-                    if(u.getCarid() != null)
-                        obj.setEstamento(u.getCarid().getCarnombre());
-                    obj.setAsisTotal(aux);
-                    tablaMensual.add(obj);
-                    cont ++;
-                }
+                obj.setNum(cont);
+                obj.setNombre(u.getUsuapellidos()+" "+u.getUsunombres());
+                obj.setSexo(u.getUsugenero());
+                obj.setCodigo(u.getUsuid());
+                if(u.getUniid() != null)
+                    obj.setPrograma(u.getUniid().getUninombre());
+                if(u.getCarid() != null)
+                    obj.setEstamento(u.getCarid().getCarnombre());
+                obj.setAsisTotal(aux);
+                tablaMensual.add(obj);
+                cont ++;
             }
         }
     }

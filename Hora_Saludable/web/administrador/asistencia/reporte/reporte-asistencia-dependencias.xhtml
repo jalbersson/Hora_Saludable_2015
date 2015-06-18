@@ -17,8 +17,7 @@
             <ui:define name="title">         
             </ui:define>
 
-            <ui:define name="body">
-                
+            <ui:define name="body">                
                 <p:breadCrumb>
                     <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
                     <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
@@ -33,51 +32,44 @@
 
                 <h:form id="form">
                     <p:panel>
-                        <p:panelGrid styleClass="panelgrid"  id="panelGrid1">
+                        <p:panelGrid id="panelGrid1" styleClass="panelgrid" style="margin: 0 auto;">
                             <p:row>
                                 <p:column style="text-align:right">
-                                    <h:outputLabel for="tipoReporte" value="Tipo de reporte:" />
+                                    <h:outputLabel for="tipoReporte" value="Tipo de reporte:" style="font-size: 15px;"/>
                                 </p:column>
                                 <p:column>
                                     <p:selectOneMenu id="tipoReporte" required="true"
                                                      requiredMessage="Seleccione el tipo de reporte."
-                                                     valueChangeListener="#{dependencias.cambiarTipo}">
+                                                     valueChangeListener="#{reporteDependencias.cambiarTipo}">
                                         <f:selectItem itemValue="NingunReporte" itemLabel="Seleccione uno" /> 
                                         <f:selectItem itemValue="Anual" itemLabel="Anual" />
                                         <f:selectItem itemValue="Mensual" itemLabel="Mensual" />
-                                        <f:ajax  execute="tipoReporte" render="form" />
+                                        <f:selectItem itemValue="Semestral" itemLabel="Semestral" />
+                                        <p:ajax update="form"/>
+                                        <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                                     </p:selectOneMenu>
                                 </p:column>
-                                <p:column>
-                                    <p:message for="tipoReporte"/>  
+                                <p:column style="text-align:right" rendered="#{reporteDependencias.comboAnio}">
+                                    <h:outputLabel for="anioReporte" value="Año:" style="font-size: 15px;"/>
                                 </p:column>
-                            </p:row>
-
-                            <p:row rendered="#{dependencias.comboAnio}">
-                                <p:column style="text-align:right">
-                                    <h:outputLabel for="anioReporte" value="Año:" />
-                                </p:column>
-                                <p:column>
+                                <p:column rendered="#{reporteDependencias.comboAnio}">
                                     <p:selectOneMenu id="anioReporte" required="true" requiredMessage="Seleccione el año."
-                                                     valueChangeListener="#{dependencias.cambiarAño}">
+                                                     valueChangeListener="#{reporteDependencias.cambiarAño}" value="#{reporteDependencias.anioSeleccionado}">
                                         <f:selectItem itemValue="NingunAño" itemLabel="Seleccione uno" /> 
                                         <f:selectItem itemValue="2014" itemLabel="2014" />
                                         <f:selectItem itemValue="2015" itemLabel="2015" />
-                                        <f:ajax  execute="tipoReporte" render="form" />
+                                        <f:selectItem itemValue="2016" itemLabel="2016" />
+                                        <p:ajax update="form"/>
+                                        <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                                     </p:selectOneMenu>
                                 </p:column>
-                                <p:column>
-                                    <p:message for="anioReporte"/>  
+                                
+                                <p:column style="text-align:right" rendered="#{reporteDependencias.comboMes}">
+                                    <h:outputLabel for="mesReporte" value="Mes:" style="font-size: 15px;" />
                                 </p:column>
-                            </p:row>
-
-                            <p:row rendered="#{dependencias.comboMes}">
-                                <p:column style="text-align:right">
-                                    <h:outputLabel for="mesReporte" value="Mes:" />
-                                </p:column>
-                                <p:column>
+                                <p:column rendered="#{reporteDependencias.comboMes}">
                                     <p:selectOneMenu id="mesReporte" required="true" requiredMessage="Seleccione el mes."
-                                                     valueChangeListener="#{dependencias.cambiarPorMes}">
+                                                     valueChangeListener="#{reporteDependencias.cambiarPorMes}" value="#{reporteDependencias.mesSeleccionado}">
                                         <f:selectItem itemValue="NingunMes" itemLabel="Seleccione uno" /> 
                                         <f:selectItem itemValue="Enero" itemLabel="Enero" />
                                         <f:selectItem itemValue="Febrero" itemLabel="Febrero" />
@@ -91,35 +83,41 @@
                                         <f:selectItem itemValue="Octubre" itemLabel="Octubre" />
                                         <f:selectItem itemValue="Noviembre" itemLabel="Noviembre" />
                                         <f:selectItem itemValue="Diciembre" itemLabel="Diciembre" />
-                                        <f:ajax  execute="tipoReporte" render="form" />
+                                        <p:ajax update="form"/>
+                                        <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                                     </p:selectOneMenu>
                                 </p:column>
-                                <p:column>
-                                    <p:message for="mesReporte"/>  
+                                <p:column style="text-align:right" rendered="#{reporteDependencias.comboPeriodo}">
+                                    <h:outputLabel for="semestreReporte" value="Periodo:" style="font-size: 15px;" />
+                                </p:column>
+                                <p:column rendered="#{reporteDependencias.comboPeriodo}">
+                                    <p:selectOneMenu id="semestreReporte" required="true" requiredMessage="Seleccione el semestre."
+                                                     valueChangeListener="#{reporteDependencias.cambiarPorSemestre}" value="#{reporteDependencias.semestreSeleccionado}">
+                                        <f:selectItem itemValue="NingunSemestre" itemLabel="Seleccione uno" /> 
+                                        <f:selectItem itemValue="Primero" itemLabel="Primero" />
+                                        <f:selectItem itemValue="Segundo" itemLabel="Segundo" />
+                                        <p:ajax update="form"/>
+                                        <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                                    </p:selectOneMenu>
                                 </p:column>
                             </p:row>
                         </p:panelGrid>
-                    </p:panel>
-
-                    <p:spacer height="20"/>
                     
-                    <h:panelGrid id="panelGrid2" style="margin: 0 auto;" columns="1" cellpadding="7" rendered="#{dependencias.mostrarPoraño}"> 
-                        <h3>Este reporte muestra la asistencia de participantes por dependencias en el mes de enero de 2014</h3>
-                        <p:chart type="bar" model="#{dependencias.barModel}" style="height:600px; width: 800px" widgetVar="chart"/>
-                        <p:commandButton type="button" value="Exportar" icon="ui-icon-extlink" onclick="exportChart()"/>
-                    </h:panelGrid>
-                
-                    <h:panelGrid id="panelGrid3" style="margin: 0 auto;" columns="1" cellpadding="7" rendered="#{dependencias.mostrarPorMes}"> 
-                        <h3>Este reporte muestra la asistencia de participantes por dependencias en el mes de enero de 2014</h3>
-                        <p:chart type="bar" model="#{dependencias.barModel}" style="height:600px; width: 800px" widgetVar="chart"/>
-                        <p:commandButton type="button" value="Exportar" icon="ui-icon-extlink" onclick="exportChart()"/>
-                    </h:panelGrid>
-                
+                        <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
+                        <p:spacer height="35" rendered="#{reporteDependencias.mostrarGrafica}"/>
+                        <h:panelGrid style="margin: 0 auto;" rendered="#{reporteDependencias.mostrarGrafica}">
+                            <p:chart type="bar" model="#{reporteDependencias.barModel}" style="height:500px; width: 850px" widgetVar="chart" />
+                        </h:panelGrid>
+                        <p:spacer height="20" rendered="#{reporteDependencias.mostrarGrafica}"/>
+                        <h:panelGrid style="margin: 0 auto;" rendered="#{reporteDependencias.mostrarGrafica}">
+                            <p:commandButton type="button" value="Ver como imagen" icon="ui-icon-extlink" onclick="exportChart()"
+                                            style="background:#22419A; color: #FFFFFF; font-weight: normal;" />
+                        </h:panelGrid>
+                        <p:spacer height="15" rendered="#{reporteDependencias.mostrarGrafica}"/>
+                    </p:panel>
                 </h:form>
-                
-                
                 <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Gráfica" resizable="false">
-                    <p:outputPanel id="output" layout="block" style="width:610px; height:320px"/>
+                    <p:outputPanel id="output" layout="block" style="height:520px; width: 870px"/>
                 </p:dialog>
 
                 <script type="text/javascript">
@@ -132,8 +130,6 @@
                     }
                 </script>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

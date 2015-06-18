@@ -18,8 +18,11 @@
                 
             </ui:define>
 
-            <ui:define name="body">               
+            <ui:define name="body">
+                <h:outputScript library="js" name="calendar_es.js" />
+                
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>  
+                
                 <div class="submenu">
                     <h5>MENU USUARIO</h5>
                     <h:form>
@@ -40,6 +43,7 @@
                         </h:link> 
                     </h:form>                    
                 </div>
+                
                 <div style="margin-left: 200px; margin-top: 10px;">                    
                     <h:form>
                         <p:breadCrumb>
@@ -50,54 +54,60 @@
                             Mi Asistencia 
                         </div>                        
                         <p:spacer height="20"/>
-                        <p:panel header="Información personal">
-                            
-                                <h:panelGrid columns="2" cellpadding="5" >
-                                    <p:outputLabel id="lblCodigo" value="Identificación:" />
-                                #{asistencia_usuarios_con_session.usuario.usuidentificacion}
-                                
-                                    <p:outputLabel id="lblNombre" value="Nombres y Apellidos:" />
-                                #{asistencia_usuarios_con_session.usuario.usunombres}  #{asistencia_usuarios_con_session.usuario.usuapellidos}
-
-
-                                    <p:outputLabel id="lblSexo" value="Sexo:" />
-                                #{asistencia_usuarios_con_session.sexo}
-
-                                    <p:outputLabel id="lblProgramaAcademico" value="Facultad:" />
-                                #{asistencia_usuarios_con_session.usuario.uniid.uninombre}
-
-                                    <p:outputLabel id="lblEstamento" value="Estamento:" />
-                                #{asistencia_usuarios_con_session.usuario.carid.carnombre}
-                                </h:panelGrid>                           
-                        </p:panel>
-                        <p:spacer height="30"/>
+                        
                         <p:panel header="Asistencia">
                             <br />
-                            <p:spacer height="25"/>
+                            <p:spacer height="15"/>
 
-
-                            <h:panelGrid columns="1" cellpadding="5">
-                                <p:outputLabel value="En el siguiente calendario, las fechas resaltadas en azul representa los dias en que asistió al programa Hora Saludable" />
-                                <p:schedule value="#{asistencia_usuarios_con_session.eventModel}" >
-                                </p:schedule>
+                            <h:panelGrid columns="1" cellpadding="5" style="margin: 0 auto;">
+                                <p:outputLabel value="En el siguiente calendario, las fechas resaltadas en azul representa los dias en que asistió a este programa." />
                                 <br />
-                                <p:outputLabel value="A continuación se muestra una gráfica donde se refleja su asistencia al programa Hora Saludable" />
+                                <p:schedule value="#{asistencia_usuarios_con_session.eventModel}" locale="es"/>
+                                <br />
+                            </h:panelGrid>
+                            <p:separator />
+                            <br /><br />
+                            
+                            <h:panelGrid style="margin: 0 auto;">
+                                <p:outputLabel value="A continuación se muestra una gráfica donde se refleja su asistencia al programa Hora Saludable"/>
+                            </h:panelGrid>
+                            
+                            <br /><br />
+                            <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;">
+                                <p:outputLabel value="Seleccione el año:" />
                                 <p:selectOneMenu value="#{asistencia_usuarios_con_session.anioElegido}">
-
                                     <f:selectItems value="#{asistencia_usuarios_con_session.obtenerAniosAsistencia()}" var="anio" itemLabel="#{anio}" itemValue="#{anio}" />
-                                    
                                     <p:ajax update="Barra"  />
+                                    <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                                 </p:selectOneMenu>
-                                <p:barChart rendered="#{asistencia_usuarios_con_session.mostrarEstadisticas}" id="Barra" value="#{asistencia_usuarios_con_session.estadisticas()}" legendPosition="ne"
-                                            title="Asistencia #{asistencia_usuarios_con_session.anioElegido}" style="height:300px; width: 500px;"
-                                            xaxisLabel="Meses" yaxisLabel="Total días" />
+                            </h:panelGrid>
+                            <p:spacer height="30"/>
+                            <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;">
+                                <p:chart id="Barra" type="bar" rendered="#{asistencia_usuarios_con_session.mostrarEstadisticas}" model="#{asistencia_usuarios_con_session.estadisticas()}"
+                                             style="height:400px; width: 600px;" widgetVar="chart"  />
                                 <p:outputLabel rendered="#{!asistencia_usuarios_con_session.mostrarEstadisticas}" value="No registra Asistencias."/>
                             </h:panelGrid>
-
-
-
+                            <p:spacer height="15"/>
+                    
+                            <h:panelGrid style="margin: 0 auto;" rendered="#{asistencia_usuarios_con_session.mostrarEstadisticas}">
+                                <p:commandButton type="button" value="Ver como imagen" icon="ui-icon-extlink" onclick="exportChart()"
+                                             style="background:#22419A; color: #FFFFFF; font-weight: normal;" />
+                            </h:panelGrid>
                         </p:panel>
                     </h:form>
+                    <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Gráfica" resizable="false" style="height:450px; width: 650px">
+                        <p:outputPanel id="output" layout="block" />
+                    </p:dialog>
+
+                    <script type="text/javascript">
+                        function exportChart() {
+                            //export image
+                            $('#output').empty().append(PF('chart').exportAsImage());
+
+                            //show the dialog
+                            PF('dlg').show();
+                        }
+                    </script>
                 </div>
                 <div style="clear: both;"></div>
             </ui:define>

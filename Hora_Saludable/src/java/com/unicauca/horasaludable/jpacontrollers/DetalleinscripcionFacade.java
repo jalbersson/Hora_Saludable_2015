@@ -32,16 +32,51 @@ public class DetalleinscripcionFacade extends AbstractFacade<Detalleinscripcion>
         super(Detalleinscripcion.class);
     }
 
-    public List<Usuario> usariosActivos(boolean activo, String mes, int anio) {
+    public List<Usuario> usariosActivos(boolean activo, String mes, int anio, String nombresApellidos) {
         try {
             String queryString = "SELECT u "
                     + "FROM Usuario u JOIN u.detalleinscripcionList d JOIN d.inscripcion i "
-                    + "WHERE d.detactivo = :activo AND i.insmes = :mes AND i.insanio = :anio";
+                    + "WHERE d.detactivo = :activo AND i.insmes = :mes AND i.insanio = :anio AND LOWER(CONCAT(CONCAT(u.usunombres,' '),u.usuapellidos)) LIKE :nombresApellidos ORDER BY u.usuapellidos ASC";
 
             TypedQuery<Usuario> query = getEntityManager().createQuery(queryString, Usuario.class);
             query.setParameter("activo", activo);
             query.setParameter("mes", mes);
             query.setParameter("anio", anio);
+            query.setParameter("nombresApellidos", "%" + nombresApellidos + "%");
+            return query.getResultList();
+        } finally {
+            // em.close();
+            //return null;
+        }
+    }
+    
+    public boolean usuarioActivo(long usuid, boolean activo, String mes, int anio) {
+        
+        String queryString = "SELECT u "
+                + "FROM Usuario u JOIN u.detalleinscripcionList d JOIN d.inscripcion i "
+                + "WHERE d.detalleinscripcionPK.usuid = :usuid AND d.detactivo = :activo AND i.insmes = :mes AND i.insanio = :anio";
+
+        TypedQuery<Usuario> query = getEntityManager().createQuery(queryString, Usuario.class);
+        query.setParameter("activo", activo);
+        query.setParameter("mes", mes);
+        query.setParameter("anio", anio);
+        query.setParameter("usuid", usuid);
+        if(query.getResultList().size() > 0)
+            return true;
+        else
+            return false;
+    }
+    
+    public List<Usuario> usariosActivosPorAño(boolean activo, int anio, String nombresApellidos ) {
+        try {
+            String queryString = "SELECT DISTINCT u "
+                    + "FROM Usuario u JOIN u.detalleinscripcionList d JOIN d.inscripcion i "
+                    + "WHERE d.detactivo = :activo AND i.insanio = :anio AND LOWER(CONCAT(CONCAT(u.usunombres,' '),u.usuapellidos)) LIKE :nombresApellidos ORDER BY u.usuapellidos ASC";
+
+            TypedQuery<Usuario> query = getEntityManager().createQuery(queryString, Usuario.class);
+            query.setParameter("activo", activo);
+            query.setParameter("anio", anio);
+            query.setParameter("nombresApellidos", "%" + nombresApellidos + "%");
             return query.getResultList();
         } finally {
             // em.close();

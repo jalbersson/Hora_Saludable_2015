@@ -18,7 +18,8 @@
                 
             </ui:define>
 
-            <ui:define name="body">                
+            <ui:define name="body"> 
+                #{crearInscripcionBean.mensajeInicial()}
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
                 <h:form id="crearInscripcionForm">
                     <p:breadCrumb>
@@ -33,73 +34,74 @@
                     </div>
                     <p:spacer height="15"/>
 
-                    <p:growl id="growl" sticky="true" showDetail="true" />
+                    <p:growl id="growl" sticky="false" showDetail="true" life="35000"/>
+                    
+                    <p:panel>
+                        <h:panelGroup id="crearInscripcionPanelGroup">
+                            <h:panelGrid columns="5" cellpadding="8" cellspacing="8" style="margin: 0 auto;" >
+                                <h:outputText value="Mes:" style="font-size: 16px; text-align: right;" />
+                                <p:selectOneMenu value="#{crearInscripcionBean.ins.insmes}" >                                    
+                                    <f:selectItems value="#{crearInscripcionBean.meses}" />                                                                        
+                                </p:selectOneMenu> 
+                                <h:outputText value="Año:" style="font-size: 16px; text-align: right;" />
+                                <p:spinner value="#{crearInscripcionBean.ins.insanio}" max="#{crearInscripcionBean.anio}" size="10" />                                                                                                                
+                                <p:commandButton value="Buscar" actionListener="#{crearInscripcionBean.buscarInscritos()}"
+                                                 update="growl, usuariosDataTable, crearInscripcionForm" 
+                                                 icon="ui-icon-search"  
+                                                 onstart="PF('efectoCarga').show()"  
+                                                 onsuccess="PF('efectoCarga').hide()" 
+                                                 style="background:#22419A; color: #FFFFFF; width: 100px; font-weight: normal;" />                            
 
-                    <h:panelGroup id="crearInscripcionPanelGroup">
-                        <h:panelGrid columns="5" cellpadding="4" cellspacing="5" rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
-                            <h:outputText value="Mes:" style="font-size: 16px;" />
-                            <p:selectOneMenu value="#{crearInscripcionBean.ins.insmes}" style="size: 10;" >                                    
-                                <f:selectItems value="#{crearInscripcionBean.meses}" />                                                                        
-                            </p:selectOneMenu> 
-                            <h:outputText value="Año:" style="font-size: 16px;" />
-                            <p:spinner value="#{crearInscripcionBean.ins.insanio}" max="#{crearInscripcionBean.anio}" size="10" />                                                                                                                
-                            <p:commandButton value="Buscar" 
-                                             actionListener="#{crearInscripcionBean.buscarInscritos()}" 
-                                             update="growl, usuariosDataTable, crearInscripcionForm" 
-                                             icon="ui-icon-search"  
-                                             onstart="PF('efectoCarga').show()"  
-                                             onsuccess="PF('efectoCarga').hide()" 
-                                             style="background:#22419A; color: #FFFFFF; width: 100px; " />                            
-                            
-                        </h:panelGrid>
-                    </h:panelGroup>
+                            </h:panelGrid>
+                        </h:panelGroup>
+                    </p:panel>
                     <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
-                    <p:spacer height="25"/>
+                    <p:spacer height="30"/>
 
-                    <p:panel id="usuariosPanel" header="Usuarios" >
-                        <h:panelGrid rendered="#{crearInscripcionBean.ins != null}" style="margin: 0 auto;" >
+                    <p:panel id="usuariosPanel" header="Lista de usuarios" rendered="#{crearInscripcionBean.usuarios.size()>0}">
+                        <h:panelGrid style="margin: 0 auto;" >
                             <p:commandButton value="#{crearInscripcionBean.accion}" 
                                              actionListener="#{crearInscripcionBean.crearIncripcion()}" 
                                              update="growl, usuariosDataTable, crearInscripcionForm" 
                                              icon="ui-icon-pencil"  
                                              onstart="PF('efectoCarga').show()"  
-                                             onsuccess="PF('efectoCarga').hide()" 
-                                             style="background:#22419A; color: #FFFFFF; width: 100px; " />
+                                             onsuccess="PF('efectoCarga').hide()"
+                                             style="background:#22419A; color: #FFFFFF; width: 190px; font-weight: normal;" />
                         </h:panelGrid>                        
                         <p:spacer />
                         
                         <p:dataTable id="usuariosDataTable" value="#{crearInscripcionBean.usuarios}" var="usu"
                                      paginator="true"
                                      rows="20"
+                                     rowsPerPageTemplate="20,40,60,80"
                                      selection="#{crearInscripcionBean.selectedUsus}"
-                                     rowKey="#{usu.usuid}"                                     
+                                     filteredValue="#{crearInscripcionBean.filteredUsus}"
+                                     emptyMessage="No hay usuarios registrados con ese filtro. Por favor, registrelos en la aplicación."
+                                     rowKey="#{usu.usuid}"         
                                      >                            
-                            <p:column headerText="NOMBRES" filterBy="#{usu.usunombres}" >
-                                <h:outputText value="#{usu.usunombres}" />
-                            </p:column>
-                            <p:column headerText="APELLIDOS" filterBy="#{usu.usuapellidos}">
-                                <h:outputText value="#{usu.usuapellidos}" />
-                            </p:column>
-                            <p:column headerText="SEXO" >
-                                <h:outputText value="#{usu.usugenero}" />
-                            </p:column>
-                            <p:column headerText="CÓDIGO" filterBy="#{usu.usuidentificacion}">
+                            <p:column headerText="IDENTIFICACIÓN" filterBy="#{usu.usuidentificacion}" width="130" style="text-align:center;" sortBy="#{usu.usuidentificacion}">
                                 <h:outputText value="#{usu.usuidentificacion}" />
                             </p:column>
-                            <p:column headerText="PROGRAMA ACADEMICO" >
+                            <p:column headerText="NOMBRES" filterBy="#{usu.usunombres}" filterFunction="#{crearInscripcionBean.filtrarPorNombre}" sortBy="#{usu.usunombres}">
+                                <h:outputText value="#{usu.usunombres}" style="text-transform: uppercase;"/>
+                            </p:column>
+                            <p:column headerText="APELLIDOS" filterBy="#{usu.usuapellidos}" filterFunction="#{crearInscripcionBean.filtrarPorApellido}" sortBy="#{usu.usuapellidos}">
+                                <h:outputText value="#{usu.usuapellidos}" style="text-transform: uppercase;"/>
+                            </p:column>
+                            <p:column headerText="SEXO" width="60" style="text-align: center;" sortBy="#{usu.usugenero}">
+                                <h:outputText value="#{usu.usugenero}" />
+                            </p:column>
+                            <p:column headerText="PROGRAMA ACADEMICO" sortBy="#{usu.uniid.uninombre}" >
                                 <h:outputText value="#{usu.uniid.uninombre}" />
                             </p:column>                            
-                            <p:column headerText="ESTAMENTO" >
+                            <p:column headerText="ESTAMENTO" width="110" style="text-align: center;" sortBy="#{usu.carid.carnombre}" >
                                 <h:outputText value="#{usu.carid.carnombre}" />
                             </p:column>                    
-                            <p:column  selectionMode="multiple" style="width:10%;text-align:center" />
+                            <p:column  selectionMode="multiple" width="20" style="text-align:center" />
                         </p:dataTable>
-
                     </p:panel>
                 </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

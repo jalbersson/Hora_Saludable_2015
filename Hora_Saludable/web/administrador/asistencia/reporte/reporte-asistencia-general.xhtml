@@ -14,83 +14,134 @@
                 Reporte | Asistencia general
             </ui:define>
 
-            <ui:define name="title">
+            <ui:define name="title">         
             </ui:define>
 
             <ui:define name="body">
-                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                
                 <p:breadCrumb>
                     <p:menuitem value="Inicio" url="../../../indexAdministrador.xhtml" />                              
                     <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
-                    <p:menuitem value="Reporte: Asistencia general" outcome="reporte-asistencia-general" />
+                    <p:menuitem value="Reporte: Asistencia general" outcome="reporte-asistencia-general" />                    
                 </p:breadCrumb>
                 
-                <p:spacer height="10"/> 
+                <p:spacer height="10"/>
                 <div class="tituloContenido">
                     Reporte: Asistencia general
-                </div>
-                <p:spacer height="20"/>                
+                </div>   
+                <p:spacer height="20"/>
 
-                <h:form id="reporteViewForm">
-                    <h:panelGroup>
-                        <p:panel>
-                            <h:panelGrid columns="2" cellpadding="5">
-                                <h:outputText value="Tipo de reporte:" />
-                                <p:selectOneMenu valueChangeListener="#{reporteView.seleccionarTipo}">
-                                    <f:selectItem itemLabel="Seleccione el tipo de reporte" itemValue="Seleccione" />
-                                    <f:selectItems value="#{reporteView.tipos}"/>
-                                    <f:ajax  execute="tipo" render="reporteViewForm" />
-                                </p:selectOneMenu>
+                <h:form id="form">
+                    <p:panel>
+                        <p:panelGrid id="panelGrid1" styleClass="panelgrid" style="margin: 0 auto;">
+                            <p:row>
+                                <p:column style="text-align:right">
+                                    <h:outputLabel for="tipoReporte" value="Tipo de reporte:" style="font-size: 15px;"/>
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="tipoReporte" required="true"
+                                                     requiredMessage="Seleccione el tipo de reporte."
+                                                     valueChangeListener="#{reporteView.cambiarTipo}">
+                                        <f:selectItem itemValue="NingunReporte" itemLabel="Seleccione uno" /> 
+                                        <f:selectItem itemValue="Anual" itemLabel="Anual" />
+                                        <f:selectItem itemValue="Semestral" itemLabel="Semestral" />
+                                        <f:selectItem itemValue="Mensual" itemLabel="Mensual" />
+                                        <p:ajax update="form"/>
+                                        <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column style="text-align:right" rendered="#{reporteView.comboAnio}">
+                                    <h:outputLabel for="anioReporte" value="Año:" style="font-size: 15px;"/>
+                                </p:column>
+                                <p:column rendered="#{reporteView.comboAnio}">
+                                    <p:selectOneMenu id="anioReporte" required="true" requiredMessage="Seleccione el año."
+                                                     valueChangeListener="#{reporteView.cambiarAño}" value="#{reporteView.anioSeleccionado}">
+                                        <f:selectItem itemValue="NingunAño" itemLabel="Seleccione uno" /> 
+                                        <f:selectItem itemValue="2014" itemLabel="2014" />
+                                        <f:selectItem itemValue="2015" itemLabel="2015" />
+                                        <f:selectItem itemValue="2016" itemLabel="2016" />
+                                        <p:ajax update="form"/>
+                                        <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                                
+                                <p:column style="text-align:right" rendered="#{reporteView.comboMes}">
+                                    <h:outputLabel for="mesReporte" value="Mes:" style="font-size: 15px;" />
+                                </p:column>
+                                <p:column rendered="#{reporteView.comboMes}">
+                                    <p:selectOneMenu id="mesReporte" required="true" requiredMessage="Seleccione el mes."
+                                                     valueChangeListener="#{reporteView.cambiarPorMes}" value="#{reporteView.mesSeleccionado}">
+                                        <f:selectItem itemValue="NingunMes" itemLabel="Seleccione uno" /> 
+                                        <f:selectItem itemValue="Enero" itemLabel="Enero" />
+                                        <f:selectItem itemValue="Febrero" itemLabel="Febrero" />
+                                        <f:selectItem itemValue="Marzo" itemLabel="Marzo" />
+                                        <f:selectItem itemValue="Abril" itemLabel="Abril" />
+                                        <f:selectItem itemValue="Mayo" itemLabel="Mayo" />
+                                        <f:selectItem itemValue="Junio" itemLabel="Junio" />
+                                        <f:selectItem itemValue="Julio" itemLabel="Julio" />
+                                        <f:selectItem itemValue="Agosto" itemLabel="Agosto" />
+                                        <f:selectItem itemValue="Septiembre" itemLabel="Septiembre" />
+                                        <f:selectItem itemValue="Octubre" itemLabel="Octubre" />
+                                        <f:selectItem itemValue="Noviembre" itemLabel="Noviembre" />
+                                        <f:selectItem itemValue="Diciembre" itemLabel="Diciembre" />
+                                        <p:ajax update="form"/>
+                                        <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column style="text-align:right" rendered="#{reporteView.comboSemestre}">
+                                    <h:outputLabel for="semestreReporte" value="Periodo:" style="font-size: 15px;" />
+                                </p:column>
+                                <p:column rendered="#{reporteView.comboSemestre}">
+                                    <p:selectOneMenu id="semestreReporte" required="true" requiredMessage="Seleccione el semestre."
+                                                     valueChangeListener="#{reporteView.cambiarPorSemestre}" value="#{reporteView.semestreSeleccionado}">
+                                        <f:selectItem itemValue="NingunSemestre" itemLabel="Seleccione uno" /> 
+                                        <f:selectItem itemValue="Primero" itemLabel="Primero" />
+                                        <f:selectItem itemValue="Segundo" itemLabel="Segundo" />
+                                        <p:ajax update="form"/>
+                                        <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                        <p:spacer height="30" rendered="#{reporteView.comboGrafica}"/>
+                        <p:panelGrid id="panelGrid2" styleClass="panelgrid" style="margin: 0 auto;" rendered="#{reporteView.comboGrafica}">
+                            <p:row >
+                                <p:column style="text-align:right">
+                                    <h:outputLabel for="graficaReporte" value="Ver gráfica por:" style="font-size: 15px;" />
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="graficaReporte" required="true" requiredMessage="Seleccione una gráfica."
+                                                     valueChangeListener="#{reporteView.cambiarGrafica}" value="#{reporteView.graficaSeleccionada}">
+                                        <f:selectItem itemValue="NingunaGrafica" itemLabel="Seleccione..." /> 
+                                        <f:selectItem itemValue="Grafica1" itemLabel="Número de asistencias" />
+                                        <f:selectItem itemValue="Grafica2" itemLabel="Número de participantes" />
+                                        <p:ajax update="form"/>
+                                        <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    
+                    
+                        <ui:include src="../../../ventanaEfectodeCarga.xhtml"/>
 
-                                <h:outputText value="Año:" rendered="#{reporteView.anioRow}" />
-                                <p:spinner value="#{reporteView.anio}" rendered="#{reporteView.anioRow}" max="#{reporteView.anio}"/>
+                        <p:spacer height="40" rendered="#{reporteView.mostrarGrafica}" />
 
-                                <h:outputText value="Periodo:" rendered="#{reporteView.periodoRow}" />
-                                <p:selectOneMenu value="#{reporteView.perido}" rendered="#{reporteView.periodoRow}" >
-                                    <f:selectItem itemLabel="Seleccione el periodo" itemValue="" />
-                                    <f:selectItems value="#{reporteView.periodos}" />                                    
-                                </p:selectOneMenu>
-
-                                <h:outputText value="Mes:" rendered="#{reporteView.mesRow}" />
-                                <p:selectOneMenu value="#{reporteView.mes}" rendered="#{reporteView.mesRow}" >
-                                    <f:selectItem itemLabel="Seleccione el mes" itemValue="" />
-                                    <f:selectItems value="#{reporteView.meses}" />                                    
-                                </p:selectOneMenu>
-
-                                <h:outputText value="Fecha inicial:" rendered="#{reporteView.rangoRow}" />
-                                <p:calendar id="fechaIncioCalendar" rendered="#{reporteView.rangoRow}" value="#{reporteView.fechaIncio}" pattern="dd-MM-yyyy" mask="true" mode="popup" showOn="button" locale="es" navigator="true" />
-
-                                <h:outputText value="Fecha final:" rendered="#{reporteView.rangoRow}" />
-                                <p:calendar id="fechaFinCalendar" rendered="#{reporteView.rangoRow}" value="#{reporteView.fechaFin}" pattern="dd-MM-yyyy" mask="true" mode="popup" showOn="button" locale="es" navigator="true" />                                
-                                <br />
-                                <p:commandButton actionListener="#{btnGenerarBean.btnGenerarReporte}" 
-                                                 value="Generar Reporte" 
-                                                 disabled="#{reporteView.disabledButton}" 
-                                                 style="background:#22419A; color: #FFFFFF; " >                                     
-                                    <f:attribute name="tipo" value="#{reporteView.tipo}" />  
-                                    <f:attribute name="anio" value="#{reporteView.anio}" /> 
-                                    <f:attribute name="perido" value="#{reporteView.perido}" />                                      
-                                    <f:attribute name="mes" value="#{reporteView.mes}" /> 
-                                    <f:attribute name="fechaIncio" value="#{reporteView.fechaIncio}" /> 
-                                    <f:attribute name="fechaFin" value="#{reporteView.fechaFin}" /> 
-                                </p:commandButton>
-                            </h:panelGrid>                            
-                        </p:panel> 
-
-                        <p:spacer height="20"/>   
-
-                        <p:panel id="panelChart" widgetVar="PanelChart" rendered="#{btnGenerarBean.mostrarReporte}">
-                            <h:panelGrid id="panelGrid2" style="margin: 0 auto;" columns="1" cellpadding="7" > 
-                                <p:outputLabel value="Este reporte muestra el número de participantes por mes que asistieron al Programa Hora Saludable" />
-                                <p:chart type="bar" model="#{chartViewInscritos.barModel}" style="height:300px" widgetVar="chart"/>
-                                <p:commandButton type="button" value="Exportar como imagen" icon="ui-icon-extlink" onclick="exportChart()"/>
-                            </h:panelGrid>                   
-                        </p:panel>
-                    </h:panelGroup>                
+                        <h:panelGrid id="panelGrid3" style="margin: 0 auto;" cellpadding="7" rendered="#{reporteView.mostrarGrafica}" >
+                            <p:chart type="bar" model="#{reporteView.barModel}" style="height:400px; width: 800px" widgetVar="chart"/>                              
+                        </h:panelGrid> 
+                        
+                        <h:panelGrid id="panelGrid4" style="margin: 0 auto;" cellpadding="7" rendered="#{reporteView.mostrarGrafica}" >
+                            <p:commandButton type="button" value="Ver como imagen" icon="ui-icon-extlink" onclick="exportChart()"
+                                         style="background:#22419A; color: #FFFFFF; font-weight: normal;" />                               
+                        </h:panelGrid> 
+                        
+                        <p:spacer height="10" rendered="#{reporteView.mostrarGrafica}" />
+                    </p:panel>
                 </h:form>
 
                 <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Gráfica" resizable="false">
-                    <p:outputPanel id="output" layout="block" style="width:610px; height:320px"/>
+                    <p:outputPanel id="output" layout="block" style="height:420px; width: 820px"/>
                 </p:dialog>
 
                 <script type="text/javascript">
@@ -102,7 +153,6 @@
                         PF('dlg').show();
                     }
                 </script>
-
             </ui:define>
         </ui:composition>
     </body>
