@@ -12,31 +12,34 @@
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Hora Saludable: Editar Evento
+                Hora Saludable: Nuevo Evento
             </ui:define>
 
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Editar Evento 
-                    <br></br>
-                </div>
+                
             </ui:define>
 
 
             <ui:define name="body"  >
-
+                <br></br>
+                
                 <h:form>
                     <p:breadCrumb>
-                        <p:menuitem value="Inicio" url="principal.xhtml" />  
-                        <p:menuitem value="Listar Eventos" url="listarEventos.xhtml" />   
-                        <p:menuitem value="Editar Evento" url="" /> 
-                    </p:breadCrumb>
+                    <p:menuitem value="Inicio" outcome="principal" />                              
+                    <p:menuitem value="Nuevo Evento" outcome="agregarEvento"/>                                        
+                </p:breadCrumb>
                 </h:form>
-                <br/>
-
+                
+                
+                <div class="tituloContenido">
+                    <br></br>
+                    Nuevo Evento 
+                    <br></br>
+                </div>
+                
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <div class="wrap" style="width: 63%;">
-
+                    
                     <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" value="*"/>
                     <h:outputLabel class="CampoLabelObligatorios" value=" Campos Obligatorios" />
 
@@ -46,38 +49,38 @@
 
                             <h:form id="nuevoEvento" >
                                 <h:panelGrid id="info" columns="2" >                                   
-
+                                    
                                     <h:column>
                                         <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
                                         <h:outputLabel class="CampoLabelObligatorios" for="titulo" value="Titulo: "  />
                                     </h:column>
-                                    <h:inputText  r:placeholder="Titulo" id="titulo" requiredMessage="Es necesario de que introduzca el Titulo del evento" value="#{eventoVerEditarController.evento.evetitulo}" required="true" size="65" maxlength="500" style="width: 100%" />
+                                    <h:inputText  r:placeholder="Titulo" id="titulo" requiredMessage="Es necesario de que introduzca el Titulo del evento" value="#{eventoController.evento.evetitulo}" required="true" size="65" maxlength="500" style="width: 100%" />
                                     <h:column>
                                         <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
                                         <h:outputLabel class="CampoLabelObligatorios" for="lugar" value="Lugar: "  />
                                     </h:column>
-                                    <h:inputText  r:placeholder="Lugar" id="lugar" requiredMessage="Es necesario de que introduzca el Lugar del evento" value="#{eventoVerEditarController.evento.evelugar}" required="true" size="65" maxlength="500" style="width: 100%" />
+                                    <h:inputText  r:placeholder="Lugar" id="lugar" requiredMessage="Es necesario de que introduzca el Lugar del evento" value="#{eventoController.evento.evelugar}" required="true" size="65" maxlength="500" style="width: 100%" />
                                     <h:column>
                                         <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
                                         <h:outputLabel class="CampoLabelObligatorios" for="fecha" value="Fecha: "  />
                                     </h:column>
-                                    <p:calendar r:placeholder="Fecha de realizacion del evento" id="datetime" requiredMessage="Es necesario de que introduzca la Fecha del evento" value="#{eventoVerEditarController.evento.evefechaevento}" pattern="yyyy-MMM-dd HH:mm:ss" required="true" size="65" maxlength="500" style="width: 100%" />
+                                    <p:calendar r:placeholder="Fecha de realizacion del evento" id="datetime" requiredMessage="Es necesario de que introduzca la Fecha del evento" value="#{eventoController.evefevento}" pattern="yyyy-MMM-dd HH:mm:ss" required="true" size="65" mask="true" maxlength="600" style="width: 100%" />
                                     <h:column>
                                         <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
                                         <h:outputLabel class="CampoLabelObligatorios" for="contenido" value="Descripcion: "  />
                                     </h:column>
-                                    <h:inputTextarea r:placeholder="Descripcion del evento" id="contenido" requiredMessage="Es necesario que ingrese el contenido del evento" required="true" value="#{eventoVerEditarController.evento.evecontenido}" rows="15" cols="65" style="width: 99%"/>
+                                    <h:inputTextarea r:placeholder="Descripcion del evento" id="contenido" requiredMessage="Es necesario que ingrese el contenido del evento" required="true" value="#{eventoController.evento.evecontenido}" rows="15" cols="65" style="width: 99%"/>
                                     <h:column>
                                         <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
                                         <h:outputLabel class="CampoLabelObligatorios" for="imagen" value="Imagen: "  />
                                     </h:column>      
-                                    <p:fileUpload value="#{eventoVerEditarController.file}" mode="simple"/>                                    
+                                    <p:fileUpload value="#{eventoController.file}" mode="simple"/>
+                                    
+                                    <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic" > </p:button>
+                                    <p:commandButton ajax="false"  update="nuevoEvento" action="#{eventoController.guardarEvento()}" actionListener="#{eventoController.upload()}" process="@form" value="Registrar" 
+                                                     style="background: #22419A;color:#FFFFFF;font-style: italic" 
+                                                     />
                                 </h:panelGrid>
-                                <br/>
-
-                                <p:commandButton ajax="false" action="#{eventoVerEditarController.actualizarEvento()}" actionListener="#{eventoVerEditarController.upload()}" process="@form" value="Editar" style="background: #22419A;color:#FFFFFF;font-style: italic"/>
-                                <p:commandButton ajax="false" action="#{eventoVerEditarController.limpiar()}" actionListener="#{eventoVerEditarController.upload()}" process="@form" value="Limpiar" style="background: #22419A;color:#FFFFFF;font-style: italic"/>
-                                <p:button outcome="listarEventos" value="Cancelar" style="background: #22419A;color:#FFFFFF;font-style: italic" > </p:button>
 
                             </h:form>
                         </p:panelGrid>

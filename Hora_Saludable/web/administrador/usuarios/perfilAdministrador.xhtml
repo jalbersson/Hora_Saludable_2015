@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+
+            <ui:define name="titulo">
+                Mi Perfil
+            </ui:define>
+                    
+
+            <ui:define name="title">
+                
+            </ui:define>
+
+            <ui:define name="body">                
+                
+                <div class="submenu">
+                    <h5>MENU USUARIO</h5>
+                    <h:form>
+                        <h:link style="text-decoration: none;" outcome="/usuario/usuarios/perfilUsuario" >
+                            <div class="botonSubmenu">
+                                Mi Perfil
+                            </div>
+                        </h:link>                  
+                        <h:link style="text-decoration: none;" outcome="/usuario/medidas/GestionTest" >
+                            <div class="botonSubmenu">
+                                Mis Valoraciones
+                            </div>
+                        </h:link>
+                        <h:link style="text-decoration: none;" outcome="/usuario/asistencia/asistencia-personal"> 
+                            <div class="botonSubmenu">
+                                Mi Asistencia
+                            </div>
+                        </h:link> 
+                    </h:form>                    
+                </div>
+                <div style="margin-left: 200px;margin-top: 10px;" >
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />                              
+                            <p:menuitem value="Mi Perfil" outcome="/usuario/usuarios/perfilUsuario" />                                        
+                        </p:breadCrumb>
+                    </h:form>
+                    <div class="tituloContenido">Mi Perfil</div>                    
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
+                    <p:panel header="Foto de Perfil">
+                        <div style="float:left">
+                            <h:form id="formularioPerfilFotoUsuario"> 
+                                <p:messages closable="true"/>
+                                <p:panelGrid  styleClass="panelgrid" id="panelPerfilFotoUsuario">                                
+                                    <p:row>                                
+                                        <p:column rendered="#{perfilUsuarioController.mostrarFoto}">
+                                            <p:graphicImage   width="100" height="100" library="#{perfilUsuarioController.rutaFoto}" 
+                                                              name="#{perfilUsuarioController.usuario.usufoto}"
+                                                              />
+                                        </p:column>
+                                        <p:column rendered="#{perfilUsuarioController.mostrarFoto}">
+                                            <p:commandLink style="color: blue;" action="#{perfilUsuarioController.mostraSubirFoto()}" value="Cambiar"/>
+                                        </p:column>
+                                        <p:column  rendered="#{!perfilUsuarioController.mostrarFoto}">
+                                            Peso máximo de la imagen 1 MegaByte
+                                            <p:fileUpload  fileUploadListener="#{perfilUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                                           label="Cargar" auto="true"  
+                                                           sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                           onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"
+                                                           />                              
+                                        </p:column>
+                                        <p:column rendered="#{!perfilUsuarioController.mostrarFoto}">
+                                            <p:outputLabel value="#{perfilUsuarioController.foto.fileName}"/>
+                                        </p:column>
+                                    </p:row>                           
+                                </p:panelGrid>
+                            </h:form>
+
+                        </div>
+                        <div style="float:left;margin-top: 50px;">
+                            <h:form id="formularioEditarFoto">
+                                <p:commandLink rendered="#{!perfilUsuarioController.mostrarFoto}"
+                                               action="#{perfilUsuarioController.actualizarFoto()}"
+                                               style="color:blue;"  value="Aceptar"
+                                               onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
+                                <p:commandLink rendered="#{!perfilUsuarioController.mostrarFoto}" 
+                                               style="margin-left:10px; color:blue;"  value="Cancelar" action="#{perfilUsuarioController.cancelarSubirFoto()}"
+                                               onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
+                            </h:form>
+                        </div>
+                        <div style="clear: both">
+
+                        </div>
+                    </p:panel>
+                    <p:panel header="Datos Personales">
+                        <h:form id="formularioPerfilDatosPersonales">
+                            <p:messages closable="true"/>
+                            <p:panelGrid styleClass="panelgrid" id="panelPerfilDatosPersonales">                            
+                                <p:row>
+                                    <p:column style="width: 250px;">
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Fecha de Nacimiento:(aaaa-mm-dd)"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.sdf.format(perfilUsuarioController.usuario.usufechanacimiento)}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Número de Identificación: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.usuidentificacion}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Nombres: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel  value="#{perfilUsuarioController.usuario.usunombres}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Apellidos: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.usuapellidos}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Correo Electróncio: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.usuemail}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Teléfono: "/>
+                                    </p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarTelefono}">
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.usutelefono}"/>
+                                    </p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarTelefono}">
+                                        <p:commandLink style="color: blue;" value="Modificar" action="#{perfilUsuarioController.mostrarModificarTelefono()}"/>
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarTelefono}">
+                                        <p:inputText value="#{perfilUsuarioController.telefono}"/>  
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarTelefono}">
+                                        <p:commandLink style="color: blue;" value="Aceptar" action="#{perfilUsuarioController.actualizarTelefono()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                                       action="#{perfilUsuarioController.cancelarActualizarTelefono()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Sexo: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.sexo}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Edad: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.edad}"/>
+                                        <p:outputLabel value=" años"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    <p:panel header="Datos de la Cuenta">
+                        <h:form id="formularioPerfilDatosCuenta">
+                            <p:messages closable="true"/>
+                            <p:panelGrid styleClass="panelgrid" id="panelPerfilDatosCuenta">                            
+                                <p:row>
+                                    <p:column style="width: 250px;">
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Nombre de Usuario: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.usunombreusuario}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarContrasena}">
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Contraseña: "/>
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarContrasena}">
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Contraseña:"/>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic;color:red;" value="* "/>
+                                    </p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarContrasena}">
+                                        <p:outputLabel  value="******************"/>
+                                    </p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarContrasena}">
+                                        <p:commandLink style="color: blue;" value="Cambiar" action="#{perfilUsuarioController.mostrarModificarContrasena()}"/>
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarContrasena}">
+                                        <p:password style="width: 120px;" value="#{perfilUsuarioController.contrasena}"/>  
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarContrasena}">
+                                        <p:commandLink style="color: blue;" value="Aceptar" action="#{perfilUsuarioController.cambiarContrasena()}" 
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                                       action="#{perfilUsuarioController.cancelarActualizarContrasena()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row rendered="#{!perfilUsuarioController.mostrarContrasena}">
+                                    <p:column>                                        
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputLabel class="CampoLabelEspecificacion"   value="Entre 6 y 20 caracteres AlfaNumericos." />
+                                    </p:column>
+                                </p:row>
+                                <p:row rendered="#{!perfilUsuarioController.mostrarContrasena}">
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Confirmar Contraseña:"/>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic;color:red;" value="* "/>
+                                    </p:column>
+                                    <p:column >
+                                        <p:password value="#{perfilUsuarioController.confirmarContrasena}" style="width: 120px;"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    <p:panel header="Otros Datos">
+                        <h:form id="formularioPerfilDatosAcademicos">
+                            <p:panelGrid styleClass="panelgrid" id="panelPerfilDatosAcademicos">                            
+                                <p:row>
+                                    <p:column style="width: 250px;">
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Tipo: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.tipo}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row rendered="#{perfilUsuarioController.funcionario}">
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Cargo: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.carid.carnombre}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row rendered="#{perfilUsuarioController.funcionario}">
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Dependencia: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.uniid.uninombre}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row rendered="#{perfilUsuarioController.estudiante}">
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Facultad: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.uniid.uninombre}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row rendered="#{perfilUsuarioController.familiar}">
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Funcionario: "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.conyugeid.usunombres} #{perfilUsuarioController.usuario.conyugeid.usuapellidos}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row rendered="#{perfilUsuarioController.familiar}">
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Cargo : "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.conyugeid.carid.carnombre}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row rendered="#{perfilUsuarioController.familiar}">
+                                    <p:column>
+                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Dependencia : "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.conyugeid.uniid.uninombre}"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </h:form>
+                    </p:panel>
+                </div>
+                <div style="clear: both;"></div>                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

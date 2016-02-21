@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
                 Acerca de 
@@ -20,27 +20,23 @@
 
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                <h:form>
-                    <p:breadCrumb>
-                        <p:menuitem value="Inicio" url="principal.xhtml" />    
-                        <p:menuitem value="Acerca de" url="acercade.xhtml" />                                                  
-                        
-                    </p:breadCrumb>
-                </h:form>
                 <h:panelGrid columns="1" style="width:800px; height: 200px;">
                     <h:form>    
-                        <br></br>
-                        <br></br>
-                        <br></br>
+                        <h:form>
+                            <p:breadCrumb>
+                                <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
+                                <p:menuitem value="Acerca de" url="acercade.xhtml" />
+
+                            </p:breadCrumb>
+                        </h:form>
+                        <p:spacer height="10"/>
                         <p align="justify">
-                            <h:outputText style="font-weight: normal; font-size: 22px"  value="La Universidad del Cauca es una institución de educación superior pública de carácter nacional con 187 años de historia.
+                            <h:outputText style="font-weight: normal; font-size: 22px;"  value="La Universidad del Cauca es una institución de educación superior pública de carácter nacional con 187 años de historia.
                                           Ubicada en la ciudad de Popayán, ofrece sus servicios educativos a estudiantes de todo el país, quienes encuentran en la Universidad y la ciudad un espacio idóneo y tranquilo para realizar sus estudios de pregrado y posgrado.
                                           Gracias a sus programas de descentralización, Unicauca ha ofrecido la posibilidad de educación superior a los caucanos de la región. Conozca a continuación algunos de los aspectos institucionales más importantes que hacen de ésta una de las mejores universidades colombianas.">
                             </h:outputText>
                         </p>
                     </h:form> 
-
-
                 </h:panelGrid>
                 <br></br>
                 <br></br>
