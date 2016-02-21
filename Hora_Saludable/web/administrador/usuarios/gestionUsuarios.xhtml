@@ -13,7 +13,7 @@
                 Gestión Usuarios                
             </ui:define> 
             <ui:define name="title">
-                                
+
             </ui:define>
             <ui:define name="body"> 
                 <br/>
@@ -40,8 +40,7 @@
                             <p:ajax update=":tablasUsuarios"/>
                             <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>                                        
                         </p:selectOneMenu>                     
-                        <p:commandButton  value="Registrar Nuevo Usuario" style="background:#22419A; 
-                                         color: #FFFFFF; margin-left: 395px;font-weight: normal;" 
+                        <p:commandButton  value="Registrar Nuevo Usuario" class="botonAzul" style="margin-left: 395px;"
                                           action="#{registrarUsuarioController.abrirVentanaRegistrarUsuario()}"
                                           onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                     </h:panelGrid>
@@ -53,7 +52,7 @@
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <ui:include src="ventanaRegistroUsuario.xhtml"/>
                 <ui:include src="ventanaVerEditarUsuario.xhtml"/>
-                
+
                 <p:dialog modal="true" resizable="false" header="Confirmar" widgetVar="eliminarUsuario" closable="false">
                     <h:form>
                         <p:panelGrid style="text-align:left;" styleClass="panelgrid">
@@ -69,12 +68,12 @@
                                                      value="Aceptar" action="#{eliminarUsuario.eliminarUsuario()}"/>
                                     <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic; margin-left: 10px;font-weight: normal;" value="Cancelar" onclick="PF('eliminarUsuario').hide()"/>
                                 </p:column>
-                                
+
                             </p:row>
                         </p:panelGrid>
                     </h:form>
                 </p:dialog>
-                    
+
                 <p:dialog modal="true" resizable="false" header="Error" widgetVar="noSePuedeEliminar" closable="false">
                     <h:form>
                         <p:panelGrid style="text-align:left;" styleClass="panelgrid">
@@ -88,14 +87,14 @@
                                     <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 100px;font-weight: normal;" 
                                                      value="Aceptar" onclick="PF('noSePuedeEliminar').hide()"/>                                    
                                 </p:column>
-                                
+
                             </p:row>
                         </p:panelGrid>
                     </h:form>
-                    
-                    
+
+
                 </p:dialog>
-                
+
                 <p:dialog modal="true" header="Información" resizable="false" widgetVar="eliminacionCorrecta" closable="false">
                     <h:form>
                         <p:panelGrid style="text-align:left;" styleClass="panelgrid">
@@ -109,12 +108,12 @@
                                     <p:commandButton style="background: #22419A;color:#FFFFFF;font-style: italic;margin-left: 60px;font-weight: normal;" 
                                                      value="Aceptar" onclick="PF('eliminacionCorrecta').hide()"/>                                    
                                 </p:column>
-                                
+
                             </p:row>
                         </p:panelGrid>
                     </h:form>
-                    
-                    
+
+
                 </p:dialog>
             </ui:define>
         </ui:composition>

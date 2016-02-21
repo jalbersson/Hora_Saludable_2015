@@ -244,10 +244,10 @@ body {
 
 .tituloContenido
 {
-    font-size: 25px;
+    font-size: 18px;
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     color:#22419A;
     font-weight: bold;
 }
@@ -384,4 +384,8 @@ body {
     background-position: 0; /* asuming bandeau.png is a single image */
 }
 
-
+.botonAzul{
+    background:#22419A; 
+    color: #FFFFFF; 
+    font-weight: normal;
+}

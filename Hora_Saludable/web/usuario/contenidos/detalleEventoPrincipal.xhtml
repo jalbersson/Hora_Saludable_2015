@@ -8,87 +8,82 @@
 
     <body>
 
+
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-               Detalle del evento
+                Detalle del evento
             </ui:define>
 
             <ui:define name="title">
 
             </ui:define>
-            
+
             <ui:define name="body">
                 <br></br>
-                
+
                 <h:form>
-                   <p:breadCrumb>
-                    <p:menuitem value="Inicio" outcome="principal" />
-                    <p:menuitem value="Detalles del evento"/>  
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" outcome="principal" />
+                        <p:menuitem value="Eventos" outcome="listarEventos" />
                     </p:breadCrumb> 
                 </h:form>
-                
-                
+
+
                 <br></br>
 
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                
+
                 <h:form>
                     <p:growl id="msgs" showDetail="true" />
                     <p:fieldset legend="Detalles del evento" style="margin-bottom:20px">
                         <h:panelGrid columns="2" cellpadding="4">
-                            <p:graphicImage height="200px" width="200px" library="img/imagenesEventos" name="#{eventoController.eventoDetalladoTodos().eveimagen}" />
+
                             <p:outputPanel>
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:form id="form">
-                                        <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
-                                                                      
-                                             
+                                        <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel"> 
+ 
+
                                             <p:row>
                                                 <p:column>
-                                                    <h:outputLabel class="CampoLabel" value="Evento :"/>
-                                                </p:column>
-                                                <p:column>
-                                                    <h:outputLabel value="#{eventoController.eventoDetalladoTodos().evetitulo}"/>
+                                                    <h:outputLabel value="#{eventosController.getEventoSeleccionado().evetitulo}" style="font-weight: bold"/>
                                                 </p:column>
                                             </p:row>
-                                            
+                                           <p:row>
+                                                <p:column>
+                                                    <h:outputLabel value="Fecha: #{eventosController.getEventoSeleccionado().evefechaevento}" style="font-style: italic" />
+                                                </p:column>
+                                            </p:row>                                            
                                             <p:row>
                                                 <p:column>
-                                                    <h:outputLabel class="CampoLabel" value="Lugar :"/>
-                                                </p:column>
-                                                <p:column>
-                                                    <h:outputLabel value="#{eventoController.eventoDetalladoTodos().evelugar}"/>
+                                                    <h:outputLabel value="Lugar: #{eventosController.getEventoSeleccionado().evelugar}" style="font-style: italic"/>
                                                 </p:column>
                                             </p:row>
-                                            
+
                                             <p:row>
                                                 <p:column>
-                                                    <h:outputLabel class="CampoLabel" value=" Fecha de evento :"/>
-                                                </p:column>
-                                                <p:column>
-                                                    <h:outputLabel value="#{eventoController.eventoDetalladoTodos().evefechaevento}"/>
+                                                    <p:graphicImage value="#{eventosController.imagenFlujo}" >
+                                                        <f:param name="idEve" value="#{eventosController.getEventoSeleccionado().eveid}" />
+                                                    </p:graphicImage>
                                                 </p:column>
                                             </p:row>
-                           
+
                                             <p:row>
                                                 <p:column>
-                                                    <h:outputLabel class="CampoLabel" value=" Descripcion :"/>
-                                                </p:column>
-                                                <p:column>
-                                                    <h:outputLabel value="#{eventoController.eventoDetallado().evecontenido}"/>
+                                                    <h:outputLabel value="#{eventosController.getEventoSeleccionado().evecontenido}" escape="false"/>
                                                 </p:column>
                                             </p:row>
-                                                                     
+
                                         </p:panelGrid>                            
                                     </h:form>    
 
-                                    
+
                                 </h:panelGrid>
                             </p:outputPanel>
-                            
+
                         </h:panelGrid>
-                        <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" > </p:button>                       
+                        <p:button outcome="principal" value="Inicio" style="background: #22419A;color:#FFFFFF; width: 100px" > </p:button>                       
                     </p:fieldset>
                 </h:form>
             </ui:define>

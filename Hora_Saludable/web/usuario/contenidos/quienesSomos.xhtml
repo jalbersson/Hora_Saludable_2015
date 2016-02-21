@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
 
     <body>
@@ -24,8 +23,8 @@
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <h:form>
                     <p:breadCrumb>
-                        <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
-                        <p:menuitem value="Quienes Somos" url="quienesSomos.xhtml" />
+                        <p:menuitem value="Inicio" outcome="principal.xhtml" />                                                  
+                        <p:menuitem value="Quienes Somos" outcome="quienesSomos.xhtml"  />
 
                     </p:breadCrumb>
                 </h:form>
@@ -52,7 +51,7 @@
 
                                             <h:form>
                                                 <p align="justify">
-                                                    <h:outputText style="font-weight: bold; font-size: 16px" value="#{quienesSomos.devMision()}" />
+                                                    <h:outputText style="font-size: 15px" value="#{quienesSomos.devMision()}" escape="false" />
                                                 </p>
                                             </h:form>
                                         </p:dataScroller>
@@ -71,7 +70,7 @@
 
                                             <h:form>
                                                 <p align="justify">
-                                                    <h:outputText style="font-weight: bold; font-size: 16px" value="#{quienesSomos.devVision()}"  />
+                                                    <h:outputText style="font-size: 15px" value="#{quienesSomos.devVision()}" escape="false" />
                                                 </p>
                                             </h:form>
                                         </p:dataScroller>
@@ -91,7 +90,7 @@
 
                                             <h:form>
                                                 <p align="justify">
-                                                    <h:outputText style="font-weight: bold; font-size: 16px"  value="#{quienesSomos.devEquipo()}" />
+                                                    <h:outputText style="font-size: 15px"  value="#{quienesSomos.devEquipo()}" escape="false" />
                                                 </p>
                                             </h:form>
                                         </p:dataScroller>
@@ -108,10 +107,10 @@
                                         <h1 style="color:#F2F2F2; text-align: center">  Documentos</h1> 
                                         <p:dataScroller  var="Documentos" value="">
 
-                                            <p:link style="font-weight: bold; font-size: 16px" outcome="reglamento" value="Ver Reglamento"></p:link>
+                                            <p:link style="font-size: 15px" outcome="reglamento" value="Ver Reglamento"></p:link>
                                             <br></br>
                                             <br></br>
-                                            <p:link style="font-weight: bold; font-size: 16px" outcome="resolucion" value="Ver Resolucion"></p:link> 
+                                            <p:link style="font-size: 15px" outcome="resolucion" value="Ver Resolucion"></p:link> 
                                         </p:dataScroller>
 
 

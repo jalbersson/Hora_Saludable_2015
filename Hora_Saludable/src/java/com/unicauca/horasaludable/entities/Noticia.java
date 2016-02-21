@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unicauca.horasaludable.entities;
 
 import java.io.Serializable;
@@ -13,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -37,8 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Noticia.findByNotfechaedicion", query = "SELECT n FROM Noticia n WHERE n.notfechaedicion = :notfechaedicion"),
     @NamedQuery(name = "Noticia.findByNotvisible", query = "SELECT n FROM Noticia n WHERE n.notvisible = :notvisible"),
     @NamedQuery(name = "Noticia.findByNotcontenido", query = "SELECT n FROM Noticia n WHERE n.notcontenido = :notcontenido"),
-    @NamedQuery(name = "Noticia.findUltimosContenido", query = "SELECT n FROM Noticia n ORDER BY n.notid DESC"),
-    @NamedQuery(name = "Noticia.findByNotimagen", query = "SELECT n FROM Noticia n WHERE n.notimagen = :notimagen")})
+    @NamedQuery(name = "Noticia.findUltimosContenido", query = "SELECT n FROM Noticia n ORDER BY n.notid DESC")
+})
 public class Noticia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,15 +59,18 @@ public class Noticia implements Serializable {
     @NotNull
     @Column(name = "NOTVISIBLE")
     private boolean notvisible;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10000)
     @Column(name = "NOTCONTENIDO")
     private String notcontenido;
-    @Size(max = 350)
-    @Column(name = "NOTIMAGEN")
-    private String notimagen;
-
+    
+    @Basic(optional = true)
+    @Lob
+    @Column(name = "notimagen")
+    private byte[] notImagen;
+    
     public Noticia() {
     }
 
@@ -85,6 +84,14 @@ public class Noticia implements Serializable {
         this.notfechapublicacion = notfechapublicacion;
         this.notvisible = notvisible;
         this.notcontenido = notcontenido;
+    }
+
+    public byte[] getNotImagen() {
+        return notImagen;
+    }
+
+    public void setNotImagen(byte[] notImagen) {
+        this.notImagen = notImagen;
     }
 
     public Long getNotid() {
@@ -130,18 +137,17 @@ public class Noticia implements Serializable {
     public String getNotcontenido() {
         return notcontenido;
     }
+    public String getContenidoTruncado() {
+        if (notcontenido.length()>200)
+           return notcontenido.substring(0, 200) + "...";
+        else
+             return notcontenido;
 
+    }
     public void setNotcontenido(String notcontenido) {
         this.notcontenido = notcontenido;
     }
 
-    public String getNotimagen() {
-        return notimagen;
-    }
-
-    public void setNotimagen(String notimagen) {
-        this.notimagen = notimagen;
-    }
 
     @Override
     public int hashCode() {

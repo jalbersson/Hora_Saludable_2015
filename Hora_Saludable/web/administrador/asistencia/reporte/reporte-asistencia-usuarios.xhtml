@@ -114,7 +114,7 @@
                                 <h:outputText value="#{tab.num}" />
                             </p:column>
                             <p:column headerText="NOMBRES Y APELLIDOS" width="285" style="text-align: left">
-                                <h:outputText value="#{tab.nombre}" style="text-transform: uppercase;"/>
+                                <h:outputText value="#{tab.nombre}" style="text-transform: capitalize;"/>
                             </p:column>
                             <p:column headerText="SEXO" exportable="true" style="display: none;" >
                                 <h:outputText value="#{tab.sexo}" />
@@ -250,20 +250,51 @@
                                 <h:outputText value="#{tab.num}" />
                             </p:column>
                             <p:column  headerText="NOMBRES Y APELLIDOS" width="147" style="text-align: left" >
-                                <h:outputText value="#{tab.nombre}" style="text-transform: uppercase;"/>
+                                <h:outputText value="#{tab.nombre}" style="text-transform: capitalize;"/>
                             </p:column>
-                            <p:column  headerText="SEXO" exportable="true" style="display: none;">
-                                <h:outputText value="#{tab.sexo}" />
+                            <p:column  headerText="M" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.masculino}" />
                             </p:column>
+                            <p:column  headerText="F" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.femenino}" />
+                            </p:column>
+
+                            
                             <p:column  headerText="IDENTIFICACIÓN" exportable="true" style="display: none;">
                                 <h:outputText value="#{tab.codigo}" />
                             </p:column>
-                            <p:column  headerText="PROGRAMA ACADEMICO O DEPENDENCIA" exportable="true" style="display: none;">
+                            <p:column  headerText="PROGRAMA ACADEMICO" exportable="true" style="display: none;">
                                 <h:outputText value="#{tab.programa}" />
                             </p:column>
-                            <p:column  headerText="ESTAMENTO" exportable="true" style="display: none;">
-                                <h:outputText value="#{tab.estamento}" />
+                            <p:column  headerText="SL" exportable="true" style="display: none;">
+                                <h:outputText value="" />
                             </p:column>
+                            <p:column  headerText="SM" exportable="true" style="display: none;">
+                                <h:outputText value="" />
+                            </p:column>
+                            <p:column  headerText="C" exportable="true" style="display: none;">
+                                <h:outputText value="" />
+                            </p:column>
+                            <p:column  headerText="HS" exportable="true" style="display: none;">
+                                <h:outputText value="X" />
+                            </p:column>
+                            <p:column  headerText="EFD" exportable="true" style="display: none;">
+                                <h:outputText value="" />
+                            </p:column>                                                        
+                            
+                            <p:column  headerText="E" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.estudiante}" />
+                            </p:column>
+                            <p:column  headerText="D" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.docente}" />
+                            </p:column>
+                            <p:column  headerText="F" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.funcionario}" />
+                            </p:column>
+                            <p:column  headerText="Fliar" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.familiar}" />
+                            </p:column>
+                            
                             <p:column  headerText="1" width="2">
                                 <h:outputText value="#{tab.getDias(0)}" />
                             </p:column>

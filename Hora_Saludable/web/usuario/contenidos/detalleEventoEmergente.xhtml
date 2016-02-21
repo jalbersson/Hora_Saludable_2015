@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="DetalleEventoDlg" width="800px" widgetVar="DetalleEventoDialog" modal="true" resizable="false" appendTo="@(body)" header="Detalle del Evento">
+            <h:form id="UploadImageCreateForm" enctype="multipart/form-data">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="1" >
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="#{eventosController.selected.evetitulo}" style="font-weight: bold"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Fecha: #{eventosController.selected.evefechaevento}" style="font-style: italic" />
+                            </p:column>
+                        </p:row>                                            
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Lugar: #{eventosController.selected.evelugar}" style="font-style: italic"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <p:graphicImage value="#{eventosController.imagenFlujo}" >
+                                    <f:param name="idEve" value="#{eventosController.selected.eveid}" />
+                                </p:graphicImage>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="#{eventosController.selected.evecontenido}" escape="false"/>
+                            </p:column>
+                        </p:row>
+
+
+                    </p:panelGrid>
+                    <p:commandButton value="Cerrar" onclick="DetalleEventoDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

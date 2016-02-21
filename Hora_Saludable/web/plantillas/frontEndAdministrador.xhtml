@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">      
 
     <h:head>
@@ -29,7 +28,7 @@
                         <a href="#"></a>
                     </div>
                     <div class="borde-redondo"></div>
-                    <a href="#" class="titulo">Programa Hora Saludable<!--#{bundle.AppName}--></a>
+                    <p:graphicImage library="img/" name="HoraSaludable.png" />
                     <div class="CuadroDeBotonesSesion">                        
                         <ui:insert name="CuadroDeBotonesSesion"> 
                             <h:form>
@@ -39,6 +38,7 @@
                                 </h:link>
                                 <p:menu overlay="true" trigger="opcionesusuario"  my="left top" at="left bottom">     
                                     
+                                    <p:menuitem value="Mi Perfil" outcome="/administrador/usuarios/perfilAdministrador"  />
                                     <p:menuitem value="Cerrar Sesión" action="#{usuarioSessionController.logout()}"
                                                 onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
                                 </p:menu>
@@ -57,7 +57,7 @@
                             <li><span class="punta"></span><p:link outcome="/administrador/usuarios/gestionUsuarios" value="Gestión de Usuarios"/></li>
                             <li><span class="punta"></span><p:link outcome="/administrador/medidas/consultaTest" value="Valoraciones"/></li>
                             <li><span class="punta"></span><p:link outcome="/administrador/asistencia/indexAsistencia" value="Control Asistencia"/></li>
-                            <li><span class="punta"></span><p:link outcome="/administrador/contenidos/acercade" value="Acerca de"/></li>                                               
+                            <li><span class="punta"></span><p:link outcome="/administrador/usuarios/perfilAdministrador" value="Mi Perfil"/></li>
                         </ul>
                     </ui:insert>           
                 </nav>                
@@ -77,6 +77,11 @@
                 <div class="separador"></div>
                 <div class="pie">
                     <div class="decoracion izq"></div>
+                    <div style="float: left; width: 706px;">
+                        <span style="display: block;text-align: center; color: #FFCC00; font-size: 14px; margin: 15px 0 3px 0;">Calle 5 No. 4 - 70 Tel. (572) 8209900 - L&iacute;nea 018000 949020 - Popay&aacute;n | Colombia</span>
+                        <span style="display: block;text-align: center; color: #FFCC00; font-size: 14px; margin: 5px 0 3px 0;">Gimnasio Hora Saludable: Sector Tulcán - Popayán</span>
+                    </div>
+                    
                     <div class="decoracion der"></div>
                     <div class="clear"></div>
                 </div>

@@ -2,442 +2,122 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog resizable="false" header="Información" modal="true"  widgetVar="mensajeRegistroExitoso" closable="false">
-            <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
-            <h:form>
-                <p:commandButton  value="Aceptar" style="background:#22419A; 
-                                     color: #FFFFFF;margin-left:70px;font-weight: normal;"
-                                  onclick="PF('mensajeRegistroExitoso').hide()"/>
-            </h:form>
-        </p:dialog>
-        <p:dialog position="top" resizable="false"   header="Registrar Usuario" showEffect="scale" modal="true"  widgetVar="RegistrarUsuario">
+        <p:panel style="text-align: center">
 
-                    <h:form id="form">
-                        <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
-                            <p:row>
-                                <p:column>
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                    <h:outputLabel class="CampoLabelObligatorios" value=" Campos Obligatorios" />
-                                </p:column>                                
-                            </p:row>                            
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="tipo" value="Tipo: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:selectOneMenu id="tipo"  style="width:125px" 
-                                                     valueChangeListener="#{registrarUsuarioController.cambiarTipoUsuario}"
-                                                     >                                          
-                                        <f:selectItems value="#{registrarUsuarioController.listaTipo}"/>                                            
-                                        <f:ajax   execute="tipo" render="panel" />
-                                        <p:ajax  onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
-                                    </p:selectOneMenu>                                                                             
-                                </p:column>
-                                <p:column>
-                                    <p:message for="tipo"/>  
-                                </p:column>
-                            </p:row>
-                            <p:row rendered="#{registrarUsuarioController.camposRegistroFuncionario}">
-                                <p:column style="text-align:right">
-                                    <h:outputLabel  class="CampoLabel" for="cargo" value="Cargo: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:selectOneMenu id="cargo"  style="width:125px" required="true" 
-                                                     valueChangeListener="#{registrarUsuarioController.cambiarCargoFuncionario}"
-                                                     requiredMessage="Seleccione un Cargo." 
-                                                     value="#{registrarUsuarioController.cargo.carid}">                                            
-                                        <f:selectItems value="#{registrarUsuarioController.listaCargos}" var="cargo" 
-                                                       itemLabel="#{cargo.carnombre}" itemValue="#{cargo.carid}"/>
-                                        <f:ajax  execute="cargo" render="form" />
-                                        <p:ajax  onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
-                                    </p:selectOneMenu>                                                                             
-                                </p:column>
-                                <p:column>
-                                    <p:message for="cargo"/>  
-                                </p:column>
-                            </p:row>
-                            <p:row rendered="#{registrarUsuarioController.camposRegistroFuncionarioDocente}">
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="dependenciaDocente" value="Dependencia: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:selectOneMenu id="dependenciaDocente"  style="width:160px"                                                          
-                                                     value="#{registrarUsuarioController.facultad.uniid}">
-                                        <f:selectItem itemLabel="Seleccionar..." itemValue="0" />
-                                        <f:selectItems value="#{registrarUsuarioController.listaFacultades}" var="facultadDocente"
-                                                       itemLabel="#{facultadDocente.uninombre}" itemValue="#{facultadDocente.uniid}"/>
-                                        <f:validator validatorId="ValidarCamposSeleccionar" />
+            <p:messages  /> 
+            <p:separator style="width: 750px" />  
 
-                                    </p:selectOneMenu>                                                                             
-                                </p:column>
-                                <p:column>
-                                    <p:message for="dependenciaDocente"/>  
-                                </p:column>
-                            </p:row>
-                            <p:row rendered="#{registrarUsuarioController.camposRegistroFuncionarioAdministrativo}">
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="dependenciaAdministrativo" value="Dependencia: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:selectOneMenu id="dependenciaAdministrativo"  style="width:160px"                                                          
-                                                     value="#{registrarUsuarioController.unidadAcademica.uniid}">
-                                        <f:selectItem itemLabel="Seleccionar.." itemValue="0" />
-                                        <f:selectItems value="#{registrarUsuarioController.listaUnidadAcademica}"
-                                                       var="unidad" itemLabel="#{unidad.uninombre}" itemValue="#{unidad.uniid}"/> 
-                                        <f:validator validatorId="ValidarCamposSeleccionar" />
-                                    </p:selectOneMenu>                                                                             
-                                </p:column>
-                                <p:column>
-                                    <p:message for="dependenciaAdministrativo"/>  
-                                </p:column>
-                            </p:row>                           
-                            <p:row id="filaFacultad" rendered="#{registrarUsuarioController.camposRegistroEstudiante}">
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="facultad" value="Facultad: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:selectOneMenu id="facultad"  style="width:160px"  
-                                                     value="#{registrarUsuarioController.facultad.uniid}" >
-                                        <f:selectItem itemLabel="Seleccione.." itemValue="0" />
-                                        <f:selectItems value="#{registrarUsuarioController.listaFacultades}" 
-                                                       var="facultad" itemLabel="#{facultad.uninombre}" 
-                                                       itemValue="#{facultad.uniid}"/>
-                                        <f:validator validatorId="ValidarCamposSeleccionar"/>
-                                    </p:selectOneMenu>                                                                             
-                                </p:column>
-                                <p:column>
-                                    <p:message for="facultad"/>  
-                                </p:column>
-                            </p:row>                  
+            <p:panel styleClass="paneltab" header="Test de Sargent">
+                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                    <f:facet name="header">
+                        Test de Sargent
+                    </f:facet>
+                    <p:outputLabel value="Embergadura:" for="inputEmbergadura"/>
+                    <p:inputText id="inputEmbergadura" value="#{medidasController.medicionactual.medembergadura}">
 
-                            <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel"  value="Funcionario: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>                                
-                                    <p:commandButton value="Seleccionar" style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;" 
-                                                     onclick="PF('seleccionarFuncionario').show()" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
-                                </p:column>
-                                <p:column>
-                                    <p:graphicImage rendered="#{registrarUsuarioController.funcionarioSeleccionado}" style="margin-left: 4px;" library="img" name="seleccione.png"/>
-                                </p:column>
-                            </p:row>
-                            <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
-                                <p:column style="text-align:right;height: 30px;">
-                                    <h:outputLabel class="CampoLabel" for="nombreFuncionario" value="Nombre del Funcionario: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:outputLabel style="font-size:15px;" 
-                                                   id="nombreFuncionario"   
-                                                   value="#{registrarUsuarioController.funcionario.usunombres} #{registrarUsuarioController.funcionario.usuapellidos}">
+                    </p:inputText>
+                    <p:outputLabel  value="Salto Maximo:" for="inputSaltoMaximo"/>
+                    <p:inputText id="inputSaltoMaximo" value="#{medidasController.medicionactual.medsaltomaximo}" >
 
-                                    </p:outputLabel>                               
+                    </p:inputText>
+                </p:panelGrid><br/>
 
-                                </p:column>
-                                <p:column>
-                                </p:column>
-                            </p:row>
-                            <p:row rendered="#{registrarUsuarioController.camposRegistroFamiliar}">
-                                <p:column style="text-align:right;height:30px; ">
-                                    <h:outputLabel class="CampoLabel" for="dependenciaFuncionario" value="Dependencia del Funcionario: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:outputLabel  style="font-size:15px; width: 160px;" 
-                                                    id="dependenciaFuncionario" 
-                                                    value="#{registrarUsuarioController.funcionario.uniid.uninombre}"/>
-                                </p:column>
-                                <p:column>                                        
-                                </p:column>
-                            </p:row>                                                            
-                            <p:row>
-                                <p:column style="text-align: right;">                                       
-                                    <h:outputLabel class="CampoLabel" for="fechaNacimiento" value="Fecha de Nacimiento: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:calendar value="#{registrarUsuarioController.usuario.usufechanacimiento}" size="10" id="fechaNacimiento"  required="true" 
-                                                requiredMessage="Seleccione una fecha de nacimiento." 
-                                                showOn="button" navigator="true" yearRange="c-100:c" pattern="yyyy-MM-dd" 
-                                                >
-                                        <f:validator validatorId="ValidarCampoFechaNacimiento"/>
-                                    </p:calendar>
-                                </p:column>
+                <p:commandButton value="Calcular s" update="labelSaltoReal labelSargent" styleClass="btncalculartest"></p:commandButton>
 
-                                <p:column>
-                                    <p:message for="fechaNacimiento"/>
-                                </p:column>                                     
-                            </p:row>
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="numeroIdentificacion" value="No. Identificación: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:inputText style="width: 110px;font-size:15px" 
-                                                 id="numeroIdentificacion" value="#{registrarUsuarioController.numeroIdentificacion}"
-                                                 required="true" requiredMessage="Campo obligatorio.">                                             
-                                        <f:validator validatorId="ValidarCampoNumeroIdentificacion"/>                                                                                    
-                                    </p:inputText>                                
-                                </p:column>
-                                <p:column>
-                                    <p:message for="numeroIdentificacion"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="nombres" value="Nombres: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:inputText style="width: 140px;font-size:15px" 
-                                                 id="nombres" value="#{registrarUsuarioController.usuario.usunombres}"
-                                                 required="true" requiredMessage="Campo obligatorio.">
-                                        <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
-                                    </p:inputText>                                
-                                </p:column>
-                                <p:column>
-                                    <p:message for="nombres"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="apellidos" value="Apellidos: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:inputText style="width: 140px;font-size:15px" 
-                                                 id="apellidos" value="#{registrarUsuarioController.usuario.usuapellidos}"
-                                                 required="true" requiredMessage="Campo obligatorio.">
-                                        <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
-                                    </p:inputText>                                
-                                </p:column>
-                                <p:column>
-                                    <p:message for="apellidos"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="nombreUsuario" value="Nombre de Usuario: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:inputText style="width: 120px;font-size:15px" 
-                                                 id="nombreUsuario" value="#{registrarUsuarioController.usuario.usunombreusuario}"
-                                                 required="true" requiredMessage="Campo obligatorio.">                                            
-                                        <f:validator validatorId="ValidarCampoNombreUsuario"/>
-                                    </p:inputText>                                
-                                </p:column>
-                                <p:column>
-                                    <p:message for="nombreUsuario"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="contrasena" value="Contraseña: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:password style="width: 120px;font-size:15px" 
-                                                id="contrasena" value="#{registrarUsuarioController.contrasena}"
-                                                required="true" requiredMessage="Campo obligatorio."
-                                                validator="#{registrarUsuarioController.validateContrasena}">
-                                        <f:validator validatorId="ValidarCampoMaximo20Caracteres"/>
-                                        <f:validator validatorId="ValidarCampoMinimo6Caracteres"/>
-                                    </p:password>                                
-                                </p:column>
-                                <p:column>
-                                    <p:message for="contrasena"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>                                        
-                                </p:column>
-                                <p:column>
-                                    <h:outputLabel class="CampoLabelEspecificacion"   value="Entre 6 y 20 caracteres AlfaNuméricos." />
-                                </p:column>
-                                <p:column>                                        
-                                </p:column>                                        
-                            </p:row>
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="confirmarContrasena" value="Confirmar Contraseña: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:password  style="width: 120px;font-size:15px" 
-                                                 id="confirmarContrasena" value="#{registrarUsuarioController.repetircontrasena}"
-                                                 required="true" requiredMessage="Campo obligatorio."
-                                                 validator="#{registrarUsuarioController.validateRepitaContrasena}">                                            
-                                    </p:password>                                
-                                </p:column>
-                                <p:column>
-                                    <p:message for="confirmarContrasena"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="correoElectronico" value="Correo Electrónico: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:inputText style="width: 180px;font-size:15px" 
-                                                 id="correoElectronico" value="#{registrarUsuarioController.usuario.usuemail}"
-                                                 required="true" requiredMessage="Campo obligatorio.">
-                                        <f:validator validatorId="ValidarCampoCorreoElectronico"/>
-                                    </p:inputText>
-                                </p:column>
-                                <p:column>
-                                    <p:message for="correoElectronico"/>
-                                </p:column>
+                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                    <f:facet name="header">
+                        Resultado Test de Sargent
+                    </f:facet>
+                    <p:outputLabel  value="Salto Real: "/>
+                    <p:outputLabel  id="labelSaltoReal" value="#{medidasController.medicionactual.medsaltoreal}"></p:outputLabel>
+                    <p:outputLabel value="Resultado: " />
+                    <p:outputLabel id="labelSargent" value="#{medidasController.medicionactual.estadotestSargent}"></p:outputLabel>
+                </p:panelGrid>
 
-                            </p:row>
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="telefono" value="Teléfono: " />
-                                </p:column>
-                                <p:column>
-                                    <p:inputText style="width: 100px;font-size:15px" 
-                                                 id="telefono" value="#{registrarUsuarioController.usuario.usutelefono}"
-                                                 >                              
-                                    </p:inputText>
-                                </p:column>
-                                <p:column>
-                                    <p:message for="telefono"/>
-                                </p:column>
+                <p:panelGrid styleClass="panelayuda" columns="1">              
+                    <p:outputLabel value="AYUDA - Hombres: Salto real mayor a 70 Excelente, entre 61 y 70 Muy bueno, entre 51 y 60 Arriba del promedio, entre 41 y 50 En el promedio, entre 31 y 40 Por debajo del promedio, entre 21 y 30 Pobre y menor a 21 Muy pobre"></p:outputLabel>
+                    <p:outputLabel value="AYUDA - Mujeres: Salto real mayor a 60 Excelente, entre 51 y 60 Muy bueno, entre 41 y 50 Arriba del promedio, entre 31 y 40 En el promedio, entre 21 y 30 Por debajo del promedio, entre 11 y 20 Pobre y menor a 11 Muy pobre"></p:outputLabel>
+                </p:panelGrid>
 
-                            </p:row>
-                            <p:row>
-                                <p:column style="text-align:right">
-                                    <h:outputLabel class="CampoLabel" for="sexo" value="Sexo: " />
-                                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="*"/>
-                                </p:column>
-                                <p:column>
-                                    <p:selectOneRadio    id="sexo" value="#{registrarUsuarioController.usuario.usugenero}" required="true" requiredMessage="Seleccione Sexo.">
-                                        <f:selectItem itemLabel="M" itemValue="M" />
-                                        <f:selectItem itemLabel="F" itemValue="F" />                                            
-                                    </p:selectOneRadio>
-                                </p:column>
-                                <p:column>
-                                    <p:message for="sexo"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>
+            </p:panel>
 
-                                </p:column>
-                                <p:column>
+            <p:separator styleClass="separadorTest" />
 
-                                </p:column>
-                                <p:column>
+            <p:panel styleClass="paneltab" header="Test de Rufier">
+                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                    <f:facet name="header">
+                        Test de Rufier
+                    </f:facet>
+                    <p:outputLabel value="Primer pulso" for="inputPrimerPulso"/>
+                    <p:inputText id="inputPrimerPulso" value="#{medidasController.medicionactual.medpulso0}">
 
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>
+                    </p:inputText>
+                    <p:outputLabel value="Segundo pulso" for="inputSegundoPulso"/>
+                    <p:inputText id="inputSegundoPulso" value="#{medidasController.medicionactual.medpulso1}">
 
-                                </p:column>
-                                <p:column>
-                                    <p:commandButton   style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;" 
-                                                       action="#{registrarUsuarioController.registrarUsuario()}" value="Registrar" ajax="true" 
-                                                       update="panel" id="registrar" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"
-                                                       />
-                                    <p:commandButton   style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;" 
-                                                       value="Cancelar" onclick="PF('RegistrarUsuario').hide()"
-                                                        id="cancelar" onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"
-                                                       />
-                                </p:column>
-                            </p:row>                               
-                        </p:panelGrid>                            
-                    </h:form>       
-                </p:dialog>
-        <p:dialog header="Seleccionar Funcionario" resizable="false" width="700"  modal="true"  widgetVar="seleccionarFuncionario">
-                    <h:form id="funcionarios">
-                        <br/>
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Nombre del Funcionario:" />
-                            <p:inputText style="width: 240px;" value="#{registrarUsuarioController.nombreOApellidos}"  >
-                                <p:ajax event="keyup" update="tablaFuncionarios" listener="#{registrarUsuarioController.buscarPorNombreFuncionario}" />                                
-                            </p:inputText>                          
+                    </p:inputText>
+                    <p:outputLabel value="Tercer pulso" for="inputTercerPulso"/>
+                    <p:inputText id="inputTercerPulso" value="#{medidasController.medicionactual.medpulso2}">
 
-                        </h:panelGrid>
+                    </p:inputText>
+                </p:panelGrid>
 
-                        <br/>
-                        <p:panel id="tablaFuncionarios">
-                            <p:dataTable  var="funcionario" value="#{registrarUsuarioController.listaFuncionarios}" 
-                                          paginator="true" rows="6"  
-                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
-                                          rowsPerPageTemplate="5,8">
+                <p:commandButton value="Calcular r" update="labelRufier valorRufier" styleClass="btncalculartest"/>
 
-                                <p:column headerText="No. Identificacion" width="130" >                                
-                                #{funcionario.usuidentificacion} 
-                                </p:column> 
-                                <p:column headerText="Nombres" >
-                                #{funcionario.usunombres}
-                                </p:column>
-                                <p:column headerText="Apellidos" >
-                                #{funcionario.usuapellidos}
-                                </p:column>
-                                <p:column headerText="Cargo" >
-                                #{funcionario.carid.carnombre}
-                                </p:column>
-                                <p:column headerText="Apellidos" >
-                                #{funcionario.uniid.uninombre}
-                                </p:column>
+                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                    <f:facet name="header">
+                        Resultado Test de Rufier
+                    </f:facet>
+                    <p:outputLabel value="Resultado:" />
+                    <p:outputLabel id="labelRufier" value="#{medidasController.medicionactual.estadoRufier}"></p:outputLabel>
+                    <p:outputLabel value="I = "></p:outputLabel>
+                    <p:outputLabel id="valorRufier" value="#{medidasController.medicionactual.testRufier}"></p:outputLabel>
+                </p:panelGrid>
+                <p:panelGrid styleClass="panelayuda" columns="1">   
+                    <p:outputLabel value="AYUDA: | entre 0 y 1 Excelente | entre 1 y 5 Muy bueno | entre 6 y 10 Regular | entre 11 y 15 Malo | mayor a 15 Muy Malo"></p:outputLabel>
+                </p:panelGrid>
+            </p:panel>
 
-                                <p:column headerText="Acciones" width="70">
-                                    <p:commandLink actionListener="#{registrarUsuarioController.seleccionarFuncionario(funcionario)}" 
-                                                   id="seleccionar" style="text-decoration: none;color: blue;" 
-                                                   >                                    
-                                        Seleccionar
-                                    </p:commandLink>
-                                </p:column> 
+            <p:separator styleClass="separadorTest" />
 
-                            </p:dataTable>
-                        </p:panel>
+            <p:panel styleClass="paneltab" header=" Test de Wells">
+                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                    <f:facet name="header">
+                        Test de Wells
+                    </f:facet>
+                    <p:outputLabel value="Flexibilidad:" for="Flexibilidad"></p:outputLabel>
+                    <p:inputText id="Flexibilidad" value="#{medidasController.medicionactual.medflexibilidad}"></p:inputText>
+                </p:panelGrid>
 
-                    </h:form>
-                </p:dialog>
+                <p:commandButton value="Calcular w" update="labelWells" styleClass="btncalculartest" />
 
-        <p:dialog header="Error" resizable="false" width="440" modal="true" widgetVar="FuncionarioYaTieneFamiliarAsociado"  closable="false">                    
-            <h:form>                
-                    <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
-                    <p:commandButton  value="Aceptar" style="background:#22419A; 
-                                             color: #FFFFFF;margin-left:150px;font-weight: normal;"
-                                      onclick="PF('FuncionarioYaTieneFamiliarAsociado').hide()"/>                
-            </h:form>            
-        </p:dialog>
+                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+                    <f:facet name="header">
+                        Resultado Test de Wells
+                    </f:facet>
+                    <p:outputLabel value="Resultado: "></p:outputLabel>
+                    <p:outputLabel id="labelWells" value="#{medidasController.medicionactual.estadoTestWells}"></p:outputLabel>
+                </p:panelGrid>
+                <p:spacer height="20" width="100"/>
+            </p:panel>
+
+            <p:separator styleClass="separadorTest" />
+
+            <!--   <p:panel styleClass="paneltab">
+              <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
+              <f:facet name="header">
+                  Test de Leger
+              </f:facet>
+                  <p:outputLabel  value="Consumo maximo de oxigeno: "/>
+                  <p:outputLabel  value="1345" />
+              </p:panelGrid>
+               </p:panel>    -->                                
+        </p:panel>
     </ui:composition>
-    
+
 </html>
 

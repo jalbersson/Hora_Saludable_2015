@@ -3,76 +3,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
-        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
 
             <ui:define name="titulo">
-                Mi Perfil
+                Mi Perfil de Administrador
             </ui:define>
-                    
+
 
             <ui:define name="title">
-                
+
             </ui:define>
 
             <ui:define name="body">                
-                
-                <div class="submenu">
-                    <h5>MENU USUARIO</h5>
-                    <h:form>
-                        <h:link style="text-decoration: none;" outcome="/usuario/usuarios/perfilUsuario" >
-                            <div class="botonSubmenu">
-                                Mi Perfil
-                            </div>
-                        </h:link>                  
-                        <h:link style="text-decoration: none;" outcome="/usuario/medidas/GestionTest" >
-                            <div class="botonSubmenu">
-                                Mis Valoraciones
-                            </div>
-                        </h:link>
-                        <h:link style="text-decoration: none;" outcome="/usuario/asistencia/asistencia-personal"> 
-                            <div class="botonSubmenu">
-                                Mi Asistencia
-                            </div>
-                        </h:link> 
-                    </h:form>                    
-                </div>
+
                 <div style="margin-left: 200px;margin-top: 10px;" >
                     <h:form>
                         <p:breadCrumb>
-                            <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />                              
-                            <p:menuitem value="Mi Perfil" outcome="/usuario/usuarios/perfilUsuario" />                                        
+                            <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />                              
+                            <p:menuitem value="Mi Perfil" outcome="/administrador/usuarios/perfilAdministrador" />                                        
                         </p:breadCrumb>
                     </h:form>
-                    <div class="tituloContenido">Mi Perfil</div>                    
-                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
-                    <p:panel header="Foto de Perfil">
+                    <div class="tituloContenido">Mi Perfil de Administrador</div>                    
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>  
+
+                    <p:panel header="Foto de Perfil" toggleable="true">
                         <div style="float:left">
                             <h:form id="formularioPerfilFotoUsuario"> 
                                 <p:messages closable="true"/>
                                 <p:panelGrid  styleClass="panelgrid" id="panelPerfilFotoUsuario">                                
-                                    <p:row>                                
+                                    <p:row>       
+
                                         <p:column rendered="#{perfilUsuarioController.mostrarFoto}">
-                                            <p:graphicImage   width="100" height="100" library="#{perfilUsuarioController.rutaFoto}" 
-                                                              name="#{perfilUsuarioController.usuario.usufoto}"
-                                                              />
+                                            <p:graphicImage value="#{perfilUsuarioController.imagenFlujo}" >
+                                                <f:param name="idUsu" value="#{perfilUsuarioController.usuario.usuid}" />
+                                            </p:graphicImage>
                                         </p:column>
                                         <p:column rendered="#{perfilUsuarioController.mostrarFoto}">
                                             <p:commandLink style="color: blue;" action="#{perfilUsuarioController.mostraSubirFoto()}" value="Cambiar"/>
                                         </p:column>
                                         <p:column  rendered="#{!perfilUsuarioController.mostrarFoto}">
-                                            Peso máximo de la imagen 1 MegaByte
+                                            La imagen que suba será redimensionada automáticamente
                                             <p:fileUpload  fileUploadListener="#{perfilUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
                                                            label="Cargar" auto="true"  
-                                                           sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                           invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                                                            onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"
                                                            />                              
-                                        </p:column>
-                                        <p:column rendered="#{!perfilUsuarioController.mostrarFoto}">
-                                            <p:outputLabel value="#{perfilUsuarioController.foto.fileName}"/>
                                         </p:column>
                                     </p:row>                           
                                 </p:panelGrid>
@@ -94,53 +74,129 @@
 
                         </div>
                     </p:panel>
-                    <p:panel header="Datos Personales">
+                    <p:panel header="Datos Personales" toggleable="true">
                         <h:form id="formularioPerfilDatosPersonales">
                             <p:messages closable="true"/>
-                            <p:panelGrid styleClass="panelgrid" id="panelPerfilDatosPersonales">                            
+                            <p:panelGrid styleClass="panelgrid" id="panelPerfilDatosPersonales">       
+                                <!-- Fecha nacimiento -->
                                 <p:row>
-                                    <p:column style="width: 250px;">
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Fecha de Nacimiento:(aaaa-mm-dd)"/>
-                                    </p:column>
+                                    <!-- Siempre carga esta col -->
                                     <p:column>
+                                        <p:outputLabel style="font-size: 15px;" value="Fecha de Nacimiento:(aaaa-mm-dd) "/>
+                                    </p:column>
+                                    <!-- Las carga al prinicipio -->
+                                    <p:column rendered="#{perfilUsuarioController.mostrarFecNac}">
                                         <p:outputLabel value="#{perfilUsuarioController.sdf.format(perfilUsuarioController.usuario.usufechanacimiento)}"/>
                                     </p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarFecNac}">
+                                        <p:commandLink style="color: blue;" value="Modificar" action="#{perfilUsuarioController.mostrarModificarFecNac()}"/>
+                                    </p:column>
+
+                                    <!-- Los carga despues de dar modificar -->
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarFecNac}">
+                                        <p:calendar value="#{perfilUsuarioController.fechaNacimiento}" size="10"    
+                                                    showOn="button" navigator="true" pattern="yyyy-MM-dd" yearRange="c-100:c" 
+                                                    /> 
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarFecNac}">
+                                        <p:commandLink style="color: blue;" value="Aceptar" action="#{perfilUsuarioController.actualizarFecNac()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                                       action="#{perfilUsuarioController.cancelarActualizarFecNac()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                    </p:column>                                    
                                 </p:row>
+                                <!-- No Identificacion -->
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Número de Identificación: "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Identificación: "/>
                                     </p:column>
-                                    <p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarIdentificacion}">
                                         <p:outputLabel value="#{perfilUsuarioController.usuario.usuidentificacion}"/>
                                     </p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarIdentificacion}">
+                                        <p:commandLink style="color: blue;" value="Modificar" action="#{perfilUsuarioController.mostrarModificarIdentificacion()}"/>
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarIdentificacion}">
+                                        <p:inputText value="#{perfilUsuarioController.identificacion}"/>  
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarIdentificacion}">
+                                        <p:commandLink style="color: blue;" value="Aceptar" action="#{perfilUsuarioController.actualizarIdentificacion()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                                       action="#{perfilUsuarioController.cancelarActualizarIdentificacion()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                    </p:column>
                                 </p:row>
+                                <!-- Nombres -->
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Nombres: "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Nombres: "/>
                                     </p:column>
-                                    <p:column>
-                                        <p:outputLabel  value="#{perfilUsuarioController.usuario.usunombres}"/>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarNombres}">
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.usunombres}"/>
+                                    </p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarNombres}">
+                                        <p:commandLink style="color: blue;" value="Modificar" action="#{perfilUsuarioController.mostrarModificarNombres()}"/>
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarNombres}">
+                                        <p:inputText value="#{perfilUsuarioController.nombres}"/>  
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarNombres}">
+                                        <p:commandLink style="color: blue;" value="Aceptar" action="#{perfilUsuarioController.actualizarNombres()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                                       action="#{perfilUsuarioController.cancelarActualizarNombres()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                     </p:column>
                                 </p:row>
+                                <!-- Apellidos -->
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Apellidos: "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Apellidos "/>
                                     </p:column>
-                                    <p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarApellidos}">
                                         <p:outputLabel value="#{perfilUsuarioController.usuario.usuapellidos}"/>
                                     </p:column>
-                                </p:row>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarApellidos}">
+                                        <p:commandLink style="color: blue;" value="Modificar" action="#{perfilUsuarioController.mostrarModificarApellidos()}"/>
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarApellidos}">
+                                        <p:inputText value="#{perfilUsuarioController.apellidos}"/>  
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarApellidos}">
+                                        <p:commandLink style="color: blue;" value="Aceptar" action="#{perfilUsuarioController.actualizarApellidos()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                                       action="#{perfilUsuarioController.cancelarActualizarApellidos()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                    </p:column>                                </p:row>
+                                <!-- Correo electronico -->
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Correo Electróncio: "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Correo Electrónico "/>
                                     </p:column>
-                                    <p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarEmail}">
                                         <p:outputLabel value="#{perfilUsuarioController.usuario.usuemail}"/>
                                     </p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarEmail}">
+                                        <p:commandLink style="color: blue;" value="Modificar" action="#{perfilUsuarioController.mostrarModificarEmail()}"/>
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarEmail}">
+                                        <p:inputText value="#{perfilUsuarioController.email}"/>  
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarEmail}">
+                                        <p:commandLink style="color: blue;" value="Aceptar" action="#{perfilUsuarioController.actualizarEmail()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                                       action="#{perfilUsuarioController.cancelarActualizarEmail()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                    </p:column> 
                                 </p:row>
+                                <!-- Telefono -->
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Teléfono: "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Teléfono: "/>
                                     </p:column>
                                     <p:column rendered="#{perfilUsuarioController.mostrarTelefono}">
                                         <p:outputLabel value="#{perfilUsuarioController.usuario.usutelefono}"/>
@@ -159,33 +215,48 @@
                                                        onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                     </p:column>
                                 </p:row>
+                                <!-- Sexo -->
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Sexo: "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Sexo: "/>
                                     </p:column>
-                                    <p:column>
-                                        <p:outputLabel value="#{perfilUsuarioController.sexo}"/>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarSexo}">
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.usugenero}"/>
+                                    </p:column>
+                                    <p:column rendered="#{perfilUsuarioController.mostrarSexo}">
+                                        <p:commandLink style="color: blue;" value="Modificar" action="#{perfilUsuarioController.mostrarModificarSexo()}"/>
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarSexo}">
+                                        <p:inputText value="#{perfilUsuarioController.sexo}"/>  
+                                    </p:column>
+                                    <p:column rendered="#{!perfilUsuarioController.mostrarSexo}">
+                                        <p:commandLink style="color: blue;" value="Aceptar" action="#{perfilUsuarioController.actualizarSexo()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                                       action="#{perfilUsuarioController.cancelarActualizarSexo()}"
+                                                       onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                                     </p:column>
                                 </p:row>
+                                <!-- Edad (Solo lectura) -->
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Edad: "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Edad: "/>
                                     </p:column>
                                     <p:column>
-                                        <p:outputLabel value="#{perfilUsuarioController.edad}"/>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.calcularEdad()}"/>
                                         <p:outputLabel value=" años"/>
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>
                         </h:form>
                     </p:panel>
-                    <p:panel header="Datos de la Cuenta">
+                    <p:panel header="Datos de la Cuenta" toggleable="true">
                         <h:form id="formularioPerfilDatosCuenta">
                             <p:messages closable="true"/>
                             <p:panelGrid styleClass="panelgrid" id="panelPerfilDatosCuenta">                            
                                 <p:row>
                                     <p:column style="width: 250px;">
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Nombre de Usuario: "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Nombre de Usuario: "/>
                                     </p:column>
                                     <p:column>
                                         <p:outputLabel value="#{perfilUsuarioController.usuario.usunombreusuario}"/>
@@ -193,11 +264,11 @@
                                 </p:row>
                                 <p:row>
                                     <p:column rendered="#{perfilUsuarioController.mostrarContrasena}">
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Contraseña: "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Contraseña: "/>
                                     </p:column>
                                     <p:column rendered="#{!perfilUsuarioController.mostrarContrasena}">
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Contraseña:"/>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic;color:red;" value="* "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Contraseña:"/>
+                                        <p:outputLabel style="font-size: 15px;color:red;" value="* "/>
                                     </p:column>
                                     <p:column rendered="#{perfilUsuarioController.mostrarContrasena}">
                                         <p:outputLabel  value="******************"/>
@@ -225,8 +296,8 @@
                                 </p:row>
                                 <p:row rendered="#{!perfilUsuarioController.mostrarContrasena}">
                                     <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Confirmar Contraseña:"/>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic;color:red;" value="* "/>
+                                        <p:outputLabel style="font-size: 15px;" value="Confirmar Contraseña:"/>
+                                        <p:outputLabel style="font-size: 15px;;color:red;" value="* "/>
                                     </p:column>
                                     <p:column >
                                         <p:password value="#{perfilUsuarioController.confirmarContrasena}" style="width: 120px;"/>
@@ -235,68 +306,7 @@
                             </p:panelGrid>
                         </h:form>
                     </p:panel>
-                    <p:panel header="Otros Datos">
-                        <h:form id="formularioPerfilDatosAcademicos">
-                            <p:panelGrid styleClass="panelgrid" id="panelPerfilDatosAcademicos">                            
-                                <p:row>
-                                    <p:column style="width: 250px;">
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Tipo: "/>
-                                    </p:column>
-                                    <p:column>
-                                        <p:outputLabel value="#{perfilUsuarioController.tipo}"/>
-                                    </p:column>
-                                </p:row>
-                                <p:row rendered="#{perfilUsuarioController.funcionario}">
-                                    <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Cargo: "/>
-                                    </p:column>
-                                    <p:column>
-                                        <p:outputLabel value="#{perfilUsuarioController.usuario.carid.carnombre}"/>
-                                    </p:column>
-                                </p:row>
-                                <p:row rendered="#{perfilUsuarioController.funcionario}">
-                                    <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Dependencia: "/>
-                                    </p:column>
-                                    <p:column>
-                                        <p:outputLabel value="#{perfilUsuarioController.usuario.uniid.uninombre}"/>
-                                    </p:column>
-                                </p:row>
-                                <p:row rendered="#{perfilUsuarioController.estudiante}">
-                                    <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Facultad: "/>
-                                    </p:column>
-                                    <p:column>
-                                        <p:outputLabel value="#{perfilUsuarioController.usuario.uniid.uninombre}"/>
-                                    </p:column>
-                                </p:row>
-                                <p:row rendered="#{perfilUsuarioController.familiar}">
-                                    <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Funcionario: "/>
-                                    </p:column>
-                                    <p:column>
-                                        <p:outputLabel value="#{perfilUsuarioController.usuario.conyugeid.usunombres} #{perfilUsuarioController.usuario.conyugeid.usuapellidos}"/>
-                                    </p:column>
-                                </p:row>
-                                <p:row rendered="#{perfilUsuarioController.familiar}">
-                                    <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Cargo : "/>
-                                    </p:column>
-                                    <p:column>
-                                        <p:outputLabel value="#{perfilUsuarioController.usuario.conyugeid.carid.carnombre}"/>
-                                    </p:column>
-                                </p:row>
-                                <p:row rendered="#{perfilUsuarioController.familiar}">
-                                    <p:column>
-                                        <p:outputLabel style="font-size: 15px; font-style: italic" value="Dependencia : "/>
-                                    </p:column>
-                                    <p:column>
-                                        <p:outputLabel value="#{perfilUsuarioController.usuario.conyugeid.uniid.uninombre}"/>
-                                    </p:column>
-                                </p:row>
-                            </p:panelGrid>
-                        </h:form>
-                    </p:panel>
+
                 </div>
                 <div style="clear: both;"></div>                
             </ui:define>

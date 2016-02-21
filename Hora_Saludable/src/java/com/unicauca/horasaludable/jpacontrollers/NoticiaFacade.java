@@ -37,7 +37,7 @@ public class NoticiaFacade extends AbstractFacade<Noticia> {
     }
 
     public List<Noticia> ultimasNoticias() {
-        Query query = getEntityManager().createNamedQuery("Noticia.findUltimosContenido").setMaxResults(3);
+        Query query = getEntityManager().createNamedQuery("Noticia.findUltimosContenido").setMaxResults(5);
         List<Noticia> resultList = query.getResultList();
         return resultList;
     }

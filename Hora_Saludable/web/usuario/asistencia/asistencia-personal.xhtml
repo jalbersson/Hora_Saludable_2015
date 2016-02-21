@@ -24,7 +24,7 @@
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>  
                 
                 <div class="submenu">
-                    <h5>MENU USUARIO</h5>
+                    <h5>Opciones</h5>
                     <h:form>
                         <h:link style="text-decoration: none;" outcome="/usuario/usuarios/perfilUsuario" >
                             <div class="botonSubmenu">
@@ -60,9 +60,9 @@
                             <p:spacer height="15"/>
 
                             <h:panelGrid columns="1" cellpadding="5" style="margin: 0 auto;">
-                                <p:outputLabel value="En el siguiente calendario, las fechas resaltadas en azul representa los dias en que asistió a este programa." />
+                                <p:outputLabel  style="color:#036fab" value="En el siguiente calendario, las fechas resaltadas en azul representa los dias en que asistió a este programa. Ignore los dos caracteres que aparecen al principio" />
                                 <br />
-                                <p:schedule value="#{asistencia_usuarios_con_session.eventModel}" locale="es"/>
+                                <p:schedule value="#{asistencia_usuarios_con_session.eventModel}" locale="es" draggable="false" rightHeaderTemplate="month" />
                                 <br />
                             </h:panelGrid>
                             <p:separator />

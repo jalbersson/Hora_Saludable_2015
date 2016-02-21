@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.unicauca.horasaludable.managedbeans.contenidos;
 
 import com.unicauca.horasaludable.entities.Horario;
@@ -19,18 +15,18 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class agregarHorarioController implements Serializable {
+public class HorarioController implements Serializable {
 
     @EJB
-    private HorarioFacade horF = new HorarioFacade();
+    private HorarioFacade horF;
 
     private Horario hor;
     private String titulo;
     private String cont;
 
-    //<table><th style="color: "></th></table>
     
-    public agregarHorarioController() {
+    
+    public HorarioController() {
         this.titulo = "Ingresa aqui titulo del horario";
         this.cont = "<br/><table align=\"center\" border=\"4\" bordercolor=\"#22419a\" cellpadding=\"10\" cellspacing=\"20\">\n"
                 + "<tr style=\"color:#ffffff\" bgcolor=\"#22419a\">\n"
@@ -165,5 +161,4 @@ public class agregarHorarioController implements Serializable {
     public void setCont(String cont) {
         this.cont = cont;
     }
-
 }

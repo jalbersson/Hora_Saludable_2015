@@ -7,20 +7,26 @@ package com.unicauca.horasaludable.managedbeans.usuarios;
 
 import com.unicauca.horasaludable.entities.Usuario;
 import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.faces.event.ValueChangeEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import com.unicauca.horasaludable.utilidades.Utilidades;
 /**
  *
  * @author geovanny
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class MostrarUsuariosController implements Serializable {
 
     @EJB
@@ -46,7 +52,24 @@ public class MostrarUsuariosController implements Serializable {
         this.cargarListaTiposUsuarios();
         this.InicializarValores();
     }   
-    
+    /**
+     * Recupera la foto de la bd y la devuelve como un StreamedContent
+     * @return flujo de la imagen
+     */
+    public StreamedContent getImagenFlujo() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            return new DefaultStreamedContent();
+        } else {
+            String id = context.getExternalContext().getRequestParameterMap().get("id");
+            Usuario usu = usuarioEJB.buscarPorIdUsuario(Long.valueOf(id)).get(0);
+            if(usu.getUsuFotoBD()==null){
+                 return Utilidades.getImagenPorDefecto("foto");
+            }else{
+                return new DefaultStreamedContent(new ByteArrayInputStream(usu.getUsuFotoBD()));
+            }
+        }
+    }    
     public boolean isHabilitarTablaUsuarios()
     {
         return habilitarTablaUsuarios;

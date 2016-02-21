@@ -114,7 +114,7 @@
                                 <h:outputText value="#{tab.num}" />
                             </p:column>
                             <p:column headerText="NOMBRES Y APELLIDOS" width="285" style="text-align: left">
-                                <h:outputText value="#{tab.nombre}" style="text-transform: uppercase;"/>
+                                <h:outputText value="#{tab.nombre}" style="text-transform: capitalize;"/>
                             </p:column>
                             <p:column headerText="SEXO" exportable="true" style="display: none;" >
                                 <h:outputText value="#{tab.sexo}" />
@@ -250,11 +250,13 @@
                                 <h:outputText value="#{tab.num}" />
                             </p:column>
                             <p:column  headerText="NOMBRES Y APELLIDOS" width="147" style="text-align: left" >
-                                <h:outputText value="#{tab.nombre}" style="text-transform: uppercase;"/>
+                                <h:outputText value="#{tab.nombre}" style="text-transform: capitalize;"/>
                             </p:column>
-                            <p:column  headerText="SEXO" exportable="true" style="display: none;">
-                                <h:outputText value="#{tab.sexo}" />
+                            <p:column  headerText="M" exportable="true" style="display: none;">
+                                <h:outputText value="#{tab.masculino}" />
                             </p:column>
+
+                            
                             <p:column  headerText="IDENTIFICACIÓN" exportable="true" style="display: none;">
                                 <h:outputText value="#{tab.codigo}" />
                             </p:column>

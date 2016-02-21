@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -12,16 +13,14 @@
             <ui:define name="titulo">
                 Mi Perfil
             </ui:define>
-                    
 
             <ui:define name="title">
-                
             </ui:define>
 
             <ui:define name="body">                
-                
+
                 <div class="submenu">
-                    <h5>MENU USUARIO</h5>
+                    <h5>Opciones</h5>
                     <h:form>
                         <h:link style="text-decoration: none;" outcome="/usuario/usuarios/perfilUsuario" >
                             <div class="botonSubmenu">
@@ -49,31 +48,31 @@
                     </h:form>
                     <div class="tituloContenido">Mi Perfil</div>                    
                     <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
-                    <p:panel header="Foto de Perfil">
+
+
+                    <p:panel header="Foto de Perfil" toggleable="true">
                         <div style="float:left">
                             <h:form id="formularioPerfilFotoUsuario"> 
                                 <p:messages closable="true"/>
                                 <p:panelGrid  styleClass="panelgrid" id="panelPerfilFotoUsuario">                                
                                     <p:row>                                
                                         <p:column rendered="#{perfilUsuarioController.mostrarFoto}">
-                                            <p:graphicImage   width="100" height="100" library="#{perfilUsuarioController.rutaFoto}" 
-                                                              name="#{perfilUsuarioController.usuario.usufoto}"
-                                                              />
+                                            <p:graphicImage value="#{perfilUsuarioController.imagenFlujo}" >
+                                                <f:param name="idUsu" value="#{perfilUsuarioController.usuario.usuid}" />
+                                            </p:graphicImage>
                                         </p:column>
                                         <p:column rendered="#{perfilUsuarioController.mostrarFoto}">
                                             <p:commandLink style="color: blue;" action="#{perfilUsuarioController.mostraSubirFoto()}" value="Cambiar"/>
                                         </p:column>
                                         <p:column  rendered="#{!perfilUsuarioController.mostrarFoto}">
-                                            Peso máximo de la imagen 1 MegaByte
+                                            La imagen que suba será redimensionada automáticamente
                                             <p:fileUpload  fileUploadListener="#{perfilUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
                                                            label="Cargar" auto="true"  
-                                                           sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                           invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                                                            onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"
                                                            />                              
                                         </p:column>
-                                        <p:column rendered="#{!perfilUsuarioController.mostrarFoto}">
-                                            <p:outputLabel value="#{perfilUsuarioController.foto.fileName}"/>
-                                        </p:column>
+
                                     </p:row>                           
                                 </p:panelGrid>
                             </h:form>
@@ -94,7 +93,7 @@
 
                         </div>
                     </p:panel>
-                    <p:panel header="Datos Personales">
+                    <p:panel header="Datos Personales" toggleable="true">
                         <h:form id="formularioPerfilDatosPersonales">
                             <p:messages closable="true"/>
                             <p:panelGrid styleClass="panelgrid" id="panelPerfilDatosPersonales">                            
@@ -172,14 +171,14 @@
                                         <p:outputLabel style="font-size: 15px; font-style: italic" value="Edad: "/>
                                     </p:column>
                                     <p:column>
-                                        <p:outputLabel value="#{perfilUsuarioController.edad}"/>
+                                        <p:outputLabel value="#{perfilUsuarioController.usuario.calcularEdad()}"/>
                                         <p:outputLabel value=" años"/>
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>
                         </h:form>
                     </p:panel>
-                    <p:panel header="Datos de la Cuenta">
+                    <p:panel header="Datos de la Cuenta" toggleable="true">
                         <h:form id="formularioPerfilDatosCuenta">
                             <p:messages closable="true"/>
                             <p:panelGrid styleClass="panelgrid" id="panelPerfilDatosCuenta">                            
@@ -235,7 +234,7 @@
                             </p:panelGrid>
                         </h:form>
                     </p:panel>
-                    <p:panel header="Otros Datos">
+                    <p:panel header="Otros Datos" toggleable="true">
                         <h:form id="formularioPerfilDatosAcademicos">
                             <p:panelGrid styleClass="panelgrid" id="panelPerfilDatosAcademicos">                            
                                 <p:row>

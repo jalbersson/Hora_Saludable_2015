@@ -26,7 +26,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "DETALLEASISTENCIA", catalog = "asae", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Detalleasistencia.findAll", query = "SELECT d FROM Detalleasistencia d"),
+    @NamedQuery(name = "Detalleasistencia.findAll", query = "SELECT d FROM Detalleasistencia d"),   
+    //Esta la creo libardo, los chicos no la incluyeron en la integracion 
+    @NamedQuery(name = "Detalleasistencia.findByAsiidAsistio", query = "SELECT d FROM Detalleasistencia d WHERE d.detalleasistenciaPK.asiid = :asiid AND d.detasistio = :detasistio"),        
     @NamedQuery(name = "Detalleasistencia.findByAsiid", query = "SELECT d FROM Detalleasistencia d WHERE d.detalleasistenciaPK.asiid = :asiid"),
     @NamedQuery(name = "Detalleasistencia.findByUsuid", query = "SELECT d FROM Detalleasistencia d WHERE d.detalleasistenciaPK.usuid = :usuid"),
     @NamedQuery(name = "Detalleasistencia.findByDetasistio", query = "SELECT d FROM Detalleasistencia d WHERE d.detasistio = :detasistio"),

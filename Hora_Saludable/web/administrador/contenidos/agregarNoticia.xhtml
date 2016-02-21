@@ -2,91 +2,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:r="http://xmlns.jcp.org/jsf/passthrough">
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <body>
 
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
-
             <ui:define name="titulo">
-                Hora Saludable: Nuevo Evento
+                Hora Saludable
             </ui:define>
-
             <ui:define name="title">
-                
             </ui:define>
-
-
-            <ui:define name="body"  >
-                <br></br>
-                
-                <h:form>
-                    <p:breadCrumb>
-                    <p:menuitem value="Inicio" outcome="principal" />                              
-                    <p:menuitem value="Nuevo Evento" outcome="agregarEvento"/>                                        
-                </p:breadCrumb>
-                </h:form>
-                
-                
-                <div class="tituloContenido">
-                    <br></br>
-                    Nuevo Evento 
-                    <br></br>
-                </div>
-                
+            <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                <div class="wrap" style="width: 63%;">
-                    
-                    <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" value="*"/>
-                    <h:outputLabel class="CampoLabelObligatorios" value=" Campos Obligatorios" />
 
-                    <h:form id="form"  enctype="multipart/form-data">
-                        <p:growl id="messages2" showDetail="true" />
-                        <p:panelGrid  columns="2" >
+                <ui:include src="componentes/submenu.xhtml"/>
+                <div style="margin-left: 200px;margin-top: 10px;" >
+                    <h:form>
 
-                            <h:form id="nuevoEvento" >
-                                <h:panelGrid id="info" columns="2" >                                   
-                                    
-                                    <h:column>
-                                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
-                                        <h:outputLabel class="CampoLabelObligatorios" for="titulo" value="Titulo: "  />
-                                    </h:column>
-                                    <h:inputText  r:placeholder="Titulo" id="titulo" requiredMessage="Es necesario de que introduzca el Titulo del evento" value="#{eventoController.evento.evetitulo}" required="true" size="65" maxlength="500" style="width: 100%" />
-                                    <h:column>
-                                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
-                                        <h:outputLabel class="CampoLabelObligatorios" for="lugar" value="Lugar: "  />
-                                    </h:column>
-                                    <h:inputText  r:placeholder="Lugar" id="lugar" requiredMessage="Es necesario de que introduzca el Lugar del evento" value="#{eventoController.evento.evelugar}" required="true" size="65" maxlength="500" style="width: 100%" />
-                                    <h:column>
-                                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
-                                        <h:outputLabel class="CampoLabelObligatorios" for="fecha" value="Fecha: "  />
-                                    </h:column>
-                                    <p:calendar r:placeholder="Fecha de realizacion del evento" id="datetime" requiredMessage="Es necesario de que introduzca la Fecha del evento" value="#{eventoController.evefevento}" pattern="yyyy-MMM-dd HH:mm:ss" required="true" size="65" mask="true" maxlength="600" style="width: 100%" />
-                                    <h:column>
-                                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
-                                        <h:outputLabel class="CampoLabelObligatorios" for="contenido" value="Descripcion: "  />
-                                    </h:column>
-                                    <h:inputTextarea r:placeholder="Descripcion del evento" id="contenido" requiredMessage="Es necesario que ingrese el contenido del evento" required="true" value="#{eventoController.evento.evecontenido}" rows="15" cols="65" style="width: 99%"/>
-                                    <h:column>
-                                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
-                                        <h:outputLabel class="CampoLabelObligatorios" for="imagen" value="Imagen: "  />
-                                    </h:column>      
-                                    <p:fileUpload value="#{eventoController.file}" mode="simple"/>
-                                    
-                                    <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic" > </p:button>
-                                    <p:commandButton ajax="false"  update="nuevoEvento" action="#{eventoController.guardarEvento()}" actionListener="#{eventoController.upload()}" process="@form" value="Registrar" 
-                                                     style="background: #22419A;color:#FFFFFF;font-style: italic" 
-                                                     />
-                                </h:panelGrid>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />
+                            <p:menuitem value="Noticias" outcome="/administrador/contenidos/listarNoticias" />
+                        </p:breadCrumb>
 
-                            </h:form>
-                        </p:panelGrid>
                     </h:form>
+                    <div class="tituloContenido">Agregar Noticia</div>                    
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
+                    <p:panel>
+                        <h:form id="form" enctype="multipart/form-data">
 
+                            <h:panelGrid columns="3" >                                   
+
+                                <h:outputLabel for="titulo" value="*Titulo: "  />
+                                <h:inputText value="#{noticiasController.selected.nottitulo}" id="titulo" requiredMessage="Ingrese el Título"  required="true" size="65" maxlength="500" style="width: 99%" />
+                                <h:message for="titulo" style="color:red;"/>
+                                 
+                                
+                                <h:outputLabel for="fecha" value="*Fecha Publicación: "  />
+                                <p:calendar value="#{noticiasController.selected.notfechapublicacion}"  id="fecha" requiredMessage="Ingrese la Fecha"  pattern="yyyy-MMM-dd HH:mm:ss" required="true"  />
+                                <h:message for="fecha" style="color:red;"/>
+
+                                <h:outputLabel for="contenido" value="*Contenido: "  />
+                                <p:editor value="#{noticiasController.selected.notcontenido}" id="contenido" requiredMessage="Ingrese el contenido" required="true"  />
+                                <h:message for="contenido" style="color:red;"/>
+
+                                <h:outputLabel value="Imagen: "  />
+                                <p:fileUpload value="#{noticiasController.file}" mode="simple"/>
+                                <h:panelGroup/>
+                                <h:panelGroup/>
+                                <h:outputLabel value="NOTA: si no selecciona una imagen, el sistema pone una por defecto" style="color: blue"  />
+
+                                <h:panelGroup/>
+                                <h:panelGroup/>
+                                <h:commandButton value="Grabar" actionListener="#{noticiasController.agregarNoticia()}"  style="background: #22419A;color:#FFFFFF;width:70px; height: 30px">
+                                    <f:ajax execute="@all" render="@form" />
+                                </h:commandButton>  
+                                <h:link outcome="listarNoticias" value="Volver " />
+                                
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
                 </div>
+                <div style="clear: both;"></div>                
 
             </ui:define>
         </ui:composition>

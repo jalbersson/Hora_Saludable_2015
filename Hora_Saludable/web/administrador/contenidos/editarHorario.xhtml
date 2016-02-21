@@ -2,66 +2,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <body>
-
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
-
             <ui:define name="titulo">
-                Editar Horario
+                Hora Saludable
             </ui:define>
-
             <ui:define name="title">
-                <div class="tituloContenido">
-                    <br></br>
-                    Editar Horario
-                    <br></br>
-                </div>
             </ui:define>
-
             <ui:define name="body">
-                
-                <h:form id="form" style="text-align: center">
-                    
-                    <p:breadCrumb>
-                        <p:menuitem value="Inicio" url="principal.xhtml" />  
-                        <p:menuitem value="Editar Horario" url="" /> 
-                    </p:breadCrumb>
-                    <br/>
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
 
-                    <p:panelGrid  style="width: 70%; margin-left: 20px" columns="1" >
+                <ui:include src="componentes/submenu.xhtml"/>
 
+                <div style="margin-left: 200px;margin-top: 10px;" >
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />                              
+                            <p:menuitem value="Horario" outcome="/administrador/contenidos/horarioConfigurar" />
+                        </p:breadCrumb>
+                    </h:form>
+                    <div class="tituloContenido"></div>
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
+                    <h:form id="form" style="text-align: center">
                         <p:messages style="border: none" id="messages" />
                         <h:panelGrid columns="2" >
                             <p:outputLabel style="font-weight: bold " value="* Titulo: " />
                             <p:inputText style="margin: 5px" id="tituloEvento" value="#{verEditarHorarioController.horario.hornombre}" required="true" size="60" requiredMessage="Introduzca titulo del horario." />
                         </h:panelGrid>   
 
-                        <p:editor id="editor" widgetVar="editorWidget" value="#{verEditarHorarioController.horario.horcontenido}" width="870" height="400" />
+                        <p:editor id="editor" widgetVar="editorWidget" value="#{verEditarHorarioController.horario.horcontenido}"  height="400" />
 
-                    </p:panelGrid>
+                        <br/>
+                        <p:commandButton value="Guardar" ajax="false" action="#{verEditarHorarioController.actualizarHorario()}" process="@form" 
+                                         style="width: 110px;background: #22419A;color:#FFFFFF;"/>
 
-                    <br/>
-                    <p:commandButton ajax="false" action="#{verEditarHorarioController.actualizarHorario()}" process="@form" value="Guardar" 
-                                     style="width: 110px;background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px; margin-left: 20px" />
-                    
-                    <p:commandButton ajax="false" action="principal" value="Volver" 
-                                     style="width: 110px;background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px" />
-                    
-                    <p:commandButton ajax="false" action="#{agregarHorarioController.limpiar()}" process="@form" value="Limpiar" 
-                                     style="width: 110px; background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px" />
 
-                    <p:commandButton ajax="false" action="#{verEditarHorarioController.insertarFila()}" process="@form" value="Insertar Fila" 
-                                     style="width: 110px;background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px" />
 
-                    <p:commandButton ajax="false" action="#{agregarHorarioController.eliminarFila()}" process="@form" value="Eliminar Fila" 
-                                     style="width: 110px;background: #22419A;color:#FFFFFF;font-style: italic" />
+                        <p:commandButton value="Limpiar" ajax="false" action="#{horarioController.limpiar()}" process="@form"  
+                                         style="width: 110px; background: #22419A;color:#FFFFFF;" />
 
-                </h:form>
+                        <p:commandButton value="Insertar Fila" ajax="false" action="#{verEditarHorarioController.insertarFila()}" process="@form"  
+                                         style="width: 110px;background: #22419A;color:#FFFFFF;" />
+
+                        <p:commandButton value="Eliminar Fila"  ajax="false" action="#{horarioController.eliminarFila()}" process="@form" 
+                                         style="width: 110px;background: #22419A;color:#FFFFFF;" />
+                        <br />
+                        <p:commandButton value="Volver" ajax="false" action="horarioConfigurar" 
+                                         style="width: 110px;background: #22419A;color:#FFFFFF;" />
+
+                    </h:form>
+                </div>
+                <div style="clear: both;"></div>                
+
             </ui:define>
         </ui:composition>
     </body>
 </html>
+

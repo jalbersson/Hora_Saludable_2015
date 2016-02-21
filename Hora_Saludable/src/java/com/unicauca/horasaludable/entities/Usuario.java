@@ -7,6 +7,7 @@ package com.unicauca.horasaludable.entities;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -17,8 +18,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "USUARIO", catalog = "asae", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u ORDER BY u.usuapellidos ASC"),    
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u ORDER BY u.usuapellidos ASC"),
     @NamedQuery(name = "Usuario.findByUsuid", query = "SELECT u FROM Usuario u WHERE u.usuid = :usuid"),
     @NamedQuery(name = "Usuario.findByUsuidentificacion", query = "SELECT u FROM Usuario u WHERE u.usuidentificacion = :usuidentificacion"),
     @NamedQuery(name = "Usuario.findByUsufechanacimiento", query = "SELECT u FROM Usuario u WHERE u.usufechanacimiento = :usufechanacimiento"),
@@ -50,7 +50,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByUsucontrasena", query = "SELECT u FROM Usuario u WHERE u.usucontrasena = :usucontrasena"),
     @NamedQuery(name = "Usuario.findByUsuemail", query = "SELECT u FROM Usuario u WHERE u.usuemail = :usuemail"),
     @NamedQuery(name = "Usuario.findByUsutelefono", query = "SELECT u FROM Usuario u WHERE u.usutelefono = :usutelefono"),
-    @NamedQuery(name = "Usuario.findByUsufoto", query = "SELECT u FROM Usuario u WHERE u.usufoto = :usufoto"),
     @NamedQuery(name = "Usuario.findByCargo", query = "SELECT u FROM Usuario u WHERE u.carid IS NOT NULL"),
     @NamedQuery(name = "Usuario.findByEstudents", query = "SELECT u FROM Usuario u WHERE u.carid IS NULL AND u.conyugeid IS NULL AND u.uniid IS NOT NULL"),
     @NamedQuery(name = "Usuario.findByFamiliars", query = "SELECT u FROM Usuario u WHERE u.carid IS NULL AND u.conyugeid IS NOT NULL AND u.uniid IS NULL"),
@@ -64,73 +63,94 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByIdentiFuncionarios", query = "SELECT u FROM Usuario u WHERE TRIM(u.usuidentificacion) LIKE :usuidentificacion AND u.carid IS NOT NULL"),
     @NamedQuery(name = "Usuario.findByIdentiEstudiante", query = "SELECT u FROM Usuario u WHERE TRIM(u.usuidentificacion) LIKE :usuidentificacion AND u.carid IS NULL AND u.conyugeid IS NULL AND u.uniid IS NOT NULL"),
     @NamedQuery(name = "Usuario.findByIdentiFamiliar", query = "SELECT u FROM Usuario u WHERE TRIM(u.usuidentificacion) LIKE :usuidentificacion AND u.conyugeid IS NOT NULL")})
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, Comparable<Usuario> {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "USUID")
     private Long usuid;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "USUIDENTIFICACION")
     private long usuidentificacion;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "USUFECHANACIMIENTO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date usufechanacimiento;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 75)
     @Column(name = "USUNOMBRES")
     private String usunombres;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 75)
     @Column(name = "USUAPELLIDOS")
     private String usuapellidos;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "USUGENERO")
     private Character usugenero;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 75)
     @Column(name = "USUNOMBREUSUARIO")
     private String usunombreusuario;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "USUCONTRASENA")
     private String usucontrasena;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 150)
     @Column(name = "USUEMAIL")
     private String usuemail;
+    
     @Column(name = "USUTELEFONO")
     private BigInteger usutelefono;
-    @Size(max = 150)
-    @Column(name = "USUFOTO")
-    private String usufoto;
+    
+  
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuid")
     private List<Medida> medidaList;
+    
     @OneToMany(mappedBy = "conyugeid")
     private List<Usuario> usuarioList;
+    
     @JoinColumn(name = "CONYUGEID", referencedColumnName = "USUID")
     @ManyToOne
     private Usuario conyugeid;
+    
     @JoinColumn(name = "CARID", referencedColumnName = "CARID")
     @ManyToOne
     private Cargo carid;
+    
     @JoinColumn(name = "UNIID", referencedColumnName = "UNIID")
-    @ManyToOne
+    @ManyToOne    
     private Unidadacademica uniid;
+    
+    @Basic(optional = true)
+    @Lob
+    @Column(name = "usufotobd")
+    private byte[] usuFotoBD;    
+      
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Detalleasistencia> detalleasistenciaList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Usuariogrupo> usuariogrupoList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Detalleinscripcion> detalleinscripcionList;
 
@@ -141,6 +161,7 @@ public class Usuario implements Serializable {
         this.usuid = usuid;
     }
 
+    
     public Usuario(Long usuid, long usuidentificacion, Date usufechanacimiento, String usunombres, String usuapellidos, Character usugenero, String usunombreusuario, String usucontrasena, String usuemail) {
         this.usuid = usuid;
         this.usuidentificacion = usuidentificacion;
@@ -152,7 +173,7 @@ public class Usuario implements Serializable {
         this.usucontrasena = usucontrasena;
         this.usuemail = usuemail;
     }
-
+   
     public Long getUsuid() {
         return usuid;
     }
@@ -233,14 +254,6 @@ public class Usuario implements Serializable {
         this.usutelefono = usutelefono;
     }
 
-    public String getUsufoto() {
-        return usufoto;
-    }
-
-    public void setUsufoto(String usufoto) {
-        this.usufoto = usufoto;
-    }
-
     @XmlTransient
     public List<Medida> getMedidaList() {
         return medidaList;
@@ -310,6 +323,16 @@ public class Usuario implements Serializable {
         this.detalleinscripcionList = detalleinscripcionList;
     }
 
+    public byte[] getUsuFotoBD() {
+        return usuFotoBD;
+    }
+
+    public void setUsuFotoBD(byte[] usuFotoBD) {
+        this.usuFotoBD = usuFotoBD;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -329,9 +352,38 @@ public class Usuario implements Serializable {
         }
         return true;
     }
+
     @Override
     public String toString() {
         return "com.unicauca.horasaludable.entities.Usuario[ usuid=" + usuid + " ]";
     }
+
+    public int calcularEdad() {
+        int edad;
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha_nac = formato.format(this.usufechanacimiento);
+        Date fechaActual = new Date();
+        String hoy = formato.format(fechaActual);
+        String[] dat1 = fecha_nac.split("/");
+        String[] dat2 = hoy.split("/");
+        edad = Integer.parseInt(dat2[2]) - Integer.parseInt(dat1[2]);
+        int mes = Integer.parseInt(dat2[1]) - Integer.parseInt(dat1[1]);
+        if (mes < 0) {
+            edad = edad - 1;
+        } else if (mes == 0) {
+            int dia = Integer.parseInt(dat2[0]) - Integer.parseInt(dat1[0]);
+            if (dia > 0) {
+                edad = edad - 1;
+            }
+        }
+        return edad;
+    }
     
+    @Override
+    public int compareTo(Usuario usu) {
+        String a=this.getUsunombres() + " " + this.getUsuapellidos();
+        String b=usu.getUsunombres() + " " + usu.getUsuapellidos();
+        return a.compareTo(b);
+    }
+
 }

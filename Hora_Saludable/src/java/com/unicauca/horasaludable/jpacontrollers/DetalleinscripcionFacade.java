@@ -45,13 +45,11 @@ public class DetalleinscripcionFacade extends AbstractFacade<Detalleinscripcion>
             query.setParameter("nombresApellidos", "%" + nombresApellidos + "%");
             return query.getResultList();
         } finally {
-            // em.close();
-            //return null;
         }
     }
-    
+
     public boolean usuarioActivo(long usuid, boolean activo, String mes, int anio) {
-        
+
         String queryString = "SELECT u "
                 + "FROM Usuario u JOIN u.detalleinscripcionList d JOIN d.inscripcion i "
                 + "WHERE d.detalleinscripcionPK.usuid = :usuid AND d.detactivo = :activo AND i.insmes = :mes AND i.insanio = :anio";
@@ -61,13 +59,14 @@ public class DetalleinscripcionFacade extends AbstractFacade<Detalleinscripcion>
         query.setParameter("mes", mes);
         query.setParameter("anio", anio);
         query.setParameter("usuid", usuid);
-        if(query.getResultList().size() > 0)
+        if (query.getResultList().size() > 0) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
-    
-    public List<Usuario> usariosActivosPorAño(boolean activo, int anio, String nombresApellidos ) {
+
+    public List<Usuario> usariosActivosPorAño(boolean activo, int anio, String nombresApellidos) {
         try {
             String queryString = "SELECT DISTINCT u "
                     + "FROM Usuario u JOIN u.detalleinscripcionList d JOIN d.inscripcion i "

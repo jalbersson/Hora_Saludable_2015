@@ -2,84 +2,80 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <body>
 
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
-
             <ui:define name="titulo">
-                Hora Saludable: Lista Noticias
+                Hora Saludable
             </ui:define>
-
             <ui:define name="title">
-
             </ui:define>
+            <ui:define name="body">
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
 
-            <ui:define name="body" >
-                <h:form>
-                    <p:breadCrumb>
-                        <p:menuitem value="Inicio" url="principal.xhtml" />    
-                        <p:menuitem value="Noticias" url="listarNoticias.xhtml" />                        
-                     
-                    </p:breadCrumb>
-                </h:form>
+                <ui:include src="componentes/submenu.xhtml"/>
 
-
-                <p:spacer height="10"/>
-                <div class="tituloContenido">
-                    Noticias
-                </div>
-
-
-
-                <div class="wrap" style="width: 90%;">    
-
+                <div style="margin-left: 200px;margin-top: 10px;" >
                     <h:form>
-                        <p:dataTable var="noticia" value="#{listarNoticiasController.obtenerNoticias()}" rows="10" 
-                                     paginator="true" 
-                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                     rowsPerPageTemplate="5,10,15">
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />                              
 
-                            <p:column headerText="Titulo">
-                                <p:link value="#{noticia.nottitulo}" outcome="detalleNoticia?noticiaId=#{noticia.notid}" style="font-weight: bold; color: #22419A" />
-                            </p:column>
+                        </p:breadCrumb>
+                    </h:form>
+                    <div class="tituloContenido">Noticias</div>                    
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
 
-                            <p:column headerText="Fecha publicación">
-                                <h:outputText value="#{noticia.notfechapublicacion}" />
-                            </p:column>
+                    <p:panel  toggleable="false">
+                        <p:commandButton  value="Nueva Noticia" class="botonAzul" 
+                                          action="#{noticiasController.nuevaNoticia()}"
+                                          style="background: #22419A;color:#FFFFFF;width:170px; height: 30px; float: right"
+                                          />
+                        <br />
+                        <br />
+                        <br />
+                        <h:form id="form1">
+                            <p:dataTable var="noticiaLista" value="#{noticiasController.noticias}" rows="10" 
+                                         paginator="true" 
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15">
 
-                            <p:column headerText="Noticia">
-                                <p align="justify">
-                                    <h:outputText value="#{noticia.notcontenido}" />
-                                </p>
+                                <p:column headerText="Titulo" width="70%">
+                                    <h:outputText value="#{noticiaLista.nottitulo}" />
+                                </p:column>
 
-                            </p:column>
+                                <p:column headerText="Fecha publicación">
+                                    <h:outputText value="#{noticiaLista.notfechapublicacion}" />
+                                </p:column>
 
+                                <p:column headerText="Acciones">
 
-                            <p:column headerText="Accion" style="text-align: center">
-                                <p:row>
-                                    <p:button outcome="editarNoticia?id=#{noticia.notid}" value="Editar" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px"/>
-                                </p:row>
-                                <br></br><br></br>
-                                <p:row>
-                                    <p:button outcome="eliminarNoticia?id=#{noticia.notid}" value="Eliminar" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px"/>
-                                </p:row>
-                            </p:column>    
+                                    <p:commandLink title="Ver o Editar"   style="text-decoration: none;" action="#{noticiasController.editarNoticia(noticiaLista)}">                                    
+                                        <p:graphicImage style="width:25px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                    </p:commandLink>     
+                                    <h:outputScript >
+                                        function seguroEliminar(){
+                                        if(confirm('Está seguro que desea eliminar la noticia?'))
+                                        return true;
+                                        else
+                                        return false;
+                                        }
+                                    </h:outputScript>  
+                                    <p:commandLink id="eliminar" style="text-decoration: none;margin-left: 5px; " title="Eliminar" action="#{noticiasController.eliminarNoticia(noticiaLista)}" onstart="return seguroEliminar();" >                                    
+                                        <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                    </p:commandLink>                                    
+                                </p:column>    
 
+                            </p:dataTable> 
 
-                        </p:dataTable> 
-                    </h:form>  
-
-                    <br></br>
-                    <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; " > </p:button>
+                        </h:form>
+                    </p:panel>
 
                 </div>
+                <div style="clear: both;"></div>                
 
             </ui:define>
-
         </ui:composition>
     </body>
 </html>

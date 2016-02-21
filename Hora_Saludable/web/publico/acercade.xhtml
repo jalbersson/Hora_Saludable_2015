@@ -19,7 +19,10 @@
             </ui:define>
 
             <ui:define name="body">
+
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+
+
                 <h:panelGrid columns="1" style="width:800px; height: 200px;">
                     <h:form>    
                         <h:form>
@@ -29,11 +32,35 @@
 
                             </p:breadCrumb>
                         </h:form>
+                        <div class="tituloContenido">
+                            <br/>
+                            Acerca de... <br></br>
+                        </div>
                         <p:spacer height="10"/>
-                        <p align="justify">
-                            <h:outputText style="font-weight: normal; font-size: 22px;"  value="La Universidad del Cauca es una institución de educación superior pública de carácter nacional con 187 años de historia.
-                                          Ubicada en la ciudad de Popayán, ofrece sus servicios educativos a estudiantes de todo el país, quienes encuentran en la Universidad y la ciudad un espacio idóneo y tranquilo para realizar sus estudios de pregrado y posgrado.
-                                          Gracias a sus programas de descentralización, Unicauca ha ofrecido la posibilidad de educación superior a los caucanos de la región. Conozca a continuación algunos de los aspectos institucionales más importantes que hacen de ésta una de las mejores universidades colombianas.">
+                        <p>
+                            <h:outputText style="font-weight: normal; font-size: 18px;"  
+                                          value="Hora Saludable Versión 1.0 Beta Junio 22 de 2015.">
+                            </h:outputText>
+                        </p>
+                        <p>
+                            <h:outputText style="font-weight: normal; font-size: 18px;"  
+                                          value="El programa Hora Saludable, es un espacio de la 
+                                          Universidad del Cauca, para sus docentes y administrativos,
+                                          que busca fomentar y generar dinámicas y procesos que 
+                                          favorezcan el desarrollo consciente de la motricidad humana 
+                                          orientada hacia hábitos y estilos de vida saludables a 
+                                          través de la recreación y el deporte.">
+                            </h:outputText>
+                        </p>
+                        <p>
+                            <h:outputText style="font-weight: normal; font-size: 18px;"  
+                                          value="Esta aplicación fue realizada por los
+                                          estudiantes del programa de Ingeniería de Sistemas
+                                          de la electiva Arquitecturas de Software para 
+                                          Aplicaciones Empresariales durante el primer 
+                                          semestre de 2015, bajo la dirección de los profesores
+                                          W. Libardo Pantoja Yépez y Pablo A. Magé, con la colaboración y asesoría
+                                          del Profesor Nairo Burbano (Coordinador de la Hora Saludable). ">
                             </h:outputText>
                         </p>
                     </h:form> 

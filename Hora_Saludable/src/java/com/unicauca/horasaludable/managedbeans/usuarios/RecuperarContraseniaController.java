@@ -28,12 +28,12 @@ import javax.servlet.http.HttpServletRequest;
 @ManagedBean
 @RequestScoped
 public class RecuperarContraseniaController {
-    
+
     @EJB
     private UsuarioFacade ejbUsuario;
     @EJB
     private RecuperarcontrasenaFacade ejbRecuperarcontrasena;
-    
+
     private String correo;
     private Usuario usuario;
     private Recuperarcontrasena recuperarContrasena;
@@ -43,8 +43,7 @@ public class RecuperarContraseniaController {
     private String subject;
     private String smtpServ;
     private Cifrar cifrado;
-    
-        
+
     public RecuperarContraseniaController() {
     }
 
@@ -104,29 +103,28 @@ public class RecuperarContraseniaController {
     public void setSmtpServ(String smtpServ) {
         this.smtpServ = smtpServ;
     }
-    
+
     ///
-    
-    public void recuperar(){
-        try{
+    public void recuperar() {
+        try {
             usuario = ejbUsuario.buscarUsuarioPorEmail(correo);
-            if(usuario != null){
+            if (usuario != null) {
                 sendMail();
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable/faces/usuario/recuperarcontrasenia/validar.xhtml");
-            }else{
+            } else {
                 FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"No se pudo encontrar el correo",""));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se pudo encontrar el correo", ""));
             }
-        }catch(Exception e){
+        } catch (Exception e) {
         }
     }
-    
-    public void sendMail(){
-        HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();      
-        
+
+    public void sendMail() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+
         to = correo;
         from = "horasaludable@gmail.com";
-        
+
         subject = "Recuperar contraseña Hora Saludable";
         smtpServ = "smtp.gmail.com";
         String pass = "hora.saludable";
@@ -134,15 +132,18 @@ public class RecuperarContraseniaController {
         //String idcifrado = usuario.getUsuid().toString();
         recuperarContrasena = new Recuperarcontrasena();
         recuperarContrasena.setReid(usuario.getUsuid());
-        recuperarContrasena.setReidcifrado(idcifrado);        
-        if(ejbRecuperarcontrasena.buscarRecuperarContrasenaCifrado(idcifrado)==null)
-        {
+        recuperarContrasena.setReidcifrado(idcifrado);
+        if (ejbRecuperarcontrasena.buscarRecuperarContrasenaCifrado(idcifrado) == null) {
             ejbRecuperarcontrasena.create(recuperarContrasena);
-        }                
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/faces/usuario/recuperarcontrasenia/cambiarContrasenia.xhtml?ifo="+ idcifrado;
-        message = "<h1> Hola "+usuario.getUsunombres()+" Hemos recibido tu solicitud de cambio de contraseña, para hacer el"
-                + " cambio haz clic <a href="+url+">Aqui</a></h1>";
-         
+        }
+        //Cuando el servidor es local se usa la siguiente url:
+        //String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/faces/usuario/recuperarcontrasenia/cambiarContrasenia.xhtml?ifo="+ idcifrado;
+
+        //Para producción sirve la siguiente url:
+        String url = "http://www.unicauca.edu.co" + request.getContextPath() + "/faces/usuario/recuperarcontrasenia/cambiarContrasenia.xhtml?ifo=" + idcifrado;
+        message = "<h1> Hola " + usuario.getUsunombres() + ", con tu usuario: " + usuario.getUsunombreusuario() + ", hemos recibido tu solicitud de cambio de contraseña, para hacer el"
+                + " cambio haz clic <a href=" + url + ">Aquí</a></h1>";
+
         Properties props = System.getProperties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -157,7 +158,7 @@ public class RecuperarContraseniaController {
             MimeMessage message = new MimeMessage(session);//se inicia una session
             message.setFrom(new InternetAddress(this.from));
             message.addRecipient(Message.RecipientType.TO,
-                           new InternetAddress(to));
+                    new InternetAddress(to));
             message.setSubject(this.subject);
             message.setText(this.message, "ISO-8859-1", "html");
 
@@ -165,9 +166,9 @@ public class RecuperarContraseniaController {
             transport.connect(smtpServ, from, pass);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
-            System.out.println("A+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            //System.out.println("A+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
-        }       
+        }
     }
 }

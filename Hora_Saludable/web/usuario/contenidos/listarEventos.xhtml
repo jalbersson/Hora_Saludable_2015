@@ -3,86 +3,86 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+      xmlns:p="http://primefaces.org/ui">
+
     <body>
 
-       <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
+        <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
             <ui:define name="titulo">
                 Eventos
             </ui:define>          
 
-            
+
 
             <ui:define name="title">
                 <div class="tituloContenido">
-                    Programate... 
+                    Todos los eventos
                     <br></br>
                 </div>
             </ui:define>
 
             <ui:define name="body">
-                
-            <p:breadCrumb>
+
+                <p:breadCrumb>
                     <p:menuitem value="Inicio" outcome="principal" />                              
-                    <p:menuitem value="Eventos" outcome="eventos"/>                                        
-            </p:breadCrumb>    
-            
-            <br></br>    
-                
-            <h:form id="form1">
-                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                <p:dataGrid var="eventoLista" value="#{eventoController.eventos}" columns="3"
-                    rows="12" paginator="true" 
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                    rowsPerPageTemplate="6,12,16">
+                    <p:menuitem value="Eventos" outcome="listarEventos"/>                                        
+                </p:breadCrumb>    
 
-                    <p:panel  class="tituloContenido" style="text-align:left; border:none;">
-                        <div style="border:solid 1px #0B2972; border-radius: 5px; height: 130px; padding-left: 10px;">
-                            <br></br>
-                            <h:form>
-                                <h:panelGrid columns="1" style="width:100%; border: none; ">
-                            <p:row>
-                                <p:column>
-                                    <h:outputLabel value="Evento :" style="color:#0B2972; font-size:15px; font-style: italic; "/>
-                                </p:column>
-                                <p:column>
-                                    <h:outputLabel value="#{eventoLista.evetitulo}"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>
-                                    <h:outputLabel class="CampoLabel" value="Lugar :" style="color:#0B2972; font-size:15px; font-style: italic;"/>
-                                </p:column>
-                                <p:column>
-                                    <h:outputLabel value="#{eventoLista.evelugar}"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>
-                                    <h:outputLabel class="CampoLabel" value="Fecha :" style="color:#0B2972; font-size:15px; font-style: italic;"/>
-                                </p:column>
-                                <p:column>
-                                    <h:outputLabel value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:link value="Detalles" outcome="#{eventoController.detalleEventoEventos(eventoLista.eveid)}" style="font-weight: bold; font-size: 15px; color:#aa0000;">
-                                        <f:param name="eventoId" value="#{eventoLista.eveid}" />
-                                </p:link>
-                            </p:row>
-                            </h:panelGrid> 
-                            </h:form>   
-                        </div>
-                        
-                    </p:panel>
+                <br></br>    
 
-                </p:dataGrid>
-                <br></br>
-                <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" > </p:button>
+                <h:form id="form1">
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                    <p:dataGrid var="eventoLista" value="#{eventosController.eventos}" columns="3"
+                                rows="12" paginator="true" 
+                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="6,12,16">
 
-            </h:form>               
+                        <p:panel  class="tituloContenido" style="text-align:left; border:none;">
+                            <div style="border:solid 1px #0B2972; border-radius: 5px; height: 130px; padding-left: 10px;">
+                                <br></br>
+                                <h:form>
+                                    <h:panelGrid columns="1" style="width:100%; border: none; ">
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputLabel value="Evento :" style="color:#0B2972; font-size:15px; font-style: italic; "/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputLabel value="#{eventoLista.evetitulo}"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputLabel class="CampoLabel" value="Lugar :" style="color:#0B2972; font-size:15px; font-style: italic;"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputLabel value="#{eventoLista.evelugar}"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <h:outputLabel class="CampoLabel" value="Fecha :" style="color:#0B2972; font-size:15px; font-style: italic;"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputLabel value="#{eventosController.convertToJavaDate(eventoLista.evefechaevento)}"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <br />
+                                            <p:link value="Leer Más" outcome="detalleEventoPrincipal?eventoId=#{eventoLista.eveid}" style="color: #AA0000; font-size: 14px;">
+                                            </p:link>
+                                        </p:row>
+                                    </h:panelGrid> 
+                                </h:form>   
+                            </div>
+
+                        </p:panel>
+
+                    </p:dataGrid>
+                    <br></br>
+                    <p:button outcome="principal" value="Inicio" style="background: #22419A;color:#FFFFFF; width: 100px" > </p:button>
+
+                </h:form>         
+                <ui:include src="detalleEventoEmergente.xhtml"/>
             </ui:define>
 
         </ui:composition>

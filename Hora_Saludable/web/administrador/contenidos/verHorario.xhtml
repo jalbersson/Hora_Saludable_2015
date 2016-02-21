@@ -1,45 +1,43 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <body>
-
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
-
             <ui:define name="titulo">
-                Ver horario
+                Hora Saludable
             </ui:define>
-
             <ui:define name="title">
-
             </ui:define>
-
             <ui:define name="body">
-                <h:form style="text-align: center">
-                    
-                    <p:breadCrumb>
-                        <p:menuitem value="Inicio" url="principal.xhtml" />  
-                        <p:menuitem value="Ver Horario" url="" />    
-                    </p:breadCrumb>
-                    
-                    <p:growl id="msgs" showDetail="true" />
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
 
-                    <h2 style="margin-top:30px" class="tituloContenido">#{verEditarHorarioController.horario.hornombre}</h2>
-                    <br/><br/>
-                    <h:outputText id="display" value="#{verEditarHorarioController.horario.horcontenido}" escape="false" />
-                    <br/><br/><br/><br/>           
-                </h:form>
-                
-                <p:button style="background:#22419A ; color: #ffffff; font-style: italic; text-align: left; margin-left: 100px" outcome="principal" value="Volver" />
-                
+                <ui:include src="componentes/submenu.xhtml"/>
+
+                <div style="margin-left: 200px;margin-top: 10px;" >
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />
+                            <p:menuitem value="Horario" outcome="/administrador/contenidos/horarioConfigurar" />
+                        </p:breadCrumb>
+                    </h:form>
+                    <div class="tituloContenido"></div>
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
+
+                    <p:panel  toggleable="false">
+                        <h2 style="margin-top:5px" class="tituloContenido">#{verEditarHorarioController.horario.hornombre}</h2>
+                        <h:outputText id="display" value="#{verEditarHorarioController.horario.horcontenido}" escape="false" />       
+                        
+                        <p:button value="Volver" style="background:#22419A ; color: #ffffff; text-align: left; margin-left: 47px" outcome="horarioConfigurar"  />
+                    </p:panel>
+
+                </div>
+                <div style="clear: both;"></div>                
+
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>
 

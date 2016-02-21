@@ -8,14 +8,14 @@
     <ui:composition>
         <p:dialog header="Ver o Editar Usuario" modal="true" resizable="false" position="top"  widgetVar="verEditarUsuario" closable="true">
             <h:form id="formularioTituloVerEditar">
-                <p:outputLabel value="Funcionario" style="font-size: 25px; margin-left:140px;color:#22419A;" 
+                <p:outputLabel value="Funcionario" style="font-size: 20px; margin-left:140px;color:#22419A;" 
                                rendered="#{verEditarUsuarioController.camposFuncionario}"/>
-                <p:outputLabel value="Estudiante" style="font-size: 25px; margin-left:140px;color:#22419A;" 
+                <p:outputLabel value="Estudiante" style="font-size: 20px; margin-left:140px;color:#22419A;" 
                                rendered="#{verEditarUsuarioController.camposEstudiante}"/>
-                <p:outputLabel value="Familiar" style="font-size: 25px; margin-left:140px;color:#22419A;" 
-                                 rendered="#{verEditarUsuarioController.camposFamiliar}"/>
+                <p:outputLabel value="Familiar" style="font-size: 20px; margin-left:140px;color:#22419A;" 
+                               rendered="#{verEditarUsuarioController.camposFamiliar}"/>
             </h:form>
-            <p:panel header="Foto de Perfil">
+            <p:panel header="Foto de Perfil" toggleable="true">
                 <div style="float:left">
                     <h:form id="formularioFoto">
                         <p:messages closable="true"/>
@@ -23,25 +23,32 @@
                             <p:row>
                                 <p:column>                                
                                 </p:column>
+
                                 <p:column  rendered="#{verEditarUsuarioController.campoFoto}">                                
-                                    <p:graphicImage  width="100" height="100" library="#{verEditarUsuarioController.rutaFoto}" name="#{verEditarUsuarioController.usuario.usufoto}"
-                                                     />
+                                    <p:graphicImage value="#{verEditarUsuarioController.imagenFlujo}" >
+                                        <f:param name="idUsu" value="#{verEditarUsuarioController.usuario.usuid}" />
+                                    </p:graphicImage>
+
                                 </p:column>
                                 <p:column rendered="#{verEditarUsuarioController.campoFoto}">
                                     <p:commandLink style="color: blue;" action="#{verEditarUsuarioController.mostraSubirFoto()}" value="Cambiar"/>                                                                 
                                 </p:column>
+
                                 <p:column  rendered="#{!verEditarUsuarioController.campoFoto}">
-                                    Peso máximo de la imagen 1 MegaByte
+                                    La imagen que suba será redimensionada automáticamente
                                     <p:fileUpload  fileUploadListener="#{verEditarUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
                                                    label="Cargar" auto="true"  
-                                                   sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido"   fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                   invalidFileMessage="Tipo de archivo no válido"   fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                                                    onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
                                 </p:column>
                                 <p:column rendered="#{!verEditarUsuarioController.campoFoto}">
                                     <p:outputLabel value="#{verEditarUsuarioController.foto.fileName}"/>
                                 </p:column>
-
                             </p:row>
+
+                            <p:graphicImage value="#{uploadImageController.imagenFlujo}" >
+                                <f:param name="id" value="#{uploadImageController.selected.imageId}" />
+                            </p:graphicImage>
 
                         </p:panelGrid>            
                     </h:form> 
@@ -51,7 +58,7 @@
                         <p:commandLink rendered="#{!verEditarUsuarioController.campoFoto}"
                                        action="#{verEditarUsuarioController.actualizarFoto()}"
                                        style="color:blue;"  value="Aceptar"
-                                       onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
+                                       onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"  />
                         <p:commandLink rendered="#{!verEditarUsuarioController.campoFoto}" 
                                        style="margin-left:10px; color:blue;"  value="Cancelar" action="#{verEditarUsuarioController.cancelarSubirFoto()}"
                                        onstart="PF('efectoCarga').show()"  oncomplete="PF('efectoCarga').hide()"/>
@@ -59,14 +66,15 @@
                 </div>            
                 <div style="clear: both"></div>
             </p:panel>
-            <p:panel header="Datos Personales">
+            <p:panel header="Datos Personales" toggleable="true">
                 <h:form id="formularioDatosPersonales">
                     <p:messages closable="true"/>
-                    <p:panelGrid styleClass="panelgrid">                        
+                    <p:panelGrid styleClass="panelgrid">  
+
                         <p:row rendered="#{verEditarUsuarioController.campoFechaNacimiento}">
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Fecha de Nacimiento (aaaa-mm-dd): "/>
-                            </p:column>
+                            </p:column>                                                        
                             <p:column>
                                 <p:outputLabel value="#{verEditarUsuarioController.sdf.format(verEditarUsuarioController.usuario.usufechanacimiento)}"/>
                             </p:column>
@@ -78,7 +86,7 @@
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Fecha de Nacimiento (aaaa-mm-dd): "/>
                                 <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="* "/>
+                                               value="* "/>
                             </p:column>
                             <p:column>
                                 <p:calendar value="#{verEditarUsuarioController.fechaNacimiento}" size="10"    
@@ -92,6 +100,7 @@
                                                onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                             </p:column>
                         </p:row>
+
                         <p:row rendered="#{verEditarUsuarioController.campoIdentificacion}">
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Número de Identificación: "/>
@@ -107,7 +116,7 @@
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Número de Identificación: "/>
                                 <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="* "/>
+                                               value="* "/>
                             </p:column>
                             <p:column>
                                 <p:inputText value="#{verEditarUsuarioController.identificacion}"/>
@@ -119,6 +128,7 @@
                                                onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                             </p:column>
                         </p:row>
+
                         <p:row rendered="#{verEditarUsuarioController.campoNombre}">
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Nombres: "/>
@@ -127,14 +137,14 @@
                                 <p:outputLabel value="#{verEditarUsuarioController.usuario.usunombres}"/>
                             </p:column>
                             <p:column>
-                                <p:commandLink style="color: blue;" value="Modificar" action="#{verEditarUsuarioController.mostrarModifiarNombre()}"/>
+                                <p:commandLink style="color: blue;" value="Modificar" action="#{verEditarUsuarioController.mostrarModificarNombre()}"/>
                             </p:column>
                         </p:row>
                         <p:row rendered="#{!verEditarUsuarioController.campoNombre}">
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Nombre: "/>
                                 <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="* "/>
+                                               value="* "/>
                             </p:column>
                             <p:column>
                                 <p:inputText value="#{verEditarUsuarioController.nombres}"/>  
@@ -147,6 +157,7 @@
                                                onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                             </p:column>
                         </p:row>
+
                         <p:row rendered="#{verEditarUsuarioController.campoApellidos}">
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Apellidos: "/>
@@ -162,7 +173,7 @@
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Apellidos: "/>
                                 <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="* "/>
+                                               value="* "/>
                             </p:column>
                             <p:column>
                                 <p:inputText value="#{verEditarUsuarioController.apellidos}"/>  
@@ -175,6 +186,7 @@
                                                onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                             </p:column>
                         </p:row> 
+
                         <p:row rendered="#{verEditarUsuarioController.campoCorreo}">
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Correo Electróncio: "/>
@@ -190,7 +202,7 @@
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Correo Electróncio: "/>
                                 <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="* "/>
+                                               value="* "/>
                             </p:column>
                             <p:column>
                                 <p:inputText value="#{verEditarUsuarioController.correo}"/>  
@@ -203,6 +215,8 @@
                                                onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                             </p:column>
                         </p:row>
+
+
                         <p:row rendered="#{verEditarUsuarioController.campotelefono}">
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Teléfono: "/>
@@ -229,10 +243,50 @@
                                                onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
                             </p:column>
                         </p:row>
+
+                        <!-- Sexo -->
+
+                        <p:row rendered="#{verEditarUsuarioController.campoGenero}">
+                            <p:column>
+                                <p:outputLabel style="font-size: 15px;" value="Sexo (M,F): "/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{verEditarUsuarioController.usuario.usugenero}"/>
+                            </p:column>
+                            <p:column>
+                                <p:commandLink style="color: blue;" value="Modificar" action="#{verEditarUsuarioController.mostrarModificarGenero()}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row rendered="#{!verEditarUsuarioController.campoGenero}">
+                            <p:column>
+                                <p:outputLabel style="font-size: 15px;" value="Sexo: "/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{verEditarUsuarioController.genero}"/>  
+                            </p:column>
+                            <p:column>
+                                <p:commandLink style="color: blue;" value="Aceptar" action="#{verEditarUsuarioController.actualizarGenero()}"
+                                               onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                                <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                               action="#{verEditarUsuarioController.cancelarActualizarGenero()}"
+                                               onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel style="font-size: 15px;" value="Edad: "/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{verEditarUsuarioController.usuario.calcularEdad()}"/>
+                                <p:outputLabel value=" años"/>
+                            </p:column>
+                        </p:row>
+
                     </p:panelGrid>
                 </h:form>
             </p:panel>
-            <p:panel header="Datos de la Cuenta">
+            <p:panel header="Datos de la Cuenta" toggleable="true">
                 <h:form id="formularioDatosCuenta">
                     <p:messages closable="true"/>
                     <p:panelGrid styleClass="panelgrid">                       
@@ -251,7 +305,7 @@
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Nombre de Usuario: "/>
                                 <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="* "/>
+                                               value="* "/>
                             </p:column>
                             <p:column>
                                 <p:inputText value="#{verEditarUsuarioController.nombreUsuario}"/>  
@@ -279,7 +333,7 @@
                             <p:column>
                                 <p:outputLabel style="font-size: 15px;" value="Contraseña: "/>
                                 <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
-                                                   value="* "/>
+                                               value="* "/>
                             </p:column>
                             <p:column>
                                 <p:password value="#{verEditarUsuarioController.contrasena}"/>  
@@ -295,7 +349,7 @@
                     </p:panelGrid>                
                 </h:form>
             </p:panel>
-            <p:panel header="Otros Datos">
+            <p:panel header="Otros Datos" toggleable="true">
                 <h:form id="formularioOtrosDatos" >
                     <p:messages closable="true"/>                    
                     <div style="float:left">
@@ -451,60 +505,60 @@
             </p:panel>
         </p:dialog>
         <p:dialog header="Seleccionar Funcionario" width="700"  modal="true"  widgetVar="seleccionarEditarFuncionario">
-                    <h:form id="ventanaSeleccionarFuncionario">
-                        <br/>
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Nombre del Funcionario:" />
-                            <p:inputText style="width: 240px;" value="#{verEditarUsuarioController.nombreOApellidos}"  >
-                                <p:ajax event="keyup" update="tablasEditarFuncionarios" listener="#{verEditarUsuarioController.buscarPorNombreFuncionario}" />                                
-                            </p:inputText>                          
+            <h:form id="ventanaSeleccionarFuncionario">
+                <br/>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Nombre del Funcionario:" />
+                    <p:inputText style="width: 240px;" value="#{verEditarUsuarioController.nombreOApellidos}"  >
+                        <p:ajax event="keyup" update="tablasEditarFuncionarios" listener="#{verEditarUsuarioController.buscarPorNombreFuncionario}" />                                
+                    </p:inputText>                          
 
-                        </h:panelGrid>
+                </h:panelGrid>
 
-                        <br/>
-                        <p:panel id="tablasEditarFuncionarios">
-                            <p:dataTable  var="funcionarioEditar" value="#{verEditarUsuarioController.listaFuncionarios}" 
-                                          paginator="true" rows="8"  
-                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
-                                          rowsPerPageTemplate="5,8">
+                <br/>
+                <p:panel id="tablasEditarFuncionarios">
+                    <p:dataTable  var="funcionarioEditar" value="#{verEditarUsuarioController.listaFuncionarios}" 
+                                  paginator="true" rows="8"  
+                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                  rowsPerPageTemplate="5,8">
 
-                                <p:column headerText="No. Identificacion" width="130" >                                
-                                #{funcionarioEditar.usuidentificacion} 
-                                </p:column> 
-                                <p:column headerText="Nombres" >
-                                #{funcionarioEditar.usunombres}
-                                </p:column>
-                                <p:column headerText="Apellidos" >
-                                #{funcionarioEditar.usuapellidos}
-                                </p:column>
-                                <p:column headerText="Cargo" >
-                                #{funcionarioEditar.carid.carnombre}
-                                </p:column>
-                                <p:column headerText="Apellidos" >
-                                #{funcionarioEditar.uniid.uninombre}
-                                </p:column>
+                        <p:column headerText="No. Identificacion" width="130" >                                
+                            #{funcionarioEditar.usuidentificacion} 
+                        </p:column> 
+                        <p:column headerText="Nombres" >
+                            #{funcionarioEditar.usunombres}
+                        </p:column>
+                        <p:column headerText="Apellidos" >
+                            #{funcionarioEditar.usuapellidos}
+                        </p:column>
+                        <p:column headerText="Cargo" >
+                            #{funcionarioEditar.carid.carnombre}
+                        </p:column>
+                        <p:column headerText="Apellidos" >
+                            #{funcionarioEditar.uniid.uninombre}
+                        </p:column>
 
-                                <p:column headerText="Acciones" width="70">
-                                    <p:commandLink actionListener="#{verEditarUsuarioController.seleccionarFuncionario(funcionarioEditar)}" 
-                                                   id="seleccionar" style="text-decoration: none;color: blue;" 
-                                                   >                                    
-                                        Seleccionar
-                                    </p:commandLink>
-                                </p:column> 
+                        <p:column headerText="Acciones" width="70">
+                            <p:commandLink actionListener="#{verEditarUsuarioController.seleccionarFuncionario(funcionarioEditar)}" 
+                                           id="seleccionar" style="text-decoration: none;color: blue;" 
+                                           >                                    
+                                Seleccionar
+                            </p:commandLink>
+                        </p:column> 
 
-                            </p:dataTable>
-                        </p:panel>
+                    </p:dataTable>
+                </p:panel>
 
-                    </h:form>
-                </p:dialog>
+            </h:form>
+        </p:dialog>
 
-                <p:dialog modal="true"  widgetVar="editarFuncionarioYaTieneFamiliarAsociado" closable="false">
-                    <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
-                    <h:form>
-                        <p:commandButton  value="Aceptar" style="background:#22419A; 
-                                             color: #FFFFFF;margin-left:150px;font-weight: normal;"
-                                          onclick="PF('editarFuncionarioYaTieneFamiliarAsociado').hide()"/>
-                    </h:form>
-                </p:dialog>
+        <p:dialog modal="true"  widgetVar="editarFuncionarioYaTieneFamiliarAsociado" closable="false">
+            <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
+            <h:form>
+                <p:commandButton  value="Aceptar" style="background:#22419A; 
+                                  color: #FFFFFF;margin-left:150px;font-weight: normal;"
+                                  onclick="PF('editarFuncionarioYaTieneFamiliarAsociado').hide()"/>
+            </h:form>
+        </p:dialog>
     </ui:composition>   
 </html>

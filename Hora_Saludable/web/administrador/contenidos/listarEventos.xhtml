@@ -5,95 +5,79 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
     <body>
 
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
-
             <ui:define name="titulo">
-                Hora Saludable: Lista Eventos
+                Hora Saludable
             </ui:define>
-
             <ui:define name="title">
-                
             </ui:define>
-
-            <ui:define name="body" >
-                
-                <br></br> 
-                <h:form>
-                  <p:breadCrumb>
-                    <p:menuitem value="Inicio" outcome="principal" />                              
-                    <p:menuitem value="Lista de eventos" />                                        
-                  </p:breadCrumb>  
-                </h:form>
-                
-                
-                
-                <div class="tituloContenido">
-                    <br></br>
-                        Eventos 
-                    <br></br>
-                </div>
-
+            <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                <div class="wrap" style="width: 90%;">    
-                    
-                <h:form>
-                    
-                    <p:breadCrumb>
-                        <p:menuitem value="Inicio" url="principal.xhtml" />  
-                        <p:menuitem value="Listar Eventos" url="listarEventos.xhtml" />    
-                    </p:breadCrumb>
-                    <br/>
-                    
-                    <p:dataTable var="evento_de_lista" value="#{eventoController.eventos}" rows="10" 
-                                 paginator="true" 
+
+                <ui:include src="componentes/submenu.xhtml"/>
+
+                <div style="margin-left: 200px;margin-top: 10px;" >
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />                              
+
+                        </p:breadCrumb>
+                    </h:form>
+                    <div class="tituloContenido">Eventos</div>                    
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
+
+                    <p:panel  toggleable="false">
+                         <p:commandButton  value="Nuevo Evento" class="botonAzul" 
+                                          action="#{eventosController.nuevoEvento()}"
+                                           style="background: #22419A;color:#FFFFFF;width:170px; height: 30px; float: right"
+                                           />
+                         <br />
+                         <br />
+                         <br />
+                        <h:form id="form1">
+                            <p:dataTable var="eventoLista" value="#{eventosController.eventos}" rows="10" 
+                                         paginator="true" 
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15">
-                        
-                        <p:column headerText="Titulo">
-                            <p:link value="#{eventoController.cortarTitulo(evento_de_lista.evetitulo)}" outcome="#{eventoController.detalleEventoEventos(evento_de_lista.eveid)}" style="font-weight: bold; color: #22419A;">                                           
-                                <f:param name="eventoId" value="#{evento_de_lista.eveid}" />
-                            </p:link>
-                        </p:column>
-                        
-                        <p:column headerText="Lugar">
-                            <h:outputText value="#{evento_de_lista.evelugar}" />
-                        </p:column>
-                        
-                        <p:column headerText="Fecha de evento">
-                            <h:outputText value="#{eventoController.convertToJavaDate(evento_de_lista.evefechaevento)}" />
-                        </p:column>
-                        
-                        <p:column headerText="Fecha de publicacion">
-                            <h:outputText value="#{eventoController.convertToJavaDate(evento_de_lista.evefechapublicacion)}" />
-                        </p:column>
-                        
-                        <p:column headerText="Descripcion" width="30%">
-                            <h:outputText value="#{evento_de_lista.evecontenido}" />
-                        </p:column>
-                        
-                        <p:column headerText="Accion">
-                            <p:row>
-                                <p:button outcome="#{eventoController.mostrarEventoEditar(evento_de_lista)}" value="Editar" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" > </p:button>   
-                            </p:row>
-                            <br></br><br></br>
-                            <p:row>
-                                <p:commandButton value="Eliminar" action="#{eventoController.eliminarEvento(evento_de_lista)}" style="background: #22419A;color:#FFFFFF;font-style: italic; width:100px"/>
-                            </p:row>
-                        </p:column>    
-                        
-                        
-                    </p:dataTable> 
-                </h:form>  
-                    <br></br>
-                    <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; width: 100px" > </p:button>                       
+
+                                <p:column headerText="Título" width="70%">
+                                    <h:outputText value="#{eventoLista.evetitulo}"  />                                   
+                                </p:column>
+
+                                <p:column headerText="Fecha del evento">
+                                    <h:outputText value="#{eventosController.convertToJavaDate(eventoLista.evefechaevento)}" />
+                                </p:column>
+
+                                <p:column headerText="Acciones">
+
+                                    <p:commandLink title="Ver o Editar"   style="text-decoration: none;" action="#{eventosController.editarEvento(eventoLista)}">                                    
+                                        <p:graphicImage style="width:25px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                    </p:commandLink>     
+                                    <h:outputScript >
+                                        function seguroEliminar(){
+                                            if(confirm('Está seguro que desea eliminar el evento?'))
+                                                return true;
+                                            else
+                                                return false;
+                                        }
+                                    </h:outputScript>  
+                                    <p:commandLink id="eliminar" style="text-decoration: none;margin-left: 5px; " title="Eliminar" action="#{eventosController.eliminarEvento(eventoLista)}" onstart="return seguroEliminar();">                                    
+                                        <p:graphicImage style="width:20px; " library="img/usuarios" name="eliminar.png"/>
+                                    </p:commandLink>                                    
+                                </p:column>    
+
+                            </p:dataTable> 
+
+                        </h:form>
+                    </p:panel>
+
                 </div>
+                <div style="clear: both;"></div>                
 
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>
+

@@ -15,11 +15,10 @@
             </ui:define>
 
             <ui:define name="title">
-                
+
             </ui:define>
 
             <ui:define name="body"> 
-                #{crearInscripcionBean.mensajeInicial()}
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
                 <h:form id="crearInscripcionForm">
                     <p:breadCrumb>
@@ -27,7 +26,7 @@
                         <p:menuitem value="Control de asistencia" url="../indexAsistencia.xhtml" />                    
                         <p:menuitem value="Inscripción mensual de usuarios" outcome="lista-inscritos" />                    
                     </p:breadCrumb>
-                    
+
                     <p:spacer height="10"/>
                     <div class="tituloContenido">
                         Inscripción mensual de usuarios
@@ -35,8 +34,9 @@
                     <p:spacer height="15"/>
 
                     <p:growl id="growl" sticky="false" showDetail="true" life="35000"/>
-                    
-                    <p:panel>
+
+                    <p:panel>                        
+                        <div style="color: #036fab">Para inscribir usuarios, primero seleccione el Mes y el Año donde desea inscribirlos y luego presione: 'Buscar'.</div>
                         <h:panelGroup id="crearInscripcionPanelGroup">
                             <h:panelGrid columns="5" cellpadding="8" cellspacing="8" style="margin: 0 auto;" >
                                 <h:outputText value="Mes:" style="font-size: 16px; text-align: right;" />
@@ -59,6 +59,11 @@
                     <p:spacer height="30"/>
 
                     <p:panel id="usuariosPanel" header="Lista de usuarios" rendered="#{crearInscripcionBean.usuarios.size()>0}">
+                        <div style="color: #036fab">
+                            Los usuarios marcados son los que ya estan inscritos en esta fecha.<br />
+                            Marque los usuarios nuevos que desee inscribir en esta fecha o desmarque los usuarios antiguos si desea borrar su inscripción.<br />
+                            Presione 'Actualizar inscripción' para guardar los cambios
+                        </div>
                         <h:panelGrid style="margin: 0 auto;" >
                             <p:commandButton value="#{crearInscripcionBean.accion}" 
                                              actionListener="#{crearInscripcionBean.crearIncripcion()}" 
@@ -69,7 +74,7 @@
                                              style="background:#22419A; color: #FFFFFF; width: 190px; font-weight: normal;" />
                         </h:panelGrid>                        
                         <p:spacer />
-                        
+
                         <p:dataTable id="usuariosDataTable" value="#{crearInscripcionBean.usuarios}" var="usu"
                                      paginator="true"
                                      rows="20"
@@ -79,22 +84,33 @@
                                      emptyMessage="No hay usuarios registrados con ese filtro. Por favor, registrelos en la aplicación."
                                      rowKey="#{usu.usuid}"         
                                      >                            
-                            <p:column headerText="IDENTIFICACIÓN" filterBy="#{usu.usuidentificacion}" width="130" style="text-align:center;" sortBy="#{usu.usuidentificacion}">
+                            <p:column headerText="Identificación" filterBy="#{usu.usuidentificacion}" width="130" style="text-align:center;" sortBy="#{usu.usuidentificacion}">
                                 <h:outputText value="#{usu.usuidentificacion}" />
                             </p:column>
-                            <p:column headerText="NOMBRES" filterBy="#{usu.usunombres}" filterFunction="#{crearInscripcionBean.filtrarPorNombre}" sortBy="#{usu.usunombres}">
-                                <h:outputText value="#{usu.usunombres}" style="text-transform: uppercase;"/>
+                            <p:column headerText="Nombres" filterBy="#{usu.usunombres}" filterFunction="#{crearInscripcionBean.filtrarPorNombre}" sortBy="#{usu.usunombres}">
+                                <h:outputText value="#{usu.usunombres}" style="text-transform: capitalize;"/>
                             </p:column>
-                            <p:column headerText="APELLIDOS" filterBy="#{usu.usuapellidos}" filterFunction="#{crearInscripcionBean.filtrarPorApellido}" sortBy="#{usu.usuapellidos}">
-                                <h:outputText value="#{usu.usuapellidos}" style="text-transform: uppercase;"/>
+                            <p:column headerText="Apellidos" filterBy="#{usu.usuapellidos}" filterFunction="#{crearInscripcionBean.filtrarPorApellido}" sortBy="#{usu.usuapellidos}">
+                                <h:outputText value="#{usu.usuapellidos}" style="text-transform: capitalize;"/>
                             </p:column>
-                            <p:column headerText="SEXO" width="60" style="text-align: center;" sortBy="#{usu.usugenero}">
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Foto" />
+                                </f:facet>
+                                <p:graphicImage value="#{crearInscripcionBean.imagenFlujo}" width="50"  height="50" >
+                                    <f:param name="id" value="#{usu.usuid}" />
+                                </p:graphicImage>                            
+                            </p:column>                            
+                            
+                            
+                            <p:column headerText="Sexo" width="60" style="text-align: center;" sortBy="#{usu.usugenero}">
                                 <h:outputText value="#{usu.usugenero}" />
                             </p:column>
-                            <p:column headerText="PROGRAMA ACADEMICO" sortBy="#{usu.uniid.uninombre}" >
+                            <p:column headerText="Programa Académio" sortBy="#{usu.uniid.uninombre}" >
                                 <h:outputText value="#{usu.uniid.uninombre}" />
                             </p:column>                            
-                            <p:column headerText="ESTAMENTO" width="110" style="text-align: center;" sortBy="#{usu.carid.carnombre}" >
+                            <p:column headerText="Estamento" width="110" style="text-align: center;" sortBy="#{usu.carid.carnombre}" >
                                 <h:outputText value="#{usu.carid.carnombre}" />
                             </p:column>                    
                             <p:column  selectionMode="multiple" width="20" style="text-align:center" />

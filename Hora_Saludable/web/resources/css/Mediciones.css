@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : pcblanco
 */
 
-
+/*
 .fichapersonal
 {
  width: auto;
@@ -22,6 +22,7 @@ and open the template in the editor.
   border-color: #ffffff !important;
   background-color: #F0F0F0;
 }
+*/
 .subtitulotabla
 {
     color: #092169;
@@ -73,6 +74,15 @@ and open the template in the editor.
     margin-left: 25px;
 }
 
+.btncalcularfrecuencias
+{
+    margin-top: 50px;
+    display: inline;
+    float: left;
+    margin-left: 25px;
+}
+
+
 .btncalculartest
 {
     margin-top: 40px;
@@ -86,12 +96,6 @@ and open the template in the editor.
     margin-left: 340px;
 }
 
-.imagenmedidas2
-{
-    float: right;
-    margin-top: 150px;
-    margin-right: 185px;
-}
 .imagenmedidas9
 {
     float: right;
@@ -111,14 +115,6 @@ and open the template in the editor.
     float: right;
     margin-right: 20px;
     margin-top: 20px;
-}
-
-.tablalistaTest
-{
-    font-size: 18px !important;
-    margin-top: 38px;
-    width: 830px;
-    float: left;
 }
 
 .Menuagregartest

@@ -33,7 +33,7 @@
                     <p:growl id="msgs" showDetail="true" />
                     <p:fieldset legend="Detalles de la noticia" style="margin-bottom:20px">
                         <h:panelGrid columns="2" cellpadding="4">
-                            <p:dataScroller  var="noticiaLista" value="#{noticiacController.ultimos}" chunkSize="1" mode="inline" scrollHeight="300" style="border: none">
+                            <p:dataScroller  var="noticiaLista" value="#{noticiasController.ultimos}" chunkSize="1" mode="inline" scrollHeight="300" style="border: none">
 
                                 <p:graphicImage height="200px" width="200px" library="img/imagenesNoticias" name="#{noticiaLista.notimagen}" />
                             </p:dataScroller>
@@ -48,7 +48,7 @@
                                                     <h:outputLabel class="CampoLabel" value="Noticia :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{noticiacController.noticiaDetallada().nottitulo}"/>
+                                                    <h:outputLabel value="#{noticiasController.noticiaDetallada().nottitulo}"/>
                                                 </p:column>
                                             </p:row>
                                             <p:row>
@@ -56,7 +56,7 @@
                                                     <h:outputLabel class="CampoLabel" value="Lugar :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{noticiacController.idN}"/>
+                                                    <h:outputLabel value="#{noticiasController.idN}"/>
                                                 </p:column>
                                             </p:row>
                                             <p:row>
@@ -64,7 +64,7 @@
                                                     <h:outputLabel class="CampoLabel" value=" Fecha de la Noticia :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{noticiacController.convertToJavaDate(noticiacController.noticiaDetallada().notfechapublicacion)}"/>
+                                                    <h:outputLabel value="#{noticiasController.convertToJavaDate(noticiasController.noticiaDetallada().notfechapublicacion)}"/>
                                                 </p:column>
                                             </p:row>
 
@@ -74,7 +74,7 @@
                                                 </p:column>
                                                 <p:column>
                                                     <p align="justify">
-                                                        <h:outputLabel value="#{noticiacController.noticiaDetallada().notcontenido}"/>
+                                                        <h:outputLabel value="#{noticiasController.noticiaDetallada().notcontenido}"/>
                                                     </p>
                                                 </p:column>
                                             </p:row>

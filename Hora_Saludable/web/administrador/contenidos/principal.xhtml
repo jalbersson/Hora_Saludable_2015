@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <body>
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
             <ui:define name="titulo">
@@ -14,135 +13,39 @@
             </ui:define>
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                <p:contentFlow value="#{imagenController.images}" var="image">
-                    <p:graphicImage name="./img/imagenSalud/#{image}" styleClass="content" />                  
-                </p:contentFlow>
-                <div style="text-align: center">
-                    <p:button style="background: #AA0000;color:#FFFFFF;font-style: italic"  value="Editar Álbum" outcome="album" icon="ui-icon-star"/>   
+
+                <ui:include src="componentes/submenu.xhtml"/>
+                
+                <div style="margin-left: 200px;margin-top: 10px;" >
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />                              
+
+                        </p:breadCrumb>
+                    </h:form>
+                    <div class="tituloContenido">Bienvenido</div>                    
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
+
+
+                    <p:panel  toggleable="false">
+                        <h:form id="formularioPerfilDatosCuenta">
+                            <p>
+                                Usted ha iniciado sesión como <span style="font-weight: bold">Administrador</span> del Sistema Hora Saludable, sea bienvenido.
+                            </p>
+                             <p>
+                                Aquí podrá hacer las configuraciones globales del sistema (las que aparecen en el menú lateral 'Configuración del Sistema').
+                                También puede ingresar a las opciones del menú principal para gestionar usuarios, valorar a los deportistas y llevar el control de
+                                asistencia.
+                            </p>
+                            <center>
+                            <p:graphicImage library="img/" name="Tulcan.png" />
+                            </center>
+           
+                        </h:form>
+                    </p:panel>
                 </div>
+                <div style="clear: both;"></div>                
 
-                <br/> <br/>
-                <p:growl id="msgs" showDetail="true" />
-                <h:form>
-                    <p:growl id="msgs" showDetail="true" />
-                    <h:panelGrid columns="2" style="margin-left: 10px; margin-top: 20px" cellpadding="5">
-                        <h:form>
-                            <h:form> 
-                                <div class="divPrincipal">
-                                    <h1 style="color:#F2F2F2; text-align: center;">Noticias</h1> 
-                                    <p:carousel  value="#{noticiacController.ultimos}" var="noticiaLista" itemStyle="height:230px;width:600px;" autoPlayInterval="6000" numVisible="1" effect="easeInStrong" circular="true" class="ui-carousel">
-                                        <h:panelGrid columns="2" style="width:600px " cellpadding="10" columnClasses="label,value">
-                                            <p:tab>
-                                                <h:outputText value="#{noticiacController.convertToJavaDate(noticiaLista.notfechapublicacion)}" style="float: right; font-weight: bold; font-size: 15px;"/>
-                                                <br></br>
-                                                <h:link value="#{noticiaLista.nottitulo}" outcome="detalleNoticia?noticiaId=#{noticiaLista.notid}" style="font-weight: bold; font-size: 20px; text-align: center; color:#AA0000; " />
-                                                <h:panelGrid columns="2" cellpadding="10">
-                                                    <p:graphicImage width="150px" height="150px" library="img/imagenesNoticias" name="#{noticiaLista.notimagen}"/>
-                                                    <h:outputText value="#{noticiaLista.notcontenido}" style="font-weight: bold; font-size: 15px;"/> 
-                                                </h:panelGrid>
-                                            </p:tab>
-                                        </h:panelGrid>
-                                    </p:carousel>
-                                </div>
-                                <div style="height: 10px">
-                                </div>
-                                <div class="divPrincipal">
-
-                                    <h1 style="color:#F2F2F2; text-align: center;">Envio Correo Masivo</h1>
-                                    <h:outputLabel class="CampoLabelObligatorios" value="Todos los campos con " style="color: #AFAFAF;"/>
-                                    <h:outputLabel style="font-style: normal;font-size: 16px;text-align: left; color:red;" value="*"/>
-                                    <h:outputLabel class="CampoLabelObligatorios" value=" son obligatorios" style="color: #AFAFAF;"/>
-
-                                    <p:messages id="messages" closable="true">
-                                        <p:effect type="shake" event="load" delay="500" />
-                                    </p:messages>
-                                    <h:panelGrid columns="1" class=" width:200px; ">
-                                        <h:column>
-                                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
-                                            <h:outputLabel class="CampoLabelObligatorios" for="asunto" value="Asunto "  style="color:#FFFFFF" />
-                                        </h:column>
-
-                                        <h:inputText value="#{envioCorreo.subject}" title="Asunto" style="width: 100%" requiredMessage="Se requiere de un asunto." required="true"/>
-                                        <h:column>
-                                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red; width: 2%" value="*"/>
-                                            <h:outputLabel class="CampoLabelObligatorios" for="mensaje" value="Mensaje: " style="color:#FFFFFF" />
-                                        </h:column>
-
-                                        <h:inputText value="#{envioCorreo.message_}" style="width: 100%; height: 250px; width: 550px" id="mensaje_" title="Mensaje"
-                                                         requiredMessage="Se requiere de un mensaje para enviar el correo a todos." required="true" />
-                                        <br></br>
-                                        
-                                        <p:commandButton style="background: #AA0000;color:#FFFFFF;font-style: italic"  
-                                                         value="Enviar a todos" actionListener="#{envioCorreo.sendMail()}" update="messages" 
-                                                         />
-                                    </h:panelGrid>
-                                </div>
-                            </h:form>
-                        </h:form> 
-                        <h:form>
-                            <div class="divPrincipal" style="height: 600px">
-                                <h1 style="color:#F2F2F2; text-align: center;">Eventos</h1>
-                                <p:dataScroller  var="eventoLista" value="#{eventoController.ultimos}" chunkSize="4" >
-                                        <p:link value="#{eventoController.cortarTitulo(eventoLista.evetitulo)}" outcome="#{eventoController.detalleEventoPrincipal(eventoLista.eveid)}" style="font-weight: bold; color: #AA0000; font-size: 16px;">                                           
-                                             <f:param name="eventoId" value="#{eventoLista.eveid}" />
-                                        </p:link>
-                                            <h:panelGrid columns="1" style="width:200px; height: 100px;">
-                                                <p:outputPanel style="border-color:#22419A;">
-                                            <h:panelGrid columns="2" cellpadding="10" style="border:none">
-                                                <h:outputText value="Fecha:" style="font-weight: bold; font-size: 15px"/>
-                                                <h:outputText value="#{eventoController.convertToJavaDate(eventoLista.evefechaevento)}" style="font-size: 15px"/>
-                                                <h:outputText value="Lugar:" style="font-weight: bold; font-size: 15px"/>
-                                                <h:outputText value="#{eventoController.cortarLugar(eventoLista.evelugar)}" style="font-size: 15px" /> 
-
-                                            </h:panelGrid>
-                                        </p:outputPanel>
-                                    </h:panelGrid>
-                                </p:dataScroller> 
-                            </div>
-                        </h:form>
-                        <h:form>
-
-                            <div class="divPrincipal">
-                                <h1 style="color:#F2F2F2; text-align: center;">Horarios</h1>
-                                <p:panel id="toggleable" header="" toggleable="true" closable="false" toggleSpeed="500" widgetVar="panel" style="border: none; ">                                 
-                                    <p:button style="background: #AA0000;color:#FFFFFF;font-style: italic; margin: 5px"  value="Agregar Horario" outcome="agregarHorario" icon="ui-icon-circle-plus"/>                       
-
-                                    <p:dataTable id="basicDT" var="hor" value="#{agregarHorarioController.lista()}">
-                                        <p:column headerText="Nombre Horario">
-                                            <p:link value="#{hor.hornombre}" outcome="#{agregarHorarioController.verHorario(hor)}" style="font-weight: bold; font-size: 15px; color: #22419A" />                                           
-                                        </p:column>
-
-                                        <p:column headerText="Acciones" style="text-align: center">  
-                                            <p:button style="height: 30px; width: 80px; margin-right: 10px; background: #22419A;color:#FFFFFF;font-style: italic"  value="Ver" outcome="#{agregarHorarioController.verHorario(hor)}" />                                             
-                                            <p:button style="height: 30px; width: 80px; margin-right: 10px; background: #22419A;color:#FFFFFF;font-style: italic"  value="Editar" outcome="#{agregarHorarioController.editarHorario(hor)}" />  
-                                            <p:button style="height: 30px; width: 80px; background: #22419A;color:#FFFFFF;font-style: italic"  value="Eliminar" outcome="#{agregarHorarioController.eliminarHorario(hor)}" /> 
-                                            
-                                        </p:column>
-                                    </p:dataTable>
-
-                                </p:panel>  
-                            </div>        
-
-                        </h:form>
-                        <p:panelMenu style="width:250px; float: right" >
-                            <p:submenu label="Gestión de Eventos" >
-                                <p:menuitem value="Nuevo Evento" ajax="false" outcome="agregarEvento" icon="ui-icon-check"/> 
-                                <p:menuitem value="Listar Eventos" ajax="false" outcome="listarEventos" icon="ui-icon-check"/> 
-                            </p:submenu>
-                            <p:submenu label="Gestion de Noticias">
-                                <p:menuitem value="Agregar Noticia"  ajax="false" outcome="nuevaNoticia" icon="ui-icon-check"/>
-                                <p:menuitem value="Listar Noticias" outcome="listarNoticias" ajax="false" icon="ui-icon-check"/>
-                            </p:submenu>
-
-                            <p:submenu label="Quienes Somos ">
-                                <p:menuitem value="Ver Quienes Somos" outcome="quienesSomosPrincipal" ajax="false" icon="ui-icon-check" />
-                                <p:menuitem value="Editar Quienes Somos" outcome="quienesSomos" ajax="false" icon="ui-icon-check" />
-                            </p:submenu>
-                        </p:panelMenu>
-
-
-                    </h:panelGrid>
-                </h:form>
             </ui:define>
         </ui:composition>
     </body>

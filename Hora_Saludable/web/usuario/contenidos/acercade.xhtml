@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <body>
 
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
@@ -12,14 +11,16 @@
             <ui:define name="titulo">
                 Acerca de 
             </ui:define>
-            Acerca de 
+            <!-- Borra un titulo por defecto -->
             <ui:define name="title">
-
 
             </ui:define>
 
             <ui:define name="body">
+
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+
+
                 <h:panelGrid columns="1" style="width:800px; height: 200px;">
                     <h:form>    
                         <h:form>
@@ -29,79 +30,191 @@
 
                             </p:breadCrumb>
                         </h:form>
+                        <div class="tituloContenido">
+                            <br/>
+                            Acerca de... <br></br>
+                        </div>
                         <p:spacer height="10"/>
-                        <p align="justify">
-                            <h:outputText style="font-weight: normal; font-size: 22px;"  value="La Universidad del Cauca es una institución de educación superior pública de carácter nacional con 187 años de historia.
-                                          Ubicada en la ciudad de Popayán, ofrece sus servicios educativos a estudiantes de todo el país, quienes encuentran en la Universidad y la ciudad un espacio idóneo y tranquilo para realizar sus estudios de pregrado y posgrado.
-                                          Gracias a sus programas de descentralización, Unicauca ha ofrecido la posibilidad de educación superior a los caucanos de la región. Conozca a continuación algunos de los aspectos institucionales más importantes que hacen de ésta una de las mejores universidades colombianas.">
+                        <p>
+                            <h:outputText style="font-weight: normal; font-size: 18px;"  
+                                          value="Hora Saludable Versión 2.2 Feb 22 de 2016.">
+                            </h:outputText>
+                        </p>
+                        <p>
+                            <h:outputText style="font-size: 15px;"  
+                                          value="El programa Hora Saludable, es un espacio de la 
+                                          Universidad del Cauca, para sus docentes y administrativos,
+                                          que busca fomentar y generar dinámicas y procesos que 
+                                          favorezcan el desarrollo consciente de la motricidad humana 
+                                          orientada hacia hábitos y estilos de vida saludables a 
+                                          través de la recreación y el deporte.">
+                            </h:outputText>
+                        </p>
+                        <p>
+                            <h:outputText style="font-size: 15px;"  
+                                          value="Esta aplicación fue realizada por los
+                                          estudiantes del programa de Ingeniería de Sistemas
+                                          de la electiva Arquitecturas de Software para 
+                                          Aplicaciones Empresariales durante el primer 
+                                          semestre de 2015, bajo la dirección de los profesores
+                                          W. Libardo Pantoja Yépez y Pablo A. Magé, con la colaboración y asesoría
+                                          del Profesor Nairo Burbano (Coordinador de la Hora Saludable). ">
                             </h:outputText>
                         </p>
                     </h:form> 
-                </h:panelGrid>
-                <br></br>
-                <br></br>
-                <h:panelGrid>
-                    <h:form style="width:200px;  position:relative ; left: 20px; border: none; left: 200px" >
-                        <p:graphicImage width="550px" height="400px" library="img" name="principal.jpg" style=""  /> 
-                    </h:form>
-                </h:panelGrid>
-                <br></br>
-                <br></br>
-                <br></br>
-                <h:panelGrid columns="2" style="height: 100px; width: 400px ">
-                    <h:form>
-                        <h:panelGrid columns="1" style="height: 200px; width: 400px ">
-                            <h:form>    
-                                <div class="divPrincipal" style="height: 130px;float: right">
-                                    <h:panelGrid columns="1" style="width:400px; height: 100px;">
-                                        <h1 style="color:#F2F2F2; text-align: center">  Usuarios</h1> 
-                                        <p:dataScroller  var="Usuarios" value="">
-                                            <p:link style="font-weight: bold; font-size: 16px" outcome="usuarios" value="Contiene toda la informacion de los desarrolladores del modulo Usuarios"></p:link>
-                                        </p:dataScroller>
-                                    </h:panelGrid>
-                                </div>
-                            </h:form>
-                            <br></br>
-                            <br></br>
-                            <h:form>    
-                                <div class="divPrincipal" style="height: 130px;float: right">
-                                    <h:panelGrid columns="1" style="width:400px; height: 100px;">
-                                        <h1 style="color:#F2F2F2; text-align: center">  Contenidos</h1> 
-                                        <p:dataScroller  var="Contenidos" value="">
-                                            <p:link style="font-weight: bold; font-size: 16px" outcome="contenidos" value="Contiene toda la informacion de los desarrolladores del modulo Contenidos"></p:link>
-                                        </p:dataScroller>
-                                    </h:panelGrid>
-                                </div>
-                            </h:form>
-                        </h:panelGrid>
-                    </h:form>
-                    <h:form style="width:200px;  position: relative; left: 50px; border: none">
-                        <h:panelGrid columns="1" style="height: 200px; width: 400px ">
 
-                            <h:form>    
-                                <div class="divPrincipal" style="height: 130px;float: right">
-                                    <h:panelGrid columns="1" style="width:400px; height: 100px;">
-                                        <h1 style="color:#F2F2F2; text-align: center">  Asistencia</h1> 
-                                        <p:dataScroller  var="Asistencia" value="">
-                                            <p:link style="font-weight: bold; font-size: 16px" outcome="asistencia" value="Contiene toda la informacion de los desarrolladores del modulo Asistencia"></p:link>
-                                        </p:dataScroller>
-                                    </h:panelGrid>
-                                </div>
-                            </h:form>
-                            <br></br>
-                            <br></br>
-                            <h:form>    
-                                <div class="divPrincipal" style="height: 130px;float: right">
-                                    <h:panelGrid columns="1" style="width:400px; height: 100px;">
-                                        <h1 style="color:#F2F2F2; text-align: center">  Medidas</h1> 
-                                        <p:dataScroller  var="Medidas" value="">
-                                            <p:link style="font-weight: bold; font-size: 16px" outcome="medidas" value="Contiene toda la informacion de los desarrolladores del modulo Medidas"></p:link>
-                                        </p:dataScroller>
-                                    </h:panelGrid>
-                                </div>
-                            </h:form>
-                        </h:panelGrid>
+                    <!-- ACORDEON -->
+                    <h:form id="formAcordeon">           
+                        <p:growl id="msgs" showDetail="true" />
+                        <h3 style="margin-top:0">Detalles:</h3>
+                        <p:accordionPanel activeIndex="-1" multiple="true">
+
+                            <p:tab title="Equipo de desarrollo">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage library="img" name="principal.jpg" />
+                                    <h:outputText
+                                        value="Fotografía de todo equipo de desarrollo, tomada en la plaza de la FIET Unicauca." />
+                                </h:panelGrid>
+                            </p:tab>
+
+                            <p:tab title="Módulo de Usuarios">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage style="float: right" library="img" name="usuarios.jpg"   />
+                                    <h:outputText value="Este módulo tuvo como objetivo controlar el Inicio 
+                                                  de Sesión ya sea para el administrador o para un usuario 
+                                                  del gimnasio, el Registro de usuarios (Solo es realizado 
+                                                  por el administrador) y Recuperar contraseña que le permite 
+                                                  a los usuarios que hayan olvidado su contraseña o nombre de 
+                                                  usuario recuperar su cuenta. Sus creadores: 
+                                                  Lucy Viviana Araujo Agudelo, Annjy Natalia Castrillon Torres
+                                                  Wilson Geovanny Carvajal Molina." />
+                                </h:panelGrid>
+                            </p:tab>
+
+                            <p:tab title="Módulo de Asistencia">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage style="float: right" library="img" name="asistencias.jpg"   />
+                                    <h:outputText value="Este módulo tuvo como objetivo controlar el registro de asistencia 
+                                                  en donde el Administrativo podrá llevar un registro y control de 
+                                                  la asistencia diaria de los usuarios que asisten al gimnasio. 
+                                                  Además la generación de reportes mensuales, anuales o en un rango de fechas
+                                                  determinado incluyendo reportes de la asistencia de los usuarios promedio 
+                                                  ya sea mensual, semestral o anual.
+                                                  Sus creadores:
+                                                  Juan Jose Mosquera Melenge, 
+                                                  Johny Andrés Ortega Ruiz, 
+                                                  Jose Rodrigo Ordoñez Latorre, 
+                                                  Daniel Felipe Cepeda." />
+                                </h:panelGrid>
+                            </p:tab>
+
+                            <p:tab title="Módulo de Contenidos">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage style="float: right" library="img" name="contenidos.jpg"   />
+                                    <h:outputText value="Este módulo estuvo encargado de gestionar las noticias y eventos 
+                                                  que se van a mostrar en la página principal, de tal forma que el 
+                                                  administrador pueda crear, editar, eliminar una noticia o un evento, 
+                                                  también de mostrar el reglamento y la Resolución del programa hora 
+                                                  saludable. Por otro lado se encargó del envío de correos masivos, en el 
+                                                  cual el administrador puede enviar un correo a los usuarios activos. 
+                                                  Además elaboró Acerca de y quienes somos para este último el administrador 
+                                                  puede editar el contenido. Sus creadores:Leidi Jasmin Enriquez Muñoz, 
+                                                  Yuri Viviana Daza Gaviria, Edilson Yamid Noguera Zuñiga, 
+                                                  Angela Patricia Guerrero Walteros." />
+                                </h:panelGrid>
+                            </p:tab>
+
+                            <p:tab title="Módulo de Medidas">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage style="float: right" library="img" name="medidas.jpg"   />
+                                    <h:outputText value="Este módulo se encargó la gestión de las medidas de los usuarios 
+                                                  del gimnasio lo cual consiste en que el administrador del sistema podrá 
+                                                  registrar, en diferentes fechas, las medidas de los usuarios del gimnasio 
+                                                  con el fin de llevar un control en la evolución de estado físico de los 
+                                                  usuarios. Los usuarios registrados pueden ingresar al sistema y consultar 
+                                                  sus medidas y test realizados. Sus creadores:Jalbersson Guillermo Plazas 
+                                                  Londoño, Jhonny Paul Taborda Mosquera, Orlando Paz Duarte,
+                                                  Steeven Ruiz Colorado." />
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Versiones">
+                                <h:panelGrid columns="2" cellpadding="10" border="1">
+                                    <h:outputText value="Versión 2.2, Feb/22/2016." /> 
+                                    <ul>
+                                        <li>Se corrigieron resultados del test de rufier: Excelente, Muy Bueno, Regular, Malo, Muy Malo.</li>
+                                        <li>El administrador puede editar los datos de su perfil.</li>
+                                        <li>En los historiales de valoraciones se agregó los datos del test de rufier.</li>
+                                        <li>En valoraciones, las evaluaciones se listan ordenadas descendentemente por fecha.</li>
+                                    </ul>  
+                                    <h:outputText value="Versión 2.1.2, Ene/18/2016." /> 
+                                    <ul>
+                                        <li>Se corrigieron errores en los reportes de asistencia por parte del usuario que inicia sesión.
+                                        </li>
+                                    </ul>  
+
+                                    <h:outputText value="Versión 2.1.1, Ene/14/2016." /> 
+                                    <ul>
+                                        <li>Se corrigió un error de Ver Historial en las valoraciones.
+                                        </li>
+                                    </ul>  
+                                    <h:outputText value="Versión 2.1, Nov/23/2015." /> 
+                                    <ul>
+                                        <li>Se modificó el reporte de asistencia mensual. Quedó igual al solicitado por la Universidad.
+                                        </li>
+                                    </ul>                                    
+
+                                    <h:outputText value="Versión 2.0, Oct/22/2015." /> 
+                                    <ul>
+                                        <li>Se mejoró la estructura del contenido . 
+                                        </li>
+                                    </ul>                                    
+
+                                    <ul>
+                                        <li>Se refactorizó el código fuente para hacerlo más legible. 
+                                        </li>
+                                    </ul>                                    
+                                    <ul>
+                                        <li>En el modulo de valoraciones se modificó el test de frecuencia cardíaca según la formula:Frecuencia Máxima (208.75 - 0.73*Edad). 
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>Todas las imágenes tanto de usuario como de noticias y eventos ahora se graban en la base de datos y no en una carpeta.
+                                        </li>
+                                    </ul>
+                                    <h:outputText value="Versión 1.2.2, Oct/04/2015." />                                    
+                                    <ul>
+                                        <li>Se corrigió un error en asistencia, no actualizaba en la tabla los
+                                            usuarios que asistieron al gimnasio.
+                                        </li>
+                                    </ul>
+                                    <h:outputText value="Versión 1.2.1, Oct/02/2015." />                                    
+                                    <ul>
+                                        <li>Se creó el test de frecuencia cardiaca.
+                                        </li>
+                                    </ul>
+                                    <h:outputText value="Versión 1.2, Sep/29/2015." />                                    
+                                    <ul>
+                                        <li>Se cambio el botón de Valoraciones por "Guardar sin salir" para
+                                            facilitar la edición del formulario.
+                                        </li>
+                                    </ul>
+                                    <h:outputText value="Versión 1.1, 10/08/2015." />                                    
+                                    <ul>
+                                        <li>Se rediseñó el acerca de.</li>
+                                        <li>Se corrigió un error en valoraciones (no permitía cargar las valoraciones).</li>
+                                        <li>El administrador puede modificar el sexo de un usuario.</li>
+                                        <li>El administrador puede modificar su perfil y cambiar su contraseña.</li>
+                                    </ul>
+
+                                    <h:outputText value="Versión 1.0 Beta, 22/06/2015." />
+                                    <h:outputText value="La primera versión liberada a los usuarios" />
+
+
+                                </h:panelGrid>
+                            </p:tab>                            
+                        </p:accordionPanel>
                     </h:form>
+                    <!-- Fin Acordeon -->
                 </h:panelGrid>
             </ui:define>
         </ui:composition>

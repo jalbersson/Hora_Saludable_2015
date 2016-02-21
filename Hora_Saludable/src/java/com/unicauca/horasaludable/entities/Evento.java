@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unicauca.horasaludable.entities;
 
 import java.io.Serializable;
@@ -13,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -37,9 +33,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Evento.findByEvefechaevento", query = "SELECT e FROM Evento e WHERE e.evefechaevento = :evefechaevento"),
     @NamedQuery(name = "Evento.findByEvelugar", query = "SELECT e FROM Evento e WHERE e.evelugar = :evelugar"),
     @NamedQuery(name = "Evento.findByEvecontenido", query = "SELECT e FROM Evento e WHERE e.evecontenido = :evecontenido"),
-    @NamedQuery(name = "Evento.findUltimosEventos", query = "SELECT e FROM Evento e ORDER BY e.evefechaevento DESC "),
-    @NamedQuery(name = "Evento.findByEveimagen", query = "SELECT e FROM Evento e WHERE e.eveimagen = :eveimagen")})
+    @NamedQuery(name = "Evento.findUltimosEventos", query = "SELECT e FROM Evento e ORDER BY e.evefechaevento DESC ")
+})
 public class Evento implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,12 +66,17 @@ public class Evento implements Serializable {
     @Size(min = 1, max = 10000)
     @Column(name = "EVECONTENIDO")
     private String evecontenido;
-    @Size(max = 350)
-    @Column(name = "EVEIMAGEN")
-    private String eveimagen;
+
+    @Basic(optional = true)
+    @Lob
+    @Column(name = "eveimagen")
+    private byte[] eveImagen;
 
     public Evento() {
+
     }
+
+
 
     public Evento(Long eveid) {
         this.eveid = eveid;
@@ -136,12 +138,12 @@ public class Evento implements Serializable {
         this.evecontenido = evecontenido;
     }
 
-    public String getEveimagen() {
-        return eveimagen;
+    public byte[] getEveImagen() {
+        return eveImagen;
     }
 
-    public void setEveimagen(String eveimagen) {
-        this.eveimagen = eveimagen;
+    public void setEveImagen(byte[] eveImagen) {
+        this.eveImagen = eveImagen;
     }
 
     @Override
@@ -168,5 +170,5 @@ public class Evento implements Serializable {
     public String toString() {
         return "com.unicauca.horasaludable.entities.Evento[ eveid=" + eveid + " ]";
     }
-    
+
 }

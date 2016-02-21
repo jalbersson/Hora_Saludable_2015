@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+            <ui:define name="titulo">
+                Correo Masivo
+            </ui:define>
+            <ui:define name="title">
+            </ui:define>
+            <ui:define name="body">
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+
+                <ui:include src="componentes/submenu.xhtml"/>
+
+                <div style="margin-left: 200px;margin-top: 10px;" >
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />
+                        </p:breadCrumb>
+                    </h:form>
+                    <div class="tituloContenido"></div>
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
+
+                    <div class="divPrincipal">
+                        <h:form>
+                            <h1 style="color:#F2F2F2; text-align: center;">Envio Correo Masivo</h1>
+                            <h:outputLabel class="CampoLabelObligatorios" value="Todos los campos con * son obligatorios" style="color: #FFCC00;"/>
+
+                            <p:messages id="messages" closable="true">
+                                <p:effect type="shake" event="load" delay="500" />
+                            </p:messages>
+                            <h:panelGrid columns="1" class=" width:400px; ">
+                                <h:column>                                    
+                                    <h:outputLabel value="*Asunto "  class="CampoLabelObligatorios" for="asunto"  style="color:#FFFFFF;"  />
+                                </h:column>
+                                <h:inputText value="#{envioCorreo.subject}"  style="width: 100%" title="Asunto" requiredMessage="Se requiere de un asunto." required="true"/>
+
+                                <h:column>                                    
+                                    <h:outputLabel value="Para (Sólo lectura):"  for="para" class="CampoLabelObligatorios" style="color:#FFFFFF"  />
+                                </h:column>
+                                <p:inputTextarea value="#{envioCorreo.getCorreos()}"  style="width: 99%;background-color: #dddddd" title="Para" readonly="true"/>
+
+                                
+                                <h:column>
+                                    <h:outputLabel value="*Mensaje: " class="CampoLabelObligatorios" for="mensaje"  style="color:#FFFFFF" />
+                                </h:column>
+                                <p:editor value="#{envioCorreo.message_}" style="height: 250px; " id="mensaje_" 
+                                          requiredMessage="Se requiere de un mensaje para enviar el correo a todos." required="true" />
+                                <br/>
+
+                                <p:commandButton style="background: #AA0000;color:#FFFFFF;"  
+                                                 value="Enviar a todos" actionListener="#{envioCorreo.sendMail()}" update="messages" 
+                                                 />
+                            </h:panelGrid>
+                        </h:form>
+                    </div>
+
+                </div>
+                <div style="clear: both;"></div>                
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

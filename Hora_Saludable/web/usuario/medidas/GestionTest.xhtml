@@ -8,21 +8,20 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
-        
 
         <ui:composition template="./../../plantillas/frontEndUsuarioconysinSesion.xhtml">
 
             <ui:define name="titulo">
-                 Mis Valoraciones 
+                Mis Valoraciones 
             </ui:define>
-         
+
             <ui:define name="title">                
-                 
+
             </ui:define>
             <ui:define name="body" >
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
                 <div class="submenu">
-                    <h5>MENU USUARIO</h5>
+                    <h5>Opciones</h5>
                     <h:form>
                         <h:link style="text-decoration: none;" outcome="/usuario/usuarios/perfilUsuario" >
                             <div class="botonSubmenu">
@@ -42,125 +41,127 @@
                     </h:form>                    
                 </div>
                 <div style="margin-left: 200px;margin-top: 10px;" >
-                <p:panel style="border: none;">
-                    <h:form>
-                        <p:breadCrumb>
-                           <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />
-                           <p:menuitem value="Mis Valoraciones" outcome="GestionTest" />
-                
-                        </p:breadCrumb>
-                        
-                <div class="tituloContenido">
-                    Mis Valoraciones                    
-                </div>
-                    </h:form>
-                </p:panel>
-                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                    <p:commandButton value="Si" type="button"  styleClass="ui-confirmdialog-yes" style="margin-left: 20px;" icon="ui-icon-check"  />
-                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" style="margin-left: 20px;" icon="ui-icon-close" />
-              </p:confirmDialog>
-                <p:panelGrid styleClass="fichapersonal" >
-                    <p:row>
-                        <p:column rowspan="9">
-                            <p:column  rendered="#{mostrarUsuarioTestController.campoFoto}">                                
-                                <p:graphicImage  width="100" height="100" library="#{mostrarUsuarioTestController.rutaFoto}" name="#{mostrarUsuarioTestController.usuario.usufoto}"/>
-                            </p:column>    
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Nombres:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usunombres}" />
-                        </p:column>                      
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Apellidos:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuapellidos}" />
-                        </p:column>                      
-                    </p:row>                    
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.sexo}" />
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Edad:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.edad}" />
-                            <p:outputLabel styleClass="fuentefichatabla" value=" años"/>
-                        </p:column>
-                    </p:row>
-                </p:panelGrid>
-                <p:growl for="msggestion" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
-              
-                <div>
-                    <p:panelGrid columns="2" styleClass="Menuagregartest" >
-                        <f:facet name="header" >
-                            <h:outputLabel  value="Lista de Test registrados al usuario" />                      
-                        </f:facet>
-                    </p:panelGrid> 
-                    <h:form>
-                        <p:panelGrid columns="2" style="float: right; margin-top: 30px; "> 
-                            <f:facet name="header">
-                           <p:button value="Ver Historial" icon="ui-icon-refresh" outcome="HistorialMed"/> 
-                            </f:facet> 
-                        </p:panelGrid>
-                    </h:form>
-                </div>
-                
-                  <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-                    <br></br><br></br><br></br><br></br><br></br>
-                <h:form id="formTest">
-                    <p:dataTable style="width: 730px;" id="tablaTest"  value="#{medidasController.listaTest}" var="Tests" styleClass="tablalistaTest" paginator="true" rows="6" emptyMessage="No hay Test registrados a este usuario">
-                        <p:column headerText="Fecha">
-                            <p:outputLabel value="#{Tests.obtenerFecha()}" />
-                        </p:column>
-                        <p:column headerText="Acciones">
-                            <p:commandLink actionListener="#{mostrarUsuarioTestController.medicionSeleccionadaUsu(Tests)}" title="Ver Y Editar Test" style="color: #045491;">                                     
-                                <p:graphicImage style="width:25px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
-                                </p:commandLink>  
-                             <p:commandLink action="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}"  title="Exportar Test" oncomplete="PF('dlgVerRutina').show();" update="frmVerRutina" style=" margin-left: 10px;color: #045491;" >                                     
-                                  <p:graphicImage style="width:20px;margin-left: 5px;" library="img" name="pdf_icon.png"/>
-                                  <f:setPropertyActionListener value="#{Tests}" target="#{medidasController.medicionactual}" />
-                             </p:commandLink>
-                   
-                    <h:form id="frmVerRutina">  
-                        <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
-                            <c:if test="#{medidasController.pdfFileName != null}">    
-                              
-                                <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
-                                    Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
-                                </object>   
-                            </c:if>
-                        </p:dialog>        
-                    </h:form>
-                        </p:column>
-                        
-                 
-                         
-                    </p:dataTable>
-                </h:form>
+                    <p:panel style="border: none;">
+                        <h:form>
+                            <p:breadCrumb>
+                                <p:menuitem value="Inicio" outcome="/usuario/contenidos/principal" />
+                                <p:menuitem value="Mis Valoraciones" outcome="GestionTest" />
+
+                            </p:breadCrumb>
+
+                            <div class="tituloContenido">
+                                Mis Valoraciones                    
+                            </div>
+                        </h:form>
+                    </p:panel>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                        <p:commandButton value="Si" type="button"  styleClass="ui-confirmdialog-yes" style="margin-left: 20px;" icon="ui-icon-check"  />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" style="margin-left: 20px;" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                    <p:panelGrid styleClass="fichapersonal" >
+                        <p:row>
+                            <p:column rowspan="9">
+                                <p:column  rendered="#{mostrarUsuarioTestController.campoFoto}">                                
+                                    <p:graphicImage value="#{mostrarUsuarioTestController.imagenFlujo}" >
+                                        <f:param name="idUsu" value="#{mostrarUsuarioTestController.usuario.usuid}" />
+                                    </p:graphicImage>
+                                </p:column>    
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel styleClass="subtitulotabla" value="Nombres:" />
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usunombres}" />
+                            </p:column>                      
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel styleClass="subtitulotabla" value="Apellidos:" />
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuapellidos}" />
+                            </p:column>                      
+                        </p:row>                    
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.sexo}" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel styleClass="subtitulotabla" value="Edad:" />
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.edad}" />
+                                <p:outputLabel styleClass="fuentefichatabla" value=" años"/>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                    <p:growl for="msggestion" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
+
+                    <div>
+                        <p:panelGrid columns="2" styleClass="Menuagregartest" >
+                            <f:facet name="header" >
+                                <h:outputLabel  value="Lista de Test registrados al usuario" />                      
+                            </f:facet>
+                        </p:panelGrid> 
+                        <h:form>
+                            <p:panelGrid columns="2" style="float: right; margin-top: 30px; "> 
+                                <f:facet name="header">
+                                    <p:button value="Ver Historial" icon="ui-icon-refresh" outcome="HistorialMed"/> 
+                                </f:facet> 
+                            </p:panelGrid>
+                        </h:form>
                     </div>
+
+                    <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                    <br></br><br></br><br></br><br></br><br></br>
+                    <h:form id="formTest">
+                        <p:dataTable style="width: 730px;" id="tablaTest"  value="#{medidasController.listaTest}" var="Tests" styleClass="tablalistaTest" paginator="true" rows="6" emptyMessage="No hay Test registrados a este usuario">
+                            <p:column headerText="Fecha">
+                                <p:outputLabel value="#{Tests.obtenerFecha()}" />
+                            </p:column>
+                            <p:column headerText="Acciones">
+                                <p:commandLink actionListener="#{mostrarUsuarioTestController.medicionSeleccionadaUsu(Tests)}" title="Ver Y Editar Test" style="color: #045491;">                                     
+                                    <p:graphicImage style="width:25px;margin-left: 5px;" library="img/usuarios" name="ver.png"/>
+                                </p:commandLink>  
+                                <p:commandLink action="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}"  title="Exportar Test" oncomplete="PF('dlgVerRutina').show();" update="frmVerRutina" style=" margin-left: 10px;color: #045491;" >                                     
+                                    <p:graphicImage style="width:20px;margin-left: 5px;" library="img" name="pdf_icon.png"/>
+                                    <f:setPropertyActionListener value="#{Tests}" target="#{medidasController.medicionactual}" />
+                                </p:commandLink>
+
+                                <h:form id="frmVerRutina">  
+                                    <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
+                                        <c:if test="#{medidasController.pdfFileName != null}">    
+
+                                            <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
+                                                Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
+                                            </object>   
+                                        </c:if>
+                                    </p:dialog>        
+                                </h:form>
+                            </p:column>
+
+
+
+                        </p:dataTable>
+                    </h:form>
+                </div>
                 <div style="clear: both;"></div>
-                
+
             </ui:define>
         </ui:composition>
     </body>

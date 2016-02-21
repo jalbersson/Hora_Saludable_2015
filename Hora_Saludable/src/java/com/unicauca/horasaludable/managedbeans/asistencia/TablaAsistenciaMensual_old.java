@@ -8,18 +8,20 @@ import javax.faces.bean.ViewScoped;
 @Named(value = "tablaAsistenciaMensual")
 @ManagedBean
 @ViewScoped
-public class TablaAsistenciaMensual implements Serializable
+public class TablaAsistenciaMensual_old implements Serializable
 {
     private int num;
     private String nombre;
     private char sexo;
+    private char masculino;
+    private char femenino;
     private long codigo;
     private String programa;
     private String estamento;
     private String[] dias;
     private int asisTotal;
     
-    public TablaAsistenciaMensual()
+    public TablaAsistenciaMensual_old()
     {
         num = 0;
         nombre = "-";
@@ -95,4 +97,22 @@ public class TablaAsistenciaMensual implements Serializable
     public void setAsisTotal(int asisTotal) {
         this.asisTotal = asisTotal;
     }  
+
+    public char getMasculino() {
+        return masculino;
+    }
+
+    public void setMasculino(char masculino) {
+        this.masculino = masculino;
+    }
+
+    public char getFemenino() {
+        return femenino;
+    }
+
+    public void setFemenino(char femenino) {
+        this.femenino = femenino;
+    }
+    
+    
 }

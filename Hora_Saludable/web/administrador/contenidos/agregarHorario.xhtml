@@ -35,27 +35,27 @@
                         <p:messages style="border: none" id="messages" />
                         <h:panelGrid columns="2" >
                             <p:outputLabel style="font-weight: bold " value="* Titulo: " />
-                            <p:inputText style="margin: 5px" id="tituloEvento" value="#{agregarHorarioController.titulo}" required="true" size="60" requiredMessage="Introduzca titulo del horario." />
+                            <p:inputText style="margin: 5px" id="tituloEvento" value="#{horarioController.titulo}" required="true" size="60" requiredMessage="Introduzca titulo del horario." />
                         </h:panelGrid>   
 
-                        <p:editor id="editor" widgetVar="editorWidget" value="#{agregarHorarioController.cont}" width="870" height="400" />
+                        <p:editor id="editor" widgetVar="editorWidget" value="#{horarioController.cont}" width="870" height="400" />
 
                     </p:panelGrid>
 
                     <br/>
-                    <p:commandButton ajax="false" action="#{agregarHorarioController.crearHorario()}" process="@form" value="Registrar" 
+                    <p:commandButton ajax="false" action="#{horarioController.crearHorario()}" process="@form" value="Registrar" 
                                      style="width: 110px; background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px; margin-left: 20px" />  
                     
                     <p:commandButton ajax="false" action="principal" value="Volver" 
                                      style="width: 110px; background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px" />
                     
-                    <p:commandButton ajax="false" action="#{agregarHorarioController.limpiar()}" process="@form" value="Limpiar" 
+                    <p:commandButton ajax="false" action="#{horarioController.limpiar()}" process="@form" value="Limpiar" 
                                      style="width: 110px; background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px" />
 
-                    <p:commandButton ajax="false" action="#{agregarHorarioController.insertarFila()}" process="@form" value="Insertar Fila" 
+                    <p:commandButton ajax="false" action="#{horarioController.insertarFila()}" process="@form" value="Insertar Fila" 
                                      style="width: 110px; background: #22419A;color:#FFFFFF;font-style: italic; margin-right: 80px" />
 
-                    <p:commandButton ajax="false" action="#{agregarHorarioController.eliminarFila()}" process="@form" value="Eliminar Fila" 
+                    <p:commandButton ajax="false" action="#{horarioController.eliminarFila()}" process="@form" value="Eliminar Fila" 
                                      style="width: 110px; background: #22419A;color:#FFFFFF;font-style: italic" />
 
                 </h:form>

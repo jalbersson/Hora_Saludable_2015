@@ -34,7 +34,7 @@
                     <p:growl id="msgs" showDetail="true" />
                     <p:fieldset legend="Detalles del evento" style="margin-bottom:20px">
                         <h:panelGrid columns="2" cellpadding="4">
-                            <p:graphicImage height="200px" width="200px" library="img/imagenesEventos" name="#{eventoController.eventoDetalladoTodos().eveimagen}" />
+                            <p:graphicImage height="200px" width="200px" library="img/imagenesEventos" name="#{eventosController.eventoDetallado.eveimagen}" />
                             <p:outputPanel>
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:form id="form">
@@ -46,7 +46,7 @@
                                                     <h:outputLabel class="CampoLabel" value="Evento :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoController.eventoDetalladoTodos().evetitulo}"/>
+                                                    <h:outputLabel value="#{eventosController.eventoDetallado.evetitulo}"/>
                                                 </p:column>
                                             </p:row>
                                             
@@ -55,7 +55,7 @@
                                                     <h:outputLabel class="CampoLabel" value="Lugar :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoController.eventoDetalladoTodos().evelugar}"/>
+                                                    <h:outputLabel value="#{eventosController.eventoDetallado.evelugar}"/>
                                                 </p:column>
                                             </p:row>
                                             
@@ -64,7 +64,7 @@
                                                     <h:outputLabel class="CampoLabel" value=" Fecha de evento :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoController.eventoDetalladoTodos().evefechaevento}"/>
+                                                    <h:outputLabel value="#{eventosController.eventoDetallado.evefechaevento}"/>
                                                 </p:column>
                                             </p:row>
                            
@@ -73,7 +73,7 @@
                                                     <h:outputLabel class="CampoLabel" value=" Descripcion :"/>
                                                 </p:column>
                                                 <p:column>
-                                                    <h:outputLabel value="#{eventoController.eventoDetallado().evecontenido}"/>
+                                                    <h:outputLabel value="#{eventosController.eventoDetallado().evecontenido}"/>
                                                 </p:column>
                                             </p:row>
                                                                      

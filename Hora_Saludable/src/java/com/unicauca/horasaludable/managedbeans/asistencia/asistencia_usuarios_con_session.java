@@ -30,12 +30,11 @@ import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
-
 @Named(value = "asistencia_usuarios_con_session")
 @ManagedBean
 @ViewScoped
-public class asistencia_usuarios_con_session implements Serializable 
-{
+public class asistencia_usuarios_con_session implements Serializable {
+
     @EJB
     private AsistenciaFacade ebjUsuarioFacade;
     @EJB
@@ -48,7 +47,6 @@ public class asistencia_usuarios_con_session implements Serializable
     private String anioElegido;
     private boolean mostrarEstadisticas;
 
-    
     public String getAnioElegido() {
         return anioElegido;
     }
@@ -90,13 +88,12 @@ public class asistencia_usuarios_con_session implements Serializable
     public void setMeses(BarChartModel meses) {
         this.meses = meses;
     }
-    public boolean isMostrarEstadisticas() 
-    {
+
+    public boolean isMostrarEstadisticas() {
         return mostrarEstadisticas;
     }
 
-    public void setMostrarEstadisticas(boolean mostrarEstadisticas) 
-    {
+    public void setMostrarEstadisticas(boolean mostrarEstadisticas) {
         this.mostrarEstadisticas = mostrarEstadisticas;
     }
 
@@ -105,38 +102,43 @@ public class asistencia_usuarios_con_session implements Serializable
     }
 
     public List<Usuario> obtener_usuario_usuid() {
-        
+
         FacesContext fc = FacesContext.getCurrentInstance();
-        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
-        if (req.getUserPrincipal() != null) 
-        {            
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+        if (req.getUserPrincipal() != null) {
             List<Usuario> lst = ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName());
             return lst;
         }
         return null;
     }
-
+  /**
+   * Obtiene toda la asistencia del usuario que inició sesión
+   * @return  Un List con toda la asistencia
+   */
     public List<Detalleasistencia> obtener_asistencia_usuid() {
-        
+
         FacesContext fc = FacesContext.getCurrentInstance();
-        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
-        if (req.getUserPrincipal() != null) 
-        {
-           
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+        if (req.getUserPrincipal() != null) {
+
             List<Detalleasistencia> lst = ebjDetalleasistenciaFacade.obtenerAsisUsuid(ebjUsuarioFacade.retornarBuscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0).getUsuid());
             return lst;
         }
         return null;
-        
+
     }
 
+    /**
+     * Es invocado desde el init()
+     * Permite consultar toda la asistencia del usuario que inició ssesión y renderizarlo en un calednario (schedule).
+     */
     private void cargarSchedule() {
         List<Detalleasistencia> listaAsistencias = this.obtener_asistencia_usuid();
         eventModel = new DefaultScheduleModel();
         int numAsis = 1;
         for (Detalleasistencia asistencias : listaAsistencias) {
-            eventModel.addEvent(new DefaultScheduleEvent("Asistencia #"+numAsis,
-                    asistencias.getAsistencia().getAsifecha(), asistencias.getAsistencia().getAsifecha(), numAsis));
+               //eventModel.addEvent(new DefaultScheduleEvent("Asistencia #" + numAsis, asistencias.getAsistencia().getAsifecha(), asistencias.getAsistencia().getAsifecha(), numAsis));
+                eventModel.addEvent(new DefaultScheduleEvent("Asistió", asistencias.getAsistencia().getAsifecha(), asistencias.getAsistencia().getAsifecha(), numAsis));
             numAsis++;
         }
     }
@@ -213,45 +215,41 @@ public class asistencia_usuarios_con_session implements Serializable
 
         meses.clear();
         meses.addSeries(contendido);
-        
-        meses.setTitle("ASISTENCIA PERSONAL - AÑO: "+anioElegido);
+
+        meses.setTitle("ASISTENCIA PERSONAL - AÑO: " + anioElegido);
         meses.setLegendPosition("ne");
         meses.setShowPointLabels(true);
         meses.setSeriesColors("4D94FF, 1975FF");
-        
+
         Axis xAxis = meses.getAxis(AxisType.X);
         xAxis.setLabel("Mes");
-        
+
         Axis yAxis = meses.getAxis(AxisType.Y);
         yAxis.setLabel("Total de días");
         yAxis.setMin(0);
         yAxis.setMax(102);
-        
+
         return meses;
     }
-    
-    public List<String> obtenerAniosAsistencia()
-    {
+
+    public List<String> obtenerAniosAsistencia() {
         FacesContext fc = FacesContext.getCurrentInstance();
-        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();       
-        if (req.getUserPrincipal() != null) 
-        {            
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+        if (req.getUserPrincipal() != null) {
             List<Integer> lst = this.ebjDetalleasistenciaFacade.obtenerAniosAsistencia(req.getUserPrincipal().getName());
-            List<String> anios=new ArrayList();
-            int contador=0;
-            for(Integer objeto:lst)
-            {
-                anios.add(objeto+"");
+            List<String> anios = new ArrayList();
+            int contador = 0;
+            for (Integer objeto : lst) {
+                anios.add(objeto + "");
                 contador++;
             }
-            if(contador>0)
-            {
-                this.anioElegido=anios.get(contador-1);
-                this.mostrarEstadisticas=true;
+            if (contador > 0) {
+                this.anioElegido = anios.get(contador - 1);
+                this.mostrarEstadisticas = true;
                 return anios;
-                
+
             }
-            this.mostrarEstadisticas=false;
+            this.mostrarEstadisticas = false;
             return null;
         }
         return null;

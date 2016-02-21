@@ -7,6 +7,11 @@ package com.unicauca.horasaludable.managedbeans.contenidos;
 
 import com.unicauca.horasaludable.entities.Noticia;
 import com.unicauca.horasaludable.jpacontrollers.NoticiaFacade;
+import com.unicauca.horasaludable.utilidades.RedimensionadorImagenes;
+import com.unicauca.horasaludable.utilidades.Utilidades;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,20 +20,25 @@ import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
  * @author Leidi
  */
 @ManagedBean
-@RequestScoped
-public class noticiacController {
+@SessionScoped
+public class NoticiasController {
 
     @EJB
     NoticiaFacade ejbNoticia;
-
+    
+    Noticia selected;
     Noticia noticia;
     Noticia detallesNoticia;
     private List<Noticia> noticias = new ArrayList();
@@ -37,14 +47,111 @@ public class noticiacController {
     String notTitulo;
     java.util.Date notfnoticia;
     Long idN = null;
+    private UploadedFile file;
 
-    public noticiacController() {
+    public NoticiasController() {
         noticia = new Noticia();
 
     }
-
+    public void nuevaNoticia() {
+        selected = new Noticia();
+        Utilidades.redireccionar("agregarNoticia.xhtml");
+    }
     public Noticia getNoticia() {
         return noticia;
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+    
+    
+    public void editarNoticia(Noticia noti) {
+        selected = noti;
+        Utilidades.redireccionar("editarNoticia.xhtml");
+    }
+    public void eliminarNoticia(Noticia noti) {
+        try {
+            this.ejbNoticia.remove(noti);
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Error: La noticia no fue eliminado!"));
+        }
+
+        Utilidades.redireccionar("listarNoticias.xhtml");
+    }
+    public void agregarNoticia() {
+        if (selected==null)
+            selected = new Noticia();
+        try {
+            if (this.file.getFileName().equals("")) {
+
+                StreamedContent imagen = Utilidades.getImagenPorDefecto("noticia");
+                selected.setNotImagen(Utilidades.StreameadContentToByte(imagen));
+            } else {
+
+                InputStream fi = file.getInputstream();
+                byte[] buffer = RedimensionadorImagenes.redimensionar(fi, 200);
+                selected.setNotImagen(buffer);
+
+            }
+            this.ejbNoticia.edit(selected);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Evento agregado con éxito", "Edición exitosa"));
+            this.file = null;
+            Utilidades.redireccionar("listarNoticias.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error al agregar la noticia", "Error"));
+        }
+
+    }
+    
+    public Noticia getSelected() {
+        return selected;
+    }
+    public void actualizarNoticia() {
+        try {
+            if (!this.file.getFileName().equals("")) {
+
+                InputStream fi = file.getInputstream();
+                byte[] buffer = RedimensionadorImagenes.redimensionar(fi, 200);
+                selected.setNotImagen(buffer);
+
+            }
+            this.ejbNoticia.edit(selected);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Noticia editada con éxito", "Edición exitosa"));
+            this.file = null;
+            Utilidades.redireccionar("listarNoticias.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error al grabar noticia", "Error"));
+        }
+
+    }
+     
+    
+    /**
+     * Recupera de la bd la imagen de la noticia
+     *
+     * @return el flujo de bytes de la imagen
+     */
+    public StreamedContent getImagenFlujo() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            return new DefaultStreamedContent();
+        } else {
+
+            String id = context.getExternalContext().getRequestParameterMap().get("idNot");
+            Noticia noti = ejbNoticia.noticiaID(Long.valueOf(id)).get(0);
+            if (noti.getNotImagen() == null) {
+                return Utilidades.getImagenPorDefecto("noticia");
+            } else {
+                return new DefaultStreamedContent(new ByteArrayInputStream(noti.getNotImagen()));
+            }
+        }
     }
 
     public void setNoticia(Noticia noticia) {
@@ -177,15 +284,6 @@ public class noticiacController {
         //eveTitulo=params.get("eventoId");
         idN = Long.parseLong(params.get("noticiaId"));
         detallesNoticia = new Noticia();
-        /*
-        
-         //long numero= (long)idE;
-         for (int i = 0; i < ultimos.size(); i++) {
-         if (ultimos.get(i).getNotid().equals(idN)) {
-         detallesNoticia = ultimos.get(i);
-         }
-         }*/
-        //detallesEvento=ultimos.get(numero);
 
         this.ultimos = this.ejbNoticia.noticiaID(idN);
         detallesNoticia = ultimos.get(0);

@@ -32,46 +32,33 @@
                     <p:growl id="msgs" showDetail="true" />
                     <p:fieldset legend="Detalles de la noticia" style="margin-bottom:20px">
                         <h:panelGrid columns="2" cellpadding="4">
-                            <p:dataScroller  var="noticiaLista" value="#{noticiacController.ultimos}" chunkSize="1" mode="inline" scrollHeight="300" style="border: none">
-
-                                <p:graphicImage height="200px" width="200px" library="img/imagenesNoticias" name="#{noticiaLista.notimagen}" />
-                            </p:dataScroller>
                             <p:outputPanel>
                                 <h:panelGrid columns="2" cellpadding="5">
-                                    <h:form id="form">
-                                        <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
+                                    <h:form id="form" >
+                                        <p:panelGrid  styleClass="panelgrid"  id="panel" style="font-size: 16px;">
+
                                             <p:row>
                                                 <p:column>
-                                                    <h:outputLabel class="CampoLabel" value="Noticia :"/>
-                                                </p:column>
-                                                <p:column>
-                                                    <h:outputLabel value="#{noticiacController.noticiaDetallada().nottitulo}"/>
-                                                </p:column>
-                                            </p:row>
-                                            <p:row>
-                                                <p:column>
-                                                    <h:outputLabel class="CampoLabel" value="Lugar :"/>
-                                                </p:column>
-                                                <p:column>
-                                                    <h:outputLabel value="#{noticiacController.idN}"/>
-                                                </p:column>
-                                            </p:row>
-                                            <p:row>
-                                                <p:column>
-                                                    <h:outputLabel class="CampoLabel" value=" Fecha de la Noticia :"/>
-                                                </p:column>
-                                                <p:column>
-                                                    <h:outputLabel value="#{noticiacController.convertToJavaDate(noticiacController.noticiaDetallada().notfechapublicacion)}"/>
+                                                    <h:outputLabel value="#{noticiasController.convertToJavaDate(noticiasController.noticiaDetallada().notfechapublicacion)}" style="font-style: italic"/>
                                                 </p:column>
                                             </p:row>
 
                                             <p:row>
                                                 <p:column>
-                                                    <h:outputLabel class="CampoLabel" value=" Descripcion :"/>
+                                                    <h:outputLabel value="#{noticiasController.noticiaDetallada().nottitulo}" style="font-weight: bold"/>
                                                 </p:column>
+                                            </p:row>
+                                            <p:row>
                                                 <p:column>
-                                                    <p align="justify">
-                                                        <h:outputLabel value="#{noticiacController.noticiaDetallada().notcontenido}"/>
+                                                    <p:graphicImage value="#{noticiasController.imagenFlujo}" >
+                                                        <f:param name="idNot" value="#{noticiasController.noticiaDetallada().notid}" />
+                                                    </p:graphicImage>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column>
+                                                    <p>
+                                                        <h:outputLabel value="#{noticiasController.noticiaDetallada().notcontenido}" escape="false"/>
                                                     </p>
                                                 </p:column>
                                             </p:row>
@@ -85,7 +72,7 @@
 
                         </h:panelGrid>
                     </p:fieldset>
-                    <p:button outcome="listarNoticias" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic" > </p:button>
+                    <p:button outcome="listarNoticias" value="Listar todas las noticias" style="background: #22419A;color:#FFFFFF;" > </p:button>
 
                 </h:form>
             </ui:define>

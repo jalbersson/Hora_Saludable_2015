@@ -35,12 +35,12 @@ public class DetalleasistenciaFacade extends AbstractFacade<Detalleasistencia> {
 
     public List<Detalleasistencia> obtenerAsisUsuid(Long usuid) {
         try {
+            //Había un error, faltaba and t.detasistio=true
             String queryString = "SELECT t FROM Detalleasistencia t "
-                    + "where t.usuario.usuid=" + usuid;
+                    + "where t.usuario.usuid=" + usuid + " and t.detasistio=true";
+            System.out.println("Query:" + queryString);
             Query query = getEntityManager().createQuery(queryString);
-            //System.out.println("ERR"+Long.valueOf(usuid.intValue()+""));
-            //query.set("usuid", Long.valueOf(usuid.intValue()+""));
-            return query.getResultList();
+                        return query.getResultList();
         } finally {
             // em.close();
         }
@@ -200,11 +200,13 @@ public class DetalleasistenciaFacade extends AbstractFacade<Detalleasistencia> {
     public List<Detalleasistencia> obtenerPorAsiid(Long asiid, Boolean detasistio) {
         List<Detalleasistencia> resultList;
         try {
+            //Esta linea está creando error
             Query query = getEntityManager().createNamedQuery("Detalleasistencia.findByAsiidAsistio");
             query.setParameter("asiid", asiid);
             query.setParameter("detasistio", detasistio);
             resultList = query.getResultList();
         } catch (Exception e) {
+            System.out.println("El metodo saco error: " + e.getMessage());
             resultList = new ArrayList();
         }
         return resultList;

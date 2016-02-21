@@ -2,91 +2,85 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <body>
-
         <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
-
             <ui:define name="titulo">
-                Quienes Somos
+                Hora Saludable
             </ui:define>
-
-
             <ui:define name="title">
-
             </ui:define>
-
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>
-                <h:form>
-                    <p:breadCrumb>
-                        <p:menuitem value="Inicio" url="principal.xhtml" />                                                  
-                        <p:menuitem value="Editar Quienes Somos" url="quienesSomos.xhtml" />
-                       
-                    </p:breadCrumb>
-                </h:form>
-                <p:spacer height="10"/>
 
-                <h:form id="form" enctype="multipart/form-data">           
+                <ui:include src="componentes/submenu.xhtml"/>
+
+                <div style="margin-left: 200px;margin-top: 10px;" >
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />
+                            <p:menuitem value="Quienes Somos" outcome="/administrador/contenidos/quienesSomosVer" />
+                        </p:breadCrumb>
+                    </h:form>
+                    <div class="tituloContenido"></div>
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
+
+                    <h:form id="form" enctype="multipart/form-data">           
 
 
-                    <h:panelGrid columns="1" style="margin-top: 10px">
-                        <h1 style="color:#0B2972; text-align: center">  Mision</h1>
+                        <h:panelGrid columns="1" style="margin-top: 10px">
+                            <h1 style="color:#0B2972; text-align: center">  Misión</h1>
 
-                        <h:form id="mision" >
+                            <h:form id="mision" >
 
-                            <h:inputTextarea style="font-weight: normal; font-size: 16px; resize: none" id="mision" requiredMessage="Es necesario que ingrese el contenido 
-                                             de la mision" required="true" value="#{quienesSomos.mision}" rows="10" cols="70" />
+                                <p:editor style="font-weight: normal; font-size: 16px; resize: none" id="mision" requiredMessage="Es necesario que ingrese el contenido 
+                                                 de la mision" required="true" value="#{quienesSomos.mision}" />
 
-                            <br></br>
-                            <br></br>
-                            <p:commandButton  style="background:#22419A ; color: #ffffff; font-style: italic " update="mision" action="#{quienesSomos.crearMision()}" process="@form" value="Registrar"  onclick="PF('dlg1').show();" />
+                                <p:commandButton  value="Guardar" style="background:#22419A ; color: #ffffff;" update="mision" action="#{quienesSomos.crearMision()}" process="@form"   onclick="PF('dlg1').show();" />
+                            </h:form>
+                            <p:dialog header="Mision" widgetVar="dlg1" minHeight="40">
+                                <h:outputText value="Se ha modificado la Misión con éxito!" />
+                            </p:dialog>
+                            
+                            <h1 style="color:#0B2972; text-align: center">  Visión</h1>
+                            <h:form id="vision" >
+                                <p:editor style="font-weight: normal; font-size: 16px; resize: none" id="vision" requiredMessage="Es necesario que ingrese el contenido de la 
+                                                 mision" required="true" value="#{quienesSomos.vision}" />
+                                <p:commandButton value="Guardar" style="background:#22419A ; color: #ffffff;" update="vision" action="#{quienesSomos.crearVision()}" process="@form"  onclick="PF('dlg2').show();"/>
+                            </h:form>
+                            <p:dialog header="Vision" widgetVar="dlg2" minHeight="40">
+                                <h:outputText value="Se ha modificado la visión con éxito!" />
+                            </p:dialog>
 
-                        </h:form>
-                        <p:dialog header="Mision" widgetVar="dlg1" minHeight="40">
-                            <h:outputText value="Se ha modificado la Mision con exito!" />
+                            <h1 style="color:#0B2972; text-align: center">  Responsables</h1>
+                            <h:form id="responsables" >
+                                <p:editor style="font-weight: normal; font-size: 16px; resize: none"  id="responsables" 
+                                                 requiredMessage="Es necesario que ingrese el contenido de la mision" required="true" value="#{quienesSomos.equipo}" />
+                                <p:commandButton value="Guardar" style="background:#22419A ; color: #ffffff; " update="responsables" action="#{quienesSomos.crearResponsables()}" process="@form"  onclick="PF('dlg3').show();"/>
+                            </h:form>
+                            <p:dialog header="Responsables" widgetVar="dlg3" minHeight="40">
+                                <h:outputText value="Se ha modificado los responsables con éxito!" />
+                            </p:dialog>
+
+                        </h:panelGrid>
+                        <br></br>
+                        <br></br>
+                        <h:panelGrid columns="1" style="margin-top: 10px">                            
+                            <p:button value="Volver" style="background:#22419A ; color: #ffffff;" outcome="quienesSomosVer"   />
+                        </h:panelGrid>
+
+                        <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+                            <h:outputText id="display" value="#{editorView.text}" escape="false" />
                         </p:dialog>
-                        <h1 style="color:#0B2972; text-align: center">  Vision</h1>
-                        <h:form id="vision" >
-                            <h:inputTextarea style="font-weight: normal; font-size: 16px; resize: none" id="vision" requiredMessage="Es necesario que ingrese el contenido de la 
-                                             mision" required="true" value="#{quienesSomos.vision}" rows="10" cols="70" />
-                            <br></br>
-                            <br></br>
-                            <p:commandButton style="background:#22419A ; color: #ffffff; font-style: italic " update="vision" action="#{quienesSomos.crearVision()}" process="@form" value="Registrar" onclick="PF('dlg2').show();"/>
-                        </h:form>
-                        <p:dialog header="Vision" widgetVar="dlg2" minHeight="40">
-                            <h:outputText value="Se ha modificado la Vision con exito!" />
-                        </p:dialog>
+                    </h:form>
 
-                        <h1 style="color:#0B2972; text-align: center">  Responsables</h1>
-                        <h:form id="responsables" >
-                            <h:inputTextarea style="font-weight: normal; font-size: 16px; resize: none"  id="responsables" 
-                                             requiredMessage="Es necesario que ingrese el contenido de la mision" required="true" value="#{quienesSomos.equipo}" rows="10" cols="70"/>
-                            <br></br>
-                            <br></br>
-                            <p:commandButton style="background:#22419A ; color: #ffffff; font-style: italic " update="responsables" action="#{quienesSomos.crearResponsables()}" process="@form" value="Registrar" onclick="PF('dlg3').show();"/>
-                        </h:form>
-                        <p:dialog header="Responsables" widgetVar="dlg3" minHeight="40">
-                            <h:outputText value="Se ha modificado Los Responsables con exito!" />
-                        </p:dialog>
 
-                    </h:panelGrid>
-                    <br></br>
-                    <br></br>
-                    <h:panelGrid columns="1" style="margin-top: 10px">
+                </div>
+                <div style="clear: both;"></div>                
 
-                        <p:button style="background:#22419A ; color: #ffffff; font-style: italic " outcome="quienesSomosPrincipal" value="Volver"  />
-                    </h:panelGrid>
-
-                    <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
-                        <h:outputText id="display" value="#{editorView.text}" escape="false" />
-                    </p:dialog>
-                </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>
+

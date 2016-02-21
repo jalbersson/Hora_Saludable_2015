@@ -460,7 +460,6 @@ public class RegistrarUsuarioController implements Serializable {
                this.usuario.setUsuidentificacion(Long.parseLong(this.numeroIdentificacion));
                this.usuario.setUsucontrasena(Cifrar.sha256(this.contrasena));
                this.usuario.setConyugeid(this.funcionario);
-               this.usuario.setUsufoto("vacio.jpg");
                this.usuarioEJB.create(this.usuario);            
                Usuariogrupo usuarioGrupo= new Usuariogrupo();
                UsuariogrupoPK usuarioGrupoPK= new UsuariogrupoPK();
@@ -504,7 +503,6 @@ public class RegistrarUsuarioController implements Serializable {
            
            this.usuario.setUsuidentificacion(Long.parseLong(this.numeroIdentificacion));
            this.usuario.setUsucontrasena(Cifrar.sha256(this.contrasena));
-           this.usuario.setUsufoto("vacio.jpg");
            this.usuarioEJB.create(this.usuario);  
            Usuariogrupo usuarioGrupo= new Usuariogrupo();
            UsuariogrupoPK usuarioGrupoPK= new UsuariogrupoPK();

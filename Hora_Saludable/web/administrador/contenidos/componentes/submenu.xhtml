@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:composition>
+                <div class="submenu">
+                    <h5>Configuración del Sistema</h5>
+                    <h:form>
+                        <h:link style="text-decoration: none;" outcome="/administrador/contenidos/listarEventos" >
+                            <div class="botonSubmenu">
+                                Gestión de Eventos
+                            </div>
+                        </h:link>                  
+                        <h:link style="text-decoration: none;" outcome="/administrador/contenidos/listarNoticias" >
+                            <div class="botonSubmenu">
+                                Gestión Noticias
+                            </div>
+                        </h:link>
+                        <h:link style="text-decoration: none;" outcome="horarioConfigurar"> 
+                            <div class="botonSubmenu">
+                                Horario
+                            </div>
+                        </h:link> 
+                        <h:link style="text-decoration: none;" outcome="correoMasivo"> 
+                            <div class="botonSubmenu">
+                                Correo Masivo
+                            </div>
+                        </h:link> 
+                        <h:link style="text-decoration: none;" outcome="quienesSomosVer"> 
+                            <div class="botonSubmenu">
+                                Quienes Somos
+                            </div>
+                        </h:link> 
+                    </h:form>                    
+                </div>
+
+    </ui:composition>
+
+</html>
+

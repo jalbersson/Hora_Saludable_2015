@@ -11,7 +11,7 @@
             <ui:define name="titulo">
                 Toma de medidas
             </ui:define>
-         
+
             <ui:define name="title">
                 <p:panel style="border: none;">
                     <h:form>
@@ -22,496 +22,62 @@
                             <p:menuitem value="Toma de Medidas" url="#" />
                         </p:breadCrumb>
                     </h:form>
-                </p:panel>
-              <p:separator style="width: 100%;"/>
-              
-              <div class="tituloContenido">
-                    <br></br>
-                    Edicion de Test :  <br></br>
- #{medidasController.medicionactual.obtenerFecha()}
+                </p:panel>                
 
+                <div class="tituloContenido">
+                    Edición de Test:
+                    #{medidasController.medicionactual.obtenerFecha()}
                 </div>
-               
-               
             </ui:define>
+            
             <ui:define name="body">
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/>   
-                <p:panelGrid styleClass="fichapersonal">
-         
-                    <p:row>
-                        <p:column rowspan="9">
-                            <p:column  rendered="#{mostrarUsuarioTestController.campoFoto}">                                
-                                <p:graphicImage  width="100" height="100" library="#{mostrarUsuarioTestController.rutaFoto}" name="#{mostrarUsuarioTestController.usuario.usufoto}"/>
-                            </p:column>    
-                        </p:column>
-                    </p:row>
-                      
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Nombre:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usunombres}" />
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Apellidos:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuapellidos}" />
-                        </p:column>                      
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Identificacion:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usuidentificacion}" />
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Sexo:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{mostrarUsuarioTestController.usuario.usugenero}" />
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Peso:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{medidasController.medicionactual.medpeso} Kg" />
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel styleClass="subtitulotabla" value="Talla:" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel styleClass="fuentefichatabla" value="#{medidasController.medicionactual.medtalla} Cm" />
-                        </p:column>
-                    </p:row>
+                <ui:include src="FichaPersonal.xhtml"/>        
 
- </p:panelGrid>
-                
-                <h:form id="frmTablaRutina" styleClass="imagenmedidas2">
-                        <p:commandButton value="Exportar Test" icon="ui-icon-extlink" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();" /> 
-                    </h:form>
-                    <h:form id="frmVerRutina">  
-                        <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
-                            <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">                    
-                                <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
-                                    Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al insttante.
-                                </object>   
-                            </c:if>
-                        </p:dialog>        
-                    </h:form>
+                <h:form id="frmTablaRutina" styleClass="">
+                    <p:commandButton value="Exportar Test a PDF" icon="ui-icon-extlink" actionListener="#{medidasController.generarPDF(mostrarUsuarioTestController.usuario)}" oncomplete="PF('dlgVerRutina').show();" /> 
+                </h:form>
+                <h:form id="frmVerRutina">  
+                    <p:dialog id="dlgVerRutina" header="Ver rutina" widgetVar="dlgVerRutina" modal="true" position="top" resizable="false">                            
+                        <c:if test="#{medidasController.pdfFileName != 'sin-cargar'}">                    
+                            <object type="application/pdf" data="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}" height="600px" width="820px">                        
+                                Tu Navegador NO puede desplegar PDF , <a href="#{request.contextPath}/PDFServlet/#{medidasController.pdfFileName}">click</a> Para descargar al instante.
+                            </object>   
+                        </c:if>
+                    </p:dialog>        
+                </h:form>
                 <h:form id="formTest">
                     <p:growl for="msg" severity="info,fatal" showDetail="true" sticky="true" autoUpdate="true"/> 
                     <p:accordionPanel id="acord" styleClass="acciones" style="margin: 0 auto">
                         <p:tab title="Mediciones" >
-                           
-                            <p:messages  />
-                            <p:panel styleClass="paneltab">
-                                <p:panelGrid columns="2" styleClass="panelmedidas">
-                                    <f:facet name="header">
-                                        Variables
-                                    </f:facet>
-                                    <p:outputLabel for="Deporte" value="Deporte: *" styleClass="subtitpaneltest"/>
-                                    <p:selectOneMenu id="Deporte" value="#{medidasController.medicionactual.meddeporte}" effect="fold" effectSpeed="250">
-                                        <f:selectItem itemLabel="Ninguno" itemValue="Ninguno" />
-                                        <f:selectItem itemLabel="Atletismo" itemValue="Atletismo" />
-                                        <f:selectItem itemLabel="Baloncesto" itemValue="Baloncesto" />
-                                        <f:selectItem itemLabel="Ciclismo" itemValue="Ciclismo" />
-                                        <f:selectItem itemLabel="Gimnasia" itemValue="Gimnasia" />
-                                        <f:selectItem itemLabel="Tiro" itemValue="Tiro" />
-                                        <f:selectItem itemLabel="Boxeo" itemValue="Boxeo" />
-                                        <f:selectItem itemLabel="Karate Do" itemValue="Karate Do" />
-                                        <f:selectItem itemLabel="Tenis de Mesa" itemValue="Tenis de Mesa" />
-                                        <f:selectItem itemLabel="Voleibol" itemValue="Voleibol" />
-                                        <f:selectItem itemLabel="Futbol" itemValue="Futbol" />
-                                        <f:selectItem itemLabel="Microfutbol" itemValue="Microfutbol" />
-                                        <f:selectItem itemLabel="Tenis de Campo" itemValue="Tenis de Campo" />
-                                        <f:selectItem itemLabel="Natacion" itemValue="Natacion" />
-                                        <f:selectItem itemLabel="Lucha Olimpica" itemValue="Lucha Olimpica" />
-                                        <f:selectItem itemLabel="Lev. de Pesas" itemValue="Levantamiento de Pesas" />
-                                        <f:selectItem itemLabel="Judo" itemValue="Judo" />
-                                        <f:selectItem itemLabel="Taekondo" itemValue="Taekondo" />
-                                        <f:selectItem itemLabel="Esgrima" itemValue="Esgrima" />
-                                    </p:selectOneMenu>
-                                    <p:outputLabel for="Peso" value="Peso(kg): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Peso" value="#{medidasController.medicionactual.medpeso}"  styleClass="txtboxmed" >          
-                                                   
-                                    </p:inputText>
-                                              
-                                    <p:outputLabel for="Talla" value="Talla(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Talla" value="#{medidasController.medicionactual.medtalla}"   styleClass="txtboxmed">
-                                                  
-                                    </p:inputText>
-                                    
-                                    <p:outputLabel for="Triceps" value="Triceps(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Triceps"  value="#{medidasController.medicionactual.medtriceps}"   styleClass="txtboxmed">
-                                                   
-                                    </p:inputText>
-                                    <p:outputLabel for="SubEscapular" value="Sub Escapular(cm): *" styleClass="subtitpaneltest" />
-                                    <p:inputText id="SubEscapular" value="#{medidasController.medicionactual.medsubescapular}"  styleClass="txtboxmed">
-                                                    
-                                    </p:inputText>
-                                    <p:outputLabel for="Suprailiaco" value="Suprailiaco(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Suprailiaco" value="#{medidasController.medicionactual.medsuprailiaco}"  styleClass="txtboxmed" >
-                                                  
-                                    </p:inputText>
-                                    <p:outputLabel for="Abdominal" value="Abdominal(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Abdominal" value="#{medidasController.medicionactual.medabdominal}"  styleClass="txtboxmed">
-                                                    
-                                    </p:inputText>
-                                    <p:outputLabel for="Muslo" value="Muslo(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Muslo" value="#{medidasController.medicionactual.medmuslo}"  styleClass="txtboxmed">
-                                                    
-                                    </p:inputText>
-                                    <p:outputLabel for="Pantorrilla" value="Pantorrilla(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="Pantorrilla" value="#{medidasController.medicionactual.medpantorilla}"  styleClass="txtboxmed">
-                                                  
-                                    </p:inputText>
-                                    <p:outputLabel for="PerimetroMuneca" value="Perimetro Muñeca(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroMuneca" value="#{medidasController.medicionactual.medperimetromuneca}"  styleClass="txtboxmed">
-                                                    
-                                    </p:inputText>
-                                    <p:outputLabel for="PerimetroCabeza" value="Perimetro Cabeza(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroCabeza" value="#{medidasController.medicionactual.medperimetrocabeza}"  styleClass="txtboxmed">
-                                                    
-                                    </p:inputText>
-                                    <p:outputLabel for="DiametroBiacromial" value="Diametro Biacromial(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="DiametroBiacromial" value="#{medidasController.medicionactual.meddiametrobiacromial}"  styleClass="txtboxmed">
-                                                  
-                                    </p:inputText>
-                                    
-                                    <p:outputLabel for="DiametroBiltiocristal" value="Diametro Biltiocristal(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="DiametroBiltiocristal" value="#{medidasController.medicionactual.meddiametrobiltiocristal}"  styleClass="txtboxmed">
-                                                   
-                                    </p:inputText>
-                                    <p:outputLabel for="DiametroHumero" value="Diametro Humero(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="DiametroHumero" value="#{medidasController.medicionactual.meddiametrohumero}"  styleClass="txtboxmed">
-                                                 
-                                    </p:inputText>
-                                    <p:outputLabel for="DiametroFemur" value="Diametro Femur(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="DiametroFemur" value="#{medidasController.medicionactual.meddiametrofemur}"  styleClass="txtboxmed">
-                                                    
-                                    </p:inputText>
-                                    <p:outputLabel for="PerimetroBrazo" value="Perimetro Brazo(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroBrazo" value="#{medidasController.medicionactual.medperimetrobrazo}"  styleClass="txtboxmed">
-                                                  
-                                    </p:inputText>
-                                    <p:outputLabel for="PerimetroAntebrazo" value="Perimetro Antebrazo(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroAntebrazo" value="#{medidasController.medicionactual.meddiametroantebrazo}"  styleClass="txtboxmed">
-                                                    
-                                    </p:inputText>
-                                    <p:outputLabel for="PerimetroPantorrilla" value="Perimetro Pantorrilla(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroPantorrilla" value="#{medidasController.medicionactual.medperimetropantorrilla}"  styleClass="txtboxmed">
-                                                  
-                                    </p:inputText>
-                                    <p:outputLabel for="PerimetroCajaToraxica" value="Perimetro Caja Toraxica(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroCajaToraxica" value="#{medidasController.medicionactual.medperimetrocajatoraxica}"  styleClass="txtboxmed">
-                                                  
-                                    </p:inputText>
-                                    <p:outputLabel for="PerimetroMuslo" value="Perimetro Muslo(cm): *" styleClass="subtitpaneltest"/>
-                                    <p:inputText id="PerimetroMuslo" value="#{medidasController.medicionactual.medperimetromuslo}"  styleClass="txtboxmed">
-                                                 
-                                    </p:inputText>
-                                </p:panelGrid>
-                                <p:commandButton value="Calcular" icon="ui-icon-arrowthick-1-e" 
-                                                 styleClass="btncalcularmedidas" update="result"/>
-                                <p:panelGrid  id="result" columns="2" styleClass="panelmedidas">
-                                    <f:facet name="header">
-                                        Resultado
-                                    </f:facet>
-                                    <p:outputLabel  value="Sumatoria Pliegues(cm):" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.sumatoriadepliegues()}" />
-                                    <p:outputLabel  value="Porcentaje Grasa(cm):" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.porcentajeGrasa()}"/>
-                                    <p:outputLabel  value="Peso Graso(kg):" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.pesoGraso()}" />
-                                    <p:outputLabel  value="Peso Libre grasa(kg):" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel   value="#{medidasController.medicionactual.pesolibregrasa()}" />
-                                    <p:outputLabel  value="Masa Muscular(kg):" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.masamuscular()}"/>
-                                    <p:outputLabel  value="Peso Ideal(kg):" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.pesoideal()}"/>
-                                    <p:outputLabel  value="Indice de Masa Corporal" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.indicemasacorporal()}"/>
-                                    <p:outputLabel  value="Complexion:" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.complexion()}"/>
-                                    <p:outputLabel  value="Tasa Metabolica Basal:" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.tasametabolicabasal()}"/>
-                                    <p:outputLabel  value="Exceso de Peso(kg):" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.excesodepeso()}"/>
-                                    <p:outputLabel  value="Peso Optimo(kg):" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel   value="#{medidasController.medicionactual.pesooptimo()}" />
-                                    <p:outputLabel  value="% Grasa Ideal" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel    value="#{medidasController.medicionactual.porcentajegrasaideal()}"/>
-                                    <p:separator />
-                                    <p:separator />
-                                    <p:outputLabel  value="% Grasa" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel  value="#{medidasController.medicionactual.estadoPorcentajeGrasaIdeal}"  />
-                                    <p:outputLabel  value="Complexion" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel  value="#{medidasController.medicionactual.estadoComplexion}"  />
-                                    <p:outputLabel  value="Indice de Masa Corporal" styleClass="subtitpaneltest"/>
-                                    <p:outputLabel  value="#{medidasController.medicionactual.estadoIMC}"  />
-                                </p:panelGrid>
-                            </p:panel>
+                            <ui:include src="TestMediciones.xhtml"/>                            
                         </p:tab>
                         <p:tab title="Test Deportivos">
-                            <p:panel style="text-align: center">
-                               
-                                 <p:messages  /> 
-                                <p:separator style="width: 750px" />  
-                                
-                                <p:panel styleClass="paneltab" header="Test de Sargent">
-                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
-                                <f:facet name="header">
-                                    Test de Sargent
-                                </f:facet>
-                                    <p:outputLabel value="Embergadura:" for="inputEmbergadura"/>
-                                    <p:inputText id="inputEmbergadura" value="#{medidasController.medicionactual.medembergadura}">
-                                         
-                                    </p:inputText>
-                                    <p:outputLabel  value="Salto Maximo:" for="inputSaltoMaximo"/>
-                                    <p:inputText id="inputSaltoMaximo" value="#{medidasController.medicionactual.medsaltomaximo}" >
-                                         
-                                    </p:inputText>
-                                </p:panelGrid><br/>
-                                
-                                <p:commandButton value="Calcular s" update="labelSaltoReal labelSargent" styleClass="btncalculartest"></p:commandButton>
-                               
-                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
-                                <f:facet name="header">
-                                    Resultado Test de Sargent
-                                </f:facet>
-                                <p:outputLabel  value="Salto Real: "/>
-                                <p:outputLabel  id="labelSaltoReal" value="#{medidasController.medicionactual.medsaltoreal}"></p:outputLabel>
-                                <p:outputLabel value="Resultado: " />
-                                <p:outputLabel id="labelSargent" value="#{medidasController.medicionactual.estadotestSargent}"></p:outputLabel>
-                                 </p:panelGrid>
-                                
-                                <p:panelGrid styleClass="panelayuda" columns="1">              
-                                <p:outputLabel value="AYUDA - Hombres: Salto real mayor a 70 Excelente, entre 61 y 70 Muy bueno, entre 51 y 60 Arriba del promedio, entre 41 y 50 En el promedio, entre 31 y 40 Por debajo del promedio, entre 21 y 30 Pobre y menor a 21 Muy pobre"></p:outputLabel>
-                                <p:outputLabel value="AYUDA - Mujeres: Salto real mayor a 60 Excelente, entre 51 y 60 Muy bueno, entre 41 y 50 Arriba del promedio, entre 31 y 40 En el promedio, entre 21 y 30 Por debajo del promedio, entre 11 y 20 Pobre y menor a 11 Muy pobre"></p:outputLabel>
-                                </p:panelGrid>
-                                
-                                </p:panel>
-                                
-                                <p:separator styleClass="separadorTest" />
-                                
-                                <p:panel styleClass="paneltab" header="Test de Rufier">
-                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
-                                <f:facet name="header">
-                                    Test de Rufier
-                                </f:facet>
-                                    <p:outputLabel value="Primer pulso" for="inputPrimerPulso"/>
-                                    <p:inputText id="inputPrimerPulso" value="#{medidasController.medicionactual.medpulso0}">
-                                      
-                                    </p:inputText>
-                                    <p:outputLabel value="Segundo pulso" for="inputSegundoPulso"/>
-                                    <p:inputText id="inputSegundoPulso" value="#{medidasController.medicionactual.medpulso1}">
-                                          
-                                    </p:inputText>
-                                    <p:outputLabel value="Tercer pulso" for="inputTercerPulso"/>
-                                    <p:inputText id="inputTercerPulso" value="#{medidasController.medicionactual.medpulso2}">
-                                         
-                                    </p:inputText>
-                                </p:panelGrid>
-                                
-                                <p:commandButton value="Calcular r" update="labelRufier valorRufier" styleClass="btncalculartest"/>
-                                
-                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
-                                <f:facet name="header">
-                                    Resultado Test de Rufier
-                                </f:facet>
-                                <p:outputLabel value="Resultado:" />
-                                <p:outputLabel id="labelRufier" value="#{medidasController.medicionactual.estadoRufier}"></p:outputLabel>
-                                <p:outputLabel value="I = "></p:outputLabel>
-                                <p:outputLabel id="valorRufier" value="#{medidasController.medicionactual.testRufier}"></p:outputLabel>
-                                </p:panelGrid>
-                                <p:panelGrid styleClass="panelayuda" columns="1">   
-                                <p:outputLabel value="AYUDA: I entre 0 y 1 Excelente, I entre 1 y 5 Muy bueno, I entre 6 y 10 Bueno, I entre 11 y 15 Medio, I mayor a 15 Malo"></p:outputLabel>
-                                </p:panelGrid>
-                                 </p:panel>
-                                
-                                <p:separator styleClass="separadorTest" />
-                                
-                                <p:panel styleClass="paneltab" header=" Test de Wells">
-                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
-                                <f:facet name="header">
-                                    Test de Wells
-                                </f:facet>
-                                    <p:outputLabel value="Flexibilidad:" for="Flexibilidad"></p:outputLabel>
-                                    <p:inputText id="Flexibilidad" value="#{medidasController.medicionactual.medflexibilidad}"></p:inputText>
-                                </p:panelGrid>
-                                
-                                <p:commandButton value="Calcular w" update="labelWells" styleClass="btncalculartest" />
-                                
-                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
-                                <f:facet name="header">
-                                    Resultado Test de Wells
-                                </f:facet>
-                                <p:outputLabel value="Resultado: "></p:outputLabel>
-                                <p:outputLabel id="labelWells" value="#{medidasController.medicionactual.estadoTestWells}"></p:outputLabel>
-                                </p:panelGrid>
-                                <p:spacer height="20" width="100"/>
-                                 </p:panel>
-                                
-                                <p:separator styleClass="separadorTest" />
-                                
-                              <!--   <p:panel styleClass="paneltab">
-                                <p:panelGrid   columns="2" styleClass="panelmedidas" style="width: 300px;">
-                                <f:facet name="header">
-                                    Test de Leger
-                                </f:facet>
-                                    <p:outputLabel  value="Consumo maximo de oxigeno: "/>
-                                    <p:outputLabel  value="1345" />
-                                </p:panelGrid>
-                                 </p:panel>    -->                                
-                            </p:panel>
+                            <ui:include src="TestDeportivos.xhtml"/>
                         </p:tab>
+
                         <p:tab title="Test de Leger">
-                           
-                            <p:panel styleClass="paneltab" id="panelLeger">
-                                <div style="text-align: center">
-                                    <h1>Test de Leger</h1>
-                                </div>
-                                <p:panelGrid   columns="4" styleClass="panelmedidas" style="margin-left: 260px">
-                                <f:facet name="header">
-                                    Resultado
-                                </f:facet>
-                                <p:outputLabel value="No."/>
-                                <p:outputLabel value="Frecuencia Cardiaca"/>
-                                <p:outputLabel value="Velocidad"/>
-                                <p:outputLabel value="Vo2 Max"/>
-                                <p:outputLabel  value="1" />
-                                <p:inputText id="leger1" value="#{medidasController.medicionactual.medfcardiaca1}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger1Velocidad leger1COxigeno" listener="#{medidasController.cambiarVelocidad1()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger1Velocidad" value="#{medidasController.velocidades[0]}" style="width: 30px" />
-                                <p:outputLabel id="leger1COxigeno" value="#{medidasController.consumoOxigeno[0]}" style="width: 30px"/>
-                                <p:outputLabel  value="2" />
-                                <p:inputText id="leger2" value="#{medidasController.medicionactual.medfcardiaca2}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger2Velocidad leger2COxigeno" listener="#{medidasController.cambiarVelocidad2()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger2Velocidad" value="#{medidasController.velocidades[1]}" style="width: 30px"/>
-                                <p:outputLabel id="leger2COxigeno" value="#{medidasController.consumoOxigeno[1]}" style="width: 30px"/>
-                                <p:outputLabel  value="3" />
-                                <p:inputText id="leger3" value="#{medidasController.medicionactual.medfcardiaca3}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger3Velocidad leger3COxigeno" listener="#{medidasController.cambiarVelocidad3()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger3Velocidad" value="#{medidasController.velocidades[2]}" style="width: 30px"/>
-                                <p:outputLabel id="leger3COxigeno" value="#{medidasController.consumoOxigeno[2]}" style="width: 30px"/>
-                                <p:outputLabel  value="4" />
-                                <p:inputText id="leger4" value="#{medidasController.medicionactual.medfcardiaca4}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger4Velocidad leger4COxigeno" listener="#{medidasController.cambiarVelocidad4()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger4Velocidad" value="#{medidasController.velocidades[3]}" style="width: 30px"/>
-                                <p:outputLabel id="leger4COxigeno" value="#{medidasController.consumoOxigeno[3]}" style="width: 30px"/>
-                                <p:outputLabel  value="5" />
-                                <p:inputText id="leger5" value="#{medidasController.medicionactual.medfcardiaca5}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger5Velocidad leger5COxigeno" listener="#{medidasController.cambiarVelocidad5()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger5Velocidad" value="#{medidasController.velocidades[4]}" style="width: 30px"/>
-                                <p:outputLabel id="leger5COxigeno" value="#{medidasController.consumoOxigeno[4]}" style="width: 30px"/>
-                                <p:outputLabel  value="6" />
-                                <p:inputText id="leger6" value="#{medidasController.medicionactual.medfcardiaca6}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger6Velocidad leger6COxigeno" listener="#{medidasController.cambiarVelocidad6()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger6Velocidad" value="#{medidasController.velocidades[5]}" style="width: 30px"/>
-                                <p:outputLabel id="leger6COxigeno" value="#{medidasController.consumoOxigeno[5]}" style="width: 30px"/>
-                                <p:outputLabel  value="7" />
-                                <p:inputText id="leger7" value="#{medidasController.medicionactual.medfcardiaca7}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger7Velocidad leger7COxigeno" listener="#{medidasController.cambiarVelocidad7()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger7Velocidad" value="#{medidasController.velocidades[6]}" style="width: 30px"/>
-                                <p:outputLabel id="leger7COxigeno" value="#{medidasController.consumoOxigeno[6]}" style="width: 30px"/>
-                                <p:outputLabel  value="8" />
-                                <p:inputText id="leger8" value="#{medidasController.medicionactual.medfcardiaca8}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger8Velocidad leger8COxigeno" listener="#{medidasController.cambiarVelocidad8()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger8Velocidad" value="#{medidasController.velocidades[7]}" style="width: 30px"/>
-                                <p:outputLabel id="leger8COxigeno" value="#{medidasController.consumoOxigeno[7]}" style="width: 30px"/>
-                                <p:outputLabel  value="9" />
-                                <p:inputText id="leger9" value="#{medidasController.medicionactual.medfcardiaca9}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger9Velocidad leger9COxigeno" listener="#{medidasController.cambiarVelocidad9()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger9Velocidad" value="#{medidasController.velocidades[8]}" style="width: 30px"/>
-                                <p:outputLabel id="leger9COxigeno" value="#{medidasController.consumoOxigeno[8]}" style="width: 30px"/>
-                                <p:outputLabel  value="10" />
-                                <p:inputText id="leger10" value="#{medidasController.medicionactual.medfcardiaca10}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger10Velocidad leger10COxigeno" listener="#{medidasController.cambiarVelocidad10()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger10Velocidad" value="#{medidasController.velocidades[9]}" style="width: 30px"/>
-                                <p:outputLabel id="leger10COxigeno" value="#{medidasController.consumoOxigeno[9]}" style="width: 30px"/>
-                                <p:outputLabel  value="11" />
-                                <p:inputText id="leger11" value="#{medidasController.medicionactual.medfcardiaca11}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger11Velocidad leger11COxigeno" listener="#{medidasController.cambiarVelocidad11()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger11Velocidad" value="#{medidasController.velocidades[10]}" style="width: 30px"/>
-                                <p:outputLabel id="leger11COxigeno" value="#{medidasController.consumoOxigeno[10]}" style="width: 30px"/>
-                                <p:outputLabel  value="12" />
-                                <p:inputText id="leger12" value="#{medidasController.medicionactual.medfcardiaca12}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger12Velocidad leger12COxigeno" listener="#{medidasController.cambiarVelocidad12()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger12Velocidad" value="#{medidasController.velocidades[11]}" style="width: 30px"/>
-                                <p:outputLabel id="leger12COxigeno" value="#{medidasController.consumoOxigeno[11]}" style="width: 30px"/>
-                                <p:outputLabel  value="13" />
-                                <p:inputText id="leger13" value="#{medidasController.medicionactual.medfcardiaca13}" style="width: 30px" >
-                                    <p:ajax event="keyup" update="leger13Velocidad leger13COxigeno" listener="#{medidasController.cambiarVelocidad13()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger13Velocidad" value="#{medidasController.velocidades[12]}" style="width: 30px"/>
-                                <p:outputLabel id="leger13COxigeno" value="#{medidasController.consumoOxigeno[12]}" style="width: 30px"/>
-                                <p:outputLabel  value="14" />
-                                <p:inputText id="leger14" value="#{medidasController.medicionactual.medfcardiaca14}" style="width: 30px" >
-                                    <p:ajax event="keyup" update="leger14Velocidad leger14COxigeno" listener="#{medidasController.cambiarVelocidad14()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger14Velocidad" value="#{medidasController.velocidades[13]}" style="width: 30px"/>
-                                <p:outputLabel id="leger14COxigeno" value="#{medidasController.consumoOxigeno[13]}" style="width: 30px"/>
-                                <p:outputLabel  value="15" />
-                                <p:inputText id="leger15" value="#{medidasController.medicionactual.medfcardiaca15}" style="width: 30px" >
-                                    <p:ajax event="keyup" update="leger15Velocidad leger15COxigeno" listener="#{medidasController.cambiarVelocidad15()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger15Velocidad" value="#{medidasController.velocidades[14]}" style="width: 30px"/>
-                                <p:outputLabel id="leger15COxigeno" value="#{medidasController.consumoOxigeno[14]}" style="width: 30px"/>
-                                <p:outputLabel  value="16" />
-                                <p:inputText id="leger16" value="#{medidasController.medicionactual.medfcardiaca16}" style="width: 30px">
-                                    <p:ajax event="keyup" update="leger16Velocidad leger16COxigeno" listener="#{medidasController.cambiarVelocidad16()}"/>
-                                </p:inputText>
-                                <p:outputLabel id="leger16Velocidad" value="#{medidasController.velocidades[15]}" style="width: 30px"/>
-                                <p:outputLabel id="leger16COxigeno" value="#{medidasController.consumoOxigeno[15]}" style="width: 30px"/>
-                            </p:panelGrid>
-                            </p:panel>
-                            <br/><br/>
-                                <div style="text-align: center">
-                                    <p:commandButton value="Calcular Resultado" actionListener="#{medidasController.calcularResultadoLeger()}" update="calificacion"/><br/><br/>
-                                    <p:outputLabel id="calificacion" value="#{medidasController.calificacionLeger}" style="font-size: 20px"/> <br/><br/>
-                                    <p:outputLabel value="Hombres: menor a 25 Baja, entre 25 y 33 Media, entre 34 y 42 Media, entre 43 y 52 Buena y mayor a 52 Excelente"/><br/>
-                                    <p:outputLabel value="Mujeres: menor a 24 Baja, entre 24 y 30 Media, entre 31 y 37 Media, entre 38 y 48 Buena y mayor a 48 Excelente"/>
-                                </div>
+                            <ui:include src="TestDeLeger.xhtml"/>                      
+                        </p:tab>
+                        <p:tab title="Test de Frecuencia Cardiaca">                        
+                            <ui:include src="TestFrecuenciaCardiaca.xhtml"/>
                         </p:tab>
                         <p:tab title="Observaciones">
-                            
+
                             <p:panel styleClass="paneltab">
-                            <div style="text-align: center">
-                                <p:inputTextarea rows="5" cols="100" counter="display" maxlength="200" counterTemplate="Quedan {0} caracteres." autoResize="false" value="#{medidasController.medicionactual.medobservaciones}"/><br/>
-                                <h:outputText id="display" />
-                            </div>
+                                <div style="text-align: center">
+                                    <p:inputTextarea rows="5" cols="100" counter="display" maxlength="200" counterTemplate="Quedan {0} caracteres." autoResize="false" value="#{medidasController.medicionactual.medobservaciones}"/><br/>
+                                    <h:outputText id="display" />
+                                </div>
                             </p:panel>
                         </p:tab>
                     </p:accordionPanel>
                     <h:panelGrid columns="2" styleClass="btnguardarmed" cellpadding="5" bgcolor="#045491">
-                        <p:commandButton value="Guardar" icon="ui-icon-check"  update="acord" actionListener="#{medidasController.guardarmed}"/>
-                        <p:button value="Cancelar" icon="ui-icon-cancel" outcome="GestionTest"/>
+                        <p:commandButton value="Guardar sin salir" icon="ui-icon-check"  update="acord" actionListener="#{medidasController.guardarmed}"/>
+                        <p:button value="Salir" icon="ui-icon-cancel" outcome="GestionTest"/>
                     </h:panelGrid> 
                 </h:form>
             </ui:define>
         </ui:composition>
     </body>
-    </html>
+</html>

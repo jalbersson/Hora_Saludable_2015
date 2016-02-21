@@ -7,32 +7,20 @@ package com.unicauca.horasaludable.managedbeans.contenidos;
 
 import com.unicauca.horasaludable.entities.Noticia;
 import com.unicauca.horasaludable.jpacontrollers.NoticiaFacade;
-import java.awt.Graphics2D;
+import com.unicauca.horasaludable.utilidades.RedimensionadorImagenes;
+import com.unicauca.horasaludable.utilidades.Utilidades;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
-import javax.swing.JOptionPane;
-import javax.xml.crypto.Data;
-import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -40,7 +28,7 @@ import org.primefaces.model.UploadedFile;
  * @author Yamid
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class noticiaController {
 
     @EJB
@@ -52,49 +40,51 @@ public class noticiaController {
     private Date fechapublicacion;
     private Date fechaedicion;
     private String contenido;
-    private String imagen;
-    private String path;
-
     private UploadedFile file;
 
     public noticiaController() {
         this.visible = true;
         this.fechapublicacion = new Date();
         this.fechaedicion = new Date();
-
-        this.imagen = "default";
-        File f = new File("."); // Creamos un objeto file
-
-        String OS = System.getProperty("os.name").toLowerCase();
-        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        String realPath = (String) servletContext.getRealPath("/");
-        if (OS.contains("nux") || OS.contains("debian")) {
-            this.path = realPath + "/resources/img/imagenesNoticias/";
-        } else {
-            this.path = realPath + "\\resources\\img\\imagenesNoticias\\";
-
-        }
     }
 
-  
+    public void guardarNoticia() {
+        this.noticia = new Noticia();
+        Date fecha = new java.util.Date();
+        this.noticia.setNottitulo(this.titulo);
+        this.noticia.setNotfechapublicacion(convertStringToDate(fecha));
+        this.noticia.setNotfechaedicion(convertStringToDate(fecha));
+        this.noticia.setNotvisible(this.visible);
+        this.noticia.setNotcontenido(this.contenido);
+        try {
+            //Grabar la imagen
+            InputStream fi;
+            if (file == null) {
+                //Poner la imagen de noticia por defecto. Se deben convertirla
+                StreamedContent img = Utilidades.getImagenPorDefecto("noticia");
+                this.noticia.setNotImagen(Utilidades.StreameadContentToByte(img));
+            } else {
+                //Graba la imagen del file pero primero lo redimensiona a 300 px
+                fi = file.getInputstream();
+                byte[] buffer = RedimensionadorImagenes.redimensionar(fi, 300);
+                this.noticia.setNotImagen(buffer);
+            }
 
-    public String guardarNoticia() {
-
-        try {      //imagen = "../../resources/imagenNoticia.jpg";
-            noticia = new Noticia();
-            Date fecha = new java.util.Date();
-            this.noticia.setNottitulo(this.titulo);
-            this.noticia.setNotfechapublicacion(convertStringToDate(fecha));
-            this.noticia.setNotfechaedicion(convertStringToDate(fecha));
-            this.noticia.setNotvisible(this.visible);
-            this.noticia.setNotcontenido(this.contenido);
-            this.noticia.setNotimagen(this.imagen + ".jpg");
             this.ebjNoticiaFacade.create(this.noticia);
         } catch (Exception e) {
-            return "principal";
+            Logger.getLogger("Error al crear nueva noticias");
         }
+        //return "listarNoticias"; //No funcionó
 
-        return "listarNoticias";
+        //Redireccionar a Listar noticias
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext extContext = context.getExternalContext();
+        extContext.getFlash().setKeepMessages(true);
+        try {
+            extContext.redirect("listarNoticias.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger("Error al redireccioar noticias");
+        }
     }
 
     public static Date convertStringToDate(java.util.Date date) {
@@ -105,85 +95,6 @@ public class noticiaController {
         } catch (Exception e) {
         }
         return sqlDate;
-    }
-
-    public void upload() {
-        try {
-            if (file != null) {
-                subirImagen();
-            } else {
-                this.imagen = "default";
-            }
-        } catch (Exception e) {
-            this.imagen = "default";
-        }
-
-    }
-
-    public void subirImagen() {
-        File f = null;
-        InputStream in = null;
-        String ubicacionImagen = "";
-        try {
-
-            InputStream xx = file.getInputstream();
-            InputStream fis = xx;
-            BufferedImage image = ImageIO.read(fis); //reading the image file
-
-            int rows = 1; //You should decide the values for rows and cols variables
-            int cols = 1;
-            int chunks = rows * cols;
-
-            int chunkWidth = image.getWidth() / cols; // determines the chunk width and height
-            int chunkHeight = image.getHeight() / rows;
-            int count = 0;
-
-            /**
-             * *******************
-             */
-            this.imagen = getNombreImagen();
-            /**
-             * *******************
-             */
-
-            BufferedImage imgs[] = new BufferedImage[chunks]; //Image array to hold image chunks
-            for (int x = 0; x < rows; x++) {
-                for (int y = 0; y < cols; y++) {
-
-                    imgs[count] = new BufferedImage(chunkWidth, chunkHeight, image.getType());
-
-                    Graphics2D gr = imgs[count++].createGraphics();
-                    gr.drawImage(image, 0, 0, chunkWidth, chunkHeight, chunkWidth * y, chunkHeight * x, chunkWidth * y + chunkWidth, chunkHeight * x + chunkHeight, null);
-                    gr.dispose();
-                }
-            }
-
-            for (int i = 0; i < imgs.length; i++) {
-                ImageIO.write(imgs[i], "jpg", new File(this.path + this.imagen + ".jpg"));
-            }
-
-        } catch (Exception ex) {
-            FacesMessage msg = new FacesMessage("Error", " No ha podido cargar la imagen.");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-
-        // Do what you want with the file        
-    }
-
-    String getNombreImagen() {
-        int longitud = 15;
-        String cadenaAleatoria = "";
-        long milis = new java.util.GregorianCalendar().getTimeInMillis();
-        Random r = new Random(milis);
-        int i = 0;
-        while (i < longitud) {
-            char c = (char) r.nextInt(255);
-            if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')) {
-                cadenaAleatoria += c;
-                i++;
-            }
-        }
-        return cadenaAleatoria;
     }
 
     public NoticiaFacade getEbjNoticiaFacade() {
@@ -240,22 +151,6 @@ public class noticiaController {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public UploadedFile getFile() {

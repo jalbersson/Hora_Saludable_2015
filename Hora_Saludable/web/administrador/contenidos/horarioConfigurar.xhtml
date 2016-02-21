@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+            <ui:define name="titulo">
+                Hora Saludable
+            </ui:define>
+            <ui:define name="title">
+            </ui:define>
+            <ui:define name="body">
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+
+                <ui:include src="componentes/submenu.xhtml"/>
+
+                <div style="margin-left: 200px;margin-top: 10px;" >
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />                              
+
+                        </p:breadCrumb>
+                    </h:form>
+                    <div class="tituloContenido">Configurar Horario</div>                    
+                    <ui:include src="/ventanaEfectodeCarga.xhtml"/>                   
+                    
+                    <p:panel  toggleable="false">
+                        <h:form id="formularioPerfilDatosCuenta">
+                            <p>
+                                Aquí puedes apreciar el horario de la hora saludable. Puedes modificarlo a tu gusto.
+                            </p>
+                            <p:dataTable id="basicDT" var="hor" value="#{horarioController.lista()}">
+                                <p:column headerText="Acciones" style="text-align: center">  
+                                    <p:button style="height: 30px; width: 80px; margin-right: 10px; background: #22419A;color:#FFFFFF"  value="Ver" outcome="#{horarioController.verHorario(hor)}" />
+                                    <p:button style="height: 30px; width: 80px; margin-right: 10px; background: #22419A;color:#FFFFFF"  value="Editar" outcome="#{horarioController.editarHorario(hor)}" />                                     
+
+                                </p:column>
+                            </p:dataTable>
+
+                        </h:form>
+                    </p:panel>
+
+                </div>
+                <div style="clear: both;"></div>                
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

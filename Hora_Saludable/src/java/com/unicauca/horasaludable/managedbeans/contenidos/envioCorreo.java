@@ -1,20 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.unicauca.horasaludable.managedbeans.contenidos;
 
-import com.unicauca.horasaludable.entities.Recuperarcontrasena;
 import com.unicauca.horasaludable.entities.Usuario;
 import com.unicauca.horasaludable.jpacontrollers.UsuarioFacade;
-import static java.lang.ProcessBuilder.Redirect.to;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -26,7 +20,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -54,10 +47,23 @@ public class envioCorreo {
         listaCorreos = new ArrayList();
 
     }
+    /**
+     * Devuelve el listado de correos tanto nombres como email. Es usado en la vista de Corrreo Masivo en el campo Para
+     * @return listado de correos con nombres
+     */
+    public String getCorreos(){
+        List<Usuario> todosUsuarios = ejbUsuario.buscarTodos();
+        Collections.sort(todosUsuarios);
+        String correos = "";
 
+        for (Usuario usu: todosUsuarios) {
+            correos = correos + usu.getUsunombres() + " " + usu.getUsuapellidos() + "<" + usu.getUsuemail() + ">; "; 
+        }
+        return correos;
+    }
     public void cargarCorreos() {
         List<Usuario> todosUsuarios = ejbUsuario.buscarTodos();
-        int indexEmails = 0;
+        //int indexEmails = 0;
         String dirEmail = "";
         /*
          for (int i = 0; i < todosUsuarios.size(); i++) {
@@ -79,8 +85,6 @@ public class envioCorreo {
     }
 
     public void sendMail() {
-        
-        
         cargarCorreos();
         Properties props = System.getProperties();
         props.put("mail.smtp.auth", "true");
@@ -106,13 +110,12 @@ public class envioCorreo {
             Transport transport = session.getTransport("smtp");
             transport.connect(this.smtpServ, this.from, this.pass);
             transport.sendMessage(message, message.getAllRecipients());
-            //FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_INFO, "Envio de mensaje masivo", "Mensaje enviado con exito.");
-            //RequestContext.getCurrentInstance().showMessageInDialog(messages);
-            
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("El correo se ha enviado!"));
 
             transport.close();
         } catch (MessagingException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No se pudo enviar el correo, revise"));
             throw new RuntimeException(e);
         } finally {
 
@@ -120,7 +123,6 @@ public class envioCorreo {
             this.subject = "";
         }
     }
-
 
     /**
      * VALIDACION DE DIRECCIONES DE CORREO*

@@ -13,23 +13,19 @@
             <ui:define name="titulo">
                 Consultas Test
             </ui:define>   
-            
-             <ui:define name="body"> 
-                  <h:form>
+
+            <ui:define name="body"> 
+                <h:form>
                     <p:breadCrumb>
                         <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />                              
                         <p:menuitem value="Consultar Test" outcome="/administrador/medidas/consultaTest" />   
-                        
+
                     </p:breadCrumb>
                 </h:form>
-           <div class="tituloContenido">
-                    <br></br>
-                  Consultar Evaluación Antropométrica y Funcional 
+                <div class="tituloContenido">
+                    Consultar Evaluación Antropométrica y Funcional 
                 </div>
-                 <br />
-                 <br></br><br></br>
-               
-               
+
                 <ui:include src="/ventanaEfectodeCarga.xhtml"/> 
                 <h:form id="seleccionarUsuarios">
                     <h:panelGrid columns="2"> 
@@ -59,8 +55,8 @@
                             <p:ajax event="keyup" update="tablaUsuariosM" listener="#{listasUsuariosMedidasController.buscarPorNombreUsuario}" /> 
                         </p:inputText>                                                   
                     </h:panelGrid>
-              
-                    
+
+
                     <p:panel id="tablaUsuariosM" rendered="#{listasUsuariosMedidasController.habilitarTablaUsuarios}">                                            
                         <p:dataTable  var="usuarios" value="#{listasUsuariosMedidasController.listaUsuarios}"
                                       paginator="true" rows="10"  
@@ -69,14 +65,24 @@
                                       emptyMessage="No Se encuentran Datos registrados a este usuario">
 
                             <p:column headerText="No. Identificacion" width="100">                               
-                                    #{usuarios.usuidentificacion}
+                                #{usuarios.usuidentificacion}
                             </p:column> 
                             <p:column headerText="Nombres">
-                                #{usuarios.usunombres}
+                                <h:outputText value="#{usuarios.usunombres}" style="text-transform: capitalize;" />
                             </p:column>
                             <p:column headerText="Apellidos">
-                                #{usuarios.usuapellidos}
-                            </p:column>                             
+                                <h:outputText value="#{usuarios.usuapellidos}" style="text-transform: capitalize;" />
+                            </p:column>     
+
+                            <p:column >
+                                <f:facet name="header">
+                                    <h:outputText value="Foto"  />
+                                </f:facet>
+                                <p:graphicImage value="#{listasUsuariosMedidasController.imagenFlujo}" width="50"  height="50" >
+                                    <f:param name="id" value="#{usuarios.usuid}" />
+                                </p:graphicImage>                            
+                            </p:column>   
+
                             <p:column headerText="Cargo" rendered="#{listasUsuariosMedidasController.habilitarFuncionarios}">
                                 #{usuarios.carid.carnombre}
                             </p:column>
@@ -91,23 +97,23 @@
                             </p:column>
                             <p:column headerText="Cargo Funcionario" rendered="#{listasUsuariosMedidasController.habilitarFamiliares}">
                                 #{usuarios.conyugeid.carid.carnombre}
-                                
+
                             </p:column>
                             <p:column headerText="Acciones" width="90">
-                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{mostrarUsuarioTestController.estudianteSeleccionado(usuarios)}" title="Ver Y Editar las Mediciones">                                    
+                                <p:commandLink  id="ver" style="text-decoration: none;" action="#{mostrarUsuarioTestController.estudianteSeleccionado(usuarios)}" title="Ver y editar las mediciones">                                    
                                     <p:graphicImage style="width:20px;margin-left: 5px;" library="img/usuarios" name="ver.png" />
                                 </p:commandLink>                                
-                            
+
                             </p:column>
-                            
-                            
+
+
                         </p:dataTable>
                     </p:panel>                    
                 </h:form>
                 <p:separator/>
-              
+
             </ui:define>
-            
+
         </ui:composition>
 
     </body>

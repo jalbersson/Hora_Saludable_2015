@@ -57,7 +57,7 @@ public class MedidaFacade extends AbstractFacade<Medida> {
      
       public List<Medida> buscarporUsuid(int usuid) {
         try {
-            String queryString = "SELECT *, DATE_FORMAT(MEDFECHA,'%d/%m/%Y %H:%i:%s') AS fec FROM MEDIDA"
+            String queryString = "SELECT *, DATE_FORMAT(MEDFECHA,'%Y/%m/%d/ %H:%i:%s') AS fec FROM MEDIDA"
                     + " WHERE usuid=" + usuid+"  ORDER BY fec DESC";
             Query query = getEntityManager().createNativeQuery(queryString,Medida.class);
             //System.out.println("ERR"+Long.valueOf(usuid.intValue()+""));
@@ -70,7 +70,7 @@ public class MedidaFacade extends AbstractFacade<Medida> {
      
      public List<Medida> buscarporUsuidH(int usuid) {
         try {
-            String queryString = "SELECT *, DATE_FORMAT(MEDFECHA,'%d/%m/%Y %H:%i:%s') AS fec FROM MEDIDA"
+            String queryString = "SELECT *, DATE_FORMAT(MEDFECHA,'%Y/%m/%d/ %H:%i:%s') AS fec FROM MEDIDA"
                     + " WHERE usuid=" + usuid+"  ORDER BY fec DESC ";
             Query query = getEntityManager().createNativeQuery(queryString,Medida.class);
             //System.out.println("ERR"+Long.valueOf(usuid.intValue()+""));

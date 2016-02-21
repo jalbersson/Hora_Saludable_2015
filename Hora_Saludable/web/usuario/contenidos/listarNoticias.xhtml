@@ -14,7 +14,6 @@
                 Hora Saludable: Noticias
             </ui:define>
 
-
             <ui:define name="title">
 
             </ui:define>
@@ -24,33 +23,28 @@
                     <p:breadCrumb>
                         <p:menuitem value="Inicio" url="principal.xhtml" />    
                         <p:menuitem value="Noticias" url="listarNoticias.xhtml" />                        
-
                     </p:breadCrumb>
                 </h:form>
-
 
                 <p:spacer height="10"/>
                 <div class="tituloContenido">
                     Noticias
                 </div>
                 <h:form> 
-                    <p:dataScroller value="#{listarNoticiasController.obtenerNoticias()}" var="noticia" chunkSize="3" mode="inline"  first="1" scrollHeight="350" >
+                    <p:dataScroller value="#{noticiasController.getNoticias()}" var="noticia" chunkSize="3" mode="inline"  first="1" scrollHeight="350" >
                         <f:facet name="header">
-
                         </f:facet>
 
                         <h:panelGrid columns="2" style="width:100%">
-
-
 
                             <p:outputPanel>
                                 <p:panelGrid  style="width: 100%;" columns="1" >
                                     <p:fieldset legend="#{noticia.nottitulo} - Fecha Publicación #{listarNoticiasController.convertToJavaDate( noticia.notfechapublicacion )}" style="font-size: medium; margin-bottom:20px; font-family: cursive;font-weight:lighter">
                                         <h:panelGrid columns="2" cellpadding="5">
-                                            <p:graphicImage library="img/imagenesNoticias" name="#{noticia.notimagen}" width="170px" height="140px"/>
-                                            <h:outputText value="#{noticia.notcontenido}" style="text-justify: kashida; font:large Palatino bold italic; font-stretch: expanded;  "/>
+                                            
+                                            <h:outputText value="#{noticia.contenidoTruncado}" style="" escape="false"/>
                                             <h:outputText></h:outputText>
-                                            <p:link value="Ver noticia" outcome="detalleNoticia?noticiaId=#{noticia.notid}" style="font-weight: bold; color: #22419A" />
+                                            <p:link value="Leer más" outcome="detalleNoticia?noticiaId=#{noticia.notid}" style="font-weight: bold; color: #22419A" />
 
                                             <h:form style="float: left; ">
                                                 <h:outputText></h:outputText>
@@ -64,7 +58,7 @@
                     </p:dataScroller>
                 </h:form>
                 <br></br>
-                <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;font-style: italic; " > </p:button>
+                <p:button outcome="principal" value="Volver" style="background: #22419A;color:#FFFFFF;" > </p:button>
 
             </ui:define>
 

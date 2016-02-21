@@ -28,10 +28,22 @@ public class UsuarioSessionController implements Serializable
     String nombreDeUsuario;    
     String contrasena;
     
+    private Boolean haySesion;
     
     public UsuarioSessionController()
     {
+        haySesion=false;
     }
+
+    public Boolean getHaySesion() {
+        return haySesion;
+    }
+
+    public void setHaySesion(Boolean haySesion) {
+        this.haySesion = haySesion;
+    }
+    
+    
     
     public String getNombreDeUsuario()
     {
@@ -63,6 +75,7 @@ public class UsuarioSessionController implements Serializable
             {
                 req.login(this.nombreDeUsuario, this.contrasena);
                 req.getServletContext().log("Autenticacion exitosa");
+                haySesion = true;
                 if(this.usuarioGrupoEJB.buscarPorNombreUsuario(req.getUserPrincipal().getName()).get(0).getUsuariogrupoPK().getGruid().equals("user"))
                 {
                     FacesContext.getCurrentInstance().getExternalContext().redirect("/Hora_Saludable");
