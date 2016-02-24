@@ -1308,4 +1308,18 @@ public class Medida implements Serializable {
             return Redondear(frecuenciaDeReservaLeger() * 0.8 + medfcardiacareposo);
         }
     }
+    public double aumentoMetabolismoAnaerobicoLeger() {
+        if (medfcardiacareposo == null || medfcardiacamaximaleger == null) {
+            return 0;
+        } else {
+            return Redondear(frecuenciaDeReservaLeger() * 0.9 + medfcardiacareposo);
+        }
+    }
+    public double aumentoMetabolismoAnaerobico() {
+        if (medfcardiacareposo == null || medfcardiacamaximaleger == null) {
+            return 0;
+        } else {
+            return Redondear(frecuenciaDeReserva() * 0.9 + medfcardiacareposo);
+        }
+    }    
 }

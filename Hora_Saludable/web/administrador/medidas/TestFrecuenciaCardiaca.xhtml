@@ -61,6 +61,9 @@
 
                 <p:outputLabel  value="Desarrollo de Potencia Aeróbica:" styleClass="subtitpaneltest"/>
                 <p:outputLabel  value="#{medidasController.medicionactual.desarrolloPotenciaAerobica()}" />
+
+                <p:outputLabel  value="Aumento metabolismo Anaeróbico:" styleClass="subtitpaneltest"/>
+                <p:outputLabel  value="#{medidasController.medicionactual.aumentoMetabolismoAnaerobico()}" />                
             </p:panelGrid>
             
             
@@ -79,6 +82,10 @@
 
                 <p:outputLabel  value="Desarrollo de Potencia Aeróbica:" styleClass="subtitpaneltest"/>
                 <p:outputLabel  value="#{medidasController.medicionactual.desarrolloPotenciaAerobicaLeger()}" />
+                
+                <p:outputLabel  value="Aumento metabolismo Anaeróbico:" styleClass="subtitpaneltest"/>
+                <p:outputLabel  value="#{medidasController.medicionactual.aumentoMetabolismoAnaerobicoLeger()}" />
+                
             </p:panelGrid>            
             
         </p:panel>
@@ -90,7 +97,8 @@
                 <p:outputLabel value="Rehabilitación = FrecuenciaReserva*0.5 + FrecuenciaReposo"></p:outputLabel>
                 <p:outputLabel value="Quema de Grasa = FrecuenciaReserva*0.6 + FrecuenciaReposo"></p:outputLabel>
                 <p:outputLabel value="Desarrollo de la Resistencia = FrecuenciaReserva*0.7 + FrecuenciaReposo"></p:outputLabel>
-                <p:outputLabel value="Desarrollo de Potencia Aeróbia = FrecuenciaReserva*0.8 + FrecuenciaReposo"></p:outputLabel>
+                <p:outputLabel value="Desarrollo de Potencia Aeróbica = FrecuenciaReserva*0.8 + FrecuenciaReposo"></p:outputLabel>
+                <p:outputLabel value="Aumento metabolismo Anaeróbico = FrecuenciaReserva*0.9 + FrecuenciaReposo"></p:outputLabel>
             </p:panelGrid>
         </p:panel>
 
