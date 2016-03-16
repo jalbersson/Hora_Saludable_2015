@@ -185,6 +185,7 @@ public class AsistenciaView {
         return accion;
     }
 
+    /*
     public boolean filtrarPorNombre(Object value, Object filter, Locale locale) {
         String filterText = (filter == null) ? null : filter.toString().trim();
         if (filterText == null || filterText.equals("")) {
@@ -202,7 +203,9 @@ public class AsistenciaView {
         }
         return false;
     }
+    */
 
+    /*
     public boolean filtrarPorApellido(Object value, Object filter, Locale locale) {
         String filterText = (filter == null) ? null : filter.toString().trim();
         if (filterText == null || filterText.equals("")) {
@@ -220,5 +223,6 @@ public class AsistenciaView {
         }
         return false;
     }
+    */
 
 }

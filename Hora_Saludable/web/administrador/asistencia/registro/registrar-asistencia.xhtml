@@ -58,7 +58,7 @@
                     <p:spacer height="30"/>
 
                     <p:panel header="Lista de usuarios" rendered="#{asistenciaView.usuarios.size()>0}">
-                        <div style="color: #036fab">En listado aparecen los usuarios inscritos en el mes. Los que aparecen marcados corresponden a los que asistieron. No olvide grabar presionando 'Actualizar asistencia'</div>
+                        <div style="color: #036fab">En listado aparecen los usuarios inscritos en el mes, ordenados ascendentemente por Apellido. Los que aparecen marcados corresponden a los que asistieron. No olvide grabar presionando 'Actualizar asistencia'</div>
                         <h:panelGrid style="margin: 0 auto;" >
                             <!-- Boton Actualizar asistencia -->
                             <p:commandButton value="#{asistenciaView.accion}" 
@@ -73,19 +73,22 @@
 
                         <p:dataTable id="usuariosDataTable" value="#{asistenciaView.usuarios}" var="usu"
                                      paginator="true"
-                                     rows="20"
-                                     rowsPerPageTemplate="20,40,60,80"
+                                     rows="40"
+                                     rowsPerPageTemplate="40,50,60,70,80,90,100,150,200"
                                      selection="#{asistenciaView.selectedUsus}"
                                      rowKey="#{usu.usuid}"
                                      emptyMessage="No hay usuarios inscritos con ese filtro. Por favor, dirigase a la opcion: 'Inscripción mensual de usuarios' e inscribalos."
-                                     >                            
-                            <p:column headerText="Identificación" filterBy="#{usu.usuidentificacion}"  width="130" style="text-align:center;" sortBy="#{usu.usuidentificacion}">
+                                     >  
+
+                            <p:column sortBy="#{usu.usuidentificacion}" headerText="Identif." >
                                 <h:outputText value="#{usu.usuidentificacion}" />
                             </p:column>
-                            <p:column headerText="Nombres" filterBy="#{usu.usunombres}" filterFunction="#{asistenciaView.filtrarPorNombre}" sortBy="#{usu.usunombres}" >
+                            
+                            <p:column headerText="Nombres" sortBy="#{usu.usunombres}" >
                                 <h:outputText value="#{usu.usunombres}" style="text-transform: capitalize;" />
                             </p:column>
-                            <p:column headerText="Apellidos" filterBy="#{usu.usuapellidos}" filterFunction="#{asistenciaView.filtrarPorApellido}" sortBy="#{usu.usuapellidos}">
+                            
+                            <p:column headerText="Apellidos"  sortBy="#{usu.usuapellidos}">
                                 <h:outputText value="#{usu.usuapellidos}" style="text-transform: capitalize;" />
                             </p:column>
 
@@ -98,9 +101,11 @@
                                 </p:graphicImage>                            
                             </p:column>                            
 
-                            <p:column headerText="Sexo" width="60" style="text-align: center;" sortBy="#{usu.usugenero}">
+                            <p:column sortBy="#{usu.usugenero}" headerText="Sexo" >
                                 <h:outputText value="#{usu.usugenero}" />
                             </p:column>
+
+
                             <p:column headerText="Programa Académico"  sortBy="#{usu.uniid.uninombre}" >
                                 <h:outputText value="#{usu.uniid.uninombre}" />
                             </p:column>                            

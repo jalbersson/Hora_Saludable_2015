@@ -1316,7 +1316,8 @@ public class Medida implements Serializable {
         }
     }
     public double aumentoMetabolismoAnaerobico() {
-        if (medfcardiacareposo == null || medfcardiacamaximaleger == null) {
+        //medfcardiacamaxima - medfcardiacareposo
+        if (medfcardiacareposo == null || medfcardiacamaxima == null) {
             return 0;
         } else {
             return Redondear(frecuenciaDeReserva() * 0.9 + medfcardiacareposo);
