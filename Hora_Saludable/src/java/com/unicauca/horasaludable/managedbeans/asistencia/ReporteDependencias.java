@@ -9,6 +9,8 @@ import com.unicauca.horasaludable.jpacontrollers.DetalleasistenciaFacade;
 import com.unicauca.horasaludable.jpacontrollers.UnidadacademicaFacade;
 import com.unicauca.horasaludable.entities.Unidadacademica;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -46,6 +48,7 @@ public class ReporteDependencias implements Serializable {
     
     private BarChartModel barModel;
     private String tipo;
+    private List<String> anios;
     
 
     public ReporteDependencias() {
@@ -87,6 +90,17 @@ public class ReporteDependencias implements Serializable {
       public String getAnioSeleccionado() {
         return anioSeleccionado;
     }
+
+    public List<String> getAnios() {
+        generarAnios();
+        return anios;
+    }
+
+    public void setAnios(List<String> anios) {
+        this.anios = anios;
+    }
+     
+    
 
     public String getTipo() {
         return tipo;
@@ -450,5 +464,23 @@ public class ReporteDependencias implements Serializable {
 
     public void setBarModel(BarChartModel barModel) {
         this.barModel = barModel;
+    }
+    
+    private void generarAnios()
+    {
+        anios = new ArrayList();
+        Date date = new Date();
+        
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);        
+        while(year> 2014)
+        {
+            String anio = year + "";
+            anios.add(anio);
+            year --;
+        }
+        String anio = year + "";
+        anios.add(anio);
     }
 }

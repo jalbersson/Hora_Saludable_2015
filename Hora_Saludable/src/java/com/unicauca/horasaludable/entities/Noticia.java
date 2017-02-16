@@ -62,7 +62,8 @@ public class Noticia implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10000)
+    @Lob
+    @Size(min = 1, max = 2147483647)
     @Column(name = "NOTCONTENIDO")
     private String notcontenido;
     

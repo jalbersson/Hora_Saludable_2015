@@ -2,6 +2,10 @@ package com.unicauca.horasaludable.managedbeans.asistencia;
 
 import com.unicauca.horasaludable.jpacontrollers.DetalleasistenciaFacade;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -33,6 +37,7 @@ public class ReporteView implements Serializable {
     private BarChartModel barModel;
     
     private String tipo;
+    private List<String> anios;
     
     public ReporteView()
     {
@@ -136,6 +141,17 @@ public class ReporteView implements Serializable {
     public void setMostrarGrafica(boolean mostrarGrafica) {
         this.mostrarGrafica = mostrarGrafica;
     }
+
+    public List<String> getAnios() {
+        generarAnios();
+        return anios;
+    }
+
+    public void setAnios(List<String> anios) {
+        this.anios = anios;
+    }
+    
+    
 
     public void cambiarAño(ValueChangeEvent e) {
         String tip = e.getNewValue().toString();
@@ -596,4 +612,22 @@ public class ReporteView implements Serializable {
 
         return barmodel;
     }  
+    
+    private void generarAnios()
+    {
+        anios = new ArrayList();
+        Date date = new Date();
+        
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);        
+        while(year> 2014)
+        {
+            String anio = year + "";
+            anios.add(anio);
+            year --;
+        }
+        String anio = year + "";
+        anios.add(anio);
+    }
 }

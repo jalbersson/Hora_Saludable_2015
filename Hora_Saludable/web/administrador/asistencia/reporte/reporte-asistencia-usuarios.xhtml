@@ -55,10 +55,8 @@
                                     <p:column rendered="#{reporteAsistenciaUsuController.verReporteAnual}">
                                         <p:selectOneMenu id="anioReporte" required="true" requiredMessage="Seleccione el año." style="width: 125px;"
                                                          valueChangeListener="#{reporteAsistenciaUsuController.cambiarAño}" value="#{reporteAsistenciaUsuController.año}" >
-                                            <f:selectItem itemValue="0" itemLabel="Seleccione uno" /> 
-                                            <f:selectItem itemValue="2014" itemLabel="2014" />
-                                            <f:selectItem itemValue="2015" itemLabel="2015" />
-                                            <f:selectItem itemValue="2016" itemLabel="2016" />
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione uno" />                                             
+                                            <f:selectItems value="#{reporteAsistenciaUsuController.anios}"></f:selectItems>
                                             <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" oncomplete="#{reporteAsistenciaUsuController.asistenciaAnual()}" update="form" />
                                         </p:selectOneMenu>
                                     </p:column>

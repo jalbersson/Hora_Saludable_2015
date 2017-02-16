@@ -57,9 +57,7 @@
                                     <p:selectOneMenu id="anioReporte" required="true" requiredMessage="Seleccione el año."
                                                      valueChangeListener="#{reporteView.cambiarAño}" value="#{reporteView.anioSeleccionado}">
                                         <f:selectItem itemValue="NingunAño" itemLabel="Seleccione uno" /> 
-                                        <f:selectItem itemValue="2014" itemLabel="2014" />
-                                        <f:selectItem itemValue="2015" itemLabel="2015" />
-                                        <f:selectItem itemValue="2016" itemLabel="2016" />
+                                        <f:selectItems value="#{reporteView.anios}"></f:selectItems>
                                         <p:ajax update="form"/>
                                         <p:ajax onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()" />
                                     </p:selectOneMenu>

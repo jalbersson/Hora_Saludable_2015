@@ -63,6 +63,7 @@ public class ReporteAsistenciaUsuController implements Serializable {
     private boolean verTablaAnual;
     private boolean verTablaMensual;
     private String nombreUsuario;
+    private List<String> anios;
 
     public ReporteAsistenciaUsuController() {
         nombreUsuario = "";
@@ -1048,6 +1049,19 @@ public class ReporteAsistenciaUsuController implements Serializable {
         this.verReporteMensual = verReporteMensual;
     }
 
+    public List<String> getAnios() {
+        
+        generarAnios();
+        
+        return anios;
+    }
+
+    public void setAnios(List<String> anios) {
+        this.anios = anios;
+    }
+
+    
+    
     public boolean isVerMes() {
         return verMes;
     }
@@ -1141,5 +1155,23 @@ public class ReporteAsistenciaUsuController implements Serializable {
             verReporte = false;
             verMes = false;
         }
+    }
+    
+    private void generarAnios()
+    {
+        anios = new ArrayList();
+        Date date = new Date();
+        
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);        
+        while(year> 2014)
+        {
+            String anio = year + "";
+            anios.add(anio);
+            year --;
+        }
+        String anio = year + "";
+        anios.add(anio);
     }
 }
