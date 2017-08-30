@@ -10,6 +10,11 @@
     font-style: normal; 
 }
 
+@font-face {
+    font-family: 'Lobster'; /*a name to be used later*/
+    src: url('./fonts/Lobster.ttf');
+}
+
 
 body {
     background: url(../img/body-bkg.png) repeat-x scroll 0% 0% #C8CDD6;
@@ -41,6 +46,18 @@ body {
     background-color: #22419A;
     top: -15px;
 }
+
+#mainHeader .top .responsable {
+    position: absolute;
+    
+    font-size: 17px;
+    color:#fafaed;
+    text-decoration: none;
+    margin-left: 250px;
+    margin-top: 80px;
+    font-family: "Lobster";
+}
+
 #mainHeader .top .titulo:link, #mainHeader .top .titulo:visited {
     text-transform: capitalize;
     float: left;
