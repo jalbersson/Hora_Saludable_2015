@@ -58,6 +58,22 @@ body {
     font-family: "Lobster";
 }
 
+#mainHeader .top .responsable .responsablelink {
+    text-decoration: none;
+    color:#fafaed;
+    font-size: 17px;
+    font-family: "Lobster";
+    
+}
+
+#mainHeader .top .responsable .responsablelink:hover {
+    text-decoration: none;
+    color: #81BEF7;
+    font-size: 17px;
+    font-family: "Lobster";
+    
+}
+
 #mainHeader .top .titulo:link, #mainHeader .top .titulo:visited {
     text-transform: capitalize;
     float: left;
@@ -310,6 +326,7 @@ body {
 
 .ui-carousel {
 
+    width: 600px !important;
     overflow: hidden;
     padding: 7px 10px 8px;
     border: 0;  

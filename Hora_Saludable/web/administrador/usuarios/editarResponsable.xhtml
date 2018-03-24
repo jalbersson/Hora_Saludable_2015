@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/frontEndAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                Editar responsable
+            </ui:define>
+            
+            <ui:define name="title">
+                
+            </ui:define>
+
+            <ui:define name="body">
+                
+                <br/>
+                <div style="margin-left: 200px;margin-top: 10px;" >
+                    
+                    <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Inicio" outcome="/administrador/contenidos/principal" />                              
+                        <p:menuitem value="Editar responsable" />                                        
+                    </p:breadCrumb>
+                </h:form>
+                
+                <div class="tituloContenido">
+                    Editar Persona a Cargo del Programa                    
+                </div>
+                <br/>
+                
+                <h:form>
+                    <p:panelGrid styleClass="panelgrid" id="panel">
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel style="font-size: 15px;" value="Nombre: * "/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="nombreResponsable" required="true" requiredMessage="Campo obligatorio."
+                                             value="#{editarResponsableController.nombreResponsable}"/>
+                            </p:column>
+                            <p:column>
+                                    <p:message for="nombreResponsable"/>
+                            </p:column>
+                        </p:row>
+                        
+                        <p:row>
+                            <p:column>
+                                
+                            </p:column>
+                            <p:column>
+                                <p:commandButton update="panel" 
+                                                 actionListener="#{editarResponsableController.guardar()}" 
+                                                 style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;" 
+                                                 value="Guardar"
+                                                 onstart="PF('efectoCarga').show()"  onsuccess="PF('efectoCarga').hide()"/>
+                            </p:column>
+                        </p:row>
+                        
+                    </p:panelGrid>
+                    
+                    
+                </h:form>
+                    
+                <ui:include src="/ventanaEfectodeCarga.xhtml"/>
+                </div>
+                
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

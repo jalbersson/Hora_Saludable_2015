@@ -12,26 +12,26 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author Wilson Carvajal
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class ResponsableController implements Serializable 
 {
     @EJB
     private ResponsableFacade responsableEJB;
-    private String nombreResponsable;
+    private Responsable responsable;
 
-    public String getNombreResponsable() {
-        return nombreResponsable;
+    public Responsable getResponsable() {
+        return responsable;
     }
 
-    public void setNombreResponsable(String nombreResponsable) {
-        this.nombreResponsable = nombreResponsable;
+    public void setResponsable(Responsable responsable) {
+        this.responsable = responsable;
     }
     
     public ResponsableController() 
@@ -47,11 +47,10 @@ public class ResponsableController implements Serializable
     private void inicializarNombreResponsable()
     {
         List<Responsable> listaResponsable = responsableEJB.findAll();
-        nombreResponsable="";
+        responsable= new Responsable();
         if(listaResponsable != null && listaResponsable.size()>0)
         {
-            Responsable responsable = listaResponsable.get(0);
-            nombreResponsable = responsable.getRespnombre();
+            responsable = listaResponsable.get(0);
         }
         
     }

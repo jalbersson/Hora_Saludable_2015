@@ -24,7 +24,7 @@
         <header id="mainHeader">
             <div class="contenedor">
                 <div class="top">
-                    <div class="responsable">A cargo de: #{responsableController.nombreResponsable}</div>
+                    <div class="responsable"><h:form><p:commandLink actionListener="#{editarResponsableController.goEdit()}"  class="responsablelink"  >A cargo de: #{responsableController.responsable.respnombre}</p:commandLink></h:form></div>
                     <div class="logo">
                         <a href="#"></a>
                     </div>

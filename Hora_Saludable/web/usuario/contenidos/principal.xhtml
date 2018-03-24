@@ -26,7 +26,11 @@
                             <h:form> 
                                 <div class="divPrincipal" style="height: 380px">
                                     <h2 style="color:#F2F2F2; text-align: center;">Noticias</h2>  
-                                    <p:carousel headerText="Últimas 5 noticias..."  value="#{noticiasController.ultimos}" var="noticiaLista" itemStyle="height:230px;width:600px;" autoPlayInterval="4000" numVisible="1" effect="easeInStrong" circular="true" class="ui-carousel">
+                                    <p:carousel headerText="Últimas 5 noticias..."  
+                                                value="#{noticiasController.ultimos}" var="noticiaLista" 
+                                                itemStyle="height:230px;width:600px;" 
+                                                autoPlayInterval="4000" numVisible="1" effect="easeInStrong" 
+                                                circular="true" class="ui-carousel">
                                         <h:panelGrid columns="2" style="width:600px " cellpadding="10" columnClasses="label,value">
                                             <p:tab>
                                                 <h:outputText value="#{noticiasController.convertToJavaDate(noticiaLista.notfechapublicacion)}" style="float: left; font-size: 11px;"/>
